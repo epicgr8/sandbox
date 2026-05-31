@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Треугольники: шпора + квиз</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0eee8;
+    --bg2:     #faf9f5;
+    --bg3:     #eceae2;
+    --bg4:     #e2dfd6;
+
+    --c-sum:    #d94f8a;
+    --c-pyth:   #2b7fff;
+    --c-area:   #1db36e;
+    --c-sin:    #e8650a;
+    --c-isos:   #9333ea;
+    --c-equi:   #0891b2;
+    --c-height: #ca8a04;
+    --c-cheat:  #dc2626;
+
+    --c-bg3:    #7c3aed;
+    --c-tek:    #b91c1c;
+
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 0%,   rgba(43,127,255,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 20%,  rgba(217,79,138,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(29,179,110,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 80% 80%,  rgba(232,101,10,0.05) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding: 56px 0 36px; position: relative; }
+  .hero::after {
+    content: ''; display: block; margin: 28px auto 0;
+    width: 180px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--c-sum), var(--c-pyth), var(--c-area), var(--c-sin), transparent);
+    border-radius: 2px;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero-title {
+    font-size: clamp(30px, 5vw, 52px); font-weight: 700;
+    color: var(--text); line-height: 1.1; margin-bottom: 10px;
+  }
+  .hero-title span { display: inline-block; }
+  .hero-title .ht1 { color: var(--c-sum); }
+  .hero-title .ht2 { color: var(--c-pyth); }
+  .hero-title .ht3 { color: var(--c-area); }
+  .hero-sub { font-size: 14px; color: var(--muted); }
+
+  /* ── SECTION HEAD ── */
+  .sec-head { display: flex; align-items: center; gap: 12px; margin: 44px 0 18px; }
+  .sec-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    padding: 4px 12px; border-radius: 20px; text-transform: uppercase; white-space: nowrap;
+  }
+  .sec-badge.rule { background: #1a1814; color: #faf9f5; }
+  .sec-badge.bg3  { background: var(--c-bg3); color: #fff; }
+  .sec-badge.tek  { background: var(--c-tek); color: #fff; }
+  .sec-line { flex: 1; height: 1px; background: var(--border2); }
+
+  /* ── RULE CARDS ── */
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+
+  .rule-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .rule-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+
+  .rule-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 4px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .rule-card.c-sum::after    { background: var(--c-sum); }
+  .rule-card.c-pyth::after   { background: var(--c-pyth); }
+  .rule-card.c-area::after   { background: var(--c-area); }
+  .rule-card.c-sin::after    { background: var(--c-sin); }
+  .rule-card.c-isos::after   { background: var(--c-isos); }
+  .rule-card.c-equi::after   { background: var(--c-equi); }
+  .rule-card.c-height::after { background: var(--c-height); }
+  .rule-card.c-cheat::after  { background: var(--c-cheat); }
+
+  .rule-icon { font-size: 20px; margin-bottom: 10px; margin-top: 6px; }
+
+  .rule-title {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    margin-bottom: 5px; letter-spacing: 0.01em;
+  }
+
+  .rule-formula {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    padding: 5px 10px; border-radius: 6px;
+    display: inline-block; margin: 4px 0 8px;
+    letter-spacing: 0.03em;
+  }
+  .c-sum   .rule-formula { background: rgba(217,79,138,0.1);  color: var(--c-sum); }
+  .c-pyth  .rule-formula { background: rgba(43,127,255,0.1);  color: var(--c-pyth); }
+  .c-area  .rule-formula { background: rgba(29,179,110,0.1);  color: var(--c-area); }
+  .c-sin   .rule-formula { background: rgba(232,101,10,0.1);  color: var(--c-sin); }
+  .c-isos  .rule-formula { background: rgba(147,51,234,0.1);  color: var(--c-isos); }
+  .c-equi  .rule-formula { background: rgba(8,145,178,0.1);   color: var(--c-equi); }
+  .c-height .rule-formula { background: rgba(202,138,4,0.1);  color: var(--c-height); }
+  .c-cheat .rule-formula { background: rgba(220,38,38,0.1);   color: var(--c-cheat); }
+
+  .rule-body { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  .rule-assoc {
+    margin-top: 9px; font-size: 12px; color: var(--text);
+    background: var(--bg3); border-radius: 6px;
+    padding: 7px 10px; line-height: 1.5;
+  }
+
+  /* ── TABLE ── */
+  .tbl-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .quick-table { width: 100%; border-collapse: collapse; font-size: 16px; }
+
+  .quick-table th {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--muted); padding: 12px 18px; text-align: left;
+    border-bottom: 1px solid var(--border2);
+    background: var(--bg3); text-transform: uppercase;
+  }
+
+  .quick-table td {
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    vertical-align: middle; font-size: 16px;
+  }
+  .quick-table tr:last-child td { border-bottom: none; }
+  .quick-table tr:hover td { background: var(--bg3); }
+  .quick-table td:first-child { color: var(--text); font-weight: 500; }
+  .quick-table td:nth-child(2) { color: var(--muted); }
+  .quick-table .mono {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    padding: 3px 8px; border-radius: 4px;
+    display: inline-block;
+  }
+  .quick-table tr:nth-child(1) .mono { background: rgba(217,79,138,0.1);  color: var(--c-sum); }
+  .quick-table tr:nth-child(2) .mono { background: rgba(29,179,110,0.1);  color: var(--c-area); }
+  .quick-table tr:nth-child(3) .mono { background: rgba(232,101,10,0.1);  color: var(--c-sin); }
+  .quick-table tr:nth-child(4) .mono { background: rgba(43,127,255,0.1);  color: var(--c-pyth); }
+  .quick-table tr:nth-child(5) .mono { background: rgba(147,51,234,0.1);  color: var(--c-isos); }
+  .quick-table tr:nth-child(6) .mono { background: rgba(202,138,4,0.1);   color: var(--c-height); }
+  .quick-table tr:nth-child(7) .mono { background: rgba(220,38,38,0.1);   color: var(--c-cheat); }
+
+  /* ── DECO ── */
+  .deco-div { text-align: center; margin: 36px 0; display: flex; align-items: center; gap: 12px; }
+  .deco-div::before, .deco-div::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+  .deco-div span { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ── QUIZ ── */
+  .quiz-header { text-align: center; padding: 36px 0 24px; }
+  .quiz-title { font-size: clamp(22px, 3.5vw, 36px); font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .quiz-sub { font-size: 14px; color: var(--muted); }
+
+  .quiz-progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .quiz-bar-bg { flex: 1; height: 6px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
+  .quiz-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-sum), var(--c-pyth), var(--c-area));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .quiz-counter { font-size: 13px; font-weight: 700; color: var(--muted); min-width: 56px; text-align: right; }
+  .quiz-score-badge { font-size: 13px; font-weight: 700; color: var(--c-area); min-width: 72px; }
+
+  .question-card {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .question-header {
+    padding: 8px 20px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .q-source {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; padding: 3px 10px;
+    border-radius: 20px; color: #fff;
+  }
+  .q-source.bg3 { background: var(--c-bg3); }
+  .q-source.tek { background: var(--c-tek); }
+
+  .q-topic { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+  .question-body { padding: 22px 22px 18px; }
+
+  .question-text {
+    font-size: 17px; color: var(--text); line-height: 1.65; margin-bottom: 20px;
+  }
+  .question-text .hero-name {
+    font-weight: 700; padding: 0 2px;
+    background: linear-gradient(120deg, var(--c-pyth), var(--c-sum));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt-btn {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 11px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--text); cursor: pointer;
+    text-align: left;
+    transition: border-color 0.14s, background 0.14s, transform 0.1s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--c-pyth);
+    background: rgba(43,127,255,0.05);
+    transform: translateX(4px);
+  }
+  .opt-btn .opt-letter {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    color: var(--muted); min-width: 18px;
+  }
+  .opt-btn.correct { border-color: var(--c-area); background: rgba(29,179,110,0.08); color: var(--c-area); }
+  .opt-btn.correct .opt-letter { color: var(--c-area); }
+  .opt-btn.wrong   { border-color: var(--c-sum);  background: rgba(217,79,138,0.08); color: var(--c-sum); }
+  .opt-btn.wrong   .opt-letter { color: var(--c-sum); }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 14px; padding: 12px 16px;
+    border-radius: 8px; font-size: 14px; line-height: 1.6;
+    display: none; animation: fadeIn 0.22s ease;
+  }
+  .feedback-box.ok   { background: rgba(29,179,110,0.08);  border: 1px solid rgba(29,179,110,0.25); color: #0f6b42; display: block; }
+  .feedback-box.fail { background: rgba(217,79,138,0.08);  border: 1px solid rgba(217,79,138,0.25); color: #9d1a5a; display: block; }
+
+  .question-footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+
+  .next-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.04em;
+    background: var(--text); color: var(--bg2);
+    border: none; padding: 10px 24px;
+    border-radius: 8px; cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    display: none;
+  }
+  .next-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .next-btn.show { display: block; }
+
+  /* ── RESULTS ── */
+  .results { display: none; text-align: center; padding: 60px 20px; animation: fadeIn 0.4s ease; }
+  .results.show { display: block; }
+  .results-title { font-size: clamp(24px, 4vw, 40px); font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .results-score { font-size: clamp(64px, 10vw, 96px); font-weight: 700; line-height: 1; margin: 16px 0 6px; color: var(--c-pyth); }
+  .results-total { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  .results-rank {
+    font-size: 16px; font-weight: 600; color: var(--text);
+    margin-bottom: 32px; padding: 14px 28px;
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 10px; display: inline-block;
+  }
+  .restart-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+    background: var(--text); color: var(--bg2);
+    border: none; padding: 12px 36px;
+    border-radius: 8px; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .restart-btn:hover { opacity: 0.8; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .question-animate { animation: fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Геометрия · 9 класс</div>
+    <h1 class="hero-title">
+      <span class="ht1">Треугол</span><span class="ht2">ьники</span><span class="ht3">:</span><br>Кодекс Героя
+    </h1>
+    <p class="hero-sub">Шпора + 20 испытаний — Baldur's Gate III &amp; Tekken</p>
+  </div>
+
+  <!-- ПРАВИЛА -->
+  <div class="sec-head">
+    <span class="sec-badge rule">Главные законы</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="rules-grid">
+    <div class="rule-card c-sum">
+      <div class="rule-icon">🩷</div>
+      <div class="rule-title">Сумма углов треугольника</div>
+      <div class="rule-formula">∠A + ∠B + ∠C = 180°</div>
+      <div class="rule-body">Знаешь два угла — третий считается вычитанием из 180.</div>
+      <div class="rule-assoc">🎮 BG3: В партии Гейл, Шэдоухарт, Астарион. Их «уровни доверия» всегда дают ровно 180 в сумме. Один известен — находи остальных.</div>
+    </div>
+
+    <div class="rule-card c-pyth">
+      <div class="rule-icon">💙</div>
+      <div class="rule-title">Теорема Пифагора</div>
+      <div class="rule-formula">a² + b² = c²</div>
+      <div class="rule-body">Только для прямоугольного! c — гипотенуза (напротив 90°), всегда самая длинная.</div>
+      <div class="rule-assoc">🎮 BG3: Гейл телепортируется сначала вдоль стены (катет a), потом поперёк (катет b). Прямой путь — гипотенуза c.</div>
+    </div>
+
+    <div class="rule-card c-area">
+      <div class="rule-icon">💚</div>
+      <div class="rule-title">Площадь через высоту</div>
+      <div class="rule-formula">S = ½ · a · h</div>
+      <div class="rule-body">a — основание, h — высота к нему. Высоту часто надо дорисовать карандашом.</div>
+      <div class="rule-assoc">🎮 Tekken: Хитбокс атаки — треугольник. Основание a — ширина удара, h — дальность. Чем длиннее нога Лили — тем больше площадь.</div>
+    </div>
+
+    <div class="rule-card c-sin">
+      <div class="rule-icon">🧡</div>
+      <div class="rule-title">Площадь через синус</div>
+      <div class="rule-formula">S = ½ · a · b · sin C</div>
+      <div class="rule-body">Когда даны две стороны и угол между ними.</div>
+      <div class="rule-assoc">🎮 Tekken: Казуя бьёт двумя кулаками — левая a, правая b, угол C между ними. Площадь разрушений — это S.</div>
+    </div>
+
+    <div class="rule-card c-isos">
+      <div class="rule-icon">💜</div>
+      <div class="rule-title">Равнобедренный треугольник</div>
+      <div class="rule-formula">a = b, ∠α = ∠β</div>
+      <div class="rule-body">Боковые стороны равны. Углы при основании равны. Высота делит основание пополам.</div>
+      <div class="rule-assoc">🎮 BG3: Астарион смотрит в зеркало — левая и правая стороны зеркальные. Углы при основании одинаковые, как его улыбка с обеих сторон.</div>
+    </div>
+
+    <div class="rule-card c-equi">
+      <div class="rule-icon">🩵</div>
+      <div class="rule-title">Равносторонний треугольник</div>
+      <div class="rule-formula">a = b = c, 60° — 60° — 60°</div>
+      <div class="rule-body">Все три стороны равны. Все три угла по 60°. 180 ÷ 3 = 60.</div>
+      <div class="rule-assoc">🎮 Tekken: Идеальная стойка Хворанга — три угла тела одинаковые, баланс абсолютный. Запомни: 60-60-60.</div>
+    </div>
+
+    <div class="rule-card c-height">
+      <div class="rule-icon">💛</div>
+      <div class="rule-title">Дорисуй высоту</div>
+      <div class="rule-formula">h ⊥ основание</div>
+      <div class="rule-body">Задача кажется неразрешимой — проведи высоту. Получишь два прямоугольных треугольника и сразу Пифагор.</div>
+      <div class="rule-assoc">🎮 Tekken: Сайдстеп — движение строго перпендикулярно атаке. Высота — это сайдстеп треугольника, всегда под 90°.</div>
+    </div>
+
+    <div class="rule-card c-cheat">
+      <div class="rule-icon">❤️</div>
+      <div class="rule-title">Тройки Пифагора — чит-коды</div>
+      <div class="rule-formula">3-4-5 · 5-12-13 · 8-15-17</div>
+      <div class="rule-body">Видишь два числа из тройки — третье сразу известно. Считать не надо!</div>
+      <div class="rule-assoc">🎮 RPG: Это чит-коды. Выучи как комбо-удар наизусть — экономишь время на экзамене.</div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="sec-head" style="margin-top:40px">
+    <span class="sec-badge rule">Алгоритм решения</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th>Что видишь в задаче</th>
+          <th>Что делать</th>
+          <th>Формула</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Нужен угол</td><td>Сложи остальные, вычти из 180</td><td><span class="mono">180−∠A−∠B</span></td></tr>
+        <tr><td>Нужна площадь</td><td>Найди основание и высоту</td><td><span class="mono">S = ½ah</span></td></tr>
+        <tr><td>2 стороны + угол</td><td>Площадь через синус</td><td><span class="mono">½·a·b·sinC</span></td></tr>
+        <tr><td>Прямой угол</td><td>Ищи стороны → Пифагор</td><td><span class="mono">a²+b²=c²</span></td></tr>
+        <tr><td>Равнобедренный</td><td>Ищи симметрию, дели пополам</td><td><span class="mono">a=b, ∠α=∠β</span></td></tr>
+        <tr><td>Не хватает стороны</td><td>Проведи высоту — получишь два прямоугольных треугольника, к каждому применяй Пифагора</td><td><span class="mono">h ⊥ → 2×Пифагор</span></td></tr>
+        <tr><td>Числа 3,4,5 / 5,12,13...</td><td>Третья сторона уже известна!</td><td><span class="mono">чит-код</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deco-div"><span>20 испытаний</span></div>
+
+  <!-- QUIZ -->
+  <div class="quiz-header">
+    <div class="quiz-title">Докажи, что ты маг геометрии</div>
+    <p class="quiz-sub">Каждый вопрос — задача с любимыми героями</p>
+  </div>
+
+  <div id="quiz-area">
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующее испытание →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-title">Испытание пройдено</div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Начать заново</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    src:"bg3", topic:"Сумма углов",
+    text:"<span class='hero-name'>Гейл</span>, <span class='hero-name'>Шэдоухарт</span> и <span class='hero-name'>Астарион</span> — три угла треугольника партии. Гейл = 70°, Шэдоухарт = 65°. Какой угол у Астариона?",
+    opts:["55°","45°","65°","75°"], ans:1,
+    fb:"180° − 70° − 65° = 45°. Астарион всегда немного в тени — и угол у него поменьше."
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Казуя</span> бьёт противника: удар идёт 6 м вперёд (катет a) и 8 м вбок (катет b). Какова настоящая дистанция удара — гипотенуза?",
+    opts:["10 м","14 м","12 м","7 м"], ans:0,
+    fb:"6² + 8² = 36 + 64 = 100, √100 = 10. Классика 6-8-10 (тройка 3-4-5 × 2)."
+  },
+  {
+    src:"bg3", topic:"Площадь",
+    text:"Карта квеста <span class='hero-name'>Гимпа</span> — треугольный участок болота. Основание 12 м, высота 5 м. Какова площадь?",
+    opts:["60 м²","30 м²","17 м²","24 м²"], ans:1,
+    fb:"S = ½ · 12 · 5 = 30 м². Не забывай делить на 2 — это главная ловушка ОГЭ!"
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Лили</span> делает удар ногой: высота подъёма 5 м, горизонтальный вылет 12 м. Какова полная траектория ноги (гипотенуза)?",
+    opts:["13 м","17 м","11 м","15 м"], ans:0,
+    fb:"5² + 12² = 25 + 144 = 169, √169 = 13. Чит-код 5-12-13 — выучи как комбо!"
+  },
+  {
+    src:"bg3", topic:"Равнобедренный",
+    text:"<span class='hero-name'>Астарион</span> смотрит в зеркало (равнобедренный треугольник). Угол при вершине = 50°. Чему равен каждый угол при основании?",
+    opts:["65°","50°","70°","55°"], ans:0,
+    fb:"(180° − 50°) ÷ 2 = 65°. При основании равнобедренного оба угла одинаковые — симметрия, как у вампира в зеркале."
+  },
+  {
+    src:"tek", topic:"Равносторонний",
+    text:"<span class='hero-name'>Хворанг</span> стоит в идеальной боевой стойке — равносторонний треугольник опорных точек. Один из углов равен... чему?",
+    opts:["90°","45°","60°","120°"], ans:2,
+    fb:"В равностороннем все углы = 60°. 180 ÷ 3 = 60. Запомни стойку Хворанга раз и навсегда."
+  },
+  {
+    src:"bg3", topic:"Площадь через синус",
+    text:"Зона заклинания <span class='hero-name'>Шэдоухарт</span> — треугольник со сторонами 8 м и 10 м, угол между ними 30°. Площадь? (sin 30° = 0.5)",
+    opts:["40 м²","20 м²","80 м²","16 м²"], ans:1,
+    fb:"S = ½ · 8 · 10 · 0.5 = 20 м². Формула площади через синус — когда даны две стороны и угол между ними."
+  },
+  {
+    src:"tek", topic:"Сумма углов",
+    text:"У треугольника стойки <span class='hero-name'>Нины Уильямс</span> два угла — 80° и 55°. Каков третий угол?",
+    opts:["35°","45°","55°","40°"], ans:1,
+    fb:"180° − 80° − 55° = 45°. Всегда: складываем известные и вычитаем из 180."
+  },
+  {
+    src:"bg3", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Гейл</span> прячет артефакт в 9 м вниз и 12 м в сторону от лагеря. Какова прямая дистанция до артефакта?",
+    opts:["21 м","15 м","18 м","13 м"], ans:1,
+    fb:"9² + 12² = 81 + 144 = 225, √225 = 15. Тройка 3-4-5 × 3 = 9-12-15."
+  },
+  {
+    src:"tek", topic:"Высота треугольника",
+    text:"Треугольный хитбокс <span class='hero-name'>Кинга</span> имеет площадь 36 м² и основание 12 м. Какова высота хитбокса?",
+    opts:["6 м","3 м","4 м","8 м"], ans:0,
+    fb:"S = ½ · a · h → 36 = ½ · 12 · h → h = 6 м. Выражаем h из формулы площади."
+  },
+  {
+    src:"bg3", topic:"Внешний угол",
+    text:"Внешний угол треугольника <span class='hero-name'>Минтары</span> равен 110°. Один из несмежных внутренних углов = 50°. Каков другой?",
+    opts:["60°","70°","50°","40°"], ans:0,
+    fb:"Внешний угол = сумма двух несмежных внутренних. 110° = 50° + x → x = 60°."
+  },
+  {
+    src:"tek", topic:"Равнобедренный",
+    text:"Угол при вершине равнобедренного треугольника стойки <span class='hero-name'>Паулы</span> равен 40°. Чему равна сумма углов при основании?",
+    opts:["140°","80°","100°","120°"], ans:0,
+    fb:"Сумма при основании = 180° − 40° = 140°. Каждый по 70°, итого 140°."
+  },
+  {
+    src:"bg3", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Уилл</span> стреляет из лука: горизонтальное расстояние до цели 15 м, высота цели 8 м. Какова длина полёта стрелы?",
+    opts:["17 м","23 м","15 м","19 м"], ans:0,
+    fb:"8² + 15² = 64 + 225 = 289, √289 = 17. Чит-код 8-15-17!"
+  },
+  {
+    src:"tek", topic:"Площадь",
+    text:"Треугольная зона разрушений <span class='hero-name'>Брайана Фьюри</span>: основание 20 м, высота 9 м. Площадь?",
+    opts:["90 м²","180 м²","45 м²","29 м²"], ans:0,
+    fb:"S = ½ · 20 · 9 = 90 м². Всегда умножаем и делим на 2."
+  },
+  {
+    src:"bg3", topic:"Сумма углов",
+    text:"Три точки маршрута <span class='hero-name'>Карлах</span> образуют треугольник. Два угла: 95° и 42°. Чему равен третий?",
+    opts:["43°","53°","48°","63°"], ans:0,
+    fb:"180° − 95° − 42° = 43°. Тупой угол (>90°) — нормально, треугольник может быть тупоугольным."
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"Гипотенуза прыжка <span class='hero-name'>Маршала Лоу</span> равна 13 м, один катет — 5 м. Чему равен другой катет?",
+    opts:["12 м","8 м","10 м","11 м"], ans:0,
+    fb:"b² = 13² − 5² = 169 − 25 = 144, b = 12. Чит-код 5-12-13 в обратную сторону."
+  },
+  {
+    src:"bg3", topic:"Площадь",
+    text:"<span class='hero-name'>Халсин</span> разбивает лагерь на треугольной поляне. Высота к стороне 7 м равна 6 м. Площадь поляны?",
+    opts:["21 м²","35 м²","42 м²","30 м²"], ans:0,
+    fb:"S = ½ · 7 · 6 = 21 м². Основание = 7, высота к нему = 6."
+  },
+  {
+    src:"tek", topic:"Равнобедренный",
+    text:"В равнобедренном треугольнике стойки <span class='hero-name'>Асуки</span> каждый угол при основании = 72°. Чему равен угол при вершине?",
+    opts:["36°","46°","56°","26°"], ans:0,
+    fb:"180° − 72° − 72° = 36°. Или: 180° − 2·72° = 36°."
+  },
+  {
+    src:"bg3", topic:"Высота",
+    text:"В треугольнике <span class='hero-name'>Мудрого Дракона</span> площадь 48 м², основание 16 м. Найди высоту.",
+    opts:["6 м","4 м","8 м","3 м"], ans:0,
+    fb:"48 = ½ · 16 · h → h = 48 · 2 / 16 = 6 м. Выражаем высоту из формулы."
+  },
+  {
+    src:"tek", topic:"Все темы",
+    text:"Финальный поединок! Треугольник арены с углами 2x°, 3x° и 4x°. Найди наибольший угол.",
+    opts:["40°","80°","60°","90°"], ans:1,
+    fb:"2x + 3x + 4x = 180 → 9x = 180 → x = 20. Наибольший угол = 4x = 4·20 = 80°."
+  }
+];
+
+let cur = 0, score = 0, answered = false;
+
+const qcard    = document.getElementById('qcard');
+const qheader  = document.getElementById('qheader');
+const qtext    = document.getElementById('qtext');
+const qopts    = document.getElementById('qopts');
+const qfb      = document.getElementById('qfb');
+const qnext    = document.getElementById('qnext');
+const qbar     = document.getElementById('qbar');
+const qcnt     = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false;
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+  const isBG3 = q.src === 'bg3';
+  qheader.innerHTML = `<span class="q-source ${q.src}">${isBG3 ? "Baldur's Gate III" : "Tekken"}</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = q.opts.map((o, i) => {
+    const L = ['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.textContent = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur + 1} / ${questions.length}`;
+  qbar.style.width = `${(cur / questions.length) * 100}%`;
+  scoredisp.textContent = `✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[q.ans].classList.add('correct');
+  if (i !== q.ans) btns[i].classList.add('wrong');
+  const ok = i === q.ans;
+  if (ok) score++;
+  scoredisp.textContent = `✦ ${score} правильно`;
+  qfb.textContent = (ok ? '✦ Верно! ' : '✗ Не совсем. ') + q.fb;
+  qfb.className = 'feedback-box ' + (ok ? 'ok' : 'fail');
+  qnext.className = 'next-btn show';
+  qnext.textContent = cur < questions.length - 1 ? 'Следующее испытание →' : 'Посмотреть результат →';
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+  const pct = score / questions.length;
+  let rank;
+  if (pct >= 0.9)      rank = '⚔️ Легендарный маг геометрии';
+  else if (pct >= 0.7) rank = '🎯 Опытный воин Пифагора';
+  else if (pct >= 0.5) rank = '🗡️ Ученик Академии треугольников';
+  else                 rank = '📜 Продолжай тренировки, путник';
+  document.getElementById('rrank').textContent = rank;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  cur = 0; score = 0;
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
