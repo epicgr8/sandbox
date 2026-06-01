@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — Affi (Affirmator)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Sofia&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-dark:       #243D6A;
+      --primary-dark-alt:   #353F5D;
+      --primary-dark-soft:  #364055;
+      --onboarding-dark:    #181D2A;
+      --button-bg:          rgba(22,26,39,0.90);
+      --overlay-card:       rgba(94,112,166,0.50);
+      --overlay-card-light: rgba(89,105,153,0.25);
+      --overlay-sub:        rgba(62,74,109,0.50);
+      --border-button:      #AAAAAA;
+      --text-on-dark:       #FFFFFF;
+      --text-muted:         #919191;
+      --bg-light:           #FFFFFF;
+      --bg-grouped:         #F2F2F7;
+      --surface-page:       #0E1120;
+      --surface-section:    #151A2E;
+      --surface-card:       #1C2338;
+      --divider:            rgba(255,255,255,0.08);
+      --label-color:        rgba(255,255,255,0.40);
+      --accent-glow:        rgba(36,61,106,0.60);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--surface-page);
+      color: var(--text-on-dark);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      background: rgba(14,17,32,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--divider);
+    }
+    .topbar-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      color: var(--text-on-dark);
+      text-decoration: none;
+    }
+    .topbar-logo span { color: rgba(255,255,255,0.35); font-weight: 400; }
+    .topbar-nav { display: flex; gap: 28px; }
+    .topbar-nav a {
+      font-size: 13px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .topbar-nav a:hover { color: var(--text-on-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 40px 64px;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: var(--text-on-dark);
+    }
+    .hero-desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 14px;
+      border: 1px solid var(--divider);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 0 40px 120px; }
+
+    /* ── SECTION ── */
+    .ds-section {
+      border-top: 1px solid var(--divider);
+      padding-top: 64px;
+      margin-top: 64px;
+    }
+    .ds-section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .ds-section-label span { opacity: 0.5; margin-right: 6px; }
+    .ds-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-on-dark);
+    }
+    .ds-section-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.50);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    /* ── COLOR SWATCHES ── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .swatch-group-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 32px 0 14px;
+    }
+    .swatch-card {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface-card);
+      border: 1px solid var(--divider);
+    }
+    .swatch-block {
+      height: 72px;
+      width: 100%;
+    }
+    .swatch-info {
+      padding: 12px 14px;
+    }
+    .swatch-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      margin-bottom: 2px;
+    }
+    .swatch-hex {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+      margin-bottom: 4px;
+    }
+    .swatch-use {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.4;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .typo-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .typo-table tr {
+      border-bottom: 1px solid var(--divider);
+    }
+    .typo-table tr:last-child { border-bottom: none; }
+    .typo-table td {
+      padding: 20px 0;
+      vertical-align: middle;
+    }
+    .typo-meta {
+      width: 200px;
+      padding-right: 24px;
+    }
+    .typo-style-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+      margin-bottom: 4px;
+    }
+    .typo-spec {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+    }
+    .typo-sample {
+      color: var(--text-on-dark);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .btn-card {
+      background: var(--surface-card);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .btn-card-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .btn-card-demo { margin-bottom: 14px; }
+    .btn-card-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* — actual button demos — */
+    .btn-demo-continue {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(22,26,39,0.90);
+      border: 0.2px solid #AAAAAA;
+      border-radius: 25px;
+      padding: 10px 40px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 100%;
+    }
+    .btn-demo-subscribe {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: #243D6A;
+      border: 0.5px solid transparent;
+      border-radius: 20px;
+      padding: 14px 24px;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+    .btn-demo-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #FFFFFF;
+      background: #364055;
+      border: none;
+      border-radius: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    }
+    .btn-demo-stop {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: #243D6A;
+      border: 0.2px solid #AAAAAA;
+      border-radius: 25px;
+      padding: 12px 32px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 100%;
+    }
+    .btn-demo-restore {
+      display: inline-flex;
+      gap: 8px;
+    }
+    .btn-restore {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #919191;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .affirmation-card {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(160deg, #353F5D 0%, #243D6A 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .affirmation-card-img {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #2a3558 0%, #1a2640 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .affirmation-card-label {
+      position: relative;
+      background: rgba(94,112,166,0.50);
+      backdrop-filter: blur(4px);
+      padding: 6px 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      min-height: 47px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* attraction table row */
+    .attraction-rows { display: flex; flex-direction: column; gap: 16px; }
+    .attraction-row {
+      border-radius: 15px;
+      overflow: hidden;
+      background: var(--surface-card);
+      border: 1px solid var(--divider);
+    }
+    .attraction-row-img {
+      width: 100%;
+      height: 96px;
+      background: linear-gradient(90deg, #243D6A 0%, #353F5D 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 28px;
+    }
+    .attraction-row-body {
+      padding: 11px 14px;
+    }
+    .attraction-row-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .attraction-row-desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* subscription cell */
+    .sub-cell {
+      border-radius: 20px;
+      background: rgba(62,74,109,0.50);
+      backdrop-filter: blur(8px);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sub-cell-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #fff;
+    }
+    .sub-cell-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      background: #243D6A;
+      border-radius: 10px;
+      padding: 3px 10px;
+    }
+
+    /* ── SPACING SCALE ── */
+    .spacing-scale {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .spacing-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .spacing-bar {
+      background: linear-gradient(180deg, #243D6A 0%, #364055 100%);
+      border-radius: 2px;
+      width: 20px;
+    }
+    .spacing-label {
+      font-family: 'SF Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ── RADIUS SCALE ── */
+    .radius-scale {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .radius-box {
+      width: 72px;
+      height: 56px;
+      background: var(--surface-card);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .radius-label {
+      font-family: 'SF Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── TABAR ── */
+    .tabbar-demo {
+      display: flex;
+      background: rgba(78,96,121,0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      width: fit-content;
+    }
+    .tabbar-item {
+      padding: 14px 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.50);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tabbar-item.active {
+      color: #FFFFFF;
+      background: rgba(36,61,106,0.40);
+    }
+
+    /* ── GRADIENT PREVIEW ── */
+    .gradient-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .gradient-card {
+      border-radius: 15px;
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gradient-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.80);
+      background: rgba(0,0,0,0.30);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    /* ── AFFIRMATION VIEWER ── */
+    .affirmation-demo {
+      background: linear-gradient(160deg, #353F5D 0%, #243D6A 60%, #181D2A 100%);
+      border-radius: 20px;
+      padding: 48px 54px 54px 54px;
+      position: relative;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+    .affirmation-demo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(36,61,106,0.4) 0%, transparent 60%);
+    }
+    .affirmation-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 35px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+    }
+    .affirmation-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.40);
+      letter-spacing: 0.06em;
+      z-index: 1;
+    }
+
+    /* ── ONBOARDING SCREEN ── */
+    .onb-demo {
+      border-radius: 28px;
+      overflow: hidden;
+      width: 320px;
+      background: linear-gradient(180deg, #243D6A 0%, #181D2A 100%);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .onb-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.40);
+      margin-bottom: 20px;
+    }
+    .onb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .onb-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 32px;
+    }
+    .onb-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+    .onb-option {
+      background: rgba(36,61,106,0.40);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+    }
+    .onb-option-icon { font-size: 18px; }
+    .onb-option-text { font-size: 15px; color: rgba(255,255,255,0.80); }
+    .onb-btn {
+      width: 100%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(22,26,39,0.90);
+      border: 0.2px solid #AAAAAA;
+      border-radius: 25px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ── ICON SIZES ── */
+    .icon-sizes { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+    .icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .icon-box {
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      background: var(--surface-card);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .icon-label { font-size: 11px; color: var(--text-muted); font-family: monospace; }
+
+    /* ── TABLE ── */
+    .token-table { width: 100%; border-collapse: collapse; }
+    .token-table th {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 0 0 12px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .token-table td {
+      padding: 12px 0;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .token-table td:first-child { font-family: 'SF Mono', monospace; color: rgba(255,255,255,0.70); }
+    .token-table td:nth-child(2) { font-family: 'SF Mono', monospace; font-size: 12px; color: var(--text-muted); padding-left: 16px; }
+    .token-table td:nth-child(3) { color: rgba(255,255,255,0.45); padding-left: 16px; font-size: 13px; }
+    .dot {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    footer .foot-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.40);
+    }
+    footer .foot-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* utilities */
+    .gap-8 { margin-bottom: 8px; }
+    .gap-16 { margin-bottom: 16px; }
+    .gap-24 { margin-bottom: 24px; }
+    .gap-32 { margin-bottom: 32px; }
+    .row { display: flex; gap: 24px; flex-wrap: wrap; }
+    .col { flex: 1; min-width: 260px; }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-logo" href="#">Affi <span>· Design System</span></a>
+  <div class="topbar-nav">
+    <a href="#colors">Colors</a>
+    <a href="#typography">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#cards">Cards</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#screens">Screens</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">getdesign.md · Affi (Affirmator)</p>
+    <h1>Affi Design System</h1>
+    <p class="hero-desc">Deep-navy wellness UI. Photography-driven backgrounds, Cormorant Garamond as the single brand voice, glass-morphism tabbar, and a tight dark palette built around #243D6A.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">iOS · UIKit</span>
+      <span class="hero-tag">Cormorant Garamond</span>
+      <span class="hero-tag">Dark / Navy</span>
+      <span class="hero-tag">RevenueCat</span>
+      <span class="hero-tag">Weekly subscription</span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────
+       01 — COLOR PALETTE
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="colors">
+    <p class="ds-section-label"><span>01</span>COLOR PALETTE</p>
+    <h2 class="ds-section-title">Deep navy + translucent overlays</h2>
+    <p class="ds-section-desc">A single deep-blue anchor (#243D6A) carries every primary moment. The rest is dark surface shifts, alpha overlays for glass depth, and #FFFFFF for all text on dark.</p>
+
+    <p class="swatch-group-label">Brand</p>
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#243D6A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">primaryDark</div>
+          <div class="swatch-hex">#243D6A</div>
+          <div class="swatch-use">Gradients, main buttons, accents</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#353F5D;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">primaryDarkAlt</div>
+          <div class="swatch-hex">#353F5D</div>
+          <div class="swatch-use">Main screen background</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#364055;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">primaryDarkSoft</div>
+          <div class="swatch-hex">#364055</div>
+          <div class="swatch-use">Panels, IG Story button</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#181D2A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">onboardingDark</div>
+          <div class="swatch-hex">#181D2A</div>
+          <div class="swatch-use">Onboarding gradient end</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="swatch-group-label">Overlays</p>
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:rgba(22,26,39,0.90); border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">buttonBackground</div>
+          <div class="swatch-hex">#161A27 · 90%</div>
+          <div class="swatch-use">Continue button fill</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:rgba(94,112,166,0.50); border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">overlayCard</div>
+          <div class="swatch-hex">#5E70A6 · 50%</div>
+          <div class="swatch-use">Collection cell label overlay</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:rgba(89,105,153,0.25); border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">overlayCardLight</div>
+          <div class="swatch-hex">#596999 · 25%</div>
+          <div class="swatch-use">Table cell label overlay</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:rgba(62,74,109,0.50); border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">overlaySubscription</div>
+          <div class="swatch-hex">#3E4A6D · 50%</div>
+          <div class="swatch-use">Subscription cell overlay</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="swatch-group-label">Text &amp; Borders</p>
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#FFFFFF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">textOnDark</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-use">All text on dark backgrounds</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#919191;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">textMuted</div>
+          <div class="swatch-hex">#919191</div>
+          <div class="swatch-use">Restore, Privacy, Terms</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#AAAAAA;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">borderButton</div>
+          <div class="swatch-hex">#AAAAAA</div>
+          <div class="swatch-use">Button borders · 0.2pt width</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:rgba(235,235,235,0.60); border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">navBarTint</div>
+          <div class="swatch-hex">#EBEBEB · 60%</div>
+          <div class="swatch-use">Bar button items (menu, diamond)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full token table -->
+    <table class="token-table gap-32" style="margin-top:40px;">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>HEX / Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#243D6A;"></span>primaryDark</td><td>#243D6A</td><td>Gradients, buttons, accents</td></tr>
+        <tr><td><span class="dot" style="background:#353F5D;"></span>primaryDarkAlt</td><td>#353F5D</td><td>Main screen imageView background</td></tr>
+        <tr><td><span class="dot" style="background:#364055;"></span>primaryDarkSoft</td><td>#364055</td><td>IG Story panel, panels</td></tr>
+        <tr><td><span class="dot" style="background:#181D2A;"></span>onboardingDark</td><td>#181D2A</td><td>Onboarding gradient endColor</td></tr>
+        <tr><td><span class="dot" style="background:rgba(22,26,39,0.90); border:1px solid #444;"></span>buttonBackground</td><td>#161A27 · 90%</td><td>Continue button background</td></tr>
+        <tr><td><span class="dot" style="background:rgba(94,112,166,0.50); border:1px solid #444;"></span>overlayCard</td><td>#5E70A6 · 50%</td><td>affirmationCollectionViewCell label</td></tr>
+        <tr><td><span class="dot" style="background:rgba(89,105,153,0.25); border:1px solid #444;"></span>overlayCardLight</td><td>#596999 · 25%</td><td>attractionTableViewCell label</td></tr>
+        <tr><td><span class="dot" style="background:rgba(62,74,109,0.50); border:1px solid #444;"></span>overlaySubscription</td><td>#3E4A6D · 50%</td><td>SubTVTableViewCell bgLabel</td></tr>
+        <tr><td><span class="dot" style="background:#FFFFFF; border:1px solid #555;"></span>textOnDark</td><td>#FFFFFF</td><td>All dark-background text, button titles</td></tr>
+        <tr><td><span class="dot" style="background:#919191;"></span>textMuted</td><td>#919191</td><td>Restore / Privacy / Terms labels</td></tr>
+        <tr><td><span class="dot" style="background:#AAAAAA;"></span>borderButton</td><td>#AAAAAA · 0.2pt</td><td>Continue, Stop listening borders</td></tr>
+        <tr><td><span class="dot" style="background:rgba(78,96,121,0.85); border:1px solid #444;"></span>tabBarBg</td><td>#4e6079 · 85% + blur</td><td>Glass-morphism tab bar</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       02 — GRADIENTS
+  ───────────────────────────────────────── -->
+  <section class="ds-section">
+    <p class="ds-section-label"><span>02</span>GRADIENTS</p>
+    <h2 class="ds-section-title">Cormorant · deep blue sweep</h2>
+    <p class="ds-section-desc">All gradients run top-to-bottom or diagonal, anchored between primaryDark and onboardingDark. Overlaid on photography for immersive depth.</p>
+
+    <div class="gradient-grid">
+      <div class="gradient-card" style="background:linear-gradient(160deg,#353F5D 0%,#243D6A 100%);">
+        <span class="gradient-card-name">Affirmation / Main</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(180deg,#243D6A 0%,#181D2A 100%);">
+        <span class="gradient-card-name">Onboarding</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(180deg,#353F5D 0%,#243D6A 60%,#181D2A 100%);">
+        <span class="gradient-card-name">Player overlay</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(135deg,#364055 0%,#243D6A 100%);">
+        <span class="gradient-card-name">Card accent</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       03 — TYPOGRAPHY
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="typography">
+    <p class="ds-section-label"><span>03</span>TYPOGRAPHY</p>
+    <h2 class="ds-section-title">Cormorant Garamond · editorial weight</h2>
+    <p class="ds-section-desc">Display sizes at 25–35pt in Bold — the app trusts typography over decoration. Sofia Regular handles section names. System fonts for utilities and utility buttons.</p>
+
+    <table class="typo-table">
+      <tbody>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">H1 / Affirmation</div>
+            <div class="typo-spec">Cormorant · 35pt · Bold</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:35px;font-weight:700;">I am loved just for existing</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">H2 / Section</div>
+            <div class="typo-spec">Sofia · 29pt · Regular</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Sofia',cursive;font-size:29px;">Everyday Affirmations</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">H3 / Card title</div>
+            <div class="typo-spec">Cormorant · 25–26pt · Bold</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;">Life · Love · Success</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Body large</div>
+            <div class="typo-spec">Cormorant · 21pt · Medium</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;">Happiness is a choice I make today</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Body</div>
+            <div class="typo-spec">Cormorant · 18–19pt · Medium</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;">I use obstacles to motivate me to learn and grow</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Caption</div>
+            <div class="typo-spec">Cormorant · 17pt · Medium</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:rgba(255,255,255,0.55);">The next affirmation will appear soon</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Button primary</div>
+            <div class="typo-spec">Cormorant · 25–26pt · Bold</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;">Continue</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Button secondary</div>
+            <div class="typo-spec">System · 15pt · Medium</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:system-ui,sans-serif;font-size:15px;font-weight:500;color:#919191;">Restore · Privacy · Terms</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Timer / utility</div>
+            <div class="typo-spec">System · 18pt · Semibold</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:system-ui,sans-serif;font-size:18px;font-weight:600;">12:00</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="typo-meta">
+            <div class="typo-style-name">Onboarding subtitle</div>
+            <div class="typo-spec">Sofia · 25pt · Regular</div>
+          </td>
+          <td class="typo-sample">
+            <span style="font-family:'Sofia',cursive;font-size:25px;">How do you feel most of the time?</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:36px; padding:24px; background:var(--surface-card); border-radius:14px; border:1px solid var(--divider);">
+      <p style="font-size:12px; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:12px;">Font files bundled in app</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.06); border-radius:8px; padding:5px 12px; font-family:monospace; font-size:12px; color:rgba(255,255,255,0.60);">CormorantGaramond-Bold.ttf</span>
+        <span style="background:rgba(255,255,255,0.06); border-radius:8px; padding:5px 12px; font-family:monospace; font-size:12px; color:rgba(255,255,255,0.60);">CormorantGaramond-Medium.ttf</span>
+        <span style="background:rgba(255,255,255,0.06); border-radius:8px; padding:5px 12px; font-family:monospace; font-size:12px; color:rgba(255,255,255,0.60);">CormorantGaramond-Regular.ttf</span>
+        <span style="background:rgba(255,255,255,0.06); border-radius:8px; padding:5px 12px; font-family:monospace; font-size:12px; color:rgba(255,255,255,0.60);">Sofia-Regular.ttf</span>
+        <span style="background:rgba(255,255,255,0.06); border-radius:8px; padding:5px 12px; font-family:monospace; font-size:12px; color:rgba(255,255,255,0.60);">ArefRuqaaInk-Bold.ttf</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       04 — BUTTON VARIANTS
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="buttons">
+    <p class="ds-section-label"><span>04</span>BUTTON VARIANTS</p>
+    <h2 class="ds-section-title">Navy primary, ghost-border secondary</h2>
+    <p class="ds-section-desc">All primary CTAs use #243D6A or dark-navy fill. Onboarding buttons get a 25pt radius and 0.2pt grey border. Subscription CTA is wider with 20pt radius.</p>
+
+    <div class="btn-grid">
+      <div class="btn-card">
+        <div class="btn-card-label">button-continue · onboarding</div>
+        <div class="btn-card-demo">
+          <button class="btn-demo-continue">Continue</button>
+        </div>
+        <div class="btn-card-desc">#161A27 · 90% · r25pt · border 0.2pt #AAA · shadow 0.4 · h52pt</div>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-card-label">button-subscribe · paywall</div>
+        <div class="btn-card-demo">
+          <button class="btn-demo-subscribe">Try free &amp; Subscribe</button>
+        </div>
+        <div class="btn-card-desc">#243D6A · r20pt · 332×59pt · no shadow</div>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-card-label">button-stop · player</div>
+        <div class="btn-card-demo">
+          <button class="btn-demo-stop">Stop listening</button>
+        </div>
+        <div class="btn-card-desc">#243D6A · r25pt · 222×52pt · shadow 0.4</div>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-card-label">button-ig-story · affirmation</div>
+        <div class="btn-card-demo">
+          <button class="btn-demo-ig">📸 Share to IG</button>
+        </div>
+        <div class="btn-card-desc">#364055 · r18pt · h45pt · shadow 0.6</div>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-card-label">button-secondary · settings</div>
+        <div class="btn-card-demo btn-demo-restore">
+          <button class="btn-restore">Restore</button>
+          <button class="btn-restore">Privacy</button>
+          <button class="btn-restore">Terms</button>
+        </div>
+        <div class="btn-card-desc">#919191 text · system 15pt medium · 91×30pt</div>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-card-label">tabbar navigation</div>
+        <div class="btn-card-demo">
+          <div class="tabbar-demo">
+            <div class="tabbar-item active">Affirm</div>
+            <div class="tabbar-item">Home</div>
+          </div>
+        </div>
+        <div class="btn-card-desc">#4e6079 · 85% · blur · r20pt glass-morphism</div>
+      </div>
+    </div>
+
+    <!-- Border radius scale -->
+    <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin:40px 0 16px;">Border Radius Scale</p>
+    <div class="radius-scale">
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:0;"></div>
+        <div class="radius-label">0 · none<br/><span style="opacity:.5;">Share icon</span></div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:15px;"></div>
+        <div class="radius-label">15pt · md<br/><span style="opacity:.5;">Collection cell</span></div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:18px;"></div>
+        <div class="radius-label">18pt<br/><span style="opacity:.5;">IG Story btn</span></div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:20px;"></div>
+        <div class="radius-label">20pt · lg<br/><span style="opacity:.5;">Subscribe btn</span></div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:25px;"></div>
+        <div class="radius-label">25pt · xl<br/><span style="opacity:.5;">Continue / Stop</span></div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:9999px;"></div>
+        <div class="radius-label">full · pill<br/><span style="opacity:.5;">Subscription tags</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       05 — CARDS & CELLS
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="cards">
+    <p class="ds-section-label"><span>05</span>CARDS &amp; CELLS</p>
+    <h2 class="ds-section-title">Affirmation cards, attraction rows &amp; subscription cells</h2>
+    <p class="ds-section-desc">Three content surfaces: horizontal collection cards (155×200pt), full-width attraction table rows (374×96pt image), and subscription plan cells (r20pt overlay).</p>
+
+    <p class="swatch-group-label">Collection cards · affirmationCollectionViewCell</p>
+    <div class="card-grid gap-32">
+      <div class="affirmation-card">
+        <div class="affirmation-card-img">🌿</div>
+        <div class="affirmation-card-label">Life</div>
+      </div>
+      <div class="affirmation-card">
+        <div class="affirmation-card-img">💛</div>
+        <div class="affirmation-card-label">Love</div>
+      </div>
+      <div class="affirmation-card" style="opacity:0.5;">
+        <div class="affirmation-card-img">🔒</div>
+        <div class="affirmation-card-label">Money · Premium</div>
+      </div>
+      <div class="affirmation-card" style="opacity:0.5;">
+        <div class="affirmation-card-img">🔒</div>
+        <div class="affirmation-card-label">Success · Premium</div>
+      </div>
+    </div>
+
+    <p class="swatch-group-label" style="margin-top:8px;">Attraction rows · attractionTableViewCell</p>
+    <div class="attraction-rows gap-32" style="max-width:480px;">
+      <div class="attraction-row">
+        <div class="attraction-row-img">✨ Abundance of Life's Blessings</div>
+        <div class="attraction-row-body">
+          <div class="attraction-row-title">Inner Work</div>
+          <div class="attraction-row-desc">Daily reflection practice</div>
+        </div>
+      </div>
+      <div class="attraction-row" style="opacity:0.5;">
+        <div class="attraction-row-img">🔒 Premium content</div>
+        <div class="attraction-row-body">
+          <div class="attraction-row-title">Deep Focus</div>
+          <div class="attraction-row-desc">Unlock with subscription</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="swatch-group-label" style="margin-top:32px;">Subscription cells · SubTVTableViewCell</p>
+    <div style="display:flex; flex-direction:column; gap:12px; max-width:480px; margin-bottom:32px;">
+      <div class="sub-cell">
+        <div class="sub-cell-text">Weekly · $0.99 / week</div>
+        <div class="sub-cell-badge">Best value</div>
+      </div>
+      <div class="sub-cell" style="opacity:0.6;">
+        <div class="sub-cell-text">Monthly · $2.99 / month</div>
+      </div>
+    </div>
+
+    <p class="swatch-group-label">Affirmation viewer · AffirmationViewController</p>
+    <div class="affirmation-demo">
+      <div class="affirmation-text">I am not defined by my past, I am driven by my future</div>
+      <div class="affirmation-hint">← Swipe to change →</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       06 — SPACING SCALE
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="spacing">
+    <p class="ds-section-label"><span>06</span>SPACING SCALE</p>
+    <h2 class="ds-section-title">8pt base with generous section padding</h2>
+    <p class="ds-section-desc">Base unit is 8pt. Horizontal safe-area margins at 20pt. Key landmarks: 53pt bottom for IG Story, 96pt top for affirmation content area, 117pt horizontal for Lottie.</p>
+
+    <div class="spacing-scale">
+      <div class="spacing-item"><div class="spacing-bar" style="height:8px;"></div><div class="spacing-label">8</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:20px;"></div><div class="spacing-label">20</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:26px;"></div><div class="spacing-label">26</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:36px;"></div><div class="spacing-label">36</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:41px;"></div><div class="spacing-label">41</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:53px;"></div><div class="spacing-label">53</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:80px;"></div><div class="spacing-label">80</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:96px;"></div><div class="spacing-label">96</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:113px;"></div><div class="spacing-label">113</div></div>
+      <div class="spacing-item"><div class="spacing-bar" style="height:117px;"></div><div class="spacing-label">117</div></div>
+    </div>
+
+    <table class="token-table" style="margin-top:24px;">
+      <thead><tr><th>Value (pt)</th><th>Token</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>8</td><td>spacing-xs</td><td>Inner cell gaps, icon–text spacing</td></tr>
+        <tr><td>20</td><td>spacing-base</td><td>Horizontal safe-area edges (leading/trailing)</td></tr>
+        <tr><td>26</td><td>spacing-md</td><td>IG Story icon leading</td></tr>
+        <tr><td>41</td><td>spacing-lg</td><td>Continue button bottom (Onb1)</td></tr>
+        <tr><td>53</td><td>spacing-xl</td><td>IG Story bottom from safe area</td></tr>
+        <tr><td>96</td><td>spacing-2xl</td><td>Affirmation text top, Player padding</td></tr>
+        <tr><td>113–117</td><td>spacing-3xl</td><td>Lottie horizontal centering</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       07 — ELEMENT SIZES
+  ───────────────────────────────────────── -->
+  <section class="ds-section">
+    <p class="ds-section-label"><span>07</span>COMPONENT SIZES</p>
+    <h2 class="ds-section-title">Touch targets &amp; fixed dimensions</h2>
+    <p class="ds-section-desc">Primary CTAs at minimum 52pt height. Icons at 25–30pt. Collection cell 155×200pt. Subscription CTA the largest at 332×59pt.</p>
+
+    <table class="token-table">
+      <thead><tr><th>Component</th><th>Width</th><th>Height</th></tr></thead>
+      <tbody>
+        <tr><td>Continue button (Onboarding)</td><td>full − 40pt margin</td><td>52pt</td></tr>
+        <tr><td>Stop listening (Player)</td><td>222pt</td><td>52pt</td></tr>
+        <tr><td>Try free &amp; Subscribe</td><td>332pt</td><td>59pt</td></tr>
+        <tr><td>IG Story button area</td><td>full</td><td>45pt</td></tr>
+        <tr><td>Collection cell</td><td>155pt</td><td>200pt (img 145, label 47)</td></tr>
+        <tr><td>Attraction table row image</td><td>374pt</td><td>96pt</td></tr>
+        <tr><td>Subscription cell (bgLabel)</td><td>full</td><td>58pt</td></tr>
+        <tr><td>Restore / Privacy / Terms btn</td><td>91pt</td><td>30pt</td></tr>
+        <tr><td>Nav icons (menu, diamond)</td><td>25pt</td><td>25pt</td></tr>
+        <tr><td>Share icon (Player)</td><td>30pt</td><td>30pt</td></tr>
+        <tr><td>Lottie swipe hint</td><td>full − 226pt</td><td>43pt</td></tr>
+        <tr><td>Affirmation text area</td><td>full − 109pt</td><td>227pt</td></tr>
+        <tr><td>Section title rows (Main)</td><td>full</td><td>48pt</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       08 — SHADOW SYSTEM
+  ───────────────────────────────────────── -->
+  <section class="ds-section">
+    <p class="ds-section-label"><span>08</span>SHADOW SYSTEM</p>
+    <h2 class="ds-section-title">Three tiers of depth</h2>
+    <p class="ds-section-desc">Shadows are white (#FFFFFF / tertiarySystemBackground), kept subtle against dark surfaces. Radius 4–6, opacity 0.4–0.6.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
+      <div style="background:var(--surface-card);border-radius:14px;padding:24px;border:1px solid var(--divider);text-align:center;">
+        <div style="width:80px;height:48px;border-radius:15px;background:#161A2790;border:0.2px solid #AAA;margin:0 auto 16px;box-shadow:0 4px 8px rgba(255,255,255,0.4);"></div>
+        <div style="font-size:12px;color:var(--text-muted);">shadow-sm<br/>radius 4 · opacity 0.4</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:4px;">Continue button</div>
+      </div>
+      <div style="background:var(--surface-card);border-radius:14px;padding:24px;border:1px solid var(--divider);text-align:center;">
+        <div style="width:80px;height:48px;border-radius:18px;background:#364055;margin:0 auto 16px;box-shadow:0 4px 10px rgba(255,255,255,0.6);"></div>
+        <div style="font-size:12px;color:var(--text-muted);">shadow-md<br/>radius 4 · opacity 0.6</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:4px;">IG Story button</div>
+      </div>
+      <div style="background:var(--surface-card);border-radius:14px;padding:24px;border:1px solid var(--divider);text-align:center;">
+        <div style="width:80px;height:48px;border-radius:25px;background:#243D6A;margin:0 auto 16px;box-shadow:0 6px 14px rgba(255,255,255,0.4);"></div>
+        <div style="font-size:12px;color:var(--text-muted);">shadow-lg<br/>radius 6 · opacity 0.4</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:4px;">Stop listening</div>
+      </div>
+    </div>
+
+    <table class="token-table" style="margin-top:24px;">
+      <thead><tr><th>shadowRadius</th><th>shadowOpacity</th><th>shadowOffset</th><th>Component</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>(0,0)</td><td>Share btn, Try free &amp; Subscribe, SubTV cell</td></tr>
+        <tr><td>4</td><td>0.4</td><td>(0,0)</td><td>Continue buttons (Onb1–3)</td></tr>
+        <tr><td>4</td><td>0.6</td><td>(0,0)</td><td>IG Story button</td></tr>
+        <tr><td>6</td><td>0.4</td><td>(0,0)</td><td>Stop listening (Player)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       09 — SCREENS
+  ───────────────────────────────────────── -->
+  <section class="ds-section" id="screens">
+    <p class="ds-section-label"><span>09</span>SCREEN ANATOMY</p>
+    <h2 class="ds-section-title">Five screen patterns</h2>
+    <p class="ds-section-desc">Navigation flows from Splash → Onboarding (×3) → MainTabBar. Paywall cooldown 12h. Debug menu behind 5-tap gesture.</p>
+
+    <div class="row">
+      <div class="col" style="max-width:320px;">
+        <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Onboarding screen</p>
+        <div class="onb-demo">
+          <div class="onb-eyebrow">YOUR PATH · 1 OF 5</div>
+          <div class="onb-title">How do you feel most of the time?</div>
+          <div class="onb-subtitle">Be honest — no right answers</div>
+          <div class="onb-options">
+            <div class="onb-option"><div class="onb-option-icon">🤖</div><div class="onb-option-text">Running on autopilot</div></div>
+            <div class="onb-option"><div class="onb-option-icon">🌧️</div><div class="onb-option-text">Something inside hurts</div></div>
+            <div class="onb-option"><div class="onb-option-icon">🌊</div><div class="onb-option-text">I feel out of control</div></div>
+          </div>
+          <div class="onb-btn">Continue</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Navigation flow</p>
+        <table class="token-table">
+          <thead><tr><th>Screen</th><th>File</th><th>Trigger</th></tr></thead>
+          <tbody>
+            <tr><td>Splash</td><td>SplashViewController</td><td>App launch</td></tr>
+            <tr><td>Onboarding 1–3</td><td>Onb1–3ViewController</td><td>onboarding_finished = false</td></tr>
+            <tr><td>Main Tab Bar</td><td>MainTabBarController</td><td>After onboarding</td></tr>
+            <tr><td>Affirm tab</td><td>MainViewController</td><td>Tab index 0</td></tr>
+            <tr><td>Home tab</td><td>SettingsViewController</td><td>Tab index 1</td></tr>
+            <tr><td>Affirmation</td><td>AffirmationViewController</td><td>Category tap</td></tr>
+            <tr><td>Player</td><td>PlayerViewController</td><td>Sound tap</td></tr>
+            <tr><td>Paywall</td><td>SubscribtionViewController</td><td>Premium content · 12h cooldown</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:24px;">
+          <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">UserDefaults keys</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:rgba(255,255,255,0.55);">onboarding_finished</div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:rgba(255,255,255,0.55);">today_picks_*, today_unlocked_count_*</div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:rgba(255,255,255,0.55);">seen_history_*, cached_affirmations</div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:rgba(255,255,255,0.55);">inner_work_splash_date_*</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       10 — ICONS
+  ───────────────────────────────────────── -->
+  <section class="ds-section">
+    <p class="ds-section-label"><span>10</span>ICONS &amp; ASSETS</p>
+    <h2 class="ds-section-title">25pt system icons + custom Lottie</h2>
+    <p class="ds-section-desc">Navigation and action icons at 25×25pt (padlock, diamond, menu) and 30×30pt (share). Lottie used for swipe hint animation and loading states.</p>
+
+    <div class="icon-sizes gap-24">
+      <div class="icon-item">
+        <div class="icon-box" style="width:25px;height:25px;">💎</div>
+        <div class="icon-label">25pt<br/>diamond</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box" style="width:25px;height:25px;">🔒</div>
+        <div class="icon-label">25pt<br/>padlock</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box" style="width:25px;height:25px;">☰</div>
+        <div class="icon-label">25pt<br/>menu</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box" style="width:30px;height:30px;">↗</div>
+        <div class="icon-label">30pt<br/>share</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box" style="width:25px;height:25px;">📸</div>
+        <div class="icon-label">25pt<br/>instagram</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface-card);border-radius:14px;padding:20px;border:1px solid var(--divider);display:flex;align-items:center;gap:16px;max-width:480px;">
+      <div style="background:rgba(36,61,106,0.3);border-radius:10px;width:43px;height:43px;display:flex;align-items:center;justify-content:center;font-size:22px;">👆</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Lottie swipe hint</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.45);">lottie-ios 3.5.0 · full-width − 226pt · h43pt<br/>Also used for loading state</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       11 — EXTERNAL SERVICES
+  ───────────────────────────────────────── -->
+  <section class="ds-section">
+    <p class="ds-section-label"><span>11</span>EXTERNAL SERVICES</p>
+    <h2 class="ds-section-title">Integrations &amp; data endpoints</h2>
+
+    <table class="token-table">
+      <thead><tr><th>Service</th><th>Purpose</th><th>Key</th></tr></thead>
+      <tbody>
+        <tr><td>RevenueCat</td><td>Subscriptions, paywall, entitlement validation</td><td>fullappaccess</td></tr>
+        <tr><td>RevenueCatUI</td><td>Ready-made paywall screen</td><td>—</td></tr>
+        <tr><td>files.holyunic.com</td><td>affirmations.json + 7 ambient audio tracks</td><td>/ambient/</td></tr>
+        <tr><td>App Store · StoreKit</td><td>Billing, test config</td><td>affirmatior_weekly</td></tr>
+        <tr><td>Instagram URI</td><td>Stories sharing from affirmation screen</td><td>instagram://</td></tr>
+        <tr><td>AVPlayer</td><td>Streaming audio, background playback, lock-screen controls</td><td>MPRemoteCommandCenter</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div><!-- /page -->
+
+<footer>
+  <div class="foot-logo">Affi · Design System</div>
+  <div class="foot-note">iOS 15+ · Swift · UIKit · MVC · RevenueCat · Generated from DESIGN_SYSTEM.md</div>
+</footer>
+
+</body>
+</html>
