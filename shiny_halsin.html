@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задачи про шины — Халсин объясняет · ОГЭ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;0,700;0,900;1,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #f4f0e8;
+    --bg2:   #faf8f3;
+    --bg3:   #ece7d9;
+    --ink:   #1c1a14;
+    --muted: #6b6455;
+    --border:rgba(0,0,0,0.1);
+    --B: #2563eb;
+    --H: #ea7b0f;
+    --d: #16a34a;
+    --D: #7c3aed;
+    --p: #dc2626;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:'Nunito',sans-serif; font-size:16px; line-height:1.65; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: radial-gradient(ellipse 60% 40% at 10% 0%, rgba(22,101,52,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 50% at 90% 80%, rgba(37,99,235,0.05) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 20px 80px; }
+
+  /* HERO */
+  .hero { display:grid; grid-template-columns:260px 1fr; gap:0; min-height:320px; border-radius:16px; overflow:hidden; border:1px solid rgba(0,0,0,0.12); margin-top:32px; }
+  .hero-img { width:260px; height:320px; object-fit:cover; object-position:center top; display:block; }
+  .hero-text { background:#1a2e1a; padding:32px 28px; display:flex; flex-direction:column; justify-content:center; gap:14px; position:relative; overflow:hidden; }
+  .hero-text::before { content:'🌿'; position:absolute; right:-10px; top:-20px; font-size:120px; opacity:0.06; line-height:1; }
+  .hero-eyebrow { font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#86efac; }
+  .hero-title { font-family:'Bitter',serif; font-size:clamp(22px,3.5vw,34px); font-weight:900; color:#f0fdf4; line-height:1.1; }
+  .hero-title span { color:#4ade80; }
+  .hero-badge { background:rgba(74,222,128,0.15); border:1px solid rgba(74,222,128,0.3); color:#4ade80; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:0.05em; width:fit-content; }
+  .hero-quote { font-size:14px; color:#bbf7d0; line-height:1.6; font-style:italic; border-left:3px solid #4ade80; padding-left:14px; }
+  @media(max-width:580px){ .hero{grid-template-columns:1fr;} .hero-img{width:100%;height:200px;} }
+
+  /* РАЗДЕЛЫ */
+  .section { margin-top:40px; }
+  .section-title { font-family:'Bitter',serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+  .section-num { width:32px; height:32px; border-radius:8px; background:var(--ink); color:var(--bg2); font-size:14px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Bitter',serif; }
+
+  /* МАРКИРОВКА */
+  .marking-decode { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:24px 24px 20px; margin-bottom:16px; }
+  .marking-display { display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:20px; flex-wrap:wrap; }
+  .m-part { font-family:'Bitter',serif; font-size:clamp(32px,7vw,56px); font-weight:900; line-height:1; padding:8px 4px; }
+  .m-B { color:var(--B); }  .m-sep { color:var(--muted); font-size:clamp(32px,7vw,56px); font-weight:900; }
+  .m-H { color:var(--H); }  .m-R { color:var(--muted); font-size:clamp(20px,4vw,32px); font-weight:700; }
+  .m-d { color:var(--d); }
+
+  .vars-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+  .var-card { border-radius:10px; padding:14px 16px; border:1.5px solid; }
+  .var-card.vB { background:rgba(37,99,235,0.07);  border-color:rgba(37,99,235,0.3); }
+  .var-card.vH { background:rgba(234,123,15,0.07); border-color:rgba(234,123,15,0.3); }
+  .var-card.vd { background:rgba(22,163,74,0.07);  border-color:rgba(22,163,74,0.3); }
+  .var-card.vD { background:rgba(124,58,237,0.07); border-color:rgba(124,58,237,0.3); }
+  .var-name { font-family:'Bitter',serif; font-size:28px; font-weight:900; margin-bottom:2px; }
+  .vB .var-name { color:var(--B); } .vH .var-name { color:var(--H); } .vd .var-name { color:var(--d); } .vD .var-name { color:var(--D); }
+  .var-desc { font-size:13px; color:var(--ink); font-weight:600; margin-bottom:2px; }
+  .var-value { font-size:12px; color:var(--muted); }
+  .var-formula { font-size:13px; font-weight:700; margin-top:4px; }
+  .wheel-visual { text-align:center; margin:20px 0 4px; }
+
+  /* ЗАДАЧА */
+  .task-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:16px; }
+  .task-header { padding:12px 20px; display:flex; align-items:center; gap:12px; background:var(--bg3); border-bottom:1px solid var(--border); }
+  .task-num-badge { font-family:'Bitter',serif; font-size:11px; font-weight:700; letter-spacing:0.15em; padding:3px 12px; border-radius:20px; text-transform:uppercase; background:var(--ink); color:var(--bg2); }
+  .task-topic { font-size:13px; color:var(--muted); font-weight:600; }
+  .task-difficulty { font-size:11px; margin-left:auto; color:var(--muted); }
+  .task-body { padding:20px 22px; }
+  .task-condition { background:var(--bg3); border-radius:8px; padding:12px 16px; font-size:15px; line-height:1.6; margin-bottom:18px; border-left:3px solid var(--ink); font-style:italic; }
+  .halsin-tip { display:flex; gap:12px; margin-bottom:16px; background:rgba(22,101,52,0.06); border:1px solid rgba(22,101,52,0.2); border-radius:10px; padding:12px 16px; }
+  .halsin-avatar { font-size:24px; flex-shrink:0; margin-top:1px; }
+  .halsin-speech { font-size:14px; color:#166534; line-height:1.6; font-weight:600; }
+  .steps { display:flex; flex-direction:column; gap:10px; }
+  .step { display:flex; gap:14px; align-items:flex-start; padding:12px 16px; background:var(--bg); border-radius:8px; border:1px solid var(--border); }
+  .step-num { width:26px; height:26px; border-radius:6px; background:var(--ink); color:var(--bg2); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Bitter',serif; margin-top:1px; }
+  .step-content { flex:1; font-size:15px; line-height:1.6; }
+  .answer-box { background:var(--ink); color:var(--bg2); border-radius:10px; padding:14px 18px; display:flex; align-items:center; gap:14px; margin-top:16px; }
+  .answer-label { font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; opacity:0.6; }
+  .answer-value { font-family:'Bitter',serif; font-size:24px; font-weight:900; color:#4ade80; }
+  .answer-unit { font-size:14px; opacity:0.7; }
+  .answer-note { font-size:13px; opacity:0.5; }
+
+  /* ЦВЕТА ПЕРЕМЕННЫХ */
+  .bB { color:var(--B); font-weight:800; }
+  .bH { color:var(--H); font-weight:800; }
+  .bd { color:var(--d); font-weight:800; }
+  .bD { color:var(--D); font-weight:800; }
+  .bP { color:var(--p); font-weight:800; }
+
+  /* ТАБЛИЦА */
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table.tire-table { border-collapse:collapse; width:100%; font-size:14px; }
+  table.tire-table th { background:var(--ink); color:var(--bg2); padding:8px 14px; text-align:center; font-family:'Bitter',serif; font-size:12px; letter-spacing:0.08em; }
+  table.tire-table td { padding:8px 14px; text-align:center; border-bottom:1px solid var(--border); border-right:1px solid var(--border); }
+  table.tire-table tr:hover td { background:var(--bg3); }
+  .hl-col { background:rgba(37,99,235,0.1); font-weight:700; color:var(--B); }
+  .hl-ans { background:rgba(22,163,74,0.15); font-weight:800; color:var(--d); }
+
+  /* МНЕМОНИКА */
+  .mnemo-card { background:linear-gradient(135deg,#14532d 0%,#1a3a4a 100%); border-radius:16px; padding:28px 24px; margin-top:40px; color:#f0fdf4; }
+  .mnemo-title { font-family:'Bitter',serif; font-size:20px; font-weight:900; color:#4ade80; margin-bottom:20px; }
+  .mnemo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:20px; }
+  .mnemo-item { background:rgba(255,255,255,0.07); border-radius:10px; padding:12px 14px; }
+  .mnemo-formula { font-family:'Bitter',serif; font-size:17px; font-weight:700; margin-bottom:4px; }
+  .mnemo-desc { font-size:12px; opacity:0.75; line-height:1.5; }
+  .cheatsheet { background:rgba(0,0,0,0.25); border-radius:10px; padding:16px 18px; margin-top:12px; }
+  .cheat-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:10px; }
+  .cheat-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-size:14px; }
+  .cheat-row:last-child { border-bottom:none; }
+  .cheat-label { opacity:0.7; }
+  .cheat-val { font-weight:700; color:#86efac; font-family:'Bitter',serif; }
+
+  /* ВАЖНЫЙ БЛОК */
+  .warn-box { background:rgba(234,123,15,0.1); border:1.5px solid rgba(234,123,15,0.4); border-radius:10px; padding:14px 18px; margin-bottom:20px; display:flex; gap:12px; }
+  .warn-icon { font-size:22px; flex-shrink:0; }
+  .warn-text { font-size:14px; font-weight:600; color:#7c3a00; line-height:1.6; }
+
+  .nav-back { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); font-size:13px; font-weight:600; margin-top:48px; padding:8px 16px; border:1px solid var(--border); border-radius:8px; transition:color 0.15s,border-color 0.15s; }
+  .nav-back:hover { color:var(--ink); border-color:rgba(0,0,0,0.25); }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .section { animation:fadeIn 0.4s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img" src="https://assetsio.gnwcdn.com/halsin-romance-baldurs-gate-3.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp" alt="Халсин" onerror="this.style.background='#1a2e1a'">
+    <div class="hero-text">
+      <div class="hero-eyebrow">ОГЭ 2026 · Задания 1–5 · Новый вариант</div>
+      <div class="hero-title">Задачи<br>про <span>шины</span></div>
+      <div class="hero-quote">«Я провёл тысячу лет в Теневых землях. Победил архидемона. Обнимал медведей. Но когда я впервые увидел маркировку "195/65 R15" — честно признаться, растерялся. Теперь знаю. И ты узнаешь за 5 минут.»</div>
+      <div class="hero-badge">🌿 Халсин объясняет · 165/70 R13</div>
+    </div>
+  </div>
+
+  <!-- ПРЕДУПРЕЖДЕНИЕ О ВЕРСИИ -->
+  <div class="section">
+    <div class="warn-box">
+      <span class="warn-icon">⚠️</span>
+      <span class="warn-text">Это вариант ОГЭ <strong>2026 года</strong> — маркировка <strong>165/70 R13</strong>. В интернете много старых объяснений с 265/70 R17 (вариант 2020 года). Числа другие, но принцип тот же.</span>
+    </div>
+  </div>
+
+  <!-- РАСШИФРОВКА -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">0</span>Расшифруй маркировку — дальше всё просто</div>
+
+    <div class="marking-decode">
+      <div class="marking-display">
+        <span class="m-part m-B">165</span>
+        <span class="m-sep">/</span>
+        <span class="m-part m-H">70</span>
+        <span class="m-sep">&nbsp;</span>
+        <span class="m-R">R</span>
+        <span class="m-part m-d">13</span>
+      </div>
+
+      <div class="vars-grid">
+        <div class="var-card vB">
+          <div class="var-name">B</div>
+          <div class="var-desc">Ширина протектора</div>
+          <div class="var-value">= 165 мм</div>
+          <div class="var-formula" style="color:var(--B)">🔵 Синий · первое число · миллиметры</div>
+        </div>
+        <div class="var-card vH">
+          <div class="var-name">H</div>
+          <div class="var-desc">Высота боковины</div>
+          <div class="var-value">= B × (70 ÷ 100) = 165 × 0,70</div>
+          <div class="var-formula" style="color:var(--H)">🟠 Оранжевый · это резина сбоку · % от ширины</div>
+        </div>
+        <div class="var-card vd">
+          <div class="var-name">d</div>
+          <div class="var-desc">Диаметр диска (железо внутри)</div>
+          <div class="var-value">= 13 дюймов × 25,4</div>
+          <div class="var-formula" style="color:var(--d)">🟢 Зелёный · третье число · дюймы → мм</div>
+        </div>
+        <div class="var-card vD">
+          <div class="var-name">D</div>
+          <div class="var-desc">Диаметр колеса целиком</div>
+          <div class="var-value">= 2H + d</div>
+          <div class="var-formula" style="color:var(--D)">🟣 Фиолетовый · итог · всё вместе</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG -->
+    <div class="wheel-visual">
+      <svg viewBox="0 0 320 220" width="320" height="220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+        <circle cx="160" cy="110" r="95" fill="rgba(234,123,15,0.1)" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 3"/>
+        <circle cx="160" cy="110" r="61" fill="rgba(22,163,74,0.1)" stroke="#16a34a" stroke-width="2"/>
+        <circle cx="160" cy="110" r="18" fill="#16a34a" opacity="0.3"/>
+        <line x1="160" y1="15" x2="160" y2="205" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6"/>
+        <text x="166" y="24" font-size="13" fill="#7c3aed" font-weight="700" font-family="Bitter,serif">D</text>
+        <line x1="100" y1="110" x2="220" y2="110" stroke="#16a34a" stroke-width="2" opacity="0.8"/>
+        <text x="226" y="115" font-size="13" fill="#16a34a" font-weight="700" font-family="Bitter,serif">d</text>
+        <line x1="130" y1="110" x2="130" y2="15" stroke="#ea7b0f" stroke-width="2" opacity="0.8"/>
+        <text x="104" y="66" font-size="13" fill="#ea7b0f" font-weight="700" font-family="Bitter,serif">H</text>
+        <line x1="65" y1="150" x2="255" y2="150" stroke="#2563eb" stroke-width="2" opacity="0.7"/>
+        <polygon points="65,146 65,154 55,150" fill="#2563eb" opacity="0.7"/>
+        <polygon points="255,146 255,154 265,150" fill="#2563eb" opacity="0.7"/>
+        <text x="147" y="167" font-size="13" fill="#2563eb" font-weight="700" font-family="Bitter,serif">B</text>
+        <text x="60" y="200" font-size="12" fill="#7c3aed" font-weight="700" font-family="Bitter,serif">D = 2H + d</text>
+      </svg>
+    </div>
+
+    <div class="halsin-tip">
+      <span class="halsin-avatar">🌿</span>
+      <span class="halsin-speech">Буква <strong>R</strong> — «Radial», тип конструкции шины. Для математики она ничего не значит. Просто игнорируй её — как я игнорирую советы Астариона.<br><br>
+      Главный порядок всегда: <span class="bd">d</span> из дюймов в мм → <span class="bH">H</span> из процентов в мм → собираем <span class="bD">D</span>. Три шага. Называй про себя: «диск — бок — колесо».</span>
+    </div>
+  </div>
+
+  <!-- ЗАДАНИЕ 1 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">1</span>Диаметр заводского колеса</div>
+    <div class="task-card">
+      <div class="task-header">
+        <span class="task-num-badge">Задание 1</span>
+        <span class="task-topic">Формула D = 2H + d</span>
+        <span class="task-difficulty">⭐⭐ Три шага</span>
+      </div>
+      <div class="task-body">
+        <div class="task-condition">Найдите диаметр колеса автомобиля, выходящего с завода (маркировка 165/70 R13). Ответ дайте в миллиметрах.</div>
+        <div class="halsin-tip">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">d → H → D. Три шага, без паники. Я однажды вычислял траекторию прыжка медведя через пропасть — это сложнее, обещаю.</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">Переводим диаметр диска из дюймов в мм:<br>
+            <span class="bd">d</span> = 13 × 25,4 = <strong>330,2 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">Считаем высоту боковины (70% от ширины):<br>
+            <span class="bH">H</span> = <span class="bB">B</span> × 0,70 = 165 × 0,70 = <strong>115,5 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">Собираем диаметр колеса:<br>
+            <span class="bD">D</span> = 2 × <span class="bH">H</span> + <span class="bd">d</span> = 2 × 115,5 + 330,2 = 231 + 330,2 = <strong>561,2 мм</strong></div>
+          </div>
+        </div>
+        <div class="answer-box">
+          <div><div class="answer-label">Ответ</div><div class="answer-value">561,2 <span class="answer-unit">мм</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАДАНИЕ 2 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">2</span>Наименьшая ширина шины по таблице</div>
+    <div class="task-card">
+      <div class="task-header">
+        <span class="task-num-badge">Задание 2</span>
+        <span class="task-topic">Работа с таблицей</span>
+        <span class="task-difficulty">⭐ Самое лёгкое — только таблица</span>
+      </div>
+      <div class="task-body">
+        <div class="task-condition">Шины какой наименьшей ширины можно устанавливать на автомобиль, если диаметр диска равен 15 дюймам? Ответ дайте в миллиметрах.</div>
+        <div class="halsin-tip">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Это задание — подарок. Считать не надо вообще. Просто смотришь в таблицу. Если бы все задачи были такими, я бы давно получил диплом и занялся лесом.</span>
+        </div>
+        <div class="table-wrap">
+          <table class="tire-table">
+            <tr>
+              <th>Ширина B (мм)</th>
+              <th>Диаметр диска 13"</th>
+              <th>Диаметр диска 14"</th>
+              <th>Диаметр диска 15"</th>
+            </tr>
+            <tr><td>165</td><td>165/70; 165/65</td><td>165/65</td><td>—</td></tr>
+            <tr><td>175</td><td>175/65</td><td>175/65; 175/60</td><td>—</td></tr>
+            <tr><td>185</td><td>—</td><td>185/60</td><td class="hl-ans">185/55</td></tr>
+            <tr><td>195</td><td>—</td><td>195/60; 195/55</td><td class="hl-col">195/50; 195/55</td></tr>
+            <tr><td>205</td><td>—</td><td>205/55</td><td class="hl-col">205/50; 205/55</td></tr>
+          </table>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">Находим столбец «15 дюймов». Видим ширины: <strong>185, 195, 205</strong>.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">Нужна <em>наименьшая</em>. 185 &lt; 195 &lt; 205. Ответ — <strong>185</strong>.</div>
+          </div>
+        </div>
+        <div class="answer-box">
+          <div><div class="answer-label">Ответ</div><div class="answer-value">185 <span class="answer-unit">мм</span></div></div>
+          <div class="answer-note">Просто смотришь в таблицу — считать не нужно</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАДАНИЕ 3 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">3</span>На сколько мм увеличится диаметр</div>
+    <div class="task-card">
+      <div class="task-header">
+        <span class="task-num-badge">Задание 3</span>
+        <span class="task-topic">Два диаметра — разница</span>
+        <span class="task-difficulty">⭐⭐ Как задание 1, но дважды</span>
+      </div>
+      <div class="task-body">
+        <div class="task-condition">На сколько миллиметров увеличится диаметр колеса, если заменить колёса, установленные на заводе, колёсами с шинами 195/50 R15?</div>
+        <div class="halsin-tip">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Новая шина 195/50 R<strong>15</strong> — все три числа другие: ширина, процент и диск. Считаем D заново с нуля по тем же трём шагам. D из задания 1 уже готов — не выбрасывай листочек.</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">Из задания 1: <span class="bD">D</span><sub>старый</sub> = <strong>561,2 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">Новая шина 195/50 R15. Шаг d → H → D:<br>
+            <span class="bd">d</span> = 15 × 25,4 = <strong>381 мм</strong><br>
+            <span class="bH">H</span> = 195 × 0,50 = <strong>97,5 мм</strong><br>
+            <span class="bD">D</span><sub>новый</sub> = 2 × 97,5 + 381 = 195 + 381 = <strong>576 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">Разница: 576 − 561,2 = <strong>14,8 мм</strong></div>
+          </div>
+        </div>
+        <div class="answer-box">
+          <div><div class="answer-label">Ответ</div><div class="answer-value">14,8 <span class="answer-unit">мм</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАДАНИЕ 4 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">4</span>Разница радиусов двух шин</div>
+    <div class="task-card">
+      <div class="task-header">
+        <span class="task-num-badge">Задание 4</span>
+        <span class="task-topic">Радиус = D ÷ 2</span>
+        <span class="task-difficulty">⭐⭐⭐ Не забудь поделить на 2!</span>
+      </div>
+      <div class="task-body">
+        <div class="task-condition">На сколько миллиметров радиус колеса с шиной 205/55 R14 больше, чем радиус колеса с шиной 165/65 R14?</div>
+        <div class="halsin-tip">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Здесь спрашивают про <em>радиус</em>, а не диаметр. Радиус = D ÷ 2. Найди D для каждой шины, потом поделишь оба на 2 и вычтешь. Или проще: вычти диаметры и раздели на 2.</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">Шина 205/55 R14 → d → H → D:<br>
+            <span class="bd">d</span> = 14 × 25,4 = <strong>355,6 мм</strong><br>
+            <span class="bH">H</span> = 205 × 0,55 = <strong>112,75 мм</strong><br>
+            <span class="bD">D₁</span> = 2 × 112,75 + 355,6 = 225,5 + 355,6 = <strong>581,1 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">Шина 165/65 R14 → d тот же (14"), считаем H и D:<br>
+            <span class="bd">d</span> = 14 × 25,4 = <strong>355,6 мм</strong><br>
+            <span class="bH">H</span> = 165 × 0,65 = <strong>107,25 мм</strong><br>
+            <span class="bD">D₂</span> = 2 × 107,25 + 355,6 = 214,5 + 355,6 = <strong>570,1 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">Разница диаметров: 581,1 − 570,1 = <strong>11 мм</strong><br>
+            Разница <em>радиусов</em> = разница диаметров ÷ 2 = 11 ÷ 2 = <strong>5,5 мм</strong></div>
+          </div>
+        </div>
+        <div class="halsin-tip" style="margin-top:14px">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Хак: одинаковый диск у обеих шин — значит <span class="bd">d</span> считаешь один раз! Только H разные.</span>
+        </div>
+        <div class="answer-box">
+          <div><div class="answer-label">Ответ</div><div class="answer-value">5,5 <span class="answer-unit">мм</span></div></div>
+          <div class="answer-note">Разница диаметров 11 мм ÷ 2 = радиусы</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАДАНИЕ 5 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">5</span>Процент увеличения пробега</div>
+    <div class="task-card">
+      <div class="task-header">
+        <span class="task-num-badge">Задание 5</span>
+        <span class="task-topic">Задача на проценты</span>
+        <span class="task-difficulty">⭐⭐⭐ Пропорция + округление</span>
+      </div>
+      <div class="task-body">
+        <div class="task-condition">На сколько процентов увеличится пробег автомобиля при одном обороте колеса, если заменить колёса, установленные на заводе, колёсами с шинами 175/60 R14? Округлите до десятых.</div>
+        <div class="halsin-tip">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Пробег за один оборот = длина окружности = π × D. Поскольку π одинаковый, проценты считаем просто по диаметрам. Новый D → пропорция → вычитаем 100%.</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">Из задания 1: <span class="bD">D</span><sub>заводской</sub> = <strong>561,2 мм</strong> (это 100%)</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">Новая шина 175/60 R14 → d → H → D:<br>
+            <span class="bd">d</span> = 14 × 25,4 = <strong>355,6 мм</strong><br>
+            <span class="bH">H</span> = 175 × 0,60 = <strong>105 мм</strong><br>
+            <span class="bD">D</span><sub>новый</sub> = 2 × 105 + 355,6 = 210 + 355,6 = <strong>565,6 мм</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">Составляем пропорцию:<br>
+            561,2 мм → 100%<br>
+            565,6 мм → x%<br>
+            x = (565,6 × 100) ÷ 561,2 = 56 560 ÷ 561,2 ≈ <strong>100,784...%</strong></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">Отклонение: 100,784 − 100 = <strong>0,784 ≈ 0,8%</strong></div>
+          </div>
+        </div>
+        <div class="halsin-tip" style="margin-top:14px">
+          <span class="halsin-avatar">🌿</span>
+          <span class="halsin-speech">Короткий путь: (разница D / старый D) × 100 = (565,6 − 561,2) / 561,2 × 100 = 4,4 / 561,2 × 100 ≈ 0,784 ≈ <strong>0,8%</strong></span>
+        </div>
+        <div class="answer-box">
+          <div><div class="answer-label">Ответ</div><div class="answer-value">0,8 <span class="answer-unit">%</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- МНЕМОНИКА -->
+  <div class="mnemo-card">
+    <div class="mnemo-title">🧠 Шпора — запомни это</div>
+    <div class="mnemo-grid">
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#86efac">Порядок: d → H → D</div>
+        <div class="mnemo-desc">Сначала диск в мм, потом высота боковины, потом диаметр. Всегда.</div>
+      </div>
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#93c5fd">H = B × (% ÷ 100)</div>
+        <div class="mnemo-desc">Второе число маркировки — это процент от первого. 70% → × 0,70</div>
+      </div>
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#fcd34d">d = дюймы × 25,4</div>
+        <div class="mnemo-desc">Третье число всегда в дюймах. Умножь на 25,4.</div>
+      </div>
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#c4b5fd">D = 2H + d</div>
+        <div class="mnemo-desc">Диаметр = два бока + диск. Два бока потому что с обеих сторон.</div>
+      </div>
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#fca5a5">Радиус = D ÷ 2</div>
+        <div class="mnemo-desc">Если спрашивают радиус — не забудь разделить диаметр на 2!</div>
+      </div>
+      <div class="mnemo-item">
+        <div class="mnemo-formula" style="color:#6ee7b7">% = (ΔD ÷ D₀) × 100</div>
+        <div class="mnemo-desc">Разница диаметров делить на старый диаметр, умножить на 100.</div>
+      </div>
+    </div>
+    <div class="cheatsheet">
+      <div class="cheat-title">Ответы варианта 2026 (165/70 R13) — запомни на крайний случай</div>
+      <div class="cheat-row"><span class="cheat-label">Задание 1 — диаметр заводского колеса</span><span class="cheat-val">561,2 мм</span></div>
+      <div class="cheat-row"><span class="cheat-label">Задание 2 — наименьшая ширина (диск 15")</span><span class="cheat-val">185 мм</span></div>
+      <div class="cheat-row"><span class="cheat-label">Задание 3 — прирост D (замена на 195/50 R15)</span><span class="cheat-val">14,8 мм</span></div>
+      <div class="cheat-row"><span class="cheat-label">Задание 4 — разница радиусов 205/55 R14 vs 165/65 R14</span><span class="cheat-val">5,5 мм</span></div>
+      <div class="cheat-row"><span class="cheat-label">Задание 5 — % увеличения пробега (175/60 R14)</span><span class="cheat-val">0,8 %</span></div>
+    </div>
+  </div>
+
+  <a class="nav-back" href="triangles_quiz.html">← Вернуться к квестам</a>
+
+</div>
+</body>
+</html>
