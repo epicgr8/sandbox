@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Марафон ОГЭ — все вопросы</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d0d14;
+    --bg2:   #13131e;
+    --bg3:   #1a1a28;
+    --bg4:   #222235;
+    --text:  #eeeaf8;
+    --muted: #7a7490;
+    --border:  rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --c1: #d94f8a;
+    --c2: #2d6a2d;
+    --c3: #7c3aed;
+    --c4: #b45309;
+    --cb: #c0435a;
+    --green: #1db36e;
+    --red:   #dc2626;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size: 16px;
+    line-height: 1.6; min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 0%, rgba(124,58,237,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(217,79,138,0.06) 0%, transparent 55%);
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 48px 0 32px; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .hero-title { font-size: clamp(28px,5vw,48px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+  .hero-title .g1 { color: var(--c1); }
+  .hero-title .g2 { color: var(--c3); }
+  .hero-title .g3 { color: var(--c4); }
+  .hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .hero::after { content:''; display:block; margin: 24px auto 0; width:160px; height:2px; border-radius:2px; background: linear-gradient(90deg,var(--c1),var(--c3),var(--c4),var(--cb)); }
+
+  /* SOURCE BADGES */
+  .sources-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  .src-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid; }
+  .sb1 { background: rgba(217,79,138,0.1);  color: var(--c1); border-color: rgba(217,79,138,0.3); }
+  .sb2 { background: rgba(45,106,45,0.1);   color: #4caf50;   border-color: rgba(45,106,45,0.3); }
+  .sb3 { background: rgba(124,58,237,0.1);  color: #a78bfa;   border-color: rgba(124,58,237,0.3); }
+  .sb4 { background: rgba(180,83,9,0.1);    color: #f59e0b;   border-color: rgba(180,83,9,0.3); }
+  .sb5 { background: rgba(192,67,90,0.1);   color: #f87171;   border-color: rgba(192,67,90,0.3); }
+
+  /* STATS */
+  .stats-bar {
+    display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 16px;
+    display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 100px;
+  }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; }
+  .stat-num.green { color: var(--green); }
+  .stat-num.red   { color: var(--red); }
+  .stat-num.gold  { color: var(--c4); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* PROGRESS */
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background: linear-gradient(90deg,var(--c1),var(--c3),var(--c4)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .progress-counter { font-size:12px; font-weight:700; color:var(--muted); min-width:60px; text-align:right; font-family:'Space Mono',monospace; }
+
+  /* QUESTION CARD */
+  .q-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .q-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-src { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-src.src-q1    { background: var(--c1); }
+  .q-src.src-q2    { background: #2d6a2d; }
+  .q-src.src-q3    { background: var(--c3); }
+  .q-src.src-q4    { background: var(--c4); }
+  .q-src.src-bonus { background: var(--cb); }
+  .q-src.src-egg { background: linear-gradient(135deg, #f59e0b, #ec4899); }
+  .q-card.is-egg { border-color: rgba(245,158,11,0.5); background: linear-gradient(180deg, #1a1500 0%, var(--bg2) 60px); }
+  .q-card.is-egg .q-header { background: rgba(245,158,11,0.08); border-bottom-color: rgba(245,158,11,0.25); }
+  .egg-banner { text-align:center; padding: 18px 0 6px; font-size:32px; letter-spacing:8px; animation: eggpulse 1.2s ease-in-out infinite; }
+  @keyframes eggpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .q-num { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); margin-left:auto; }
+
+  .q-body { padding:22px 22px 18px; }
+  .q-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .q-text .hero-name { font-weight:700; background:linear-gradient(120deg,#a78bfa,var(--c1)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .q-text .lut  { font-weight:700; color:var(--cb); }
+  .q-text .par  { font-weight:700; color:var(--c4); }
+  .q-text .big-formula { font-family:'Space Mono',monospace; font-size:17px; font-weight:700; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.25); color:#a78bfa; padding:8px 16px; border-radius:6px; display:block; margin:8px 0 12px; text-align:center; }
+  .q-text .eq { font-family:'Space Mono',monospace; font-size:15px; font-weight:700; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:#a78bfa; padding:4px 10px; border-radius:5px; display:inline-block; }
+  .q-text .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .q-text .kt-a { color:#60a5fa; font-weight:700; }
+  .q-text .kt-b { color:#f87171; font-weight:700; }
+  .q-text .kt-c { color:#4ade80; font-weight:700; }
+
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn {
+    background:var(--bg3); border:1px solid var(--border2); border-radius:8px;
+    padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500;
+    color:var(--text); cursor:pointer; text-align:left;
+    transition:border-color 0.14s,background 0.14s,transform 0.1s;
+    display:flex; align-items:center; gap:10px;
+  }
+  .opt-btn:hover:not(:disabled) { border-color:rgba(124,58,237,0.5); background:rgba(124,58,237,0.08); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--green); background:rgba(29,179,110,0.12); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:var(--green); }
+  .opt-btn.wrong   { border-color:var(--red); background:rgba(220,38,38,0.1); color:#fca5a5; }
+  .opt-btn.wrong   .opt-letter { color:var(--red); }
+  .opt-btn:disabled { cursor:default; }
+
+  .feedback-box { margin-top:14px; padding:12px 16px; border-radius:8px; font-size:14px; line-height:1.6; display:none; animation:fadeIn 0.2s ease; }
+  .feedback-box.ok   { background:rgba(29,179,110,0.1); border:1px solid rgba(29,179,110,0.3); color:#86efac; display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.3); color:#fca5a5; display:block; }
+
+  .q-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:56px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:64px; margin-bottom:16px; }
+  .results-title { font-size:clamp(24px,4vw,40px); font-weight:700; margin-bottom:8px; }
+  .results-score { font-size:clamp(64px,11vw,100px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c3); }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:24px; }
+  .results-breakdown { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
+  .rb { font-size:13px; font-weight:600; padding:6px 16px; border-radius:20px; }
+  .rb-ok   { background:rgba(29,179,110,0.12); color:var(--green); }
+  .rb-fail { background:rgba(220,38,38,0.12);  color:#f87171; }
+  .rb-pct  { background:rgba(124,58,237,0.12); color:#a78bfa; }
+  .results-rank { font-size:16px; font-weight:700; color:var(--text); margin-bottom:32px; padding:14px 24px; background:var(--bg2); border:1px solid var(--border2); border-radius:10px; display:inline-block; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .q-animate { animation:fadeIn 0.28s ease; }
+
+  /* INTRO */
+  .intro-screen { animation:fadeIn 0.4s ease; }
+  .intro-card {
+    background:var(--bg2); border:1px solid var(--border2); border-radius:16px;
+    padding:32px 28px; margin-bottom:20px; position:relative; overflow:hidden;
+  }
+  .intro-card::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .intro-monster-count {
+    font-family:'Space Mono',monospace;
+    font-size:clamp(36px,7vw,64px); font-weight:700;
+    color:#a78bfa; line-height:1; margin-bottom:6px;
+    text-shadow:0 0 40px rgba(124,58,237,0.4);
+  }
+  .intro-monster-label {
+    font-size:14px; color:var(--muted); margin-bottom:28px; letter-spacing:0.05em;
+  }
+  .intro-text {
+    font-size:17px; line-height:1.75; color:var(--text);
+    margin-bottom:28px;
+  }
+  .intro-text em { color:#a78bfa; font-style:normal; font-weight:600; }
+  .intro-rules {
+    display:flex; flex-direction:column; gap:8px; margin-bottom:32px;
+  }
+  .intro-rule {
+    display:flex; align-items:center; gap:12px;
+    font-size:14px; color:var(--muted);
+    background:var(--bg3); border-radius:8px; padding:10px 14px;
+  }
+  .intro-rule-icon { font-size:18px; flex-shrink:0; }
+  .start-btn {
+    width:100%; font-family:'Outfit',sans-serif; font-size:18px; font-weight:700;
+    background:linear-gradient(135deg,#7c3aed,#d94f8a); color:#fff;
+    border:none; padding:16px 32px; border-radius:12px;
+    cursor:pointer; transition:opacity 0.15s,transform 0.1s;
+    letter-spacing:0.02em;
+  }
+  .start-btn:hover { opacity:0.9; transform:translateY(-2px); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Математика · Полный марафон</div>
+    <h1 class="hero-title"><span class="g1">Марафон</span> <span class="g2">всех</span><br><span class="g3">вопросов</span></h1>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen" class="intro-screen">
+    <div class="intro-card">
+      <div class="intro-monster-count" id="monster-count">139</div>
+      <div class="intro-monster-label">монстров впереди</div>
+      <div class="intro-text">
+        Привет! Это марафон — ты бежишь вперёд через <em>всю игру</em>.<br>
+        Оружие, формулы, заклинания — всё при тебе.<br><br>
+        Халсин, Элли, Гейл, Цири, Казуя — они рядом.<br>
+        Лютик сочиняет балладу о твоём пути.<br>
+        Мадам Пармезан наблюдает молча.<br><br>
+        Где-то среди вопросов спрятаны <em>7 секретов</em> — найди их все.
+      </div>
+      <div class="intro-rules">
+        <div class="intro-rule"><span class="intro-rule-icon">⚔️</span>Все темы вперемешку — геометрия, алгебра, функции, вероятность</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🎯</span>Одна попытка на вопрос — верно или нет, без подсказок</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🥚</span>7 пасхалок спрятаны среди вопросов — они появятся неожиданно</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🏃</span>Можно остановиться — прогресс не сохраняется, но это не повод не начинать</div>
+      </div>
+      <button class="start-btn" onclick="startMarathon()">Начать марафон →</button>
+    </div>
+
+    <div class="sources-row">
+      <span class="src-badge sb1">Квест 1 — Халсин</span>
+      <span class="src-badge sb2">Квест 2 — Элли</span>
+      <span class="src-badge sb3">Квест 3 — Гейл</span>
+      <span class="src-badge sb4">Квест 4 — Аретуза</span>
+      <span class="src-badge sb5">Бонус — Лютик</span>
+    </div>
+  </div>
+
+  <div id="quiz-area" style="display:none">
+    <div class="stats-bar">
+      <div class="stat-pill"><span class="stat-num green" id="s-ok">0</span><span class="stat-label">😊 Верно</span></div>
+      <div class="stat-pill"><span class="stat-num red"   id="s-err">0</span><span class="stat-label">❌ Ошибок</span></div>
+      <div class="stat-pill"><span class="stat-num gold"  id="s-left">0</span><span class="stat-label">🧟 Монстров осталось</span></div>
+      <div class="stat-pill" style="border-color:rgba(245,158,11,0.3)"><span class="stat-num" style="color:#f59e0b" id="s-egg">0 / 7</span><span class="stat-label">🥚 Секретов</span></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="qbar"></div></div>
+      <span class="progress-counter" id="qcnt">1 / —</span>
+    </div>
+
+    <div class="q-card q-animate" id="qcard">
+      <div class="q-header" id="qheader"></div>
+      <div class="q-body">
+        <div class="q-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="q-footer">
+        <button class="next-btn" id="qnext">Дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-breakdown" id="rbreak"></div>
+    <div class="results-rank"  id="rrank"></div>
+    <button class="restart-btn" id="restart">Марафон заново</button>
+  </div>
+
+  <div class="quests-nav">
+    <div class="quests-nav-title">Вернуться к квесту</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="triangles_quiz.html"><span class="qp-num" style="background:#d94f8a;color:#fff">1</span><span class="qp-info"><span class="qp-name">Халсин в окружении</span><span class="qp-sub">Геометрия треугольников</span></span><span class="qp-badge">← Главная</span></a>
+      <a class="quest-pill" href="quest2_ellie.html"><span class="qp-num" style="background:#2d6a2d;color:#fff">2</span><span class="qp-info"><span class="qp-name">Элли против щелкунов</span><span class="qp-sub">Функции и графики</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest3_gale.html"><span class="qp-num" style="background:#7c3aed;color:#fff">3</span><span class="qp-info"><span class="qp-name">Проклятые предметы</span><span class="qp-sub">Уравнения и неравенства</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest4_aretuza.html"><span class="qp-num" style="background:#b45309;color:#fff">4</span><span class="qp-info"><span class="qp-name">Открытый экзамен в Аретузе</span><span class="qp-sub">Формулы и свойства</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="bonus_lutik.html"><span class="qp-num" style="background:#c0435a;color:#fff">♪</span><span class="qp-info"><span class="qp-name">Лютик и Мадам Пармезан</span><span class="qp-sub">Хаки ОГЭ</span></span><span class="qp-badge" style="background:rgba(192,67,90,0.1);color:#c0435a;border-color:rgba(192,67,90,0.3)">Бонус</span></a>
+    </div>
+  </div>
+
+</div>
+<script>
+const q1Questions = [
+  {
+    src:"bg3", topic:"Сумма углов",
+    text:"<span class='hero-name'>Гейл</span>, <span class='hero-name'>Шэдоухарт</span> и <span class='hero-name'>Астарион</span> — три <span class='term'>угла</span> треугольника партии. Гейл = 70°, Шэдоухарт = 65°. Какой угол у Астариона?",
+    opts:["55°","45°","65°","75°"], ans:1,
+    fb:"✦ Верно! Астарион рад твоей сноровке! 180° − 70° − 65° = 45°. Запомни: сумма трёх <span class='term'>углов треугольника</span> = 180° — это работает для ЛЮБОГО треугольника без исключений.",
+    trap:"",
+    hint:"Сумма всех трёх углов треугольника — это константа. Попробуй сложить два известных угла и подумать, чего не хватает до этой константы.",
+    ref:"Сумма углов треугольника 🩷"
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Казуя</span> бьёт противника: удар идёт 6 м вперёд (<span class='kt-a'>катет a</span>) и 8 м вбок (<span class='kt-b'>катет b</span>). Какова настоящая дистанция удара — <span class='kt-c'>гипотенуза</span>?",
+    opts:["10 м","14 м","12 м","7 м"], ans:0,
+    fb:"✦ Верно! Казуя доволен! <span class='kt-a'>a</span>²+<span class='kt-b'>b</span>²=<span class='kt-c'>c</span>²: 6²+8²=36+64=100, √100=10. Это чит-код <strong>6-8-10</strong> — кратная тройка 3-4-5 (умножена на 2). Тройки Пифагора — экономия времени на ОГЭ!",
+    trap:"Ловушка ОГЭ: ответ 6+8=14 — ошибка! Стороны треугольника нельзя просто складывать.",
+    hint:"Здесь прямоугольный треугольник — работает теорема Пифагора. Два катета известны. Вспомни, как по ним найти гипотенузу.",
+    ref:"Теорема Пифагора 💙"
+  },
+  {
+    src:"bg3", topic:"Площадь",
+    text:"<span class='hero-name'>Шэдоухарт</span> отмечает на карте треугольный участок болота для засады. <span class='term'>Основание</span> 12 м, <span class='term'>высота</span> 5 м. Какова площадь засады?",
+    opts:["60 м²","30 м²","17 м²","24 м²"], ans:1,
+    fb:"✦ Верно! Шэдоухарт выбрала идеальное место! S = ½ · 12 · 5 = 30 м². Запомни: формула площади прямоугольника — a·h, треугольника — ровно вдвое меньше.",
+    trap:"Ловушка ОГЭ: 12·5=60 — это площадь ПРЯМОУГОЛЬНИКА. Треугольник — половина. Всегда дели на 2!",
+    hint:"Формула площади треугольника включает основание и высоту. Осторожно — не забудь про ½, именно здесь чаще всего теряют балл на ОГЭ.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Лили</span> делает удар ногой: <span class='term'>высота подъёма</span> (<span class='kt-a'>катет a</span> = 5 м), горизонтальный вылет (<span class='kt-b'>катет b</span> = 12 м). Какова полная траектория ноги — <span class='kt-c'>гипотенуза</span>?",
+    opts:["13 м","17 м","11 м","15 м"], ans:0,
+    fb:"✦ Верно! Лили одобрительно кивает! 5²+12²=25+144=169, √169=13. Чит-код <strong>5-12-13</strong> — один из самых частых на ОГЭ, учи наизусть!",
+    trap:"",
+    hint:"Два катета известны — ищи гипотенузу. Попробуй вспомнить тройки Пифагора: числа 5 и 12 тебе что-нибудь подсказывают?",
+    ref:"Тройки Пифагора — чит-коды ❤️"
+  },
+  {
+    src:"bg3", topic:"Равнобедренный",
+    text:"<span class='hero-name'>Астарион</span> смотрит в зеркало — <span class='term'>равнобедренный треугольник</span>. <span class='term'>Угол при вершине</span> = 50°. Чему равен каждый <span class='term'>угол при основании</span>?",
+    opts:["65°","50°","70°","55°"], ans:0,
+    fb:"✦ Верно! Астарион доволен симметрией! (180°−50°)÷2=65°. В равнобедренном углы при основании ВСЕГДА равны — сначала вычитаем угол при вершине, потом делим пополам.",
+    trap:"Ловушка ОГЭ: не забудь разделить на 2! Многие вычитают 50° из 180° и получают 130° — это сумма двух углов при основании, не один угол.",
+    hint:"В равнобедренном треугольнике два угла при основании всегда одинаковые. Попробуй выяснить, сколько градусов осталось на оба вместе, а потом раздели.",
+    ref:"Равнобедренный треугольник 💜"
+  },
+  {
+    src:"tek", topic:"Равносторонний",
+    text:"<span class='hero-name'>Хворанг</span> атакует прыжком — три точки касания образуют <span class='term'>равносторонний треугольник</span>. Каков каждый из трёх <span class='term'>углов</span>?",
+    opts:["90°","45°","60°","120°"], ans:2,
+    fb:"✦ Верно! Хворанг кланяется! В равностороннем все 3 угла = 60°. Просто: 180÷3=60. Запомни как стойку — раз и навсегда.",
+    trap:"",
+    hint:"В равностороннем треугольнике все три стороны одинаковые — а значит и все три угла одинаковые. Сколько получается каждый, если все они в сумме дают 180°?",
+    ref:"Равносторонний треугольник 🩵"
+  },
+  {
+    src:"bg3", topic:"Площадь через синус",
+    text:"Зона заклинания <span class='hero-name'>Шэдоухарт</span> — треугольник со сторонами 8 м и 10 м, <span class='term'>угол между ними</span> 30°. Площадь? (sin 30° = 0.5)",
+    opts:["40 м²","20 м²","80 м²","16 м²"], ans:1,
+    fb:"✦ Верно! Шэдоухарт благословляет тебя! S = ½·8·10·sin30° = ½·8·10·0.5 = 20 м². Формула площади через синус — когда даны ДВЕ стороны и угол МЕЖДУ ними.",
+    trap:"Ловушка ОГЭ: не забудь умножить на ½ и на синус угла. Ответ 40 — это если забыть про ½.",
+    hint:"Даны две стороны и угол между ними — это подсказка для особой формулы площади. Посмотри в шпору — там есть формула именно для этого случая.",
+    ref:"Площадь через синус 🧡"
+  },
+  {
+    src:"tek", topic:"Сумма углов",
+    text:"<span class='hero-name'>Нина Уильямс</span> целится из снайперской позиции — треугольник прицела задан двумя <span class='term'>углами</span>: 80° и 55°. Какой третий <span class='term'>угол</span> у треугольника прицела?",
+    opts:["35°","45°","55°","40°"], ans:1,
+    fb:"✦ Верно! Нина прицелилась точно! 180°−80°−55°=45°. Всегда: сумма всех трёх углов = 180°, значит третий = 180 минус сумма двух известных.",
+    trap:"",
+    hint:"Сколько градусов в сумме у всех углов треугольника? Два угла известны — найди третий.",
+    ref:"Сумма углов треугольника 🩷"
+  },
+  {
+    src:"bg3", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Гейл</span> прячет артефакт: 9 м вниз и 12 м в сторону от лагеря. Это <span class='term'>прямоугольный треугольник</span> (угол 90° между направлениями). <span class='kt-a'>Катет a</span>=9, <span class='kt-b'>катет b</span>=12. Какова прямая дистанция (<span class='kt-c'>гипотенуза</span>)?",
+    opts:["21 м","15 м","18 м","13 м"], ans:1,
+    fb:"✦ Верно! Гейл доволен! 9²+12²=81+144=225, √225=15. Чит-код: <strong>9-12-15</strong> — это тройка 3-4-5, умноженная на 3.",
+    trap:"Ловушка ОГЭ: 9+12=21 — нельзя просто складывать катеты! Только через Пифагора.",
+    hint:"В задаче два направления под прямым углом — это два катета. Задача на теорему Пифагора. Обрати внимание на числа — может быть знакомая тройка?",
+    ref:"Теорема Пифагора 💙 · Тройки Пифагора ❤️"
+  },
+  {
+    src:"tek", topic:"Высота треугольника",
+    text:"<span class='hero-name'>Кинг</span> захватывает противника в бросок — зона захвата на полу имеет форму треугольника. Тренер говорит: площадь зоны 36 дм², <span class='term'>основание</span> 12 дм. Какова <span class='term'>высота</span> треугольника?",
+    opts:["6 м","3 м","4 м","8 м"], ans:0,
+    fb:"✦ Верно! Кинг поднимает тебя на руки! S=½·a·h → 36=½·12·h → h=36·2÷12=6 м. Приём: выражаем h: умножаем S на 2, делим на основание.",
+    trap:"",
+    hint:"Площадь и основание известны — нужно найти высоту. Возьми формулу площади треугольника и вырази из неё высоту.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"bg3", topic:"Внешний угол",
+    text:"<span class='hero-name'>Минтара</span> чертит план атаки: маршрут её отряда образует треугольник. Снаружи одного угла отмечен <span class='term'>внешний угол</span> — он равен 110°. Один из несмежных <span class='term'>внутренних углов</span> = 50°. Чему равен другой внутренний угол?",
+    opts:["60°","70°","50°","40°"], ans:0,
+    fb:"✦ Верно! Минтара кивает! Внешний угол = сумма двух НЕСМЕЖНЫХ внутренних. 110°=50°+x → x=60°.",
+    trap:"Ловушка ОГЭ: внешний угол НЕ равен смежному внутреннему! Смежный с ним внутренний = 180°−110°=70°, но нас спрашивают про несмежный.",
+    hint:"Вспомни свойство внешнего угла треугольника: он равен сумме двух углов, которые НЕ являются смежными с ним.",
+    ref:"Сумма углов треугольника 🩷"
+  },
+  {
+    src:"tek", topic:"Равнобедренный",
+    text:"<span class='term'>Угол при вершине</span> <span class='term'>равнобедренного треугольника</span> зоны атаки <span class='hero-name'>Сяоюй</span> равен 40°. Чему равна <strong>сумма</strong> <span class='term'>углов при основании</span>?",
+    opts:["140°","80°","100°","120°"], ans:0,
+    fb:"✦ Верно! Сяоюй кружится в победном танце! 180°−40°=140°. Это сумма двух углов при основании. Каждый из них = 70°.",
+    trap:"Ловушка ОГЭ: вопрос про СУММУ обоих углов, не про каждый отдельно. Каждый = 70°, но сумма = 140°.",
+    hint:"В равнобедренном треугольнике угол при вершине известен. Вопрос про сумму обоих углов при основании вместе — не каждого по отдельности.",
+    ref:"Равнобедренный треугольник 💜"
+  },
+  {
+    src:"bg3", topic:"Теорема Пифагора",
+    text:"<span class='hero-name'>Уилл</span> стреляет монстру прямо в голову: горизонтальное расстояние до монстра (<span class='kt-a'>катет a</span>) = 15 м, высота головы монстра (<span class='kt-b'>катет b</span>) = 8 м. Это <span class='term'>прямоугольный треугольник</span>. Какова длина полёта стрелы (<span class='kt-c'>гипотенуза</span>)?",
+    opts:["17 м","23 м","15 м","19 м"], ans:0,
+    fb:"✦ Верно! Уилл не промахнулся! 8²+15²=64+225=289, √289=17. Чит-код <strong>8-15-17</strong> — реже встречается, но знать нужно!",
+    trap:"",
+    hint:"Расстояние по горизонтали и высота головы — это два катета прямоугольного треугольника. Стрела летит по гипотенузе. Числа 8 и 15 — подсказка из таблицы троек.",
+    ref:"Тройки Пифагора — чит-коды ❤️"
+  },
+  {
+    src:"tek", topic:"Площадь",
+    text:"Треугольная зона разрушений <span class='hero-name'>Брайана Фьюри</span>: <span class='term'>основание</span> 20 м, <span class='term'>высота</span> 9 м. Площадь?",
+    opts:["90 м²","180 м²","45 м²","29 м²"], ans:0,
+    fb:"✦ Верно! Брайан выбивает ногой пятёрку! S=½·20·9=90 м². Ответ 180 — это площадь прямоугольника 20×9. Не забывай делить на 2!",
+    trap:"Ловушка ОГЭ: вариант 180 специально поставлен для тех, кто забывает про ½. Это ловушка-приманка!",
+    hint:"Формула площади треугольника содержит ½. Без неё получится площадь прямоугольника — а это другая фигура.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"bg3", topic:"Сумма углов",
+    text:"Три точки маршрута <span class='hero-name'>Карлах</span> образуют <span class='term'>тупоугольный треугольник</span>. Два <span class='term'>угла</span>: 95° и 42°. Чему равен третий?",
+    opts:["43°","53°","48°","63°"], ans:0,
+    fb:"✦ Верно! Карлах мчит к Халсину! 180°−95°−42°=43°. Тупой угол (>90°) — абсолютно нормально, сумма углов всё равно 180°.",
+    trap:"",
+    hint:"Два угла известны, один из них тупой — больше 90°. Это не мешает использовать общее правило про сумму углов.",
+    ref:"Сумма углов треугольника 🩷"
+  },
+  {
+    src:"tek", topic:"Теорема Пифагора",
+    text:"<span class='kt-c'>Гипотенуза</span> прыжка <span class='hero-name'>Маршала Лоу</span> = 13 м, один <span class='kt-a'>катет a</span> = 5 м. Чему равен <span class='kt-b'>катет b</span>?",
+    opts:["12 м","8 м","10 м","11 м"], ans:0,
+    fb:"✦ Верно! Маршал Лоу сальто в твою честь! b²=13²−5²=169−25=144, b=12. Чит-код 5-12-13 в обратном направлении.",
+    trap:"Ловушка ОГЭ: когда ищем катет — ВЫЧИТАЕМ из гипотенузы, а не складываем. b²=c²−a².",
+    hint:"Гипотенуза и один катет известны — ищем другой катет. Формула Пифагора работает в обе стороны: из неё можно выразить любую сторону.",
+    ref:"Теорема Пифагора 💙"
+  },
+  {
+    src:"bg3", topic:"Площадь",
+    text:"<span class='hero-name'>Халсин</span> разбивает лагерь на треугольной поляне. <span class='term'>Основание</span> = 7 м, <span class='term'>высота</span> к этому основанию = 6 м. Площадь поляны?",
+    opts:["21 м²","35 м²","42 м²","30 м²"], ans:0,
+    fb:"✦ Верно! Халсин обнимает тебя как медведь! S=½·7·6=21 м².",
+    trap:"",
+    hint:"Основание и высота к нему известны. Применяй базовую формулу площади треугольника — и не забудь про ½.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"tek", topic:"Равнобедренный",
+    text:"В <span class='term'>равнобедренном треугольнике</span> стойки <span class='hero-name'>Асуки</span> каждый <span class='term'>угол при основании</span> = 72°. Чему равен <span class='term'>угол при вершине</span>?",
+    opts:["36°","46°","56°","26°"], ans:0,
+    fb:"✦ Верно! Асука довольна! 180°−72°−72°=36°. Или короче: 180°−2·72°=36°.",
+    trap:"",
+    hint:"В равнобедренном оба угла при основании одинаковые. Зная один из них, можно найти сколько всего они занимают вместе, а остаток — это угол при вершине.",
+    ref:"Равнобедренный треугольник 💜"
+  },
+  {
+    src:"wit", topic:"Высота",
+    text:"<span class='hero-name'>Кровавый Барон</span> делит землю между деревнями — участок имеет форму треугольника. <span class='term'>Площадь</span> участка = 48 м², <span class='term'>основание</span> = 16 м. Найди <span class='term'>высоту</span>.",
+    opts:["6 м","4 м","8 м","3 м"], ans:0,
+    fb:"✦ Верно! Барон доволен справедливым дележом! 48=½·16·h → h=48·2÷16=6 м. Схема: берём S=½ah, умножаем обе части на 2, делим на a.",
+    trap:"",
+    hint:"Площадь и основание известны, нужна высота. Возьми формулу S=½·a·h и вырази h — умножь обе части на 2 и раздели на основание.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"bg3", topic:"Смежные углы",
+    text:"<span class='hero-name'>Шэдоухарт</span> и <span class='hero-name'>Астарион</span> стоят спиной к спине у стены. <span class='term'>Смежный угол</span> Шэдоухарт = 115°. Каков смежный угол Астариона?",
+    opts:["65°","75°","55°","45°"], ans:0,
+    fb:"✦ Верно! Вместе они непобедимы! Смежные углы в сумме = 180°. 180°−115°=65°.",
+    trap:"Ловушка ОГЭ: смежные углы = 180° (они на прямой). Вертикальные углы = равны между собой. Не перепутай!",
+    hint:"Два угла лежат на одной прямой по обе стороны от точки. Вспомни, сколько градусов дают два смежных угла в сумме.",
+    ref:"Смежные углы 🩶"
+  },
+  {
+    src:"tek", topic:"Все темы",
+    text:"Финальный поединок! <span class='term'>Углы треугольника</span> арены: 2x°, 3x° и 4x°. Найди <strong>наибольший</strong> угол.",
+    opts:["40°","80°","60°","90°"], ans:1,
+    fb:"✦ ФИНАЛ! Халсин свободен! 2x+3x+4x=180 → 9x=180 → x=20. Наибольший угол = 4x = 4·20 = 80°.",
+    trap:"Ловушка ОГЭ: сначала найди x, потом подставь в 4x. Часто ошибаются — находят x=20 и пишут ответ 20. Это значение x, а не угол!",
+    hint:"Сложи все три выражения для углов и приравняй к 180°. Сначала найди x, потом вычисли наибольший из трёх углов.",
+    ref:"Сумма углов треугольника 🩷"
+  },
+  {
+    src:"lou", topic:"Площадь параллелограмма",
+    text:"<span class='hero-name'>Джоэл</span> баррикадирует окно досками — форма проёма <span class='term'>параллелограмм</span> с основанием 8 м и <span class='term'>высотой</span> 3 м. Какова площадь?",
+    opts:["24 м²","22 м²","11 м²","48 м²"], ans:0,
+    fb:"✦ Верно! Джоэл доволен укреплением! S = a · h = 8 · 3 = 24 м². Формула параллелограмма — как у прямоугольника: основание × высота (не сторона!).",
+    trap:"Ловушка ОГЭ: высота параллелограмма — это перпендикуляр к основанию, не боковая сторона. Не перепутай!",
+    hint:"Площадь параллелограмма считается как основание умножить на высоту. Высота — это перпендикуляр, не наклонная сторона.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"wit", topic:"Площадь ромба",
+    text:"Щит <span class='hero-name'>Геральта</span> в форме <span class='term'>ромба</span>. <span class='term'>Диагонали ромба</span> равны 6 м и 8 м. Какова площадь щита?",
+    opts:["24 м²","48 м²","14 м²","28 м²"], ans:0,
+    fb:"✦ Верно! Геральт одобряет! S = ½ · d₁ · d₂ = ½ · 6 · 8 = 24 м². Площадь ромба — полупроизведение диагоналей.",
+    trap:"Ловушка ОГЭ: площадь ромба через диагонали — не забудь ½! 6·8=48 — это без деления на 2.",
+    hint:"Площадь ромба считается через его диагонали. Вспомни формулу — в ней есть ½.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"lou", topic:"Свойства фигур — истина/ложь",
+    text:"<span class='hero-name'>Элли</span> чертит карту и утверждает: «<span class='term'>Диагонали ромба</span> перпендикулярны друг другу». Это правда?",
+    opts:["Да, всегда","Нет, никогда","Только в квадрате","Только если стороны равны 1"], ans:0,
+    fb:"✦ Верно! Элли права! Диагонали ромба всегда перпендикулярны — это одно из ключевых свойств ромба. Плюс они делят друг друга пополам.",
+    trap:"Ловушка ОГЭ: часто спрашивают про свойства диагоналей — в прямоугольнике они равны, в ромбе перпендикулярны, в квадрате — и то, и другое!",
+    hint:"Вспомни особые свойства диагоналей ромба — что с ними происходит в точке пересечения?",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"wit", topic:"Средняя линия треугольника",
+    text:"<span class='hero-name'>Цири</span> срезает путь через лес: <span class='term'>средняя линия треугольника</span> леса равна 5 км. Чему равно основание треугольника?",
+    opts:["10 км","5 км","2.5 км","7 км"], ans:0,
+    fb:"✦ Верно! Цири добралась быстрее! Средняя линия = ½ основания, значит основание = 2 · 5 = 10 км.",
+    trap:"Ловушка ОГЭ: средняя линия параллельна основанию и равна ПОЛОВИНЕ основания. Не перепутай направление: из средней линии находим основание умножением на 2.",
+    hint:"Средняя линия треугольника связана с основанием простым соотношением. Вспомни, во сколько раз она меньше основания.",
+    ref:"Дорисуй высоту 💛"
+  },
+  {
+    src:"lou", topic:"Реальная ситуация — лестница",
+    text:"<span class='hero-name'>Джоэл</span> ставит лестницу к стене: <span class='term'>основание</span> на 5 м от стены, стена высотой 12 м. Какова длина лестницы (<span class='kt-c'>гипотенуза</span>)?",
+    opts:["13 м","17 м","11 м","60 м"], ans:0,
+    fb:"✦ Верно! Джоэл забирается наверх! 5²+12²=25+144=169, √169=13. Чит-код 5-12-13!",
+    trap:"",
+    hint:"Стена, земля и лестница образуют прямоугольный треугольник. Два катета известны — ищи гипотенузу.",
+    ref:"Тройки Пифагора — чит-коды ❤️"
+  },
+  {
+    src:"wit", topic:"Площадь квадрата",
+    text:"Двор замка <span class='hero-name'>Каэр Морхена</span> — <span class='term'>квадрат</span> со стороной 15 м. Какова его площадь?",
+    opts:["225 м²","60 м²","30 м²","125 м²"], ans:0,
+    fb:"✦ Верно! Ведьмаки довольны простором! S = a² = 15² = 225 м². Квадрат — частный случай прямоугольника, площадь = сторона в квадрате.",
+    trap:"",
+    hint:"Квадрат — фигура с четырьмя равными сторонами. Его площадь считается через одну сторону.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Реальная ситуация — высота столба",
+    text:"<span class='hero-name'>Элли</span> видит тень столба длиной 6 м, угол падения света 90°. Тень и столб образуют <span class='term'>прямоугольный треугольник</span> с <span class='kt-c'>гипотенузой</span> 10 м. Какова высота столба (<span class='kt-b'>катет</span>)?",
+    opts:["8 м","4 м","6 м","16 м"], ans:0,
+    fb:"✦ Верно! Элли запомнила эту тройку! b²=10²−6²=100−36=64, b=8. Чит-код 6-8-10!",
+    trap:"",
+    hint:"Гипотенуза и один катет известны — ищи второй катет. Обрати внимание на числа.",
+    ref:"Тройки Пифагора — чит-коды ❤️"
+  },
+  {
+    src:"wit", topic:"Биссектриса",
+    text:"<span class='hero-name'>Геральт</span> делит угол атаки <span class='term'>биссектрисой</span> — она делит угол 80° пополам. Каков каждый из получившихся углов?",
+    opts:["40°","80°","20°","160°"], ans:0,
+    fb:"✦ Верно! Геральт разрубил угол точно! Биссектриса делит угол на два равных — 80°÷2=40°.",
+    trap:"",
+    hint:"Биссектриса — это луч, который делит угол ровно пополам. Как делится угол в 80°?",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Площадь прямоугольника",
+    text:"<span class='hero-name'>Тесс</span> измеряет убежище: <span class='term'>прямоугольник</span> 14 м × 9 м. Площадь?",
+    opts:["126 м²","46 м²","63 м²","252 м²"], ans:0,
+    fb:"✦ Верно! Тесс одобряет убежище! S = 14 · 9 = 126 м². Площадь прямоугольника = длина × ширина.",
+    trap:"Ловушка ОГЭ: 14+9=23 — это полупериметр, не площадь. Периметр = 46 м, а площадь = 126 м².",
+    hint:"Площадь прямоугольника — это произведение двух его сторон.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"wit", topic:"Подобие треугольников",
+    text:"<span class='hero-name'>Геральт</span> изучает две карты одного леса — маленькую и большую. Треугольные участки на них <span class='term'>подобны</span>. Стороны на маленькой карте: 3, 4, 5 км. <span class='term'>Коэффициент подобия</span> = 3. Какова наименьшая сторона на большой карте?",
+    opts:["9","12","15","6"], ans:0,
+    fb:"✦ Верно! Геральт видит закономерность! При коэффициенте подобия k все стороны умножаются на k: 3·3=9.",
+    trap:"Ловушка ОГЭ: коэффициент подобия применяется к каждой стороне. Не складывай, а умножай!",
+    hint:"При подобии все стороны пропорциональны. Если коэффициент подобия k, каждая сторона умножается на k.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Медиана треугольника",
+    text:"<span class='hero-name'>Джоэл</span> ведёт Элли через лес, обходя орду. Маршрут образует треугольник. Джоэл находит срезку — <span class='term'>медиану</span> из вершины к противоположной стороне длиной 18 км. На сколько равных частей медиана делит эту сторону?",
+    opts:["На 2 части по 9 км","На 3 части по 6 км","Не делится","На 4 части по 4.5 км"], ans:0,
+    fb:"✦ Верно! Джоэл нашёл короткий путь! Медиана идёт из вершины строго в середину противоположной стороны — она делит её на 2 равные части по 9 км.",
+    trap:"",
+    hint:"Медиана треугольника проведена из вершины в точку противоположной стороны. Что такое эта точка?",
+    ref:"Дорисуй высоту 💛"
+  },
+  {
+    src:"wit", topic:"Свойства фигур — истина/ложь",
+    text:"<span class='hero-name'>Трисс</span> чертит магический барьер в форме <span class='term'>прямоугольника</span>. Она утверждает, что его <span class='term'>диагонали равны</span>. Верно ли это?",
+    opts:["Да, всегда верно","Нет, только в квадрате","Нет, никогда","Только если стороны равны"], ans:0,
+    fb:"✦ Верно! Трисс знает своё дело! В прямоугольнике диагонали всегда равны — это одно из его ключевых свойств.",
+    trap:"Ловушка ОГЭ: в ромбе диагонали НЕ равны (но перпендикулярны). В квадрате — и равны, и перпендикулярны. Различай!",
+    hint:"Вспомни свойства диагоналей прямоугольника. Что с ними происходит по сравнению с другими параллелограммами?",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Комбинированная задача",
+    text:"Иллюминатор бункера <span class='hero-name'>Элли</span> — круглое окно <span class='term'>диаметром</span> 10 дм, вписанное в квадратный люк со стороной 10 дм. Какова площадь квадрата, НЕ закрытая стеклом? (π ≈ 3.14)",
+    opts:["21.5 дм²","100 дм²","78.5 дм²","50 дм²"], ans:0,
+    fb:"✦ Верно! Элли видит раму! Квадрат: 10²=100 дм². Круг: π·r²=3.14·5²=3.14·25=78.5 дм². Разность: 100−78.5=21.5 дм².",
+    trap:"Ловушка ОГЭ: радиус = 5, а не 10! Дан диаметр — делим на 2 перед подстановкой в πr².",
+    hint:"Вычти площадь круга из площади квадрата. Не забудь, что в формуле площади круга используется радиус, а не диаметр.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"wit", topic:"Реальная ситуация — высота дерева",
+    text:"<span class='hero-name'>Лютик</span> стоит в 8 м от дерева. Верёвка от его ног до верхушки дерева равна 17 м (<span class='kt-c'>гипотенуза</span>). Высота дерева (<span class='kt-b'>катет</span>)?",
+    opts:["15 м","9 м","25 м","12 м"], ans:0,
+    fb:"✦ Верно! Лютик сложит об этом балладу! b²=17²−8²=289−64=225, b=15. Чит-код 8-15-17!",
+    trap:"",
+    hint:"Дерево, земля и верёвка — прямоугольный треугольник. Гипотенуза и один катет известны.",
+    ref:"Тройки Пифагора — чит-коды ❤️"
+  },
+  {
+    src:"lou", topic:"Площадь параллелограмма",
+    text:"<span class='hero-name'>Тесс</span> укрепляет периметр убежища. Один из участков ограждения имеет форму <span class='term'>параллелограмма</span> — стена наклонена, но <span class='term'>высота</span> (перпендикуляр между стенами) равна 7 м, основание 10 м. Какова площадь этого участка?",
+    opts:["70 м²","34 м²","17 м²","140 м²"], ans:0,
+    fb:"✦ Верно! Тесс укрепила периметр! S=a·h=10·7=70 м². Высота параллелограмма — перпендикуляр к основанию.",
+    trap:"Ловушка ОГЭ: если дана боковая сторона (не высота) — она не подходит для формулы площади напрямую!",
+    hint:"Площадь параллелограмма = основание × высота. Высота — это перпендикуляр между параллельными сторонами.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"wit", topic:"Окружность",
+    text:"Тролль бросил <span class='hero-name'>Цири</span> на круглую арену и запер выход. Чтобы найти слабое место в стене, ей нужно обежать её по периметру — окружности <span class='term'>радиусом</span> 7 м. Какое расстояние она пробежит? (π ≈ 3.14)",
+    opts:["43.96 м","21.98 м","153.86 м","14 м"], ans:0,
+    fb:"✦ Верно! Цири пробежала точный круг! C=2πr=2·3.14·7=43.96 м. Длина окружности = 2·π·r.",
+    trap:"Ловушка ОГЭ: C=2πr, а площадь круга = πr². Не перепутай формулы — они разные!",
+    hint:"Длина окружности и площадь круга — разные формулы. Тебе нужна длина (периметр), а не площадь.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Высота треугольника",
+    text:"<span class='hero-name'>Элли</span> и <span class='hero-name'>Джоэл</span> разбивают лагерь на треугольной поляне. Джоэл опускает <span class='term'>высоту</span> из вершины — она делит основание на отрезки 8 м и 12 м. Высота = 6 м. Какова площадь поляны?",
+    opts:["60 м²","120 м²","96 м²","48 м²"], ans:0,
+    fb:"✦ Верно! Они поровну разделили припасы! S=½·20·6=60 м². Основание треугольника — это вся длина основания (8+12=20), а не отдельные отрезки.",
+    trap:"Ловушка ОГЭ: основание — это 20 м (вся сторона), не 8 или 12. Высота делит основание, но для площади берётся целое основание!",
+    hint:"Для формулы площади нужно полное основание треугольника. Сложи оба отрезка, на которые высота делит основание.",
+    ref:"Площадь через высоту 💚"
+  },
+  {
+    src:"wit", topic:"Комбинированная задача",
+    text:"<span class='hero-name'>Геральт</span> сравнивает два подобных треугольных поля боя — маленькое и большое. Площадь маленького — 12 м². <span class='term'>Коэффициент подобия</span> равен 2. Какова площадь большого?",
+    opts:["48 м²","24 м²","144 м²","6 м²"], ans:0,
+    fb:"✦ Верно! Геральт посчитал в уме! При коэффициенте подобия k площади отличаются в k²: 12·2²=12·4=48 м².",
+    trap:"Ловушка ОГЭ: площади подобных фигур — это k², а не k! Стороны умножаются на k, площади — на k². Частая ошибка — умножить на 2 вместо 4.",
+    hint:"При подобии стороны умножаются на k, но площади — на k². Вспомни, как связаны площади подобных фигур.",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"lou", topic:"Свойства фигур — истина/ложь",
+    text:"<span class='hero-name'>Джоэл</span> смотрит на план бункера — комната имеет форму <span class='term'>параллелограмма</span>. Он говорит Элли: «Смотри, противоположные <span class='term'>углы</span> одинаковые». Элли не верит. Кто прав?",
+    opts:["Да, всегда","Нет, только в прямоугольнике","Только если все стороны равны","Нет, это свойство ромба"], ans:0,
+    fb:"✦ Верно! Джоэл проверил чертёж! В любом параллелограмме противоположные углы равны — это базовое свойство.",
+    trap:"Ловушка ОГЭ: в параллелограмме противоположные углы равны, а соседние — в сумме дают 180°. Не перепутай!",
+    hint:"Вспомни основные свойства параллелограмма — что происходит с его углами?",
+    ref:"Алгоритм решения 📋"
+  },
+  {
+    src:"wit", topic:"Площадь ромба",
+    text:"Арена боя <span class='hero-name'>Геральта</span> — <span class='term'>ромб</span> со стороной 10 м и <span class='term'>высотой</span> 8 м. Площадь арены?",
+    opts:["80 м²","40 м²","100 м²","20 м²"], ans:0,
+    fb:"✦ Верно! Геральт занял всю арену! S=a·h=10·8=80 м². Ромб — частный случай параллелограмма, его площадь тоже = основание × высота.",
+    trap:"Ловушка ОГЭ: сторона ромба ≠ высота ромба! Высота — это перпендикуляр между сторонами.",
+    hint:"Ромб — это параллелограмм с равными сторонами. Формула площади такая же — основание × высота.",
+    ref:"Площадь через высоту 💚"
+  }
+];
+
+const q2Questions = [
+  {
+    topic:"Линейная функция",
+    text:"<span class='hero-name'>Элли</span> бежит по прямому коридору. Её положение описывается функцией <span class='term'>y = 2x + 3</span>. Чему равно значение функции при x = 4?",
+    opts:["11","14","10","8"], ans:0,
+    fb:"✦ Верно! Элли рассчитала путь! y = 2·4 + 3 = 8 + 3 = 11. Подставляем x в формулу и считаем.",
+    trap:"Ловушка ОГЭ: не перепутай порядок — сначала умножение, потом сложение. 2·4=8, и только потом +3.",
+    hint:"Подставь x=4 в формулу y=2x+3. Сначала умножение, потом сложение.",
+    ref:"Линейная функция 💙"
+  },
+  {
+    topic:"Парабола — ветви",
+    text:"<span class='hero-name'>Джоэл</span> бросает бутылку с зажигательной смесью. Траектория — парабола <span class='term'>y = −3x² + 6x</span>. В какую сторону направлены ветви параболы?",
+    opts:["Вниз","Вверх","Горизонтально","Зависит от x"], ans:0,
+    fb:"✦ Верно! Джоэл рассчитал бросок! Коэффициент a = −3 < 0, значит ветви смотрят ВНИЗ. Знак a определяет направление ветвей.",
+    trap:"Ловушка ОГЭ: смотри только на знак a (коэффициент при x²). Отрицательный — вниз, положительный — вверх. Остальные коэффициенты не влияют на направление.",
+    hint:"Посмотри на коэффициент при x² — его знак и определяет направление ветвей параболы.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Гипербола — четверти",
+    text:"<span class='hero-name'>Дина</span> чертит график распространения заражения — он имеет форму гиперболы <span class='term'>y = −4/x</span>. В каких четвертях координатной плоскости находятся её ветви?",
+    opts:["II и IV","I и III","I и II","III и IV"], ans:0,
+    fb:"✦ Верно! Дина правильно прочитала карту! k = −4 < 0 → ветви во II и IV четвертях. Запомни: k > 0 — I и III, k < 0 — II и IV.",
+    trap:"Ловушка ОГЭ: не перепутай! k>0 → I и III (обе ветви «по диагонали» вправо), k<0 → II и IV (по диагонали влево).",
+    hint:"Знак k в формуле y=k/x определяет, в каких четвертях ветви гиперболы. Вспомни правило.",
+    ref:"Гипербола 💜"
+  },
+  {
+    topic:"Сдвиг графика",
+    text:"<span class='hero-name'>Элли</span> сдвигает маршрут на карте: функция <span class='term'>y = (x−3)²</span> — это парабола y=x², сдвинутая...",
+    opts:["Вправо на 3","Влево на 3","Вверх на 3","Вниз на 3"], ans:0,
+    fb:"✦ Верно! Элли нашла безопасный обход! f(x−3) означает сдвиг ВПРАВО на 3. Знак минус внутри скобок — сдвиг вправо (кажется парадоксом, но это так!).",
+    trap:"Ловушка ОГЭ: сдвиг по x работает НАОБОРОТ знаку! f(x−3) → вправо на 3, f(x+3) → влево на 3. Это самая частая ошибка в теме сдвигов.",
+    hint:"Сдвиг по оси x работает наоборот знаку внутри скобок. Знак минус — двигайся в другую сторону.",
+    ref:"Сдвиги графика 💚"
+  },
+  {
+    topic:"Нули функции",
+    text:"<span class='hero-name'>Томми</span> ищет нейтральную зону: нули функции <span class='term'>y = 2x − 6</span>. При каком x функция обращается в ноль?",
+    opts:["x = 3","x = 6","x = −3","x = 2"], ans:0,
+    fb:"✦ Верно! Томми нашёл нейтральную зону! 2x − 6 = 0 → 2x = 6 → x = 3. Нули функции — это решение уравнения f(x) = 0.",
+    trap:"",
+    hint:"Приравняй функцию к нулю: 2x−6=0. Реши уравнение — найдёшь ноль функции.",
+    ref:"Свойства функций 💛"
+  },
+  {
+    topic:"Парабола — вершина",
+    text:"<span class='hero-name'>Эбби</span> прыгает через препятствие. Траектория: <span class='term'>y = −x² + 4x</span>. Какова x-координата вершины параболы (наивысшая точка прыжка)?",
+    opts:["x = 2","x = 4","x = −2","x = 0"], ans:0,
+    fb:"✦ Верно! Эбби прыгнула точно! x = −b/(2a) = −4/(2·(−1)) = −4/(−2) = 2. Формула вершины — главное запомнить знак минус перед b.",
+    trap:"Ловушка ОГЭ: формула вершины x = −b/2a, а не b/2a. Не забудь знак минус перед b!",
+    hint:"Формула x-координаты вершины параболы: x = −b/(2a). Здесь a=−1, b=4.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Кусочная функция",
+    text:"<span class='hero-name'>Элли</span> идёт по подземному тоннелю — в разных его частях скорость разная. Это описывает кусочная функция: f(x) = 2x при x < 0 и f(x) = x + 3 при x ≥ 0. Чему равно f(−2)?",
+    opts:["−4","1","−1","4"], ans:0,
+    fb:"✦ Верно! Элли вовремя переключилась! x = −2 < 0, значит используем первую формулу: f(−2) = 2·(−2) = −4.",
+    trap:"Ловушка ОГЭ: сначала определи, в какой области находится x, потом выбирай формулу. Не применяй вторую формулу для отрицательного x!",
+    hint:"Сначала проверь: x=−2 — это меньше нуля или больше? Выбери нужную часть функции.",
+    ref:"Кусочно-заданная функция 🩵"
+  },
+  {
+    topic:"Линейная функция — наклон",
+    text:"<span class='hero-name'>Джоэл</span> оценивает уклон тоннеля. Функция <span class='term'>y = −5x + 2</span>. Функция возрастает или убывает?",
+    opts:["Убывает","Возрастает","Постоянна","Зависит от x"], ans:0,
+    fb:"✦ Верно! Джоэл выбрал спуск! k = −5 < 0 → функция убывает. Правило: знак k определяет характер функции.",
+    trap:"",
+    hint:"Посмотри на коэффициент k при x. Его знак определяет, растёт или убывает функция.",
+    ref:"Линейная функция 💙"
+  },
+  {
+    topic:"Сдвиг — вертикальный",
+    text:"<span class='hero-name'>Дина</span> поднимает уровень опасности: график функции <span class='term'>y = x² + 5</span> — это парабола y=x², сдвинутая...",
+    opts:["Вверх на 5","Вниз на 5","Вправо на 5","Влево на 5"], ans:0,
+    fb:"✦ Верно! Дина оценила угрозу! +5 вне скобок — сдвиг вверх на 5. Всё что прибавляется к f(x) снаружи — это вертикальный сдвиг.",
+    trap:"Ловушка ОГЭ: +b вне скобок — сдвиг вверх, −b вне скобок — сдвиг вниз. Не перепутай с горизонтальным сдвигом!",
+    hint:"Константа, прибавленная к функции снаружи, отвечает за вертикальный сдвиг. В какую сторону?",
+    ref:"Сдвиги графика 💚"
+  },
+  {
+    topic:"Гипербола — область значений",
+    text:"<span class='hero-name'>Томми</span> строит график функции <span class='term'>y = 3/x</span>. Какое значение y эта функция никогда не принимает — сколько бы ты ни подставлял разные x?",
+    opts:["y = 0","y = 3","y = −3","y = 0.001"], ans:0,
+    fb:"✦ Верно! Томми знает запасы точно! Гипербола никогда не равна нулю — ось y является асимптотой. При любом x функция y=k/x ≠ 0.",
+    trap:"Ловушка ОГЭ: гипербола не касается ни одной из осей координат! Значит y=0 недостижимо, и x=0 — вне области определения.",
+    hint:"Гипербола y=k/x имеет асимптоты. Вспомни — каких значений y она никогда не принимает?",
+    ref:"Гипербола 💜"
+  },
+  {
+    topic:"Отражение графика",
+    text:"<span class='hero-name'>Эбби</span> смотрит в лужу и видит отражение параболы. График <span class='term'>y = −x²</span> по сравнению с y = x² — это парабола, которую...",
+    opts:["Перевернули вниз (ветви смотрят вниз)","Сдвинули вправо","Сдвинули вверх","Растянули по вертикали"], ans:0,
+    fb:"✦ Верно! Эбби увидела отражение! Минус перед x² переворачивает параболу — ветви смотрят вниз. Коэффициент a = −1 < 0.",
+    trap:"Ловушка ОГЭ: знак a при x² определяет направление ветвей. Минус — ветви вниз. Это не сдвиг!",
+    hint:"Посмотри на знак коэффициента при x². Что он говорит о направлении ветвей?",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Кусочная функция",
+    text:"<span class='hero-name'>Элли</span> и <span class='hero-name'>Дина</span> планируют маршрут: f(x) = x² при x ≤ 1 и f(x) = 2x − 1 при x > 1. Совпадают ли значения функции при x=1 для обеих частей?",
+    opts:["Да, обе дают 1","Нет, первая даёт 1, вторая — 2","Нет, первая даёт 1, вторая — 0","Да, обе дают 2"], ans:0,
+    fb:"✦ Верно! Маршрут состыковался! При x=1: первая часть — 1²=1. Вторая часть — 2·1−1=1. Обе дают 1 — функция непрерывна в точке x=1.",
+    trap:"",
+    hint:"Подставь x=1 в каждую из двух формул и сравни результаты.",
+    ref:"Кусочно-заданная функция 🩵"
+  },
+  {
+    topic:"Свойства функции — знак",
+    text:"<span class='hero-name'>Томми</span> сканирует зону: функция <span class='term'>y = x − 4</span>. При каких x функция принимает отрицательные значения (опасная зона)?",
+    opts:["x < 4","x > 4","x < −4","x > −4"], ans:0,
+    fb:"✦ Верно! Томми определил опасную зону! y < 0 → x − 4 < 0 → x < 4. Функция отрицательна левее нуля функции.",
+    trap:"",
+    hint:"Реши неравенство y < 0, то есть x−4 < 0. Перенеси 4 в правую часть.",
+    ref:"Свойства функций 💛"
+  },
+  {
+    topic:"Парабола — точки пересечения с осью x",
+    text:"<span class='hero-name'>Джоэл</span> рассчитывает, где траектория кирпича коснётся земли (ось x). Функция <span class='term'>y = x² − 9</span>. Найди нули параболы.",
+    opts:["x = 3 и x = −3","x = 9 и x = −9","x = 3","x = 0"], ans:0,
+    fb:"✦ Верно! Джоэл точно рассчитал! x²−9=0 → x²=9 → x=±3. Парабола пересекает ось x в двух точках.",
+    trap:"Ловушка ОГЭ: x²=9 даёт ДВА корня: x=3 и x=−3. Не забудь отрицательный корень!",
+    hint:"Приравняй x²−9=0 и реши. Квадратный корень даёт два значения — не забудь оба.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Линейная функция — построение",
+    text:"<span class='hero-name'>Элли</span> прокладывает путь: функция <span class='term'>y = 3x − 6</span>. Где прямая пересекает ось y (при x=0)?",
+    opts:["(0; −6)","(0; 3)","(2; 0)","(0; 6)"], ans:0,
+    fb:"✦ Верно! Элли нашла точку старта! При x=0: y=3·0−6=−6. Точка (0; −6). В формуле y=kx+b свободный член b — это всегда точка пересечения с осью y.",
+    trap:"Ловушка ОГЭ: не перепутай пересечение с осью y (ставим x=0) и пересечение с осью x (ставим y=0). Это разные точки!",
+    hint:"Чтобы найти пересечение с осью y, подставь x=0 в формулу.",
+    ref:"Линейная функция 💙"
+  }
+];
+
+const q3Questions = [
+  {
+    topic:"Линейное уравнение",
+    text:"<span class='hero-name'>Гейл</span> нашёл в Некромиконе заклинание-замок: чтобы открыть книгу, нужно решить уравнение. <span class='eq'>3x − 9 = 0</span>. Чему равен x?",
+    opts:["3","−3","9","0"], ans:0,
+    fb:"✦ Верно! Книга открылась! 3x = 9 → x = 3. Переносим −9 вправо, делим обе части на 3.",
+    trap:"Ловушка ОГЭ: не переноси знак — при переносе через равно знак меняется. −9 становится +9 справа.",
+    hint:"Перенеси −9 в правую часть (знак изменится), затем раздели обе части на коэффициент при x.",
+    ref:"Линейное уравнение 💙"
+  },
+  {
+    topic:"Дискриминант",
+    text:"Кольцо Мьеркул заблокировано квадратным уравнением. <span class='hero-name'>Гейл</span> считает дискриминант: <span class='eq'>x² − 5x + 6 = 0</span>. Чему равен D?",
+    opts:["1","−1","25","11"], ans:0,
+    fb:"✦ Верно! Кольцо поддаётся! D = b²−4ac = (−5)²−4·1·6 = 25−24 = 1.",
+    trap:"Ловушка ОГЭ: b = −5, и в формуле b² = (−5)² = 25, а не −25. Минус исчезает при возведении в квадрат!",
+    hint:"Формула дискриминанта: D = b²−4ac. Здесь a=1, b=−5, c=6. Осторожно со знаком b при возведении в квадрат.",
+    ref:"Дискриминант 💗"
+  },
+  {
+    topic:"Квадратное уравнение",
+    text:"Свиток Вечной Тьмы требует найти оба корня. <span class='hero-name'>Гейл</span> уже посчитал D=1 для уравнения <span class='eq'>x² − 5x + 6 = 0</span>. Каковы корни?",
+    opts:["x=2 и x=3","x=−2 и x=−3","x=5 и x=6","x=1 и x=6"], ans:0,
+    fb:"✦ Верно! Свиток расколдован! x = (5±√1)/2. x₁ = (5+1)/2 = 3, x₂ = (5−1)/2 = 2.",
+    trap:"Ловушка ОГЭ: формула x=(−b±√D)/2a, не забывай делить на 2a. Здесь a=1, b=−5, поэтому −b = 5.",
+    hint:"Используй формулу x=(−b±√D)/2a. b=−5, значит −b=5. √D=√1=1. Считай два корня отдельно: с + и с −.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Неполное квадратное",
+    text:"Амулет Мистры заперт неполным уравнением: <span class='eq'>x² − 16 = 0</span>. Сколько корней и каковы они?",
+    opts:["x=4 и x=−4","x=4","x=8 и x=−8","Корней нет"], ans:0,
+    fb:"✦ Верно! Амулет светится! x²=16 → x=±4. Два корня: 4 и −4. Неполное квадратное без x всегда даёт два симметричных корня (или ноль).",
+    trap:"Ловушка ОГЭ: √16=4, но ответ x=4 неполный! При извлечении корня из x² всегда пиши ±. Оба корня нужны для полного ответа.",
+    hint:"Перенеси −16 вправо: x²=16. Извлекай корень — не забудь знак ±.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Дробное уравнение — ОДЗ",
+    text:"Проклятый Гримуар требует решить уравнение. <span class='hero-name'>Гейл</span> видит: <span class='eq'>6/x = 2</span>. Но сначала — чему не может равняться x (ОДЗ)?",
+    opts:["x ≠ 0","x ≠ 2","x ≠ 6","x ≠ 3"], ans:0,
+    fb:"✦ Верно! Гейл не взорвался! ОДЗ: знаменатель x ≠ 0. Само решение: 6 = 2x → x = 3. x=3 не нарушает ОДЗ — ответ принят.",
+    trap:"Ловушка ОГЭ: ОДЗ определяется из знаменателя ДО решения. Потом проверяешь, не попал ли корень под запрет.",
+    hint:"ОДЗ — это условие, при котором знаменатель не равен нулю. Посмотри, что стоит в знаменателе.",
+    ref:"Дробное уравнение и ОДЗ 💜"
+  },
+  {
+    topic:"Дробное уравнение — посторонний корень",
+    text:"Кинжал Шар требует решить: <span class='eq'>(x²−4)/(x−2) = 0</span>. <span class='hero-name'>Гейл</span> находит корень x=2. Принять ли этот ответ?",
+    opts:["Нет — x=2 посторонний корень","Да — x=2 верный ответ","Да, и ещё x=−2","Уравнение не имеет решений"], ans:0,
+    fb:"✦ Верно! Гейл распознал ловушку! При x=2 знаменатель (x−2)=0 — деление на ноль запрещено. Значит x=2 — посторонний корень, его отбрасываем. Настоящий корень: x=−2.",
+    trap:"Ловушка ОГЭ: посторонний корень — это корень уравнения, который обнуляет знаменатель. Он выглядит правильным, но его нужно отбросить.",
+    hint:"Проверь: при x=2 что происходит со знаменателем x−2? Если он обнуляется — это посторонний корень, его нельзя принять.",
+    ref:"Дробное уравнение и ОДЗ 💜"
+  },
+  {
+    topic:"Линейное неравенство",
+    text:"Проклятый меч Балдура требует найти безопасную зону: <span class='eq'>−2x + 6 > 0</span>. При каких x неравенство выполняется?",
+    opts:["x < 3","x > 3","x < −3","x > −3"], ans:0,
+    fb:"✦ Верно! Безопасная зона найдена! −2x > −6 → делим на −2 → x < 3. Знак меняется при делении на отрицательное!",
+    trap:"Ловушка ОГЭ: при делении или умножении на отрицательное число знак неравенства переворачивается. > становится <. Самая частая ошибка в теме!",
+    hint:"Перенеси 6 вправо: −2x > −6. Теперь дели обе части на −2. Не забудь — знак неравенства меняется!",
+    ref:"Линейное неравенство 🩵"
+  },
+  {
+    topic:"Система неравенств",
+    text:"Шэдоухарт и Карлах указывают безопасный путь через Подземье. Вместе: <span class='eq'>x > 1</span> и <span class='eq'>x ≤ 4</span>. Какой ответ?",
+    opts:["1 < x ≤ 4","x > 1 или x ≤ 4","x ≤ 1","x > 4"], ans:0,
+    fb:"✦ Верно! Гейл нашёл путь! Пересечение двух условий: x больше 1 И не больше 4. Ответ: 1 < x ≤ 4.",
+    trap:"Ловушка ОГЭ: система неравенств — это И (пересечение), а не ИЛИ (объединение). Нужны только те x, которые удовлетворяют ОБОИМ неравенствам одновременно.",
+    hint:"Нарисуй числовую ось. Отметь x>1 и x≤4. Где они пересекаются — там и ответ.",
+    ref:"Система неравенств 💚"
+  },
+  {
+    topic:"Квадратное неравенство",
+    text:"Некромант запер выход неравенством. <span class='hero-name'>Гейл</span> решает: <span class='eq'>x² − 4 < 0</span>. При каких x выполняется?",
+    opts:["−2 < x < 2","x < −2 или x > 2","x > 2","x < −2"], ans:0,
+    fb:"✦ Верно! Выход открыт! Корни x²−4=0: x=±2. Парабола смотрит вверх (a=1>0), значит она ниже нуля между корнями — там, где −2 < x < 2.",
+    trap:"Ловушка ОГЭ: парабола с a>0 уходит вниз МЕЖДУ корнями. Это и есть зона, где y<0. Нарисуй параболу — и сразу видно!",
+    hint:"Найди корни уравнения x²−4=0. Парабола с a>0 — между корнями она ниже нуля. Там и ответ.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Дискриминант — нет корней",
+    text:"Последний артефакт — Орб Аннигиляции. <span class='hero-name'>Гейл</span> считает D для уравнения <span class='eq'>x² + 2x + 5 = 0</span>. Каков D и сколько корней?",
+    opts:["D = −16, корней нет","D = 16, два корня","D = 0, один корень","D = 4, два корня"], ans:0,
+    fb:"✦ Верно! Гейл не стал тратить магию! D = 4 − 20 = −16 < 0. Корней нет — уравнение неразрешимо в вещественных числах. Орб не имеет слабых мест!",
+    trap:"Ловушка ОГЭ: D = b²−4ac = 2²−4·1·5 = 4−20 = −16. Отрицательный D означает — корней нет вовсе. Это тоже правильный ответ на ОГЭ!",
+    hint:"Считай D = b²−4ac. b=2, a=1, c=5. Если D получится отрицательным — корней нет.",
+    ref:"Дискриминант 💗"
+  }
+];
+
+const q4Questions = [
+
+  // ── ЗНАНИЕ ФОРМУЛ НАИЗУСТЬ ─────────────────────────
+  {
+    ex:'yen', type:'formula', topic:'Квадрат суммы',
+    text:`<span class='hero-name'>Йеннифэр</span> превращает Лютика в кота — заклинание трансформации требует точного раскрытия скобок, иначе хвост вырастет не там. Запишите полное раскрытие:<br><span class='big-formula'>(a + b)² = ?</span>`,
+    opts:['a² + 2ab + b²','a² + b²','a² + ab + b²','2a + 2b'], ans:0,
+    fb:'✦ Верно! Лютик — красивый кот! (a+b)² = a² + 2ab + b². Три слагаемых: квадрат первого, удвоенное произведение, квадрат второго.',
+    trap:'Ловушка ОГЭ: (a+b)² ≠ a²+b². Пропустить среднее слагаемое 2ab — самая частая ошибка в алгебре!',
+    hint:'Квадрат суммы — три слагаемых. Среднее — это 2ab. Без него формула неверна.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'tri', type:'formula', topic:'Квадрат разности',
+    text:`<span class='hero-name'>Трисс</span> готовит зелье исчезновения — формула зелья требует точного раскрытия:<br><span class='big-formula'>(a − b)² = ?</span>`,
+    opts:['a² − 2ab + b²','a² − b²','a² + 2ab + b²','a² − ab + b²'], ans:0,
+    fb:'✦ Верно! Зелье сработало! (a−b)² = a² − 2ab + b². Отличие от квадрата суммы — минус перед 2ab.',
+    trap:'Ловушка ОГЭ: не путай (a−b)² и (a+b)². Разница только в знаке среднего члена: минус вместо плюса.',
+    hint:'Квадрат разности почти как квадрат суммы, но знак перед 2ab — минус.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'key', type:'formula', topic:'Разность квадратов',
+    text:`<span class='hero-name'>Кейра</span> вызывает Халсина в облике медведя — ритуал требует разложить выражение на множители, иначе медведь получится с рыбьим хвостом:<br><span class='big-formula'>a² − b² = ?</span>`,
+    opts:['(a+b)(a−b)','(a−b)²','(a+b)²','(a²+b²)'], ans:0,
+    fb:'✦ Верно! Халсин — настоящий медведь! a²−b² = (a+b)(a−b). Разность квадратов всегда раскладывается в произведение суммы и разности.',
+    trap:'Ловушка ОГЭ: a²−b² ≠ (a−b)². Это разные выражения! (a−b)² = a²−2ab+b², а a²−b² = (a+b)(a−b).',
+    hint:'Разность квадратов — это произведение двух скобок: сумма и разность тех же чисел.',
+    ref:'Разность квадратов'
+  },
+  {
+    ex:'yen', type:'formula', topic:'Дискриминант',
+    text:`<span class='hero-name'>Йеннифэр</span> развеивает иллюзию Лютика — он притворялся рыцарем три часа. Чтобы понять, сколько у иллюзии «корней», нужно посчитать:<br><span class='big-formula'>D = ?</span> для уравнения ax²+bx+c=0`,
+    opts:['b² − 4ac','b² + 4ac','√b − ac','2b − ac'], ans:0,
+    fb:'✦ Верно! Иллюзия развеяна! D = b²−4ac. D>0 — два корня, D=0 — один, D<0 — корней нет.',
+    trap:'Ловушка ОГЭ: в формуле именно −4ac (минус!). И b² — это всегда положительно, даже если b отрицательное.',
+    hint:'Дискриминант: D = b²−4ac. Не перепутай знак — там минус перед 4ac.',
+    ref:'Дискриминант'
+  },
+  {
+    ex:'key', type:'formula', topic:'Корни квадратного уравнения',
+    text:`<span class='hero-name'>Кейра</span> составляет круг защиты от духов — чтобы рассчитать радиус, нужна формула корней квадратного уравнения. Если D ≥ 0, то x = ?`,
+    opts:['(−b ± √D) / 2a','(b ± √D) / 2a','−b / 2a','(−b ± D) / 2a'], ans:0,
+    fb:'✦ Верно! Духи не прошли! x = (−b ± √D) / 2a. Два корня при D>0, один при D=0.',
+    trap:'Ловушка ОГЭ: в числителе −b (минус b!), а не просто b. И под корнем стоит D, а не b.',
+    hint:'Формула корней: x = (−b ± √D) / 2a. Не забудь знак минус перед b и деление на 2a.',
+    ref:'Дискриминант'
+  },
+  {
+    ex:'tri', type:'formula', topic:'Разность квадратов — применение',
+    text:`<span class='hero-name'>Трисс</span> объединяет два зелья в одно — нужно упростить выражение. Каким из этих вариантов правильно записать произведение (x+3)(x−3)?`,
+    opts:['x² − 9','x² + 9','x² − 6x + 9','x² − 3'], ans:0,
+    fb:'✦ Верно! Зелья слиты! (x+3)(x−3) = x²−3² = x²−9. Разность квадратов — быстрый способ перемножить сумму и разность.',
+    trap:'Ловушка ОГЭ: (x−3)² = x²−6x+9 — это другое! Здесь не квадрат разности, а произведение суммы на разность.',
+    hint:'Когда множители — одно и то же число, но с разными знаками — это формула разности квадратов.',
+    ref:'Разность квадратов'
+  },
+  {
+    ex:'yen', type:'formula', topic:'Квадрат суммы — применение',
+    text:`<span class='hero-name'>Гермиона</span> вычисляет площадь квадратного щита со стороной (a+5). <span class='hero-name'>Йеннифэр</span> спрашивает: как раскроешь (a+5)²?`,
+    opts:['a² + 10a + 25','a² + 25','a² + 5a + 25','a² + 10a + 5'], ans:0,
+    fb:'✦ Верно! Щит рассчитан! (a+5)² = a² + 2·a·5 + 5² = a² + 10a + 25. Среднее слагаемое = 2·a·5 = 10a.',
+    trap:'Ловушка ОГЭ: среднее слагаемое = 2·a·5 = 10a, не 5a. Умножай на 2!',
+    hint:'(a+5)² = a² + 2·a·5 + 5². Посчитай 2·a·5 — это и есть среднее слагаемое.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'key', type:'formula', topic:'Вероятность — формула',
+    text:`<span class='hero-name'>Кейра</span> бросает зелье наудачу в толпу врагов. <span class='hero-name'>Гейл</span> спрашивает: чему равна вероятность события A? Выбери правильную формулу.`,
+    opts:['P(A) = m / n','P(A) = n / m','P(A) = m · n','P(A) = m − n'], ans:0,
+    fb:'✦ Верно! Гейл доволен! P(A) = m/n, где m — число благоприятных исходов, n — число всех равновозможных.',
+    trap:'Ловушка ОГЭ: m — это благоприятные (числитель, верхний), n — все исходы (знаменатель, нижний). Не переворачивай дробь!',
+    hint:'Вероятность — это дробь. В числителе — то, что хочешь получить. В знаменателе — все возможные варианты.',
+    ref:'Вероятность'
+  },
+
+  {
+    ex:'yen', type:'formula', topic:'Тригонометрия — sin',
+    text:`<span class='hero-name'>Гермиона</span> вычисляет расстояние до доспехов школы Змеи через прямоугольный треугольник. <span class='hero-name'>Йеннифэр</span> проверяет: чему равен sin α в прямоугольном треугольнике?`,
+    opts:['противолежащий катет / гипотенуза','прилежащий катет / гипотенуза','гипотенуза / катет','прилежащий / противолежащий'], ans:0,
+    fb:'✦ Верно! Доспехи найдены! Синус = противолежащий катет / гипотенуза. Косинус = прилежащий / гипотенуза.',
+    trap:'Ловушка ОГЭ: синус и косинус легко перепутать. Синус — сторона напротив угла. Косинус — сторона рядом с углом.',
+    hint:'Синус — дробь. В числителе — катет, который находится напротив угла α, не рядом с ним.',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'key', type:'formula', topic:'Тригонометрическое тождество',
+    text:`<span class='hero-name'>Гейл</span> накладывает заклинание стабилизации магии — в основе тождество, которое всегда равно одному числу. <span class='hero-name'>Кейра</span> спрашивает:<br><span class='big-formula'>sin²α + cos²α = ?</span>`,
+    opts:['1','0','sin 2α','tg α'], ans:0,
+    fb:'✦ Верно! Магия стабилизирована! sin²α + cos²α = 1 — всегда, для любого угла α. Используй, когда знаешь один из них.',
+    trap:'Ловушка ОГЭ: это тождество верно для ЛЮБОГО α, не только 30° или 45°.',
+    hint:'Сумма квадратов синуса и косинуса одного угла всегда равна постоянному числу. Какому?',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'tri', type:'task', topic:'Вероятность',
+    text:`В колчане <span class='hero-name'>Цири</span> 4 серебряные стрелы и 6 обычных. Только серебряная убьёт этого монстра. Она стреляет наугад. Какова вероятность удачного выстрела?`,
+    opts:['2/5','4/6','1/4','3/5'], ans:0,
+    fb:'✦ Верно! Серебряная! Монстр повержен! P = 4/10 = 2/5. Упрощаем дробь.',
+    trap:'Ловушка ОГЭ: P = 4/10, но ответ нужно упростить до 2/5. Не забывай сокращать дроби.',
+    hint:'Всего стрел: 4+6=10. Благоприятных — 4. P = 4/10. Можно ещё упростить.',
+    ref:'Вероятность'
+  },
+  {
+    ex:'key', type:'task', topic:'Тригонометрия',
+    text:`<span class='hero-name'>Халсин</span> в облике медведя спускается с обрыва по наклонному склону. Вертикальная высота обрыва — 5 м, угол склона с горизонталью — 30°. Какова длина самого склона (гипотенуза)?`,
+    opts:['10 м','5 м','5√3 м','15 м'], ans:0,
+    fb:'✦ Верно! Медведь добрался! Треугольник 30-60-90: стороны 1:√3:2. Меньший катет (высота 5 м) напротив 30°, гипотенуза = 2·5 = 10 м.',
+    trap:'Ловушка ОГЭ: в треугольнике 30-60-90 меньший катет = ½ гипотенузы. Значит гипотенуза = 2 × меньший катет = 10.',
+    hint:'Меньший катет напротив 30° равен половине гипотенузы. Если катет = 5, то гипотенуза = ?',
+    ref:'Теорема Пифагора + Специальные треугольники'
+  },
+  {
+    ex:'yen', type:'task', topic:'Площадь треугольника',
+    text:`<span class='hero-name'>Йеннифэр</span> выжигает треугольный участок леса, отрезая путь нечисти. Основание 12 м, высота 8 м. Какова площадь выжженного поля?`,
+    opts:['48 м²','96 м²','20 м²','80 м²'], ans:0,
+    fb:'✦ Верно! Нечисть остановлена! S = ½·12·8 = 48 м². Треугольник — половина прямоугольника.',
+    trap:'Ловушка ОГЭ: 12·8=96 — площадь прямоугольника. Треугольник вдвое меньше. Ответ 96 стоит как ловушка.',
+    hint:'Площадь треугольника = ½ · основание · высота. Не забудь ½!',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'tri', type:'task', topic:'Внешний угол',
+    text:`Иллюзия <span class='hero-name'>Трисс</span> — треугольный призрачный замок. Два угла треугольника — 55° и 65°. Противник обходит его снаружи по внешнему углу при третьей вершине. Сколько градусов он поворачивает?`,
+    opts:['120°','60°','115°','180°'], ans:0,
+    fb:'✦ Верно! Трисс предугадала путь! Внешний угол = 55° + 65° = 120°. Равен сумме двух несмежных внутренних.',
+    trap:'Ловушка ОГЭ: внутренний угол при вершине = 60°. Внешний = 180°−60° = 120°. Или проще: сложи два несмежных угла.',
+    hint:'Внешний угол треугольника = сумма двух внутренних углов, не смежных с ним.',
+    ref:'Вписанные и центральные углы'
+  },
+  {
+    ex:'key', type:'task', topic:'Корни',
+    text:`<span class='hero-name'>Кейра</span> рассчитывает длину стороны квадратного алтаря в лесу друидов — площадь алтаря 48 м². Длина стороны = √48. Упрости:<br><span class='big-formula'>√48 = ?</span>`,
+    opts:['4√3','6√2','2√12','√48'], ans:0,
+    fb:'✦ Верно! Алтарь построен! √48 = √(16·3) = √16·√3 = 4√3. Ищи наибольший точный квадрат-делитель.',
+    trap:'Ловушка ОГЭ: 48 = 16·3, и √16=4. Можно и через 4·12, но тогда √12 надо ещё упрощать — лучше сразу брать 16.',
+    hint:'Разложи 48 на множители, один из которых — точный квадрат. Какой максимальный точный квадрат делит 48?',
+    ref:'Свойства корней'
+  },
+  {
+    ex:'yen', type:'task', topic:'Вписанный угол',
+    text:`<span class='hero-name'>Гермиона</span> рисует защитный круг — классика и Хогвартса, и Аретузы. Вписывает в него угол, опирающийся на диаметр. Чему он равен?`,
+    opts:['90°','45°','60°','180°'], ans:0,
+    fb:'✦ Верно! Обе академии едины! Угол, вписанный в полуокружность = 90°. Теорема Фалеса: дуга = 180°, вписанный = ½·180° = 90°.',
+    trap:'Ловушка ОГЭ: это частный случай вписанного угла — когда он опирается на диаметр.',
+    hint:'Вписанный угол = ½ дуги. Полуокружность = дуга 180°. Считай.',
+    ref:'Вписанные и центральные углы'
+  },
+  {
+    ex:'tri', type:'task', topic:'Площадь ромба',
+    text:`Иллюзия <span class='hero-name'>Трисс</span> — ромбовидное озеро посреди экзаменационного зала. Диагонали иллюзии: d₁ = 10 м и d₂ = 6 м. Какова площадь иллюзии?`,
+    opts:['30 м²','60 м²','16 м²','15 м²'], ans:0,
+    fb:'✦ Верно! Иллюзия убедительна! S = ½·d₁·d₂ = ½·10·6 = 30 м². Площадь ромба — полупроизведение диагоналей.',
+    trap:'Ловушка ОГЭ: d₁·d₂=60 — не забывай ½. Ответ 60 стоит как ловушка.',
+    hint:'Площадь ромба через диагонали: S = ½ · d₁ · d₂.',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'key', type:'task', topic:'sin²+cos²',
+    text:`<span class='hero-name'>Халсин</span> в облике медведя рассчитывает угол наклона горы. Известно: cos α = 0.8. Найди sin²α — без этого он не выберет безопасный спуск.`,
+    opts:['0.36','0.64','0.8','0.2'], ans:0,
+    fb:'✦ Верно! Медведь выбрал безопасный спуск! sin²α = 1 − cos²α = 1 − 0.64 = 0.36. cos²α = 0.8² = 0.64.',
+    trap:'Ловушка ОГЭ: cos²α = (0.8)² = 0.64, а не 0.8. Сначала возведи в квадрат, потом вычти из 1.',
+    hint:'Используй тождество sin²α + cos²α = 1. Найди cos²α = (0.8)², потом вычти из 1.',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'yen', type:'task', topic:'Длина окружности',
+    text:`<span class='hero-name'>Лютик</span> обегает периметр круглого иллюзорного замка, который <span class='hero-name'>Йеннифэр</span> создала для экзамена. Радиус замка — 5 м. Какое расстояние пробежит Лютик за один круг?`,
+    opts:['10π м','25π м','5π м','50π м'], ans:0,
+    fb:'✦ Верно! Лютик уже сочиняет об этом балладу! C = 2πr = 2·π·5 = 10π м.',
+    trap:'Ловушка ОГЭ: 25π = πr² — это площадь замка, не длина пути. C=2πr, S=πr². Не перепутай.',
+    hint:'Длина окружности: C = 2πr. Площадь круга: S = πr². Тебе нужна длина пути.',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'tri', type:'task', topic:'Площадь параллелограмма',
+    text:`<span class='hero-name'>Трисс</span> накрывает параллелограммный участок леса защитным куполом от нечисти. Основание участка 11 м, высота (перпендикуляр) 5 м. Площадь купола?`,
+    opts:['55 м²','27.5 м²','32 м²','110 м²'], ans:0,
+    fb:'✦ Верно! Купол надёжен! S = a·h = 11·5 = 55 м². Параллелограмм: основание × высота (не боковая сторона!).',
+    trap:'Ловушка ОГЭ: высота — это ПЕРПЕНДИКУЛЯР к основанию, а не наклонная боковая сторона.',
+    hint:'S параллелограмма = основание × высота (перпендикуляр). Убедись, что не перепутал с боковой стороной.',
+    ref:'Площади фигур'
+  }
+];
+
+const bonusQuestions = [
+  {
+    scene:"Явление первое",
+    type:"Хак на панику",
+    sit:"Лютик вошёл в аудиторию. Мадам Пармезан сдаёт в соседней — она обещала ждать у выхода и смотреть на результат.",
+    text:"<span class='lut'>Лютик</span> открыл вариант и увидел задачу, которую не понимает вообще. Что делает умный человек, которому нужно произвести впечатление?",
+    opts:["Пропускает, решает то, что знает, и возвращается в конце","Сидит над ней до победного — сдаваться при ней нельзя","Переписывает условие красиво — авось проверяющий оценит","Рисует портрет Мадам Пармезан на полях"], ans:0,
+    fb:"✦ Верно! <span class='lut'>Лютик</span> перешёл к следующей задаче и вернулся. В ОГЭ 26 заданий. Сначала реши все лёгкие — набери гарантированные баллы, потом атакуй сложные.",
+    hack:"Не залипай на одной задаче. Лёгкое → сложное, не наоборот.",
+    hint:"Что умнее — застрять на одном или сначала набрать много лёгких баллов?",
+  },
+  {
+    scene:"Явление второе",
+    type:"Хак на формулы",
+    sit:"Накануне Мадам Пармезан положила Лютику на стол листок. «Изучи», — сказала она, не объясняя.",
+    text:"На экзамене <span class='lut'>Лютик</span> забыл формулу дискриминанта. Вдруг вспоминает тот листок. Что это было?",
+    opts:["Справочник с формулами — он выдаётся на ОГЭ вместе с вариантом","Записка с её номером телефона","Список запрещённых тем","Меню таверны «Золотая лошадь»"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> знала, что делала. На ОГЭ выдают официальный справочник с формулами — квадратные уравнения, прогрессии, площади. Многое не нужно учить наизусть!",
+    hack:"Справочник — твоя легальная шпаргалка. Изучи заранее, что в нём есть.",
+    hint:"На ОГЭ есть официальный справочник с формулами. Его можно использовать.",
+  },
+  {
+    scene:"Явление третье",
+    type:"Хак на проверку",
+    sit:"Лютик записал ответ и чуть не сдал лист. Но что-то остановило — образ Мадам Пармезан, которая скажет: «Ты проверил?»",
+    text:"<span class='lut'>Лютик</span> получил ответ x = −437 в задаче про длину дороги. Стоит ли беспокоиться?",
+    opts:["Да — длина не может быть отрицательной, где-то ошибка","Нет, так бывает — пишем и сдаём","Дорога идёт в обратном направлении, всё логично","Мадам Пармезан бы тоже так получила"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> кивает одобрительно. Всегда проверяй ответ здравым смыслом: длина, вес, площадь, вероятность — не могут быть отрицательными.",
+    hack:"Проверяй смысл ответа. Отрицательная длина, вероятность > 1 — сигнал пересчитать.",
+    hint:"Может ли длина дороги быть отрицательной?",
+  },
+  {
+    scene:"Явление четвёртое",
+    type:"Хак на время",
+    sit:"До конца экзамена 20 минут. Лютик думает: «Мадам Пармезан ждёт снаружи. Надо выйти достойно».",
+    text:"<span class='lut'>Лютик</span> решил 20 задач из 26. Осталось 20 минут и 6 нерешённых. Что делать?",
+    opts:["Вернуться к лёгким нерешённым, затем угадать остальные — пустой ответ точно ноль","Сдать как есть — главное выйти красиво","Переписать уже решённые аккуратнее","Написать на полях посвящение Мадам Пармезан"], ans:0,
+    fb:"✦ Верно! В ОГЭ нет штрафа за неверный ответ. Пустой ответ — гарантированный ноль. Угаданный из 4 — шанс 25%.",
+    hack:"Никогда не оставляй пустых ответов. Угадай — шанс 25%. Пустой — шанс 0%.",
+    hint:"Что лучше: пустой ответ или угаданный из 4 вариантов?",
+  },
+  {
+    scene:"Явление пятое",
+    type:"Хак на подстановку",
+    sit:"Лютик застрял. Вспоминает совет Мадам Пармезан, данный за завтраком: «Когда не знаешь как решить — посмотри на ответы».",
+    text:"<span class='lut'>Лютик</span> не может решить уравнение алгебраически. Что можно попробовать в тестовой части?",
+    opts:["Подставить каждый из четырёх вариантов в уравнение и найти тот, что подходит","Решать методом страданий до победы","Написать «не знаю» и надеяться на сочувствие","Ждать вдохновения"], ans:0,
+    fb:"✦ Верно! Хак подстановки: в тестовой части 4 готовых варианта. Подставь каждый в уравнение — правильный сойдётся. Часто быстрее, чем решать с нуля.",
+    hack:"В тестовой части можно подставить варианты ответов прямо в задачу. Быстро и надёжно.",
+    hint:"Варианты ответов уже написаны. Можно проверить каждый, не решая уравнение.",
+  },
+  {
+    scene:"Явление шестое",
+    type:"Хак на текст",
+    sit:"Лютик перечитывает условие уже в пятый раз. Думает: «Мадам Пармезан никогда не перечитывает дважды — она рисует».",
+    text:"<span class='lut'>Лютик</span> не понимает задачу с длинным условием. Что сделает умный бард?",
+    opts:["Нарисует схему или таблицу — переведёт текст в картинку","Прочитает ещё раз, только медленнее и с выражением","Напишет, что задача некорректна","Перескажет условие задачи в рифму"], ans:0,
+    fb:"✦ Верно! Схема или таблица превращает запутанный текст в понятную картинку. Особенно помогает в задачах на движение, совместную работу и проценты.",
+    hack:"Не можешь понять текст — нарисуй схему. Руки помогают голове.",
+    hint:"Как визуализация помогает понять сложное условие?",
+  },
+  {
+    scene:"Явление седьмое",
+    type:"Хак на геометрию",
+    sit:"Лютик застрял на геометрии. Вспоминает, как Мадам Пармезан однажды взяла карандаш и одной линией решила задачу, над которой он сидел час.",
+    text:"<span class='lut'>Лютик</span> не может подступиться к задаче с треугольником. Что поможет?",
+    opts:["Провести вспомогательную линию — высоту, биссектрису или медиану","Нарисовать Лютика рядом с треугольником для масштаба","Обвести фигуру потолще — авось станет яснее","Дорисовать сердечко и сдать"], ans:0,
+    fb:"✦ Верно! Вспомогательная линия — главный хак геометрии. Высота из вершины делит сложный треугольник на два простых прямоугольных — и Пифагор уже работает.",
+    hack:"Застрял в геометрии — проведи высоту карандашом. Сложное становится простым.",
+    hint:"Какая вспомогательная линия разбивает треугольник на два прямоугольных?",
+  },
+  {
+    scene:"Явление восьмое",
+    type:"Хак на вычисления",
+    sit:"Лютик получил странное число и задумался: «Мадам Пармезан сказала — если ответ выглядит нелепо, он и есть нелепый».",
+    text:"В задаче про вероятность <span class='lut'>Лютик</span> получил P = 1.2. <span class='par'>Мадам Пармезан</span> бы засмеялась. Почему?",
+    opts:["Вероятность не может быть больше 1 — значит, где-то ошибка","Всё нормально, иногда так бывает","Это означает, что событие произойдёт 1.2 раза","Мадам Пармезан смеётся над всем подряд, не обращай внимания"], ans:0,
+    fb:"✦ Верно! Вероятность всегда от 0 до 1. P > 1 или P < 0 — гарантированная ошибка. Возвращайся и ищи, где напутал.",
+    hack:"Вероятность: 0 ≤ P ≤ 1. Длина > 0. Сумма углов треугольника = 180°. Это маяки для проверки.",
+    hint:"Каковы допустимые границы вероятности?",
+  },
+  {
+    scene:"Явление девятое",
+    type:"Хак на тройки",
+    sit:"Мадам Пармезан как-то написала на его руке три числа: 3·4·5. Лютик думал, это шифр признания в любви. Оказалось — нет.",
+    text:"В задаче стороны треугольника 5 и 12. <span class='lut'>Лютик</span> тянется считать. Но вдруг вспоминает ту надпись на руке. Что она означала?",
+    opts:["Тройки Пифагора: 5-12-13 — третья сторона сразу известна, считать не нужно","Это был день рождения её кошки","Мадам Пармезан хотела его запутать","Лютику нельзя доверять тройкам чисел"], ans:0,
+    fb:"✦ Верно! Тройки Пифагора — чит-коды: 3-4-5, 5-12-13, 8-15-17. Видишь два числа из тройки — третье известно мгновенно. Считать не нужно.",
+    hack:"Выучи тройки Пифагора: 3-4-5, 5-12-13, 8-15-17. Экономишь минуты на экзамене.",
+    hint:"Что такое тройки Пифагора и как ими пользоваться?",
+  },
+  {
+    scene:"Явление десятое",
+    type:"Хак на знак",
+    sit:"Лютик написал ответ и гордо поставил точку. Потом вспомнил, как Мадам Пармезан говорила: «Минус — это всегда ловушка».",
+    text:"<span class='lut'>Лютик</span> решал неравенство и на одном шаге разделил обе части на −2, но не поменял знак. Что случится с ответом?",
+    opts:["Ответ будет неверным — при делении на отрицательное знак неравенства переворачивается","Ничего — знак тут не при чём","Знак меняется только при умножении, но не делении","Всё верно, Мадам Пармезан придирается"], ans:0,
+    fb:"✦ Верно! Главная ловушка неравенств: делишь или умножаешь на отрицательное — знак меняется. > становится <. Самая частая ошибка в этой теме!",
+    hack:"Делишь на минус — переворачивай знак неравенства. Это правило, не баг.",
+    hint:"Что происходит со знаком неравенства при делении на отрицательное число?",
+  },
+  {
+    scene:"Явление одиннадцатое",
+    type:"Хак на ОДЗ",
+    sit:"Мадам Пармезан как-то сказала: «Лютик, найденный ответ — ещё не ответ. Сначала проверь, имеет ли он право существовать».",
+    text:"<span class='lut'>Лютик</span> решил дробное уравнение и нашёл x = 3. В знаменателе стоит (x − 3). Принять ответ?",
+    opts:["Нет — x=3 обнуляет знаменатель, это посторонний корень, его нельзя принять","Да, задача решена","Да, если очень хочется","Нет, но можно написать «x почти равно 3»"], ans:0,
+    fb:"✦ Верно! Посторонний корень — это корень, который обнуляет знаменатель. Подставь найденный ответ обратно в знаменатель — если ноль, корень отбрасываем.",
+    hack:"После решения дробного уравнения — подставь ответ в знаменатель. Если ноль — выброси корень.",
+    hint:"Что произойдёт, если подставить x=3 в выражение (x−3)?",
+  },
+  {
+    scene:"Явление двенадцатое",
+    type:"Хак на графики",
+    sit:"Лютик смотрит на график. Мадам Пармезан однажды объяснила ему: «Смотри на форму — она всё говорит».",
+    text:"<span class='lut'>Лютик</span> видит параболу с ветвями вниз. Что он может сразу сказать о коэффициенте a?",
+    opts:["a < 0 — коэффициент при x² отрицательный","a > 0 — ветви вниз означают положительный a","a = 0 — парабола стала прямой","Ничего — надо вычислять"], ans:0,
+    fb:"✦ Верно! Ветви вверх → a > 0, ветви вниз → a < 0. Смотришь на рисунок — сразу знаешь знак коэффициента, без вычислений.",
+    hack:"Парабола вверх = a плюс (улыбка). Парабола вниз = a минус (грусть).",
+    hint:"Какой знак коэффициента a у параболы с ветвями вниз?",
+  },
+  {
+    scene:"Явление тринадцатое",
+    type:"Хак на площадь",
+    sit:"Мадам Пармезан нарисовала треугольник в воздухе и многозначительно подняла один палец. Лютик запомнил жест.",
+    text:"<span class='lut'>Лютик</span> посчитал площадь треугольника как основание × высота = 96. <span class='par'>Мадам Пармезан</span> вздохнула бы. В чём ошибка?",
+    opts:["Забыл поделить на 2 — правильная формула: S = ½ · a · h","Всё верно, площадь равна 96","Нужно было умножить ещё на 2","Треугольник неправильный, задача некорректна"], ans:0,
+    fb:"✦ Верно! Самая частая ошибка — забыть ½. Треугольник — это половина прямоугольника с теми же основанием и высотой.",
+    hack:"Площадь треугольника — всегда ½ · a · h. Ответ кажется слишком большим? Скорее всего, забыл поделить.",
+    hint:"Почему площадь треугольника вдвое меньше площади прямоугольника с теми же сторонами?",
+  },
+  {
+    scene:"Явление четырнадцатое",
+    type:"Хак на тактику",
+    sit:"Лютик открыл вторую часть и побледнел. Но вспомнил: Мадам Пармезан говорила, что тройку можно взять и без неё.",
+    text:"<span class='lut'>Лютик</span> смотрит на сложную вторую часть. Стоит ли туда прыгать, не закончив первую?",
+    opts:["Нет — первая часть даёт до 20 баллов, этого хватит на тройку. Сначала сделай всё там","Да — вторая часть важнее","Они одинаковые, без разницы","Лучше сдать пустой лист и выйти с достоинством"], ans:0,
+    fb:"✦ Верно! Для тройки на ОГЭ нужно ~15 баллов. Первая часть (задания 1–19) даёт до 20 баллов. Полностью решить её — тройка почти гарантирована без второй части.",
+    hack:"Сначала первая часть — вся. Задания 1–8 самые простые. Это твоя тройка.",
+    hint:"Сколько баллов даёт первая часть ОГЭ и хватит ли их для тройки?",
+  },
+  {
+    scene:"Финальное явление",
+    type:"Главный хак",
+    sit:"Экзамен закончен. Лютик выходит. Мадам Пармезан стоит у двери, скрестив руки. «Ну?» — говорит она.",
+    text:"<span class='lut'>Лютик</span> хочет сказать что-то умное, чтобы окончательно покорить <span class='par'>Мадам Пармезан</span>. Какой главный принцип он называет?",
+    opts:["«Не паникуй, реши лёгкое, проверь смысл, не оставляй пустых клеток»","«Учи всё наизусть за одну ночь»","«Надейся на удачу и красивый почерк»","«Главное — любовь, математика подождёт»"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> улыбается — впервые за весь экзамен. Четыре принципа: не паникуй, реши лёгкое, проверь смысл, не оставляй пустых клеток.",
+    hack:"Четыре правила: не паникуй, решай лёгкое, проверяй смысл, не оставляй пустых клеток.",
+    hint:"Назови четыре главных принципа поведения на любом экзамене.",
+  }
+];
+
+const extraQuestions = [
+
+  // ── КОРНИ ──────────────────────────────────────────
+  {
+    topic:"Корни — √(a²)",
+    text:"<span class='hero-name'>Ламберт</span> вычисляет по формуле расстояние до монстра и получает √(x²) при x = −9. Результат?",
+    opts:["9","−9","81","±9"], ans:0,
+    fb:"✦ Верно! √(x²) = |x| = |−9| = 9. Корень всегда неотрицателен, даже если x отрицательное.",
+    trap:"Ловушка ОГЭ: √(x²) ≠ x. При отрицательном x нужен модуль.",
+    hint:"Квадратный корень всегда ≥ 0. Что делает число неотрицательным?",
+    ref:"Свойства корней"
+  },
+  {
+    topic:"Корни — упрощение",
+    text:"<span class='hero-name'>Гейл</span> упрощает формулу радиуса магического портала: √72 = √(36·2) = ?",
+    opts:["6√2","6√3","36√2","Нельзя упростить"], ans:0,
+    fb:"✦ Верно! √72 = √(36·2) = √36·√2 = 6√2. Ищи наибольший точный квадрат-делитель.",
+    trap:"Ловушка ОГЭ: 72 = 36·2, а не 4·18 — берём наибольший точный квадрат для удобства.",
+    hint:"Разложи 72 на множители, один из которых — точный квадрат (4, 9, 16, 25, 36...).",
+    ref:"Свойства корней"
+  },
+  {
+    topic:"Корни — ловушка √(a+b)",
+    text:"<span class='hero-name'>Элли</span> считает на привале: √(16+9) = √16 + √9 = 4+3 = 7. <span class='hero-name'>Дина</span> смотрит скептически. Кто прав?",
+    opts:["Дина — правильный ответ 5, а не 7. √25 = 5","Элли — всё верно","Обе неправы, ответ 12","Оба метода дают одно и то же"], ans:0,
+    fb:"✦ Верно! √(16+9) = √25 = 5. Корень суммы ≠ сумме корней — это грубая ошибка!",
+    trap:"Ловушка ОГЭ: √(a+b) ≠ √a + √b. Никогда. Сначала считай под корнем, потом извлекай.",
+    hint:"Сначала посчитай 16+9, потом извлеки корень. Не разноси сложение под корнем.",
+    ref:"Свойства корней"
+  },
+  {
+    topic:"Корни — (√a)²",
+    text:"<span class='hero-name'>Некромант</span> рассчитывает площадь круга проклятия по формуле, в которой появляется (√17)². Чему это равно?",
+    opts:["17","√17","289","≈4.1"], ans:0,
+    fb:"✦ Верно! (√a)² = a при a ≥ 0. Возведение в квадрат и извлечение корня — обратные операции.",
+    trap:"Ловушка ОГЭ: (√17)² = 17, а не 17². Не путай (√a)² и √(a²).",
+    hint:"Квадрат корня отменяет сам корень. (√17)² = ?",
+    ref:"Свойства корней"
+  },
+
+  // ── ОКРУЖНОСТЬ ─────────────────────────────────────
+  {
+    topic:"Вписанный угол",
+    text:"<span class='hero-name'>Кровавый Барон</span> чертит план осады — крепость вписана в окружность. Его лучник стоит на дуге 100°. Чему равен вписанный угол, опирающийся на эту дугу?",
+    opts:["50°","100°","200°","25°"], ans:0,
+    fb:"✦ Верно! Вписанный угол = ½ дуги = ½·100° = 50°. Центральный угол равен дуге, вписанный — вдвое меньше.",
+    trap:"Ловушка ОГЭ: не перепутай вписанный и центральный! Центральный = дуге, вписанный = ½ дуги.",
+    hint:"Вписанный угол вдвое меньше дуги, на которую опирается.",
+    ref:"Вписанные и центральные углы"
+  },
+  {
+    topic:"Теорема Фалеса",
+    text:"<span class='hero-name'>Лев</span> строит укрытие у воды. Он знает: если взять любую точку на берегу (окружности) и соединить с концами диаметра, угол будет удобен для наблюдения. Чему он равен?",
+    opts:["90° — угол, вписанный в полуокружность, всегда прямой","45°","180°","Зависит от точки на окружности"], ans:0,
+    fb:"✦ Верно! Угол, вписанный в полуокружность = 90°. Теорема Фалеса: дуга = 180°, вписанный = ½·180° = 90°.",
+    trap:"Ловушка ОГЭ: это работает для ЛЮБОЙ точки на полуокружности, кроме концов диаметра.",
+    hint:"Диаметр — это дуга 180°. Вписанный угол = ½ дуги. Считай.",
+    ref:"Вписанные и центральные углы"
+  },
+  {
+    topic:"Касательная к окружности",
+    text:"<span class='hero-name'>Эбби</span> планирует маршрут побега вокруг круглой башни — ей нужно пройти касательно к стене. Под каким углом дорога (касательная) встречает радиус башни в точке касания?",
+    opts:["90° — касательная всегда перпендикулярна радиусу","45°","60°","Зависит от радиуса башни"], ans:0,
+    fb:"✦ Верно! Касательная ⊥ радиусу в точке касания — это фундаментальное свойство окружности.",
+    trap:"Ловушка ОГЭ: угол всегда 90°, независимо от радиуса и расположения точки.",
+    hint:"Касательная и радиус в точке касания всегда перпендикулярны. Всегда.",
+    ref:"Вписанные и центральные углы"
+  },
+
+  // ── НАТУРАЛЬНЫЕ ЧИСЛА ──────────────────────────────
+  {
+    topic:"НОД",
+    text:"<span class='hero-name'>Джоэл</span> делит 36 консервов и 48 патронов на одинаковые пайки без остатка. Сколько максимум пайков он может собрать? НОД(36, 48) = ?",
+    opts:["12","6","24","4"], ans:0,
+    fb:"✦ Верно! НОД(36, 48) = 12. Разложи: 36 = 12·3, 48 = 12·4. Наибольший общий делитель — 12.",
+    trap:"Ловушка ОГЭ: НОД — это НАИБОЛЬШИЙ делитель, а не просто любой. 6 тоже делитель, но не наибольший.",
+    hint:"Найди все делители 36 и 48, выбери наибольший общий.",
+    ref:"Натуральные числа"
+  },
+  {
+    topic:"Признак делимости на 3",
+    text:"<span class='hero-name'>Щелкун</span> патрулирует отсеки с номерами. Делится ли номер 2673 на 3?",
+    opts:["Да — сумма цифр 2+6+7+3=18, а 18 делится на 3","Нет — нечётное число","Да — заканчивается на 3","Нельзя определить без деления"], ans:0,
+    fb:"✦ Верно! Признак делимости на 3: сумма цифр делится на 3. 2+6+7+3=18, 18÷3=6 ✓",
+    trap:"Ловушка ОГЭ: «заканчивается на 3» — это признак делимости на... ничто конкретное. Признак делимости на 3 — только сумма цифр.",
+    hint:"Сложи все цифры числа. Если сумма делится на 3 — делится и всё число.",
+    ref:"Натуральные числа"
+  },
+  {
+    topic:"НОК",
+    text:"<span class='hero-name'>Дина</span> выходит на патруль каждые 4 часа, <span class='hero-name'>Элли</span> — каждые 6. Через сколько часов они выйдут вместе в первый раз? НОК(4, 6) = ?",
+    opts:["12","24","2","10"], ans:0,
+    fb:"✦ Верно! НОК(4, 6) = 12. Наименьшее общее кратное — наименьшее число, которое делится и на 4, и на 6.",
+    trap:"Ловушка ОГЭ: НОК ≠ произведению чисел (4·6=24). НОК(4,6) = 12, а не 24.",
+    hint:"Найди наименьшее число, которое делится и на 4, и на 6 без остатка.",
+    ref:"Натуральные числа"
+  },
+
+  // ── КВАДРАТНЫЕ УРАВНЕНИЯ ───────────────────────────
+  {
+    topic:"Дискриминант",
+    text:"<span class='hero-name'>Старший мозг</span> рассчитывает пути распространения заражения — задача сводится к уравнению x² − 5x + 6 = 0. Первый шаг — дискриминант. D = b² − 4ac = ?",
+    opts:["1","25","−24","49"], ans:0,
+    fb:"✦ Верно! D = (−5)² − 4·1·6 = 25 − 24 = 1. Корни: x = (5±1)/2, то есть x₁=3, x₂=2.",
+    trap:"Ловушка ОГЭ: b = −5, поэтому b² = (−5)² = 25, а не −25. Минус исчезает при возведении в квадрат.",
+    hint:"D = b²−4ac. Подставь a=1, b=−5, c=6. Осторожно со знаком b.",
+    ref:"Дискриминант"
+  },
+  {
+    topic:"Теорема Виета",
+    text:"<span class='hero-name'>Гейл</span> расшифровывает древний артефакт: два ключа — корни уравнения x² + bx + c = 0. Он знает x₁ = 2 и x₂ = 3. По теореме Виета c = x₁·x₂ = ?",
+    opts:["6","5","−5","−6"], ans:0,
+    fb:"✦ Верно! По теореме Виета: x₁+x₂ = −b и x₁·x₂ = c. Значит c = 2·3 = 6.",
+    trap:"Ловушка ОГЭ: c = произведение корней, b = минус сумма. Не перепутай: сумма = 5, но b = −5.",
+    hint:"Теорема Виета: c — это произведение корней. x₁·x₂ = ?",
+    ref:"Квадратные уравнения"
+  },
+  {
+    topic:"Нет корней — D < 0",
+    text:"<span class='hero-name'>Ламберт</span> решает уравнение x² + 2x + 5 = 0 и считает D = 4 − 20 = −16. Что это означает?",
+    opts:["Корней нет — при D < 0 уравнение не имеет решений","Один корень","Два корня","Нужно продолжать вычисления"], ans:0,
+    fb:"✦ Верно! D < 0 → корней нет. Это тоже правильный ответ на ОГЭ, не пытайся считать дальше.",
+    trap:"Ловушка ОГЭ: если D < 0, останавливайся — корней нет. Не пиши √(−16), это запрещено в вещественных числах.",
+    hint:"Знак D определяет количество корней. D < 0 означает что?",
+    ref:"Дискриминант"
+  },
+
+  // ── ДРОБНО-РАЦИОНАЛЬНЫЕ ────────────────────────────
+  {
+    topic:"ОДЗ — запрещённое значение",
+    text:"<span class='hero-name'>Кровавый Барон</span> делит трофеи по формуле 5/(x−3) = 2. Какое значение x запрещено ОДЗ?",
+    opts:["x ≠ 3","x ≠ 5","x ≠ 2","x ≠ 0"], ans:0,
+    fb:"✦ Верно! ОДЗ: знаменатель (x−3) ≠ 0, значит x ≠ 3. Само решение: x = 3.5 — не нарушает ОДЗ.",
+    trap:"Ловушка ОГЭ: ОДЗ определяется ДО решения. Запрещено то, что обнуляет знаменатель.",
+    hint:"Приравняй знаменатель к нулю: x−3 = 0. Что получается?",
+    ref:"Дробно-рациональные уравнения"
+  },
+  {
+    topic:"Посторонний корень",
+    text:"<span class='hero-name'>Эбби</span> вычисляет радиус патрульной зоны и решает (x−4)/(x²−16) = 0. Находит x = 4. Можно принять этот ответ?",
+    opts:["Нет — x=4 обнуляет знаменатель x²−16, это посторонний корень","Да, всё верно","Да, но с оговоркой","Нет, и ответов вообще нет"], ans:0,
+    fb:"✦ Верно! x²−16 = (x−4)(x+4). При x=4 знаменатель = 0 — делить нельзя. x=4 отбрасываем. Настоящий корень: x=−4.",
+    trap:"Ловушка ОГЭ: посторонний корень выглядит правильным — числитель тоже обнуляется. Но знаменатель важнее.",
+    hint:"Подставь x=4 в знаменатель x²−16. Что получается? Можно ли делить на ноль?",
+    ref:"Дробно-рациональные уравнения"
+  },
+  {
+    topic:"ОДЗ — корень принят",
+    text:"<span class='hero-name'>Джоэл</span> рассчитывает безопасную дистанцию: 6/x = 3. Находит x = 2. Нужно ли проверять ОДЗ и пройдёт ли x=2 проверку?",
+    opts:["Нужно — и x=2 проходит: знаменатель ≠ 0, ответ принят","Не нужно — ОДЗ только для сложных уравнений","x=2 нарушает ОДЗ, ответа нет","ОДЗ: x ≠ 3, значит x=2 под запретом"], ans:0,
+    fb:"✦ Верно! ОДЗ нужно проверять всегда. Здесь x ≠ 0 (знаменатель). x=2 ≠ 0, ответ принят.",
+    trap:"Ловушка ОГЭ: ОДЗ проверяют для ЛЮБОГО дробного уравнения, не только сложного.",
+    hint:"ОДЗ: знаменатель x ≠ 0. Нарушает ли x=2 это условие?",
+    ref:"Дробно-рациональные уравнения"
+  }
+];
+
+const extraQuestions2 = [
+
+  // ── ОБЫКНОВЕННЫЕ ДРОБИ ─────────────────────────────
+  {
+    topic:"Сложение дробей",
+    text:"<span class='hero-name'>Лютик</span> написал <span class='par'>Мадам Пармезан</span> 2/3 любовного сонета утром — вдохновение нахлынуло. Вечером добавил ещё 1/4. Какую часть сонета он написал за день?",
+    opts:["11/12","3/7","3/12","1/2"], ans:0,
+    fb:"✦ Верно! Мадам Пармезан оценила! 2/3 + 1/4 = 8/12 + 3/12 = 11/12. Приводим к общему знаменателю 12.",
+    trap:"Ловушка ОГЭ: нельзя складывать числители и знаменатели отдельно! 2+1=3, 3+4=7 → 3/7 — грубая ошибка.",
+    hint:"Приведи дроби к общему знаменателю, потом складывай только числители.",
+    ref:"Обыкновенные дроби"
+  },
+  {
+    topic:"Умножение дробей",
+    text:"<span class='hero-name'>Геральт</span> выпил 3/4 флакона зелья перед встречей с Трисс. Потом решил выпить ещё 2/3 от того, что осталось в флаконе. Какую часть полного флакона он выпил вторым глотком?",
+    opts:["1/6","1/4","1/2","2/3"], ans:0,
+    fb:"✦ Верно! Геральт рассчитал точно! Осталось: 1 − 3/4 = 1/4. Второй глоток: 2/3 · 1/4 = 2/12 = 1/6.",
+    trap:"Ловушка ОГЭ: «ещё 2/3» — это 2/3 от остатка, а не от полного флакона. Читай условие внимательно.",
+    hint:"Сначала найди, сколько осталось после первого глотка. Потом умножь на 2/3.",
+    ref:"Обыкновенные дроби"
+  },
+  {
+    topic:"Сравнение дробей",
+    text:"<span class='hero-name'>Астарион</span> предложил <span class='hero-name'>Шэдоухарт</span> пари: 5/8 или 3/5 — что больше? Шэдоухарт выиграла. Что она ответила?",
+    opts:["5/8 больше: 25/40 > 24/40","3/5 больше","Они равны","Нельзя сравнить без калькулятора"], ans:0,
+    fb:"✦ Верно! Шэдоухарт улыбается. 5/8 = 25/40, 3/5 = 24/40. 25 > 24, значит 5/8 > 3/5.",
+    trap:"Ловушка ОГЭ: нельзя сравнивать дроби напрямую по числителям. Нужен общий знаменатель.",
+    hint:"Приведи обе дроби к знаменателю 40. Потом сравни числители.",
+    ref:"Обыкновенные дроби"
+  },
+
+  // ── ДЕСЯТИЧНЫЕ ДРОБИ ───────────────────────────────
+  {
+    topic:"Перевод дроби в десятичную",
+    text:"<span class='hero-name'>Джоэл</span> отмерил 3/8 запаса топлива. <span class='hero-name'>Элли</span> хочет увидеть то же на счётчике в десятичном виде. 3 ÷ 8 = ?",
+    opts:["0.375","0.38","0.3","3.8"], ans:0,
+    fb:"✦ Верно! 3 ÷ 8 = 0.375. Делим в столбик: 3.000 ÷ 8 = 0.375. Элли смотрит на счётчик.",
+    trap:"Ловушка ОГЭ: не округляй без необходимости — 0.38 это уже не точный ответ.",
+    hint:"Раздели 3 на 8 в столбик. Добавляй нули после запятой пока не получишь точный ответ.",
+    ref:"Десятичные дроби"
+  },
+  {
+    topic:"Умножение на 100",
+    text:"<span class='hero-name'>Казуя</span> тренирует скорость реакции. Прибор показывает 0.047 секунды. Тренер умножает результат на 100 для протокола. Что получается?",
+    opts:["4.7","0.47","47","0.0047"], ans:0,
+    fb:"✦ Верно! 0.047 × 100 = 4.7. При умножении на 100 запятая сдвигается вправо на 2 позиции.",
+    trap:"Ловушка ОГЭ: запятая сдвигается вправо при умножении. 0.047 → 4.7, а не 47.",
+    hint:"При умножении на 100 перенеси запятую на 2 цифры вправо.",
+    ref:"Десятичные дроби"
+  },
+  {
+    topic:"Округление до десятых",
+    text:"<span class='hero-name'>Цири</span> рассчитала точность телепортации: прыжок = 2.7461 м. Маг-наставник просит округлить до десятых. Результат?",
+    opts:["2.7","2.8","2.74","3.0"], ans:0,
+    fb:"✦ Верно! 2.7461 → смотрим на сотые: цифра 4 < 5, значит отбрасываем → 2.7.",
+    trap:"Ловушка ОГЭ: при округлении до десятых смотришь на сотые (вторую цифру после запятой). 4 < 5 → оставляем 7, не увеличиваем.",
+    hint:"Округление до десятых: смотри на вторую цифру после запятой. Если < 5 — отбрасываем, если ≥ 5 — увеличиваем.",
+    ref:"Десятичные дроби"
+  },
+
+  // ── РАЦИОНАЛЬНЫЕ ЧИСЛА ─────────────────────────────
+  {
+    topic:"Модуль числа",
+    text:"<span class='hero-name'>Лютик</span> проиграл <span class='par'>Мадам Пармезан</span> пари и его счёт стал −3.5 монеты. Она требует вернуть долг. Сколько он должен — |−3.5| = ?",
+    opts:["3.5","-3.5","0","±3.5"], ans:0,
+    fb:"✦ Верно! Мадам Пармезан строга! |−3.5| = 3.5. Модуль — это расстояние от нуля, всегда неотрицательное число.",
+    trap:"Ловушка ОГЭ: модуль числа всегда ≥ 0. |−3.5| ≠ −3.5.",
+    hint:"Модуль — это расстояние от нуля на числовой оси. Расстояние не бывает отрицательным.",
+    ref:"Рациональные числа"
+  },
+  {
+    topic:"Умножение отрицательных",
+    text:"<span class='hero-name'>Астарион</span> считает ночные потери отряда: «минус три» раза по «минус четыре» человека каждый раз. (−3) · (−4) = ?",
+    opts:["12","−12","−7","7"], ans:0,
+    fb:"✦ Верно! Астарион мрачно улыбается. (−3)·(−4) = 12. Минус на минус даёт плюс.",
+    trap:"Ловушка ОГЭ: минус × минус = плюс. Минус × плюс = минус. Запомни как правило знаков.",
+    hint:"Два отрицательных множителя дают положительное произведение.",
+    ref:"Рациональные числа"
+  },
+  {
+    topic:"Сравнение отрицательных чисел",
+    text:"<span class='hero-name'>Элли</span> проверяет температуру в двух подвалах: −7°С и −3°С. В каком теплее и почему?",
+    opts:["В подвале с −3°С: на числовой оси −3 правее −7","В подвале с −7°С: большее число всегда теплее","Одинаково — оба отрицательные","Нельзя сравнить отрицательные температуры"], ans:0,
+    fb:"✦ Верно! Элли выбрала правильный подвал! −3 > −7, потому что −3 правее на числовой оси. Среди отрицательных больше то, что ближе к нулю.",
+    trap:"Ловушка ОГЭ: среди отрицательных чисел БОЛЬШЕ то, у которого меньше абсолютная величина. −3 > −7.",
+    hint:"Представь числовую ось. Какое из чисел −3 и −7 находится правее (ближе к нулю)?",
+    ref:"Рациональные числа"
+  },
+
+  // ── ВЕРОЯТНОСТЬ ────────────────────────────────────
+  {
+    topic:"Классическая вероятность",
+    text:"<span class='hero-name'>Старший мозг</span> управляет 5 красными, 3 синими и 2 зелёными споровыми капсулами. Одна активируется случайно. Вероятность, что синяя?",
+    opts:["3/10","3/5","1/3","3/8"], ans:0,
+    fb:"✦ Верно! P = m/n = 3/(5+3+2) = 3/10. Всего 10 капсул, синих — 3.",
+    trap:"Ловушка ОГЭ: в знаменателе — ВСЕ исходы (10), а не только похожие. Не пиши 3/5 или 3/8.",
+    hint:"Посчитай общее число капсул: 5+3+2. Потом считай вероятность.",
+    ref:"Теория вероятностей"
+  },
+  {
+    topic:"Вероятность противоположного события",
+    text:"<span class='hero-name'>Цири</span> знает: вероятность поразить монстра первым ударом = 0.8. Монстр загадочно ухмыляется. Вероятность, что она промахнётся?",
+    opts:["0.2","0.8","1.8","0.08"], ans:0,
+    fb:"✦ Верно! Монстр ухмылялся зря! P(промах) = 1 − 0.8 = 0.2. Сумма вероятностей противоположных событий = 1.",
+    trap:"Ловушка ОГЭ: P(противоположное) = 1 − P(событие). Не вычитай из 0 и не умножай.",
+    hint:"Вероятность попасть + вероятность промахнуться = 1. Найди второе.",
+    ref:"Теория вероятностей"
+  },
+  {
+    topic:"Равновозможные исходы",
+    text:"<span class='hero-name'>Халсин</span> может принять облик медведя, волка, орла или лиса — и все одинаково вероятны. <span class='hero-name'>Лютик</span> загадал один облик. Вероятность угадать?",
+    opts:["1/4","1/3","4","1/2"], ans:0,
+    fb:"✦ Верно! Лютик рискнул. P = 1/4. Всего 4 равновозможных исхода, благоприятный — 1.",
+    trap:"Ловушка ОГЭ: вероятность — это дробь от 0 до 1. Ответ «4» — это число исходов, не вероятность.",
+    hint:"P = число благоприятных исходов / число всех равновозможных исходов.",
+    ref:"Теория вероятностей"
+  },
+
+  // ── ОКРУЖНОСТЬ — новые аспекты ─────────────────────
+  {
+    topic:"Хорда через центр",
+    text:"<span class='hero-name'>Шэдоухарт</span> проводит хорду через центр магической окружности радиусом 7. Какова длина этой хорды?",
+    opts:["14","7","7π","21"], ans:0,
+    fb:"✦ Верно! Шэдоухарт точна. Хорда через центр — это диаметр. d = 2r = 2·7 = 14.",
+    trap:"Ловушка ОГЭ: хорда через центр = диаметр = 2r. Не путай с радиусом.",
+    hint:"Хорда, проходящая через центр окружности — как она называется? Чему равна?",
+    ref:"Окружности"
+  },
+  {
+    topic:"Центральный угол через вписанный",
+    text:"<span class='hero-name'>Некромант</span> начертил загадочный символ: вписанный угол = 35°. Центральный угол, опирающийся на ту же дугу, равен...?",
+    opts:["70°","35°","17.5°","140°"], ans:0,
+    fb:"✦ Верно! Центральный угол = 2 × вписанный = 2·35° = 70°. Центральный вдвое больше вписанного на одной дуге.",
+    trap:"Ловушка ОГЭ: центральный БОЛЬШЕ вписанного вдвое. Частая путаница — делят вместо умножения.",
+    hint:"Вписанный = ½ центрального. Значит центральный = 2 × вписанный.",
+    ref:"Окружности"
+  },
+  {
+    topic:"Площадь круга через диаметр",
+    text:"<span class='hero-name'>Гейл</span> начертил магический круг диаметром 6 м для защиты лагеря. Площадь круга (через π)?",
+    opts:["9π м²","6π м²","36π м²","3π м²"], ans:0,
+    fb:"✦ Верно! Лагерь защищён! S = πr². Радиус = d/2 = 3. S = π·3² = 9π м².",
+    trap:"Ловушка ОГЭ: дан диаметр, а в формуле нужен радиус r = d/2 = 3. Не подставляй 6 вместо 3!",
+    hint:"Радиус = диаметр ÷ 2. Потом применяй S = πr².",
+    ref:"Окружности"
+  }
+];
+
+const easterEggs = [
+  {
+    easter:true, emoji:"🌿",
+    topic:"Внезапный привал",
+    text:"<span class='hero-name'>Халсин</span> материализовался из ниоткуда, протягивает тебе бутерброд с козьим сыром и смотрит добрыми глазами. «Ты заслужил». Что делаешь?",
+    opts:["Берёшь с благодарностью — сыр вкусный","Отказываешься — на диете","Спрашиваешь, есть ли без корки","Плачешь от внезапной заботы"], ans:0,
+    fb:"✦ Правильный выбор! Халсин удовлетворённо кивает и превращается в медведя. Бутерброд был с козьим сыром. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"✨",
+    topic:"Магическое вторжение",
+    text:"Посреди марафона <span class='hero-name'>Гейл</span> выглядывает из случайного портала, подмигивает и шлёт воздушный поцелуй. «Ты справляешься великолепно». Как реагируешь?",
+    opts:["Ловишь — не каждый день такое бывает","Делаешь вид, что не заметил","Отправляешь поцелуй обратно","Спрашиваешь, не взорвётся ли портал"], ans:0,
+    fb:"✦ Мудро! Гейл доволен. Портал закрывается. Стабильность магии — 100%. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"📰",
+    topic:"Экстренный выпуск",
+    text:"<span class='hero-name'>Лютик</span> врывается с лютней: «Экстренные новости! <span class='par'>Мадам Пармезан</span> узнала твой результат и упала с дивана от восторга. Лютик упал следом — от солидарности». Что делаешь?",
+    opts:["Продолжаешь — Пармезан в надёжных руках Лютика","Идёшь проверять диван","Сочиняешь ответную балладу","Требуешь фотодоказательств"], ans:0,
+    fb:"✦ Верно! Лютик играет туш. Мадам Пармезан встала и выглядит довольной. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🦇",
+    topic:"Ночной визит",
+    text:"<span class='hero-name'>Астарион</span> заглянул из-за угла. «Не думал, что ты зайдёшь так далеко». Долгая пауза. «Это комплимент». Что отвечаешь?",
+    opts:["«Спасибо, Астарион» — принимаешь с достоинством","Краснеешь","Делаешь вид, что так и должно быть","Спрашиваешь, следил ли он давно"], ans:0,
+    fb:"✦ Астарион одобрительно исчезает в темноте. Это лучшее, чего от него можно ожидать. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🧟",
+    topic:"Необъяснимая поддержка",
+    text:"<span class='hero-name'>Щелкун</span> подошёл, щёлкнул три раза и сел рядом. Кажется, он болеет за тебя. Смотрит на экран. Щёлкает одобрительно. Что происходит?",
+    opts:["Принимаешь поддержку — болельщики нужны всем","Убегаешь из марафона","Щёлкаешь в ответ","Даёшь ему задачку на вероятность"], ans:0,
+    fb:"✦ Щелкун щёлкнул ещё раз — по-видимому, радостно — и растворился в темноте. Даже монстры уважают тех, кто решает ОГЭ. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"⚡",
+    topic:"Телепортация не туда",
+    text:"<span class='hero-name'>Цири</span> телепортировалась прямо перед тобой. «Ой. Не туда». Смотрит на экран. Читает вопрос. Молчит секунду. «Кстати... это правильный ответ». Что делаешь?",
+    opts:["Благодаришь и отмечаешь правильный","Делаешь вид, что сам знал","Спрашиваешь, может ли она остаться до конца марафона","Уточняешь, уверена ли она"], ans:0,
+    fb:"✦ Цири кивает, телепортируется обратно. Иногда помощь приходит с неожиданной стороны. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🔥",
+    topic:"Молчаливое одобрение",
+    text:"<span class='hero-name'>Казуя</span> вошёл. Посмотрел на твой прогресс. Медленно кивнул. Вышел. Это была высшая оценка. Что чувствуешь?",
+    opts:["Гордость — Казуя не кивает просто так","Замешательство — кто это вообще был","Желание немедленно сделать джаглинг","Ничего — ты в потоке"], ans:0,
+    fb:"✦ Где-то вдали звучит тема Mishima. Казуя доволен. Продолжай! 🥳",
+  }
+];
+
+const allMarathonQuestions = [...q1Questions, ...q2Questions, ...q3Questions, ...q4Questions, ...bonusQuestions, ...extraQuestions, ...extraQuestions2, ...easterEggs];
+
+// Determine source tag for each question
+function getSrc(q) {
+  if (q.easter)                   return {cls:'src-egg',   name:"🥚 Пасхалка"};
+  if (q1Questions.includes(q))    return {cls:'src-q1',    name:"Квест 1 · Халсин"};
+  if (q2Questions.includes(q))    return {cls:'src-q2',    name:"Квест 2 · Элли"};
+  if (q3Questions.includes(q))    return {cls:'src-q3',    name:"Квест 3 · Гейл"};
+  if (q4Questions.includes(q))    return {cls:'src-q4',    name:"Квест 4 · Аретуза"};
+  if (bonusQuestions.includes(q)) return {cls:'src-bonus', name:"Бонус · Лютик"};
+  return {cls:'src-q1', name:"—"};
+}
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, correct, errors, answered;
+let shuffledOpts=[], correctIdx=0;
+
+function init() {
+  // Разделяем обычные вопросы и пасхалки
+  const regular = shuffle([...allMarathonQuestions].filter(q => !q.easter));
+  const eggs    = shuffle([...easterEggs]);
+
+  // Равномерно вставляем пасхалки через каждые N вопросов
+  const step = Math.floor(regular.length / eggs.length);
+  const mixed = [];
+  let eggIdx = 0;
+  for (let i = 0; i < regular.length; i++) {
+    mixed.push(regular[i]);
+    // Вставляем пасхалку после каждого step-го вопроса, начиная с середины интервала
+    if (eggIdx < eggs.length && (i + 1) % step === Math.floor(step / 2)) {
+      mixed.push(eggs[eggIdx++]);
+    }
+  }
+  // Если остались непоставленные пасхалки — добавляем в конец (страховка)
+  while (eggIdx < eggs.length) mixed.push(eggs[eggIdx++]);
+
+  questions = mixed;
+  cur=0; correct=0; errors=0; eggsFound=0; answered=false;
+  updateStats();
+}
+
+let eggsFound = 0;
+init();
+
+// Обновляем счётчик монстров на экране вступления
+const mc = document.getElementById('monster-count');
+if (mc) mc.textContent = questions.length;
+
+function startMarathon() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+}
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt');
+
+function updateStats() {
+  document.getElementById('s-ok').textContent   = correct;
+  document.getElementById('s-err').textContent  = errors;
+  document.getElementById('s-left').textContent = Math.max(0, questions.length - cur);
+  document.getElementById('s-egg').textContent  = eggsFound + ' / 7';
+}
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts = idx.map(i => q.opts[i]);
+  correctIdx   = idx.indexOf(q.ans);
+
+  qcard.classList.remove('q-animate', 'is-egg');
+  void qcard.offsetWidth;
+  qcard.classList.add('q-animate');
+  if (q.easter) qcard.classList.add('is-egg');
+
+  const src = getSrc(q);
+  const topic = q.topic || q.type || '';
+  qheader.innerHTML = `<span class="q-src ${src.cls}">${src.name}</span><span class="q-topic">${topic}</span><span class="q-num">${cur+1} / ${questions.length}</span>`;
+
+  const eggBanner = q.easter ? `<div class="egg-banner">${q.emoji || '🥚'}</div>` : '';
+  qtext.innerHTML = eggBanner + q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className='feedback-box'; qfb.innerHTML='';
+  qnext.className='next-btn';
+
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  updateStats();
+}
+
+function answer(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[correctIdx].classList.add('correct');
+
+  if (i === correctIdx) {
+    correct++;
+    if (q.easter) {
+      eggsFound++;
+      qfb.innerHTML = q.fb + `<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 7</span>`;
+      qfb.className = 'feedback-box ok';
+    } else {
+      qfb.textContent = '✓ Верно!';
+      qfb.className = 'feedback-box ok';
+    }
+  } else {
+    errors++;
+    btns[i].classList.add('wrong');
+    if (q.easter) {
+      eggsFound++;
+      qfb.innerHTML = `Тоже неплохо 😄 ${q.fb}<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 7</span>`;
+      qfb.className = 'feedback-box ok';
+    } else {
+      qfb.textContent = '✗ Ошибка.';
+      qfb.className = 'feedback-box fail';
+    }
+  }
+
+  qnext.className = 'next-btn show';
+  qnext.textContent = cur < questions.length-1 ? 'Дальше →' : 'Результат →';
+  updateStats();
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results'); res.classList.add('show');
+  const total = questions.length;
+  const pct = Math.round(correct/total*100);
+  document.getElementById('rscore').textContent = correct;
+  document.getElementById('rtotal').textContent = `из ${total} вопросов`;
+  document.getElementById('rbreak').innerHTML =
+    `<span class="rb rb-ok">✓ ${correct} верно</span>` +
+    `<span class="rb rb-fail">✗ ${errors} ошибок</span>` +
+    `<span class="rb rb-pct">${pct}% точность</span>` +
+    `<span class="rb" style="background:rgba(245,158,11,0.12);color:#f59e0b">🥚 ${eggsFound} / 7 секретов</span>`;
+
+  let emoji, title, rank;
+  if (pct >= 90)      { emoji='🏆'; title='Легенда ОГЭ!';           rank='Все темы пройдены на отлично'; }
+  else if (pct >= 75) { emoji='⚔️';  title='Уверенный результат';    rank='Большинство тем под контролем'; }
+  else if (pct >= 60) { emoji='🎯';  title='Хороший уровень';        rank='Есть над чем поработать'; }
+  else if (pct >= 45) { emoji='📖';  title='Нужно повторить';        rank='Вернись к слабым квестам'; }
+  else                { emoji='🌱';  title='Начало пути';             rank='Начни с шпор в каждом квесте'; }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rrank').textContent  = rank;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  eggsFound = 0;
+  init();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('intro-screen').style.display = 'block';
+  document.getElementById('quiz-area').style.display = 'none';
+  const mc = document.getElementById('monster-count');
+  if (mc) mc.textContent = questions.length;
+});
+
+// Марафон стартует по кнопке на экране вступления
+</script>
+</body>
+</html>
