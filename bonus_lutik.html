@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лютик и Мадам Пармезан: Хаки ОГЭ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:   #fdf6e9;
+    --paper:   #f7eedb;
+    --gold:    #c8962a;
+    --gold2:   #e8b84b;
+    --rose:    #c0435a;
+    --rose2:   #e8687e;
+    --ink:     #2a1f14;
+    --muted:   #7a6a58;
+    --border:  rgba(200,150,42,0.3);
+    --border2: rgba(200,150,42,0.6);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,150,42,0.08) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(200,150,42,0.06) 39px, rgba(200,150,42,0.06) 40px);
+    color: var(--ink);
+    font-family: 'Lora', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* MASTHEAD */
+  .masthead {
+    text-align: center;
+    padding: 40px 0 8px;
+    border-bottom: 3px double var(--border2);
+    margin-bottom: 0;
+    position: relative;
+  }
+  .masthead-kicker {
+    font-family: 'Lora', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 7vw, 64px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .masthead-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 2.5vw, 20px);
+    color: var(--rose);
+    margin-bottom: 14px;
+  }
+  .masthead-rule {
+    display: flex; align-items: center; gap: 12px; margin: 12px 0;
+  }
+  .masthead-rule::before, .masthead-rule::after {
+    content: ''; flex: 1; height: 1px; background: var(--border2);
+  }
+  .masthead-ornament { color: var(--gold); font-size: 18px; letter-spacing: 6px; }
+
+  /* BYLINE STRIP */
+  .byline-strip {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Lora', serif;
+    margin-bottom: 28px;
+  }
+
+  /* INTRO BOX */
+  .intro-box {
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    padding: 20px 24px;
+    background: var(--paper);
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .intro-box::before {
+    content: '❝';
+    position: absolute; top: -14px; left: 16px;
+    font-size: 32px; color: var(--gold); line-height: 1;
+    background: var(--paper); padding: 0 4px;
+  }
+  .intro-lead {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .intro-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* STAKES */
+  .stakes-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 28px; justify-content: center;
+  }
+  .stake-pill {
+    font-size: 11px; font-weight: 600;
+    padding: 5px 14px; border-radius: 20px;
+    border: 1px solid;
+  }
+  .sp-s { background: rgba(200,150,42,0.12); color: #7a4e00; border-color: rgba(200,150,42,0.4); }
+  .sp-a { background: rgba(192,67,90,0.08);  color: var(--rose); border-color: rgba(192,67,90,0.3); }
+  .sp-b { background: rgba(42,31,20,0.06);   color: var(--muted); border-color: rgba(42,31,20,0.2); }
+  .sp-c { background: rgba(200,150,42,0.06); color: var(--muted); border-color: var(--border); }
+
+  /* PROGRESS */
+  .progress-wrap {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .progress-bar-bg {
+    flex: 1; height: 4px; background: var(--border);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--rose));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-counter { font-size: 12px; color: var(--muted); font-family: 'Lora', serif; min-width: 50px; text-align: right; }
+  .score-badge { font-size: 12px; color: var(--gold); font-weight: 600; min-width: 70px; }
+
+  /* QUESTION CARD */
+  .q-card {
+    border: 1px solid var(--border2);
+    background: var(--paper);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .q-header {
+    background: var(--ink);
+    padding: 8px 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .q-scene {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold2);
+    font-family: 'Lora', serif;
+  }
+  .q-type-badge {
+    font-size: 10px; padding: 2px 8px; border-radius: 10px;
+    background: rgba(200,150,42,0.2); color: var(--gold2);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .q-body { padding: 22px 22px 18px; }
+
+  .q-situation {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    border-left: 2px solid var(--gold);
+    padding-left: 10px;
+    line-height: 1.5;
+  }
+
+  .q-text {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: 18px;
+    font-family: 'Lora', serif;
+  }
+  .q-text .lut { font-weight: 600; color: var(--rose); }
+  .q-text .par { font-weight: 600; color: var(--gold); }
+  .q-text .hack { font-weight: 700; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt-btn {
+    background: var(--cream);
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    padding: 11px 16px;
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.14s, border-color 0.14s, transform 0.1s;
+    display: flex; align-items: flex-start; gap: 10px;
+    line-height: 1.5;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: var(--paper);
+    border-color: var(--gold);
+    transform: translateX(4px);
+  }
+  .opt-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--gold); min-width: 18px; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .opt-btn.correct { border-color: #5a8a3a; background: rgba(90,138,58,0.08); color: #2d4a1a; }
+  .opt-btn.correct .opt-letter { color: #5a8a3a; }
+  .opt-btn.wrong   { border-color: var(--rose); background: rgba(192,67,90,0.07); color: var(--rose); }
+  .opt-btn.wrong   .opt-letter { color: var(--rose); }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 14px; padding: 14px 18px;
+    border-radius: 2px; font-size: 14px; line-height: 1.7;
+    display: none; animation: fadeIn 0.25s ease;
+    font-family: 'Lora', serif;
+  }
+  .feedback-box.ok {
+    background: rgba(90,138,58,0.07);
+    border: 1px solid rgba(90,138,58,0.3);
+    color: #2d4a1a; display: block;
+  }
+  .feedback-box.fail {
+    background: rgba(192,67,90,0.07);
+    border: 1px solid rgba(192,67,90,0.25);
+    color: #7a1a2a; display: block;
+  }
+  .fb-hack {
+    display: block; margin-top: 10px;
+    background: rgba(200,150,42,0.1);
+    border: 1px solid var(--border2);
+    color: #7a4e00;
+    border-radius: 2px; padding: 8px 12px;
+    font-size: 13px; font-weight: 600;
+  }
+  .fb-hack::before { content: '✦ Хак ОГЭ: '; }
+  .fb-retry { display: block; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--rose); }
+
+  .q-footer {
+    padding: 12px 22px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+  .next-btn {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    background: var(--ink); color: var(--cream);
+    border: none; padding: 10px 24px;
+    cursor: pointer; transition: opacity 0.15s;
+    display: none;
+  }
+  .next-btn:hover { opacity: 0.8; }
+  .next-btn.show { display: block; }
+
+  /* RESULTS */
+  .results {
+    display: none; text-align: center; padding: 50px 20px;
+    animation: fadeIn 0.4s ease;
+  }
+  .results.show { display: block; }
+  .results-ornament { font-size: 48px; margin-bottom: 12px; }
+  .results-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 900; color: var(--ink);
+    line-height: 1.1; margin-bottom: 10px;
+  }
+  .results-score {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 12vw, 88px);
+    font-weight: 900; color: var(--gold);
+    line-height: 1; margin: 12px 0 4px;
+  }
+  .results-of { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .results-story {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 16px; line-height: 1.7;
+    color: var(--ink); max-width: 480px;
+    margin: 0 auto 20px;
+    padding: 18px 22px;
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+  }
+  .results-rank {
+    font-size: 14px; font-weight: 600;
+    display: inline-block; margin-bottom: 28px;
+    padding: 8px 20px; border: 1px solid var(--border2);
+    background: var(--paper);
+  }
+  .restart-btn {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    background: var(--ink); color: var(--cream);
+    border: none; padding: 12px 36px;
+    cursor: pointer; transition: opacity 0.15s;
+    display: block; margin: 0 auto;
+  }
+  .restart-btn:hover { opacity: 0.8; }
+
+  /* NAV */
+  .quests-nav { margin-top: 56px; padding-top: 28px; border-top: 2px double var(--border2); }
+  .quests-nav-title {
+    font-family: 'Lora', serif; font-size: 10px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px; text-align: center;
+  }
+  .quests-pills { display: flex; flex-direction: column; gap: 8px; }
+  .quest-pill {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper); border: 1px solid var(--border);
+    padding: 12px 16px; text-decoration: none; color: var(--ink);
+    transition: border-color 0.15s, transform 0.12s;
+    border-radius: 2px;
+  }
+  .quest-pill:hover { border-color: var(--gold); transform: translateX(3px); }
+  .qp-num {
+    width: 28px; height: 28px; border-radius: 2px;
+    font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .qp-info { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+  .qp-name { font-size: 14px; font-weight: 600; font-family: 'Lora', serif; }
+  .qp-sub { font-size: 11px; color: var(--muted); font-family: 'Lora', serif; }
+  .qp-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 2px 8px;
+    border: 1px solid var(--border); color: var(--muted);
+    background: var(--cream); white-space: nowrap;
+  }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .q-animate { animation: fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-kicker">Еженедельный вестник · Хаки выживания на ОГЭ</div>
+    <div class="masthead-title">Лютик &<br>Мадам Пармезан</div>
+    <div class="masthead-sub">Роман, уравнения и экзаменационные советы</div>
+    <div class="masthead-rule"><span class="masthead-ornament">✦ ✦ ✦</span></div>
+  </div>
+
+  <div class="byline-strip">
+    Автор: Лютик из Риссберга · Редактор: Мадам Пармезан · 15 вопросов на здравый смысл
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <p class="intro-lead">Когда всё забыто, Йеннифэр недоступна, а экзамен через час...</p>
+    <p class="intro-body">Лютик, великий бард и хронический двоечник, остался один на один с ОГЭ. В его жизни появилась Мадам Пармезан — загадочная особа с большим опытом выживания на экзаменах. Вместе они открыли главную тайну математики: иногда голова важнее формул. Пройди тест и узнай, какие хаки спасут тебя, если ты растерялся.</p>
+  </div>
+
+  <div class="stakes-row">
+    <span class="stake-pill sp-s">13–15 ✦ Лютик сдал на отлично</span>
+    <span class="stake-pill sp-a">10–12 ✦ Пармезан гордится</span>
+    <span class="stake-pill sp-b">6–9 ✦ Тройка с боем</span>
+    <span class="stake-pill sp-c">0–5 ✦ Пересдача в сентябре</span>
+  </div>
+
+  <div id="quiz-area">
+    <div class="progress-wrap">
+      <span class="score-badge" id="score-disp">✦ 0 верно</span>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="qbar"></div></div>
+      <span class="progress-counter" id="qcnt">1 / 15</span>
+    </div>
+
+    <div class="q-card q-animate" id="qcard">
+      <div class="q-header" id="qheader"></div>
+      <div class="q-body">
+        <div class="q-situation" id="qsit"></div>
+        <div class="q-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="q-footer">
+        <button class="next-btn" id="qnext">Следующий совет →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-ornament" id="remoji"></div>
+    <div class="results-headline" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-of" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Перечитать роман заново</button>
+  </div>
+
+  <!-- NAV -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">— Все квесты серии —</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="triangles_quiz.html"><span class="qp-num" style="background:#d94f8a;color:#fff">1</span><span class="qp-info"><span class="qp-name">Халсин в окружении</span><span class="qp-sub">Геометрия треугольников</span></span><span class="qp-badge">← Главная</span></a>
+      <a class="quest-pill" href="quest2_ellie.html"><span class="qp-num" style="background:#2d6a2d;color:#fff">2</span><span class="qp-info"><span class="qp-name">Элли против щелкунов</span><span class="qp-sub">Функции и графики</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest3_gale.html"><span class="qp-num" style="background:#7c3aed;color:#fff">3</span><span class="qp-info"><span class="qp-name">Проклятые предметы</span><span class="qp-sub">Уравнения и неравенства</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest4_aretuza.html"><span class="qp-num" style="background:#b45309;color:#fff">4</span><span class="qp-info"><span class="qp-name">Открытый экзамен в Аретузе</span><span class="qp-sub">Формулы и свойства</span></span><span class="qp-badge"></span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    scene:"Явление первое",
+    type:"Хак на панику",
+    sit:"Лютик вошёл в аудиторию. На него смотрят 30 человек. Мадам Пармезан шепчет с соседнего ряда.",
+    text:"<span class='lut'>Лютик</span> открыл вариант и увидел задачу, которую не понимает вообще. Что делает умный человек?",
+    opts:["Пропускает, решает то, что знает, и возвращается в конце","Сидит над ней до победного, ведь сдаваться нельзя","Переписывает условие красиво — авось проверяющий оценит","Рисует Мадам Пармезан на полях"], ans:0,
+    fb:"✦ Верно! <span class='lut'>Лютик</span> перешёл к следующей задаче и вернулся. Хак: в ОГЭ 26 заданий. Сначала реши все лёгкие — набери гарантированные баллы, потом атакуй сложные.",
+    hack:"Не залипай на одной задаче. Лёгкое → сложное, не наоборот.",
+    hint:"Что умнее — застрять на одном или набрать много лёгких баллов?",
+  },
+  {
+    scene:"Явление второе",
+    type:"Хак на формулы",
+    sit:"Мадам Пармезан протянула Лютику листок со справочными материалами.",
+    text:"<span class='lut'>Лютик</span> забыл формулу дискриминанта. Что делать?",
+    opts:["Открыть справочник — он выдаётся на ОГЭ вместе с вариантом","Паниковать и вспоминать из глубин памяти","Написать любую формулу и надеяться","Спросить у Мадам Пармезан"], ans:0,
+    fb:"✦ Верно! На ОГЭ выдают справочник с формулами — квадратные уравнения, прогрессии, площади. Многое не нужно знать наизусть!",
+    hack:"Справочник — твой легальный шпаргалка. Изучи его содержание заранее, чтобы знать, что там есть.",
+    hint:"На ОГЭ есть официальный справочник с формулами. Им можно пользоваться.",
+  },
+  {
+    scene:"Явление третье",
+    type:"Хак на проверку",
+    sit:"Мадам Пармезан наблюдает, как Лютик записывает ответ.",
+    text:"<span class='lut'>Лютик</span> получил ответ x = −437 в задаче про длину дороги. Что это означает?",
+    opts:["Где-то ошибка — длина не может быть отрицательной","Так бывает, просто пишем ответ","Дорога идёт в обратном направлении","Мадам Пармезан тоже так получила, значит верно"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> кивает одобрительно. Хак: всегда проверяй ответ здравым смыслом. Длина, вес, площадь, вероятность — не могут быть отрицательными.",
+    hack:"Проверяй смысл ответа. Отрицательная длина, вероятность > 1 — сигнал пересчитать.",
+    hint:"Подумай: может ли длина дороги быть отрицательной?",
+  },
+  {
+    scene:"Явление четвёртое",
+    type:"Хак на время",
+    sit:"До конца экзамена 20 минут. Лютик решил 20 задач из 26.",
+    text:"<span class='lut'>Лютик</span> смотрит на часы. 6 задач не решены. Что делать в оставшиеся 20 минут?",
+    opts:["Вернуться к лёгким нерешённым, затем попробовать угадать остальные — пустой ответ точно 0 баллов","Ничего не делать — устал","Переписать уже решённые красивее","Написать Мадам Пармезан записку с объяснением ситуации"], ans:0,
+    fb:"✦ Верно! В ОГЭ нет штрафа за неверный ответ. Пустой ответ — гарантированный ноль. Угаданный — шанс на балл.",
+    hack:"Никогда не оставляй пустые ответы. Угадай — шанс 25%. Пустой — шанс 0%.",
+    hint:"Что лучше: пустой ответ или угаданный из 4 вариантов?",
+  },
+  {
+    scene:"Явление пятое",
+    type:"Хак на подстановку",
+    sit:"Мадам Пармезан шепчет: «Когда не знаешь — подставляй».",
+    text:"<span class='lut'>Лютик</span> не может решить уравнение алгебраически. Что можно попробовать в тестовой части?",
+    opts:["Подставить варианты ответов в уравнение и проверить, какой подходит","Решать методом страданий","Написать «не знаю» и попросить сочувствия","Переименовать x в «Пармезан» для вдохновения"], ans:0,
+    fb:"✦ Верно! Хак подстановки: в тестовой части есть 4 варианта. Подставь каждый в уравнение — правильный сойдётся. Быстрее, чем решать!",
+    hack:"В тестовой части можно подставить варианты ответов прямо в задачу. Быстро и надёжно.",
+    hint:"Варианты ответов уже написаны. Можно проверить каждый, не решая уравнение.",
+  },
+  {
+    scene:"Явление шестое",
+    type:"Хак на задачи с текстом",
+    sit:"Лютик перечитывает условие уже в пятый раз.",
+    text:"<span class='lut'>Лютик</span> не понимает задачу с текстом. Что сделает умный бард?",
+    opts:["Нарисует схему или таблицу — визуализирует условие","Прочитает ещё раз, только медленнее и с выражением","Напишет, что задача некорректна","Спросит у Мадам Пармезан, но она из другой аудитории"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> одобряет. Схема или таблица превращает запутанный текст в понятную картинку. Это работает для задач на движение, работу, проценты.",
+    hack:"Не можешь понять текст — нарисуй схему. Руки помогают голове.",
+    hint:"Как визуализация помогает понять сложный текст?",
+  },
+  {
+    scene:"Явление седьмое",
+    type:"Хак на геометрию",
+    sit:"Мадам Пармезан достала карандаш и провела линию.",
+    text:"<span class='lut'>Лютик</span> застрял на геометрической задаче. <span class='par'>Мадам Пармезан</span> говорит: «Дорисуй». Что это значит?",
+    opts:["Провести вспомогательную линию — высоту, биссектрису или медиану","Нарисовать Лютика рядом с треугольником для масштаба","Обвести фигуру потолще","Дорисовать сердечко"], ans:0,
+    fb:"✦ Верно! Вспомогательная линия — главный хак геометрии. Высота из вершины делит сложный треугольник на два простых прямоугольных.",
+    hack:"Застрял в геометрии — проведи высоту карандашом. Сложное становится простым.",
+    hint:"Какая вспомогательная линия поможет разбить сложный треугольник на простые?",
+  },
+  {
+    scene:"Явление восьмое",
+    type:"Хак на вычисления",
+    sit:"Лютик насчитал 7.000000001 и завис.",
+    text:"В задаче про вероятность <span class='lut'>Лютик</span> получил P = 1.2. <span class='par'>Мадам Пармезан</span> смеётся. Почему?",
+    opts:["Вероятность не может быть больше 1 — где-то ошибка","Всё нормально, иногда бывает","Это означает, что событие произойдёт 1.2 раза","Мадам Пармезан смеётся без причины, это её стиль"], ans:0,
+    fb:"✦ Верно! Вероятность всегда от 0 до 1. P > 1 или P < 0 — гарантированная ошибка в вычислениях. Ищи, где напутал.",
+    hack:"Вероятность: 0 ≤ P ≤ 1. Сумма углов треугольника = 180°. Длина > 0. Это маяки для проверки.",
+    hint:"Каковы границы вероятности?",
+  },
+  {
+    scene:"Явление девятое",
+    type:"Хак на тройки",
+    sit:"Мадам Пармезан нарисовала три числа на полях.",
+    text:"В задаче на теорему Пифагора стороны треугольника 5 и 12. <span class='lut'>Лютик</span> тянется к калькулятору. <span class='par'>Мадам Пармезан</span> останавливает его. Зачем?",
+    opts:["Потому что 5-12-13 — тройка Пифагора, третья сторона = 13, считать не нужно","Потому что калькулятор сломан","Потому что Лютику нельзя доверять технику","Потому что она хочет сама посчитать"], ans:0,
+    fb:"✦ Верно! Тройки Пифагора — чит-коды. 3-4-5, 5-12-13, 8-15-17. Видишь два числа из тройки — третье известно мгновенно.",
+    hack:"Выучи тройки Пифагора: 3-4-5, 5-12-13, 8-15-17 и их кратные. Экономишь минуты.",
+    hint:"Что такое тройки Пифагора и зачем их знать?",
+  },
+  {
+    scene:"Явление десятое",
+    type:"Хак на знак",
+    sit:"Лютик написал ответ и гордо поставил точку.",
+    text:"<span class='lut'>Лютик</span> решил неравенство и получил x > −3. Он разделил на −2 и не поменял знак. <span class='par'>Мадам Пармезан</span> качает головой. Почему?",
+    opts:["При делении на отрицательное число знак неравенства меняется на противоположный","Мадам Пармезан просто придирается","Знак меняется только при умножении, не делении","Всё правильно, она ошибается"], ans:0,
+    fb:"✦ Верно! Главная ловушка неравенств: делишь или умножаешь на отрицательное — знак переворачивается. > становится <. Самая частая ошибка ОГЭ!",
+    hack:"Делишь на минус — переворачивай знак. Это не баг, это правило.",
+    hint:"Что происходит со знаком неравенства при умножении/делении на отрицательное число?",
+  },
+  {
+    scene:"Явление одиннадцатое",
+    type:"Хак на дробные уравнения",
+    sit:"Мадам Пармезан строго смотрит поверх очков.",
+    text:"<span class='lut'>Лютик</span> решил дробное уравнение и нашёл x = 3. Но в знаменателе стоит (x − 3). Ответ верный?",
+    opts:["Нет — x=3 обнуляет знаменатель, это посторонний корень, его нельзя принять","Да, всё отлично","Да, если очень хочется","Нет, но можно написать в скобках «почти верно»"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> удовлетворена. Посторонний корень — корень, который обнуляет знаменатель. Всегда проверяй найденные корни в ОДЗ!",
+    hack:"После решения дробного уравнения — подставь ответ в знаменатель. Если ноль — выброси этот корень.",
+    hint:"Что случится, если подставить x=3 в знаменатель (x−3)?",
+  },
+  {
+    scene:"Явление двенадцатое",
+    type:"Хак на задачи с графиком",
+    sit:"Лютик смотрит на график и видит только линии.",
+    text:"<span class='lut'>Лютик</span> видит на графике параболу, открытую вниз. Что это говорит о коэффициенте a?",
+    opts:["a < 0 — коэффициент при x² отрицательный","a > 0 — ветви вниз означают положительный a","a = 0 — нет разницы","Лютик не разбирается в параболах"], ans:0,
+    fb:"✦ Верно! Хак чтения графика: ветви вверх → a > 0, ветви вниз → a < 0. Смотришь на рисунок — уже знаешь знак коэффициента.",
+    hack:"Парабола вверх = a плюс. Парабола вниз = a минус. Запомни как улыбку и грусть.",
+    hint:"Какой знак a даёт параболу с ветвями вниз?",
+  },
+  {
+    scene:"Явление тринадцатое",
+    type:"Хак на площадь",
+    sit:"Мадам Пармезан рисует треугольник и многозначительно смотрит.",
+    text:"<span class='lut'>Лютик</span> посчитал площадь треугольника как основание × высота и получил 96. <span class='par'>Мадам Пармезан</span> вздыхает. В чём ошибка?",
+    opts:["Забыл поделить на 2 — формула площади треугольника: ½ · a · h","Всё верно — 96 это правильно","Нужно было умножить на 2","Надо было использовать другой треугольник"], ans:0,
+    fb:"✦ Верно! Самая частая ошибка в планиметрии — забыть ½ в формуле площади треугольника. Треугольник = половина прямоугольника!",
+    hack:"Площадь треугольника — не забудь ½. Ответ «слишком большой»? Скорее всего, забыл поделить.",
+    hint:"Почему площадь треугольника вдвое меньше площади прямоугольника с теми же основанием и высотой?",
+  },
+  {
+    scene:"Явление четырнадцатое",
+    type:"Хак на первую часть",
+    sit:"Лютик смотрит на вторую часть и бледнеет.",
+    text:"<span class='lut'>Лютик</span> испугался второй части ОГЭ и хочет пропустить её. <span class='par'>Мадам Пармезан</span> говорит: «Сначала убедись в первой». Что она имеет в виду?",
+    opts:["Первая часть (задания 1–19) даёт достаточно баллов для тройки — сначала реши всё там","Вторая часть важнее, туда и надо идти","Обе части одинаково сложные","Мадам Пармезан боится второй части сама"], ans:0,
+    fb:"✦ Верно! Для тройки на ОГЭ достаточно ~15 баллов. Первая часть даёт до 20 баллов. Если уверенно решить её всю — тройка почти гарантирована.",
+    hack:"Задания 1–8 первой части — самые простые. Реши их идеально, остальное — бонус.",
+    hint:"Сколько баллов можно набрать только в первой части ОГЭ?",
+  },
+  {
+    scene:"Финальное явление",
+    type:"Главный хак",
+    sit:"Экзамен закончился. Лютик и Мадам Пармезан выходят вместе.",
+    text:"<span class='lut'>Лютик</span> спрашивает: «Мадам Пармезан, в чём главный секрет ОГЭ?» Она отвечает...",
+    opts:["«Не паникуй, реши лёгкое, проверь смысл ответа, не оставляй пустых клеток»","«Учи всё наизусть за одну ночь»","«Надейся на удачу и красивый почерк»","«Возьми меня на экзамен»"], ans:0,
+    fb:"✦ Верно! <span class='par'>Мадам Пармезан</span> улыбается. Четыре принципа: 1) Не паникуй — переходи к следующему. 2) Лёгкое сначала. 3) Проверяй здравым смыслом. 4) Никаких пустых ответов.",
+    hack:"Четыре правила: не паникуй, решай лёгкое, проверяй смысл, не оставляй пустых клеток.",
+    hint:"Какие четыре принципа помогают на любом экзамене?",
+  }
+];
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+const _questions_orig = [...questions];
+let _questions = shuffle([...questions]);
+let _cur=0, _score=0, _attempts=0, _firstWrong=-1, _answered=false;
+let _shuffledOpts=[], _correctIdx=0;
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qsit=document.getElementById('qsit'), qtext=document.getElementById('qtext'),
+  qopts=document.getElementById('qopts'), qfb=document.getElementById('qfb'),
+  qnext=document.getElementById('qnext'), qbar=document.getElementById('qbar'),
+  qcnt=document.getElementById('qcnt'), scoredisp=document.getElementById('score-disp');
+
+function renderQ() {
+  const q=_questions[_cur];
+  _answered=false; _attempts=0; _firstWrong=-1;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  _shuffledOpts=idx.map(i=>q.opts[i]);
+  _correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('q-animate'); void qcard.offsetWidth; qcard.classList.add('q-animate');
+  qheader.innerHTML=`<span class="q-scene">${q.scene}</span><span class="q-type-badge">${q.type}</span>`;
+  qsit.textContent=q.sit;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=_shuffledOpts.map((o,i)=>{
+    const L=['А','Б','В','Г'];
+    return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className='feedback-box'; qfb.innerHTML=''; qnext.className='next-btn';
+  qcnt.textContent=`${_cur+1} / ${_questions.length}`;
+  qbar.style.width=`${(_cur/_questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${_score} верно`;
+}
+
+function answer(i) {
+  if(_answered) return;
+  const q=_questions[_cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===_correctIdx;
+  if(ok){
+    _answered=true;
+    if(_attempts===0) _score++;
+    scoredisp.textContent=`✦ ${_score} верно`;
+    btns.forEach(b=>b.disabled=true);
+    btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    fb+=`<span class="fb-hack">${q.hack}</span>`;
+    qfb.innerHTML=fb; qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=_cur<_questions.length-1?'Следующий совет →':'Узнать итог →';
+  } else {
+    _attempts++;
+    btns[i].classList.add('wrong'); btns[i].disabled=true;
+    if(_firstWrong===-1) _firstWrong=i;
+    if(_attempts===1){
+      qfb.innerHTML=`😞 Не совсем. Подумай ещё: <em>${q.hint}</em><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      _answered=true;
+      btns.forEach(b=>b.disabled=true);
+      btns[_correctIdx].classList.add('correct');
+      let fb=`😔 Правильный ответ выделен.<br>${q.fb}`;
+      fb+=`<span class="fb-hack">${q.hack}</span>`;
+      qfb.innerHTML=fb; qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=_cur<_questions.length-1?'Следующий совет →':'Узнать итог →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{_cur++;if(_cur>=_questions.length){showResults();return;}renderQ();});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results'); res.classList.add('show');
+  document.getElementById('rscore').textContent=_score;
+  document.getElementById('rtotal').textContent=`из ${_questions.length} советов`;
+  let emoji,title,story,rank;
+  if(_score>=13){
+    emoji='🎭'; title='Лютик сдал на отлично!';
+    story='«Дорогая Пармезан, — написал Лютик в записке, — я справился. Все хаки сработали. Жду тебя у таверны "Золотая лошадь" с результатами и лютней».';
+    rank='✦ Мастер экзаменационных хаков';
+  } else if(_score>=10){
+    emoji='🌹'; title='Пармезан гордится!';
+    story='«Неплохо, — сказала Мадам Пармезан, разглядывая результаты. — Пара хаков ещё требует практики. Но тройка точно твоя. Зайди ко мне за бонусными советами».';
+    rank='✦ Опытный абитуриент';
+  } else if(_score>=6){
+    emoji='🎻'; title='Тройка с боем';
+    story='Лютик вышел из аудитории бледный, но живой. «По крайней мере, я не оставил пустых клеток», — сказал он. Мадам Пармезан молча протянула ему чай.';
+    rank:'✦ Выжил, и это главное';
+    rank='✦ Выжил, и это главное';
+  } else {
+    emoji='📜'; title='Пересдача в сентябре';
+    story='«Лютик, — вздохнула Мадам Пармезан, — ты великий бард. Но формулы — не баллады. Они не прощают импровизации». Она протянула ему учебник.';
+    rank='✦ Лютик, учи хаки';
+  }
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').innerHTML=story;
+  document.getElementById('rrank').textContent=rank;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  _questions=shuffle([..._questions_orig]);
+  _cur=0;_score=0;_attempts=0;_firstWrong=-1;_answered=false;
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
