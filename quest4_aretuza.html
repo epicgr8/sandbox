@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест 4: Открытый экзамен в Аретузе</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f2ede8;
+    --bg2:     #faf8f5;
+    --bg3:     #e8e2db;
+    --bg4:     #ddd6ce;
+    --c-alg:   #c2410c;
+    --c-geo:   #1db36e;
+    --c-trig:  #2b7fff;
+    --c-prob:  #ca8a04;
+    --c-circ:  #7c3aed;
+    --c-root:  #0891b2;
+    --c-gold:  #b45309;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 5%  0%,  rgba(180,83,9,0.07)  0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 95% 10%, rgba(43,127,255,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 60% at 50% 100%,rgba(29,179,110,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:940px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 40px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:200px; height:2px; border-radius:2px; background:linear-gradient(90deg,transparent,var(--c-gold),var(--c-alg),var(--c-geo),var(--c-trig),transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(26px,4.5vw,48px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color:var(--c-gold); }
+  .ht2 { color:var(--c-alg); }
+  .ht3 { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* EXAMINERS */
+  .examiners { display:flex; gap:12px; justify-content:center; margin:28px 0 0; flex-wrap:wrap; }
+  .examiner { background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:10px 16px; font-size:13px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:8px; }
+  .examiner .ex-role { font-size:10px; font-weight:500; color:var(--muted); display:block; }
+  .examiner-emoji { font-size:20px; }
+
+  /* SEC */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* FORMULA CARDS */
+  .formulas-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; }
+  .fcard { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:16px 18px; position:relative; overflow:hidden; }
+  .fcard::after { content:''; position:absolute; top:0; left:0; width:100%; height:3px; border-radius:12px 12px 0 0; }
+  .fcard.alg::after  { background:var(--c-alg); }
+  .fcard.geo::after  { background:var(--c-geo); }
+  .fcard.trig::after { background:var(--c-trig); }
+  .fcard.prob::after { background:var(--c-prob); }
+  .fcard.circ::after { background:var(--c-circ); }
+  .fcard.root::after { background:var(--c-root); }
+  .fcard-cat { font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; margin-top:4px; }
+  .fcard.alg  .fcard-cat { color:var(--c-alg); }
+  .fcard.geo  .fcard-cat { color:var(--c-geo); }
+  .fcard.trig .fcard-cat { color:var(--c-trig); }
+  .fcard.prob .fcard-cat { color:var(--c-prob); }
+  .fcard.circ .fcard-cat { color:var(--c-circ); }
+  .fcard.root .fcard-cat { color:var(--c-root); }
+  .fcard-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:8px; }
+  .fcard-formulas { display:flex; flex-direction:column; gap:4px; }
+  .ff { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:4px 10px; border-radius:5px; display:inline-block; color:var(--text); background:var(--bg3); }
+  .fcard-note { font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5; }
+  .fcard-note strong { color:var(--text); }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* EXAM BANNER */
+  .exam-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(180,83,9,0.3); background:var(--bg2); }
+  .exam-banner-inner { display:grid; grid-template-columns:260px 1fr; }
+  .yen-img { width:260px; height:320px; object-fit:cover; object-position:center top; display:block; }
+  .exam-banner-text { padding:24px 24px; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+  .exam-title { font-size:20px; font-weight:700; color:var(--c-gold); }
+  .exam-sub { font-size:13px; color:var(--muted); line-height:1.55; }
+  .candidates { display:flex; flex-wrap:wrap; gap:8px; }
+  .candidate { font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:var(--bg3); border:1px solid var(--border2); color:var(--text); }
+  .exam-stakes { display:flex; flex-wrap:wrap; gap:6px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(29,179,110,0.12);  color:#0f6b42; }
+  .stake-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .stake-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .stake-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .stake-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  @media(max-width:600px){ .exam-banner-inner{grid-template-columns:1fr;} .yen-img{width:100%;height:220px;object-position:top;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,30px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-gold),var(--c-alg),var(--c-trig)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-geo); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-examiner { font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; white-space:nowrap; }
+  .q-examiner.yen  { background:#7c3aed; }
+  .q-examiner.tri  { background:#c2410c; }
+  .q-examiner.key  { background:#0891b2; }
+  .q-type { font-size:11px; font-weight:600; padding:2px 8px; border-radius:10px; }
+  .q-type.formula { background:rgba(43,127,255,0.12); color:var(--c-trig); }
+  .q-type.task    { background:rgba(29,179,110,0.12); color:var(--c-geo); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.7; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; background:linear-gradient(120deg,var(--c-gold),var(--c-alg)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .big-formula { font-family:'Space Mono',monospace; font-size:18px; font-weight:700; background:rgba(180,83,9,0.08); border:1.5px solid rgba(180,83,9,0.25); color:var(--c-gold); padding:12px 20px; border-radius:8px; display:block; margin:8px 0 14px; text-align:center; letter-spacing:0.02em; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-gold); background:rgba(180,83,9,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; flex-shrink:0; }
+  .opt-btn.correct { border-color:#1db36e; background:rgba(29,179,110,0.15); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#1db36e; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-gold); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:520px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(29,179,110,0.12);  color:#0f6b42; }
+  .rank-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .rank-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .rank-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .rank-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-gold); background:rgba(180,83,9,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(180,83,9,0.12); color:var(--c-gold); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Формулы и свойства · 9 класс</div>
+    <h1 class="hero-title">
+      <span class="ht1">Квест 4:</span><br>
+      <span class="ht2">Открытый экзамен</span> <span class="ht3">в Аретузе</span>
+    </h1>
+    <p class="hero-sub">Знаешь ли ты формулы наизусть? 20 вопросов на память</p>
+    <div class="examiners">
+      <div class="examiner"><span class="examiner-emoji">🧙‍♀️</span><span><strong>Йеннифэр</strong><span class="ex-role">Алгебра и тождества</span></span></div>
+      <div class="examiner"><span class="examiner-emoji">🌹</span><span><strong>Трисс</strong><span class="ex-role">Геометрия и площади</span></span></div>
+      <div class="examiner"><span class="examiner-emoji">🔬</span><span><strong>Кейра</strong><span class="ex-role">Тригонометрия и окружность</span></span></div>
+    </div>
+  </div>
+
+  <!-- ФОРМУЛЫ-ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Что нужно знать наизусть</span><div class="sec-line"></div></div>
+
+  <div class="formulas-grid">
+
+    <div class="fcard alg">
+      <div class="fcard-cat">Алгебра</div>
+      <div class="fcard-title">Формулы сокращённого умножения</div>
+      <div class="fcard-formulas">
+        <span class="ff">(a+b)² = a² + 2ab + b²</span>
+        <span class="ff">(a−b)² = a² − 2ab + b²</span>
+        <span class="ff">(a+b)(a−b) = a² − b²</span>
+      </div>
+      <div class="fcard-note">⚠ Главная ловушка: <strong>(a+b)² ≠ a²+b²</strong> — нельзя забывать 2ab!</div>
+    </div>
+
+    <div class="fcard alg">
+      <div class="fcard-cat">Алгебра</div>
+      <div class="fcard-title">Дискриминант и корни</div>
+      <div class="fcard-formulas">
+        <span class="ff">D = b² − 4ac</span>
+        <span class="ff">x = (−b ± √D) / 2a</span>
+        <span class="ff">D &gt; 0 → два корня</span>
+        <span class="ff">D = 0 → один корень</span>
+        <span class="ff">D &lt; 0 → корней нет</span>
+      </div>
+      <div class="fcard-note">⚠ В числителе <strong>−b</strong>, не b. И делить нужно на 2a целиком!</div>
+    </div>
+
+    <div class="fcard root">
+      <div class="fcard-cat">Корни</div>
+      <div class="fcard-title">Свойства корней (знать наизусть!)</div>
+      <div class="fcard-formulas">
+        <span class="ff">√(a·b) = √a · √b</span>
+        <span class="ff">√(a/b) = √a / √b</span>
+        <span class="ff">√(a²) = |a|</span>
+        <span class="ff">a^(1/n) = ⁿ√a</span>
+      </div>
+      <div class="fcard-note">⚠ <strong>√(a²) = |a|</strong>, не просто a! При a&lt;0 это важно.</div>
+    </div>
+
+    <div class="fcard geo">
+      <div class="fcard-cat">Геометрия</div>
+      <div class="fcard-title">Площади фигур</div>
+      <div class="fcard-formulas">
+        <span class="ff">△: S = ½·a·h</span>
+        <span class="ff">□: S = a·b</span>
+        <span class="ff">◇ ромб: S = ½·d₁·d₂</span>
+        <span class="ff">○ круг: S = π·r²</span>
+        <span class="ff">▱ паралл.: S = a·h</span>
+        <span class="ff">△ через sin: S = ½·a·b·sinC</span>
+      </div>
+    </div>
+
+    <div class="fcard trig">
+      <div class="fcard-cat">Тригонометрия</div>
+      <div class="fcard-title">Основные соотношения (прямоугольный △)</div>
+      <div class="fcard-formulas">
+        <span class="ff">sin α = противолежащий / гипотенуза</span>
+        <span class="ff">cos α = прилежащий / гипотенуза</span>
+        <span class="ff">tg α = sin α / cos α</span>
+        <span class="ff">sin²α + cos²α = 1</span>
+      </div>
+      <div class="fcard-note">Мнемоника: <strong>СОЧ ПОЧ</strong> — Синус Отношение Противолежащего, Косинус Отношение Прилежащего.</div>
+    </div>
+
+    <div class="fcard circ">
+      <div class="fcard-cat">Окружность</div>
+      <div class="fcard-title">Вписанные и центральные углы</div>
+      <div class="fcard-formulas">
+        <span class="ff">Центральный = дуге</span>
+        <span class="ff">Вписанный = ½ · дуги</span>
+        <span class="ff">Вписанный на полуокружности = 90°</span>
+        <span class="ff">Длина окружности: C = 2πr</span>
+        <span class="ff">Внешний угол △ = сумма 2 несмежных</span>
+      </div>
+    </div>
+
+    <div class="fcard prob">
+      <div class="fcard-cat">Вероятность</div>
+      <div class="fcard-title">Классическая вероятность</div>
+      <div class="fcard-formulas">
+        <span class="ff">P(A) = m / n</span>
+        <span class="ff">m — число благоприятных исходов</span>
+        <span class="ff">n — число всех равновозможных</span>
+        <span class="ff">0 ≤ P(A) ≤ 1</span>
+      </div>
+      <div class="fcard-note">Вероятность никогда не бывает больше 1 или меньше 0.</div>
+    </div>
+
+    <div class="fcard trig">
+      <div class="fcard-cat">Теорема Пифагора</div>
+      <div class="fcard-title">+ Специальные треугольники</div>
+      <div class="fcard-formulas">
+        <span class="ff">a² + b² = c²</span>
+        <span class="ff">30-60-90: стороны 1 : √3 : 2</span>
+        <span class="ff">45-45-90: стороны 1 : 1 : √2</span>
+      </div>
+      <div class="fcard-note">Треугольник 30-60-90: меньший катет = ½ гипотенузы.</div>
+    </div>
+
+  </div>
+
+  <div class="deco-div"><span>Экзаменационный зал</span></div>
+
+  <!-- BANNER -->
+  <div class="exam-banner">
+    <div class="exam-banner-inner">
+      <img class="yen-img" src="https://cdna.artstation.com/p/assets/images/images/026/577/800/large/my-phan-6fanart-yen-final.jpg?1589161157" alt="Йеннифэр из Ведьмака" onerror="this.style.display='none'">
+      <div class="exam-banner-text">
+        <div class="exam-title">Открытый экзамен Аретузы</div>
+        <div class="exam-sub">Сдают волшебники, ведьмаки и гости из других миров. Принимают Йеннифэр, Трисс и Кейра.</div>
+        <div class="candidates">
+          <span class="candidate">🎭 Лютик — волнуется, но держится</span>
+          <span class="candidate">⚔️ Цири — уверена в себе</span>
+          <span class="candidate">✨ Гейл — готовился всю ночь</span>
+          <span class="candidate">🌿 Халсин — спокоен как дерево</span>
+          <span class="candidate">📚 Гермиона — уже сдала экстерном</span>
+        </div>
+        <div class="exam-stakes">
+          <span class="stake stake-s">18–20 ✦ Диплом с отличием Аретузы</span>
+          <span class="stake stake-a">14–17 ✦ Успешная сдача</span>
+          <span class="stake stake-b">10–13 ✦ Пересдача одной темы</span>
+          <span class="stake stake-c">6–9 ✦ Пересдача половины</span>
+          <span class="stake stake-d">0–5 ✦ Повторный курс</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">20 вопросов от трёх экзаменаторов</div>
+      <p class="quiz-sub">Формулы — это магия. Знаешь наизусть — используешь мгновенно.</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий вопрос →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Пересдать экзамен</button>
+  </div>
+
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="triangles_quiz.html"><span class="qp-num" style="background:#d94f8a;color:#fff">1</span><span class="qp-info"><span class="qp-name">Халсин в окружении</span><span class="qp-sub">Геометрия треугольников</span></span><span class="qp-badge">← Главная</span></a>
+      <a class="quest-pill" href="quest2_ellie.html"><span class="qp-num" style="background:#2d6a2d;color:#fff">2</span><span class="qp-info"><span class="qp-name">Элли против щелкунов</span><span class="qp-sub">Функции и графики</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest3_gale.html"><span class="qp-num" style="background:#7c3aed;color:#fff">3</span><span class="qp-info"><span class="qp-name">Проклятые предметы</span><span class="qp-sub">Уравнения и неравенства</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill quest-active" href="#"><span class="qp-num" style="background:#b45309;color:#fff">4</span><span class="qp-info"><span class="qp-name">Открытый экзамен в Аретузе</span><span class="qp-sub">Формулы и свойства</span></span><span class="qp-badge qp-here">Здесь</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const examiners = {
+  yen: { cls:'yen', name:'Йеннифэр' },
+  tri: { cls:'tri', name:'Трисс' },
+  key: { cls:'key', name:'Кейра' }
+};
+
+const candidates = ['Лютик','Цири','Гейл','Халсин','Гермиона'];
+
+const allQuestions = [
+
+  // ── ЗНАНИЕ ФОРМУЛ НАИЗУСТЬ ─────────────────────────
+  {
+    ex:'yen', type:'formula', topic:'Квадрат суммы',
+    text:`<span class='hero-name'>Йеннифэр</span> превращает Лютика в кота — заклинание трансформации требует точного раскрытия скобок, иначе хвост вырастет не там. Запишите полное раскрытие:<br><span class='big-formula'>(a + b)² = ?</span>`,
+    opts:['a² + 2ab + b²','a² + b²','a² + ab + b²','2a + 2b'], ans:0,
+    fb:'✦ Верно! Лютик — красивый кот! (a+b)² = a² + 2ab + b². Три слагаемых: квадрат первого, удвоенное произведение, квадрат второго.',
+    trap:'Ловушка ОГЭ: (a+b)² ≠ a²+b². Пропустить среднее слагаемое 2ab — самая частая ошибка в алгебре!',
+    hint:'Квадрат суммы — три слагаемых. Среднее — это 2ab. Без него формула неверна.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'tri', type:'formula', topic:'Квадрат разности',
+    text:`<span class='hero-name'>Трисс</span> готовит зелье исчезновения — формула зелья требует точного раскрытия:<br><span class='big-formula'>(a − b)² = ?</span>`,
+    opts:['a² − 2ab + b²','a² − b²','a² + 2ab + b²','a² − ab + b²'], ans:0,
+    fb:'✦ Верно! Зелье сработало! (a−b)² = a² − 2ab + b². Отличие от квадрата суммы — минус перед 2ab.',
+    trap:'Ловушка ОГЭ: не путай (a−b)² и (a+b)². Разница только в знаке среднего члена: минус вместо плюса.',
+    hint:'Квадрат разности почти как квадрат суммы, но знак перед 2ab — минус.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'key', type:'formula', topic:'Разность квадратов',
+    text:`<span class='hero-name'>Кейра</span> вызывает Халсина в облике медведя — ритуал требует разложить выражение на множители, иначе медведь получится с рыбьим хвостом:<br><span class='big-formula'>a² − b² = ?</span>`,
+    opts:['(a+b)(a−b)','(a−b)²','(a+b)²','(a²+b²)'], ans:0,
+    fb:'✦ Верно! Халсин — настоящий медведь! a²−b² = (a+b)(a−b). Разность квадратов всегда раскладывается в произведение суммы и разности.',
+    trap:'Ловушка ОГЭ: a²−b² ≠ (a−b)². Это разные выражения! (a−b)² = a²−2ab+b², а a²−b² = (a+b)(a−b).',
+    hint:'Разность квадратов — это произведение двух скобок: сумма и разность тех же чисел.',
+    ref:'Разность квадратов'
+  },
+  {
+    ex:'yen', type:'formula', topic:'Дискриминант',
+    text:`<span class='hero-name'>Йеннифэр</span> развеивает иллюзию Лютика — он притворялся рыцарем три часа. Чтобы понять, сколько у иллюзии «корней», нужно посчитать:<br><span class='big-formula'>D = ?</span> для уравнения ax²+bx+c=0`,
+    opts:['b² − 4ac','b² + 4ac','√b − ac','2b − ac'], ans:0,
+    fb:'✦ Верно! Иллюзия развеяна! D = b²−4ac. D>0 — два корня, D=0 — один, D<0 — корней нет.',
+    trap:'Ловушка ОГЭ: в формуле именно −4ac (минус!). И b² — это всегда положительно, даже если b отрицательное.',
+    hint:'Дискриминант: D = b²−4ac. Не перепутай знак — там минус перед 4ac.',
+    ref:'Дискриминант'
+  },
+  {
+    ex:'key', type:'formula', topic:'Корни квадратного уравнения',
+    text:`<span class='hero-name'>Кейра</span> составляет круг защиты от духов — чтобы рассчитать радиус, нужна формула корней квадратного уравнения. Если D ≥ 0, то x = ?`,
+    opts:['(−b ± √D) / 2a','(b ± √D) / 2a','−b / 2a','(−b ± D) / 2a'], ans:0,
+    fb:'✦ Верно! Духи не прошли! x = (−b ± √D) / 2a. Два корня при D>0, один при D=0.',
+    trap:'Ловушка ОГЭ: в числителе −b (минус b!), а не просто b. И под корнем стоит D, а не b.',
+    hint:'Формула корней: x = (−b ± √D) / 2a. Не забудь знак минус перед b и деление на 2a.',
+    ref:'Дискриминант'
+  },
+  {
+    ex:'tri', type:'formula', topic:'Разность квадратов — применение',
+    text:`<span class='hero-name'>Трисс</span> объединяет два зелья в одно — нужно упростить выражение. Каким из этих вариантов правильно записать произведение (x+3)(x−3)?`,
+    opts:['x² − 9','x² + 9','x² − 6x + 9','x² − 3'], ans:0,
+    fb:'✦ Верно! Зелья слиты! (x+3)(x−3) = x²−3² = x²−9. Разность квадратов — быстрый способ перемножить сумму и разность.',
+    trap:'Ловушка ОГЭ: (x−3)² = x²−6x+9 — это другое! Здесь не квадрат разности, а произведение суммы на разность.',
+    hint:'Когда множители — одно и то же число, но с разными знаками — это формула разности квадратов.',
+    ref:'Разность квадратов'
+  },
+  {
+    ex:'yen', type:'formula', topic:'Квадрат суммы — применение',
+    text:`<span class='hero-name'>Гермиона</span> вычисляет площадь квадратного щита со стороной (a+5). <span class='hero-name'>Йеннифэр</span> спрашивает: как раскроешь (a+5)²?`,
+    opts:['a² + 10a + 25','a² + 25','a² + 5a + 25','a² + 10a + 5'], ans:0,
+    fb:'✦ Верно! Щит рассчитан! (a+5)² = a² + 2·a·5 + 5² = a² + 10a + 25. Среднее слагаемое = 2·a·5 = 10a.',
+    trap:'Ловушка ОГЭ: среднее слагаемое = 2·a·5 = 10a, не 5a. Умножай на 2!',
+    hint:'(a+5)² = a² + 2·a·5 + 5². Посчитай 2·a·5 — это и есть среднее слагаемое.',
+    ref:'Квадрат суммы и разности'
+  },
+  {
+    ex:'key', type:'formula', topic:'Вероятность — формула',
+    text:`<span class='hero-name'>Кейра</span> бросает зелье наудачу в толпу врагов. <span class='hero-name'>Гейл</span> спрашивает: чему равна вероятность события A? Выбери правильную формулу.`,
+    opts:['P(A) = m / n','P(A) = n / m','P(A) = m · n','P(A) = m − n'], ans:0,
+    fb:'✦ Верно! Гейл доволен! P(A) = m/n, где m — число благоприятных исходов, n — число всех равновозможных.',
+    trap:'Ловушка ОГЭ: m — это благоприятные (числитель, верхний), n — все исходы (знаменатель, нижний). Не переворачивай дробь!',
+    hint:'Вероятность — это дробь. В числителе — то, что хочешь получить. В знаменателе — все возможные варианты.',
+    ref:'Вероятность'
+  },
+
+  {
+    ex:'yen', type:'formula', topic:'Тригонометрия — sin',
+    text:`<span class='hero-name'>Гермиона</span> вычисляет расстояние до доспехов школы Змеи через прямоугольный треугольник. <span class='hero-name'>Йеннифэр</span> проверяет: чему равен sin α в прямоугольном треугольнике?`,
+    opts:['противолежащий катет / гипотенуза','прилежащий катет / гипотенуза','гипотенуза / катет','прилежащий / противолежащий'], ans:0,
+    fb:'✦ Верно! Доспехи найдены! Синус = противолежащий катет / гипотенуза. Косинус = прилежащий / гипотенуза.',
+    trap:'Ловушка ОГЭ: синус и косинус легко перепутать. Синус — сторона напротив угла. Косинус — сторона рядом с углом.',
+    hint:'Синус — дробь. В числителе — катет, который находится напротив угла α, не рядом с ним.',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'key', type:'formula', topic:'Тригонометрическое тождество',
+    text:`<span class='hero-name'>Гейл</span> накладывает заклинание стабилизации магии — в основе тождество, которое всегда равно одному числу. <span class='hero-name'>Кейра</span> спрашивает:<br><span class='big-formula'>sin²α + cos²α = ?</span>`,
+    opts:['1','0','sin 2α','tg α'], ans:0,
+    fb:'✦ Верно! Магия стабилизирована! sin²α + cos²α = 1 — всегда, для любого угла α. Используй, когда знаешь один из них.',
+    trap:'Ловушка ОГЭ: это тождество верно для ЛЮБОГО α, не только 30° или 45°.',
+    hint:'Сумма квадратов синуса и косинуса одного угла всегда равна постоянному числу. Какому?',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'tri', type:'task', topic:'Вероятность',
+    text:`В колчане <span class='hero-name'>Цири</span> 4 серебряные стрелы и 6 обычных. Только серебряная убьёт этого монстра. Она стреляет наугад. Какова вероятность удачного выстрела?`,
+    opts:['2/5','4/6','1/4','3/5'], ans:0,
+    fb:'✦ Верно! Серебряная! Монстр повержен! P = 4/10 = 2/5. Упрощаем дробь.',
+    trap:'Ловушка ОГЭ: P = 4/10, но ответ нужно упростить до 2/5. Не забывай сокращать дроби.',
+    hint:'Всего стрел: 4+6=10. Благоприятных — 4. P = 4/10. Можно ещё упростить.',
+    ref:'Вероятность'
+  },
+  {
+    ex:'key', type:'task', topic:'Тригонометрия',
+    text:`<span class='hero-name'>Халсин</span> в облике медведя спускается с обрыва по наклонному склону. Вертикальная высота обрыва — 5 м, угол склона с горизонталью — 30°. Какова длина самого склона (гипотенуза)?`,
+    opts:['10 м','5 м','5√3 м','15 м'], ans:0,
+    fb:'✦ Верно! Медведь добрался! Треугольник 30-60-90: стороны 1:√3:2. Меньший катет (высота 5 м) напротив 30°, гипотенуза = 2·5 = 10 м.',
+    trap:'Ловушка ОГЭ: в треугольнике 30-60-90 меньший катет = ½ гипотенузы. Значит гипотенуза = 2 × меньший катет = 10.',
+    hint:'Меньший катет напротив 30° равен половине гипотенузы. Если катет = 5, то гипотенуза = ?',
+    ref:'Теорема Пифагора + Специальные треугольники'
+  },
+  {
+    ex:'yen', type:'task', topic:'Площадь треугольника',
+    text:`<span class='hero-name'>Йеннифэр</span> выжигает треугольный участок леса, отрезая путь нечисти. Основание 12 м, высота 8 м. Какова площадь выжженного поля?`,
+    opts:['48 м²','96 м²','20 м²','80 м²'], ans:0,
+    fb:'✦ Верно! Нечисть остановлена! S = ½·12·8 = 48 м². Треугольник — половина прямоугольника.',
+    trap:'Ловушка ОГЭ: 12·8=96 — площадь прямоугольника. Треугольник вдвое меньше. Ответ 96 стоит как ловушка.',
+    hint:'Площадь треугольника = ½ · основание · высота. Не забудь ½!',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'tri', type:'task', topic:'Внешний угол',
+    text:`Иллюзия <span class='hero-name'>Трисс</span> — треугольный призрачный замок. Два угла треугольника — 55° и 65°. Противник обходит его снаружи по внешнему углу при третьей вершине. Сколько градусов он поворачивает?`,
+    opts:['120°','60°','115°','180°'], ans:0,
+    fb:'✦ Верно! Трисс предугадала путь! Внешний угол = 55° + 65° = 120°. Равен сумме двух несмежных внутренних.',
+    trap:'Ловушка ОГЭ: внутренний угол при вершине = 60°. Внешний = 180°−60° = 120°. Или проще: сложи два несмежных угла.',
+    hint:'Внешний угол треугольника = сумма двух внутренних углов, не смежных с ним.',
+    ref:'Вписанные и центральные углы'
+  },
+  {
+    ex:'key', type:'task', topic:'Корни',
+    text:`<span class='hero-name'>Кейра</span> рассчитывает длину стороны квадратного алтаря в лесу друидов — площадь алтаря 48 м². Длина стороны = √48. Упрости:<br><span class='big-formula'>√48 = ?</span>`,
+    opts:['4√3','6√2','2√12','√48'], ans:0,
+    fb:'✦ Верно! Алтарь построен! √48 = √(16·3) = √16·√3 = 4√3. Ищи наибольший точный квадрат-делитель.',
+    trap:'Ловушка ОГЭ: 48 = 16·3, и √16=4. Можно и через 4·12, но тогда √12 надо ещё упрощать — лучше сразу брать 16.',
+    hint:'Разложи 48 на множители, один из которых — точный квадрат. Какой максимальный точный квадрат делит 48?',
+    ref:'Свойства корней'
+  },
+  {
+    ex:'yen', type:'task', topic:'Вписанный угол',
+    text:`<span class='hero-name'>Гермиона</span> рисует защитный круг — классика и Хогвартса, и Аретузы. Вписывает в него угол, опирающийся на диаметр. Чему он равен?`,
+    opts:['90°','45°','60°','180°'], ans:0,
+    fb:'✦ Верно! Обе академии едины! Угол, вписанный в полуокружность = 90°. Теорема Фалеса: дуга = 180°, вписанный = ½·180° = 90°.',
+    trap:'Ловушка ОГЭ: это частный случай вписанного угла — когда он опирается на диаметр.',
+    hint:'Вписанный угол = ½ дуги. Полуокружность = дуга 180°. Считай.',
+    ref:'Вписанные и центральные углы'
+  },
+  {
+    ex:'tri', type:'task', topic:'Площадь ромба',
+    text:`Иллюзия <span class='hero-name'>Трисс</span> — ромбовидное озеро посреди экзаменационного зала. Диагонали иллюзии: d₁ = 10 м и d₂ = 6 м. Какова площадь иллюзии?`,
+    opts:['30 м²','60 м²','16 м²','15 м²'], ans:0,
+    fb:'✦ Верно! Иллюзия убедительна! S = ½·d₁·d₂ = ½·10·6 = 30 м². Площадь ромба — полупроизведение диагоналей.',
+    trap:'Ловушка ОГЭ: d₁·d₂=60 — не забывай ½. Ответ 60 стоит как ловушка.',
+    hint:'Площадь ромба через диагонали: S = ½ · d₁ · d₂.',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'key', type:'task', topic:'sin²+cos²',
+    text:`<span class='hero-name'>Халсин</span> в облике медведя рассчитывает угол наклона горы. Известно: cos α = 0.8. Найди sin²α — без этого он не выберет безопасный спуск.`,
+    opts:['0.36','0.64','0.8','0.2'], ans:0,
+    fb:'✦ Верно! Медведь выбрал безопасный спуск! sin²α = 1 − cos²α = 1 − 0.64 = 0.36. cos²α = 0.8² = 0.64.',
+    trap:'Ловушка ОГЭ: cos²α = (0.8)² = 0.64, а не 0.8. Сначала возведи в квадрат, потом вычти из 1.',
+    hint:'Используй тождество sin²α + cos²α = 1. Найди cos²α = (0.8)², потом вычти из 1.',
+    ref:'Тригонометрия'
+  },
+  {
+    ex:'yen', type:'task', topic:'Длина окружности',
+    text:`<span class='hero-name'>Лютик</span> обегает периметр круглого иллюзорного замка, который <span class='hero-name'>Йеннифэр</span> создала для экзамена. Радиус замка — 5 м. Какое расстояние пробежит Лютик за один круг?`,
+    opts:['10π м','25π м','5π м','50π м'], ans:0,
+    fb:'✦ Верно! Лютик уже сочиняет об этом балладу! C = 2πr = 2·π·5 = 10π м.',
+    trap:'Ловушка ОГЭ: 25π = πr² — это площадь замка, не длина пути. C=2πr, S=πr². Не перепутай.',
+    hint:'Длина окружности: C = 2πr. Площадь круга: S = πr². Тебе нужна длина пути.',
+    ref:'Площади фигур'
+  },
+  {
+    ex:'tri', type:'task', topic:'Площадь параллелограмма',
+    text:`<span class='hero-name'>Трисс</span> накрывает параллелограммный участок леса защитным куполом от нечисти. Основание участка 11 м, высота (перпендикуляр) 5 м. Площадь купола?`,
+    opts:['55 м²','27.5 м²','32 м²','110 м²'], ans:0,
+    fb:'✦ Верно! Купол надёжен! S = a·h = 11·5 = 55 м². Параллелограмм: основание × высота (не боковая сторона!).',
+    trap:'Ловушка ОГЭ: высота — это ПЕРПЕНДИКУЛЯР к основанию, а не наклонная боковая сторона.',
+    hint:'S параллелограмма = основание × высота (перпендикуляр). Убедись, что не перепутал с боковой стороной.',
+    ref:'Площади фигур'
+  }
+];
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, score, attempts, firstWrong, answered;
+let shuffledOpts=[], correctIdx=0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0,20);
+  cur=0; score=0; attempts=0; firstWrong=-1; answered=false;
+}
+initQuiz();
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+function renderQ() {
+  const q=questions[cur];
+  answered=false; attempts=0; firstWrong=-1;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);
+  correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate'); void qcard.offsetWidth; qcard.classList.add('question-animate');
+  const ex = examiners[q.ex];
+  const typeLabel = q.type==='formula' ? '<span class="q-type formula">Формула → смысл</span>' : '<span class="q-type task">Задача → формула</span>';
+  qheader.innerHTML=`<span class="q-examiner ${ex.cls}">${ex.name}</span>${typeLabel}<span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box'; qfb.innerHTML=''; qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if(answered) return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0) score++;
+    scoredisp.textContent=`✦ ${score} правильно`;
+    btns.forEach(b=>b.disabled=true);
+    btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb; qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий вопрос →':'Узнать результат →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong'); btns[i].disabled=true;
+    if(firstWrong===-1) firstWrong=i;
+    if(attempts===1){
+      qfb.innerHTML=`😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай ещё!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;
+      btns.forEach(b=>b.disabled=true);
+      btns[correctIdx].classList.add('correct');
+      let fb=`😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb; qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий вопрос →':'Узнать результат →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{cur++;if(cur>=questions.length){showResults();return;}renderQ();});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results'); res.classList.add('show');
+  document.getElementById('rscore').textContent=score;
+  document.getElementById('rtotal').textContent=`из ${questions.length} вопросов`;
+  let emoji,title,story,rankText,rankClass;
+  if(score>=18){
+    emoji='🎓'; title='Диплом с отличием Аретузы!';
+    story='Йеннифэр, Трисс и Кейра переглядываются. «Первый раз за пять лет», — произносит Йеннифэр. Диплом с отличием. Гермиона аплодирует. Даже Лютик уже сочиняет песню о твоих достижениях.';
+    rankText='🔮 Архимаг формул'; rankClass='rank-s';
+  } else if(score>=14){
+    emoji='📜'; title='Успешная сдача!';
+    story='«Достойно», — кивает Йеннифэр. Трисс тепло улыбается. Небольшие пробелы есть, но в целом — хорошая работа. Цири хлопает тебя по плечу: «Со второго раза станет идеально».';
+    rankText='✨ Квалифицированный маг'; rankClass='rank-a';
+  } else if(score>=10){
+    emoji='📋'; title='Пересдача одной темы';
+    story='«Базу знаешь, — говорит Кейра, — но дискриминант и вписанные углы подведут тебя на экзамене». Лютик записывает: «Повторить шпору перед рассветом».';
+    rankText='📖 Ещё немного практики'; rankClass='rank-b';
+  } else if(score>=6){
+    emoji='😬'; title='Пересдача половины тем';
+    story='Трисс мягко говорит: «Вернись к шпоре. Формулы площадей, корни, вписанные углы — всё это нужно знать наизусть». Халсин предлагает потренироваться вместе у костра.';
+    rankText='📚 Повтори шпору'; rankClass='rank-c';
+  } else {
+    emoji='😅'; title='Повторный курс в Аретузе';
+    story='Йеннифэр складывает руки: «Формулы не знать — всё равно что идти в бой без оружия». Гейл обещает помочь. Гермиона уже составила план занятий. Начни со шпоры вверху страницы.';
+    rankText='🔁 Начни со шпоры'; rankClass='rank-d';
+  }
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  document.getElementById('rrank').textContent=rankText;
+  document.getElementById('rrank').className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='block';
+  renderQ();
+});
+renderQ();
+</script>
+</body>
+</html>
