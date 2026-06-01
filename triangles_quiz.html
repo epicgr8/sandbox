@@ -236,6 +236,31 @@
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   .question-animate { animation: fadeIn 0.28s ease; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border2); }
+  .quests-nav-title { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .quests-pills { display: flex; flex-direction: column; gap: 8px; }
+  .quest-pill {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 18px;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+  .quest-pill:hover:not(.quest-locked) { border-color: var(--border2); transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color: var(--c-sum); background: rgba(217,79,138,0.04); }
+  .quest-pill.quest-locked { opacity: 0.45; cursor: default; }
+  .qp-num { width: 32px; height: 32px; border-radius: 8px; background: var(--bg3); font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: var(--muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .quest-pill.quest-active .qp-num { background: var(--c-sum); color: #fff; }
+  a.quest-pill:nth-child(2) .qp-num { background: var(--c-lou); color: #fff; }
+  .qp-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .qp-name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .qp-sub { font-size: 12px; color: var(--muted); }
+  .qp-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--bg3); color: var(--muted); white-space: nowrap; }
+  .qp-new { background: rgba(45,106,45,0.12); color: var(--c-lou); }
+  .qp-soon { background: transparent; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -296,7 +321,7 @@
       <div class="rule-icon">💛</div>
       <div class="rule-title">Дорисуй высоту</div>
       <div class="rule-formula">h ⊥ основание</div>
-      <div class="rule-body">Задача кажется неразрешимой — проведи <strong>высоту</strong> (перпендикуляр к основанию). Получишь два прямоугольных треугольника → Пифагор.</div>
+      <div class="rule-body">Задача кажется неразрешимой — проведи <strong>высоту</strong> (это отрезок, который падает на основание строго под прямым углом 90°). Получишь два прямоугольных треугольника → Пифагор.</div>
       <div class="rule-assoc">🎮 Tekken: Сайдстеп — движение строго перпендикулярно атаке. Высота — это сайдстеп треугольника, всегда под 90°.</div>
     </div>
     <div class="rule-card c-cheat">
@@ -318,8 +343,8 @@
       <div class="rule-icon">🩶</div>
       <div class="rule-title">Смежные углы</div>
       <div class="rule-formula">∠1 + ∠2 = 180°</div>
-      <div class="rule-body">Два угла, у которых <strong>общая сторона и общая вершина</strong>, а другие стороны образуют прямую — это смежные углы. В сумме всегда 180°.</div>
-      <div class="rule-assoc">🎮 BG3: Два бойца стоят спиной к спине и смотрят в разные стороны вдоль одной линии. Их углы обзора — смежные. Вместе они закрывают 180°.</div>
+      <div class="rule-body">Представь точку на прямой линии — из неё торчит луч вверх. Слева угол и справа угол. Вот это и есть смежные углы. В сумме они всегда дают <strong>180°</strong>, потому что вместе это полный разворот (прямая = 180°).</div>
+      <div class="rule-assoc">🎮 BG3: Два бойца стоят спиной к спине на одной линии — смотрят в разные стороны. Их углы обзора смежные: вместе закрывают ровно 180°.</div>
     </div>
   </div>
 
@@ -330,7 +355,7 @@
       <tbody>
         <tr><td>Нужен угол</td><td>Сложи остальные, вычти из 180</td><td><span class="mono">180−∠A−∠B</span></td></tr>
         <tr><td>Нужна площадь</td><td>Найди основание и высоту</td><td><span class="mono">S = ½ah</span></td></tr>
-        <tr><td>2 стороны + угол</td><td>Площадь через синус</td><td><span class="mono">½·a·b·sinC</span></td></tr>
+        <tr><td>2 стороны + угол <em>между ними</em></td><td>Площадь через синус</td><td><span class="mono">½·a·b·sinC</span></td></tr>
         <tr><td>Прямой угол</td><td>Ищи стороны → Пифагор</td><td><span class="mono">a²+b²=c²</span></td></tr>
         <tr><td>Равнобедренный</td><td>Ищи симметрию, дели пополам</td><td><span class="mono">a=b, ∠α=∠β</span></td></tr>
         <tr><td>Не хватает стороны</td><td>Проведи высоту — получишь два прямоугольных треугольника, к каждому применяй Пифагора</td><td><span class="mono">h⊥ → 2×Пифагор</span></td></tr>
@@ -389,6 +414,37 @@
     <div class="results-story" id="rstory"></div>
     <div class="results-rank" id="rrank"></div>
     <button class="restart-btn" id="restart">Пройти снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ КВЕСТОВ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num">1</span>
+        <span class="qp-info">
+          <span class="qp-name">Халсин в окружении</span>
+          <span class="qp-sub">Геометрия треугольников</span>
+        </span>
+        <span class="qp-badge">Здесь</span>
+      </a>
+      <a class="quest-pill" href="quest2_ellie.html">
+        <span class="qp-num">2</span>
+        <span class="qp-info">
+          <span class="qp-name">Элли против щелкунов</span>
+          <span class="qp-sub">Функции и графики</span>
+        </span>
+        <span class="qp-badge qp-new">Новый</span>
+      </a>
+      <a class="quest-pill" href="quest3_gale.html">
+        <span class="qp-num" style="background:var(--c-isos);color:#fff">3</span>
+        <span class="qp-info">
+          <span class="qp-name">Проклятые предметы</span>
+          <span class="qp-sub">Уравнения и неравенства</span>
+        </span>
+        <span class="qp-badge qp-new">Новый</span>
+      </a>
+    </div>
   </div>
 
 </div>

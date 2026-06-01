@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест 2: Элли против щелкунов — Функции ОГЭ</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede6;
+    --bg2:     #faf8f3;
+    --bg3:     #e8e4db;
+    --bg4:     #dedad0;
+    --c-lin:   #2b7fff;
+    --c-par:   #c2410c;
+    --c-hyp:   #7c3aed;
+    --c-piec:  #0891b2;
+    --c-shift: #1db36e;
+    --c-prop:  #ca8a04;
+    --c-lou:   #2d6a2d;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --kt-a: #2b7fff;
+    --kt-b: #c2410c;
+    --kt-c: #1db36e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5%  0%,  rgba(44,101,44,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 15%,  rgba(43,127,255,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(194,65,12,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after {
+    content:''; display:block; margin:28px auto 0;
+    width:180px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, transparent, var(--c-lou), var(--c-par), var(--c-lin), transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(30px,5vw,52px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color: var(--c-lou); }
+  .ht2 { color: var(--c-par); }
+  .ht3 { color: var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-lin::after   { background:var(--c-lin); }
+  .rule-card.c-par::after   { background:var(--c-par); }
+  .rule-card.c-hyp::after   { background:var(--c-hyp); }
+  .rule-card.c-piec::after  { background:var(--c-piec); }
+  .rule-card.c-shift::after { background:var(--c-shift); }
+  .rule-card.c-prop::after  { background:var(--c-prop); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:14px; font-weight:700; padding:5px 10px; border-radius:6px; display:inline-block; margin:4px 0 8px; }
+  .c-lin  .rule-formula { background:rgba(43,127,255,0.1);  color:var(--c-lin); }
+  .c-par  .rule-formula { background:rgba(194,65,12,0.1);   color:var(--c-par); }
+  .c-hyp  .rule-formula { background:rgba(124,58,237,0.1);  color:var(--c-hyp); }
+  .c-piec .rule-formula { background:rgba(8,145,178,0.1);   color:var(--c-piec); }
+  .c-shift.rule-formula  { background:rgba(29,179,110,0.1);  color:var(--c-shift); }
+  .c-shift .rule-formula { background:rgba(29,179,110,0.1);  color:var(--c-shift); }
+  .c-prop .rule-formula { background:rgba(202,138,4,0.1);   color:var(--c-prop); }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.55; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+
+  /* TABLE */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:32px; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:16px; }
+  .quick-table th { font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--muted); padding:12px 18px; text-align:left; border-bottom:1px solid var(--border2); background:var(--bg3); text-transform:uppercase; }
+  .quick-table td { padding:12px 18px; border-bottom:1px solid var(--border); vertical-align:middle; font-size:15px; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:600; }
+  .quick-table td:nth-child(2) { color:var(--muted); }
+  .mono { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:3px 8px; border-radius:4px; display:inline-block; }
+  .m-lin  { background:rgba(43,127,255,0.1);  color:var(--c-lin); }
+  .m-par  { background:rgba(194,65,12,0.1);   color:var(--c-par); }
+  .m-hyp  { background:rgba(124,58,237,0.1);  color:var(--c-hyp); }
+  .m-shi  { background:rgba(29,179,110,0.1);  color:var(--c-shift); }
+  .m-pie  { background:rgba(8,145,178,0.1);   color:var(--c-piec); }
+  .m-pro  { background:rgba(202,138,4,0.1);   color:var(--c-prop); }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* ELLIE BANNER */
+  .ellie-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(45,106,45,0.3); display:grid; grid-template-columns:200px 1fr; }
+  .ellie-img { width:200px; height:180px; object-fit:cover; object-position:center top; display:block; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:60px; }
+  .ellie-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .ellie-title { font-size:18px; font-weight:700; color:var(--c-lou); }
+  .ellie-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .ellie-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(29,179,110,0.12); color:#0f6b42; }
+  .stake-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .stake-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .stake-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .stake-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  @media(max-width:560px){ .ellie-banner{grid-template-columns:1fr;} .ellie-img{width:100%;height:120px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,32px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-lou),var(--c-lin),var(--c-par)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-shift); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; background:var(--c-lou); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; padding:0 2px; background:linear-gradient(120deg,var(--c-lou),var(--c-lin)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-lin); background:rgba(43,127,255,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#1db36e; background:rgba(29,179,110,0.15); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#1db36e; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-par); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:500px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(29,179,110,0.12); color:#0f6b42; }
+  .rank-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .rank-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .rank-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .rank-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; cursor:pointer; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-lou); background:rgba(45,106,45,0.04); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; background:var(--bg3); font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:var(--muted); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-n1 { background:#d94f8a; color:#fff; }
+  .qp-n2 { background:var(--c-lou); color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(45,106,45,0.12); color:var(--c-lou); }
+  .qp-soon { background:transparent; font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Алгебра · 9 класс</div>
+    <h1 class="hero-title">
+      <span class="ht1">Квест 2:</span><br>
+      <span class="ht2">Элли</span> <span class="ht3">против щелкунов</span>
+    </h1>
+    <p class="hero-sub">Функции и графики — шпора + 15 испытаний · The Last of Us</p>
+  </div>
+
+  <!-- ПРАВИЛА -->
+  <div class="sec-head"><span class="sec-badge rule">Главные законы</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-lin">
+      <div class="rule-icon">💙</div>
+      <div class="rule-title">Линейная функция</div>
+      <div class="rule-formula">y = kx + b</div>
+      <div class="rule-body">
+        <strong>k</strong> — угловой коэффициент (наклон прямой).<br>
+        <strong>b</strong> — точка пересечения с осью y.<br>
+        k &gt; 0 → прямая растёт; k &lt; 0 → убывает.<br>
+        k = 0 → горизонтальная прямая y = b.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Маршрут Элли — прямая линия. k — это уклон дороги: положительный — подъём, отрицательный — спуск. b — точка старта.</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">🧡</div>
+      <div class="rule-title">Парабола</div>
+      <div class="rule-formula">y = ax² + bx + c</div>
+      <div class="rule-body">
+        a &gt; 0 → ветви <strong>вверх</strong> (улыбка).<br>
+        a &lt; 0 → ветви <strong>вниз</strong> (грусть).<br>
+        Вершина: x = −b / 2a.<br>
+        Простейшая: y = x² — вершина в (0;0).
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Джоэл бросает кирпич во врага — траектория полёта это парабола. Ветви вниз (a &lt; 0), вершина — наивысшая точка броска.</div>
+    </div>
+
+    <div class="rule-card c-hyp">
+      <div class="rule-icon">💜</div>
+      <div class="rule-title">Гипербола</div>
+      <div class="rule-formula">y = k / x</div>
+      <div class="rule-body">
+        Две ветви, симметричные относительно начала координат.<br>
+        k &gt; 0 → ветви в I и III четвертях.<br>
+        k &lt; 0 → ветви во II и IV четвертях.<br>
+        Никогда не касается осей (асимптоты x=0, y=0).
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Запасы еды и число выживших — чем больше людей, тем меньше еды на каждого. Это гипербола: y = k/x.</div>
+    </div>
+
+    <div class="rule-card c-shift">
+      <div class="rule-icon">💚</div>
+      <div class="rule-title">Сдвиги графика</div>
+      <div class="rule-formula">y = f(x−a) + b</div>
+      <div class="rule-body">
+        <strong>+b</strong> вне скобок → сдвиг <strong>вверх</strong> на b.<br>
+        <strong>−b</strong> вне скобок → сдвиг <strong>вниз</strong> на b.<br>
+        <strong>f(x−a)</strong> → сдвиг <strong>вправо</strong> на a.<br>
+        <strong>f(x+a)</strong> → сдвиг <strong>влево</strong> на a.<br>
+        ⚠ Сдвиг по x — в обратную сторону от знака!
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Карта безопасной зоны сдвинулась — всё то же самое, но на другом месте. График функции тоже «переезжает», не меняя формы.</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">🔴</div>
+      <div class="rule-title">Растяжение и отражение</div>
+      <div class="rule-formula">y = a·f(x)</div>
+      <div class="rule-body">
+        |a| &gt; 1 → растяжение по вертикали.<br>
+        0 &lt; |a| &lt; 1 → сжатие по вертикали.<br>
+        a &lt; 0 → отражение относительно оси x.<br>
+        f(−x) → отражение относительно оси y.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Эбби тренируется — растяжение, как увеличение амплитуды движений. Отражение — зеркальная копия атаки.</div>
+    </div>
+
+    <div class="rule-card c-piec">
+      <div class="rule-icon">🩵</div>
+      <div class="rule-title">Кусочно-заданная функция</div>
+      <div class="rule-formula">f(x) = { f₁, x&lt;a / f₂, x≥a }</div>
+      <div class="rule-body">
+        Разные формулы на разных участках области определения.<br>
+        Строим каждый кусок отдельно на своём отрезке.<br>
+        Проверяй, включена ли граничная точка (• или ○).
+      </div>
+      <div class="rule-assoc">🎮 TLOU: В первой части Элли идёт медленно, после укуса — бежит. Разные «режимы» на разных участках — это и есть кусочная функция.</div>
+    </div>
+
+    <div class="rule-card c-prop">
+      <div class="rule-icon">💛</div>
+      <div class="rule-title">Свойства функций</div>
+      <div class="rule-formula">↗ возраст. / ↘ убывает</div>
+      <div class="rule-body">
+        <strong>Область определения</strong> — все допустимые x.<br>
+        <strong>Область значений</strong> — все возможные y.<br>
+        <strong>Нули функции</strong> — где y = 0 (пересечение с осью x).<br>
+        <strong>Знак функции</strong> — где f(x) &gt; 0 и f(x) &lt; 0.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Томми сканирует местность — он определяет, где безопасно (f &gt; 0), где опасно (f &lt; 0), и где нейтральная зона (нули функции).</div>
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="sec-head" style="margin-top:40px"><span class="sec-badge rule">Быстрый навигатор</span><div class="sec-line"></div></div>
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead><tr><th>Видишь на графике</th><th>Это...</th><th>Формула</th></tr></thead>
+      <tbody>
+        <tr><td>Прямая линия</td><td>Линейная функция</td><td><span class="mono m-lin">y = kx + b</span></td></tr>
+        <tr><td>Парабола (дуга)</td><td>Квадратичная функция</td><td><span class="mono m-par">y = ax²</span></td></tr>
+        <tr><td>Две ветви, не касаются осей</td><td>Гипербола</td><td><span class="mono m-hyp">y = k/x</span></td></tr>
+        <tr><td>График сместился вправо на a</td><td>Сдвиг: x заменён на (x−a)</td><td><span class="mono m-shi">f(x−a)</span></td></tr>
+        <tr><td>График «перевернулся»</td><td>Отражение от оси x</td><td><span class="mono m-par">y = −f(x)</span></td></tr>
+        <tr><td>Разные формулы на частях</td><td>Кусочная функция</td><td><span class="mono m-pie">f₁/f₂</span></td></tr>
+        <tr><td>Где график пересекает ось x</td><td>Нули функции</td><td><span class="mono m-pro">f(x) = 0</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deco-div"><span>Квест 2 — 15 случайных испытаний</span></div>
+
+  <!-- BANNER -->
+  <div class="ellie-banner">
+    <div class="ellie-img">🧟</div>
+    <div class="ellie-text">
+      <div class="ellie-title">🔪 Элли окружена щелкунами!</div>
+      <div class="ellie-desc">Щелкуны не видят — они слышат. Единственный выход: решить задачи по функциям и рассчитать безопасный маршрут через заражённую зону. Каждый верный ответ — шаг к выходу.</div>
+      <div class="ellie-stakes">
+        <span class="stake stake-s">13–15 ✦ Элли вырвалась!</span>
+        <span class="stake stake-a">10–12 ✦ Прорвалась с ножом</span>
+        <span class="stake stake-b">7–9 ✦ Сбежала, но ранена</span>
+        <span class="stake stake-c">4–6 ✦ Спряталась, ждёт помощи</span>
+        <span class="stake stake-d">0–3 ✦ Щелкуны нашли её...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Рассчитай маршрут — спаси Элли</div>
+      <p class="quiz-sub">Каждый верный ответ — тише шаг, дальше от щелкунов</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 15</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий шаг →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Попробовать снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ КВЕСТОВ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="triangles_quiz.html">
+        <span class="qp-num qp-n1">1</span>
+        <span class="qp-info">
+          <span class="qp-name">Халсин в окружении</span>
+          <span class="qp-sub">Геометрия треугольников</span>
+        </span>
+        <span class="qp-badge">← Главная</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num qp-n2">2</span>
+        <span class="qp-info">
+          <span class="qp-name">Элли против щелкунов</span>
+          <span class="qp-sub">Функции и графики</span>
+        </span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <a class="quest-pill" href="quest3_gale.html">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">3</span>
+        <span class="qp-info"><span class="qp-name">Проклятые предметы</span><span class="qp-sub">Уравнения и неравенства</span></span>
+        <span class="qp-badge qp-new">Новый</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const allQuestions = [
+  {
+    topic:"Линейная функция",
+    text:"<span class='hero-name'>Элли</span> бежит по прямому коридору. Её положение описывается функцией <span class='term'>y = 2x + 3</span>. Чему равно значение функции при x = 4?",
+    opts:["11","14","10","8"], ans:0,
+    fb:"✦ Верно! Элли рассчитала путь! y = 2·4 + 3 = 8 + 3 = 11. Подставляем x в формулу и считаем.",
+    trap:"Ловушка ОГЭ: не перепутай порядок — сначала умножение, потом сложение. 2·4=8, и только потом +3.",
+    hint:"Подставь x=4 в формулу y=2x+3. Сначала умножение, потом сложение.",
+    ref:"Линейная функция 💙"
+  },
+  {
+    topic:"Парабола — ветви",
+    text:"<span class='hero-name'>Джоэл</span> бросает бутылку с зажигательной смесью. Траектория — парабола <span class='term'>y = −3x² + 6x</span>. В какую сторону направлены ветви параболы?",
+    opts:["Вниз","Вверх","Горизонтально","Зависит от x"], ans:0,
+    fb:"✦ Верно! Джоэл рассчитал бросок! Коэффициент a = −3 < 0, значит ветви смотрят ВНИЗ. Знак a определяет направление ветвей.",
+    trap:"Ловушка ОГЭ: смотри только на знак a (коэффициент при x²). Отрицательный — вниз, положительный — вверх. Остальные коэффициенты не влияют на направление.",
+    hint:"Посмотри на коэффициент при x² — его знак и определяет направление ветвей параболы.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Гипербола — четверти",
+    text:"<span class='hero-name'>Дина</span> изучает карту заражения: функция <span class='term'>y = −4/x</span>. В каких четвертях находятся ветви этой гиперболы?",
+    opts:["II и IV","I и III","I и II","III и IV"], ans:0,
+    fb:"✦ Верно! Дина правильно прочитала карту! k = −4 < 0 → ветви во II и IV четвертях. Запомни: k > 0 — I и III, k < 0 — II и IV.",
+    trap:"Ловушка ОГЭ: не перепутай! k>0 → I и III (обе ветви «по диагонали» вправо), k<0 → II и IV (по диагонали влево).",
+    hint:"Знак k в формуле y=k/x определяет, в каких четвертях ветви гиперболы. Вспомни правило.",
+    ref:"Гипербола 💜"
+  },
+  {
+    topic:"Сдвиг графика",
+    text:"<span class='hero-name'>Элли</span> сдвигает маршрут на карте: функция <span class='term'>y = (x−3)²</span> — это парабола y=x², сдвинутая...",
+    opts:["Вправо на 3","Влево на 3","Вверх на 3","Вниз на 3"], ans:0,
+    fb:"✦ Верно! Элли нашла безопасный обход! f(x−3) означает сдвиг ВПРАВО на 3. Знак минус внутри скобок — сдвиг вправо (кажется парадоксом, но это так!).",
+    trap:"Ловушка ОГЭ: сдвиг по x работает НАОБОРОТ знаку! f(x−3) → вправо на 3, f(x+3) → влево на 3. Это самая частая ошибка в теме сдвигов.",
+    hint:"Сдвиг по оси x работает наоборот знаку внутри скобок. Знак минус — двигайся в другую сторону.",
+    ref:"Сдвиги графика 💚"
+  },
+  {
+    topic:"Нули функции",
+    text:"<span class='hero-name'>Томми</span> ищет нейтральную зону: нули функции <span class='term'>y = 2x − 6</span>. При каком x функция обращается в ноль?",
+    opts:["x = 3","x = 6","x = −3","x = 2"], ans:0,
+    fb:"✦ Верно! Томми нашёл нейтральную зону! 2x − 6 = 0 → 2x = 6 → x = 3. Нули функции — это решение уравнения f(x) = 0.",
+    trap:"",
+    hint:"Приравняй функцию к нулю: 2x−6=0. Реши уравнение — найдёшь ноль функции.",
+    ref:"Свойства функций 💛"
+  },
+  {
+    topic:"Парабола — вершина",
+    text:"<span class='hero-name'>Эбби</span> прыгает через препятствие. Траектория: <span class='term'>y = −x² + 4x</span>. Какова x-координата вершины параболы (наивысшая точка прыжка)?",
+    opts:["x = 2","x = 4","x = −2","x = 0"], ans:0,
+    fb:"✦ Верно! Эбби прыгнула точно! x = −b/(2a) = −4/(2·(−1)) = −4/(−2) = 2. Формула вершины — главное запомнить знак минус перед b.",
+    trap:"Ловушка ОГЭ: формула вершины x = −b/2a, а не b/2a. Не забудь знак минус перед b!",
+    hint:"Формула x-координаты вершины параболы: x = −b/(2a). Здесь a=−1, b=4.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Кусочная функция",
+    text:"<span class='hero-name'>Элли</span> меняет темп: f(x) = 2x при x < 0 и f(x) = x + 3 при x ≥ 0. Чему равно f(−2)?",
+    opts:["−4","1","−1","4"], ans:0,
+    fb:"✦ Верно! Элли вовремя переключилась! x = −2 < 0, значит используем первую формулу: f(−2) = 2·(−2) = −4.",
+    trap:"Ловушка ОГЭ: сначала определи, в какой области находится x, потом выбирай формулу. Не применяй вторую формулу для отрицательного x!",
+    hint:"Сначала проверь: x=−2 — это меньше нуля или больше? Выбери нужную часть функции.",
+    ref:"Кусочно-заданная функция 🩵"
+  },
+  {
+    topic:"Линейная функция — наклон",
+    text:"<span class='hero-name'>Джоэл</span> оценивает уклон тоннеля. Функция <span class='term'>y = −5x + 2</span>. Функция возрастает или убывает?",
+    opts:["Убывает","Возрастает","Постоянна","Зависит от x"], ans:0,
+    fb:"✦ Верно! Джоэл выбрал спуск! k = −5 < 0 → функция убывает. Правило: знак k определяет характер функции.",
+    trap:"",
+    hint:"Посмотри на коэффициент k при x. Его знак определяет, растёт или убывает функция.",
+    ref:"Линейная функция 💙"
+  },
+  {
+    topic:"Сдвиг — вертикальный",
+    text:"<span class='hero-name'>Дина</span> поднимает уровень опасности: график функции <span class='term'>y = x² + 5</span> — это парабола y=x², сдвинутая...",
+    opts:["Вверх на 5","Вниз на 5","Вправо на 5","Влево на 5"], ans:0,
+    fb:"✦ Верно! Дина оценила угрозу! +5 вне скобок — сдвиг вверх на 5. Всё что прибавляется к f(x) снаружи — это вертикальный сдвиг.",
+    trap:"Ловушка ОГЭ: +b вне скобок — сдвиг вверх, −b вне скобок — сдвиг вниз. Не перепутай с горизонтальным сдвигом!",
+    hint:"Константа, прибавленная к функции снаружи, отвечает за вертикальный сдвиг. В какую сторону?",
+    ref:"Сдвиги графика 💚"
+  },
+  {
+    topic:"Гипербола — область значений",
+    text:"<span class='hero-name'>Томми</span> анализирует запасы: функция <span class='term'>y = 3/x</span>. Какое значение y НЕ входит в область значений этой функции?",
+    opts:["y = 0","y = 3","y = −3","y = 0.001"], ans:0,
+    fb:"✦ Верно! Томми знает запасы точно! Гипербола никогда не равна нулю — ось y является асимптотой. При любом x функция y=k/x ≠ 0.",
+    trap:"Ловушка ОГЭ: гипербола не касается ни одной из осей координат! Значит y=0 недостижимо, и x=0 — вне области определения.",
+    hint:"Гипербола y=k/x имеет асимптоты. Вспомни — каких значений y она никогда не принимает?",
+    ref:"Гипербола 💜"
+  },
+  {
+    topic:"Отражение графика",
+    text:"<span class='hero-name'>Эбби</span> видит зеркальное отражение маршрута. Функция <span class='term'>y = −x²</span> — это парабола y=x², отражённая относительно...",
+    opts:["Оси x","Оси y","Начала координат","Прямой y=x"], ans:0,
+    fb:"✦ Верно! Эбби увидела отражение! y = −f(x) — минус перед всей функцией означает отражение относительно оси x (переворот вертикально).",
+    trap:"Ловушка ОГЭ: −f(x) → отражение относительно оси x (ветви смотрят вниз). f(−x) → отражение относительно оси y. Разные вещи!",
+    hint:"Минус перед функцией и минус внутри аргумента дают разные отражения. Здесь минус перед всей функцией.",
+    ref:"Растяжение и отражение 🔴"
+  },
+  {
+    topic:"Кусочная функция",
+    text:"<span class='hero-name'>Элли</span> и <span class='hero-name'>Дина</span> планируют маршрут: f(x) = x² при x ≤ 1 и f(x) = 2x − 1 при x > 1. Совпадают ли значения функции при x=1 для обеих частей?",
+    opts:["Да, обе дают 1","Нет, первая даёт 1, вторая — 2","Нет, первая даёт 1, вторая — 0","Да, обе дают 2"], ans:0,
+    fb:"✦ Верно! Маршрут состыковался! При x=1: первая часть — 1²=1. Вторая часть — 2·1−1=1. Обе дают 1 — функция непрерывна в точке x=1.",
+    trap:"",
+    hint:"Подставь x=1 в каждую из двух формул и сравни результаты.",
+    ref:"Кусочно-заданная функция 🩵"
+  },
+  {
+    topic:"Свойства функции — знак",
+    text:"<span class='hero-name'>Томми</span> сканирует зону: функция <span class='term'>y = x − 4</span>. При каких x функция принимает отрицательные значения (опасная зона)?",
+    opts:["x < 4","x > 4","x < −4","x > −4"], ans:0,
+    fb:"✦ Верно! Томми определил опасную зону! y < 0 → x − 4 < 0 → x < 4. Функция отрицательна левее нуля функции.",
+    trap:"",
+    hint:"Реши неравенство y < 0, то есть x−4 < 0. Перенеси 4 в правую часть.",
+    ref:"Свойства функций 💛"
+  },
+  {
+    topic:"Парабола — точки пересечения с осью x",
+    text:"<span class='hero-name'>Джоэл</span> рассчитывает, где траектория кирпича коснётся земли (ось x). Функция <span class='term'>y = x² − 9</span>. Найди нули параболы.",
+    opts:["x = 3 и x = −3","x = 9 и x = −9","x = 3","x = 0"], ans:0,
+    fb:"✦ Верно! Джоэл точно рассчитал! x²−9=0 → x²=9 → x=±3. Парабола пересекает ось x в двух точках.",
+    trap:"Ловушка ОГЭ: x²=9 даёт ДВА корня: x=3 и x=−3. Не забудь отрицательный корень!",
+    hint:"Приравняй x²−9=0 и реши. Квадратный корень даёт два значения — не забудь оба.",
+    ref:"Парабола 🧡"
+  },
+  {
+    topic:"Линейная функция — построение",
+    text:"<span class='hero-name'>Элли</span> прокладывает путь: функция <span class='term'>y = 3x − 6</span>. Где прямая пересекает ось y (при x=0)?",
+    opts:["(0; −6)","(0; 3)","(2; 0)","(0; 6)"], ans:0,
+    fb:"✦ Верно! Элли нашла точку старта! При x=0: y=3·0−6=−6. Точка (0; −6). В формуле y=kx+b свободный член b — это всегда точка пересечения с осью y.",
+    trap:"Ловушка ОГЭ: не перепутай пересечение с осью y (ставим x=0) и пересечение с осью x (ставим y=0). Это разные точки!",
+    hint:"Чтобы найти пересечение с осью y, подставь x=0 в формулу.",
+    ref:"Линейная функция 💙"
+  }
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+let questions, cur, score, attempts, firstWrong, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0, 15);
+  cur = 0; score = 0; attempts = 0; firstWrong = -1; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0; firstWrong = -1;
+
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+  qheader.innerHTML = `<span class="q-source">The Last of Us</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} правильно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий шаг →' : 'Узнать судьбу Элли →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (firstWrong === -1) firstWrong = i;
+    if (attempts === 1) {
+      qfb.innerHTML = `😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай ещё!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий шаг →' : 'Узнать судьбу Элли →';
+    }
+  }
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+  const pct = score / questions.length;
+  let emoji, title, story, rankText, rankClass;
+  if (score >= 13) {
+    emoji='🏃'; title='Элли вырвалась!';
+    story='Ты рассчитала маршрут идеально — Элли скользнула сквозь щелкунов бесшумно, как тень. Дина ждала снаружи. «Я знала, что ты справишься», — сказала она.';
+    rankText='⚡ Мастер функций'; rankClass='rank-s';
+  } else if (score >= 10) {
+    emoji='🔪'; title='Прорвалась с ножом!';
+    story='Маршрут был почти идеальным, но один щелкун учуял. Элли выхватила нож и прорвалась. Пара царапин — ничего страшного. «Живём», — выдохнула она.';
+    rankText='🎯 Уверенный навигатор'; rankClass='rank-a';
+  } else if (score >= 7) {
+    emoji='🩹'; title='Сбежала, но ранена';
+    story='Пришлось бежать — маршрут оказался с ошибками. Элли выбралась, но задела острый угол и порезала руку. Дина молча наложила повязку.';
+    rankText='📐 Учишься на ходу'; rankClass='rank-b';
+  } else if (score >= 4) {
+    emoji='🫣'; title='Спряталась, ждёт помощи';
+    story='Элли забилась под стол в дальнем углу. Щелкуны кружат рядом. Она шепчет в рацию: «Дина... мне нужна помощь. И учебник по функциям».';
+    rankText='📖 Повтори шпору ещё раз'; rankClass='rank-c';
+  } else {
+    emoji='🧟'; title='Щелкуны нашли её...';
+    story='Маршрут не сработал. Щелкун повернул голову — щёлк, щёлк. «В следующий раз учи сдвиги графиков», — успела подумать Элли.';
+    rankText='📚 Начни со шпоры сначала'; rankClass='rank-d';
+  }
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rstory').textContent = story;
+  document.getElementById('rrank').textContent = rankText;
+  document.getElementById('rrank').className = 'results-rank ' + rankClass;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>

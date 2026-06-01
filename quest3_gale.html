@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест 3: Проклятые предметы — Уравнения ОГЭ</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #eeebf0;
+    --bg2:     #f9f7fa;
+    --bg3:     #e5e1ea;
+    --bg4:     #dbd6e3;
+    --c-lin:   #2b7fff;
+    --c-quad:  #c2410c;
+    --c-frac:  #7c3aed;
+    --c-ineq:  #0891b2;
+    --c-sys:   #1db36e;
+    --c-disc:  #d94f8a;
+    --c-bg3:   #7c3aed;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 0%,  rgba(124,58,237,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(43,127,255,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(217,79,138,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:180px; height:2px; border-radius:2px; background:linear-gradient(90deg,transparent,var(--c-frac),var(--c-disc),var(--c-lin),transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(30px,5vw,52px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color:var(--c-frac); }
+  .ht2 { color:var(--c-disc); }
+  .ht3 { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-lin::after  { background:var(--c-lin); }
+  .rule-card.c-quad::after { background:var(--c-quad); }
+  .rule-card.c-frac::after { background:var(--c-frac); }
+  .rule-card.c-ineq::after { background:var(--c-ineq); }
+  .rule-card.c-sys::after  { background:var(--c-sys); }
+  .rule-card.c-disc::after { background:var(--c-disc); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:14px; font-weight:700; padding:5px 10px; border-radius:6px; display:inline-block; margin:4px 0 8px; }
+  .c-lin  .rule-formula { background:rgba(43,127,255,0.1);  color:var(--c-lin); }
+  .c-quad .rule-formula { background:rgba(194,65,12,0.1);   color:var(--c-quad); }
+  .c-frac .rule-formula { background:rgba(124,58,237,0.1);  color:var(--c-frac); }
+  .c-ineq .rule-formula { background:rgba(8,145,178,0.1);   color:var(--c-ineq); }
+  .c-sys  .rule-formula { background:rgba(29,179,110,0.1);  color:var(--c-sys); }
+  .c-disc .rule-formula { background:rgba(217,79,138,0.1);  color:var(--c-disc); }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .warn { display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color:var(--c-quad); }
+
+  /* TABLE */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:32px; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:15px; }
+  .quick-table th { font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--muted); padding:12px 18px; text-align:left; border-bottom:1px solid var(--border2); background:var(--bg3); text-transform:uppercase; }
+  .quick-table td { padding:11px 18px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:600; }
+  .quick-table td:nth-child(2) { color:var(--muted); font-size:14px; }
+  .mono { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 8px; border-radius:4px; display:inline-block; }
+  .m-lin  { background:rgba(43,127,255,0.1);  color:var(--c-lin); }
+  .m-quad { background:rgba(194,65,12,0.1);   color:var(--c-quad); }
+  .m-frac { background:rgba(124,58,237,0.1);  color:var(--c-frac); }
+  .m-ineq { background:rgba(8,145,178,0.1);   color:var(--c-ineq); }
+  .m-sys  { background:rgba(29,179,110,0.1);  color:var(--c-sys); }
+  .m-disc { background:rgba(217,79,138,0.1);  color:var(--c-disc); }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* GALE BANNER */
+  .gale-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(124,58,237,0.3); display:grid; grid-template-columns:200px 1fr; }
+  .gale-img { width:200px; height:200px; object-fit:cover; object-position:center top; display:block; }
+  .gale-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .gale-title { font-size:18px; font-weight:700; color:var(--c-frac); }
+  .gale-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .gale-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(29,179,110,0.12);  color:#0f6b42; }
+  .stake-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .stake-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .stake-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .stake-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  @media(max-width:560px){ .gale-banner{grid-template-columns:1fr;} .gale-img{width:100%;height:180px;object-position:top;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,32px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-frac),var(--c-disc),var(--c-lin)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-sys); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; background:var(--c-bg3); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.7; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; background:linear-gradient(120deg,var(--c-frac),var(--c-disc)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .eq { font-family:'Space Mono',monospace; font-size:16px; font-weight:700; background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2); color:var(--c-frac); padding:6px 12px; border-radius:6px; display:inline-block; margin:4px 0; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-frac); background:rgba(124,58,237,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#1db36e; background:rgba(29,179,110,0.15); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#1db36e; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-img { width:120px; height:120px; object-fit:cover; object-position:top; border-radius:50%; margin:0 auto 16px; display:block; border:3px solid var(--c-frac); }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-frac); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:500px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(29,179,110,0.12);  color:#0f6b42; }
+  .rank-a { background:rgba(43,127,255,0.12);  color:#1e40af; }
+  .rank-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .rank-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .rank-d { background:rgba(220,38,38,0.12);   color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; cursor:pointer; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-frac); background:rgba(124,58,237,0.04); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:var(--bg3); color:var(--muted); }
+  .qp-n1 { background:#d94f8a; color:#fff; }
+  .qp-n2 { background:#2d6a2d; color:#fff; }
+  .qp-n3 { background:var(--c-frac); color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(124,58,237,0.12); color:var(--c-frac); }
+  .qp-soon { background:transparent; font-size:14px; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Алгебра · 9 класс</div>
+    <h1 class="hero-title">
+      <span class="ht1">Квест 3:</span><br>
+      <span class="ht2">Проклятые</span> <span class="ht3">предметы</span>
+    </h1>
+    <p class="hero-sub">Уравнения и неравенства — шпора + 10 испытаний · Baldur's Gate 3</p>
+  </div>
+
+  <div class="sec-head"><span class="sec-badge rule">Главные законы</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-lin">
+      <div class="rule-icon">💙</div>
+      <div class="rule-title">Линейное уравнение</div>
+      <div class="rule-formula">ax + b = 0</div>
+      <div class="rule-body">
+        Переносишь слагаемые: все с <strong>x</strong> — влево, числа — вправо.<br>
+        Затем делишь обе части на коэффициент при x.<br>
+        <span class="warn">⚡ Если ax = 0, то x = 0 (не дели на x, не теряй корень!)</span>
+      </div>
+      <div class="rule-assoc">🎮 BG3: Гейл решает уравнение баланса маны. Переносишь лишнее на другую сторону — как выкладываешь лишние артефакты из инвентаря.</div>
+    </div>
+
+    <div class="rule-card c-disc">
+      <div class="rule-icon">💗</div>
+      <div class="rule-title">Дискриминант</div>
+      <div class="rule-formula">D = b² − 4ac</div>
+      <div class="rule-body">
+        D &gt; 0 → два корня: <strong>x = (−b ± √D) / 2a</strong><br>
+        D = 0 → один корень: <strong>x = −b / 2a</strong><br>
+        D &lt; 0 → корней нет (в ОГЭ такое тоже встречается!)<br>
+        <span class="warn">⚡ Формула корней: x = (−b ± √D) / 2a</span>
+      </div>
+      <div class="rule-assoc">🎮 BG3: D — это индикатор проклятья на предмете. D&gt;0 — два пути снять проклятье. D=0 — один способ. D&lt;0 — предмет нельзя расколдовать.</div>
+    </div>
+
+    <div class="rule-card c-quad">
+      <div class="rule-icon">🧡</div>
+      <div class="rule-title">Квадратное уравнение</div>
+      <div class="rule-formula">ax² + bx + c = 0</div>
+      <div class="rule-body">
+        <strong>Шаг 1:</strong> считаешь дискриминант D = b²−4ac<br>
+        <strong>Шаг 2:</strong> если D ≥ 0, считаешь корни по формуле<br>
+        <strong>Шаг 3:</strong> проверяешь подстановкой<br>
+        <span class="warn">⚡ Неполное: ax²+c=0 → x²=−c/a → x=±√(−c/a)</span>
+      </div>
+      <div class="rule-assoc">🎮 BG3: Проклятый Некромикон требует двух ключей (два корня). Гейл считает дискриминант — есть ли вообще решение, прежде чем тратить заклинание.</div>
+    </div>
+
+    <div class="rule-card c-frac">
+      <div class="rule-icon">💜</div>
+      <div class="rule-title">Дробное уравнение и ОДЗ</div>
+      <div class="rule-formula">P(x) / Q(x) = 0</div>
+      <div class="rule-body">
+        <strong>ОДЗ</strong> — значения x, при которых знаменатель ≠ 0.<br>
+        Находишь ОДЗ <em>до</em> решения, проверяешь корни <em>после</em>.<br>
+        Корень, при котором знаменатель = 0 — <strong>посторонний</strong>, его отбрасываешь.<br>
+        <span class="warn">⚡ Всегда проверяй ОДЗ — это самая частая ловушка ОГЭ!</span>
+      </div>
+      <div class="rule-assoc">🎮 BG3: ОДЗ — как список запрещённых заклинаний в Академии Волшебства. Гейл знает: некоторые решения «взорвутся» — их нельзя использовать.</div>
+    </div>
+
+    <div class="rule-card c-ineq">
+      <div class="rule-icon">🩵</div>
+      <div class="rule-title">Линейное неравенство</div>
+      <div class="rule-formula">ax + b &gt; 0</div>
+      <div class="rule-body">
+        Решается как уравнение, но:<br>
+        <strong>При умножении / делении на отрицательное число — знак неравенства меняется на противоположный!</strong><br>
+        Ответ записывается как промежуток: x &gt; 3 или x ∈ (3; +∞).
+      </div>
+      <div class="rule-assoc">🎮 BG3: Астарион объясняет: «Если умножаешь на отрицательное — всё переворачивается». Как его взгляд на мир после превращения в вампира.</div>
+    </div>
+
+    <div class="rule-card c-sys">
+      <div class="rule-icon">💚</div>
+      <div class="rule-title">Система неравенств</div>
+      <div class="rule-formula">{ ax &gt; b / cx ≤ d }</div>
+      <div class="rule-body">
+        Решаешь каждое неравенство отдельно.<br>
+        Рисуешь числовую ось, отмечаешь оба промежутка.<br>
+        Ответ — <strong>пересечение</strong> (где оба выполняются одновременно).<br>
+        <span class="warn">⚡ Если пересечения нет — система не имеет решений.</span>
+      </div>
+      <div class="rule-assoc">🎮 BG3: Шэдоухарт и Карлах одновременно указывают безопасный путь. Идти можно только там, где они обе согласны — это пересечение промежутков.</div>
+    </div>
+
+  </div>
+
+  <div class="sec-head" style="margin-top:40px"><span class="sec-badge rule">Алгоритм решения</span><div class="sec-line"></div></div>
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead><tr><th>Тип задачи</th><th>Главная ловушка</th><th>Метод</th></tr></thead>
+      <tbody>
+        <tr><td>Линейное уравнение</td><td>Потерять корень при делении на x</td><td><span class="mono m-lin">ax = b → x = b/a</span></td></tr>
+        <tr><td>Квадратное уравнение</td><td>Посчитать D неправильно</td><td><span class="mono m-disc">D = b²−4ac</span></td></tr>
+        <tr><td>Дробное уравнение</td><td>Не проверить ОДЗ</td><td><span class="mono m-frac">Q(x) ≠ 0</span></td></tr>
+        <tr><td>Линейное неравенство</td><td>Не изменить знак при делении на −a</td><td><span class="mono m-ineq">÷(−) → знак ↔</span></td></tr>
+        <tr><td>Система неравенств</td><td>Взять объединение вместо пересечения</td><td><span class="mono m-sys">∩ (И, а не ИЛИ)</span></td></tr>
+        <tr><td>Неполное квадратное</td><td>Забыть ± при извлечении корня</td><td><span class="mono m-quad">x = ±√(c/a)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deco-div"><span>Квест 3 — 10 испытаний Гейла</span></div>
+
+  <!-- GALE BANNER -->
+  <div class="gale-banner">
+    <img class="gale-img" src="https://mktg-assets.tcgplayer.com/fit-in/1000x1000/filters:quality(75)/content/opengraph/MTG-Gale-Waterdeep-Prodigy-CLB.png" alt="Гейл из Baldur's Gate 3" onerror="this.style.display='none'">
+    <div class="gale-text">
+      <div class="gale-title">✨ Гейл попал под действие проклятых предметов!</div>
+      <div class="gale-desc">Некромикон, Свиток Вечной Тьмы, Кольцо Мьеркул — каждый артефакт требует решения уравнения, чтобы снять проклятье. Помоги Гейлу расколдовать их до рассвета — иначе магическая нестабильность уничтожит лагерь.</div>
+      <div class="gale-stakes">
+        <span class="stake stake-s">9–10 ✦ Все проклятья сняты!</span>
+        <span class="stake stake-a">7–8 ✦ Почти всё под контролем</span>
+        <span class="stake stake-b">5–6 ✦ Часть предметов осталась</span>
+        <span class="stake stake-c">3–4 ✦ Нестабильность нарастает</span>
+        <span class="stake stake-d">0–2 ✦ Взрыв неизбежен...</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Расколдуй артефакты — спаси лагерь</div>
+      <p class="quiz-sub">Каждый верный ответ снимает одно проклятье с Гейла</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 расколдовано</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 10</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий артефакт →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <img class="results-img" src="https://mktg-assets.tcgplayer.com/fit-in/1000x1000/filters:quality(75)/content/opengraph/MTG-Gale-Waterdeep-Prodigy-CLB.png" alt="Гейл" onerror="this.style.display='none'">
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Попробовать снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ КВЕСТОВ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="triangles_quiz.html">
+        <span class="qp-num qp-n1">1</span>
+        <span class="qp-info"><span class="qp-name">Халсин в окружении</span><span class="qp-sub">Геометрия треугольников</span></span>
+        <span class="qp-badge">← Главная</span>
+      </a>
+      <a class="quest-pill" href="quest2_ellie.html">
+        <span class="qp-num qp-n2">2</span>
+        <span class="qp-info"><span class="qp-name">Элли против щелкунов</span><span class="qp-sub">Функции и графики</span></span>
+        <span class="qp-badge"></span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num qp-n3">3</span>
+        <span class="qp-info"><span class="qp-name">Проклятые предметы</span><span class="qp-sub">Уравнения и неравенства</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const allQuestions = [
+  {
+    topic:"Линейное уравнение",
+    text:"<span class='hero-name'>Гейл</span> нашёл в Некромиконе заклинание-замок: чтобы открыть книгу, нужно решить уравнение. <span class='eq'>3x − 9 = 0</span>. Чему равен x?",
+    opts:["3","−3","9","0"], ans:0,
+    fb:"✦ Верно! Книга открылась! 3x = 9 → x = 3. Переносим −9 вправо, делим обе части на 3.",
+    trap:"Ловушка ОГЭ: не переноси знак — при переносе через равно знак меняется. −9 становится +9 справа.",
+    hint:"Перенеси −9 в правую часть (знак изменится), затем раздели обе части на коэффициент при x.",
+    ref:"Линейное уравнение 💙"
+  },
+  {
+    topic:"Дискриминант",
+    text:"Кольцо Мьеркул заблокировано квадратным уравнением. <span class='hero-name'>Гейл</span> считает дискриминант: <span class='eq'>x² − 5x + 6 = 0</span>. Чему равен D?",
+    opts:["1","−1","25","11"], ans:0,
+    fb:"✦ Верно! Кольцо поддаётся! D = b²−4ac = (−5)²−4·1·6 = 25−24 = 1.",
+    trap:"Ловушка ОГЭ: b = −5, и в формуле b² = (−5)² = 25, а не −25. Минус исчезает при возведении в квадрат!",
+    hint:"Формула дискриминанта: D = b²−4ac. Здесь a=1, b=−5, c=6. Осторожно со знаком b при возведении в квадрат.",
+    ref:"Дискриминант 💗"
+  },
+  {
+    topic:"Квадратное уравнение",
+    text:"Свиток Вечной Тьмы требует найти оба корня. <span class='hero-name'>Гейл</span> уже посчитал D=1 для уравнения <span class='eq'>x² − 5x + 6 = 0</span>. Каковы корни?",
+    opts:["x=2 и x=3","x=−2 и x=−3","x=5 и x=6","x=1 и x=6"], ans:0,
+    fb:"✦ Верно! Свиток расколдован! x = (5±√1)/2. x₁ = (5+1)/2 = 3, x₂ = (5−1)/2 = 2.",
+    trap:"Ловушка ОГЭ: формула x=(−b±√D)/2a, не забывай делить на 2a. Здесь a=1, b=−5, поэтому −b = 5.",
+    hint:"Используй формулу x=(−b±√D)/2a. b=−5, значит −b=5. √D=√1=1. Считай два корня отдельно: с + и с −.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Неполное квадратное",
+    text:"Амулет Мистры заперт неполным уравнением: <span class='eq'>x² − 16 = 0</span>. Сколько корней и каковы они?",
+    opts:["x=4 и x=−4","x=4","x=8 и x=−8","Корней нет"], ans:0,
+    fb:"✦ Верно! Амулет светится! x²=16 → x=±4. Два корня: 4 и −4. Неполное квадратное без x всегда даёт два симметричных корня (или ноль).",
+    trap:"Ловушка ОГЭ: √16=4, но ответ x=4 неполный! При извлечении корня из x² всегда пиши ±. Оба корня нужны для полного ответа.",
+    hint:"Перенеси −16 вправо: x²=16. Извлекай корень — не забудь знак ±.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Дробное уравнение — ОДЗ",
+    text:"Проклятый Гримуар требует решить уравнение. <span class='hero-name'>Гейл</span> видит: <span class='eq'>6/x = 2</span>. Но сначала — чему не может равняться x (ОДЗ)?",
+    opts:["x ≠ 0","x ≠ 2","x ≠ 6","x ≠ 3"], ans:0,
+    fb:"✦ Верно! Гейл не взорвался! ОДЗ: знаменатель x ≠ 0. Само решение: 6 = 2x → x = 3. x=3 не нарушает ОДЗ — ответ принят.",
+    trap:"Ловушка ОГЭ: ОДЗ определяется из знаменателя ДО решения. Потом проверяешь, не попал ли корень под запрет.",
+    hint:"ОДЗ — это условие, при котором знаменатель не равен нулю. Посмотри, что стоит в знаменателе.",
+    ref:"Дробное уравнение и ОДЗ 💜"
+  },
+  {
+    topic:"Дробное уравнение — посторонний корень",
+    text:"Кинжал Шар требует решить: <span class='eq'>(x²−4)/(x−2) = 0</span>. <span class='hero-name'>Гейл</span> находит корень x=2. Принять ли этот ответ?",
+    opts:["Нет — x=2 посторонний корень","Да — x=2 верный ответ","Да, и ещё x=−2","Уравнение не имеет решений"], ans:0,
+    fb:"✦ Верно! Гейл распознал ловушку! При x=2 знаменатель (x−2)=0 — деление на ноль! x=2 нарушает ОДЗ и является посторонним корнем. Истинный корень: x=−2 (числитель x²−4=(x−2)(x+2)=0 при x=−2, и знаменатель ≠ 0).",
+    trap:"Ловушка ОГЭ: посторонний корень — это корень уравнения, который обнуляет знаменатель. Он выглядит правильным, но его нужно отбросить.",
+    hint:"Проверь: при x=2 что происходит со знаменателем x−2? Если он обнуляется — это посторонний корень, его нельзя принять.",
+    ref:"Дробное уравнение и ОДЗ 💜"
+  },
+  {
+    topic:"Линейное неравенство",
+    text:"Проклятый меч Балдура требует найти безопасную зону: <span class='eq'>−2x + 6 > 0</span>. При каких x неравенство выполняется?",
+    opts:["x < 3","x > 3","x < −3","x > −3"], ans:0,
+    fb:"✦ Верно! Безопасная зона найдена! −2x > −6 → делим на −2 → x < 3. Знак меняется при делении на отрицательное!",
+    trap:"Ловушка ОГЭ: при делении или умножении на отрицательное число знак неравенства переворачивается. > становится <. Самая частая ошибка в теме!",
+    hint:"Перенеси 6 вправо: −2x > −6. Теперь дели обе части на −2. Не забудь — знак неравенства меняется!",
+    ref:"Линейное неравенство 🩵"
+  },
+  {
+    topic:"Система неравенств",
+    text:"Шэдоухарт и Карлах указывают безопасный путь через Подземье. Вместе: <span class='eq'>x > 1</span> и <span class='eq'>x ≤ 4</span>. Какой ответ?",
+    opts:["1 < x ≤ 4","x > 1 или x ≤ 4","x ≤ 1","x > 4"], ans:0,
+    fb:"✦ Верно! Гейл нашёл путь! Пересечение двух условий: x больше 1 И не больше 4. Ответ: 1 < x ≤ 4, или x ∈ (1; 4].",
+    trap:"Ловушка ОГЭ: система неравенств — это И (пересечение), а не ИЛИ (объединение). Нужны только те x, которые удовлетворяют ОБОИМ неравенствам одновременно.",
+    hint:"Нарисуй числовую ось. Отметь x>1 и x≤4. Где они пересекаются — там и ответ.",
+    ref:"Система неравенств 💚"
+  },
+  {
+    topic:"Квадратное неравенство",
+    text:"Некромант запер выход неравенством. <span class='hero-name'>Гейл</span> решает: <span class='eq'>x² − 4 < 0</span>. При каких x выполняется?",
+    opts:["−2 < x < 2","x < −2 или x > 2","x > 2","x < −2"], ans:0,
+    fb:"✦ Верно! Выход открыт! Корни уравнения x²−4=0: x=±2. Парабола смотрит вверх (a>0), ниже нуля — между корнями. Ответ: −2 < x < 2.",
+    trap:"Ловушка ОГЭ: a>0 (ветви вверх) — функция отрицательна МЕЖДУ корнями. a<0 (ветви вниз) — функция отрицательна ВНЕ корней. Не перепутай!",
+    hint:"Найди корни уравнения x²−4=0. Парабола с a>0 — между корнями она ниже нуля. Там и ответ.",
+    ref:"Квадратное уравнение 🧡"
+  },
+  {
+    topic:"Дискриминант — нет корней",
+    text:"Последний артефакт — Орб Аннигиляции. <span class='hero-name'>Гейл</span> считает D для уравнения <span class='eq'>x² + 2x + 5 = 0</span>. Каков D и сколько корней?",
+    opts:["D = −16, корней нет","D = 16, два корня","D = 0, один корень","D = 4, два корня"], ans:0,
+    fb:"✦ Верно! Гейл не стал тратить магию! D = 4 − 20 = −16 < 0. Корней нет — уравнение неразрешимо в вещественных числах. Орб не имеет слабых мест!",
+    trap:"Ловушка ОГЭ: D = b²−4ac = 2²−4·1·5 = 4−20 = −16. Отрицательный D означает — корней нет вовсе. Это тоже правильный ответ на ОГЭ!",
+    hint:"Считай D = b²−4ac. b=2, a=1, c=5. Если D получится отрицательным — корней нет.",
+    ref:"Дискриминант 💗"
+  }
+];
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, score, attempts, firstWrong, answered;
+let shuffledOpts=[], correctIdx=0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0,10);
+  cur=0; score=0; attempts=0; firstWrong=-1; answered=false;
+}
+initQuiz();
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+function renderQ() {
+  const q=questions[cur];
+  answered=false; attempts=0; firstWrong=-1;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);
+  correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate'); void qcard.offsetWidth; qcard.classList.add('question-animate');
+  qheader.innerHTML=`<span class="q-source">Baldur's Gate III</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box'; qfb.innerHTML=''; qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} расколдовано`;
+}
+
+function answer(i) {
+  if(answered) return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0) score++;
+    scoredisp.textContent=`✦ ${score} расколдовано`;
+    btns.forEach(b=>b.disabled=true);
+    btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb; qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий артефакт →':'Узнать судьбу Гейла →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong'); btns[i].disabled=true;
+    if(firstWrong===-1) firstWrong=i;
+    if(attempts===1){
+      qfb.innerHTML=`😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай ещё!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;
+      btns.forEach(b=>b.disabled=true);
+      btns[correctIdx].classList.add('correct');
+      let fb=`😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb; qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий артефакт →':'Узнать судьбу Гейла →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{
+  cur++;
+  if(cur>=questions.length){showResults();return;}
+  renderQ();
+});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('rscore').textContent=score;
+  document.getElementById('rtotal').textContent=`из ${questions.length} артефактов`;
+  let title,story,rankText,rankClass;
+  if(score>=9){
+    title='✨ Все проклятья сняты!';
+    story='Гейл склонил голову — магическая нестабильность исчезла. «Ты понимаешь уравнения лучше, чем некоторые профессора Академии Волшебства», — сказал он тихо. Лагерь спасён.';
+    rankText='🔮 Архимаг уравнений'; rankClass='rank-s';
+  } else if(score>=7){
+    title='💫 Почти всё под контролем';
+    story='Большинство артефактов расколдованы. Гейл устало улыбнулся: «Нестабильность ещё ощущается, но мы справились с самым опасным». Несколько предметов подождут до утра.';
+    rankText='📖 Опытный чародей'; rankClass='rank-a';
+  } else if(score>=5){
+    title='⚡ Часть предметов осталась';
+    story='Половина артефактов расколдована. Гейл морщится: «Нестабильность ощутима. Нужно ещё поработать с дискриминантами и ОДЗ. Утром продолжим».';
+    rankText='📐 Ученик Академии'; rankClass='rank-b';
+  } else if(score>=3){
+    title='🌀 Нестабильность нарастает';
+    story='Гейл смотрит на светящиеся артефакты с тревогой. «Видишь эти трещины в магическом поле? Это из-за нерешённых уравнений. Нам нужна срочная тренировка».';
+    rankText='📚 Повтори шпору'; rankClass='rank-c';
+  } else {
+    title='💥 Взрыв неизбежен...';
+    story='Гейл закрывает глаза: «Магическая нестабильность критическая. Я успею телепортировать всех... если ты срочно повторишь формулу дискриминанта и правило знака при неравенствах».';
+    rankText='🔁 Начни со шпоры'; rankClass='rank-d';
+  }
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  document.getElementById('rrank').textContent=rankText;
+  document.getElementById('rrank').className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
