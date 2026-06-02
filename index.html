@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ 2026 — Прокачай знания</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Rubik:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Шапка — тёмная */
+  --hero-bg:   #0b0d12;
+  --hero-text: #eef0f8;
+  --hero-muted:#9ca3af;
+
+  /* Тело — светлое */
+  --bg:    #f2eeea;
+  --bg2:   #faf8f5;
+  --bg3:   #ece7df;
+  --bg4:   #e4ddd4;
+  --text:  #1c1916;
+  --muted: #6b6455;
+  --border: rgba(0,0,0,0.09);
+  --border2:rgba(0,0,0,0.14);
+
+  /* предметы */
+  --math:  #7c3aed;
+  --bio:   #16a34a;
+  --soc:   #0284c7;
+  --rus:   #db2777;
+  --chem:  #ea580c;
+  --lit:   #8b5cf6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Inter',sans-serif; font-size:15px; line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── HERO — тёмная шапка ── */
+.hero-wrap {
+  background:var(--hero-bg);
+  position:relative; overflow:hidden;
+}
+.hero-wrap::before {
+  content:'';
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(167,139,250,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 90%,  rgba(244,114,182,0.1) 0%, transparent 50%);
+}
+
+.wrap { position:relative; z-index:1; max-width:1020px; margin:0 auto; padding:0 20px 80px; }
+
+/* ── HERO ── */
+.hero {
+  padding:72px 0 56px;
+  text-align:center;
+  position:relative; z-index:1;
+  color:var(--hero-text);
+}
+.hero-kicker {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'Rubik',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase;
+  color:#a78bfa; margin-bottom:20px;
+  padding:6px 16px; border:1px solid rgba(167,139,250,0.35);
+  border-radius:20px; background:rgba(167,139,250,0.1);
+}
+.hero-title {
+  font-family:'Unbounded', sans-serif;
+  font-size:clamp(28px,6vw,64px); font-weight:900;
+  line-height:1.05; letter-spacing:-0.02em;
+  margin-bottom:10px;
+}
+.hero-title .line1 { color:var(--hero-text); }
+.hero-title .line2 {
+  background:linear-gradient(90deg, #a78bfa, #f472b6, #4ade80);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hero-tagline {
+  font-family:'Rubik',sans-serif; font-size:17px; font-weight:600; color:#fbbf24;
+  margin-bottom:6px; letter-spacing:0.01em;
+}
+.hero-sub {
+  font-family:'Inter',sans-serif; font-size:15px; color:var(--hero-muted); max-width:440px; margin:0 auto 28px;
+  line-height:1.65;
+}
+.hero-badges {
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+}
+.hbadge {
+  font-family:'Inter',sans-serif; font-size:12px; font-weight:500;
+  padding:6px 16px; border-radius:20px; border:1px solid;
+}
+.hb-1 { color:#a78bfa; border-color:rgba(167,139,250,0.35); background:rgba(167,139,250,0.1); }
+.hb-2 { color:#4ade80; border-color:rgba(74,222,128,0.35);  background:rgba(74,222,128,0.1); }
+.hb-3 { color:#f472b6; border-color:rgba(244,114,182,0.35); background:rgba(244,114,182,0.1); }
+.hb-4 { color:#fbbf24; border-color:rgba(251,191,36,0.35);  background:rgba(251,191,36,0.1); }
+
+/* ── РАСПИСАНИЕ ── */
+.schedule-section { margin:56px 0; }
+.section-heading {
+  font-family:'Rubik',sans-serif;
+  font-size:16px; font-weight:700; letter-spacing:0.04em;
+  color:var(--text); margin-bottom:24px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-heading::after { content:''; flex:1; height:1px; background:var(--border2); }
+.timeline {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+}
+@media(max-width:540px){ .timeline { grid-template-columns:repeat(2,1fr); } }
+.tl-item {
+  border-radius:12px; padding:16px 14px;
+  border:1px solid var(--border2);
+  background:var(--bg2);
+  position:relative; overflow:hidden;
+  transition:transform 0.15s, border-color 0.15s;
+}
+.tl-item:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+.tl-item::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  border-radius:12px 12px 0 0;
+}
+.tl-done   { border-color:rgba(22,163,74,0.3); background:rgba(22,163,74,0.04); }
+.tl-done::before   { background:var(--bio); }
+.tl-math::before   { background:var(--math); }
+.tl-bio::before    { background:var(--bio); }
+.tl-soc::before    { background:var(--soc); }
+.tl-rus::before    { background:var(--rus); }
+.tl-chem::before   { background:var(--chem); }
+.tl-lit::before    { background:var(--lit); }
+
+.tl-date {
+  font-family:'Rubik',sans-serif;
+  font-size:11px; font-weight:600; color:var(--muted);
+  margin-bottom:6px; letter-spacing:0.04em;
+}
+.tl-subject {
+  font-family:'Rubik',sans-serif; font-size:14px; font-weight:600; color:var(--text);
+  margin-bottom:4px; line-height:1.2;
+}
+.tl-status {
+  font-family:'Inter',sans-serif; font-size:11px; font-weight:500; margin-top:6px;
+  display:inline-flex; align-items:center; gap:4px;
+}
+.status-done { color:var(--bio); }
+.status-soon { color:var(--muted); }
+.tl-days-left {
+  margin-top:8px;
+}
+.tl-days-num {
+  font-family:'Unbounded',sans-serif;
+  font-size:28px; font-weight:900; line-height:1;
+  display:block;
+}
+.tl-days-label {
+  font-family:'Inter',sans-serif;
+  font-size:10px; font-weight:500; color:var(--muted);
+  letter-spacing:0.06em; text-transform:uppercase;
+  display:block; margin-top:2px;
+}
+.tl-math .tl-days-left  { color:var(--math); }
+.tl-bio  .tl-days-left  { color:var(--bio); }
+.tl-soc  .tl-days-left  { color:var(--soc); }
+.tl-rus  .tl-days-left  { color:var(--rus); }
+.tl-chem .tl-days-left  { color:var(--chem); }
+.tl-lit  .tl-days-left  { color:var(--lit); }
+.tl-done .tl-days-left  { color:var(--bio); }
+
+/* ── ПРЕДМЕТЫ ── */
+.subjects-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+.subject-card {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:16px; overflow:hidden;
+  transition:transform 0.15s, box-shadow 0.15s;
+}
+.subject-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.1); }
+.subject-card.s-math { grid-column:1 / -1; }
+
+.sc-header {
+  padding:20px 22px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:14px;
+}
+.sc-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.s-math  .sc-icon { background:rgba(167,139,250,0.15); }
+.s-bio   .sc-icon { background:rgba(74,222,128,0.12); }
+.s-soc   .sc-icon { background:rgba(56,189,248,0.12); }
+.s-rus   .sc-icon { background:rgba(244,114,182,0.12); }
+.s-chem  .sc-icon { background:rgba(251,146,60,0.12); }
+.s-lit   .sc-icon { background:rgba(251,191,36,0.12); }
+
+.sc-meta { flex:1; }
+.sc-title { font-family:'Rubik',sans-serif; font-size:15px; font-weight:700; margin-bottom:2px; }
+.s-math  .sc-title { color:var(--math); }
+.s-bio   .sc-title { color:var(--bio); }
+.s-soc   .sc-title { color:var(--soc); }
+.s-rus   .sc-title { color:var(--rus); }
+.s-chem  .sc-title { color:var(--chem); }
+.s-lit   .sc-title { color:var(--lit); }
+.sc-date { font-family:'Inter',sans-serif; font-size:12px; color:var(--muted); font-weight:400; }
+.sc-badge {
+  font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+  padding:3px 10px; border-radius:20px; white-space:nowrap;
+}
+.badge-done { background:rgba(74,222,128,0.1); color:var(--bio); border:1px solid rgba(74,222,128,0.25); }
+.badge-soon { background:var(--bg3); color:var(--muted); border:1px solid var(--border2); }
+.badge-3d   { background:rgba(56,189,248,0.1); color:var(--soc); border:1px solid rgba(56,189,248,0.25); }
+.badge-7d   { background:rgba(244,114,182,0.1); color:var(--rus); border:1px solid rgba(244,114,182,0.25); }
+.badge-14d  { background:rgba(251,146,60,0.1); color:var(--chem); border:1px solid rgba(251,146,60,0.25); }
+.badge-lit  { background:rgba(139,92,246,0.1); color:var(--lit); border:1px solid rgba(139,92,246,0.25); }
+
+/* MATH — список квестов */
+.sc-quests { padding:16px 22px; display:flex; flex-direction:column; gap:8px; }
+
+/* Горизонтальная сетка для математики */
+.s-math .sc-quests {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:8px;
+}
+
+.quest-link {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 14px; border-radius:10px;
+  background:var(--bg3); border:1px solid var(--border);
+  text-decoration:none; color:var(--text);
+  transition:background 0.14s, border-color 0.14s, transform 0.1s;
+}
+.quest-link:hover { background:var(--bg4); border-color:var(--border2); transform:translateX(3px); }
+.ql-num {
+  width:28px; height:28px; border-radius:6px;
+  font-family:'Rubik',sans-serif; font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.ql-info { flex:1; min-width:0; }
+.ql-name { font-family:'Inter',sans-serif; font-size:13px; font-weight:600; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ql-sub  { font-family:'Inter',sans-serif; font-size:11px; color:var(--muted); margin-top:1px; }
+.ql-tag  { font-family:'Inter',sans-serif; font-size:10px; font-weight:600; padding:2px 8px; border-radius:10px; white-space:nowrap; letter-spacing:0.04em; }
+
+.q1 .ql-num { background:rgba(219,39,119,0.12); color:var(--rus); }
+.q1 .ql-tag { background:rgba(219,39,119,0.1);  color:var(--rus); }
+.q2 .ql-num { background:rgba(22,163,74,0.12);  color:var(--bio); }
+.q2 .ql-tag { background:rgba(22,163,74,0.1);   color:var(--bio); }
+.q3 .ql-num { background:rgba(124,58,237,0.12); color:var(--math); }
+.q3 .ql-tag { background:rgba(124,58,237,0.1);  color:var(--math); }
+.q4 .ql-num { background:rgba(234,88,12,0.12);  color:var(--chem); }
+.q4 .ql-tag { background:rgba(234,88,12,0.1);   color:var(--chem); }
+.qb .ql-num { background:rgba(219,39,119,0.1);  color:var(--rus); }
+.qb .ql-tag { background:rgba(219,39,119,0.08); color:var(--rus); }
+.qm .ql-num { background:rgba(124,58,237,0.1);  color:var(--math); }
+.qm .ql-tag { background:rgba(124,58,237,0.08); color:var(--math); }
+.qs .ql-num { background:rgba(22,163,74,0.1);   color:var(--bio); }
+.qs .ql-tag { background:rgba(22,163,74,0.08);  color:var(--bio); }
+
+/* ЗАГЛУШКИ для других предметов */
+.sc-coming {
+  padding:24px 22px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:10px; text-align:center; min-height:120px;
+}
+.sc-coming-icon { font-size:32px; opacity:0.35; }
+.sc-coming-text { font-family:'Inter',sans-serif; font-size:14px; color:var(--muted); }
+.sc-coming-cta {
+  font-family:'Inter',sans-serif; font-size:12px; font-weight:500; color:var(--muted);
+  border:1px dashed var(--border2); border-radius:8px; padding:6px 16px;
+  margin-top:4px; background:var(--bg3);
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top:72px; padding-top:28px;
+  border-top:1px solid var(--border2);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px;
+}
+.footer-brand {
+  font-family:'Rubik',sans-serif; font-size:13px; font-weight:700;
+  background:linear-gradient(90deg,var(--math),var(--rus));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.footer-note { font-family:'Inter',sans-serif; font-size:12px; color:var(--muted); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero  { animation:fadeUp 0.5s ease both; }
+.schedule-section { animation:fadeUp 0.5s 0.1s ease both; }
+.subjects-section  { animation:fadeUp 0.5s 0.2s ease both; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO — тёмная шапка -->
+  <div class="hero-wrap">
+  <div class="wrap">
+  <div class="hero">
+    <div class="hero-kicker">🎮 ОГЭ 2026</div>
+    <h1 class="hero-title">
+      <div class="line1">ОГЭ на лайтах!</div>
+      <div class="line2">прокачай знания</div>
+    </h1>
+    <div class="hero-tagline">Как говорили наши бабушки: сикс-севен! 🦀</div>
+    <p class="hero-sub">Квесты, марафоны и шпаргалки для подготовки к ОГЭ. Реальные задания, игровые герои, понятные объяснения.</p>
+    <div class="hero-badges">
+      <span class="hbadge hb-1">✓ Проходи квесты</span>
+      <span class="hbadge hb-2">✓ Гаси монстров</span>
+      <span class="hbadge hb-3">✓ Решай загадки</span>
+      <span class="hbadge hb-4">✓ Строй вселенную</span>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="wrap">
+
+  <!-- РАСПИСАНИЕ -->
+  <div class="schedule-section">
+    <div class="section-heading">📅 Расписание экзаменов</div>
+
+    <div class="timeline">
+
+      <div class="tl-item tl-done tl-math">
+        <div class="tl-date">2 июня</div>
+        <div class="tl-subject">Математика</div>
+        <div class="tl-days-left"><span class="tl-days-num" style="font-size:32px; color:var(--bio)">✓</span><span class="tl-days-label">Экзамен сдан</span></div>
+        <div class="tl-status status-done">Квесты завершены</div>
+      </div>
+
+      <div class="tl-item tl-soon tl-bio">
+        <div class="tl-date">5 июня</div>
+        <div class="tl-subject">Биология</div>
+        <div class="tl-days-left"><span class="tl-days-num" id="days-bio">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
+      </div>
+
+      <div class="tl-item tl-soon tl-soc">
+        <div class="tl-date">5 июня</div>
+        <div class="tl-subject">Обществознание</div>
+        <div class="tl-days-left"><span class="tl-days-num" id="days-soc">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
+      </div>
+
+      <div class="tl-item tl-soon tl-rus">
+        <div class="tl-date">9 июня</div>
+        <div class="tl-subject">Русский язык</div>
+        <div class="tl-days-left"><span class="tl-days-num" id="days-rus">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
+      </div>
+
+      <div class="tl-item tl-soon tl-chem">
+        <div class="tl-date">16 июня</div>
+        <div class="tl-subject">Химия</div>
+        <div class="tl-days-left"><span class="tl-days-num" id="days-chem">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
+      </div>
+
+      <div class="tl-item tl-soon tl-lit">
+        <div class="tl-date">16 июня</div>
+        <div class="tl-subject">Литература</div>
+        <div class="tl-days-left"><span class="tl-days-num" id="days-lit">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ПРЕДМЕТЫ -->
+  <div class="subjects-section">
+    <div class="section-heading">🗺️ Квесты по предметам</div>
+
+    <div class="subjects-grid">
+
+      <!-- МАТЕМАТИКА — большая карточка -->
+      <div class="subject-card s-math">
+        <div class="sc-header">
+          <div class="sc-icon">📐</div>
+          <div class="sc-meta">
+            <div class="sc-title">Математика</div>
+            <div class="sc-date">2 июня · 7 квестов + объяснения</div>
+          </div>
+          <span class="sc-badge badge-done">Квесты готовы</span>
+        </div>
+        <div class="sc-quests">
+
+          <a class="quest-link q1" href="triangles_quiz.html">
+            <span class="ql-num">1</span>
+            <span class="ql-info">
+              <span class="ql-name">Халсин в окружении</span>
+              <span class="ql-sub">Геометрия треугольников</span>
+            </span>
+            <span class="ql-tag">Квест</span>
+          </a>
+
+          <a class="quest-link q2" href="quest2_ellie.html">
+            <span class="ql-num">2</span>
+            <span class="ql-info">
+              <span class="ql-name">Элли против щелкунов</span>
+              <span class="ql-sub">Функции и графики</span>
+            </span>
+            <span class="ql-tag">Квест</span>
+          </a>
+
+          <a class="quest-link q3" href="quest3_gale.html">
+            <span class="ql-num">3</span>
+            <span class="ql-info">
+              <span class="ql-name">Проклятые предметы</span>
+              <span class="ql-sub">Уравнения и неравенства</span>
+            </span>
+            <span class="ql-tag">Квест</span>
+          </a>
+
+          <a class="quest-link q4" href="quest4_aretuza.html">
+            <span class="ql-num">4</span>
+            <span class="ql-info">
+              <span class="ql-name">Экзамен в Аретузе</span>
+              <span class="ql-sub">Формулы и свойства</span>
+            </span>
+            <span class="ql-tag">Квест</span>
+          </a>
+
+          <a class="quest-link qb" href="bonus_lutik.html">
+            <span class="ql-num">♪</span>
+            <span class="ql-info">
+              <span class="ql-name">Лютик и Пармезан</span>
+              <span class="ql-sub">Хаки ОГЭ</span>
+            </span>
+            <span class="ql-tag">Бонус</span>
+          </a>
+
+          <a class="quest-link qm" href="marathon.html">
+            <span class="ql-num">∞</span>
+            <span class="ql-info">
+              <span class="ql-name">Королевская битва</span>
+              <span class="ql-sub">Все темы · 139 вопросов</span>
+            </span>
+            <span class="ql-tag">Марафон</span>
+          </a>
+
+          <a class="quest-link qs" href="shiny_halsin.html">
+            <span class="ql-num">🚗</span>
+            <span class="ql-info">
+              <span class="ql-name">Задачи про шины</span>
+              <span class="ql-sub">Задания 1–5 · ОГЭ 2026</span>
+            </span>
+            <span class="ql-tag">Разбор</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- БИОЛОГИЯ -->
+      <div class="subject-card s-bio">
+        <div class="sc-header">
+          <div class="sc-icon">🌿</div>
+          <div class="sc-meta">
+            <div class="sc-title">Биология</div>
+            <div class="sc-date">5 июня</div>
+          </div>
+          <span class="sc-badge badge-3d" id="badge-bio">3 дня</span>
+        </div>
+        <div class="sc-coming">
+          <div class="sc-coming-icon">🧬</div>
+          <div class="sc-coming-text">Квесты в разработке</div>
+          <div class="sc-coming-cta">Скоро появятся</div>
+        </div>
+      </div>
+
+      <!-- ОБЩЕСТВОЗНАНИЕ -->
+      <div class="subject-card s-soc">
+        <div class="sc-header">
+          <div class="sc-icon">⚖️</div>
+          <div class="sc-meta">
+            <div class="sc-title">Обществознание</div>
+            <div class="sc-date">5 июня</div>
+          </div>
+          <span class="sc-badge badge-3d" id="badge-soc">3 дня</span>
+        </div>
+        <div class="sc-coming">
+          <div class="sc-coming-icon">📜</div>
+          <div class="sc-coming-text">Квесты в разработке</div>
+          <div class="sc-coming-cta">Скоро появятся</div>
+        </div>
+      </div>
+
+      <!-- РУССКИЙ ЯЗЫК -->
+      <div class="subject-card s-rus">
+        <div class="sc-header">
+          <div class="sc-icon">📝</div>
+          <div class="sc-meta">
+            <div class="sc-title">Русский язык</div>
+            <div class="sc-date">9 июня</div>
+          </div>
+          <span class="sc-badge badge-7d" id="badge-rus">7 дней</span>
+        </div>
+        <div class="sc-coming">
+          <div class="sc-coming-icon">✒️</div>
+          <div class="sc-coming-text">Квесты в разработке</div>
+          <div class="sc-coming-cta">Скоро появятся</div>
+        </div>
+      </div>
+
+      <!-- ХИМИЯ -->
+      <div class="subject-card s-chem">
+        <div class="sc-header">
+          <div class="sc-icon">⚗️</div>
+          <div class="sc-meta">
+            <div class="sc-title">Химия</div>
+            <div class="sc-date">16 июня</div>
+          </div>
+          <span class="sc-badge badge-14d" id="badge-chem">14 дней</span>
+        </div>
+        <div class="sc-coming">
+          <div class="sc-coming-icon">🧪</div>
+          <div class="sc-coming-text">Квесты в разработке</div>
+          <div class="sc-coming-cta">Скоро появятся</div>
+        </div>
+      </div>
+
+      <!-- ЛИТЕРАТУРА -->
+      <div class="subject-card s-lit">
+        <div class="sc-header">
+          <div class="sc-icon">📚</div>
+          <div class="sc-meta">
+            <div class="sc-title">Литература</div>
+            <div class="sc-date">16 июня</div>
+          </div>
+          <span class="sc-badge badge-14d" id="badge-lit">14 дней</span>
+        </div>
+        <div class="sc-coming">
+          <div class="sc-coming-icon">🪶</div>
+          <div class="sc-coming-text">Квесты в разработке</div>
+          <div class="sc-coming-cta">Скоро появятся</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="footer-brand">ОГЭ 2026 · Прокачай знания</span>
+    <span class="footer-note">Бесплатно · Без рекламы · Сделано с любовью к мелким п***... детям 🌿</span>
+  </div>
+
+  </div><!-- /wrap -->
+
+<script>
+// Считаем дни до экзаменов
+const exams = [
+  { id:'bio',  date:'2026-06-05', badgeId:'badge-bio',  daysId:'days-bio'  },
+  { id:'soc',  date:'2026-06-05', badgeId:'badge-soc',  daysId:'days-soc'  },
+  { id:'rus',  date:'2026-06-09', badgeId:'badge-rus',  daysId:'days-rus'  },
+  { id:'chem', date:'2026-06-16', badgeId:'badge-chem', daysId:'days-chem' },
+  { id:'lit',  date:'2026-06-16', badgeId:'badge-lit',  daysId:'days-lit'  },
+];
+
+const today = new Date();
+today.setHours(0,0,0,0);
+
+exams.forEach(e => {
+  const exam = new Date(e.date);
+  const diff = Math.round((exam - today) / (1000*60*60*24));
+  
+  const daysEl  = document.getElementById(e.daysId);
+  const badgeEl = document.getElementById(e.badgeId);
+  
+  const numEl = daysEl ? daysEl.querySelector('.tl-days-num') : null;
+  const lblEl = daysEl ? daysEl.querySelector('.tl-days-label') : null;
+  if (diff <= 0) {
+    if (numEl)   numEl.textContent   = '✓';
+    if (lblEl)   lblEl.textContent   = 'Экзамен сдан';
+    if (badgeEl) badgeEl.textContent = 'Квест завершён';
+  } else if (diff === 1) {
+    if (numEl)   numEl.textContent   = '1';
+    if (lblEl)   lblEl.textContent   = 'день остался';
+    if (badgeEl) badgeEl.textContent = 'Завтра!';
+  } else {
+    if (numEl)   numEl.textContent   = diff;
+    if (lblEl)   lblEl.textContent   = diff < 5 ? 'дня осталось' : 'дней осталось';
+    if (badgeEl) badgeEl.textContent = `${diff} дн.`;
+  }
+});
+</script>
+</body>
+</html>
