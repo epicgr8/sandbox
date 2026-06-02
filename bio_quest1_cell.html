@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биоквест 1: Живое и опасное — Клетка · ОГЭ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede6;
+    --bg2:     #faf8f3;
+    --bg3:     #e8e4db;
+    --bg4:     #dedad0;
+    --c-cell:  #16a34a;
+    --c-meth:  #0891b2;
+    --c-instr: #7c3aed;
+    --c-org:   #c2410c;
+    --c-tiss:  #ca8a04;
+    --c-lou:   #2d4a1e;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5%  0%,  rgba(22,163,74,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 15%,  rgba(8,145,178,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(194,65,12,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after {
+    content:''; display:block; margin:28px auto 0;
+    width:180px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, transparent, var(--c-lou), var(--c-cell), var(--c-meth), transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(30px,5vw,52px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color: var(--c-lou); }
+  .ht2 { color: var(--c-org); }
+  .ht3 { color: var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-cell::after  { background:var(--c-cell); }
+  .rule-card.c-meth::after  { background:var(--c-meth); }
+  .rule-card.c-instr::after { background:var(--c-instr); }
+  .rule-card.c-org::after   { background:var(--c-org); }
+  .rule-card.c-tiss::after  { background:var(--c-tiss); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:5px 10px; border-radius:6px; display:inline-block; margin:4px 0 8px; }
+  .c-cell  .rule-formula { background:rgba(22,163,74,0.1);   color:var(--c-cell); }
+  .c-meth  .rule-formula { background:rgba(8,145,178,0.1);   color:var(--c-meth); }
+  .c-instr .rule-formula { background:rgba(124,58,237,0.1);  color:var(--c-instr); }
+  .c-org   .rule-formula { background:rgba(194,65,12,0.1);   color:var(--c-org); }
+  .c-tiss  .rule-formula { background:rgba(202,138,4,0.1);   color:var(--c-tiss); }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.55; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+
+  /* TABLE */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:32px; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:15px; }
+  .quick-table th { font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--muted); padding:12px 18px; text-align:left; border-bottom:1px solid var(--border2); background:var(--bg3); text-transform:uppercase; }
+  .quick-table td { padding:11px 18px; border-bottom:1px solid var(--border); vertical-align:middle; font-size:14px; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:600; }
+  .mono { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 8px; border-radius:4px; display:inline-block; }
+  .m-cell  { background:rgba(22,163,74,0.1);  color:var(--c-cell); }
+  .m-meth  { background:rgba(8,145,178,0.1);  color:var(--c-meth); }
+  .m-org   { background:rgba(194,65,12,0.1);  color:var(--c-org); }
+  .m-tiss  { background:rgba(202,138,4,0.1);  color:var(--c-tiss); }
+  .m-instr { background:rgba(124,58,237,0.1); color:var(--c-instr); }
+
+  /* Таблица клеток — цветные колонки */
+  .col-plant { background:rgba(0,137,123,0.08); }
+  .col-animal { background:rgba(233,30,99,0.07); }
+  .col-bact { background:rgba(69,90,100,0.07); }
+  .th-plant { background:#00897B !important; color:#fff !important; }
+  .th-animal { background:#E91E63 !important; color:#fff !important; }
+  .th-bact { background:#455A64 !important; color:#fff !important; }
+  .yes-plant { color:#00897B; font-weight:700; }
+  .yes-animal { color:#E91E63; font-weight:700; }
+  .yes-bact { color:#455A64; font-weight:700; }
+  .no-plant { color:#00897B; opacity:0.45; }
+  .no-animal { color:#E91E63; opacity:0.45; }
+  .no-bact { color:#455A64; opacity:0.45; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* BANNER */
+  .hero-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(45,74,30,0.3); display:grid; grid-template-columns:200px 1fr; }
+  .banner-img { width:200px; height:190px; object-fit:cover; object-position:center top; display:block; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:56px; }
+  .banner-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .banner-title { font-size:18px; font-weight:700; color:var(--c-lou); }
+  .banner-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .banner-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(22,163,74,0.12);  color:#0f6b35; }
+  .stake-a { background:rgba(8,145,178,0.12);  color:#075985; }
+  .stake-b { background:rgba(202,138,4,0.12);  color:#92400e; }
+  .stake-c { background:rgba(194,65,12,0.12);  color:#9a3412; }
+  .stake-d { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  @media(max-width:560px){ .hero-banner{grid-template-columns:1fr;} .banner-img{width:100%;height:120px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,32px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-lou),var(--c-cell),var(--c-meth)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-cell); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; background:var(--c-lou); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; padding:0 2px; background:linear-gradient(120deg,var(--c-lou),var(--c-cell)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-cell); background:rgba(22,163,74,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#16a34a; background:rgba(22,163,74,0.13); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#16a34a; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(194,65,12,0.1); border:1px solid rgba(194,65,12,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-org); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:500px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(22,163,74,0.12);  color:#0f6b35; }
+  .rank-a { background:rgba(8,145,178,0.12);  color:#075985; }
+  .rank-b { background:rgba(202,138,4,0.12);  color:#92400e; }
+  .rank-c { background:rgba(194,65,12,0.12);  color:#9a3412; }
+  .rank-d { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-cell); background:rgba(22,163,74,0.04); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; background:var(--bg3); font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:var(--muted); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(22,163,74,0.12); color:var(--c-cell); }
+  .nav-section-label { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · 9 класс · Квест 1</div>
+    <h1 class="hero-title">
+      <span class="ht1">Живое</span> <span class="ht3">и</span><br>
+      <span class="ht2">Опасное</span>
+    </h1>
+    <p class="hero-sub">Клетка, ткани, методы биологии — шпора + 20 испытаний · The Last of Us</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Шпора — запомни до старта</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-cell">
+      <div class="rule-icon">🧬</div>
+      <div class="rule-title">8 признаков живого</div>
+      <div class="rule-formula">КОП · ДАР · ВОР · РОМ</div>
+      <div class="rule-body">
+        <strong style="color:var(--c-cell)">КОП</strong> → <strong>К</strong>леточное строение + <strong>П</strong>итание<br>
+        <strong style="color:var(--c-meth)">ДАР</strong> → <strong>Д</strong>ыхание + <strong>Р</strong>аздражимость<br>
+        <strong style="color:var(--c-org)">ВОР</strong> → <strong>В</strong>ыделение + <strong>Р</strong>азмножение<br>
+        <strong style="color:var(--c-tiss)">РОМ</strong> → <strong>Р</strong>ост и развитие + <strong>О</strong>бмен веществ<br>
+        Вирусы — не клеточные, поэтому <em>спорны</em> как «живые».<br>
+        Неживая природа не имеет <em>всех восьми</em> сразу.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Заражённый КЦИ всё ещё живой — КОП ДАР ВОР РОМ. Грибок растёт, дышит, питается. Просто управляет им уже не хозяин.</div>
+    </div>
+
+    <div class="rule-card c-meth">
+      <div class="rule-icon">🔬</div>
+      <div class="rule-title">Методы биологии</div>
+      <div class="rule-formula">Наблюд. / Эксп. / Сравн.</div>
+      <div class="rule-body">
+        <strong>Наблюдение</strong> — смотрим без вмешательства.<br>
+        <strong>Эксперимент</strong> — меняем условия и смотрим результат.<br>
+        <strong>Сравнительный</strong> — ищем сходство и различия.<br>
+        <strong>Исторический</strong> — изучаем развитие во времени.<br>
+        <strong>Моделирование</strong> — создаём аналог процесса.<br>
+        В эксперименте: <em>контроль</em> = группа без изменений.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Учёные Светлячков 🕯️ сравнивали иммунитет Элли с клетками обычных людей — сравнительный метод. Тесты на Элли — эксперимент.</div>
+    </div>
+
+    <div class="rule-card c-instr">
+      <div class="rule-icon">🔭</div>
+      <div class="rule-title">Биологические приборы</div>
+      <div class="rule-formula">Микроскоп · Термостат</div>
+      <div class="rule-body">
+        <strong>Световой микроскоп</strong> — клетки и ткани (до ×2000).<br>
+        <strong>Лупа</strong> — крупные структуры (×2–30).<br>
+        <strong>Термостат</strong> — поддерживает температуру в опытах.<br>
+        <strong>Спирометр</strong> — измеряет объём лёгких.<br>
+        <strong>Тонометр</strong> — измеряет артериальное давление.<br>
+        <strong>рН-метр</strong> — кислотность среды.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: В лаборатории Светлячков 🕯️ стоит термостат — +37°C, температура тела. Только так КЦИ-культура растёт в пробирке.</div>
+    </div>
+
+    <div class="rule-card c-org">
+      <div class="rule-icon">🦠</div>
+      <div class="rule-title">Три типа клеток</div>
+      <div class="rule-formula">Раст. / Жив. / Прокар.</div>
+      <div class="rule-body">
+        <strong>Растительная:</strong> клеточная стенка (целлюлоза), хлоропласты, крупная вакуоль.<br>
+        <strong>Животная:</strong> нет стенки, нет пластид, нет большой вакуоли. Есть лизосомы, клеточный центр. (У высших растений клеточного центра тоже нет, у водорослей — есть.)<br>
+        <strong>Прокариотическая (бактерии):</strong> нет оформленного ядра (есть нуклеоид), нет митохондрий, нет ЭПС.<br>
+        <strong>Общее у всех:</strong> рибосомы и ДНК.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: КЦИ — гриб (эукариот), клетки с ядром. Его не перепутать с бактериями — антибиотики на него не действуют!</div>
+    </div>
+
+    <div class="rule-card c-meth" style="--after-color:#0891b2">
+      <div class="rule-icon">🔭</div>
+      <div class="rule-title">Уровни организации живого</div>
+      <div class="rule-formula">Клетка → … → Биосфера</div>
+      <div class="rule-body">
+        <strong>1.</strong> Молекулярный<br>
+        <strong>2.</strong> Клеточный — клетка<br>
+        <strong>3.</strong> Тканевой — ткань<br>
+        <strong>4.</strong> Органный — орган<br>
+        <strong>5.</strong> Системный — система органов<br>
+        <strong>6.</strong> Организменный — организм<br>
+        <strong>7.</strong> Популяционно-видовой<br>
+        <strong>8.</strong> Экосистемный<br>
+        <strong>9.</strong> Биосферный<br>
+        Для ОГЭ главное: <em>Клетка → Ткань → Орган → Система → Организм</em>
+      </div>
+      <div class="rule-assoc">🎮 TLOU: КЦИ атакует снизу вверх — сначала клетки мозга, потом ткани, потом весь организм. И в итоге — целая популяция.</div>
+    </div>
+
+    <div class="rule-card c-tiss">
+      <div class="rule-icon">🩻</div>
+      <div class="rule-title">4 типа тканей человека</div>
+      <div class="rule-formula">Эпит. · Соед. · Мыш. · Нерв.</div>
+      <div class="rule-body">
+        <strong>Эпителиальная:</strong> клетки плотно прилегают, межклеточного вещества мало. Покрывает тело и выстилает полости.<br>
+        <strong>Соединительная:</strong> много межклеточного вещества. Включает кровь, кость, хрящ, жир.<br>
+        <strong>Мышечная:</strong> сократимость. Гладкая (непроизвольная), поперечнополосатая (произвольная), сердечная.<br>
+        <strong>Нервная:</strong> нейроны (отростки) + нейроглия. Возбудимость и проводимость.
+      </div>
+      <div class="rule-assoc">🎮 TLOU: КЦИ прорастает сквозь нервную ткань мозга — нейроны имеют длинные отростки, и по ним грибок распространяется быстрее всего.</div>
+    </div>
+
+  </div>
+
+  <!-- ТАБЛИЦА: сравнение клеток -->
+  <div class="sec-head" style="margin-top:40px"><span class="sec-badge rule">Таблица сравнения клеток</span><div class="sec-line"></div></div>
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th style="background:var(--bg3)">Признак</th>
+          <th class="th-plant">🌱 Растительная</th>
+          <th class="th-animal">🐺 Животная</th>
+          <th class="th-bact">🦠 Бактерия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Оформленное ядро</td>
+          <td class="col-plant"><span class="yes-plant">✓ Есть</span></td>
+          <td class="col-animal"><span class="yes-animal">✓ Есть</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет (нуклеоид)</span></td>
+        </tr>
+        <tr>
+          <td>Клеточная стенка</td>
+          <td class="col-plant"><span class="yes-plant">✓ Целлюлоза</span></td>
+          <td class="col-animal"><span class="no-animal">✗ Нет</span></td>
+          <td class="col-bact"><span class="yes-bact">✓ (не целлюлоза)</span></td>
+        </tr>
+        <tr>
+          <td>Хлоропласты 🌱</td>
+          <td class="col-plant"><span class="yes-plant">✓ Есть</span></td>
+          <td class="col-animal"><span class="no-animal">✗ Нет</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет</span></td>
+        </tr>
+        <tr>
+          <td>Крупная вакуоль</td>
+          <td class="col-plant"><span class="yes-plant">✓ Есть</span></td>
+          <td class="col-animal"><span class="no-animal">✗ Нет</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет</span></td>
+        </tr>
+        <tr>
+          <td>Митохондрии</td>
+          <td class="col-plant"><span class="yes-plant">✓ Есть</span></td>
+          <td class="col-animal"><span class="yes-animal">✓ Есть</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет</span></td>
+        </tr>
+        <tr>
+          <td>Рибосомы</td>
+          <td class="col-plant"><span class="yes-plant">✓ Есть</span></td>
+          <td class="col-animal"><span class="yes-animal">✓ Есть</span></td>
+          <td class="col-bact"><span class="yes-bact">✓ Есть</span></td>
+        </tr>
+        <tr>
+          <td>Лизосомы 😷</td>
+          <td class="col-plant"><span class="no-plant">✗ Нет</span></td>
+          <td class="col-animal"><span class="yes-animal">✓ Есть</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет</span></td>
+        </tr>
+        <tr>
+          <td>Клеточный центр 🐺</td>
+          <td class="col-plant"><span class="no-plant">✗ Нет</span></td>
+          <td class="col-animal"><span class="yes-animal">✓ Есть</span></td>
+          <td class="col-bact"><span class="no-bact">✗ Нет</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deco-div"><span>Биоквест 1 — 20 случайных испытаний</span></div>
+
+  <!-- BANNER -->
+  <div class="hero-banner">
+    <img class="banner-img" src="https://creator.nightcafe.studio/jobs/nn2KaEt8WZLve8Shjble/nn2KaEt8WZLve8Shjble--3--2sj89.jpg" alt="TLOU — живое и опасное" onerror="this.style.fontSize='56px';this.textContent='🧟';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center'">
+    <div class="banner-text">
+      <div class="banner-title">☣️ КЦИ вырвался из зоны карантина!</div>
+      <div class="banner-desc">Элли, Джоэл и Дина пробираются через лабораторию FEDRA. Чтобы понять, как работает КЦИ и выжить — нужно знать биологию клетки изнутри. Каждый верный ответ — шаг к выходу.</div>
+      <div class="banner-stakes">
+        <span class="stake stake-s">18–20 ✦ Иммунитет активирован!</span>
+        <span class="stake stake-a">14–17 ✦ Вырвались с потерями</span>
+        <span class="stake stake-b">10–13 ✦ Спаслись, но заражены</span>
+        <span class="stake stake-c">6–9 ✦ Укрылись в убежище</span>
+        <span class="stake stake-d">0–5 ✦ КЦИ победил...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Ответь — и КЦИ не пройдёт</div>
+      <p class="quiz-sub">Каждый верный ответ — один шаг к иммунитету</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Попробовать снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все биоквесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-cell);color:#fff">1</span>
+        <span class="qp-info">
+          <span class="qp-name">Живое и опасное</span>
+          <span class="qp-sub">Клетка, ткани, методы · TLOU</span>
+        </span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#0891b2;color:#fff">2</span>
+        <span class="qp-info"><span class="qp-name">Царства живой природы</span><span class="qp-sub">Растения, грибы, бактерии, вирусы</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">3</span>
+        <span class="qp-info"><span class="qp-name">Зоология и эволюция</span><span class="qp-sub">Систематика животных, Дарвин</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#c2410c;color:#fff">4</span>
+        <span class="qp-info"><span class="qp-name">Тело человека</span><span class="qp-sub">Скелет, кровь, дыхание, пищеварение</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#ca8a04;color:#fff">5</span>
+        <span class="qp-info"><span class="qp-name">Мозг и экосистемы</span><span class="qp-sub">ВНД, анализаторы, экология</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label" style="margin-top:28px">Квесты по математике</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">↩</span>
+        <span class="qp-info"><span class="qp-name">Все квесты</span><span class="qp-sub">Главная страница ОГЭ 2026</span></span>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const allQuestions = [
+  // ── ПРИЗНАКИ ЖИВОГО ──
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Джоэл</span> осматривает щелкуна. Заражённый дышит, питается, двигается, реагирует на звук. Какой признак живого является самым универсальным — присущим <span class='term'>любому</span> живому организму без исключения?",
+    opts:["Обмен веществ и превращение энергии","Способность к движению","Высокая температура тела","Наличие нервной системы"],
+    ans:0,
+    fb:"✦ Верно! Обмен веществ — фундаментальный признак всего живого. Даже у кораллов и грибков он есть. Движение или нервная система — не у всех организмов.",
+    trap:"Ловушка ОГЭ: движение есть у большинства животных, но не у растений (которые тоже живые). Обмен веществ — у всех без исключения.",
+    hint:"Подумай: у каких живых организмов НЕТ движения? А обмен веществ есть у всех — от бактерий до китов.",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Элли</span> читает о КЦИ: гриб кордицепс мутировал и смог заражать людей — это раньше было невозможно. Какое <span class='term'>свойство всего живого</span> позволило грибку адаптироваться к температуре тела человека (+37°C)?",
+    opts:["Наследственность и изменчивость","Дыхание","Рост и развитие","Выделение"],
+    ans:0,
+    fb:"✦ Верно! Изменчивость — случайные мутации в ДНК. Наследственность — передача этих изменений потомству. Именно так работает эволюция: выжили те штаммы, которые случайно стали термоустойчивыми.",
+    trap:"Ловушка ОГЭ: рост и развитие — это один из 8 признаков живого, но он не объясняет адаптацию. Адаптация = изменчивость + наследственность + отбор.",
+    hint:"Гриб изменился и передал это изменение потомству. Как называется эта пара свойств живого?",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Дина</span> замечает: щелкун повернул голову точно на её кашель — за 40 метров. Грибковые наросты на голове дают ему это «чувство». Какой признак живого здесь демонстрируется?",
+    opts:["Раздражимость","Размножение","Обмен веществ","Дыхание"],
+    ans:0,
+    fb:"✦ Верно! Раздражимость — способность реагировать на раздражители из среды. У щелкунов это эхолокация через КЦИ-наросты. У людей — нервная система.",
+    trap:"",
+    hint:"Организм реагирует на внешний сигнал (звук). Как называется эта способность?",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Элли</span> спорит с учёным Светлячков: «Вирусы — это живые?» Учёный отвечает: «Нет, не совсем». Какой ключевой признак живого у вирусов <span class='term'>отсутствует</span>?",
+    opts:["Клеточное строение","Наследственность","Изменчивость","Размножение"],
+    ans:0,
+    fb:"✦ Верно! Вирусы — неклеточная форма жизни. У них нет клетки, нет собственного обмена веществ. Они могут размножаться только внутри чужой клетки-хозяина. КЦИ — гриб, у него клетки есть.",
+    trap:"Ловушка ОГЭ: вирусы УМЕЮТ размножаться и изменяться — но только внутри клетки. Клеточного строения у них нет — вот главное.",
+    hint:"Вирус состоит из ДНК/РНК и белковой оболочки. Клеток у него нет. Что из 8 признаков живого это нарушает?",
+    ref:"Признаки живого 🧬"
+  },
+
+  // ── МЕТОДЫ БИОЛОГИИ ──
+  {
+    topic:"Методы биологии",
+    text:"<span class='hero-name'>Джоэл</span> несколько дней наблюдал за патрулём бегунов — не вступая в контакт, только записывал маршруты и время. Какой метод биологии он применял?",
+    opts:["Наблюдение","Эксперимент","Моделирование","Сравнительный"],
+    ans:0,
+    fb:"✦ Верно! Наблюдение — изучение без вмешательства. Джоэл не менял условия — только фиксировал. Эксперимент предполагает активное изменение условий.",
+    trap:"",
+    hint:"Джоэл не вмешивался, не менял условия, только смотрел и записывал. Как называется такой метод?",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"<span class='hero-name'>Дина</span> проводит опыт: делит клетки КЦИ на две группы. В первую добавляет сыворотку Элли, во вторую — нет. В первой группе клетки погибли. Как называется <span class='term'>вторая группа</span> в этом эксперименте?",
+    opts:["Контрольная группа","Независимая переменная","Зависимая переменная","Гипотеза"],
+    ans:0,
+    fb:"✦ Верно! Контрольная группа — та, где условия не менялись (без сыворотки). Она нужна для сравнения. Независимая переменная — то, что менял исследователь (добавил сыворотку или нет).",
+    trap:"Ловушка ОГЭ: контрольная группа — НЕ та, где что-то изменилось. Это эталон сравнения — «обычные условия».",
+    hint:"В какой группе ничего не меняли? Именно она называется контрольной.",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"Учёные Светлячков сравнивали строение обычного гриба Ophiocordyceps (паразит муравьёв) и мутировавшего КЦИ (паразит людей). Какой метод биологии они использовали?",
+    opts:["Сравнительный","Исторический","Экспериментальный","Моделирование"],
+    ans:0,
+    fb:"✦ Верно! Сравнительный метод — поиск сходства и различий между объектами. Именно сравнение помогло понять, как гриб изменился, чтобы заражать людей.",
+    trap:"",
+    hint:"Учёные искали сходства и различия между двумя видами гриба. Как называется этот метод?",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"Специалисты FEDRA создали компьютерную <span class='term'>симуляцию</span> распространения спор КЦИ в Бостонской зоне, чтобы спланировать эвакуацию. Какой метод биологии они применили?",
+    opts:["Моделирование","Наблюдение","Описание","Сравнительный"],
+    ans:0,
+    fb:"✦ Верно! Моделирование — создание аналога (модели) реального процесса. Компьютерная симуляция — это модель. Метод позволяет изучать процессы, которые трудно наблюдать напрямую.",
+    trap:"",
+    hint:"Создали аналог реального процесса — не настоящий, а искусственный. Как называется такой метод?",
+    ref:"Методы биологии 🔬"
+  },
+
+  // ── ПРИБОРЫ ──
+  {
+    topic:"Биологические приборы",
+    text:"<span class='hero-name'>Джоэл</span> находит в заброшенной лаборатории прибор, который увеличивает изображение клеток КЦИ в <span class='term'>400 раз</span>. Что это за прибор?",
+    opts:["Световой микроскоп","Лупа","Спирометр","Термостат"],
+    ans:0,
+    fb:"✦ Верно! Световой микроскоп даёт увеличение до ×2000. Лупа — лишь ×2–30 (не хватит для клеток). Спирометр и термостат — вообще не оптические приборы.",
+    trap:"Ловушка ОГЭ: лупа и микроскоп — оба увеличивают, но кратность разная. Клетки видно только под микроскопом.",
+    hint:"Лупа — это до ×30. Клетки видны только в прибор с увеличением сотни и тысячи раз.",
+    ref:"Биологические приборы 🔭"
+  },
+  {
+    topic:"Биологические приборы",
+    text:"В лаборатории Светлячков культуры КЦИ выращивают при строго +37°C — температуре человеческого тела. Какой прибор поддерживает эту температуру постоянной?",
+    opts:["Термостат","Термометр","Спирометр","рН-метр"],
+    ans:0,
+    fb:"✦ Верно! Термостат — поддерживает заданную температуру. Термометр — только измеряет. Спирометр — объём лёгких. рН-метр — кислотность среды.",
+    trap:"Ловушка ОГЭ: термометр ИЗМЕРЯЕТ, а термостат ПОДДЕРЖИВАЕТ. Разные функции!",
+    hint:"Нужен прибор, который не просто показывает температуру, а удерживает её постоянной.",
+    ref:"Биологические приборы 🔭"
+  },
+
+  // ── СТРОЕНИЕ КЛЕТКИ ──
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Элли</span> рассматривает клетку мха под микроскопом. Она видит зелёные зёрна внутри. Что это за структуры?",
+    opts:["Хлоропласты — пластиды для фотосинтеза","Митохондрии — органоиды дыхания","Лизосомы — пузырьки с ферментами","Вакуоли с клеточным соком"],
+    ans:0,
+    fb:"✦ Верно! Хлоропласты содержат зелёный пигмент хлорофилл — поэтому видны как зелёные зёрна. Они есть только в клетках растений и водорослей.",
+    trap:"Ловушка ОГЭ: зелёный цвет = хлоропласты. Митохондрии тоже есть в растениях, но они не зелёные и очень мелкие.",
+    hint:"Зелёный цвет клеткам растений придаёт пигмент хлорофилл. В каком органоиде он содержится?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Дина</span> изучает клетку из ткани заражённого. В ней есть ядро, митохондрии, рибосомы, лизосомы — но нет клеточной стенки, нет хлоропластов, нет крупных вакуолей. Какой тип клетки она изучает?",
+    opts:["Животная клетка","Растительная клетка","Прокариотическая (бактерия)","Клетка гриба"],
+    ans:0,
+    fb:"✦ Верно! Животная клетка: нет клеточной стенки, нет пластид, нет центральной вакуоли. Есть лизосомы и клеточный центр. Клетки человека и заражённых — животного типа.",
+    trap:"Ловушка ОГЭ: у клеток грибов тоже нет хлоропластов и большой вакуоли, но у них есть клеточная стенка (из хитина). Животная — без стенки.",
+    hint:"Клетка без стенки, без хлоропластов, без большой вакуоли, но с лизосомами — это какой тип?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"КЦИ — это гриб (эукариот). Чем его клетки принципиально отличаются от клеток <span class='term'>бактерий</span>?",
+    opts:["У гриба есть оформленное ядро с мембраной, у бактерий — нет","У гриба нет рибосом, у бактерий — есть","Бактерии крупнее клеток гриба","У гриба нет ДНК, у бактерий — есть"],
+    ans:0,
+    fb:"✦ Верно! Бактерии — прокариоты: нет оформленного ядра. Их ДНК находится в нуклеоиде — прямо в цитоплазме, без мембраны. Поэтому антибиотики помогают против бактерий, но не против КЦИ.",
+    trap:"Ловушка ОГЭ: ДНК есть у всех — и у бактерий, и у грибов. Разница в том, есть ли у ДНК ядерная мембрана.",
+    hint:"Прокариот = до ядра. Что это значит для клетки бактерии?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Джоэл</span> видит в клетке мелкие органоиды, которые разрушают отработавшие белки и уничтожают попавшие внутрь частицы КЦИ. Что это?",
+    opts:["Лизосомы","Митохондрии","Хлоропласты","Аппарат Гольджи"],
+    ans:0,
+    fb:"✦ Верно! Лизосомы — «пищеварительная система клетки». Содержат ферменты, расщепляющие органические молекулы и чужеродные частицы. Митохондрии — энергия (АТФ).",
+    trap:"",
+    hint:"Какой органоид содержит ферменты для переваривания? Его называют «пищеварительным пузырьком».",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Элли</span> рассматривает растительную клетку и видит, что почти весь её центр занят одним большим пузырём с клеточным соком. Как называется эта структура?",
+    opts:["Центральная вакуоль","Ядро","Хлоропласт","Митохондрия"],
+    ans:0,
+    fb:"✦ Верно! Центральная вакуоль — характерная структура зрелой растительной клетки. Создаёт тургорное давление — «надутость» клетки. В животных клетках такой вакуоли нет.",
+    trap:"Ловушка ОГЭ: не путай с ядром — ядро плотное, тёмное, содержит ДНК. Вакуоль — большой, прозрачный пузырь с жидкостью.",
+    hint:"Большой пузырь с жидкостью, занимающий центр растительной клетки — это не ядро.",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"Какой органоид есть <span class='term'>во всех без исключения</span> живых клетках — и у растений, и у животных, и у бактерий?",
+    opts:["Рибосомы","Митохондрии","Хлоропласты","Клеточный центр"],
+    ans:0,
+    fb:"✦ Верно! Рибосомы есть у всех — они синтезируют белки. Это самый «древний» органоид. Митохондрии — у эукариот. Хлоропласты — только у растений. Клеточный центр — у животных и грибов.",
+    trap:"Ловушка ОГЭ: митохондрии есть у большинства эукариот, но не у прокариот (бактерий). Рибосомы — единственный органоид всех клеток.",
+    hint:"Этот органоид отвечает за синтез белков и есть даже у бактерий.",
+    ref:"Строение клетки 🦠"
+  },
+
+  // ── ТКАНИ ──
+  {
+    topic:"Ткани человека",
+    text:"Кожа <span class='hero-name'>Джоэла</span> защищает его от спор КЦИ — пока не повреждена. Поверхностный слой кожи образован плотно прилегающими клетками с малым количеством межклеточного вещества. К какому типу ткани он относится?",
+    opts:["Эпителиальная","Соединительная","Мышечная","Нервная"],
+    ans:0,
+    fb:"✦ Верно! Признаки эпителиальной ткани: клетки плотно прилегают, межклеточного вещества мало, обновляется быстро. Покрывает тело снаружи и выстилает полости внутренних органов.",
+    trap:"Ловушка ОГЭ: в соединительной ткани, наоборот, МНОГО межклеточного вещества. Запомни: эпителий — клетки плотно, соединительная — вещества много.",
+    hint:"Снаружи тела, клетки плотно прилегают, межклеточного вещества почти нет. Какая ткань?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"<span class='hero-name'>Элли</span> слышит удар щелкуна — нервный импульс от уха проходит по клеткам с длинными отростками к мозгу за доли секунды. Клетки какой ткани это обеспечивают?",
+    opts:["Нервная","Эпителиальная","Соединительная","Мышечная"],
+    ans:0,
+    fb:"✦ Верно! Нервная ткань состоит из нейронов (с длинными отростками — аксоном и дендритами) и нейроглии. Свойства нервной ткани: возбудимость и проводимость импульса.",
+    trap:"",
+    hint:"Длинные отростки, передают импульсы — это клетки какой ткани?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"В крови <span class='hero-name'>Элли</span> — антитела к КЦИ. Кровь — это тип ткани. К какому виду ткани она относится?",
+    opts:["Соединительная","Эпителиальная","Мышечная","Нервная"],
+    ans:0,
+    fb:"✦ Верно! Соединительная ткань включает кровь, кость, хрящ, жировую ткань. Их объединяет большое количество межклеточного вещества. У крови — жидкое межклеточное вещество: плазма.",
+    trap:"Ловушка ОГЭ: кровь — соединительная ткань. Это нестандартно, но так. Запомни: кость, хрящ, кровь, лимфа, жир — всё соединительная.",
+    hint:"Кровь, кость, хрящ, жир — что у них общего? Много межклеточного вещества. Это какой тип ткани?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"<span class='hero-name'>Дина</span> слышит, как бьётся её сердце — оно не устаёт, работает всю жизнь непрерывно. Какой тип мышечной ткани образует стенки сердца?",
+    opts:["Сердечная мышечная ткань","Гладкая мышечная ткань","Поперечнополосатая (скелетная) мышечная ткань","Нервная ткань"],
+    ans:0,
+    fb:"✦ Верно! Сердечная мышечная ткань — особый тип: непроизвольная (как гладкая), но быстрая и ритмичная (как поперечнополосатая). Клетки соединены специальными контактами — вставочными дисками.",
+    trap:"Ловушка ОГЭ: 3 вида мышечной ткани: гладкая (стенки органов, непроизвольная), поперечнополосатая (скелетные мышцы, произвольная), сердечная (сердце, непроизвольная).",
+    hint:"Сердце работает непроизвольно — мы его не контролируем. Но это не гладкая и не скелетная мышца. Что третье?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"Что такое <span class='term'>ткань</span> в биологии? Выбери верное определение.",
+    opts:["Группа клеток сходного строения, выполняющих общую функцию","Один специализированный орган с несколькими функциями","Совокупность органов одной системы","Совокупность всех клеток организма"],
+    ans:0,
+    fb:"✦ Верно! Ткань — уровень организации между клеткой и органом. Ключевые слова: сходное строение + общая функция. Например, нервная ткань — нейроны + нейроглия, обе для передачи импульса.",
+    trap:"",
+    hint:"Ткань — это не орган и не клетка. Что стоит между ними в иерархии организации живого?",
+    ref:"Ткани человека 🩻"
+  },
+
+  // ── ДОП. СЛОЖНЫЕ ──
+  {
+    topic:"Уровни организации живого",
+    text:"<span class='hero-name'>Джоэл</span> осматривает рану: сначала КЦИ повреждает отдельные клетки, потом — ткани, потом органы. В правильном порядке от меньшего к большему это:",
+    opts:["Клетка → Ткань → Орган → Система органов → Организм","Ткань → Клетка → Орган → Организм","Организм → Система → Орган → Ткань → Клетка","Клетка → Орган → Ткань → Организм"],
+    ans:0,
+    fb:"✦ Верно! Иерархия уровней организации живого: молекулярный → клеточный → тканевой → органный → системный → организменный. Для ОГЭ главное: Клетка → Ткань → Орган → Система органов → Организм.",
+    trap:"Ловушка ОГЭ: порядок нарушать нельзя. Ткань всегда состоит из клеток, орган — из тканей.",
+    hint:"Вспомни иерархию: самое маленькое — клетка. Что следующее?",
+    ref:"Уровни организации 🧬"
+  }
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0, 20);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+  qheader.innerHTML = `<span class="q-source">The Last of Us</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} правильно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (attempts === 1) {
+      qfb.innerHTML = `😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай ещё!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+    }
+  }
+}
+
+document.getElementById('qnext').addEventListener('click', () => {
+  cur++;
+  if (cur < questions.length) {
+    renderQ();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  const pct = score / questions.length;
+  let emoji, title, story, rankClass, rankText;
+  if (pct >= 0.9) {
+    emoji='🧬'; title='Иммунитет активирован!';
+    story='Элли смотрит на тебя с уважением: «Ты знаешь клетки лучше учёных Светлячков». Джоэл молча кивает. Дина смеётся: «Давно пора было».';
+    rankClass='rank-s'; rankText='Ранг: Иммунный ✦';
+  } else if (pct >= 0.7) {
+    emoji='🩹'; title='Вырвались с потерями';
+    story='Элли, Джоэл и Дина выбрались из лаборатории. Несколько вопросов зацепили — но знания почти на уровне. КЦИ отступил.';
+    rankClass='rank-a'; rankText='Ранг: Выживший ✦';
+  } else if (pct >= 0.5) {
+    emoji='😷'; title='Спаслись, но заражены...';
+    story='Вы вышли, но КЦИ добрался до части знаний. Нужно повторить шпору — особенно строение клетки и ткани.';
+    rankClass='rank-b'; rankText='Ранг: Заражённый';
+  } else if (pct >= 0.3) {
+    emoji='🤕'; title='Укрылись в убежище';
+    story='Едва успели захлопнуть дверь. Пора перечитать шпору сначала — грибок знает биологию лучше тебя.';
+    rankClass='rank-c'; rankText='Ранг: Бегун';
+  } else {
+    emoji='🧟'; title='КЦИ победил...';
+    story='...но это не конец. Вернись, перечитай карточки и попробуй снова. Даже щелкуны когда-то были людьми.';
+    rankClass='rank-d'; rankText='Ранг: Щелкун';
+  }
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+  document.getElementById('rstory').textContent = story;
+  const rrank = document.getElementById('rrank');
+  rrank.textContent = rankText;
+  rrank.className = `results-rank ${rankClass}`;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
