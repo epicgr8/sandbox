@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биоквест 2: Битва четырёх царств — ОГЭ Биология 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede6;
+    --bg2:     #faf8f3;
+    --bg3:     #e8e4db;
+    --bg4:     #dedad0;
+    --c-fungi: #6D4C41;
+    --c-bact:  #C62828;
+    --c-vir:   #6A1B9A;
+    --c-plant: #2E7D32;
+    --c-pvz:   #558B2F;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:'Outfit',sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 5%  0%,  rgba(194,40,40,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 90% 10%,  rgba(106,27,154,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(46,125,50,0.07) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after {
+    content:''; display:block; margin:28px auto 0;
+    width:200px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--c-bact),var(--c-vir),var(--c-fungi),var(--c-plant),transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht-red   { color:var(--c-bact); }
+  .ht-pur   { color:var(--c-vir); }
+  .ht-br    { color:var(--c-fungi); }
+  .ht-gr    { color:var(--c-plant); }
+  .ht-plain { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .c-bact::after  { background:var(--c-bact); }
+  .c-fungi::after { background:var(--c-fungi); }
+  .c-vir::after   { background:var(--c-vir); }
+  .c-plant::after { background:var(--c-plant); }
+  .c-pvz::after   { background:var(--c-pvz); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:5px 10px; border-radius:6px; display:inline-block; margin:4px 0 8px; }
+  .c-bact  .rule-formula { background:rgba(198,40,40,0.1);   color:var(--c-bact); }
+  .c-fungi .rule-formula { background:rgba(109,76,65,0.1);   color:var(--c-fungi); }
+  .c-vir   .rule-formula { background:rgba(106,27,154,0.1);  color:var(--c-vir); }
+  .c-plant .rule-formula { background:rgba(46,125,50,0.1);   color:var(--c-plant); }
+  .c-pvz   .rule-formula { background:rgba(85,139,47,0.1);   color:var(--c-pvz); }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.55; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+
+  /* СРАВНИТЕЛЬНАЯ ТАБЛИЦА */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:32px; overflow-x:auto; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:14px; min-width:580px; }
+  .quick-table th { font-size:11px; font-weight:700; letter-spacing:0.1em; padding:11px 14px; text-align:left; border-bottom:1px solid var(--border2); text-transform:uppercase; color:#fff; }
+  .th-bact  { background:var(--c-bact); }
+  .th-fungi { background:var(--c-fungi); }
+  .th-vir   { background:var(--c-vir); }
+  .th-plant { background:var(--c-plant); }
+  .th-feat  { background:#37474F; }
+  .quick-table td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:middle; font-size:13px; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:600; font-size:12px; color:var(--muted); }
+  .yes  { font-weight:700; }
+  .y-b  { color:var(--c-bact); }
+  .y-f  { color:var(--c-fungi); }
+  .y-v  { color:var(--c-vir); }
+  .y-p  { color:var(--c-plant); }
+  .no   { opacity:0.4; font-size:12px; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* BANNER */
+  .hero-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(198,40,40,0.25); display:grid; grid-template-columns:200px 1fr; }
+  .banner-img { width:200px; min-height:190px; object-fit:cover; object-position:center; display:block; background:var(--bg3); }
+  .banner-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .banner-title { font-size:18px; font-weight:700; color:var(--c-bact); }
+  .banner-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .banner-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(46,125,50,0.12);  color:#1b5e20; }
+  .stake-a { background:rgba(85,139,47,0.12);   color:#33691e; }
+  .stake-b { background:rgba(202,138,4,0.12);   color:#92400e; }
+  .stake-c { background:rgba(194,65,12,0.12);   color:#9a3412; }
+  .stake-d { background:rgba(198,40,40,0.12);   color:#7f0000; }
+  @media(max-width:560px){ .hero-banner{grid-template-columns:1fr;} .banner-img{width:100%;min-height:160px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,32px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-bact),var(--c-vir),var(--c-fungi),var(--c-plant)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-plant); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .qs-re    { background:var(--c-bact); }
+  .qs-tlou  { background:var(--c-fungi); }
+  .qs-vir   { background:var(--c-vir); }
+  .qs-pvz   { background:var(--c-plant); }
+  .qs-mix   { background:#37474F; }
+  .q-topic  { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; padding:0 2px; }
+  .name-ellie { background:linear-gradient(120deg,var(--c-fungi),var(--c-plant)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .name-eliz  { background:linear-gradient(120deg,var(--c-bact),var(--c-vir)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-plant); background:rgba(46,125,50,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--c-plant); background:rgba(46,125,50,0.12); }
+  .opt-btn.correct .opt-letter { color:var(--c-plant); }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(198,40,40,0.08); border:1px solid rgba(198,40,40,0.3); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-bact); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:500px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(46,125,50,0.12);  color:#1b5e20; }
+  .rank-a { background:rgba(85,139,47,0.12);  color:#33691e; }
+  .rank-b { background:rgba(202,138,4,0.12);  color:#92400e; }
+  .rank-c { background:rgba(194,65,12,0.12);  color:#9a3412; }
+  .rank-d { background:rgba(198,40,40,0.12);  color:#7f0000; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-bact); background:rgba(198,40,40,0.03); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(198,40,40,0.12); color:var(--c-bact); }
+  .nav-section-label { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · 9 класс · Квест 2</div>
+    <h1 class="hero-title">
+      <span class="ht-red">Битва</span> <span class="ht-plain">четырёх</span><br>
+      <span class="ht-br">цар</span><span class="ht-pur">ств</span>
+    </h1>
+    <p class="hero-sub">Бактерии · Грибы · Вирусы · Растения — шпора + 20 испытаний · RE × TLOU × Растения против Зомби × Гордость, Предубеждение и Зомби</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Шпора — 4 царства</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-bact">
+      <div class="rule-icon">🧫</div>
+      <div class="rule-title">Царство Бактерии</div>
+      <div class="rule-formula">Прокариоты</div>
+      <div class="rule-body">
+        <strong>Нет</strong> оформленного ядра — только нуклеоид (кольцевая ДНК).<br>
+        <strong>Нет</strong>: митохондрий, пластид, ЭПС, аппарата Гольджи.<br>
+        <strong>Есть</strong>: рибосомы, клеточная стенка (не целлюлоза!).<br>
+        <strong>Роли</strong>: брожение (йогурт, кефир), гниение, азотфиксация (клубеньки бобовых), болезнетворные.<br>
+        <strong>Споры</strong> — для выживания в неблагоприятных условиях, НЕ для размножения.
+      </div>
+      <div class="rule-assoc">☣️ RE: T-бактерия Umbrella — прокариот. Антибиотики разрушают клеточную стенку бактерий — именно поэтому они не действуют на вирусы.</div>
+    </div>
+
+    <div class="rule-card c-fungi">
+      <div class="rule-icon">🍄</div>
+      <div class="rule-title">Царство Грибы</div>
+      <div class="rule-formula">Гетеротрофы-эукариоты</div>
+      <div class="rule-body">
+        Тело = <strong>мицелий</strong> (грибница) из гиф.<br>
+        Клеточная стенка — из <strong>хитина</strong> (как у насекомых).<br>
+        Запасное вещество — <strong>гликоген</strong> (как у животных).<br>
+        Питание: сапрофиты (мёртвая органика) или паразиты.<br>
+        <strong>Сходство с растениями</strong>: клеточная стенка, неподвижность.<br>
+        <strong>Сходство с животными</strong>: хитин, гликоген, гетеротрофность.
+      </div>
+      <div class="rule-assoc">🍄 TLOU: Кордицепс — паразит. Мицелий прорастает сквозь нервную ткань хозяина. Антибиотики против него бессильны — это не бактерия.</div>
+    </div>
+
+    <div class="rule-card c-vir">
+      <div class="rule-icon">🦠</div>
+      <div class="rule-title">Вирусы + Лишайники</div>
+      <div class="rule-formula">Вне царств живой природы</div>
+      <div class="rule-body">
+        <strong>Вирусы</strong> — неклеточная форма жизни.<br>
+        Состав: <strong>нуклеиновая кислота</strong> (ДНК ИЛИ РНК) + <strong>белковая оболочка</strong> (капсид).<br>
+        Размножаются только внутри клетки-хозяина.<br>
+        Нет обмена веществ вне клетки — «живой кристалл».<br>
+        <strong>Лишайники</strong> — симбиоз <strong>гриба + водоросли</strong> (или цианобактерии). Биоиндикаторы чистоты воздуха. Не отдельное царство!
+      </div>
+      <div class="rule-assoc">☣️ RE: T-вирус Umbrella — РНК-вирус. Антибиотики и антигрибковые препараты против него бесполезны. Нужны противовирусные.</div>
+    </div>
+
+    <div class="rule-card c-plant">
+      <div class="rule-icon">🌿</div>
+      <div class="rule-title">Растения: эволюция и систематика</div>
+      <div class="rule-formula">«Вросли-Мхи-Папа-Голый-Покрыт»</div>
+      <div class="rule-body">
+        <strong>Вросли</strong> = Водоросли → <strong>Мхи</strong> → <strong>Папа</strong> = Папоротники →<br>
+        <strong>Голый</strong> = Голосеменные → <strong>Покрыт</strong> = Покрытосеменные<br>
+        Каждый следующий отдел лучше приспособлен к суше.<br>
+        <strong>Таксоны</strong> (от меньшего к большему):<br>
+        Вид → Род → Семейство → Порядок → Класс → Отдел → Царство (ВИРОСЕ ПОКЛОЦ)
+      </div>
+      <div class="rule-assoc">🌻 PvZ: Горох-стрелок, Подсолнух, Вишня-бомба — покрытосеменные, самый эволюционно продвинутый отдел. Семена защищены плодом.</div>
+    </div>
+
+    <div class="rule-card c-pvz">
+      <div class="rule-icon">🌱</div>
+      <div class="rule-title">Однодольные vs Двудольные</div>
+      <div class="rule-formula">1 семядоля / 2 семядоли</div>
+      <div class="rule-body">
+        <table style="width:100%;font-size:12px;border-collapse:collapse">
+          <tr style="font-weight:700">
+            <td style="padding:3px 6px 3px 0;color:var(--c-pvz)">Однодольные</td>
+            <td style="padding:3px 0;color:var(--c-plant)">Двудольные</td>
+          </tr>
+          <tr><td style="padding:2px 6px 2px 0">1 семядоля</td><td>2 семядоли</td></tr>
+          <tr><td style="padding:2px 6px 2px 0">Параллельное жилкование</td><td>Сетчатое жилкование</td></tr>
+          <tr><td style="padding:2px 6px 2px 0">Мочковатый корень</td><td>Стержневой корень</td></tr>
+          <tr><td style="padding:2px 6px 2px 0">3 лепестка</td><td>4–5 лепестков</td></tr>
+          <tr><td style="padding:2px 6px 2px 0">Злаки, лилии, тюльпан</td><td>Яблоня, подсолнух, берёза</td></tr>
+        </table>
+      </div>
+      <div class="rule-assoc">🌻 PvZ: Подсолнух (Helianthus annuus) — двудольное: 2 семядоли, сетчатое жилкование, стержневой корень.</div>
+    </div>
+
+    <div class="rule-card c-plant" style="--border-clr:#558B2F">
+      <div class="rule-icon">🔬</div>
+      <div class="rule-title">Фотосинтез и ткани растений</div>
+      <div class="rule-formula">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</div>
+      <div class="rule-body">
+        <strong>Фотосинтез</strong>: CO₂ + H₂O + свет → <strong>глюкоза + кислород</strong><br>
+        Происходит в хлоропластах (фотосинтезирующая паренхима).<br>
+        <strong>Ткани растений</strong>:<br>
+        · <strong>Меристема</strong> — деление, рост<br>
+        · <strong>Покровная</strong> — защита (эпидермис, кора)<br>
+        · <strong>Ксилема</strong> — вода вверх ↑<br>
+        · <strong>Флоэма</strong> — органика вниз ↓<br>
+        · <strong>Механическая</strong> — опора (волокна)
+      </div>
+      <div class="rule-assoc">🌻 PvZ: Подсолнух производит «sun» — игровую энергию для всей команды. Прямая аналогия: хлоропласты поглощают свет и синтезируют глюкозу — энергию для клетки.</div>
+    </div>
+
+  </div>
+
+  <!-- ТАБЛИЦА ЦАРСТВ -->
+  <div class="sec-head" style="margin-top:40px"><span class="sec-badge rule">Сравнение четырёх царств</span><div class="sec-line"></div></div>
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th class="th-feat">Признак</th>
+          <th class="th-bact">🧫 Бактерии</th>
+          <th class="th-fungi">🍄 Грибы</th>
+          <th class="th-vir">🦠 Вирусы</th>
+          <th class="th-plant">🌿 Растения</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Тип клетки</td>
+          <td><span class="yes y-b">Прокариот</span></td>
+          <td><span class="yes y-f">Эукариот</span></td>
+          <td><span class="no">Нет клетки</span></td>
+          <td><span class="yes y-p">Эукариот</span></td>
+        </tr>
+        <tr>
+          <td>Ядро</td>
+          <td><span class="no">✗ Нуклеоид</span></td>
+          <td><span class="yes y-f">✓ Есть</span></td>
+          <td><span class="no">✗ Нет</span></td>
+          <td><span class="yes y-p">✓ Есть</span></td>
+        </tr>
+        <tr>
+          <td>Клеточная стенка</td>
+          <td><span class="yes y-b">✓ (не целлюлоза)</span></td>
+          <td><span class="yes y-f">✓ Хитин</span></td>
+          <td><span class="no">✗ Нет</span></td>
+          <td><span class="yes y-p">✓ Целлюлоза</span></td>
+        </tr>
+        <tr>
+          <td>Питание</td>
+          <td><span class="yes y-b">Гетеро/авто</span></td>
+          <td><span class="yes y-f">Гетеротроф</span></td>
+          <td><span class="no">Нет обмена</span></td>
+          <td><span class="yes y-p">Автотроф</span></td>
+        </tr>
+        <tr>
+          <td>Запасное вещество</td>
+          <td><span class="yes y-b">Гликоген</span></td>
+          <td><span class="yes y-f">Гликоген</span></td>
+          <td><span class="no">—</span></td>
+          <td><span class="yes y-p">Крахмал</span></td>
+        </tr>
+        <tr>
+          <td>Хлоропласты</td>
+          <td><span class="no">✗ Нет</span></td>
+          <td><span class="no">✗ Нет</span></td>
+          <td><span class="no">✗ Нет</span></td>
+          <td><span class="yes y-p">✓ Есть</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deco-div"><span>Биоквест 2 — 20 случайных испытаний</span></div>
+
+  <!-- BANNER -->
+  <div class="hero-banner">
+    <img class="banner-img" src="https://i.pinimg.com/736x/6c/98/0e/6c980efd2f6be0f2a93df3abbaf5e305.jpg" alt="Битва четырёх царств" onerror="this.style.background='var(--bg3)';this.textContent='🧟🌿'">
+    <div class="banner-text">
+      <div class="banner-title">☣️ Война четырёх царств началась!</div>
+      <div class="banner-desc">Элли Миллер и Элизабет Беннет — две мощные героини — оказались в эпицентре войны: бактерии Umbrella, Т-вирус, кордицепс КЦИ и армия растений PvZ сошлись в схватке. Чтобы выжить — нужно разобраться, кто есть кто в мире царств живой природы.</div>
+      <div class="banner-stakes">
+        <span class="stake stake-s">18–20 ✦ Все четыре армии побеждены!</span>
+        <span class="stake stake-a">14–17 ✦ Прорвались через три</span>
+        <span class="stake stake-b">10–13 ✦ Двое остановили двоих</span>
+        <span class="stake stake-c">6–9 ✦ Отступили в укрытие</span>
+        <span class="stake stake-d">0–5 ✦ Биохазард победил...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Определи, кто есть кто</div>
+      <p class="quiz-sub">Элли и Элизабет надеются на тебя. Не подведи.</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Попробовать снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все биоквесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="bio_quest1_cell.html">
+        <span class="qp-num" style="background:#16a34a">1</span>
+        <span class="qp-info"><span class="qp-name">Живое и опасное</span><span class="qp-sub">Клетка, ткани, методы · TLOU</span></span>
+        <span class="qp-badge">← Назад</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-bact)">2</span>
+        <span class="qp-info"><span class="qp-name">Битва четырёх царств</span><span class="qp-sub">Бактерии, грибы, вирусы, растения</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#7c3aed">3</span>
+        <span class="qp-info"><span class="qp-name">Зоология и эволюция</span><span class="qp-sub">Систематика животных, Дарвин</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#c2410c">4</span>
+        <span class="qp-info"><span class="qp-name">Тело человека</span><span class="qp-sub">Скелет, кровь, дыхание, пищеварение</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#ca8a04">5</span>
+        <span class="qp-info"><span class="qp-name">Мозг и экосистемы</span><span class="qp-sub">ВНД, анализаторы, экология</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+    </div>
+    <div class="nav-section-label" style="margin-top:24px">Главная</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#7c3aed">↩</span>
+        <span class="qp-info"><span class="qp-name">Все квесты ОГЭ 2026</span><span class="qp-sub">Главная страница</span></span>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// source: RE = Resident Evil, TLOU = The Last of Us, PvZ = Растения против Зомби, MIX = mixed/PP&Z
+const allQuestions = [
+
+  // ── БАКТЕРИИ ──
+  {
+    src:"re", topic:"Бактерии — прокариоты",
+    text:"<span class='hero-name name-eliz'>Элизабет Беннет</span> врывается в лабораторию Umbrella. На столе — препарат клетки под микроскопом: ядра нет, ДНК лежит прямо в цитоплазме, митохондрий нет. Как называются организмы с <span class='term'>таким типом клеточного строения</span>?",
+    opts:["Прокариоты","Эукариоты","Сапрофиты","Анаэробы"],
+    ans:0,
+    fb:"✦ Верно! Про-кариот буквально = «до ядра». Бактерии — единственное царство прокариот. Все остальные (грибы, растения, животные) — эукариоты с настоящим ядром и ядерной мембраной.",
+    trap:"Ловушка ОГЭ: вирусы не являются прокариотами — у них нет клетки вообще. Прокариоты — это именно бактерии (и архебактерии).",
+    hint:"Про-кариот = до ядра. У бактерий ДНК лежит прямо в цитоплазме. Как называется такой тип организации?"
+  },
+  {
+    src:"re", topic:"Споры бактерий",
+    text:"Лаборатория Umbrella уничтожена. Через 50 лет учёные находят в руинах живые бактерии. Как они выжили — без питания, воды, при экстремальной температуре?",
+    opts:["Образовали споры — защитные структуры для переживания неблагоприятных условий","Перешли в форму вируса","Размножились половым путём","Притаились внутри клеток мёртвых хозяев"],
+    ans:0,
+    fb:"✦ Верно! Споры бактерий — это НЕ размножение (в отличие от грибов и растений!). Это выживание: клетка покрывается плотной оболочкой и замирает. Переживает жару, холод, кислоты десятки лет.",
+    trap:"Ловушка ОГЭ: у бактерий споры = ВЫЖИВАНИЕ. У грибов и растений споры = РАЗМНОЖЕНИЕ. Разные функции при одинаковом слове!",
+    hint:"Бактерии не размножаются спорами — они так выживают. В чём разница между выживанием и размножением?"
+  },
+  {
+    src:"re", topic:"Роль бактерий — азотфиксация",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> замечает: поля после зомби-апокалипсиса зарастают клевером. Учёный объясняет — в корнях клевера живут бактерии, которые делают почву плодородной. Что именно они делают?",
+    opts:["Превращают азот воздуха в доступные для растений соединения (азотфиксация)","Разрушают мёртвую органику (гниение)","Сбраживают сахар в молочную кислоту","Выделяют кислород при фотосинтезе"],
+    ans:0,
+    fb:"✦ Верно! Азотфиксирующие бактерии (Rhizobium) живут в клубеньках бобовых — клевера, гороха, сои. Переводят N₂ из воздуха в нитраты. Без них растения не могут усваивать атмосферный азот.",
+    trap:"",
+    hint:"Растения нуждаются в азоте, но не могут брать его из воздуха напрямую. Какие бактерии им в этом помогают?"
+  },
+  {
+    src:"re", topic:"Молочнокислые бактерии",
+    text:"<span class='hero-name name-ellie'>Элли</span> находит на базе выживших запасы кефира. «Живут же люди». Какие бактерии позволяют превращать молоко в кефир и йогурт?",
+    opts:["Молочнокислые бактерии (сбраживают лактозу в молочную кислоту)","Азотфиксирующие бактерии","Болезнетворные (патогенные) бактерии","Гнилостные бактерии"],
+    ans:0,
+    fb:"✦ Верно! Молочнокислые бактерии (Lactobacillus) сбраживают молочный сахар в молочную кислоту. Кислая среда сворачивает белок — получается йогурт, кефир, сыр, сметана.",
+    trap:"Ловушка ОГЭ: брожение (анаэробный процесс) ≠ гниение (разложение белков). Это разные роли разных бактерий. Брожение даёт пищевые продукты, гниение — разрушает трупы.",
+    hint:"Молоко → кефир. Это брожение. Какие бактерии его проводят?"
+  },
+  {
+    src:"re", topic:"Строение бактериальной клетки",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> изучает препарат под микроскопом. Что из перечисленного <span class='term'>есть</span> в клетке бактерии?",
+    opts:["Рибосомы и кольцевая ДНК (нуклеоид)","Митохондрии","Хлоропласты","Аппарат Гольджи"],
+    ans:0,
+    fb:"✦ Верно! У бактерий ЕСТЬ: рибосомы (синтез белков), нуклеоид (ДНК без мембраны), клеточная стенка, плазматическая мембрана. НЕТ: митохондрий, ЭПС, аппарата Гольджи, пластид.",
+    trap:"Ловушка ОГЭ: рибосомы есть у ВСЕХ клеток — и у бактерий тоже. Это единственный органоид, общий для про- и эукариот.",
+    hint:"Бактерии — прокариоты. Из органоидов у них есть только самый древний и простой. Какой?"
+  },
+
+  // ── ГРИБЫ ──
+  {
+    src:"tlou", topic:"Строение гриба",
+    text:"КЦИ распространяется по подземным туннелям невидимыми нитями. Как называется вегетативное тело гриба — сеть тончайших нитей, пронизывающих субстрат?",
+    opts:["Мицелий (грибница)","Плодовое тело","Спора","Гифа (одна нить мицелия)"],
+    ans:0,
+    fb:"✦ Верно! Мицелий (грибница) — основное тело гриба, состоит из гиф. Плодовое тело (шляпка + ножка) — лишь надземная часть, где созревают споры. КЦИ распространяется именно мицелием.",
+    trap:"Ловушка ОГЭ: гифа и мицелий — разные понятия. Гифа — одна нить. Мицелий — вся сеть нитей. На ОГЭ могут спросить оба термина.",
+    hint:"Тело гриба под землёй — это не плодовое тело (шляпка). Как называется вся сеть грибных нитей?"
+  },
+  {
+    src:"tlou", topic:"Питание грибов",
+    text:"<span class='hero-name name-ellie'>Элли</span> спрашивает: «Кордицепс питается мозгом — он как хищник?». Как правильно называется тип питания гриба, который получает органику из тела живого хозяина?",
+    opts:["Паразитизм (гетеротрофное питание)","Автотрофное питание (фотосинтез)","Хемосинтез","Симбиоз"],
+    ans:0,
+    fb:"✦ Верно! Все грибы — гетеротрофы: не синтезируют органику сами. Сапрофиты питаются мёртвой органикой (мукор, пеницилл, дрожжи). Паразиты — живыми хозяевами (кордицепс, трутовик). КЦИ — паразит.",
+    trap:"Ловушка ОГЭ: симбиоз — взаимовыгодное сожительство (лишайники). Паразитизм — один живёт за счёт другого в ущерб хозяину. Кордицепс явно не взаимовыгоден.",
+    hint:"Гриб получает органику ИЗ живого хозяина, нанося ему вред. Как называется такой тип отношений?"
+  },
+  {
+    src:"tlou", topic:"Клеточная стенка грибов",
+    text:"<span class='hero-name name-ellie'>Элли</span> узнаёт: кордицепс устойчив к антибиотикам — отчасти из-за особого состава клеточной стенки. Из какого вещества состоит клеточная стенка <span class='term'>растений</span> — в отличие от грибов?",
+    opts:["Целлюлоза","Хитин","Муреин","Гликоген"],
+    ans:0,
+    fb:"✦ Верно! Растения — целлюлоза. Грибы — хитин (как у насекомых и ракообразных). Бактерии — муреин (особый полисахарид). Это одно из ключевых различий царств.",
+    trap:"Ловушка ОГЭ: и грибы, и растения имеют клеточную стенку — но из разных веществ. Хитин = грибы = насекомые. Целлюлоза = только растения.",
+    hint:"Помни: хитин у грибов, как у насекомых. А у растений что-то своё. Что?"
+  },
+  {
+    src:"tlou", topic:"Запасные вещества грибов",
+    text:"Запасное вещество кордицепса — не крахмал. Какое вещество грибы откладывают «про запас» — и этим похожи на животных, а не на растения?",
+    opts:["Гликоген","Крахмал","Жиры","Хлорофилл"],
+    ans:0,
+    fb:"✦ Верно! Запасные вещества: у растений — КРАХМАЛ, у грибов и животных — ГЛИКОГЕН. Именно гликоген и хитин — признаки, сближающие грибов с животными.",
+    trap:"Ловушка ОГЭ: крахмал = растения. Гликоген = грибы + животные. Часто спрашивают именно это.",
+    hint:"Крахмал — это у растений. А у грибов (и у нас тоже) — другое запасное вещество. Какое?"
+  },
+  {
+    src:"re", topic:"Лишайники",
+    text:"На руинах Раккун-сити на камнях выросли серо-зелёные корочки. Лишайники выжили там, где другие организмы погибли. Что такое лишайник по своей биологической природе?",
+    opts:["Симбиоз гриба и водоросли (или цианобактерии)","Особый вид мха","Тип бактерий","Паразитический гриб"],
+    ans:0,
+    fb:"✦ Верно! Лишайник = гриб + водоросль (фотосинтез органики) или цианобактерия. Гриб даёт воду и минералы, водоросль — органику. Взаимовыгодный симбиоз. Лишайники — биоиндикаторы чистоты воздуха.",
+    trap:"Ловушка ОГЭ: лишайник — НЕ отдельное царство живой природы! Это симбиотические организмы, относящиеся к царству Грибы.",
+    hint:"Лишайник состоит из двух организмов. Кто они?"
+  },
+  {
+    src:"re", topic:"Ядовитые грибы",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> находит в лесу белый гриб с зеленоватой шляпкой. Это может быть бледная поганка. Какой признак отличает её от съедобного шампиньона?",
+    opts:["Белые пластинки и вольва (чашечка) у основания ножки","Зелёный цвет шляпки","Неприятный запах","Растёт только в дубовых лесах"],
+    ans:0,
+    fb:"✦ Верно! Бледная поганка: белые пластинки (у шампиньона — розовые!), юбочка на ножке, вольва у основания. Яд — аматоксин — разрушает печень. Симптомы появляются через 6–24 часа.",
+    trap:"Ловушка ОГЭ: белые пластинки = опасность. У молодого шампиньона пластинки розоватые, у зрелого — тёмно-коричневые. Никогда не бери белопластинчатые грибы.",
+    hint:"У бледной поганки и шампиньона разный цвет пластинок под шляпкой. Какой у ядовитой?"
+  },
+  {
+    src:"re", topic:"Плесневые грибы",
+    text:"В заброшенном складе Umbrella — плесень везде. Какое медицинское значение имеет плесневый гриб пеницилл (Penicillium)?",
+    opts:["Из него получают антибиотик пенициллин — первый антибиотик в истории","Он производит противовирусные препараты","Он синтезирует витамины группы B","Из него делают противогрибковые мази"],
+    ans:0,
+    fb:"✦ Верно! Пенициллин открыл Александр Флеминг в 1928 году. Первый антибиотик — революция в медицине. Антибиотики убивают бактерий — но не действуют на вирусы и грибы!",
+    trap:"Ловушка ОГЭ: антибиотики действуют ТОЛЬКО на бактерий. При гриппе (вирус) или молочнице (гриб) антибиотики бесполезны и вредны.",
+    hint:"Пеницилл → пенициллин. Против каких организмов работают антибиотики?"
+  },
+
+  // ── ВИРУСЫ ──
+  {
+    src:"re", topic:"Строение вируса",
+    text:"В лаборатории Umbrella исследуют T-вирус. Из чего он состоит? Выбери правильное описание строения вируса.",
+    opts:["Нуклеиновая кислота (ДНК или РНК) + белковая оболочка (капсид)","Клетка с ядром и митохондриями","Клетка без ядра, как бактерия","Только белки, без нуклеиновой кислоты"],
+    ans:0,
+    fb:"✦ Верно! Вирус = нуклеиновая кислота (только ДНК ИЛИ только РНК) + белковый капсид. Никакой клетки, никаких органоидов.",
+    trap:"Ловушка ОГЭ: у вируса ЛИБО ДНК, ЛИБО РНК — никогда оба. ДНК-вирусы: оспа, герпес. РНК-вирусы: грипп, ВИЧ, коронавирус, T-вирус Umbrella.",
+    hint:"Вирус не имеет клетки. Из каких двух компонентов он состоит?"
+  },
+  {
+    src:"re", topic:"Вирусы — неклеточная форма",
+    text:"T-вирус вне клетки — просто кристалл. Внутри клетки-хозяина — «оживает». Какое утверждение о вирусах <span class='term'>верно</span>?",
+    opts:["Вирусы — неклеточная форма жизни без клеточного строения","Вирусы — мелкие бактерии без клеточной стенки","Вирусы имеют ядро, но без мембраны","Вирусы — простейшие грибы"],
+    ans:0,
+    fb:"✦ Верно! Вирусы занимают промежуточное положение между живым и неживым: вне клетки — кристалл без обмена веществ, внутри — «захватывают» рибосомы хозяина и размножаются.",
+    trap:"Ловушка ОГЭ: бактерии — живые клетки (прокариоты). Вирусы — НЕ клетки вообще. Это принципиальное различие. Антибиотики работают против клеток, не против вирусов.",
+    hint:"Клетки нет — ни с ядром, ни без. Как называется такая форма существования?"
+  },
+  {
+    src:"re", topic:"Антибиотики vs вирусы",
+    text:"Врач объясняет: T-вирус и бактерия — РАЗНЫЕ вещи. Антибиотики помогут от бактерий, но не от T-вируса. Почему антибиотики не работают против вирусов?",
+    opts:["Антибиотики разрушают клеточные структуры бактерий, а у вирусов клетки нет","Вирусы крупнее бактерий и прочнее","Вирусы живут только в крови, куда антибиотик не попадает","T-вирус выработал устойчивость к антибиотикам"],
+    ans:0,
+    fb:"✦ Верно! Антибиотики атакуют клеточную стенку или рибосомы бактерий. У вирусов нет ни клетки, ни клеточной стенки, ни рибосом — нечего атаковать. Против вирусов — только противовирусные препараты.",
+    trap:"Ловушка жизни (не только ОГЭ): грипп — вирус. Пить антибиотики при гриппе бессмысленно и убивает полезную микрофлору кишечника.",
+    hint:"Антибиотики работают против клеточных структур. Есть ли у вирусов клетки?"
+  },
+
+  // ── РАСТЕНИЯ ──
+  {
+    src:"pvz", topic:"Эволюция растений",
+    text:"Горох-стрелок — покрытосеменное растение, самый «современный» отдел. В каком <span class='term'>правильном порядке</span> шла эволюция растений?",
+    opts:["Водоросли → Мхи → Папоротники → Голосеменные → Покрытосеменные","Мхи → Водоросли → Папоротники → Покрытосеменные","Папоротники → Мхи → Голосеменные → Покрытосеменные","Покрытосеменные → Голосеменные → Папоротники → Мхи → Водоросли"],
+    ans:0,
+    fb:"✦ Верно! Мнемоника: «Вросли-Мхи-Папа-Голый-Покрыт» = Водоросли → Мхи → Папоротники → Голосеменные → Покрытосеменные. Каждый следующий отдел лучше приспособлен к жизни на суше.",
+    trap:"Ловушка ОГЭ: Мхи появились ПОСЛЕ водорослей и РАНЬШЕ папоротников, не наоборот. Семена появились у голосеменных, плоды — у покрытосеменных.",
+    hint:"Начни с самых простых — они жили в воде. Потом первые наземные. Потом те, у кого появились семена. Последние — с плодами."
+  },
+  {
+    src:"pvz", topic:"Однодольные и двудольные",
+    text:"Подсолнух-стрелок в PvZ — двудольное растение. Какой признак <span class='term'>двудольных</span> отличает их от однодольных?",
+    opts:["Сетчатое (перистое) жилкование листьев","Параллельное жилкование листьев","Мочковатая корневая система","Одна семядоля в семени"],
+    ans:0,
+    fb:"✦ Верно! Двудольные: 2 семядоли, сетчатое жилкование, стержневой корень, 4–5 лепестков. Однодольные: 1 семядоля, параллельное жилкование, мочковатый корень, 3 лепестка.",
+    trap:"Ловушка ОГЭ: параллельное жилкование = однодольные (злаки, лилии, тюльпаны). Сетчатое = двудольные (яблоня, подсолнух, берёза). Жилкование проще всего увидеть на листе.",
+    hint:"У подсолнуха жилки на листьях — разветвлённые, как сеть. Это признак одно- или двудольного?"
+  },
+  {
+    src:"pvz", topic:"Систематика растений",
+    text:"<span class='hero-name name-ellie'>Элли</span> и <span class='hero-name name-eliz'>Элизабет</span> изучают таксономию. В каком <span class='term'>правильном порядке</span> расположены таксоны — от наименьшего к наибольшему?",
+    opts:["Вид → Род → Семейство → Порядок → Класс → Отдел → Царство","Царство → Класс → Семейство → Вид","Вид → Семейство → Класс → Царство","Род → Вид → Класс → Царство"],
+    ans:0,
+    fb:"✦ Верно! Иерархия: Вид → Род → Семейство → Порядок → Класс → Отдел → Царство (ВИРОСЕ ПОКЛОЦ). Пример: Роза собачья → Род Роза → Семейство Розовые → Класс Двудольные → Отдел Покрытосеменные → Царство Растения.",
+    trap:"Ловушка ОГЭ: семейство стоит ВЫШЕ рода, не ниже. Вид — самый маленький таксон. Запомни порядок как цепочку.",
+    hint:"Самое маленькое — вид. Самое большое — царство. Что между ними по порядку?"
+  },
+  {
+    src:"pvz", topic:"Фотосинтез",
+    text:"Подсолнух-стрелок — главный источник энергии в PvZ. Что является конечными продуктами <span class='term'>фотосинтеза</span>?",
+    opts:["Глюкоза и кислород","Углекислый газ и вода","АТФ и углекислый газ","Крахмал и азот"],
+    ans:0,
+    fb:"✦ Верно! Фотосинтез: 6CO₂ + 6H₂O + свет → C₆H₁₂O₆ + 6O₂. Сырьё: CO₂ + вода + свет. Продукты: глюкоза + кислород. Растения — автотрофы, сами создают органику.",
+    trap:"Ловушка ОГЭ: дыхание — противоположный процесс: глюкоза + O₂ → CO₂ + H₂O + энергия. Не перепутай, что сырьё, а что продукт.",
+    hint:"Фотосинтез: CO₂ и вода ПОГЛОЩАЮТСЯ. Что при этом ВЫДЕЛЯЕТСЯ?"
+  },
+  {
+    src:"pvz", topic:"Проводящие ткани растений",
+    text:"Вишня-бомба переносит питательные вещества по стеблю вниз к корням. Как называется ткань, по которой движется органика от листьев к корням?",
+    opts:["Флоэма (ситовидные трубки)","Ксилема (сосуды)","Меристема","Механическая ткань"],
+    ans:0,
+    fb:"✦ Верно! Флоэма — «продовольственный» транспорт: органика (сахара) от листьев ВНИЗ к корням и плодам. Ксилема — «водный» транспорт: вода и минеральные соли ВВЕРХ от корней.",
+    trap:"Ловушка ОГЭ: ксилема = вода вверх. Флоэма = органика вниз. Запомни: ф(лоэма) — ф(рукты, плоды) — то, ради чего несут питание вниз.",
+    hint:"Ксилема — вода вверх. Флоэма — что и в каком направлении?"
+  },
+
+  // ── СРАВНИТЕЛЬНЫЕ ──
+  {
+    src:"mix", topic:"Сходство грибов с животными",
+    text:"<span class='hero-name name-ellie'>Элли</span> спорит: «Грибы — это же растения?». Что общего у грибов и <span class='term'>животных</span> — чего нет у растений?",
+    opts:["Хитин в клеточной стенке и гликоген как запасное вещество","Наличие хлорофилла","Клеточная стенка из целлюлозы","Автотрофный тип питания"],
+    ans:0,
+    fb:"✦ Верно! Грибы и животные: хитин (стенка/панцирь), гликоген (запас), гетеротрофность. У растений: целлюлоза (стенка), крахмал (запас), автотрофность. Именно поэтому грибы выделены в отдельное царство.",
+    trap:"Ловушка ОГЭ: хлорофилл и автотрофное питание — это РАСТЕНИЯ, а не грибы. Грибы не фотосинтезируют.",
+    hint:"Что объединяет грибы и животных — по клеточной стенке и запасному веществу?"
+  },
+  {
+    src:"mix", topic:"Царства живой природы — сравнение",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> составляет таблицу по царствам. Какое утверждение <span class='term'>верно</span>?",
+    opts:["Только бактерии — прокариоты; грибы, растения, животные — эукариоты","Грибы — автотрофы, как растения","Вирусы относятся к царству Бактерий","Лишайники — самостоятельное царство живой природы"],
+    ans:0,
+    fb:"✦ Верно! Только бактерии (и архебактерии) — прокариоты. Все остальные царства — эукариоты. Вирусы — не клетки, не царство. Лишайники — симбиоз гриба и водоросли, входят в царство Грибы.",
+    trap:"Ловушка ОГЭ: лишайники — не царство! Это частая ошибка. И грибы — НЕ автотрофы: они не фотосинтезируют.",
+    hint:"Одно из четырёх утверждений верно. Проверь каждое по шпоре: про прокариот, автотрофов, вирусы и лишайники."
+  }
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+const srcLabels = {
+  re:   { cls:'qs-re',   text:'Resident Evil' },
+  tlou: { cls:'qs-tlou', text:'The Last of Us' },
+  vir:  { cls:'qs-vir',  text:'Umbrella · Вирусы' },
+  pvz:  { cls:'qs-pvz',  text:'Растения против Зомби' },
+  mix:  { cls:'qs-mix',  text:'Все вселенные' }
+};
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0, 20);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+  const s = srcLabels[q.src] || srcLabels.mix;
+  qheader.innerHTML = `<span class="q-source ${s.cls}">${s.text}</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} правильно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (attempts === 1) {
+      qfb.innerHTML = `😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.topic}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb.replace(/^✦ Верно! /, '')}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+    }
+  }
+}
+
+document.getElementById('qnext').addEventListener('click', () => {
+  cur++;
+  if (cur < questions.length) renderQ();
+  else showResults();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  const pct = score / questions.length;
+  let emoji, title, story, rankClass, rankText;
+  if (pct >= 0.9) {
+    emoji='🏆'; title='Все четыре армии побеждены!';
+    story='Элли улыбается: «Ты знаешь царства лучше, чем кордицепс знает мозги». Элизабет Беннет кивает с достоинством: «Я в вас не сомневалась с самого начала».';
+    rankClass='rank-s'; rankText='Ранг: Мастер царств ✦';
+  } else if (pct >= 0.7) {
+    emoji='⚔️'; title='Прорвались через три армии';
+    story='Трое из четырёх побеждены. Осталась одна. Элли: «Повторишь шпору — и она тоже падёт».';
+    rankClass='rank-a'; rankText='Ранг: Выживший боец ✦';
+  } else if (pct >= 0.5) {
+    emoji='🌿'; title='Двое остановили двоих';
+    story='Вничью. Горох-стрелок всё ещё держит позицию. Нужно подкрепить знания — особенно по вирусам и грибам.';
+    rankClass='rank-b'; rankText='Ранг: Ботаник-любитель';
+  } else if (pct >= 0.3) {
+    emoji='🧫'; title='Отступили в укрытие';
+    story='Umbrella пока побеждает. Перечитай шпору с самого начала — особенно таблицу царств.';
+    rankClass='rank-c'; rankText='Ранг: Носитель';
+  } else {
+    emoji='☣️'; title='Биохазард победил...';
+    story='...но это не конец. Вернись, прочитай шпору и попробуй снова. Даже зомби когда-то знали биологию.';
+    rankClass='rank-d'; rankText='Ранг: Зомби';
+  }
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+  document.getElementById('rstory').textContent = story;
+  const rrank = document.getElementById('rrank');
+  rrank.textContent = rankText;
+  rrank.className = `results-rank ${rankClass}`;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>

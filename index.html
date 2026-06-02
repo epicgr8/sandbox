@@ -183,7 +183,6 @@ body {
   transition:transform 0.15s, box-shadow 0.15s;
 }
 .subject-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.1); }
-.subject-card.s-math { grid-column:1 / -1; }
 
 .sc-header {
   padding:20px 24px 16px;
@@ -222,15 +221,8 @@ body {
 .badge-14d  { background:rgba(194,65,12,0.1); color:var(--chem); border:1px solid rgba(194,65,12,0.25); }
 .badge-lit  { background:rgba(139,92,246,0.1); color:var(--lit); border:1px solid rgba(139,92,246,0.25); }
 
-/* MATH — список квестов */
+/* Список квестов */
 .sc-quests { padding:16px 24px; display:flex; flex-direction:column; gap:8px; }
-
-/* Горизонтальная сетка для математики */
-.s-math .sc-quests {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:8px;
-}
 
 .quest-link {
   display:flex; align-items:center; gap:12px;
@@ -473,9 +465,9 @@ body {
           <div class="sc-icon" aria-hidden="true">🌿</div>
           <div class="sc-meta">
             <div class="sc-title">Биология</div>
-            <div class="sc-date">5 июня · 1 квест готов, 4 в разработке</div>
+            <div class="sc-date">5 июня · 2 квеста готовы, 3 в разработке</div>
           </div>
-          <span class="sc-badge badge-done">Первый готов</span>
+          <span class="sc-badge badge-done">2 квеста готовы</span>
         </div>
         <div class="sc-quests">
 
@@ -488,14 +480,14 @@ body {
             <span class="ql-tag">Квест</span>
           </a>
 
-          <div class="quest-link" style="opacity:0.45;cursor:default">
-            <span class="ql-num" style="background:rgba(8,145,178,0.12);color:#0891b2">2</span>
+          <a class="quest-link q2" href="bio_quest2_kingdoms.html">
+            <span class="ql-num" style="background:#C62828;color:#fff">2</span>
             <span class="ql-info">
-              <span class="ql-name">Царства живой природы</span>
-              <span class="ql-sub">Растения, грибы, бактерии, вирусы</span>
+              <span class="ql-name">Битва четырёх царств</span>
+              <span class="ql-sub">Бактерии, грибы, вирусы, растения · RE × PvZ</span>
             </span>
-            <span class="ql-tag">Скоро</span>
-          </div>
+            <span class="ql-tag">Квест</span>
+          </a>
 
           <div class="quest-link" style="opacity:0.45;cursor:default">
             <span class="ql-num" style="background:rgba(124,58,237,0.12);color:#7c3aed">3</span>
@@ -601,7 +593,7 @@ body {
   <!-- FOOTER -->
   <div class="footer">
     <span class="footer-brand">ОГЭ 2026 · Прокачай знания</span>
-    <span class="footer-note">Бесплатно · Без рекламы · Сделано с любовью к мелким п***... детям 🌿</span>
+    <span class="footer-note">Бесплатно · Без рекламы · Сделано с любовью к мелким детям 🌿</span>
   </div>
 
   </div><!-- /wrap -->

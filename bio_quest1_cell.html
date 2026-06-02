@@ -440,11 +440,11 @@
         </span>
         <span class="qp-badge qp-here">Здесь</span>
       </a>
-      <div class="quest-pill quest-locked">
-        <span class="qp-num" style="background:#0891b2;color:#fff">2</span>
-        <span class="qp-info"><span class="qp-name">Царства живой природы</span><span class="qp-sub">Растения, грибы, бактерии, вирусы</span></span>
-        <span class="qp-badge">Скоро</span>
-      </div>
+      <a class="quest-pill" href="bio_quest2_kingdoms.html">
+        <span class="qp-num" style="background:#C62828;color:#fff">2</span>
+        <span class="qp-info"><span class="qp-name">Битва четырёх царств</span><span class="qp-sub">Бактерии, грибы, вирусы, растения · RE × PvZ</span></span>
+        <span class="qp-badge" style="background:rgba(198,40,40,0.12);color:#C62828">Новый →</span>
+      </a>
       <div class="quest-pill quest-locked">
         <span class="qp-num" style="background:#7c3aed;color:#fff">3</span>
         <span class="qp-info"><span class="qp-name">Зоология и эволюция</span><span class="qp-sub">Систематика животных, Дарвин</span></span>
@@ -795,7 +795,7 @@ function answer(i) {
       answered = true;
       btns.forEach(b => b.disabled = true);
       btns[correctIdx].classList.add('correct');
-      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb.replace(/^✦ Верно! /, '')}`;
       if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
       qfb.innerHTML = fbHtml;
       qfb.className = 'feedback-box fail';
