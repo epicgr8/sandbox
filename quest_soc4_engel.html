@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Нейтралитет невозможен — Wolfenstein · Обществознание · Социальная сфера и политика</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f5f3ee;
+    --bg2:     #fdfcf9;
+    --bg3:     #ece8df;
+    --bg4:     #ddd8cd;
+    --c-engel: #c62828;
+    --c-skull: #37474f;
+    --c-resist:#2e7d32;
+    --c-nilfg: #4a148c;
+    --c-skell: #01579b;
+    --c-tuss:  #e65100;
+    --text:    #1a1410;
+    --muted:   #6b5e4a;
+    --border:  rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 0%,  rgba(198,40,40,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(46,125,50,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(74,20,140,0.04) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:300px; height:3px; border-radius:3px; background:linear-gradient(90deg,transparent,var(--c-engel),#9CCC65,var(--c-nilfg),#42A5F5,transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(32px,6vw,58px); font-weight:700; line-height:1.08; margin-bottom:10px; }
+  .ht1 { display:block; font-size:0.46em; letter-spacing:0.18em; text-transform:uppercase; font-weight:600; color:#D81B60; margin-bottom:6px; }
+  .ht-main { display:inline; background:linear-gradient(135deg,#D81B60 0%,#C62828 45%,#880E4F 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a0505; color:#fff8f8; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-engel::after  { background:var(--c-engel); }
+  .rule-card.c-skull::after  { background:var(--c-skull); }
+  .rule-card.c-resist::after { background:var(--c-resist); }
+  .rule-card.c-nilfg::after  { background:var(--c-nilfg); }
+  .rule-card.c-skell::after  { background:var(--c-skell); }
+  .rule-card.c-tuss::after   { background:var(--c-tuss); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .rule-body .law { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:2px 7px; border-radius:4px; display:inline-block; margin:1px 0; }
+  .c-engel .rule-body .law  { background:rgba(198,40,40,0.1);   color:var(--c-engel); }
+  .c-skull .rule-body .law  { background:rgba(55,71,79,0.1);    color:var(--c-skull); }
+  .c-resist .rule-body .law { background:rgba(46,125,50,0.1);   color:var(--c-resist); }
+  .c-nilfg .rule-body .law  { background:rgba(74,20,140,0.1);   color:var(--c-nilfg); }
+  .c-skell .rule-body .law  { background:rgba(1,87,155,0.1);    color:var(--c-skell); }
+  .c-tuss .rule-body .law   { background:rgba(230,81,0,0.1);    color:var(--c-tuss); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:6px 12px; border-radius:7px; display:inline-block; margin:6px 0 10px; letter-spacing:0.03em; line-height:1.5; }
+  .c-engel .rule-formula  { background:rgba(198,40,40,0.10);  color:var(--c-engel); }
+  .c-skull .rule-formula  { background:rgba(55,71,79,0.12);   color:var(--c-skull); }
+  .c-resist .rule-formula { background:rgba(46,125,50,0.10);  color:var(--c-resist); }
+  .c-nilfg .rule-formula  { background:rgba(74,20,140,0.10);  color:var(--c-nilfg); }
+  .c-skell .rule-formula  { background:rgba(1,87,155,0.10);   color:var(--c-skell); }
+  .c-tuss .rule-formula   { background:rgba(230,81,0,0.10);   color:var(--c-tuss); }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color:#1565c0; }
+  .rule-row { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:4px; }
+  .rule-row strong { color:var(--text); }
+
+  .pills-row { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 12px; }
+  .pill { display:inline-flex; align-items:center; gap:4px; padding:5px 11px; border-radius:20px; font-size:12px; font-weight:700; line-height:1.3; }
+  .pill-e  { background:rgba(198,40,40,0.13);  color:#b71c1c; border:1px solid rgba(198,40,40,0.35); }
+  .pill-b  { background:rgba(46,125,50,0.13);  color:#1b5e20; border:1px solid rgba(46,125,50,0.35); }
+  .pill-n  { background:rgba(74,20,140,0.13);  color:#4a148c; border:1px solid rgba(74,20,140,0.35); }
+  .pill-s  { background:rgba(0,131,143,0.13);  color:#006064; border:1px solid rgba(0,131,143,0.35); }
+  .pill-t  { background:rgba(230,81,0,0.13);   color:#e65100; border:1px solid rgba(230,81,0,0.35); }
+  .pill-g  { background:rgba(55,71,79,0.13);   color:#37474f; border:1px solid rgba(55,71,79,0.35); }
+  .pill-y  { background:rgba(245,127,23,0.13); color:#e65100; border:1px solid rgba(245,127,23,0.35); }
+  .pill-r  { background:rgba(21,101,192,0.13); color:#1565c0; border:1px solid rgba(21,101,192,0.35); }
+
+  /* BANNER */
+  .engel-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(216,27,96,0.35); display:grid; grid-template-columns:250px 1fr; }
+  .engel-img { width:250px; height:230px; object-fit:cover; object-position:center top; display:block; }
+  .engel-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .engel-title { font-size:17px; font-weight:700; color:#D81B60; }
+  .engel-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .engel-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(46,125,50,0.12);   color:#1b5e20; }
+  .stake-a { background:rgba(1,87,155,0.12);    color:#01579b; }
+  .stake-b { background:rgba(198,40,40,0.12);   color:#b71c1c; }
+  .stake-c { background:rgba(230,81,0,0.12);    color:#bf360c; }
+  .stake-d { background:rgba(55,71,79,0.12);    color:#263238; }
+  @media(max-width:560px){ .engel-banner{grid-template-columns:1fr;} .engel-img{width:100%;height:160px;object-position:center 20%;} }
+
+  /* TYPE CARDS (формы правления / режимы) */
+  .type-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(158px,1fr)); gap:10px; margin-bottom:24px; }
+  .type-card { border-radius:12px; overflow:hidden; border:1px solid rgba(0,0,0,0.10); background:var(--bg2); transition:transform 0.15s,box-shadow 0.15s; }
+  .type-card:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.09); }
+  .tc-code { background:var(--tc,#888); color:var(--tc-txt,#fff); font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:9px 14px; line-height:1.3; }
+  .tc-body { padding:10px 14px 12px; }
+  .tc-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; line-height:1.3; }
+  .tc-key { font-size:12px; color:var(--muted); line-height:1.45; margin-bottom:8px; }
+  .tc-real { display:block; font-size:10px; font-family:'Space Mono',monospace; font-weight:700; color:var(--muted); margin-bottom:5px; }
+  .tc-lore { font-size:11px; color:var(--text); background:var(--bg3); border-radius:6px; padding:5px 8px; line-height:1.4; }
+  /* РЕЖИМЫ */
+  .regime-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:28px; }
+  .regime-card { border-radius:12px; overflow:hidden; border:1px solid rgba(0,0,0,0.10); background:var(--bg2); }
+  .rc-head { padding:10px 14px 9px; font-size:15px; font-weight:700; }
+  .rc-body { padding:10px 14px 14px; display:flex; flex-direction:column; gap:8px; }
+  .rc-row { display:flex; flex-direction:column; gap:1px; }
+  .rc-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); }
+  .rc-val { font-size:13px; color:var(--text); font-weight:500; }
+  .rc-lore { font-size:11px; color:var(--text); background:var(--bg3); border-radius:6px; padding:5px 8px; margin-top:4px; }
+  @media(max-width:540px){ .regime-cards{grid-template-columns:1fr;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,30px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-engel),var(--c-resist),var(--c-nilfg)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-resist); min-width:80px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-engel    { background:var(--c-engel); }
+  .q-bj       { background:var(--c-resist); }
+  .q-skull    { background:var(--c-skull); }
+  .q-nilfg    { background:var(--c-nilfg); }
+  .q-redania  { background:#1565c0; }
+  .q-skellige { background:var(--c-skell); }
+  .q-tussent  { background:var(--c-tuss); color:#1a1410; }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:16px; color:var(--text); line-height:1.75; margin-bottom:20px; }
+
+  /* hero spans */
+  .hero-e { font-weight:700; background:linear-gradient(120deg,#c62828,#e53935); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-b { font-weight:700; background:linear-gradient(120deg,#2e7d32,#43a047); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-n { font-weight:700; background:linear-gradient(120deg,#4a148c,#7b1fa2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-r { font-weight:700; background:linear-gradient(120deg,#1565c0,#1976d2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-s { font-weight:700; background:linear-gradient(120deg,#01579b,#0288d1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-t { font-weight:700; background:linear-gradient(120deg,#e65100,#ef6c00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-g { font-weight:700; background:linear-gradient(120deg,#37474f,#546e7a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-engel); background:rgba(198,40,40,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#2e7d32; background:rgba(46,125,50,0.12); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#2e7d32; }
+  .opt-btn.wrong { border-color:#c62828; background:rgba(198,40,40,0.07); color:#7f1d1d; }
+  .opt-btn.wrong .opt-letter { color:#c62828; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:14px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(198,40,40,0.06); border:1px solid rgba(198,40,40,0.22); color:#7f1d1d; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(230,81,0,0.10); border:1px solid rgba(230,81,0,0.30); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:13px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-icon { font-size:72px; margin:0 auto 16px; display:block; }
+  .results-title { font-size:clamp(20px,4vw,34px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(58px,10vw,86px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-engel); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.65; color:var(--text); max-width:520px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(46,125,50,0.12);  color:#1b5e20; }
+  .rank-a { background:rgba(1,87,155,0.12);   color:#01579b; }
+  .rank-b { background:rgba(230,81,0,0.12);   color:#bf360c; }
+  .rank-c { background:rgba(198,40,40,0.12);  color:#b71c1c; }
+  .rank-d { background:rgba(55,71,79,0.12);   color:#263238; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-engel); background:rgba(198,40,40,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(198,40,40,0.12); color:var(--c-engel); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Обществознание · 9 класс · Разделы 5–6</div>
+    <h1 class="hero-title">
+      <span class="ht1">⚔️ Квест 4</span>
+      <span class="ht-main">Нейтралитет невозможен</span>
+    </h1>
+    <p class="hero-sub">Социальный статус · Семья · Девиация · Государство · Формы правления · Выборы · Wolfenstein &amp; Ведьмак</p>
+  </div>
+
+  <!-- ═══ ШПАРГАЛКА ═══ -->
+  <div class="sec-head"><span class="sec-badge rule">Шпаргалка — учи перед квестом</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-engel">
+      <div class="rule-icon">👑</div>
+      <div class="rule-title">Социальный статус и мобильность</div>
+      <div class="rule-formula">П — Получен при рождении<br>Д — Добился сам</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-e">👑 Предписанный</span>
+          <span class="pill pill-b">⚡ Достигнутый</span>
+          <span class="pill pill-r">📈 Вертикальная</span>
+          <span class="pill pill-g">↔️ Горизонтальная</span>
+        </div>
+        <div class="rule-row"><strong>Предписанный:</strong> пол, нация, место рождения, сословие — НЕ выбирал</div>
+        <div class="rule-row"><strong>Достигнутый:</strong> профессия, образование, должность, звание — заработал сам</div>
+        <div class="rule-row"><strong>Вертикальная мобильность:</strong> вверх (повышение) или вниз (разжалован)</div>
+        <div class="rule-row"><strong>Горизонтальная мобильность:</strong> сменил должность на равную без роста</div>
+        <span class="warn">⚡ «Статус ПД: Предписанный — Природой дан; Достигнутый — Добился сам»</span>
+      </div>
+      <div class="rule-assoc">🎮 Wolfenstein: Фрау Энгель — «ариец» (предписанный), «командующий СС» (достигнутый). Уильям Бласковиц — «американец» (предписанный), «лидер Сопротивления» (достигнутый). Ведьмак: «гном» для Золтана — предписанный; «успешный купец» — достигнутый.</div>
+    </div>
+
+    <div class="rule-card c-resist">
+      <div class="rule-icon">👨‍👩‍👧</div>
+      <div class="rule-title">Семья: виды и функции</div>
+      <div class="rule-formula">Нуклеар = Ядро (родители+дети)<br>Расширенная = + все остальные<br>Функции: РеВо · ХЭ · РЕ</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-b">🏠 Нуклеарная</span>
+          <span class="pill pill-r">🏘️ Расширенная</span>
+          <span class="pill pill-e">👑 Традиционная</span>
+          <span class="pill pill-n">🤝 Партнёрская</span>
+        </div>
+        <div class="rule-row"><strong>Функции — мнемоника «РеВо·ХЭ·РЕ»:</strong></div>
+        <div class="rule-row"><span class="law">Ре</span> Репродуктивная — рожают детей</div>
+        <div class="rule-row"><span class="law">Во</span> Воспитательная — социализация ребёнка</div>
+        <div class="rule-row"><span class="law">Х</span> Хозяйственная — ведут быт</div>
+        <div class="rule-row"><span class="law">Э</span> Экономическая — зарабатывают</div>
+        <div class="rule-row"><span class="law">Р</span> Рекреационная — отдыхают вместе</div>
+        <div class="rule-row"><span class="law">Е</span> Эмоциональная — поддерживают друг друга</div>
+        <span class="warn">⚡ Традиционная (патриархальная) — мужчина-глава. Партнёрская (демократическая) — равноправие, решают вместе.</span>
+      </div>
+      <div class="rule-assoc">🎮 Кланы Скеллиге = расширенная семья (все поколения вместе). Семья Уильяма Бласковица и Ани Олива = нуклеарная партнёрская (оба равноправны). Ведьмак: семья ярла Краита = расширенная традиционная.</div>
+    </div>
+
+    <div class="rule-card c-skull">
+      <div class="rule-icon">⚖️</div>
+      <div class="rule-title">Соц. нормы, девиация и санкции</div>
+      <div class="rule-formula">Нормы: ПоМоОбКор<br>Девиация: + Позитивная / − Негативная</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-e">📜 Правовые</span>
+          <span class="pill pill-b">❤️ Моральные</span>
+          <span class="pill pill-g">🕐 Обычаи</span>
+          <span class="pill pill-r">🏢 Корпоративные</span>
+        </div>
+        <div class="rule-row"><span class="law">Пра</span> Правовые — в законах, обязательны для всех</div>
+        <div class="rule-row"><span class="law">Мо</span> Моральные — добро/зло, нарушение = осуждение совестью</div>
+        <div class="rule-row"><span class="law">Об</span> Обычаи и традиции — исторически сложились</div>
+        <div class="rule-row"><span class="law">Кор</span> Корпоративные — устав школы, армии, организации</div>
+        <div class="rule-row" style="margin-top:8px"><strong>Позитивная девиация</strong> — отклонение в лучшую сторону: героизм, гениальность</div>
+        <div class="rule-row"><strong>Делинквентное поведение</strong> — нарушение ЗАКОНА (= негативная правовая девиация)</div>
+        <div class="rule-row" style="margin-top:6px"><strong>Формальные санкции</strong> — от власти (штраф, арест)</div>
+        <div class="rule-row"><strong>Неформальные санкции</strong> — от людей (бойкот, осуждение)</div>
+        <span class="warn">⚡ Делинквентное = всегда нарушение ЗАКОНА (штраф, тюрьма). Девиация — ловушка-слово: бывает ПОЗИТИВНАЯ (подвиг, гений) и НЕГАТИВНАЯ (преступление). Не всякая девиация = плохо!</span>
+      </div>
+      <div class="rule-assoc">🎮 Доктор Череп = делинквент (преступления против человечности). Бласко = позитивная девиация (герой). В Нильфгаарде: публичная казнь = формальная негативная санкция; бойкот соседа-предателя = неформальная негативная.</div>
+    </div>
+
+    <div class="rule-card c-nilfg">
+      <div class="rule-icon">🏛️</div>
+      <div class="rule-title">Формы правления</div>
+      <div class="rule-formula">ЖМА · МК · РеПр · РеПа · ВыбМон</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill" style="background:rgba(244,67,54,0.13);color:#b71c1c;border:1px solid rgba(244,67,54,0.4)">⚔️ ЖМА — Монархия абсолютная</span>
+          <span class="pill" style="background:rgba(251,140,0,0.13);color:#bf360c;border:1px solid rgba(251,140,0,0.4)">⚖️ МК — Монархия конституционная</span>
+          <span class="pill" style="background:rgba(255,213,79,0.18);color:#6d4c00;border:1px solid rgba(255,213,79,0.5)">🇺🇸 РеПр — Республика президентская</span>
+          <span class="pill" style="background:rgba(29,233,182,0.14);color:#006c5e;border:1px solid rgba(29,233,182,0.45)">🏛️ РеПа — Республика парламентская</span>
+          <span class="pill" style="background:rgba(33,150,243,0.13);color:#01579b;border:1px solid rgba(33,150,243,0.4)">🗳️ ВыбМон — Выборная монархия</span>
+        </div>
+        <div class="rule-row"><span class="law">ЖМА</span> Монарх = ВСЯ власть, парламента нет или он совещательный</div>
+        <div class="rule-row"><span class="law">МК</span> Монарх есть, но ОГРАНИЧЕН конституцией + парламентом</div>
+        <div class="rule-row"><span class="law">РеПр</span> Президент = Глава государства И Правительства, не зависит от парламента</div>
+        <div class="rule-row"><span class="law">РеПа</span> Президент слабый/формальный, правительство формируют из парламента</div>
+        <div class="rule-row" style="margin-top:6px"><strong>Выборная монархия</strong> — монарха избирают, а не наследуют (Скеллиге, Речь Посполитая)</div>
+        <span class="warn">⚡ В Президентской: президент НЕ зависит от парламента. В Парламентской: правительство ЗАВИСИТ от доверия парламента.</span>
+      </div>
+      <div class="rule-assoc">🎮 Эмгыр = Монархия Абсолютная (никаких ограничений). Анна Генриетта = МК (Кодекс + Совет ограничивают). США до оккупации = Президентская республика. Скеллиге = Выборная монархия (ярла выбирают на Тинге).</div>
+    </div>
+
+    <div class="rule-card c-skell">
+      <div class="rule-icon">🗺️</div>
+      <div class="rule-title">Государственное устройство и режимы</div>
+      <div class="rule-formula">У·Фед·Кон // Дем·Авт·Тот</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-g">🗺️ Унитарное</span>
+          <span class="pill pill-r">🏛️ Федерация</span>
+          <span class="pill pill-s">🔗 Конфедерация</span>
+        </div>
+        <div class="rule-row"><span class="law">Унитарное</span> единый центр, провинции без своих конституций (Франция, Япония, Нильфгаард)</div>
+        <div class="rule-row"><span class="law">Федерация</span> субъекты имеют свои конституции и законы (Россия, США, ФРГ)</div>
+        <div class="rule-row"><span class="law">Конфедерация</span> союз суверенных государств, рыхлый центр, могут выйти</div>
+        <div class="rule-row" style="margin-top:8px">
+          <strong>Режимы:</strong> Демократия (выборы + права) / Авторитаризм (политику контролирует, в остальное не лезет) / Тоталитаризм (тотальный контроль ВСЕГО)
+        </div>
+        <span class="warn">⚡ Авторитаризм: только политику контролирует — магазины, религия, быт остаются твоими. Тоталитаризм: контролирует буквально всё — культуру, экономику, частную жизнь и даже мысли.</span>
+      </div>
+      <div class="rule-assoc">🎮 Нильфгаард = унитарная империя (наместники без своих законов). Северные королевства = рыхлая конфедерация. Рейх в Wolfenstein = тоталитаризм (контроль над бытом, культурой, мыслями). Скеллиге — элементы прямой демократии через Тинг.</div>
+    </div>
+
+    <div class="rule-card c-tuss">
+      <div class="rule-icon">🗳️</div>
+      <div class="rule-title">Выборы, партии и гражданское общество</div>
+      <div class="rule-formula">ВРПТ: Всегда · Равным · Прямо · Тайно</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-t">🗳️ Активное (голосовать)</span>
+          <span class="pill pill-b">🙋 Пассивное (выдвигаться)</span>
+        </div>
+        <div class="rule-row"><strong>Активное право</strong> — ГОЛОСОВАТЬ (с 18 лет в РФ)</div>
+        <div class="rule-row"><strong>Пассивное право</strong> — быть ИЗБРАННЫМ (депутат: с 21, президент: с 35)</div>
+        <div class="rule-row" style="margin-top:6px">
+          <span class="law">Мажоритарная</span> голосуешь за ЧЕЛОВЕКА в округе, побеждает большинство
+        </div>
+        <div class="rule-row">
+          <span class="law">Пропорциональная</span> голосуешь за ПАРТИЮ, мандаты делятся по %
+        </div>
+        <div class="rule-row" style="margin-top:6px"><strong>Референдум</strong> — прямое голосование по конкретному ВОПРОСУ (не за человека)</div>
+        <div class="rule-row"><strong>Политическая партия:</strong> идеология + программа + борьба за власть</div>
+        <div class="rule-row"><strong>СМИ</strong> = «четвёртая власть» (законодательная, исполнительная, судебная — плюс они)</div>
+        <span class="warn">⚡ ВРПТ: В — все граждане голосуют · Р — каждый голос весит одинаково · П — лично, без посредника · Т — в кабинке, тайно. Мажоритарная: один победитель в округе. Пропорциональная: места пропорционально % партий.</span>
+      </div>
+      <div class="rule-assoc">🎮 Тинг на Скеллиге = прямая демократия (референдум). Сопротивление Бласко = по функциям партия (программа + борьба за власть), но без регистрации. «Голос Свободы» = подпольное СМИ, «четвёртая власть» против Рейха.</div>
+    </div>
+
+  </div>
+
+  <!-- КАРТОЧКИ ФОРМ ПРАВЛЕНИЯ -->
+  <div class="sec-head" style="margin-top:36px"><span class="sec-badge rule">Формы правления — наглядно</span><div class="sec-line"></div></div>
+  <div class="type-cards">
+    <div class="type-card" style="--tc:#F44336">
+      <div class="tc-code">👑 Монархия абсолютная</div>
+      <div class="tc-body">
+        <div class="tc-key">Монарх — ВСЯ власть, нет ограничений</div>
+        <span class="tc-real">Саудовская Аравия · Россия до 1905</span>
+        <div class="tc-lore">⚔️ Нильфгаард (Эмгыр)</div>
+      </div>
+    </div>
+    <div class="type-card" style="--tc:#FB8C00">
+      <div class="tc-code">⚖️ Монархия конституционная</div>
+      <div class="tc-body">
+        <div class="tc-key">Монарх + Конституция + Парламент</div>
+        <span class="tc-real">Великобритания · Япония · Испания</span>
+        <div class="tc-lore">🌹 Туссент (Анна Генриетта)</div>
+      </div>
+    </div>
+    <div class="type-card" style="--tc:#FFD54F;--tc-txt:#1a1410">
+      <div class="tc-code">🇺🇸 Республика президентская</div>
+      <div class="tc-body">
+        <div class="tc-key">Президент = глава государства И правительства</div>
+        <span class="tc-real">США · Бразилия · Мексика</span>
+        <div class="tc-lore">🗽 США (до оккупации Рейхом)</div>
+      </div>
+    </div>
+    <div class="type-card" style="--tc:#1DE9B6;--tc-txt:#1a1410">
+      <div class="tc-code">🏛️ Республика парламентская</div>
+      <div class="tc-body">
+        <div class="tc-key">Правительство формирует парламент, президент — фигурант</div>
+        <span class="tc-real">ФРГ · Италия · Индия</span>
+        <div class="tc-lore">📜 Ковир и Повисс</div>
+      </div>
+    </div>
+    <div class="type-card" style="--tc:#2196F3">
+      <div class="tc-code">🗳️ Выборная монархия</div>
+      <div class="tc-body">
+        <div class="tc-key">Монарха избирают советом, а не наследуют</div>
+        <span class="tc-real">Речь Посполитая · Ватикан</span>
+        <div class="tc-lore">⚡ Скеллиге (Тинг ярлов)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- КАРТОЧКИ ПОЛИТИЧЕСКИХ РЕЖИМОВ -->
+  <div class="sec-head" style="margin-top:4px"><span class="sec-badge rule">Политические режимы — различай!</span><div class="sec-line"></div></div>
+  <div class="regime-cards">
+    <div class="regime-card">
+      <div class="rc-head" style="background:#9CCC65;color:#1a1410">✅ Демократия</div>
+      <div class="rc-body">
+        <div class="rc-row"><span class="rc-label">Выборы</span><span class="rc-val">Свободные и честные</span></div>
+        <div class="rc-row"><span class="rc-label">Права</span><span class="rc-val">Гарантированы</span></div>
+        <div class="rc-row"><span class="rc-label">Контроль над жизнью</span><span class="rc-val">Минимальный</span></div>
+        <div class="rc-lore">🗽 США до оккупации Рейхом</div>
+      </div>
+    </div>
+    <div class="regime-card">
+      <div class="rc-head" style="background:#E91E63;color:#fff">⚠️ Авторитаризм</div>
+      <div class="rc-body">
+        <div class="rc-row"><span class="rc-label">Выборы</span><span class="rc-val">Ограничены / фиктивны</span></div>
+        <div class="rc-row"><span class="rc-label">Права</span><span class="rc-val">Политические — нет</span></div>
+        <div class="rc-row"><span class="rc-label">Контроль над жизнью</span><span class="rc-val">Только политика</span></div>
+        <div class="rc-lore">⚔️ Редания (Радовид)</div>
+      </div>
+    </div>
+    <div class="regime-card">
+      <div class="rc-head" style="background:#212121;color:#fff">☠️ Тоталитаризм</div>
+      <div class="rc-body">
+        <div class="rc-row"><span class="rc-label">Выборы</span><span class="rc-val">Нет или фиктивны</span></div>
+        <div class="rc-row"><span class="rc-label">Права</span><span class="rc-val">Нет вообще</span></div>
+        <div class="rc-row"><span class="rc-label">Контроль над жизнью</span><span class="rc-val">Тотальный — над всем</span></div>
+        <div class="rc-lore">💀 Рейх (Wolfenstein)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER -->
+  <div class="engel-banner">
+    <img class="engel-img" src="https://images.ctfassets.net/rporu91m20dc/3Cidf62TGgcayuMOggIoIS/ba8009fe0439e35af910b9f018b20f91/Wolf2_ArticleDashboard_KeyArt_619x499.jpg?fit=fill&w=619&h=309" alt="Wolfenstein 2: The New Colossus" onerror="this.style.display='none'">
+    <div class="engel-text">
+      <div class="engel-title">⚔️ Нейтралитет невозможен</div>
+      <div class="engel-desc">Wolfenstein: Фрау Энгель правит Новой Колонией. Уильям Бласковиц ведёт Сопротивление. Ведьмак: Нильфгаард давит, Редания держится, Скеллиге стоит особняком. Туссент в вассалитете. 30 вопросов. Два шанса. Социальная сфера и политика не прощают незнания.</div>
+      <div class="engel-stakes">
+        <span class="stake stake-s">27–30 ✦ Агент высшего класса</span>
+        <span class="stake stake-a">22–26 ✦ Боец Сопротивления</span>
+        <span class="stake stake-b">16–21 ✦ Новобранец</span>
+        <span class="stake stake-c">10–15 ✦ Коллаборационист-недоучка</span>
+        <span class="stake stake-d">0–9 ✦ Нейтралитет не спасёт</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area" role="region" aria-label="Квиз" aria-live="polite">
+    <div class="quiz-header">
+      <div class="quiz-title">Нейтралитет невозможен — 30 вопросов</div>
+      <p class="quiz-sub">Wolfenstein · Ведьмак · Нильфгаард · Редания · Скеллиге — политика везде</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 30</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <span class="results-icon" id="ricon">🎖️</span>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Пройти ещё раз</button>
+  </div>
+
+  <!-- NAV -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Обществознание — все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span>
+        <span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span>
+        <span class="qp-badge">← На главную</span>
+      </a>
+      <a class="quest-pill" href="quest_soc1_yenn.html">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">С1</span>
+        <span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Разделы 7–8</span></span>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="quest_soc2_terms.html">
+        <span class="qp-num" style="background:#0284c7;color:#fff">С2</span>
+        <span class="qp-info"><span class="qp-name">Знай свои права</span><span class="qp-sub">Термины и определения</span></span>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="quest_soc3_zoltan.html">
+        <span class="qp-num" style="background:#b45309;color:#fff">С3</span>
+        <span class="qp-info"><span class="qp-name">Рынок не прощает</span><span class="qp-sub">Экономика · Раздел 4</span></span>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-engel);color:#fff">С4</span>
+        <span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Разделы 5–6</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#15803d;color:#fff">С5</span>
+        <span class="qp-info"><span class="qp-name">Человек и общество</span><span class="qp-sub">Разделы 1–3</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const srcConfig = {
+  engel:    {label:'WOLFENSTEIN · РЕЙХ',           cls:'q-engel'},
+  bj:       {label:'WOLFENSTEIN · УИЛЬЯМ БЛАСКОВИЦ', cls:'q-bj'},
+  skull:    {label:'WOLFENSTEIN · ЛАБОРАТОРИИ',    cls:'q-skull'},
+  grace:    {label:'WOLFENSTEIN · ГРЕЙС УОКЕР',    cls:'q-bj'},
+  sethroth: {label:'WOLFENSTEIN · СЕТ РОТ',        cls:'q-skull'},
+  nilfg:    {label:'ВЕДЬМАК · НИЛЬФГААРД',         cls:'q-nilfg'},
+  redania:  {label:'ВЕДЬМАК · РЕДАНИЯ',             cls:'q-redania'},
+  skellige: {label:'ВЕДЬМАК · СКЕЛЛИГЕ',            cls:'q-skellige'},
+  tussent:  {label:'ВЕДЬМАК · ТУССЕНТ',             cls:'q-tussent'},
+};
+
+const allQuestions = [
+
+  // ═══ БЛОК 1 — СОЦИАЛЬНЫЙ СТАТУС ═══
+  {
+    src:"engel", topic:"Предписанный статус",
+    text:"<span class='hero-e'>Фрау Энгель</span> — СС-Обергруппенфюрер, женщина, уроженка Германии, аристократка по происхождению. Какой из перечисленных статусов является <strong>предписанным (приписанным)</strong>?",
+    opts:["Командующий СС","Уроженка Германии","Руководитель карательных операций","Обладатель высшей военной награды"],
+    ans:1,
+    fb:"✦ Верно! Предписанный статус — получен при рождении или помимо воли: пол, национальность, место рождения, сословие. «Уроженка Германии» — не выбирала, где родиться.",
+    trap:"Командующий, руководитель, обладатель награды — все это ДОСТИГНУТЫЕ статусы: Энгель их добилась сама, приложив усилия.",
+    hint:"Предписанный — то, что ты НЕ выбирал. Место рождения — она выбирала?",
+    ref:"Социальный статус"
+  },
+  {
+    src:"bj", topic:"Достигнутый статус",
+    text:"<span class='hero-b'>Уильям Бласковиц</span>: американец польского происхождения, мужчина, лидер Сопротивления, ветеран войны. Какой статус является <strong>достигнутым</strong>?",
+    opts:["Американец польского происхождения","Мужчина","Лидер Сопротивления","Сын польского иммигранта"],
+    ans:2,
+    fb:"✦ Верно! Достигнутый статус — результат собственных усилий, выбора, заслуг. Лидером Сопротивления Бласковиц стал сам — через бои, решения, жертвы.",
+    trap:"«Американец польского происхождения», «мужчина», «сын иммигранта» — всё это предписанные статусы: не выбирал.",
+    hint:"Что из перечисленного Бласко ЗАРАБОТАЛ сам, а не получил при рождении?",
+    ref:"Социальный статус"
+  },
+  {
+    src:"nilfg", topic:"Социальные роли",
+    text:"<span class='hero-n'>Эмгыр вар Эмрейс</span> — император, главнокомандующий, отец Цири, дипломат. Каждый его статус задаёт определённые ожидания окружающих. Как называется ожидаемый образец поведения, соответствующий конкретному статусу?",
+    opts:["Социальный лифт","Социальная роль","Социальная мобильность","Социальный контроль"],
+    ans:1,
+    fb:"✦ Верно! Социальная роль — ожидаемый образец поведения при конкретном статусе. От императора ждут указов, от отца — заботы, от дипломата — переговоров. Один человек — много статусов, у каждого своя роль.",
+    trap:"Социальный лифт и мобильность — про перемещение между статусами. Контроль — про соблюдение норм. Роль — это именно то, чего от тебя ждут при данном статусе.",
+    hint:"Каждый статус — это ожидания. Как называется то, что от тебя ждут окружающие в связи с твоим положением?",
+    ref:"Социальные роли"
+  },
+  {
+    src:"bj", topic:"Социальная мобильность",
+    text:"<span class='hero-b'>Уильям Бласковиц</span>: был простым солдатом → стал легендарным лидером Сопротивления и национальным героем США. Как называется такое изменение социального положения?",
+    opts:["Социальная стратификация","Восходящая вертикальная мобильность","Горизонтальная мобильность","Социальная дифференциация"],
+    ans:1,
+    fb:"✦ Верно! Вертикальная мобильность — перемещение между слоями (стратами) вверх или вниз. Восходящая — повышение статуса. Бласковиц поднялся от рядового до национального героя — это восходящая вертикальная мобильность.",
+    trap:"Горизонтальная мобильность — смена статуса без изменения уровня (поменял одну профессию на равноценную). Стратификация и дифференциация — не про движение, а про устройство общества.",
+    hint:"Он стал ВЫШЕ по социальному положению. Вертикаль = вверх/вниз. Это восходящая или нисходящая?",
+    ref:"Социальная мобильность"
+  },
+
+  // ═══ БЛОК 2 — СОЦИАЛЬНЫЕ ГРУППЫ ═══
+  {
+    src:"grace", topic:"Молодёжь как социальная группа",
+    text:"<span class='hero-b'>Грейс Уокер</span>, лидер американского Сопротивления, набирает бойцов в отряд: большинство — люди 18–28 лет. Что <strong>НЕ является</strong> характерной чертой молодёжи как особой социальной группы?",
+    opts:["Незавершённость процесса социализации","Поиск своего места в жизни","Завершённость профессионального пути","Особый социально-психологический облик"],
+    ans:2,
+    fb:"✦ Верно! Молодёжи свойственны: незавершённая социализация, поиск идентичности, ещё не устоявшиеся взгляды, особая психология. «Завершённость профессионального пути» — черта зрелого человека, но не молодого.",
+    trap:"Молодёжь как раз в НАЧАЛЕ профессионального пути, а не в его конце.",
+    hint:"Что из перечисленного больше подходит людям 45–60 лет, а не 18–25?",
+    ref:"Молодёжь как социальная группа"
+  },
+  {
+    src:"bj", topic:"Формальные и неформальные группы",
+    text:"<span class='hero-b'>Уильям Бласковиц</span> состоит в двух сообществах: (1) официально зарегистрированная американская армия с уставом и документами; (2) тайный партизанский отряд без юридического статуса, объединённый личной преданностью. Какое из них является <strong>формальной</strong> группой?",
+    opts:["Тайный партизанский отряд","Американская армия","Оба являются формальными","Ни одно из них"],
+    ans:1,
+    fb:"✦ Верно! Формальная группа — создана официально, имеет юридический статус, устав, формализованные правила (армия, школьный класс, трудовой коллектив). Неформальная — держится на личных связях, без официальных документов.",
+    trap:"Неформальная ≠ незаконная. Партизаны борются за правое дело — просто их объединение не имеет официального юридического оформления.",
+    hint:"Формальная — значит, есть официальный документ, юридический статус. У кого из двух это есть?",
+    ref:"Социальные группы"
+  },
+
+  // ═══ БЛОК 3 — СЕМЬЯ ═══
+  {
+    src:"redania", topic:"Нуклеарная семья",
+    text:"В имении Кровавого Барона живут: сам барон <span class='hero-r'>Филип Стрэнджер</span>, его жена Анна и дочь Тамара. Больше никаких родственников рядом нет. Какой тип семьи описан?",
+    opts:["Расширенная","Нуклеарная","Неполная","Патриархальная"],
+    ans:1,
+    fb:"✦ Верно! Нуклеарная семья = только родители (или один родитель) + их дети. «Ядро» семьи — отсюда «нуклеарная» (nucleus = ядро на латыни). Без бабушек, дядей и дальних родственников.",
+    trap:"Расширенная — когда вместе живут несколько поколений или дальние родственники. Здесь только родители + дочь.",
+    hint:"Нуклеарная = ядро. В ядро входят только самые близкие: родители и их дети. Есть ли здесь кто-то лишний?",
+    ref:"Семья"
+  },
+  {
+    src:"skellige", topic:"Расширенная семья",
+    text:"В клане <span class='hero-s'>Туирсеах</span> на Скеллиге под одной крышей живут: ярл с женой, их дети, родители ярла, его братья с семьями. Какой тип семьи описан?",
+    opts:["Нуклеарная","Расширенная","Неполная","Пустое гнездо"],
+    ans:1,
+    fb:"✦ Верно! Расширенная семья — несколько поколений и/или дальние родственники под одной крышей. В кланах это традиционная норма: дети, родители, братья — все вместе.",
+    trap:"Нуклеарная — только родители + дети, без бабушек и братьев. На Скеллиге явно живут вместе несколько поколений.",
+    hint:"Расширенная = выходит за пределы «ядра». Сколько поколений объединено в этой семье?",
+    ref:"Семья"
+  },
+  {
+    src:"engel", topic:"Функции семьи",
+    text:"Идеология Рейха обязывала арийских женщин: рожать детей для государства (1), воспитывать их в духе нацизма (2), вести домашнее хозяйство (3). Какие <strong>три функции семьи</strong> иллюстрируют эти обязанности?",
+    opts:["Только репродуктивная","Репродуктивная и воспитательная","Репродуктивная, воспитательная и хозяйственная","Только экономическая"],
+    ans:2,
+    fb:"✦ Верно! Функции семьи: репродуктивная (рожать), воспитательная (растить и социализировать), хозяйственная (вести быт), экономическая, рекреационная, эмоциональная. Все три перечисленных обязанности — три разные функции.",
+    trap:"Не путай воспитательную и репродуктивную! Репродуктивная — биологическое воспроизводство. Воспитательная — формирование личности ребёнка (идеологии, ценностей).",
+    hint:"Считай по одному: рожать — это какая функция? Воспитывать идеологически — какая? Вести домашнее хозяйство — какая? Загляни в шпаргалку РеВо·ХЭ·РЕ.",
+    ref:"Семья"
+  },
+  {
+    src:"bj", topic:"Партнёрская семья",
+    text:"Семья <span class='hero-b'>Уильяма Бласковица</span> и <span class='hero-b'>Ани Олива</span>: оба родителя работают и воюют, бытовые обязанности делятся поровну, все важные решения принимаются вместе на равных. Какой тип семьи по распределению ролей описан?",
+    opts:["Традиционная (патриархальная)","Партнёрская (демократическая)","Матриархальная","Расширенная"],
+    ans:1,
+    fb:"✦ Верно! Партнёрская (эгалитарная/демократическая) семья: равноправие супругов, совместное принятие решений, разделение бытовых обязанностей. Традиционная (патриархальная) — чёткое разделение ролей, главенство мужчины.",
+    trap:"Матриархальная — главенство женщины. Здесь равенство, а не чья-то власть. «Расширенная» — про состав семьи, а не роли.",
+    hint:"Ключевые слова: «поровну», «вместе», «на равных» — это традиция или партнёрство?",
+    ref:"Семья"
+  },
+
+  // ═══ БЛОК 4 — НОРМЫ И ДЕВИАЦИЯ ═══
+  {
+    src:"nilfg", topic:"Виды социальных норм",
+    text:"В Нильфгаарде: (1) императорский указ о военной обязанности; (2) традиция преклонять колено перед имперским флагом; (3) религиозный обряд в честь Великого Солнца. Укажите <strong>верное соответствие</strong> видов норм:",
+    opts:["(1) правовая, (2) обычай, (3) религиозная","(1) религиозная, (2) правовая, (3) обычай","(1) обычай, (2) правовая, (3) религиозная","(1) правовая, (2) религиозная, (3) обычай"],
+    ans:0,
+    fb:"✦ Верно! Правовые нормы — закреплены в законах (указ императора). Обычаи — исторически сложившиеся правила поведения (традиция преклонения). Религиозные — предписания веры (обряд Великого Солнца).",
+    trap:"Традиция преклонения — это ОБЫЧАЙ (сложился исторически), а не правовая норма, хотя в Нильфгаарде за её нарушение и накажут.",
+    hint:"Правовая = ЗАКОН; Обычай = исторически сложившаяся ТРАДИЦИЯ; Религиозная = ВЕРА. Теперь сопоставь с тремя примерами.",
+    ref:"Виды социальных норм"
+  },
+  {
+    src:"bj", topic:"Позитивная девиация",
+    text:"<span class='hero-b'>Уильям Бласковиц</span> в одиночку уничтожает командный центр Рейха, жертвует собой ради Сопротивления, совершает невозможное — делает то, чего от обычного человека никто не ожидал. Это пример:",
+    opts:["Негативной девиации","Конформного поведения","Позитивной девиации","Делинквентного поведения"],
+    ans:2,
+    fb:"✦ Верно! Позитивная девиация — отклонение от нормы, но в лучшую сторону: героизм, гениальность, самопожертвование. Бласковиц выходит за рамки ожидаемого — но это подвиг, а не преступление.",
+    trap:"Конформное — строго по нормам, ничего особенного. Делинквентное — нарушение закона. Позитивная девиация — это ХОРОШЕЕ отклонение от стандартных ожиданий.",
+    hint:"Девиация = отклонение. Это хорошее или плохое отклонение от нормы? Бласко — герой или преступник?",
+    ref:"Девиантное поведение"
+  },
+  {
+    src:"skull", topic:"Делинквентное поведение",
+    text:"<span class='hero-g'>Доктор Череп</span> проводит запрещённые эксперименты над людьми, нарушает законы военного времени, совершает действия, расцениваемые как военные преступления. Это пример:",
+    opts:["Позитивной девиации","Конформного поведения","Делинквентного поведения","Маргинального поведения"],
+    ans:2,
+    fb:"✦ Верно! Делинквентное поведение — нарушение правовых норм, преступления и правонарушения. Военные преступления — тяжелейшие правовые нарушения. Доктор Череп — классический делинквент.",
+    trap:"Маргинальное поведение — нахождение «на краю» общества, но не обязательно преступное. Делинквентное — именно нарушение ЗАКОНА.",
+    hint:"Череп нарушает именно закон — не просто моральные нормы, а уголовные. Вспомни: какой термин обозначает поведение, нарушающее правовые нормы?",
+    ref:"Девиантное поведение"
+  },
+  {
+    src:"redania", topic:"Виды санкций",
+    text:"В Редании: (1) <span class='hero-r'>Охотники на ведьм</span> штрафуют торговцев за нарушение комендантского часа; (2) соседи перестали здороваться с тем, кто донёс на друзей. Определите виды санкций в правильном порядке:",
+    opts:["(1) формальная негативная; (2) неформальная негативная","(1) неформальная позитивная; (2) формальная негативная","(1) формальная позитивная; (2) неформальная позитивная","(1) неформальная негативная; (2) формальная негативная"],
+    ans:0,
+    fb:"✦ Верно! Формальные санкции — от официальных органов власти (штраф охотников = представителей власти). Неформальные — от окружающих людей (бойкот соседей). Обе ситуации — наказание (негативные).",
+    trap:"Не путай формальная/неформальная с хорошая/плохая! Формальная = от официальных структур. Неформальная = от обычных людей. Оба примера — наказание.",
+    hint:"Формальная = от государства/организации. Неформальная = от обычных людей. Штраф от власти — это какая? Бойкот соседей — какая?",
+    ref:"Социальный контроль"
+  },
+  {
+    src:"engel", topic:"Социальный контроль",
+    text:"Рейх <span class='hero-e'>Фрау Энгель</span> удерживает граждан в повиновении: тюрьмы (1), система доносительства среди соседей (2), пропаганда через СМИ (3). Что из перечисленного является <strong>внешним</strong> социальным контролем?",
+    opts:["Только (1)","Только (2)","(1) и (2) и (3) — все являются","Только (3)"],
+    ans:2,
+    fb:"✦ Верно! Внешний социальный контроль — воздействие общества/государства на человека извне: тюрьмы (принуждение), доносительство (общественный надзор), пропаганда (формирование взглядов). Все три — внешнее воздействие.",
+    trap:"Внутренний контроль — это СОВЕСТЬ (интернализованные нормы). Внешний — всё, что давит снаружи. Тюрьма, слежка, пропаганда — всё снаружи.",
+    hint:"Внешний = кто-то снаружи следит и влияет. Внутренний = совесть изнутри. Тюрьма, доносы, пропаганда — это изнутри или снаружи?",
+    ref:"Социальный контроль"
+  },
+
+  // ═══ БЛОК 5 — ГОСУДАРСТВО ═══
+  {
+    src:"nilfg", topic:"Признаки государства",
+    text:"<span class='hero-n'>Нильфгаард</span> имеет: территорию, население, монопольное право на насилие, систему налогов и законов, армию и суды — и красивый герб с солнцем. Что из перечисленного <strong>НЕ является</strong> обязательным признаком государства?",
+    opts:["Суверенитет (верховенство власти)","Система законов и налогов","Монополия на законное принуждение","Красивый герб и флаг"],
+    ans:3,
+    fb:"✦ Верно! Обязательные признаки: территория, население, суверенитет, монополия на насилие, система законов, налоги. Флаг и герб — символика, приятная, но НЕ обязательная. Государство существует и без них.",
+    trap:"Многие путают символику с признаками. Флаг красивый, но без него государство всё равно работает. А без суверенитета — это уже не государство, а оккупированная территория.",
+    hint:"Что из четырёх вариантов может отсутствовать, и государство всё равно останется государством?",
+    ref:"Государство"
+  },
+  {
+    src:"engel", topic:"Функции государства",
+    text:"Режим <span class='hero-e'>Фрау Энгель</span>: контролирует границы и ведёт войны (1), подавляет сопротивление внутри страны (2), управляет экономикой и собирает налоги (3). Какие <strong>функции государства</strong> реализуются?",
+    opts:["Только внутренние","Только внешние","Внутренние И внешние одновременно","Только культурно-воспитательная"],
+    ans:2,
+    fb:"✦ Верно! Внешние функции: защита границ, ведение войн, внешняя политика (пример 1). Внутренние: охрана правопорядка (2), управление экономикой и налоги (3). Режим делает всё это одновременно.",
+    trap:"Пропаганда Рейха — это культурно-воспитательная функция, но главные в примерах — силовые внутренние и военные внешние.",
+    hint:"Армия и границы — это функция внутренняя или внешняя? А подавление и управление экономикой — какая? Посчитай, сколько разных функций задействовано.",
+    ref:"Функции государства"
+  },
+  {
+    src:"bj", topic:"Правовое государство",
+    text:"<span class='hero-b'>Уильям Бласковиц</span> мечтает о восстановленных США: независимые суды, власть, ограниченная законом, права человека, защищённые от произвола. Как называется государство, построенное на этих принципах?",
+    opts:["Унитарное","Федеративное","Правовое","Социальное"],
+    ans:2,
+    fb:"✦ Верно! Правовое государство: верховенство закона, разделение властей, независимость судебной системы, гарантии прав и свобод граждан, ограничение государственной власти правом.",
+    trap:"Социальное государство — заботится о благосостоянии граждан (пенсии, медицина). Правовое — про ограничение власти законом. Унитарное/федеративное — про территориальное устройство.",
+    hint:"Власть, ОГРАНИЧЕННАЯ законом + независимые суды + права человека = какое государство?",
+    ref:"Правовое государство"
+  },
+
+  // ═══ БЛОК 6 — ФОРМЫ ПРАВЛЕНИЯ ═══
+  {
+    src:"nilfg", topic:"Абсолютная монархия",
+    text:"В Нильфгаарде <span class='hero-n'>Эмгыр вар Эмрейс</span> единолично принимает все государственные решения: объявляет войны, назначает наместников, издаёт законы без какого-либо парламента. Как называется такая форма правления?",
+    opts:["Конституционная монархия","Президентская республика","Абсолютная монархия","Парламентская республика"],
+    ans:2,
+    fb:"✦ Верно! Абсолютная монархия: вся полнота власти у монарха, нет парламента (или он только совещательный), нет конституционных ограничений. Эмгыр — классический абсолютный монарх.",
+    trap:"Конституционная монархия — монарх ОГРАНИЧЕН конституцией и парламентом (как в Великобритании). У Эмгыра никаких ограничений нет.",
+    hint:"А-монарх = Абсолютно всё в его руках. К-монарх = Конституция мешает. Эмгыр хоть с кем-нибудь согласует решения?",
+    ref:"Формы правления"
+  },
+  {
+    src:"tussent", topic:"Конституционная монархия",
+    text:"Герцогство Туссент: <span class='hero-t'>Анна Генриетта</span> правит, но её решения ограничены «Кодексом рыцарской чести» — традиционным сводом правил, а рыцарский совет вправе отвергнуть некоторые её указы. Какая форма правления описана?",
+    opts:["Абсолютная монархия","Конституционная (ограниченная) монархия","Президентская республика","Теократия"],
+    ans:1,
+    fb:"✦ Верно! Конституционная монархия — монарх есть, но ограничен законом (конституцией) и/или парламентом. Анна Генриетта правит, но Кодекс и Совет её ограничивают — классическая конституционная монархия.",
+    trap:"Теократия — власть религиозных лидеров. Туссент — светское герцогство, хоть и с рыцарскими кодексами.",
+    hint:"Монарх есть? Да. Ограничения есть? Да. Значит — абсолютная или конституционная?",
+    ref:"Формы правления"
+  },
+  {
+    src:"engel", topic:"Президентская республика",
+    text:"США до оккупации Рейхом: президент избирается народом на срок 4 года, является главой государства И правительства, назначает министров самостоятельно, не зависит от доверия конгресса. Какая форма правления описана?",
+    opts:["Парламентская республика","Президентская республика","Абсолютная монархия","Конституционная монархия"],
+    ans:1,
+    fb:"✦ Верно! Президентская республика: президент — глава государства И правительства, избирается народом, сам формирует кабинет, не зависит от парламентского доверия. США — классический пример.",
+    trap:"Парламентская республика: президент слабый или формальный; правительство формируется парламентом и зависит от его доверия. В президентской — президент НЕ зависит от парламента.",
+    hint:"Ключ: президент = глава и государства, и правительства, не зависит от парламента → Президентская. Президент слабый, правительство от парламента → Парламентская.",
+    ref:"Формы правления"
+  },
+  {
+    src:"skellige", topic:"Выборная монархия",
+    text:"На Скеллиге каждый ярл — наследственный правитель своего острова. Но когда место Верховного ярла (короля) пустеет, все ярлы съезжаются на Тинг и голосованием определяют, кто станет правителем всего Скеллиге. Какой признак отличает эту систему от обычной наследственной монархии?",
+    opts:["Правление ограничено сроком","Верховный правитель определяется решением совета, а не наследованием","Наличие писаной конституции","Разделение военной и гражданской власти"],
+    ans:1,
+    fb:"✦ Верно! Выборная (элективная) монархия — монарха избирают (ярлами, знатью, церковью), а не наследуют автоматически. Исторические примеры: Речь Посполитая, Священная Римская империя.",
+    trap:"Срочность — признак республики, а не монархии. Конституция — признак ограниченной монархии. Особенность Скеллиге в том, как именно определяется верховный правитель.",
+    hint:"В обычной монархии власть передаётся по крови автоматически. На Скеллиге что-то делают по-другому при смене правителя?",
+    ref:"Формы правления"
+  },
+
+  // ═══ БЛОК 7 — ГОСУДАРСТВЕННОЕ УСТРОЙСТВО И РЕЖИМЫ ═══
+  {
+    src:"nilfg", topic:"Унитарное государство",
+    text:"Нильфгаард: единое централизованное государство, все провинции управляются императорскими наместниками, единые законы для всей территории, провинции не имеют собственных конституций. Какая форма <strong>государственного устройства</strong> описана?",
+    opts:["Федерация","Конфедерация","Унитарное государство","Протекторат"],
+    ans:2,
+    fb:"✦ Верно! Унитарное государство: единый центр власти, административные единицы не имеют суверенитета и собственных конституций, единые законы для всей страны. Примеры: Франция, Япония — и Нильфгаард.",
+    trap:"Федерация — субъекты имеют значительную самостоятельность (Россия, США, ФРГ). Конфедерация — союз суверенных государств, ещё более рыхлый.",
+    hint:"Мнемоника: У-государство = Единое (Uniform). Ф-государство = у субъектов есть свои законы. Здесь единые законы везде?",
+    ref:"Государственное устройство"
+  },
+  {
+    src:"engel", topic:"Федерация",
+    text:"США: штаты сохраняют значительную самостоятельность — собственные законы, суды и губернаторов, — но над всеми стоит федеральная конституция и федеральные законы. Какому типу государственного устройства соответствует это описание?",
+    opts:["Конфедерации","Унитарному государству","Федерации","Теократии"],
+    ans:2,
+    fb:"✦ Верно! Федерация: субъекты (штаты, земли, республики) сохраняют самостоятельность — свои законы, суды, органы власти, — но над всеми действует федеральная конституция и федеральные законы.",
+    trap:"Конфедерация — ещё более рыхлый союз: субъекты могут выйти, центральная власть минимальна. В США штаты не могут просто выйти — это именно федерация.",
+    hint:"Штаты имеют свои законы и суды? Федерация. Единые законы без исключений, без субъектов? Унитарное.",
+    ref:"Государственное устройство"
+  },
+  {
+    src:"engel", topic:"Тоталитарный режим",
+    text:"Режим <span class='hero-e'>Новой Колонии</span> (Wolfenstein): государственный контроль над всеми сферами жизни, единственная разрешённая партия, отсутствие свободных выборов, государственная пропаганда везде, политические репрессии, культ фюрера, надзор за частной жизнью граждан. Какой политический режим описан?",
+    opts:["Демократия","Авторитаризм","Тоталитаризм","Абсолютная монархия"],
+    ans:2,
+    fb:"✦ Верно! Тоталитаризм: контроль государства над ВСЕМИ сферами (политика + экономика + культура + частная жизнь), одна партия, идеологическая монополия, репрессии, культ личности. Нацистский режим — исторический пример.",
+    trap:"Авторитаризм ≠ тоталитаризм. Авторитарное государство ограничивает политические права, но частную жизнь не контролирует полностью. Тоталитаризм — ВСЁ под контролем.",
+    hint:"АВТО = только политику контролирует. ТОТО = тотально всё. Рейх следит даже за бытом и мыслями — это что?",
+    ref:"Политические режимы"
+  },
+  {
+    src:"redania", topic:"Авторитарный режим",
+    text:"Редания при <span class='hero-r'>Радовиде</span>: нет свободных выборов, политических оппонентов преследуют, но частная жизнь горожан относительно не контролируется — торговля, религия, семья остаются в руках людей. Какой политический режим описан?",
+    opts:["Демократия","Авторитаризм","Тоталитаризм","Федеративная монархия"],
+    ans:1,
+    fb:"✦ Верно! Авторитаризм: власть одного человека или группы, политические права ограничены, оппозиция подавляется — но НЕТ тотального контроля над экономикой, культурой, частной жизнью. Радовид жёсткий, но до тоталитаризма не дотягивает.",
+    trap:"Тоталитаризм = контроль над ВСЕМ, включая частную жизнь. Авторитаризм = только политика под контролем. Горожане Редании торгуют и живут своей жизнью — значит, это не тоталитаризм.",
+    hint:"Ключевое отличие: в частную жизнь лезет или нет? Редания — только политику контролирует?",
+    ref:"Политические режимы"
+  },
+
+  // ═══ БЛОК 8 — ВЫБОРЫ ═══
+  {
+    src:"bj", topic:"Принципы демократических выборов",
+    text:"<span class='hero-b'>Бласко</span> мечтает о восстановленных в США выборах: каждый гражданин с 18 лет голосует (1), каждый голос весит одинаково (2), голосуют лично — не через посредника (3), в кабинке — никто не видит (4). Назовите принципы в правильном порядке:",
+    opts:["Всеобщие, равные, прямые, тайные","Прямые, тайные, равные, всеобщие","Равные, прямые, всеобщие, тайные","Тайные, всеобщие, прямые, равные"],
+    ans:0,
+    fb:"✦ Верно! Мнемоника ВРПТ: В — Всеобщие (все граждане), Р — Равные (одинаковый вес), П — Прямые (лично, без выборщиков), Т — Тайные (в кабинке, анонимно).",
+    trap:"Не путай прямые и тайные! Прямые — ТЫ выбираешь конкретного человека (а не выборщика). Тайные — никто не знает, за кого ты проголосовал.",
+    hint:"Аббревиатура ВРПТ — твой ключ. Каждая буква — один принцип. Начни с В: что значит, что «каждый гражданин с 18 лет» голосует?",
+    ref:"Избирательное право"
+  },
+  {
+    src:"redania", topic:"Активное и пассивное право",
+    text:"В Редании после реформ: <span class='hero-s'>Хаттори</span> (гном, 24 года) пришёл голосовать за кандидата. <span class='hero-t'>Лютик</span> (человек, 22 года) выдвинул свою кандидатуру в городской совет. Определите виды избирательного права:",
+    opts:["Хаттори — активное право; Лютик — пассивное","Хаттори — пассивное право; Лютик — активное","Оба реализуют активное право","Оба реализуют пассивное право"],
+    ans:0,
+    fb:"✦ Верно! Активное избирательное право — право ГОЛОСОВАТЬ (избирать). Пассивное — право быть ИЗБРАННЫМ (выдвигаться). Хаттори голосует → активное. Лютик выдвигается → пассивное.",
+    trap:"Слова «активное» и «пассивное» звучат контринтуитивно: «пассивный» кандидат как раз активно агитирует. Но термин о том, КАК ты участвуешь: голосуешь — активное; выдвигаешься — пассивное.",
+    hint:"Активное = Активно голосую сам за других. Пассивное = Пассивно жду, выберут ли меня.",
+    ref:"Избирательное право"
+  },
+  {
+    src:"sethroth", topic:"Избирательные системы",
+    text:"<span class='hero-g'>Сет Рот</span> объясняет устройство выборов: <strong>Система А</strong> — голосуешь за конкретного человека в округе, побеждает набравший большинство; <strong>Система Б</strong> — голосуешь за партию, места в парламенте делятся пропорционально набранным голосам. Определите системы:",
+    opts:["А — мажоритарная, Б — пропорциональная","А — пропорциональная, Б — мажоритарная","Обе — мажоритарные","А — смешанная, Б — мажоритарная"],
+    ans:0,
+    fb:"✦ Верно! Мажоритарная: голосуешь за КОНКРЕТНОГО человека, победитель получает мандат. Пропорциональная: голосуешь за ПАРТИЮ, мандаты делятся по проценту голосов.",
+    trap:"В России Госдума — смешанная система: половина депутатов по мажоритарной (одномандатники), половина — по пропорциональной (партийные списки).",
+    hint:"Мажор-итарная = большинство (majority) за одного человека. Пропорц-иональная = пропорции между партиями.",
+    ref:"Избирательные системы"
+  },
+  {
+    src:"skellige", topic:"Референдум",
+    text:"Тинг на Скеллиге созвал всех свободных жителей островов для прямого голосования: вступать ли в союз с Севером против Нильфгаарда. Каждый голосует сам лично по конкретному вопросу — не за представителя. Как называется такая форма демократии?",
+    opts:["Парламентские выборы","Референдум","Выборы ярла","Назначение наместника"],
+    ans:1,
+    fb:"✦ Верно! Референдум — прямое голосование граждан по конкретному вопросу (а не за представителя). Вступление в союз, принятие конституции, изменение границ — типичные темы референдумов.",
+    trap:"Парламентские выборы — выбираешь ЧЕЛОВЕКА (депутата), а не решаешь вопрос напрямую. Референдум — решаешь конкретный вопрос сам, минуя представителей.",
+    hint:"Рефе-РЕНДУМ = прямое РЕшение. Голосование по ВОПРОСУ — не за личность.",
+    ref:"Прямая демократия"
+  },
+
+  // ═══ БЛОК 9 — ПАРТИИ И ГРАЖДАНСКОЕ ОБЩЕСТВО ═══
+  {
+    src:"bj", topic:"Признаки политической партии",
+    text:"Сопротивление в Wolfenstein: объединяет людей со схожими взглядами, разработало программу (восстановление демократии), борется за власть, чтобы её реализовать. Какой признак партии <strong>НЕ соответствует</strong> описанному объединению?",
+    opts:["Объединение по идеологии","Наличие политической программы","Борьба за государственную власть","Официальная регистрация в государственных органах"],
+    ans:3,
+    fb:"✦ Верно! Признаки политической партии: идеология, программа, борьба за власть, официальная регистрация. Сопротивление — подпольная организация: по содержанию очень похожа на партию, но юридического статуса нет — зарегистрироваться при нацистском режиме невозможно.",
+    trap:"По содержанию Сопротивление очень похоже на партию. Но юридически незарегистрированная подпольная организация партией в правовом смысле не является.",
+    hint:"Что из четырёх пунктов точно невозможно для подпольной организации при нацистском режиме?",
+    ref:"Политические партии"
+  },
+  {
+    src:"grace", topic:"Функции политических партий",
+    text:"<span class='hero-b'>Грейс Уокер</span>, бывший лидер Сопротивления, возглавила легальную партию после освобождения США. Партия: выдвигает кандидатов на выборы (1), разрабатывает программу экономических реформ (2), объясняет гражданам политические процессы через листовки (3). Какие <strong>функции партии</strong> описаны?",
+    opts:["Только электоральная (1)","Электоральная, программная, просветительская","Только просветительская (3)","Судебная и законодательная"],
+    ans:1,
+    fb:"✦ Верно! Функции политической партии: электоральная (участие в выборах), программная (разработка курса), политического просвещения (образование граждан), кадровая (выдвижение политиков). Все три примера — три разные функции.",
+    trap:"Судебная и законодательная — функции ГОСУДАРСТВЕННЫХ ОРГАНОВ, а не партий. Партия борется за власть, а не сама является властью.",
+    hint:"Считай функции: выборы (1) — это какая? Программа (2) — это какая? Просвещение (3) — это какая?",
+    ref:"Политические партии"
+  },
+  {
+    src:"engel", topic:"Гражданское общество и СМИ",
+    text:"В подполье Wolfenstein действует тайная радиостанция «Голос Свободы» — разоблачает ложь Рейха, информирует граждан, формирует общественное мнение независимо от государства. Какую роль выполняет это СМИ?",
+    opts:["Законодательную функцию государства","Функцию «четвёртой власти» и элемента гражданского общества","Исполнительную функцию государства","Судебную функцию государства"],
+    ans:1,
+    fb:"✦ Верно! СМИ называют «четвёртой властью» — они контролируют власть через информацию и общественное мнение. Независимые СМИ — важнейший элемент гражданского общества наряду с партиями, профсоюзами, НКО.",
+    trap:"СМИ НЕ являются официальными ветвями власти — они не принимают законов и не выносят приговоров. «Четвёртая власть» — метафора, обозначающая их реальное влияние.",
+    hint:"Три официальных власти: законодательная, исполнительная, судебная. СМИ неофициально называют какой властью по счёту?",
+    ref:"Гражданское общество"
+  }
+
+];
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let questions,cur,score,attempts,answered,shuffledOpts=[],correctIdx=0;
+
+function initQuiz(){questions=shuffle(allQuestions);cur=0;score=0;attempts=0;answered=false;}
+initQuiz();
+
+const qcard=document.getElementById('qcard'),qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'),qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'),qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'),qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+function renderQ(){
+  const q=questions[cur];answered=false;attempts=0;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate');void qcard.offsetWidth;qcard.classList.add('question-animate');
+  const sc=srcConfig[q.src]||{label:'ВЕДЬМАК',cls:'q-nilfg'};
+  qheader.innerHTML=`<span class="q-source ${sc.cls}">${sc.label}</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box';qfb.innerHTML='';qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} правильно`;
+}
+
+function answer(i){
+  if(answered)return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0)score++;
+    scoredisp.textContent=`✦ ${score} правильно`;
+    btns.forEach(b=>b.disabled=true);btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap)fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb;qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+  } else {
+    attempts++;btns[i].classList.add('wrong');btns[i].disabled=true;
+    if(attempts===1){
+      qfb.innerHTML=`😞 Не то. ${q.hint}<br><span class="fb-hint-ref">📖 Шпора: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;btns.forEach(b=>b.disabled=true);btns[correctIdx].classList.add('correct');
+      let fb=`😔 Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap)fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb;qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{cur++;if(cur>=questions.length){showResults();return;}renderQ();});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results');res.classList.add('show');
+  const s=score,t=questions.length;
+  document.getElementById('rscore').textContent=s;
+  document.getElementById('rtotal').textContent=`из ${t} вопросов`;
+  let title,story,rankClass,rankText,icon;
+  if(s>=27){
+    icon='🎖️';title='Агент высшего класса';
+    story='Ты разбираешься в социальной сфере и политике лучше большинства. Статус, семья, девиация, формы правления, выборы — всё на месте. Сопротивление ждёт тебя в штабе.';
+    rankClass='rank-s';rankText='S-ранг · Агент Сопротивления';
+  } else if(s>=22){
+    icon='⚔️';title='Боец под прикрытием';
+    story='Хорошая работа. Большинство тем покорились. Повтори различие авторитаризма и тоталитаризма, активного и пассивного избирательного права — там часто ловушки на ОГЭ.';
+    rankClass='rank-a';rankText='A-ранг · Готов к ОГЭ';
+  } else if(s>=16){
+    icon='🔧';title='Новобранец Сопротивления';
+    story='Основы есть, детали плывут. Вернись к шпаргалке — особенно к таблице форм правления и видам санкций. Там несколько вопросов на ОГЭ.';
+    rankClass='rank-b';rankText='B-ранг · Нужно повторить';
+  } else if(s>=10){
+    icon='😅';title='Коллаборационист-недоучка';
+    story='Рейх пока выигрывает. Перечитай шпаргалку про предписанный/достигнутый статус и функции семьи — там простые очки.';
+    rankClass='rank-c';rankText='C-ранг · Повтори снова';
+  } else {
+    icon='☠️';title='Нейтралитет не спасёт';
+    story='«Нейтралитет — это выбор в пользу угнетателя». Начни со шпаргалки. Особенно мнемоники ВРПТ, ПД-статус и таблица форм правления — это база.';
+    rankClass='rank-d';rankText='D-ранг · Шпаргалка ждёт';
+  }
+  document.getElementById('ricon').textContent=icon;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  const rr=document.getElementById('rrank');rr.textContent=rankText;rr.className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
