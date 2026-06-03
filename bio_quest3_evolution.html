@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биоквест 3: Друзья и монстры — ОГЭ Биология 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede6;
+    --bg2:     #faf8f3;
+    --bg3:     #e8e4db;
+    --bg4:     #dedad0;
+    --c-ger:   #1B5E20;
+    --c-ves:   #4E342E;
+    --c-reg:   #880E4F;
+    --c-cir:   #4527A0;
+    --c-lut:   #E65100;
+    --c-mon:   #37474F;
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:'Outfit',sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 5%  0%,  rgba(27,94,32,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 90% 10%,  rgba(136,14,79,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(69,39,160,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after {
+    content:''; display:block; margin:28px auto 0;
+    width:200px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--c-ger),var(--c-reg),var(--c-cir),var(--c-lut),transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht-gr  { color:var(--c-ger); }
+  .ht-re  { color:var(--c-reg); }
+  .ht-pl  { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .c-ger::after { background:var(--c-ger); }
+  .c-ves::after { background:var(--c-ves); }
+  .c-reg::after { background:var(--c-reg); }
+  .c-cir::after { background:var(--c-cir); }
+  .c-lut::after { background:var(--c-lut); }
+  .c-mon::after { background:var(--c-mon); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:5px 10px; border-radius:6px; display:inline-block; margin:4px 0 8px; }
+  .c-ger .rule-formula { background:rgba(27,94,32,0.1);   color:var(--c-ger); }
+  .c-ves .rule-formula { background:rgba(78,52,46,0.1);   color:var(--c-ves); }
+  .c-reg .rule-formula { background:rgba(136,14,79,0.1);  color:var(--c-reg); }
+  .c-cir .rule-formula { background:rgba(69,39,160,0.1);  color:var(--c-cir); }
+  .c-lut .rule-formula { background:rgba(230,81,0,0.1);   color:var(--c-lut); }
+  .c-mon .rule-formula { background:rgba(55,71,79,0.1);   color:var(--c-mon); }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.55; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+
+  /* СРАВНИТЕЛЬНАЯ ТАБЛИЦА */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:32px; overflow-x:auto; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:13px; min-width:580px; }
+  .quick-table th { font-size:11px; font-weight:700; letter-spacing:0.08em; padding:10px 12px; text-align:left; border-bottom:1px solid var(--border2); text-transform:uppercase; }
+  .th-0 { background:#37474F; color:#fff; }
+  .th-1 { background:#1565C0; color:#fff; }
+  .th-2 { background:#2E7D32; color:#fff; }
+  .th-3 { background:#6A1B9A; color:#fff; }
+  .th-4 { background:#1B5E20; color:#fff; }
+  .th-5 { background:#4E342E; color:#fff; }
+  .quick-table td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:600; font-size:12px; color:var(--muted); }
+  .hl { font-weight:700; }
+  .hl-1 { color:#1565C0; }
+  .hl-2 { color:#2E7D32; }
+  .hl-3 { color:#6A1B9A; }
+  .hl-4 { color:#1B5E20; }
+  .hl-5 { color:#4E342E; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* BANNER */
+  .hero-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(27,94,32,0.3); display:grid; grid-template-columns:200px 1fr; }
+  .banner-img { width:200px; min-height:190px; object-fit:cover; object-position:center; display:block; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:56px; }
+  .banner-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .banner-title { font-size:18px; font-weight:700; color:var(--c-ger); }
+  .banner-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .banner-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(27,94,32,0.12);  color:#1B5E20; }
+  .stake-a { background:rgba(78,52,46,0.12);  color:#4E342E; }
+  .stake-b { background:rgba(202,138,4,0.12); color:#92400e; }
+  .stake-c { background:rgba(136,14,79,0.12); color:#880E4F; }
+  .stake-d { background:rgba(55,71,79,0.12);  color:#37474F; }
+  @media(max-width:560px){ .hero-banner{grid-template-columns:1fr;} .banner-img{width:100%;min-height:120px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,32px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-ger),var(--c-reg),var(--c-cir),var(--c-lut)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-ger); min-width:72px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .qs-ger { background:var(--c-ger); }
+  .qs-ves { background:var(--c-ves); }
+  .qs-reg { background:var(--c-reg); }
+  .qs-cir { background:var(--c-cir); }
+  .qs-kei { background:#00695C; }
+  .qs-lut { background:var(--c-lut); }
+  .qs-mon { background:var(--c-mon); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .hero-name { font-weight:700; padding:0 2px; }
+  .n-ger { background:linear-gradient(120deg,var(--c-ger),#388E3C); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-ves { background:linear-gradient(120deg,var(--c-ves),#795548); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-reg { background:linear-gradient(120deg,var(--c-reg),#AD1457); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-cir { background:linear-gradient(120deg,var(--c-cir),#7B1FA2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-kei { background:linear-gradient(120deg,#00695C,#26A69A); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-lut { background:linear-gradient(120deg,var(--c-lut),#FF8F00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-ger); background:rgba(27,94,32,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--c-ger); background:rgba(27,94,32,0.12); }
+  .opt-btn.correct .opt-letter { color:var(--c-ger); }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#991b1b; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(78,52,46,0.1); border:1px solid rgba(78,52,46,0.3); color:var(--text); border-radius:6px; padding:6px 12px; font-size:15px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:10px; color:var(--muted); }
+  .fb-retry { display:block; margin-top:10px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-reg); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:16px; line-height:1.65; color:var(--text); max-width:500px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(27,94,32,0.12);  color:#1B5E20; }
+  .rank-a { background:rgba(78,52,46,0.12);  color:#4E342E; }
+  .rank-b { background:rgba(202,138,4,0.12); color:#92400e; }
+  .rank-c { background:rgba(136,14,79,0.12); color:#880E4F; }
+  .rank-d { background:rgba(55,71,79,0.12);  color:#37474F; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-ger); background:rgba(27,94,32,0.03); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(27,94,32,0.12); color:var(--c-ger); }
+  .nav-section-label { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin:20px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · 9 класс · Квест 3</div>
+    <h1 class="hero-title">
+      <span class="ht-gr">Друзья</span> <span class="ht-pl">и</span><br>
+      <span class="ht-re">Монстры</span>
+    </h1>
+    <p class="hero-sub">Зоология · Систематика животных · Эволюция · Антропогенез — 30 испытаний · Ведьмак</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Бестиарий Весемира — шпора</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-ger">
+      <div class="rule-icon">🪱</div>
+      <div class="rule-title">Черви и паразиты</div>
+      <div class="rule-formula">Плоские · Круглые · Кольчатые</div>
+      <div class="rule-body">
+        <strong>Плоские</strong> (Platyhelminthes): планария, печёночный сосальщик, бычий цепень. Тело сплюснуто. Многие — паразиты.<br>
+        <strong>Круглые</strong> (Nematoda): аскарида, острица. Тело в поперечном сечении круглое. Паразиты кишечника.<br>
+        <strong>Кольчатые</strong> (Annelida): дождевой червь. Тело сегментировано. Замкнутая кровеносная система.<br>
+        <strong>Бычий цепень</strong>: человек = основной хозяин, корова = промежуточный (финны в мышцах).
+      </div>
+      <div class="rule-assoc">🗡️ Геральт: «Паразиты — худшие монстры. Незаметны, но убивают изнутри. Аскаридоз — через немытые руки.»</div>
+    </div>
+
+    <div class="rule-card c-ves">
+      <div class="rule-icon">🦋</div>
+      <div class="rule-title">Членистоногие и метаморфоз</div>
+      <div class="rule-formula">Полный / Неполный метаморфоз</div>
+      <div class="rule-body">
+        <strong>Насекомые:</strong> 6 ног, 3 отдела тела (голова, грудь, брюшко), 1 пара усиков.<br>
+        <strong>Паукообразные:</strong> 8 ног, 2 отдела тела (головогрудь + брюшко), нет усиков.<br>
+        <strong>Полный метаморфоз</strong>: яйцо → личинка → <em>куколка</em> → взрослое. Бабочки, жуки, мухи, пчёлы.<br>
+        <strong>Неполный метаморфоз</strong>: яйцо → личинка → взрослое (куколки нет). Кузнечики, саранча, клопы, стрекозы.
+      </div>
+      <div class="rule-assoc">📚 Весемир: «Куколка — ключ. Есть куколка — полный метаморфоз. Нет куколки — неполный. Просто.»</div>
+    </div>
+
+    <div class="rule-card c-reg">
+      <div class="rule-icon">🐟</div>
+      <div class="rule-title">Хордовые — сравнение классов</div>
+      <div class="rule-formula">Сердце · Температура · Покровы</div>
+      <div class="rule-body">
+        <strong>Рыбы:</strong> 2-кам. ♥, 1 круг, холоднокровные, чешуя.<br>
+        <strong>Земноводные:</strong> 3-кам. ♥, 2 круга, холоднокровные, голая влажная кожа.<br>
+        <strong>Пресмыкающиеся:</strong> 3-кам. ♥ (+ неполная перегородка), 2 круга, холоднокровные, сухая чешуя.<br>
+        <strong>Птицы:</strong> 4-кам. ♥, 2 круга, <em>теплокровные</em>, перья.<br>
+        <strong>Млекопитающие:</strong> 4-кам. ♥, 2 круга, <em>теплокровные</em>, шерсть, молочные железы.
+      </div>
+      <div class="rule-assoc">🩸 Регис: «Тёплая кровь — это прогресс. Я знаю лучше других — мне пришлось от неё отказаться.»</div>
+    </div>
+
+    <div class="rule-card c-cir">
+      <div class="rule-icon">🧬</div>
+      <div class="rule-title">Эволюция по Дарвину</div>
+      <div class="rule-formula">Наследственность · Изменчивость · Отбор</div>
+      <div class="rule-body">
+        <strong>Три движущие силы:</strong> наследственность, изменчивость, естественный отбор.<br>
+        <strong>Естественный отбор</strong> — выживают наиболее приспособленные к условиям среды.<br>
+        <strong>Борьба за существование:</strong> внутривидовая (особи одного вида), межвидовая (разные виды), с условиями среды.<br>
+        <strong>Доказательства:</strong> палеонтологические (окаменелости), сравнительно-анатомические (гомологичные органы), эмбриологические.<br>
+        <strong>Рудименты</strong> — органы, утратившие функцию. <strong>Атавизмы</strong> — возврат признаков предков.
+      </div>
+      <div class="rule-assoc">✨ Цирилла: «Ведьмаки прошли мутации. По Дарвину — это изменчивость + отбор. Выжили только сильнейшие.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🧑</div>
+      <div class="rule-title">Антропогенез</div>
+      <div class="rule-formula">Авст → Habilis → Erectus → Sapiens</div>
+      <div class="rule-body">
+        <strong>Австралопитек</strong> (~4–2 млн лет): прямохождение, небольшой мозг.<br>
+        <strong>Homo habilis</strong> («Человек умелый», ~2 млн): первые орудия труда.<br>
+        <strong>Homo erectus</strong> («Человек прямоходящий», ~1,8 млн): огонь, сложные орудия.<br>
+        <strong>Homo sapiens</strong> (~300 тыс. лет): речь, абстрактное мышление, искусство.<br>
+        <strong>Движущие силы:</strong> труд, прямохождение, развитие речи и мозга.
+      </div>
+      <div class="rule-assoc">🎵 Лютик: «Написал балладу об эволюции человека. Начал с австралопитека — закончил Весемиром. Тот обиделся.»</div>
+    </div>
+
+    <div class="rule-card c-mon">
+      <div class="rule-icon">🦎</div>
+      <div class="rule-title">Простейшие и систематика</div>
+      <div class="rule-formula">Тип · Класс · Признаки</div>
+      <div class="rule-body">
+        <strong>Простейшие</strong> — одноклеточные животные: амёба, эвглена, инфузория-туфелька.<br>
+        Эвглена — миксотроф: и фотосинтезирует, и питается готовой органикой.<br>
+        <strong>Моллюски:</strong> брюхоногие (улитка, прудовик), двустворчатые (мидия, перловица), головоногие (осьминог, кальмар).<br>
+        <strong>Место человека:</strong> Царство Животные → Тип Хордовые → Класс <em>Млекопитающие</em> → Отряд Приматы → Вид Homo sapiens.
+      </div>
+      <div class="rule-assoc">🐉 Монстры Континента — эукариоты, многоклеточные, гетеротрофы. Царство Животные. Даже василиск.</div>
+    </div>
+
+  </div>
+
+  <!-- ТАБЛИЦА ХОРДОВЫХ -->
+  <div class="sec-head" style="margin-top:40px"><span class="sec-badge rule">Сравнение классов хордовых</span><div class="sec-line"></div></div>
+  <div class="tbl-wrap">
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th class="th-0">Признак</th>
+          <th class="th-1">🐟 Рыбы</th>
+          <th class="th-2">🐸 Земноводные</th>
+          <th class="th-3">🦎 Рептилии</th>
+          <th class="th-4">🦅 Птицы</th>
+          <th class="th-5">🐺 Млекопит.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Камеры сердца</td>
+          <td><span class="hl hl-1">2</span></td>
+          <td><span class="hl hl-2">3</span></td>
+          <td><span class="hl hl-3">3 + перег.</span></td>
+          <td><span class="hl hl-4">4</span></td>
+          <td><span class="hl hl-5">4</span></td>
+        </tr>
+        <tr>
+          <td>Кровообращение</td>
+          <td><span class="hl hl-1">1 круг</span></td>
+          <td><span class="hl hl-2">2 круга</span></td>
+          <td><span class="hl hl-3">2 круга</span></td>
+          <td><span class="hl hl-4">2 круга</span></td>
+          <td><span class="hl hl-5">2 круга</span></td>
+        </tr>
+        <tr>
+          <td>Температура</td>
+          <td>Холоднокровные</td>
+          <td>Холоднокровные</td>
+          <td>Холоднокровные</td>
+          <td><span class="hl hl-4">Теплокровные</span></td>
+          <td><span class="hl hl-5">Теплокровные</span></td>
+        </tr>
+        <tr>
+          <td>Кожные покровы</td>
+          <td>Чешуя</td>
+          <td>Голая влажная</td>
+          <td>Сухая чешуя</td>
+          <td>Перья</td>
+          <td>Шерсть / волосы</td>
+        </tr>
+        <tr>
+          <td>Размножение</td>
+          <td>Икра в воде</td>
+          <td>Икра в воде</td>
+          <td>Яйца на суше</td>
+          <td>Яйца (насиживание)</td>
+          <td>Живорождение*</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- СХЕМА: ДОМА-СЕРДЦА -->
+  <div style="margin:28px 0 0;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:var(--muted);">
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:#E53935;display:inline-block;flex-shrink:0"></span>артериальная</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:#1E88E5;display:inline-block;flex-shrink:0"></span>венозная</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:#43A047;display:inline-block;flex-shrink:0"></span>смешанная ⚠</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:10px;align-items:end;">
+
+      <!-- РЫБЫ -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);text-align:center;">🐟 Рыбы</div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:-4px;">2 комнаты · 1 круг</div>
+        <div style="width:90px;">
+          <div style="width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:20px solid #0D47A1;margin:0 auto;"></div>
+          <div style="background:#E3F2FD;border:2px solid #0D47A1;border-top:none;border-radius:0 0 6px 6px;padding:4px;display:flex;flex-direction:column;gap:3px;">
+            <div style="background:#1E88E5;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">предсердие</div>
+            <div style="background:#1565C0;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">желудочек</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ЗЕМНОВОДНЫЕ -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);text-align:center;">🐸 Земно­водные</div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:-4px;">3 комнаты</div>
+        <div style="width:90px;">
+          <div style="width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:20px solid #1B5E20;margin:0 auto;"></div>
+          <div style="background:#E8F5E9;border:2px solid #1B5E20;border-top:none;border-radius:0 0 6px 6px;padding:4px;display:flex;flex-direction:column;gap:3px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#E53935;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+              <div style="background:#1E88E5;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+            </div>
+            <div style="background:#43A047;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">желудочек ⚠ смешан</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- РЕПТИЛИИ -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);text-align:center;">🦎 Рептилии</div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:-4px;">3 + перегородка</div>
+        <div style="width:90px;">
+          <div style="width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:20px solid #E65100;margin:0 auto;"></div>
+          <div style="background:#FFF3E0;border:2px solid #E65100;border-top:none;border-radius:0 0 6px 6px;padding:4px;display:flex;flex-direction:column;gap:3px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#E53935;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+              <div style="background:#1E88E5;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+            </div>
+            <div style="border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;overflow:hidden;">
+              <div style="background:#E53935;color:#fff;flex:1;height:100%;display:flex;align-items:center;justify-content:center;">жел.</div>
+              <div style="width:2px;height:100%;background:#E65100;"></div>
+              <div style="background:#1E88E5;color:#fff;flex:1;height:100%;display:flex;align-items:center;justify-content:center;">жел.</div>
+            </div>
+            <div style="font-size:9px;color:#E65100;text-align:center;font-weight:600;">неполная стена</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ПТИЦЫ -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);text-align:center;">🦅 Птицы</div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:-4px;">4 комнаты ✓</div>
+        <div style="width:90px;">
+          <div style="width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:20px solid #4A148C;margin:0 auto;"></div>
+          <div style="background:#F3E5F5;border:2px solid #4A148C;border-top:none;border-radius:0 0 6px 6px;padding:4px;display:flex;flex-direction:column;gap:3px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#E53935;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+              <div style="background:#1E88E5;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+            </div>
+            <div style="height:2px;background:#4A148C;border-radius:1px;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#C62828;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">жел.</div>
+              <div style="background:#0D47A1;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">жел.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- МЛЕКОПИТАЮЩИЕ -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);text-align:center;">🐺 Млеко­питающие</div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:-4px;">4 комнаты ✓</div>
+        <div style="width:90px;">
+          <div style="width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:20px solid #004D40;margin:0 auto;"></div>
+          <div style="background:#E0F2F1;border:2px solid #004D40;border-top:none;border-radius:0 0 6px 6px;padding:4px;display:flex;flex-direction:column;gap:3px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#E53935;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+              <div style="background:#1E88E5;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">пред.</div>
+            </div>
+            <div style="height:2px;background:#004D40;border-radius:1px;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="background:#C62828;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">жел.</div>
+              <div style="background:#0D47A1;color:#fff;border-radius:3px;height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;">жел.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin-top:10px;padding:8px 12px;background:var(--bg3);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.6;">
+      💡 <strong style="color:var(--text)">Правило:</strong> пока желудочек один — кровь смешивается (земноводные, рептилии). Два желудочка = полная стена = чистая кровь = теплокровность.
+    </div>
+  </div>
+
+  <div class="deco-div"><span>Биоквест 3 — 30 испытаний</span></div>
+
+  <!-- BANNER -->
+  <div class="hero-banner">
+    <img class="banner-img" src="https://i.redd.it/ffsusskipkeb1.jpg" alt="Геральт и монстры" onerror="this.style.fontSize='56px';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.textContent='⚔️'">
+    <div class="banner-text">
+      <div class="banner-title">🗡️ Портал открылся — монстры прут!</div>
+      <div class="banner-desc">Геральту и его спутникам нужна твоя помощь: разобраться, кто есть кто среди тварей Континента. Систематика, эволюция, анатомия — всё пригодится, чтобы одних отпустить с миром, а от других убежать.</div>
+      <div class="banner-stakes">
+        <span class="stake stake-s">27–30 ✦ Весемир одобрил</span>
+        <span class="stake stake-a">22–26 ✦ Геральт кивнул</span>
+        <span class="stake stake-b">16–21 ✦ Цирилла сдала зачёт</span>
+        <span class="stake stake-c">9–15 ✦ Лютик написал стишок о провале</span>
+        <span class="stake stake-d">0–8 ✦ Монстры победили...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Определи тварь — спаси Континент</div>
+      <p class="quiz-sub">Весемир открыл бестиарий. Пора учиться.</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 30</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Попробовать снова</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все биоквесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="bio_quest1_cell.html">
+        <span class="qp-num" style="background:#16a34a">1</span>
+        <span class="qp-info"><span class="qp-name">Живое и опасное</span><span class="qp-sub">Клетка, ткани, методы · TLOU</span></span>
+        <span class="qp-badge">← Назад</span>
+      </a>
+      <a class="quest-pill" href="bio_quest2_kingdoms.html">
+        <span class="qp-num" style="background:#C62828">2</span>
+        <span class="qp-info"><span class="qp-name">Битва четырёх царств</span><span class="qp-sub">Бактерии, грибы, вирусы, растения</span></span>
+        <span class="qp-badge">← Назад</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-ger)">3</span>
+        <span class="qp-info"><span class="qp-name">Друзья и монстры</span><span class="qp-sub">Зоология, эволюция, антропогенез · Ведьмак</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#c2410c">4</span>
+        <span class="qp-info"><span class="qp-name">Тело человека</span><span class="qp-sub">Скелет, кровь, дыхание, пищеварение</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#ca8a04">5</span>
+        <span class="qp-info"><span class="qp-name">Мозг и экосистемы</span><span class="qp-sub">ВНД, анализаторы, экология</span></span>
+        <span class="qp-badge">Скоро</span>
+      </div>
+    </div>
+    <div class="nav-section-label" style="margin-top:24px">Главная</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#7c3aed">↩</span>
+        <span class="qp-info"><span class="qp-name">Все квесты ОГЭ 2026</span><span class="qp-sub">Главная страница</span></span>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const srcLabels = {
+  ger: { cls:'qs-ger', text:'Геральт из Ривии' },
+  ves: { cls:'qs-ves', text:'Весемир · Бестиарий' },
+  reg: { cls:'qs-reg', text:'Регис · Лекарь' },
+  cir: { cls:'qs-cir', text:'Цирилла' },
+  kei: { cls:'qs-kei', text:'Кейра Мец' },
+  lut: { cls:'qs-lut', text:'Лютик · Бард' },
+  mon: { cls:'qs-mon', text:'Монстры Континента' }
+};
+
+const allQuestions = [
+
+  // ── ПРОСТЕЙШИЕ ──
+  {
+    src:"ger", topic:"Простейшие животные",
+    text:"<span class='hero-name n-ger'>Геральт</span> нашёл в болоте крошечную тварь — видна лишь под микроскопом, состоит из одной клетки и самостоятельно охотится на бактерий. Как называется эта группа животных?",
+    opts:["Простейшие (одноклеточные животные)","Кишечнополостные","Бактерии-прокариоты","Водоросли"],
+    ans:0,
+    fb:"✦ Верно! Простейшие — одноклеточные животные: амёба, эвглена, инфузория-туфелька. Несмотря на одну клетку — полноценные организмы с ядром, органоидами и способностью к активному движению.",
+    trap:"Ловушка ОГЭ: простейшие — животные, а не бактерии! Бактерии — прокариоты без ядра. Простейшие — эукариоты. Это принципиальная разница.",
+    hint:"Одна клетка, есть ядро, умеет охотиться. Не бактерия — это более сложный одноклеточный организм. Какая группа?"
+  },
+  {
+    src:"kei", topic:"Эвглена — миксотроф",
+    text:"<span class='hero-name n-kei'>Кейра</span> рассматривает болотный образец: эвглена зелёная на свету фотосинтезирует, а в темноте питается готовой органикой. Как называется такой тип питания?",
+    opts:["Миксотрофный (смешанный)","Автотрофный (только фотосинтез)","Гетеротрофный (только готовая органика)","Паразитический"],
+    ans:0,
+    fb:"✦ Верно! Миксотроф = смешанный тип питания. Эвглена — уникальное существо на границе растений и животных. Именно поэтому её долго не знали, куда отнести.",
+    trap:"Ловушка ОГЭ: эвглена — не чистый автотроф и не чистый гетеротроф. На свету — как растение, в темноте — как животное. Такой тип называется миксотрофным.",
+    hint:"Эвглена умеет и то, и другое. Как называется питание, совмещающее оба способа?"
+  },
+
+  // ── ЧЕРВИ ──
+  {
+    src:"reg", topic:"Типы червей",
+    text:"<span class='hero-name n-reg'>Регис</span> осматривает пациента: в кишечнике паразит длиной до 8 метров с крючьями и присосками на голове. Это бычий цепень. К какому типу червей он относится?",
+    opts:["Плоские черви","Круглые черви","Кольчатые черви","Ресничные черви"],
+    ans:0,
+    fb:"✦ Верно! Бычий цепень — плоский червь (класс Ленточные). Тело лентовидное, сплюснутое. Крючья и присоски — органы прикрепления к стенке кишечника хозяина.",
+    trap:"Ловушка ОГЭ: не путай типы червей! Плоские — сплюснутое тело (планария, цепень, сосальщик). Круглые — цилиндрическое (аскарида, острица). Кольчатые — сегментированное (дождевой червь).",
+    hint:"Тело сплющено, как лента. Это плоский или круглый?"
+  },
+  {
+    src:"reg", topic:"Жизненный цикл бычьего цепня",
+    text:"<span class='hero-name n-reg'>Регис</span> объясняет: бычий цепень живёт в кишечнике человека и откладывает яйца. Яйца попадают к корове и образуют личинки (финны) в мышцах. Чем является корова в этом цикле?",
+    opts:["Промежуточным хозяином — в нём живут личинки","Окончательным хозяином","Переносчиком, который не заражается","Резервуаром без развития паразита"],
+    ans:0,
+    fb:"✦ Верно! Промежуточный хозяин — тот, в котором паразит проходит личиночную стадию. Окончательный хозяин — тот, где паразит достигает половой зрелости (для бычьего цепня — человек).",
+    trap:"Ловушка ОГЭ: окончательный хозяин — где паразит взрослый (человек). Промежуточный — где личинки (корова). Не перепутай!",
+    hint:"В корове паразит не взрослый, а в стадии личинки. Как называется хозяин, где живут личинки?"
+  },
+  {
+    src:"reg", topic:"Аскаридоз — профилактика",
+    text:"<span class='hero-name n-reg'>Регис</span> лечит крестьян от аскаридоза. Как можно заразиться аскаридой?",
+    opts:["Через немытые руки, овощи и фрукты с яйцами аскариды","При укусе насекомого-переносчика","Воздушно-капельным путём при чихании","При тесном контакте с заражённым животным"],
+    ans:0,
+    fb:"✦ Верно! Аскарида — геогельминт: яйца созревают в почве. Заражение — фекально-оральный путь: немытые руки, овощи с грядки. Профилактика: мыть руки, овощи, не пить сырую воду из луж.",
+    trap:"",
+    hint:"Яйца аскариды попадают в почву. Как они оттуда добираются до человека?"
+  },
+  {
+    src:"ger", topic:"Кольчатые черви",
+    text:"<span class='hero-name n-ger'>Геральт</span> роет яму у Каэр Морхена и находит дождевых червей. Что отличает кольчатых червей от плоских и круглых?",
+    opts:["Сегментированное (членистое) тело и замкнутая кровеносная система","Паразитический образ жизни","Сплюснутое тело без полости","Отсутствие нервной системы"],
+    ans:0,
+    fb:"✦ Верно! Кольчатые черви: тело поделено на сегменты (кольца), есть замкнутая кровеносная система — настоящая кровь циркулирует по сосудам. Дождевой червь — почвообразователь, а не паразит.",
+    trap:"Ловушка ОГЭ: кольчатые = сегменты + замкнутая кровеносная. У плоских и круглых — незамкнутая или отсутствует. Дождевой червь — не паразит!",
+    hint:"Главные признаки кольчатых — кольца-сегменты и как устроена кровеносная система?"
+  },
+
+  // ── МОЛЛЮСКИ ──
+  {
+    src:"ves", topic:"Классы моллюсков",
+    text:"<span class='hero-name n-ves'>Весемир</span> листает бестиарий морских тварей: там и Сирена (похожа на осьминога), и мидии, и прудовики. Все — моллюски. На какие три класса делятся моллюски?",
+    opts:["Брюхоногие, двустворчатые, головоногие","Наземные, морские, пресноводные","Паразитические, свободноживущие, симбиотические","Одностворчатые, двустворчатые, трёхстворчатые"],
+    ans:0,
+    fb:"✦ Верно! Брюхоногие (улитки, прудовик — одна раковина, нога-«живот»). Двустворчатые (мидии, перловица — две створки, нет головы). Головоногие (осьминог, кальмар, каракатица — «ноги» на голове).",
+    trap:"Ловушка ОГЭ: классификация моллюсков по строению тела, не по среде обитания. Осьминог — не рыба и не червь, а головоногий моллюск.",
+    hint:"Три класса названы по особенностям строения тела. Брюхоногие — по положению ноги. Двустворчатые — по раковине. А головоногие?"
+  },
+
+  // ── ЧЛЕНИСТОНОГИЕ ──
+  {
+    src:"ves", topic:"Насекомые vs паукообразные",
+    text:"<span class='hero-name n-ger'>Геральт</span> видит огромного паука — Эхидну паукообразную. <span class='hero-name n-ves'>Весемир</span>: «Это не насекомое!» По какому главному признаку пауки отличаются от насекомых?",
+    opts:["У пауков 8 ног и 2 отдела тела, у насекомых — 6 ног и 3 отдела","У пауков нет глаз, у насекомых — есть","Пауки не имеют покровов, насекомые — имеют","У пауков нет крыльев, а у всех насекомых они есть"],
+    ans:0,
+    fb:"✦ Верно! Паукообразные: 8 ног, 2 отдела (головогрудь + брюшко), нет усиков. Насекомые: 6 ног, 3 отдела (голова + грудь + брюшко), 1 пара усиков. Крылья — не у всех насекомых (блохи, вши — бескрылые).",
+    trap:"Ловушка ОГЭ: «у насекомых есть крылья» — НЕВЕРНО для всех. Блохи и вши — насекомые без крыльев. Надёжный признак — число ног: 6 или 8.",
+    hint:"Посчитай ноги: сколько у паука и сколько у мухи?"
+  },
+  {
+    src:"lut", topic:"Полный метаморфоз",
+    text:"<span class='hero-name n-lut'>Лютик</span> наблюдает: гусеница свила кокон, из кокона вылетела бабочка. Это полный метаморфоз. Назови правильный порядок всех стадий.",
+    opts:["Яйцо → Личинка → Куколка → Взрослое насекомое","Яйцо → Личинка → Взрослое насекомое","Яйцо → Куколка → Личинка → Взрослое","Личинка → Яйцо → Куколка → Взрослое"],
+    ans:0,
+    fb:"✦ Верно! Полный метаморфоз: 4 стадии, куколка обязательна. Личинка совсем не похожа на взрослое насекомое — именно это признак полного метаморфоза. Бабочки, жуки, мухи, пчёлы, комары.",
+    trap:"Ловушка ОГЭ: главный маркер полного метаморфоза — КУКОЛКА. Если куколки нет — метаморфоз неполный. Личинка при полном метаморфозе совсем не похожа на взрослое.",
+    hint:"Ключевое слово — кокон. Кокон — это какая стадия метаморфоза?"
+  },
+  {
+    src:"lut", topic:"Неполный метаморфоз",
+    text:"<span class='hero-name n-lut'>Лютик</span> пишет стишок про кузнечика: «Прыгал с самого рожденья, миновав окукленье». Какой тип метаморфоза у кузнечика?",
+    opts:["Неполный (яйцо → личинка → взрослое, куколки нет)","Полный (с куколкой)","Прямое развитие без метаморфоза","Живорождение"],
+    ans:0,
+    fb:"✦ Верно! Неполный метаморфоз: 3 стадии, куколки нет. Личинка похожа на взрослое насекомое, только маленькая и без крыльев. Кузнечики, саранча, клопы, стрекозы, тараканы.",
+    trap:"",
+    hint:"Кузнечик родился — уже похож на взрослого, только маленький. Куколки нет. Это полный или неполный?"
+  },
+  {
+    src:"lut", topic:"Примеры полного метаморфоза",
+    text:"<span class='hero-name n-lut'>Лютик</span> решил проверить: «А жук-рогач — это полный или неполный метаморфоз?» Какие из перечисленных насекомых проходят ПОЛНЫЙ метаморфоз?",
+    opts:["Бабочки, жуки, мухи, пчёлы","Кузнечики, саранча, клопы","Тараканы, стрекозы, вши","Все насекомые без исключения"],
+    ans:0,
+    fb:"✦ Верно! Полный метаморфоз — бабочки (чешуекрылые), жуки (жесткокрылые), мухи и комары (двукрылые), пчёлы и осы (перепончатокрылые), блохи. Их личинки (гусеница, личинка жука) совсем не похожи на взрослых.",
+    trap:"Ловушка ОГЭ: стрекозы и тараканы — неполный метаморфоз. Часто ошибаются со стрекозами — у них тоже нет стадии куколки.",
+    hint:"Запомни группы с полным метаморфозом: бабочки, жуки, мухи, пчёлы. У остальных — неполный."
+  },
+
+  // ── ХОРДОВЫЕ ──
+  {
+    src:"reg", topic:"Сердце рыб",
+    text:"<span class='hero-name n-reg'>Регис</span> препарирует рыбу на берегу Понтара. Сколько камер в сердце рыбы и сколько кругов кровообращения?",
+    opts:["2 камеры, 1 круг кровообращения","3 камеры, 2 круга","4 камеры, 2 круга","2 камеры, 2 круга"],
+    ans:0,
+    fb:"✦ Верно! Рыбы — самые «простые» из позвоночных по строению сердца: 2 камеры (предсердие + желудочек), 1 круг кровообращения. Через само сердце рыбы течёт только венозная кровь — она обогащается кислородом в жабрах.",
+    trap:"Ловушка ОГЭ: запомни ряд — 2 камеры (рыбы), 3 камеры (земноводные + рептилии), 4 камеры (птицы + млекопитающие). Каждый шаг эволюции добавляет камеру.",
+    hint:"У рыб — самое простое сердце. Сколько камер у него и сколько кругов кровообращения?"
+  },
+  {
+    src:"ger", topic:"Земноводные",
+    text:"<span class='hero-name n-ger'>Геральт</span> встречает болотного монстра — в юности он дышал жабрами, а теперь и лёгкими, и через кожу. Это земноводное. Что из перечисленного ВЕРНО для земноводных?",
+    opts:["Трёхкамерное сердце, 2 круга кровообращения, холоднокровные","Четырёхкамерное сердце, теплокровные","Двухкамерное сердце, 1 круг, кожа сухая и чешуйчатая","Трёхкамерное сердце с полной перегородкой, сухая кожа"],
+    ans:0,
+    fb:"✦ Верно! Земноводные: 3-камерное сердце (2 предсердия + 1 желудочек), 2 круга, холоднокровные, кожа голая и влажная (дышат через неё). Личинки (головастики) дышат жабрами — взрослые лёгкими и кожей.",
+    trap:"Ловушка ОГЭ: у земноводных 3-камерное сердце — как у рептилий, но кожа ДРУГАЯ. У земноводных — влажная голая, у рептилий — сухая чешуйчатая.",
+    hint:"Земноводные — средняя ступень: больше чем рыбы, меньше чем рептилии. Сердце трёхкамерное, кровь — смешанная в желудочке."
+  },
+  {
+    src:"ves", topic:"Пресмыкающиеся / Василиск",
+    text:"<span class='hero-name n-ves'>Весемир</span> открывает страницу на «Василиск». По каким признакам пресмыкающиеся отличаются от птиц?",
+    opts:["Холоднокровные, сухая кожа с чешуёй или щитками","Постоянная температура тела, перьевой покров","Четырёхкамерное сердце, 2 круга кровообращения","Кормят детёнышей молоком"],
+    ans:0,
+    fb:"✦ Верно! Пресмыкающиеся: холоднокровные, сухая кожа с чешуёй/щитками, яйца с кожистой оболочкой на суше, 3-камерное сердце (+ неполная перегородка). Птицы — теплокровные, с перьями.",
+    trap:"Ловушка ОГЭ: у птиц И пресмыкающихся 4-камерное? Нет! У пресмыкающихся — 3-камерное. Только у крокодилов 4-камерное (но это ОГЭ — можно не углубляться).",
+    hint:"Что теплее — пресмыкающееся или птица? Чем покрыто тело у каждого?"
+  },
+  {
+    src:"lut", topic:"Птицы / Гарпия",
+    text:"<span class='hero-name n-lut'>Лютик</span> восхищается летящей Гарпией: «Она как птица!» Что есть у птиц, чего нет у пресмыкающихся?",
+    opts:["Постоянная температура тела (теплокровность) и 4-камерное сердце","Трёхкамерное сердце","Сухая чешуйчатая кожа","Размножение через яйца"],
+    ans:0,
+    fb:"✦ Верно! Птицы и млекопитающие — теплокровные (гомойотермные): температура тела постоянная вне зависимости от среды. У птиц 4-камерное сердце — чистое разделение артериальной и венозной крови.",
+    trap:"Ловушка ОГЭ: яйца откладывают и рептилии, и птицы — это не различительный признак. Главное — теплокровность и 4-камерное сердце у птиц.",
+    hint:"Птицы активны и зимой, и летом. Значит — что? И сколько камер в их сердце?"
+  },
+  {
+    src:"cir", topic:"Млекопитающие / Эхидна",
+    text:"<span class='hero-name n-cir'>Цирилла</span> встречает Эхидну — монстра, кормящего детёнышей молоком. Что является главными признаками класса Млекопитающих?",
+    opts:["Кормление детёнышей молоком и наличие волосяного покрова","Откладывание яиц и чешуйчатая кожа","Наличие жабр в личиночном возрасте","Холоднокровность и 3-камерное сердце"],
+    ans:0,
+    fb:"✦ Верно! Два главных признака млекопитающих: 1) молочные железы (вскармливание молоком) и 2) волосяной покров. Плюс — теплокровность, 4-камерное сердце, живорождение у большинства.",
+    trap:"Ловушка ОГЭ: утконос и ехидна — исключения: млекопитающие, откладывающие яйца. Но молоко выделяют. Яйцо ≠ не млекопитающее.",
+    hint:"Как кормит детёнышей млекопитающее? И чем покрыто его тело?"
+  },
+  {
+    src:"ves", topic:"Теплокровность",
+    text:"<span class='hero-name n-ves'>Весемир</span> объясняет: Виверна холоднеет на морозе и становится медленной. Гепард на морозе — нет. Как называются животные с ПОСТОЯННОЙ температурой тела?",
+    opts:["Гомойотермные (теплокровные)","Пойкилотермные (холоднокровные)","Хладнокровные эукариоты","Гетеротрофные"],
+    ans:0,
+    fb:"✦ Верно! Гомойотермные (теплокровные) — птицы и млекопитающие. Температура тела постоянная. Пойкилотермные (холоднокровные) — рыбы, земноводные, рептилии. Их активность зависит от температуры среды.",
+    trap:"Ловушка ОГЭ: термины «гомойотермные» и «пойкилотермные» встречаются в ОГЭ. Гомойо = одинаковый (температура). Пойкило = изменчивый.",
+    hint:"«Гомо» — одинаковый. «Пойкило» — разный. Постоянная температура — какой термин?"
+  },
+
+  // ── СИСТЕМАТИКА (задание №13 тип) ──
+  {
+    src:"mon", topic:"Определение класса по признакам",
+    text:"<span class='hero-name n-ves'>Весемир</span> описывает Вилохвоста: тело покрыто чешуёй, конечностей нет, откладывает яйца с мягкой оболочкой на суше, температура тела меняется вместе с погодой. К какому классу это существо?",
+    opts:["Пресмыкающиеся","Земноводные","Рыбы","Млекопитающие"],
+    ans:0,
+    fb:"✦ Верно! Пресмыкающиеся: чешуя (сухая кожа), яйца на суше с кожистой оболочкой, холоднокровные. Именно так описываются змеи и ящерицы. Отсутствие конечностей — признак змей внутри класса.",
+    trap:"Ловушка ОГЭ: у земноводных кожа влажная голая, яйца без оболочки в воде. У пресмыкающихся — сухая чешуйчатая, яйца на суше. Это ключевое различие.",
+    hint:"Чешуя + яйца на суше + холоднокровное. Это земноводное или пресмыкающееся?"
+  },
+  {
+    src:"mon", topic:"Определение класса по признакам",
+    text:"<span class='hero-name n-ger'>Геральт</span> описывает Клекотуна: тело покрыто перьями, передние конечности — крылья, 4-камерное сердце, детёнышей выводит из яиц. К какому классу он относится?",
+    opts:["Птицы","Рукокрылые (летучие мыши)","Пресмыкающиеся","Насекомые"],
+    ans:0,
+    fb:"✦ Верно! Птицы: перья, крылья из передних конечностей, 4-камерное сердце, теплокровные, яйца с твёрдой известковой скорлупой. Рукокрылые — это летучие мыши (млекопитающие), они не несут яиц.",
+    trap:"Ловушка ОГЭ: летучие мыши — не птицы! Это млекопитающие (рукокрылые): живородящие, кормят молоком, покрыты шерстью.",
+    hint:"Перья, крылья, яйца — три признака определённого класса. Какого?"
+  },
+  {
+    src:"mon", topic:"Определение класса по признакам",
+    text:"<span class='hero-name n-kei'>Кейра</span> описывает Трампона-рыжую бестию: шерсть, живорождение, кормит детёнышей молоком, 4-камерное сердце, теплокровный. К какому классу она относится?",
+    opts:["Млекопитающие","Птицы","Пресмыкающиеся","Земноводные"],
+    ans:0,
+    fb:"✦ Верно! Трампон — млекопитающее по всем признакам: шерсть, молоко, 4-камерное сердце, теплокровность, живорождение. Интересно, что Геральт всё равно решил её изучить.",
+    trap:"",
+    hint:"Шерсть + молоко = что за класс?"
+  },
+
+  // ── ЭВОЛЮЦИЯ ──
+  {
+    src:"cir", topic:"Движущие силы эволюции",
+    text:"<span class='hero-name n-cir'>Цирилла</span> спрашивает Весемира: «Почему монстры такие разные — одни летают, другие плавают?» Какие три главные движущие силы эволюции по Дарвину?",
+    opts:["Наследственность, изменчивость, естественный отбор","Мутации, радиация, температура среды","Питание, рост, размножение","Хищничество, болезни, конкуренция"],
+    ans:0,
+    fb:"✦ Верно! Три движущие силы эволюции по Дарвину: наследственность (передача признаков), изменчивость (появление отличий), естественный отбор (выживание наиболее приспособленных). Все три работают вместе.",
+    trap:"Ловушка ОГЭ: мутации — это один из видов изменчивости, а не отдельная движущая сила. Хищничество — это борьба за существование, которая является условием отбора.",
+    hint:"Дарвин назвал три главных механизма. Один — передача признаков, один — изменение признаков, один — «кто выживает». Как они называются?"
+  },
+  {
+    src:"ger", topic:"Естественный отбор",
+    text:"<span class='hero-name n-ger'>Геральт</span> замечает: выживают самые приспособленные монстры — быстрые, незаметные, умные. Остальные гибнут. Как Дарвин назвал этот процесс?",
+    opts:["Естественный отбор","Искусственный отбор","Борьба за существование","Адаптация"],
+    ans:0,
+    fb:"✦ Верно! Естественный отбор — выживание особей с полезными для данных условий признаками и гибель менее приспособленных. Движущий отбор меняет признак, стабилизирующий — сохраняет.",
+    trap:"Ловушка ОГЭ: искусственный отбор — когда ЧЕЛОВЕК выбирает нужные признаки (собаки, культурные растения). Естественный — сама природа. Геральт — не природа, он ведьмак.",
+    hint:"«Естественный» — значит, проводит сама природа, без человека. Как называется этот процесс?"
+  },
+  {
+    src:"lut", topic:"Борьба за существование",
+    text:"<span class='hero-name n-lut'>Лютик</span> пишет: «Два волка грызутся за ту же лань». Как называется конкуренция между особями ОДНОГО вида за одни и те же ресурсы?",
+    opts:["Внутривидовая борьба за существование","Межвидовая борьба","Борьба с условиями среды","Хищничество"],
+    ans:0,
+    fb:"✦ Верно! Внутривидовая борьба — самая острая: особи одного вида нуждаются в одних ресурсах. Межвидовая — между разными видами. Борьба с условиями среды — против холода, засухи и т.д.",
+    trap:"Ловушка ОГЭ: борьба за существование — не только конкуренция. Она включает три формы: внутривидовую, межвидовую и с условиями среды.",
+    hint:"«Внутри» — внутри одного вида. «Межвидовая» — между разными видами. Два волка — это какая борьба?"
+  },
+  {
+    src:"kei", topic:"Доказательства эволюции",
+    text:"<span class='hero-name n-kei'>Кейра</span> показывает Цирилле окаменелость в скале — древнее существо, жившее миллионы лет назад. Какой вид доказательств эволюции она демонстрирует?",
+    opts:["Палеонтологические (ископаемые остатки)","Сравнительно-анатомические","Эмбриологические","Биогеографические"],
+    ans:0,
+    fb:"✦ Верно! Палеонтологические доказательства — ископаемые остатки (окаменелости, отпечатки). Они показывают, как менялись организмы со временем. Переходные формы (археоптерикс) особенно ценны.",
+    trap:"Ловушка ОГЭ: три главных доказательства для ОГЭ — палеонтологические (ископаемые), сравнительно-анатомические (гомологичные органы, рудименты), эмбриологические (сходство зародышей).",
+    hint:"Окаменелость в скале — это какой тип доказательств эволюции? Древнее → ископаемое → как называется?"
+  },
+  {
+    src:"reg", topic:"Рудименты",
+    text:"<span class='hero-name n-reg'>Регис</span> осматривает пациента: у него в области таза — крошечные кости, никакой функции не несущие. У китов тоже есть. Как называются такие органы?",
+    opts:["Рудименты — органы, утратившие основную функцию","Атавизмы — признаки далёких предков","Гомологичные органы","Аналогичные органы"],
+    ans:0,
+    fb:"✦ Верно! Рудименты — органы, сохранившиеся в ходе эволюции, но утратившие главную функцию. Примеры: тазовые кости у китов и змей, аппендикс у человека, третье веко.",
+    trap:"Ловушка ОГЭ: рудимент ≠ атавизм. Рудимент — есть у всех особей вида, просто недоразвит. Атавизм — редкое появление признака далёких предков у отдельных особей.",
+    hint:"Орган есть, но не работает — у всех особей. Это рудимент или атавизм?"
+  },
+  {
+    src:"ger", topic:"Атавизмы",
+    text:"<span class='hero-name n-ger'>Геральт</span> встречает человека с хвостом — очень редкий случай. Как называется появление у отдельного человека признаков, характерных для далёких предков?",
+    opts:["Атавизм","Рудимент","Мутация","Адаптация"],
+    ans:0,
+    fb:"✦ Верно! Атавизм — неожиданное появление у отдельных особей признаков далёких предков, отсутствующих у большинства. Хвост у человека, много сосков у людей, густой волосяной покров.",
+    trap:"Ловушка ОГЭ: атавизм — редкий, у единиц. Рудимент — есть у всех (аппендикс у всех людей). Хвост — редкость, значит атавизм.",
+    hint:"Редкий, у отдельных особей, признак далёких предков. Рудимент или атавизм?"
+  },
+
+  {
+    src:"ves", topic:"Гомологичные органы",
+    text:"<span class='hero-name n-ves'>Весемир</span> раскладывает рисунки: крыло летучей мыши, рука человека, ласт дельфина, лапа кошки. Строение костей — одинаковое, хоть функции разные. Как называются такие органы и что они доказывают?",
+    opts:["Гомологичные органы — доказывают общее происхождение","Аналогичные органы — доказывают одинаковые условия жизни","Рудименты — доказывают деградацию вида","Атавизмы — доказывают возврат к предкам"],
+    ans:0,
+    fb:"✦ Верно! Гомологичные органы — единый план строения, разное назначение. Доказывают родство и общего предка. Это сравнительно-анатомическое доказательство эволюции. Аналогичные органы (крыло птицы и крыло бабочки) — одинаковая функция, но разное строение.",
+    trap:"Ловушка ОГЭ: гомологичные ≠ аналогичные. Гомологичные — одно строение, разная функция. Аналогичные — одна функция, разное строение. На ОГЭ путают эти понятия.",
+    hint:"Одинаковый план строения костей, но разные функции. Это гомологичные или аналогичные органы?"
+  },
+
+  // ── АНТРОПОГЕНЕЗ ──
+  {
+    src:"cir", topic:"Этапы антропогенеза",
+    text:"<span class='hero-name n-cir'>Цирилла</span> учится у Весемира: «А откуда взялись люди?» В каком правильном порядке шло развитие предков человека?",
+    opts:["Австралопитек → Homo habilis → Homo erectus → Homo sapiens","Homo sapiens → Homo erectus → Homo habilis → Австралопитек","Homo habilis → Австралопитек → Homo sapiens → Homo erectus","Австралопитек → Homo sapiens → Homo erectus → Homo habilis"],
+    ans:0,
+    fb:"✦ Верно! Этапы антропогенеза: Австралопитек (прямохождение) → Homo habilis (первые орудия) → Homo erectus (огонь, сложные орудия) → Homo sapiens (речь, мышление, искусство).",
+    trap:"Ловушка ОГЭ: «sapiens» = «разумный» — это самый последний и современный. Австралопитек — самый древний из этого ряда. Порядок — от простого к сложному.",
+    hint:"«Sapiens» — разумный, это мы. Кто был перед нами? А перед ними? Восстанови порядок от древнего к современному."
+  },
+  {
+    src:"cir", topic:"Движущие силы антропогенеза",
+    text:"<span class='hero-name n-cir'>Цирилла</span> спрашивает: «Зачем вообще наши предки встали на две ноги? Неудобно же!» Какое главное преимущество дало прямохождение?",
+    opts:["Освободило передние конечности для использования и изготовления орудий труда","Увеличило скорость бега","Уменьшило энергозатраты на передвижение","Улучшило обоняние и слух"],
+    ans:0,
+    fb:"✦ Верно! Прямохождение → свободные руки → орудия труда → развитие мозга → речь → абстрактное мышление. Это цепочка, определившая весь антропогенез. Руки освободились — и всё изменилось.",
+    trap:"",
+    hint:"Что произошло с руками, когда предок встал на две ноги? Что это позволило делать?"
+  },
+  {
+    src:"ves", topic:"Систематика человека",
+    text:"<span class='hero-name n-ves'>Весемир</span> проверяет Цириллу: «К какому классу позвоночных относится человек?»",
+    opts:["Млекопитающие","Приматы","Птицы","Пресмыкающиеся"],
+    ans:0,
+    fb:"✦ Верно! Человек: Царство Животные → Тип Хордовые → Класс Млекопитающие → Отряд Приматы → Вид Homo sapiens. Приматы — это отряд внутри класса Млекопитающие, а не отдельный класс.",
+    trap:"Ловушка ОГЭ: приматы — это ОТРЯД (подразделение класса), а не отдельный класс. Класс — Млекопитающие. Не путай уровни таксономии.",
+    hint:"Человек рожает живых детёнышей, кормит молоком, покрыт волосами. К какому классу это относит его?"
+  }
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+  const s = srcLabels[q.src] || srcLabels.mon;
+  qheader.innerHTML = `<span class="q-source ${s.cls}">${s.text}</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} правильно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (attempts === 1) {
+      qfb.innerHTML = `😞 ${q.hint}<br><span class="fb-hint-ref">📖 Загляни в шпору: <strong>${q.topic}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb.replace(/^✦ Верно! /, '')}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий →' : 'Узнать исход →';
+    }
+  }
+}
+
+document.getElementById('qnext').addEventListener('click', () => {
+  cur++;
+  if (cur < questions.length) renderQ();
+  else showResults();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  const pct = score / questions.length;
+  let emoji, title, story, rankClass, rankText;
+  if (pct >= 0.9) {
+    emoji='⚔️'; title='Весемир одобрил!';
+    story='«Ты мог бы стать ведьмаком,» — буркнул Весемир и захлопнул бестиарий. Геральт кивнул. Лютик уже сочиняет балладу о твоей победе.';
+    rankClass='rank-s'; rankText='Ранг: Ведьмак ✦';
+  } else if (pct >= 0.73) {
+    emoji='🗡️'; title='Геральт кивнул';
+    story='Прошёл испытание. Несколько монстров ускользнули — но большинство опознаны. Регис говорит: «Ещё пару зачётов — и готов к Тропе».';
+    rankClass='rank-a'; rankText='Ранг: Испытуемый ✦';
+  } else if (pct >= 0.53) {
+    emoji='📚'; title='Цирилла сдала зачёт';
+    story='Примерно как Цирилла на первом году обучения. Есть прогресс — нет уверенности. Повтори хордовых и эволюцию.';
+    rankClass='rank-b'; rankText='Ранг: Ученик';
+  } else if (pct >= 0.3) {
+    emoji='🎵'; title='Лютик написал стишок о провале';
+    story='«Он встретил монстра — и не знал, кто тот такой. Съел его монстр. Вот и весь сказ.» — Лютик, баллада в миноре.';
+    rankClass='rank-c'; rankText='Ранг: Бард без знаний';
+  } else {
+    emoji='🐉'; title='Монстры победили...';
+    story='...но возвращайся. Даже Геральт не сразу стал Геральтом. Открой шпору, перечитай бестиарий.';
+    rankClass='rank-d'; rankText='Ранг: Добыча монстров';
+  }
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+  document.getElementById('rstory').textContent = story;
+  const rrank = document.getElementById('rrank');
+  rrank.textContent = rankText;
+  rrank.className = `results-rank ${rankClass}`;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>

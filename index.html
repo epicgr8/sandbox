@@ -47,8 +47,9 @@ body {
   content:'';
   position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(167,139,250,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 90%,  rgba(244,114,182,0.1) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(167,139,250,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 90%,  rgba(244,114,182,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 60% 10%,  rgba(74,222,128,0.10) 0%, transparent 45%);
 }
 
 .wrap { position:relative; z-index:1; max-width:1020px; margin:0 auto; padding:0 20px 80px; }
@@ -122,7 +123,7 @@ body {
 }
 .tl-item:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.08); }
 .tl-item::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
   border-radius:12px 12px 0 0;
 }
 .tl-done   { border-color:rgba(22,163,74,0.3); background:rgba(22,163,74,0.04); }
@@ -181,8 +182,17 @@ body {
   background:var(--bg2); border:1px solid var(--border2);
   border-radius:16px; overflow:hidden;
   transition:transform 0.15s, box-shadow 0.15s;
+  border-left-width:4px; border-left-style:solid;
 }
 .subject-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.1); }
+
+/* Цветная левая полоска по предмету */
+.s-math { border-left-color: var(--math); }
+.s-bio  { border-left-color: var(--bio);  }
+.s-soc  { border-left-color: var(--soc);  }
+.s-rus  { border-left-color: var(--rus);  }
+.s-chem { border-left-color: var(--chem); }
+.s-lit  { border-left-color: var(--lit);  }
 
 .sc-header {
   padding:20px 24px 16px;
@@ -194,12 +204,12 @@ body {
   display:flex; align-items:center; justify-content:center;
   font-size:22px; flex-shrink:0;
 }
-.s-math  .sc-icon { background:rgba(167,139,250,0.15); }
-.s-bio   .sc-icon { background:rgba(74,222,128,0.12); }
-.s-soc   .sc-icon { background:rgba(56,189,248,0.12); }
-.s-rus   .sc-icon { background:rgba(244,114,182,0.12); }
-.s-chem  .sc-icon { background:rgba(194,65,12,0.12); }
-.s-lit   .sc-icon { background:rgba(139,92,246,0.12); }
+.s-math  .sc-icon { background:rgba(167,139,250,0.25); }
+.s-bio   .sc-icon { background:rgba(74,222,128,0.22); }
+.s-soc   .sc-icon { background:rgba(56,189,248,0.22); }
+.s-rus   .sc-icon { background:rgba(244,114,182,0.22); }
+.s-chem  .sc-icon { background:rgba(194,65,12,0.22); }
+.s-lit   .sc-icon { background:rgba(139,92,246,0.22); }
 
 .sc-meta { flex:1; }
 .sc-title { font-family:'Rubik',sans-serif; font-size:15px; font-weight:700; margin-bottom:2px; }
@@ -243,20 +253,36 @@ body {
 .ql-sub  { font-family:'Inter',sans-serif; font-size:11px; color:var(--muted); margin-top:1px; }
 .ql-tag  { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; padding:2px 8px; border-radius:10px; white-space:nowrap; letter-spacing:0.02em; }
 
-.q1 .ql-num { background:rgba(219,39,119,0.12); color:var(--rus); }
-.q1 .ql-tag { background:rgba(219,39,119,0.1);  color:var(--rus); }
-.q2 .ql-num { background:rgba(22,163,74,0.12);  color:var(--bio); }
-.q2 .ql-tag { background:rgba(22,163,74,0.1);   color:var(--bio); }
-.q3 .ql-num { background:rgba(124,58,237,0.12); color:var(--math); }
-.q3 .ql-tag { background:rgba(124,58,237,0.1);  color:var(--math); }
-.q4 .ql-num { background:rgba(234,88,12,0.12);  color:var(--chem); }
-.q4 .ql-tag { background:rgba(234,88,12,0.1);   color:var(--chem); }
-.qb .ql-num { background:rgba(219,39,119,0.1);  color:var(--rus); }
-.qb .ql-tag { background:rgba(219,39,119,0.08); color:var(--rus); }
-.qm .ql-num { background:rgba(124,58,237,0.1);  color:var(--math); }
-.qm .ql-tag { background:rgba(124,58,237,0.08); color:var(--math); }
-.qs .ql-num { background:rgba(22,163,74,0.1);   color:var(--bio); }
-.qs .ql-tag { background:rgba(22,163,74,0.08);  color:var(--bio); }
+.q1 .ql-num { background:rgba(219,39,119,0.15); color:var(--rus); }
+.q1 .ql-tag { background:rgba(219,39,119,0.12); color:var(--rus); }
+.q2 .ql-num { background:rgba(22,163,74,0.15);  color:var(--bio); }
+.q2 .ql-tag { background:rgba(22,163,74,0.12);  color:var(--bio); }
+.q3 .ql-num { background:rgba(124,58,237,0.15); color:var(--math); }
+.q3 .ql-tag { background:rgba(124,58,237,0.12); color:var(--math); }
+.q4 .ql-num { background:rgba(234,88,12,0.15);  color:var(--chem); }
+.q4 .ql-tag { background:rgba(234,88,12,0.12);  color:var(--chem); }
+.qb .ql-num { background:rgba(219,39,119,0.13); color:var(--rus); }
+.qb .ql-tag { background:rgba(219,39,119,0.10); color:var(--rus); }
+.qm .ql-num { background:rgba(124,58,237,0.13); color:var(--math); }
+.qm .ql-tag { background:rgba(124,58,237,0.10); color:var(--math); }
+.qs .ql-num { background:rgba(22,163,74,0.13);  color:var(--bio); }
+.qs .ql-tag { background:rgba(22,163,74,0.10);  color:var(--bio); }
+
+/* Цветной тинт у строк квестов */
+.q1.quest-link { background:rgba(219,39,119,0.05); border-color:rgba(219,39,119,0.18); }
+.q1.quest-link:hover { background:rgba(219,39,119,0.10); border-color:rgba(219,39,119,0.3); }
+.q2.quest-link { background:rgba(22,163,74,0.05);  border-color:rgba(22,163,74,0.18); }
+.q2.quest-link:hover { background:rgba(22,163,74,0.10);  border-color:rgba(22,163,74,0.3); }
+.q3.quest-link { background:rgba(124,58,237,0.05); border-color:rgba(124,58,237,0.18); }
+.q3.quest-link:hover { background:rgba(124,58,237,0.10); border-color:rgba(124,58,237,0.3); }
+.q4.quest-link { background:rgba(234,88,12,0.05);  border-color:rgba(234,88,12,0.18); }
+.q4.quest-link:hover { background:rgba(234,88,12,0.10);  border-color:rgba(234,88,12,0.3); }
+.qb.quest-link { background:rgba(219,39,119,0.04); border-color:rgba(219,39,119,0.16); }
+.qb.quest-link:hover { background:rgba(219,39,119,0.09); border-color:rgba(219,39,119,0.28); }
+.qm.quest-link { background:rgba(124,58,237,0.04); border-color:rgba(124,58,237,0.16); }
+.qm.quest-link:hover { background:rgba(124,58,237,0.09); border-color:rgba(124,58,237,0.28); }
+.qs.quest-link { background:rgba(22,163,74,0.04);  border-color:rgba(22,163,74,0.16); }
+.qs.quest-link:hover { background:rgba(22,163,74,0.09);  border-color:rgba(22,163,74,0.28); }
 
 /* ЗАГЛУШКИ для других предметов */
 .sc-coming {
@@ -264,13 +290,17 @@ body {
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:10px; text-align:center; min-height:120px;
 }
-.sc-coming-icon { font-size:32px; opacity:0.35; }
+.sc-coming-icon { font-size:36px; opacity:0.6; }
 .sc-coming-text { font-family:'Inter',sans-serif; font-size:14px; color:var(--muted); }
 .sc-coming-cta {
-  font-family:'Inter',sans-serif; font-size:12px; font-weight:500; color:var(--muted);
-  border:1px dashed var(--border2); border-radius:8px; padding:6px 16px;
-  margin-top:4px; background:var(--bg3);
+  font-family:'Inter',sans-serif; font-size:12px; font-weight:500;
+  border:1px dashed; border-radius:8px; padding:6px 18px;
+  margin-top:4px; background:transparent;
 }
+.s-soc  .sc-coming-cta { color:var(--soc);  border-color:rgba(2,132,199,0.35); }
+.s-rus  .sc-coming-cta { color:var(--rus);  border-color:rgba(219,39,119,0.35); }
+.s-chem .sc-coming-cta { color:var(--chem); border-color:rgba(194,65,12,0.35); }
+.s-lit  .sc-coming-cta { color:var(--lit);  border-color:rgba(139,92,246,0.35); }
 
 /* ── FOOTER ── */
 .footer {
@@ -293,6 +323,13 @@ body {
 .hero  { animation:fadeUp 0.5s ease both; }
 .schedule-section { animation:fadeUp 0.5s 0.1s ease both; }
 .subjects-section  { animation:fadeUp 0.5s 0.2s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -465,9 +502,9 @@ body {
           <div class="sc-icon" aria-hidden="true">🌿</div>
           <div class="sc-meta">
             <div class="sc-title">Биология</div>
-            <div class="sc-date">5 июня · 2 квеста готовы, 3 в разработке</div>
+            <div class="sc-date">5 июня · 3 квеста готовы, 2 в разработке</div>
           </div>
-          <span class="sc-badge badge-done">2 квеста готовы</span>
+          <span class="sc-badge badge-done">3 квеста готовы</span>
         </div>
         <div class="sc-quests">
 
@@ -489,14 +526,14 @@ body {
             <span class="ql-tag">Квест</span>
           </a>
 
-          <div class="quest-link" style="opacity:0.45;cursor:default">
-            <span class="ql-num" style="background:rgba(124,58,237,0.12);color:#7c3aed">3</span>
+          <a class="quest-link q2" href="bio_quest3_evolution.html">
+            <span class="ql-num" style="background:#1B5E20;color:#fff">3</span>
             <span class="ql-info">
-              <span class="ql-name">Зоология и эволюция</span>
-              <span class="ql-sub">Систематика животных, Дарвин</span>
+              <span class="ql-name">Друзья и монстры</span>
+              <span class="ql-sub">Зоология, эволюция, антропогенез · Ведьмак</span>
             </span>
-            <span class="ql-tag">Скоро</span>
-          </div>
+            <span class="ql-tag">Квест</span>
+          </a>
 
           <div class="quest-link" style="opacity:0.45;cursor:default">
             <span class="ql-num" style="background:rgba(194,65,12,0.12);color:#c2410c">4</span>
