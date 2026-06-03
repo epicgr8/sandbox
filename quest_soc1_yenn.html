@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Конституция и право — Йеннифэр</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #eeeaf5;
+    --bg2:     #faf8fd;
+    --bg3:     #e4dff0;
+    --bg4:     #d8d0e8;
+    --c-yenn:  #7c3aed;
+    --c-wolf:  #dc2626;
+    --c-const: #1e40af;
+    --c-family:#15803d;
+    --c-crim:  #b45309;
+    --c-civil: #0891b2;
+    --text:    #1a1520;
+    --muted:   #635a73;
+    --border:  rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 0%,  rgba(124,58,237,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(220,38,38,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(30,64,175,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:200px; height:2px; border-radius:2px; background:linear-gradient(90deg,transparent,var(--c-yenn),var(--c-wolf),var(--c-const),transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color:var(--c-yenn); }
+  .ht2 { color:var(--c-wolf); }
+  .ht3 { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1520; color:#faf8fd; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS — шпаргалка */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-yenn::after   { background:var(--c-yenn); }
+  .rule-card.c-wolf::after   { background:var(--c-wolf); }
+  .rule-card.c-const::after  { background:var(--c-const); }
+  .rule-card.c-family::after { background:var(--c-family); }
+  .rule-card.c-crim::after   { background:var(--c-crim); }
+  .rule-card.c-civil::after  { background:var(--c-civil); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .rule-body .law { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:2px 7px; border-radius:4px; display:inline-block; margin:1px 0; }
+  .c-yenn  .rule-body .law { background:rgba(124,58,237,0.1);  color:var(--c-yenn); }
+  .c-wolf  .rule-body .law { background:rgba(220,38,38,0.1);   color:var(--c-wolf); }
+  .c-const .rule-body .law { background:rgba(30,64,175,0.1);   color:var(--c-const); }
+  .c-family .rule-body .law { background:rgba(21,128,61,0.1);  color:var(--c-family); }
+  .c-crim  .rule-body .law { background:rgba(180,83,9,0.1);    color:var(--c-crim); }
+  .c-civil .rule-body .law { background:rgba(8,145,178,0.1);   color:var(--c-civil); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:6px 12px; border-radius:7px; display:inline-block; margin:6px 0 10px; letter-spacing:0.03em; line-height:1.5; }
+  .c-wolf  .rule-formula { background:rgba(220,38,38,0.10);  color:var(--c-wolf); }
+  .c-const .rule-formula { background:rgba(30,64,175,0.10);  color:var(--c-const); }
+  .c-yenn  .rule-formula { background:rgba(124,58,237,0.10); color:var(--c-yenn); }
+  .c-crim  .rule-formula { background:rgba(180,83,9,0.10);   color:var(--c-crim); }
+  .c-family .rule-formula { background:rgba(21,128,61,0.10); color:var(--c-family); }
+  .c-civil .rule-formula { background:rgba(8,145,178,0.10);  color:var(--c-civil); }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color:var(--c-wolf); }
+
+  /* TABLE */
+  .tbl-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; overflow:hidden; margin-bottom:22px; }
+  .quick-table { width:100%; border-collapse:collapse; font-size:14px; }
+  .quick-table th { font-size:11px; font-weight:700; letter-spacing:0.14em; color:var(--muted); padding:10px 16px; text-align:left; border-bottom:1px solid var(--border2); background:var(--bg3); text-transform:uppercase; }
+  .quick-table td { padding:10px 16px; border-bottom:1px solid var(--border); vertical-align:top; }
+  .quick-table tr:last-child td { border-bottom:none; }
+  .quick-table tr:hover td { background:var(--bg3); }
+  .quick-table td:first-child { font-weight:700; white-space:nowrap; }
+  .quick-table td:nth-child(2) { color:var(--muted); font-size:13px; }
+  .mono { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:2px 7px; border-radius:4px; display:inline-block; }
+  .m-y  { background:rgba(124,58,237,0.1); color:var(--c-yenn); }
+  .m-w  { background:rgba(220,38,38,0.1);  color:var(--c-wolf); }
+  .m-c  { background:rgba(30,64,175,0.1);  color:var(--c-const); }
+  .m-f  { background:rgba(21,128,61,0.1);  color:var(--c-family); }
+  .m-cr { background:rgba(180,83,9,0.1);   color:var(--c-crim); }
+  .m-ci { background:rgba(8,145,178,0.1);  color:var(--c-civil); }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* YENN BANNER */
+  .yenn-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(124,58,237,0.35); display:grid; grid-template-columns:180px 1fr; }
+  .yenn-img { width:180px; height:200px; object-fit:cover; object-position:center top; display:block; }
+  .yenn-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .yenn-title { font-size:17px; font-weight:700; color:var(--c-yenn); }
+  .yenn-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .yenn-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(21,128,61,0.12);  color:#14532d; }
+  .stake-a { background:rgba(30,64,175,0.12);  color:#1e3a8a; }
+  .stake-b { background:rgba(180,83,9,0.12);   color:#7c2d12; }
+  .stake-c { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .stake-d { background:rgba(124,58,237,0.12); color:#4c1d95; }
+  @media(max-width:560px){ .yenn-banner{grid-template-columns:1fr;} .yenn-img{width:100%;height:160px;object-position:top;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,30px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-yenn),var(--c-wolf),var(--c-const)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-family); min-width:80px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-wolf   { background:var(--c-wolf); }
+  .q-witcher { background:var(--c-yenn); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:16px; color:var(--text); line-height:1.75; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; background:linear-gradient(120deg,var(--c-yenn),var(--c-wolf)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .question-text .hero-geralt { font-weight:700; background:linear-gradient(120deg,var(--c-family),#16a34a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .question-text .hero-wolf { font-weight:700; background:linear-gradient(120deg,var(--c-wolf),#b91c1c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .law-ref { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2); color:var(--c-yenn); padding:4px 10px; border-radius:6px; display:inline-block; margin:2px 0; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-yenn); background:rgba(124,58,237,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#15803d; background:rgba(21,128,61,0.12); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#15803d; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#7f1d1d; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:14px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.22); color:#7f1d1d; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(124,58,237,0.10); border:1px solid rgba(124,58,237,0.30); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:13px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-img { width:120px; height:120px; object-fit:cover; object-position:top; border-radius:50%; margin:0 auto 16px; display:block; border:3px solid var(--c-yenn); }
+  .results-title { font-size:clamp(20px,4vw,34px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(58px,10vw,86px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-yenn); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.65; color:var(--text); max-width:520px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(21,128,61,0.12);  color:#14532d; }
+  .rank-a { background:rgba(30,64,175,0.12);  color:#1e3a8a; }
+  .rank-b { background:rgba(180,83,9,0.12);   color:#7c2d12; }
+  .rank-c { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .rank-d { background:rgba(124,58,237,0.12); color:#4c1d95; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-yenn); background:rgba(124,58,237,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(124,58,237,0.12); color:var(--c-yenn); }
+
+  /* POWERS GRID */
+  .powers-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:12px; margin-bottom:14px; }
+  .power-card { background:var(--bg2); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; display:grid; grid-template-columns:110px 1fr; transition:transform 0.18s,box-shadow 0.18s; }
+  .power-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.09); }
+  .power-img-wrap { position:relative; overflow:hidden; background:var(--bg3); }
+  .power-img { width:110px; height:100%; min-height:140px; object-fit:cover; object-position:center top; display:block; }
+  .power-body { padding:13px 15px; display:flex; flex-direction:column; gap:6px; border-left:3px solid var(--pc,var(--c-const)); }
+  .power-title { font-size:13px; font-weight:700; color:var(--pc,var(--c-const)); line-height:1.3; }
+  .power-art { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; background:rgba(0,0,0,0.06); color:var(--muted); padding:2px 7px; border-radius:4px; display:inline-block; }
+  .power-list { list-style:none; display:flex; flex-direction:column; gap:3px; }
+  .power-list li { font-size:12px; color:var(--muted); line-height:1.45; padding-left:12px; position:relative; }
+  .power-list li::before { content:'▸'; position:absolute; left:0; color:var(--pc,var(--c-const)); font-size:10px; top:2px; }
+  .power-list li strong { color:var(--text); }
+  .power-key { margin-top:4px; font-size:11px; background:color-mix(in srgb, var(--pc,var(--c-const)) 12%, transparent); color:var(--pc,var(--c-const)); border-radius:5px; padding:3px 8px; display:inline-block; }
+  @media(max-width:500px){ .power-card{grid-template-columns:80px 1fr;} .power-img{width:80px;} }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Обществознание · 9 класс · Разделы 7–8</div>
+    <h1 class="hero-title">
+      <span class="ht1">Квест 1:</span><br>
+      <span class="ht2">Закон</span> <span class="ht3">или смерть</span>
+    </h1>
+    <p class="hero-sub">Конституция РФ · Право · Два мира — Wolfenstein &amp; Ведьмак</p>
+  </div>
+
+  <!-- ═══ ШПАРГАЛКА ═══ -->
+  <div class="sec-head"><span class="sec-badge rule">Шпаргалка — учи перед квестом</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-wolf">
+      <div class="rule-icon">🏛️</div>
+      <div class="rule-title">Характеристики РФ по Конституции</div>
+      <div class="rule-formula">Д · Ф · П · Р · С · С</div>
+      <div class="rule-body">
+        <strong>Д</strong>емократическое <span class="law">ст. 1</span> — власть народа<br>
+        <strong>Ф</strong>едеративное <span class="law">ст. 1</span> — 89 субъектов<br>
+        <strong>П</strong>равовое <span class="law">ст. 1</span> — верховенство закона<br>
+        <strong>Р</strong>еспубликанская форма правления <span class="law">ст. 1</span><br>
+        <strong>С</strong>оциальное <span class="law">ст. 7</span> — государство помогает людям<br>
+        <strong>С</strong>ветское <span class="law">ст. 14</span> — церковь отделена<br>
+        + <strong>разделение властей</strong> <span class="law">ст. 10</span>
+        <span class="warn">⚡ Запомни мнемонику: «Две Фишки Правого Режима Страшно Сложны»</span>
+      </div>
+      <div class="rule-assoc">🎮 Wolfenstein: Энгель уничтожила все 6 букв разом. Биджей восстанавливает по одной — учи вместе с ним.</div>
+    </div>
+
+    <div class="rule-card c-const">
+      <div class="rule-icon">⚖️</div>
+      <div class="rule-title">Цепочка принятия закона</div>
+      <div class="rule-formula">ПРИНЯЛ → ОДОБРИЛ → ПОДПИСАЛ</div>
+      <div class="rule-body">
+        <strong>Госдума</strong> <span class="law">ст. 105</span> — <em>принимает</em> законы<br>
+        <strong>Совет Федерации</strong> <span class="law">ст. 102</span> — <em>одобряет</em> + назначает судей КС и ВС<br>
+        <strong>Президент</strong> <span class="law">ст. 83–89</span> — <em>подписывает</em> или накладывает вето; назначает Председателя Правительства<br>
+        <strong>Правительство</strong> <span class="law">ст. 114</span> — <em>исполняет</em> бюджет, управляет собственностью
+        <span class="warn">⚡ «Принял» ≠ «подписал». Путаешь — теряешь балл на задании №16</span>
+      </div>
+      <div class="rule-assoc">🎮 Wolfenstein: В Рейхе все три шага делает Энгель одна. В РФ — три разных органа. В этом и смысл разделения властей.</div>
+    </div>
+
+    <div class="rule-card c-yenn">
+      <div class="rule-icon">🗺️</div>
+      <div class="rule-title">Субъекты РФ и предметы ведения</div>
+      <div class="rule-formula">Р · К · О ·<br>Г · АО ·<br>АОкр = 6</div>
+      <div class="rule-body">
+        <strong>Р</strong>еспублика, <strong>К</strong>рай, <strong>О</strong>бласть, <strong>Г</strong>ород фед. значения, <strong>А</strong>вт. <strong>о</strong>бласть, <strong>А</strong>вт. <strong>о</strong>к<strong>р</strong>уг<br><br>
+        <span class="law">ст. 71 — только Федерация:</span> оборона, внешняя политика, атомная энергия, деньги<br>
+        <span class="law">ст. 72 — совместно:</span> образование, здравоохранение, охрана природы
+        <span class="warn">⚡ Видов — 6, субъектов — 89. Спрашивают о видах!</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Нильфгаард — жёсткая вертикаль Эмгыра, всё из центра. РФ — федерация, часть решений на местах. Дийкстра бы оценил.</div>
+    </div>
+
+    <div class="rule-card c-crim">
+      <div class="rule-icon">👤</div>
+      <div class="rule-title">Несовершеннолетние: 4 рубежа</div>
+      <div class="rule-formula">6 ── 14 ── 16 ── 18</div>
+      <div class="rule-body">
+        <span class="law">6 лет</span> → мелкие бытовые сделки (купить хлеб)<br>
+        <span class="law">14 лет</span> → частичная дееспособность; работа <em>с согласия родителей</em>; уголовная ответственность за тяжкие (ст. 20 УК)<br>
+        <span class="law">16 лет</span> → трудовой договор <em>самостоятельно</em>; уголовная ответственность за <em>все</em> преступления<br>
+        <span class="law">18 лет</span> → полная дееспособность; брак
+        <span class="warn">⚡ 14 лет: работа только С СОГЛАСИЯ. 16 лет: уже сам.</span>
+      </div>
+      <div class="rule-assoc">🎮 Wolfenstein: В мире Энгель возраст не имеет значения. В РФ — имеет. Эти 4 цифры стоят половины задания №18.</div>
+    </div>
+
+    <div class="rule-card c-family">
+      <div class="rule-icon">🐺</div>
+      <div class="rule-title">Семейное право — Геральт, Йен, Цири</div>
+      <div class="rule-formula">Брак ≥ 18 (↓16 с разрешения МСУ)</div>
+      <div class="rule-body">
+        <strong>Запреты на брак:</strong> родство, уже в браке, недееспособность<br><br>
+        <strong>Опека</strong> → до 14 лет (опекун действует <em>вместо</em> ребёнка)<br>
+        <strong>Попечительство</strong> → 14–18 лет (попечитель только <em>даёт согласие</em>)<br><br>
+        <strong>Обязанности родителей:</strong> воспитание, образование, защита прав<br>
+        <strong>Права ребёнка:</strong> жить в семье, выражать мнение, иметь имя
+        <span class="warn">⚡ Опека ≠ попечительство. Рубеж — 14 лет.</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Геральт взял Цири по «закону неожиданности» — почти усыновление. По СК РФ до 14 лет это называлось бы опекой. После — попечительством.</div>
+    </div>
+
+    <div class="rule-card c-civil">
+      <div class="rule-icon">⚔️</div>
+      <div class="rule-title">4 вида ответственности</div>
+      <div class="rule-formula">Д · А · Г · У = ДАГУ ↑</div>
+      <div class="rule-body">
+        <span class="law"><strong>Д</strong>исциплинарная</span> — замечание, выговор, увольнение (ТК РФ)<br>
+        <span class="law"><strong>А</strong>дминистративная</span> — штраф, арест до 15 суток (КоАП РФ)<br>
+        <span class="law"><strong>Г</strong>ражданская</span> — возмещение ущерба деньгами (ГК РФ)<br>
+        <span class="law"><strong>У</strong>головная</span> — лишение свободы, самая суровая (УК РФ)
+        <span class="warn">⚡ Опоздание на работу — ДИСЦИПЛИНАРНАЯ, не административная!</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Филиппа опоздала → дисциплинарная. Радовид нарушил ПДД → административная. Дийкстра ограбил казну → уголовная. Стрела идёт вверх по тяжести.</div>
+    </div>
+
+  </div>
+
+  <!-- ТАБЛИЦА ОРГАНОВ -->
+  <div class="sec-head" style="margin-top:36px"><span class="sec-badge rule">Таблица полномочий — задание №16</span><div class="sec-line"></div></div>
+  <div class="powers-grid">
+
+    <div class="power-card" style="--pc:#1e40af">
+      <div class="power-img-wrap">
+        <img class="power-img" src="https://mf.b37mrtl.ru/rbthmedia/images/2020.07/original/5f1e888885600a2608563f65.jpg" alt="Президент" onerror="this.style.background='var(--bg3)'">
+      </div>
+      <div class="power-body">
+        <div class="power-title">Президент РФ</div>
+        <div class="power-art">ст. 83–89</div>
+        <ul class="power-list">
+          <li><strong>Назначает</strong> Председателя Правительства</li>
+          <li><strong>Подписывает / отклоняет</strong> принятые законы</li>
+          <li>Верховный главнокомандующий</li>
+          <li>Помилование</li>
+        </ul>
+        <div class="power-key">Ключевое слово: <strong>НАЗНАЧАЕТ</strong></div>
+      </div>
+    </div>
+
+    <div class="power-card" style="--pc:#7c3aed">
+      <div class="power-img-wrap">
+        <img class="power-img" src="https://static.wikia.nocookie.net/deponia-wiki-rus/images/9/98/%D0%96%D0%BC%D1%8B%D1%85%D0%B8_%28%D0%92_%D0%98%D0%BD%D1%84%D0%BE%D0%B1%D0%BE%D0%BA%D1%81%29.png/revision/latest?cb=20161012153944&path-prefix=ru" alt="Государственная Дума" onerror="this.style.background='var(--bg3)'">
+      </div>
+      <div class="power-body">
+        <div class="power-title">Государственная Дума</div>
+        <div class="power-art">ст. 103, 105</div>
+        <ul class="power-list">
+          <li><strong>Принимает</strong> федеральные законы</li>
+          <li>Даёт согласие на назначение Председателя Правительства</li>
+          <li>Объявляет амнистию</li>
+        </ul>
+        <div class="power-key">Ключевое слово: <strong>ПРИНИМАЕТ</strong></div>
+      </div>
+    </div>
+
+    <div class="power-card" style="--pc:#0891b2">
+      <div class="power-img-wrap">
+        <img class="power-img" src="https://static.wikia.nocookie.net/clannad/images/b/b5/Student_Council.png/revision/latest?cb=20160829230421&path-prefix=ru" alt="Совет Федерации" onerror="this.style.background='var(--bg3)'">
+      </div>
+      <div class="power-body">
+        <div class="power-title">Совет Федерации</div>
+        <div class="power-art">ст. 102</div>
+        <ul class="power-list">
+          <li><strong>Одобряет</strong> принятые Думой законы</li>
+          <li>Назначает судей КС и ВС (по представлению Президента)</li>
+          <li>Утверждает изменение границ между субъектами</li>
+        </ul>
+        <div class="power-key">Ключевое слово: <strong>ОДОБРЯЕТ</strong></div>
+      </div>
+    </div>
+
+    <div class="power-card" style="--pc:#b45309">
+      <div class="power-img-wrap">
+        <img class="power-img" src="https://images.kinorium.com/movie/shot/1639997/h280_51449561.jpg?21672475692" alt="Правительство РФ" onerror="this.style.background='var(--bg3)'">
+      </div>
+      <div class="power-body">
+        <div class="power-title">Правительство РФ</div>
+        <div class="power-art">ст. 114</div>
+        <ul class="power-list">
+          <li><strong>Разрабатывает</strong> и <strong>исполняет</strong> федеральный бюджет</li>
+          <li>Управляет федеральной собственностью</li>
+          <li>Обеспечивает проведение финансовой, социальной и экономической политики</li>
+        </ul>
+        <div class="power-key">Ключевое слово: <strong>ИСПОЛНЯЕТ</strong></div>
+      </div>
+    </div>
+
+  </div>
+  <div style="background:rgba(30,64,175,0.07);border:1px solid rgba(30,64,175,0.2);border-radius:10px;padding:11px 16px;font-size:13px;color:var(--text);margin-bottom:10px;">
+    ⚡ <strong>Цепочка закона:</strong> Госдума <strong>принимает</strong> → Совет Федерации <strong>одобряет</strong> → Президент <strong>подписывает</strong> (или отклоняет вето)
+  </div>
+
+  <div class="deco-div"><span>20 испытаний Йеннифэр</span></div>
+
+  <!-- YENN BANNER -->
+  <div class="yenn-banner">
+    <img class="yenn-img" src="https://i.pinimg.com/474x/73/73/ca/7373ca761a1b63d18d33571de024413a.jpg" alt="Йеннифэр" onerror="this.style.display='none'">
+    <div class="yenn-text">
+      <div class="yenn-title">⚡ Йеннифэр проводит тебя сквозь два мира</div>
+      <div class="yenn-desc">В мире Wolfenstein нацисты уничтожили право и Конституцию. В мире Ведьмака политики нарушают законы каждый день. Йеннифэр знает оба мира — и требует, чтобы ты тоже знал. 20 вопросов. Два шанса. Без магии.</div>
+      <div class="yenn-stakes">
+        <span class="stake stake-s">18–20 ✦ Йен берёт тебя в ученики</span>
+        <span class="stake stake-a">14–17 ✦ Достаточно для Аретузы</span>
+        <span class="stake stake-b">10–13 ✦ Геральт смотрит с сомнением</span>
+        <span class="stake stake-c">6–9 ✦ Энгель смеётся над тобой</span>
+        <span class="stake stake-d">0–5 ✦ Добро пожаловать в Рейх</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Конституция против Рейха — 20 вопросов</div>
+      <p class="quiz-sub">Wolfenstein — конституционный строй · Ведьмак — право и ответственность</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <img class="results-img" src="https://i.pinimg.com/474x/73/73/ca/7373ca761a1b63d18d33571de024413a.jpg" alt="Йеннифэр" onerror="this.style.display='none'">
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Пройти ещё раз</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Обществознание — все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span>
+        <span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span>
+        <span class="qp-badge">← На главную</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-yenn);color:#fff">С1</span>
+        <span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Разделы 7–8</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#0891b2;color:#fff">С2</span>
+        <span class="qp-info"><span class="qp-name">Экономика Гейла</span><span class="qp-sub">Человек в экономических отношениях · Раздел 4</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#dc2626;color:#fff">С3</span>
+        <span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Разделы 5–6</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#15803d;color:#fff">С4</span>
+        <span class="qp-info"><span class="qp-name">Человек, общество, культура</span><span class="qp-sub">Разделы 1–3 · Лютик и Мадам Пармезан</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const allQuestions = [
+  // ═══ БЛОК 1 — КОНСТИТУЦИЯ (WOLFENSTEIN) ═══
+  {
+    src:"wolf",
+    topic:"Основы конституционного строя",
+    text:"<span class='hero-wolf'>Фрау Энгель</span> уничтожила конституцию и отменила выборы. В Рейхе нет разделения властей — вся власть сосредоточена у фюрера. Что из перечисленного является характеристикой Российской Федерации согласно статье 1 Конституции РФ?",
+    opts:["Теократическое государство","Унитарное государство","Демократическое федеративное правовое государство","Конституционная монархия"],
+    ans:2,
+    fb:"✦ Верно! Статья 1 Конституции РФ: Россия — демократическое федеративное правовое государство с республиканской формой правления. Всё то, что Энгель уничтожила в своём Рейхе.",
+    trap:"Ловушка: «унитарное» — это не про РФ (у нас федерация, 89 субъектов). «Теократическое» — власть духовенства. Россия — светское государство.",
+    hint:"Вспомни статью 1. Нужно три слова: тип власти, тип устройства, тип государства по закону.",
+    ref:"7 характеристик РФ"
+  },
+  {
+    src:"wolf",
+    topic:"Символы государства",
+    text:"<span class='hero-wolf'>Биджей Бласковиц</span> мечтает о мире, где флаг Рейха сорван. Агент Сигрун спрашивает: что является официальными символами государства по Конституции РФ?",
+    opts:["Гимн, герб, флаг","Гимн, печать, флаг","Герб, флаг, Конституция","Флаг, гимн, паспорт"],
+    ans:0,
+    fb:"✦ Верно! Статья 70 Конституции РФ: государственные символы — Государственный флаг, Государственный герб и Государственный гимн. Три и только три.",
+    trap:"Ловушка: печать, паспорт и Конституция — важные документы, но символами государства не являются. Запомни: герб + флаг + гимн.",
+    hint:"Вспомни ст. 70 Конституции. Символов ровно три — и все они «государственные».",
+    ref:"7 характеристик РФ"
+  },
+  {
+    src:"wolf",
+    topic:"Полномочия Президента РФ",
+    text:"<span class='hero-name'>Йеннифэр</span> изучает систему власти в РФ. Что из перечисленного входит в полномочия <strong>Президента</strong> Российской Федерации?",
+    opts:["Принятие федеральных законов","Назначение Председателя Правительства РФ","Одобрение федеральных законов","Назначение Генерального прокурора Государственной Думой"],
+    ans:1,
+    fb:"✦ Верно! Президент назначает Председателя Правительства (ст. 83). Принимает законы Государственная Дума (ст. 105). Одобряет — Совет Федерации. Генпрокурора назначает Совет Федерации по представлению Президента.",
+    trap:"Ловушка ОГЭ №16: «принятие законов» — это Госдума, не Президент. Президент только ПОДПИСЫВАЕТ или ОТКЛОНЯЕТ (вето) уже принятые и одобренные законы.",
+    hint:"Разграничь: принять — Госдума, одобрить — Совет Федерации, подписать/отклонить — Президент, исполнить — Правительство.",
+    ref:"Таблица полномочий"
+  },
+  {
+    src:"wolf",
+    topic:"Полномочия Государственной Думы",
+    text:"В мире <span class='hero-wolf'>Wolfenstein</span> парламент ликвидирован. В РФ Государственная Дума — нижняя палата Федерального Собрания. Что является <strong>исключительным</strong> полномочием Госдумы?",
+    opts:["Одобрение федеральных законов","Принятие федеральных законов","Подписание и обнародование законов","Назначение судей Конституционного суда"],
+    ans:1,
+    fb:"✦ Верно! Государственная Дума принимает федеральные законы (ст. 105). Одобряет — Совет Федерации. Подписывает и обнародует — Президент. Судей КС назначает Совет Федерации.",
+    trap:"Ловушка: «одобрение» и «принятие» — разные действия. Принимает = Госдума, одобряет = Совет Федерации. Эту пару путают чаще всего.",
+    hint:"Из трёх действий с законом — принять, одобрить, подписать — какое принадлежит нижней палате парламента?",
+    ref:"Таблица полномочий"
+  },
+  {
+    src:"wolf",
+    topic:"Три ветви власти",
+    text:"<span class='hero-wolf'>Доктор Смерть</span> установил режим единоличной власти. В правовом государстве — разделение на три ветви. Что является <strong>законодательной</strong> властью в Российской Федерации?",
+    opts:["Президент РФ","Правительство РФ","Федеральное Собрание (Госдума + Совет Федерации)","Конституционный суд РФ"],
+    ans:2,
+    fb:"✦ Верно! Законодательная власть — Федеральное Собрание (ст. 94–95): Государственная Дума + Совет Федерации. Правительство — исполнительная власть. Суды — судебная.",
+    trap:"Ловушка: Президент стоит над всеми ветвями как гарант Конституции, но сам НЕ является ни одной из трёх ветвей в классическом смысле.",
+    hint:"Три ветви: кто создаёт законы (законодательная), кто исполняет (исполнительная), кто судит (судебная).",
+    ref:"Таблица полномочий"
+  },
+  {
+    src:"wolf",
+    topic:"Виды субъектов РФ",
+    text:"<span class='hero-wolf'>Аня Олива</span> спрашивает Биджея: сколько <strong>видов</strong> субъектов входит в состав Российской Федерации согласно Конституции?",
+    opts:["4","5","6","7"],
+    ans:2,
+    fb:"✦ Верно! Согласно ст. 65 Конституции, субъекты РФ бывают 6 видов: республики, края, области, города федерального значения (Москва, Санкт-Петербург, Севастополь), автономная область, автономные округа.",
+    trap:"Ловушка: не путай ВИДЫ субъектов (6) и ЧИСЛО субъектов (89). На ОГЭ спрашивают именно о видах.",
+    hint:"Перечисли: республика, край, область, город фед. значения, авт. область, авт. округ. Считай.",
+    ref:"6 видов субъектов РФ"
+  },
+  {
+    src:"wolf",
+    topic:"Предметы ведения (ст. 71–72)",
+    text:"Разведчик <span class='hero-wolf'>Бласковиц</span> изучает структуру власти в РФ. Что из перечисленного относится к <strong>исключительному</strong> ведению Российской Федерации (статья 71)?",
+    opts:["Образование и здравоохранение","Охрана окружающей среды","Оборона и безопасность страны","Административное законодательство"],
+    ans:2,
+    fb:"✦ Верно! Оборона и безопасность (ст. 71 п. «м») — исключительное ведение федерации. Образование, охрана среды, административное законодательство — совместное ведение субъектов и федерации (ст. 72).",
+    trap:"Ловушка: образование и здравоохранение — СОВМЕСТНОЕ ведение (ст. 72), а не исключительное. Путают очень часто.",
+    hint:"Ст. 71 = только федерация. Ст. 72 = совместно с субъектами. Чем общенациональнее и стратегичнее тема — тем вероятнее, что она исключительно у федерации.",
+    ref:"6 видов субъектов РФ"
+  },
+  {
+    src:"wolf",
+    topic:"Признаки правового государства",
+    text:"<span class='hero-wolf'>Фрау Энгель</span> говорит: «В моём Рейхе закон — это я». Что из перечисленного является признаком <strong>правового государства</strong>?",
+    opts:["Концентрация всей власти в одних руках","Верховенство закона, которому подчиняется и само государство","Полный контроль государства над частной жизнью граждан","Отсутствие оппозиционных партий"],
+    ans:1,
+    fb:"✦ Верно! Правовое государство — это государство, где господствует право, верховенство закона, соблюдаются права человека, действует разделение властей. Ни один человек, включая президента, не выше закона.",
+    trap:"Ловушка: в тоталитарных государствах тоже есть «законы» — но они служат власти, а не защищают граждан. Ключевой признак — что закон главнее государства.",
+    hint:"Правовое государство = закон выше всех. Даже президент подчиняется Конституции.",
+    ref:"7 характеристик РФ"
+  },
+
+  // ═══ БЛОК 2 — СЕМЕЙНОЕ ПРАВО (ВЕДЬМАК) ═══
+  {
+    src:"witcher",
+    topic:"Условия вступления в брак",
+    text:"<span class='hero-geralt'>Геральт</span> и <span class='hero-name'>Йеннифэр</span> наконец решили оформить отношения официально — и наняли юриста. Каков общий брачный возраст по законодательству Российской Федерации?",
+    opts:["16 лет","17 лет","18 лет","21 год"],
+    ans:2,
+    fb:"✦ Верно! Общий брачный возраст в РФ — 18 лет (ст. 13 Семейного кодекса). Исключение: по уважительным причинам (беременность, рождение ребёнка и др.) органы МСУ могут разрешить вступление в брак с 16 лет.",
+    trap:"Ловушка ОГЭ: 16 лет — это исключение, а не правило. Общий возраст — всегда 18. Путают очень часто.",
+    hint:"Есть общее правило и исключение. Вопрос именно об ОБЩЕМ возрасте — том, что действует по умолчанию.",
+    ref:"Семейное право"
+  },
+  {
+    src:"witcher",
+    topic:"Права и обязанности родителей",
+    text:"<span class='hero-name'>Цири</span> — приёмная дочь <span class='hero-geralt'>Геральта</span> и <span class='hero-name'>Йеннифэр</span>. Что из перечисленного является <strong>обязанностью</strong> родителей по отношению к детям согласно Семейному кодексу РФ?",
+    opts:["Распоряжаться имуществом детей в своих интересах","Воспитывать детей и заботиться об их здоровье","Выбирать детям профессию без учёта их мнения","Запрещать детям общаться с другими родственниками"],
+    ans:1,
+    fb:"✦ Верно! Согласно ст. 63 СК РФ, родители обязаны воспитывать детей, заботиться об их здоровье, физическом, психическом и нравственном развитии. Именно это делают Геральт с Йеннифэр для Цири — пусть и с мечом наперевес.",
+    trap:"Ловушка: родители НЕ вправе распоряжаться имуществом ребёнка в своих интересах. Они — законные представители, но не собственники его вещей.",
+    hint:"Ищи вариант, где родители что-то ДЕЛАЮТ ДЛЯ ребёнка. Не то, что им запрещено, и не право распоряжаться его имуществом.",
+    ref:"Семейное право"
+  },
+  {
+    src:"witcher",
+    topic:"Опека и попечительство",
+    text:"<span class='hero-name'>Цири</span> потеряла родителей в детстве и оказалась под защитой <span class='hero-geralt'>Геральта</span>. В РФ существуют две формы защиты детей без родителей — опека и попечительство. С какого возраста устанавливается <strong>попечительство</strong>?",
+    opts:["С 6 лет","С 10 лет","С 14 лет","С 16 лет"],
+    ans:2,
+    fb:"✦ Верно! Опека — до 14 лет (опекун действует вместо ребёнка). Попечительство — с 14 до 18 лет (попечитель только даёт согласие на сделки). Ст. 145 СК РФ.",
+    trap:"Ловушка: опека и попечительство — разные формы. Главное отличие — возраст и объём полномочий. 14 лет — рубеж, с которого ребёнок начинает действовать сам, но с чьего-то согласия.",
+    hint:"Попечительство приходит на смену опеке в том же возрасте, когда наступает частичная дееспособность.",
+    ref:"Семейное право"
+  },
+
+  // ═══ БЛОК 3 — НЕСОВЕРШЕННОЛЕТНИЕ И ПРАВО (WOLFENSTEIN) ═══
+  {
+    src:"wolf",
+    topic:"Дееспособность малолетних",
+    text:"Младшему ребёнку в семье бойцов сопротивления 7 лет. Мама попросила его купить хлеб в магазине. Вправе ли он самостоятельно совершить такую сделку по ГК РФ?",
+    opts:["Нет — до 14 лет любые сделки запрещены","Да — с 6 лет разрешены мелкие бытовые сделки","Да — но только с письменного согласия родителей","Нет — только с 10 лет"],
+    ans:1,
+    fb:"✦ Верно! С 6 лет малолетние вправе самостоятельно совершать мелкие бытовые сделки — это прямо закреплено в ст. 28 ГК РФ. Покупка хлеба или проездного — типичные примеры.",
+    trap:"Ловушка: «до 14 лет — ничего нельзя» — это неверно. Именно мелкие бытовые сделки разрешены с 6 лет без чьего-либо согласия.",
+    hint:"Есть рубеж дееспособности раньше 14 лет. С него дети могут самостоятельно совершать небольшие бытовые покупки.",
+    ref:"Несовершеннолетние и право"
+  },
+  {
+    src:"wolf",
+    topic:"Труд несовершеннолетних",
+    text:"Четырнадцатилетний подросток из семьи участников сопротивления хочет подработать летом. <span class='hero-wolf'>Аня</span> спрашивает: при каком условии его могут официально принять на работу по ТК РФ?",
+    opts:["С 12 лет, с согласия органов опеки","С 14 лет, с письменного согласия одного из родителей","С 16 лет, без дополнительных условий","С 15 лет, с согласия профсоюза"],
+    ans:1,
+    fb:"✦ Верно! С 14 лет подросток может заключить трудовой договор на лёгкий труд — но только с письменного согласия одного из родителей или опекуна (ст. 63 ТК РФ). С 16 лет — уже самостоятельно.",
+    trap:"Ловушка: с 16 лет — самостоятельно. С 14 — обязательно нужно письменное согласие родителя. «С 12 лет» — не существует в ТК РФ.",
+    hint:"Обязательно два условия: возраст и чьё-то согласие. Без второго условия трудовой договор недействителен.",
+    ref:"Несовершеннолетние и право"
+  },
+  {
+    src:"wolf",
+    topic:"Уголовная ответственность",
+    text:"<span class='hero-wolf'>Фюрер-узурпатор</span> считает, что молодые — вне закона. В правовом государстве это не так. С какого возраста наступает уголовная ответственность за <strong>все</strong> виды преступлений по УК РФ?",
+    opts:["С 14 лет","С 15 лет","С 16 лет","С 18 лет"],
+    ans:2,
+    fb:"✦ Верно! Общий возраст уголовной ответственности — 16 лет. За отдельные тяжкие и особо тяжкие преступления (убийство, кража, разбой и ряд других по ст. 20 УК РФ) — с 14 лет.",
+    trap:"Ловушка: 14 лет — исключение для конкретного перечня преступлений из ст. 20 УК РФ. Общее правило — 16 лет. На ОГЭ вопрос именно о «всех видах» → ответ 16.",
+    hint:"Вопрос о ВСЕХ видах, а не о тяжких. Ищи общий возрастной порог, а не исключение из ст. 20 УК.",
+    ref:"Несовершеннолетние и право"
+  },
+
+  // ═══ БЛОК 4 — ВИДЫ ОТВЕТСТВЕННОСТИ (ВЕДЬМАК) ═══
+  {
+    src:"witcher",
+    topic:"Виды юридической ответственности",
+    text:"<span class='hero-name'>Дийкстра</span> вломился в чужую казну и вынес оттуда всё золото — классика разбоя. Какой вид юридической ответственности предусматривает лишение свободы?",
+    opts:["Административная","Дисциплинарная","Гражданско-правовая","Уголовная"],
+    ans:3,
+    fb:"✦ Верно! Уголовная ответственность — самая суровая, предусматривает наказания вплоть до лишения свободы (УК РФ). Административная: штраф, арест до 15 суток. Дисциплинарная: выговор, увольнение. Гражданская: возмещение ущерба.",
+    trap:"Ловушка: «административный арест» — до 15 суток, не лишение свободы в уголовном смысле. Лишение свободы = только уголовная.",
+    hint:"Из четырёх видов ответственности только один предусматривает лишение свободы. Вспомни шкалу ДАГУ — самый суровый.",
+    ref:"4 вида ответственности"
+  },
+  {
+    src:"witcher",
+    topic:"Административная ответственность",
+    text:"<span class='hero-name'>Радовид</span> нарушил правила проезда через городские ворота. Какое из перечисленных нарушений влечёт <strong>административную</strong> ответственность?",
+    opts:["Опоздание на работу","Нарушение правил дорожного движения","Кража в особо крупном размере","Прогул без уважительной причины"],
+    ans:1,
+    fb:"✦ Верно! Нарушение ПДД — типичный административный проступок (КоАП РФ). Опоздание и прогул — дисциплинарная ответственность (ТК РФ). Кража в крупном размере — уголовная (УК РФ).",
+    trap:"Ловушка: опоздание — не административная, а дисциплинарная! Административная ответственность — это нарушения публичного порядка, ПДД, мелкое хулиганство и т.п.",
+    hint:"Административная касается нарушений публичного порядка — то, что государство запрещает всем гражданам. Дисциплинарная — только в трудовых отношениях.",
+    ref:"4 вида ответственности"
+  },
+  {
+    src:"witcher",
+    topic:"Дисциплинарная ответственность",
+    text:"<span class='hero-name'>Филиппа Эйльхарт</span> систематически опаздывала на заседания ложи чародеек и нарушала внутренний регламент. Что относится к мерам <strong>дисциплинарной</strong> ответственности?",
+    opts:["Штраф","Замечание или выговор","Арест до 15 суток","Возмещение ущерба"],
+    ans:1,
+    fb:"✦ Верно! Дисциплинарные взыскания (ст. 192 ТК РФ): замечание, выговор, увольнение по соответствующим основаниям. Штраф и арест — административная ответственность. Возмещение ущерба — гражданская.",
+    trap:"Ловушка: штраф выглядит как «рабочее наказание», но это административная санкция. Работодатель не может наложить штраф — только замечание/выговор/увольнение.",
+    hint:"Это то, что работодатель вправе применить к сотруднику. Санкции строго по ТК РФ — штрафовать нельзя.",
+    ref:"4 вида ответственности"
+  },
+
+  // ═══ БЛОК 5 — ГРАЖДАНСКОЕ ПРАВО ═══
+  {
+    src:"wolf",
+    topic:"Права потребителей",
+    text:"<span class='hero-wolf'>Аня Олива</span> купила снаряжение для сопротивления, но товар оказался неисправным, а продавец не дал никакой информации о составе. Какие права потребителя нарушены?",
+    opts:["Право на качество товара и право на информацию","Право на труд и право на образование","Право на отдых и право на жильё","Право на политическое участие"],
+    ans:0,
+    fb:"✦ Верно! Закон «О защите прав потребителей» закрепляет: право на качество, безопасность, информацию, возмещение ущерба. Продавец нарушил сразу два: на качество товара и на информацию о нём.",
+    trap:"Ловушка: права потребителей — это про покупки и услуги, не про трудовые или политические права. Чёткий список: качество, безопасность, информация, возмещение.",
+    hint:"Проследи по тексту: что конкретно сделал продавец не так? Каждое нарушение — это отдельное право из Закона о защите прав потребителей.",
+    ref:"Семейное право"
+  },
+  {
+    src:"witcher",
+    topic:"Право собственности",
+    text:"<span class='hero-name'>Йеннифэр</span> владеет башней в Венгерберге. Что из перечисленного является правомочиями <strong>собственника</strong> согласно гражданскому праву?",
+    opts:["Владение, пользование, распоряжение","Производство, обмен, потребление","Владение, аренда, наследование","Пользование, охрана, регистрация"],
+    ans:0,
+    fb:"✦ Верно! Право собственности включает три правомочия: владение (фактическое обладание), пользование (извлечение пользы) и распоряжение (определение судьбы вещи — продать, подарить, уничтожить). Ст. 209 ГК РФ.",
+    trap:"Ловушка: «аренда» и «наследование» — это способы получить или передать собственность, а не правомочия собственника. Три правомочия = В, П, Р.",
+    hint:"Правомочий ровно три. В правильном варианте все три — именно те, что в ст. 209 ГК. Убедись, что в варианте нет посторонних слов.",
+    ref:"Несовершеннолетние и право"
+  },
+  {
+    src:"wolf",
+    topic:"Правоохранительные органы",
+    text:"<span class='hero-wolf'>Сигрун Энгель</span> перешла на сторону сопротивления и хочет понять — как устроена защита закона в правовом государстве. Какова основная задача <strong>прокуратуры</strong> в Российской Федерации?",
+    opts:["Принятие федеральных законов","Исполнение судебных решений","Надзор за соблюдением законов","Назначение федеральных судей"],
+    ans:2,
+    fb:"✦ Верно! Прокуратура РФ осуществляет надзор за исполнением законов (ст. 129 Конституции РФ). Принимает законы — Госдума. Исполняет судебные решения — ФССП. Назначает судей — Совет Федерации/Президент.",
+    trap:"Ловушка: прокуратура не принимает законы и не назначает судей. Её функция — НАДЗОР. Следить за тем, чтобы все соблюдали закон.",
+    hint:"Прокуратура не принимает законы и не исполняет решения судов. Она делает кое-что третье — про соблюдение закона всеми.",
+    ref:"4 вида ответственности"
+  }
+];
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts=[], correctIdx=0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur=0; score=0; attempts=0; answered=false;
+}
+initQuiz();
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+function renderQ() {
+  const q=questions[cur];
+  answered=false; attempts=0;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);
+  correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate'); void qcard.offsetWidth; qcard.classList.add('question-animate');
+  const srcLabel = q.src==='wolf'
+    ? `<span class="q-source q-wolf">WOLFENSTEIN</span>`
+    : `<span class="q-source q-witcher">ВЕДЬМАК</span>`;
+  qheader.innerHTML=`${srcLabel}<span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box'; qfb.innerHTML=''; qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if(answered) return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0) score++;
+    scoredisp.textContent=`✦ ${score} правильно`;
+    btns.forEach(b=>b.disabled=true);
+    btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb; qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong'); btns[i].disabled=true;
+    if(attempts===1){
+      qfb.innerHTML=`😞 Не то. ${q.hint}<br><span class="fb-hint-ref">📖 Шпора: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;
+      btns.forEach(b=>b.disabled=true);
+      btns[correctIdx].classList.add('correct');
+      let fb=`😔 Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb; qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{
+  cur++;
+  if(cur>=questions.length){showResults();return;}
+  renderQ();
+});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results');
+  res.classList.add('show');
+  const s=score, t=questions.length;
+  document.getElementById('rscore').textContent=s;
+  document.getElementById('rtotal').textContent=`из ${t} вопросов`;
+
+  let title, story, rankClass, rankText;
+  if(s>=18){
+    title='Йеннифэр берёт тебя в ученики 🔮';
+    story='Ты знаешь Конституцию лучше, чем большинство депутатов Рейхстага. Йеннифэр кивает — сдержанно, но это высшая похвала. Права потребителей, семейный кодекс, полномочия Госдумы — всё щёлкнуло как замок.';
+    rankClass='rank-s'; rankText='S-ранг · Советник Йеннифэр';
+  } else if(s>=14){
+    title='Достаточно для поступления в Аретузу 📜';
+    story='Геральт смотрит одобрительно. Большинство вопросов покорились. Повтори таблицу полномочий — задание №16 требует большей точности.';
+    rankClass='rank-a'; rankText='A-ранг · Готов к ОГЭ';
+  } else if(s>=10){
+    title='Геральт смотрит с сомнением 🐺';
+    story='Ты знаешь основы, но путаешь детали. Опека или попечительство? Госдума или Совет Федерации? Перечитай шпаргалку ещё раз — особенно таблицу полномочий.';
+    rankClass='rank-b'; rankText='B-ранг · Нужно повторить';
+  } else if(s>=6){
+    title='Энгель смотрит с интересом 🔴';
+    story='Это не тот результат, который тебе нужен. Вернись к шпаргалке — особенно к видам ответственности и возрастам дееспособности. Там половина ОГЭ.';
+    rankClass='rank-c'; rankText='C-ранг · Повтори снова';
+  } else {
+    title='Добро пожаловать в Рейх... нет ⚔️';
+    story='Знание Конституции — это первая линия обороны. Биджей не сдавался — и ты не сдавайся. Начни со шпаргалки, потом пробуй снова.';
+    rankClass='rank-d'; rankText='D-ранг · Шпаргалка ждёт тебя';
+  }
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  const rr=document.getElementById('rrank'); rr.textContent=rankText; rr.className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='';
+  initQuiz(); renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>

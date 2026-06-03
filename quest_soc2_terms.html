@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Знай свои права — Определения · Обществознание</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f2ebe0;
+    --bg2:     #faf7f0;
+    --bg3:     #e8e0d0;
+    --bg4:     #ddd5c4;
+    --c-rad:   #b71c1c;
+    --c-ger:   #1b5e20;
+    --c-gold:  #e65100;
+    --c-law:   #4a148c;
+    --c-econ:  #0277bd;
+    --c-soc:   #00695c;
+    --text:    #1a1510;
+    --muted:   #6b5f50;
+    --border:  rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5%  0%,  rgba(183,28,28,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 15%, rgba(27,94,32,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(74,20,140,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:200px; height:2px; border-radius:2px; background:linear-gradient(90deg,transparent,var(--c-rad),var(--c-gold),var(--c-ger),transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color:var(--c-rad); }
+  .ht2 { color:var(--c-gold); }
+  .ht3 { color:var(--c-ger); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1510; color:#faf7f0; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* GLOSSARY */
+  .gloss-sections { display:flex; flex-direction:column; gap:18px; }
+  .gloss-section { }
+  .gloss-label { display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:10px; }
+  .gloss-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(228px,1fr)); gap:8px; }
+  .gloss-card { border-radius:10px; padding:13px 16px; transition:transform 0.15s,box-shadow 0.15s; }
+  .gloss-card:hover { transform:translateY(-3px); box-shadow:0 6px 22px rgba(0,0,0,0.18); }
+  .gloss-term { font-size:13px; font-weight:700; margin-bottom:5px; }
+  .gloss-def { font-size:12px; line-height:1.5; }
+  /* 🟡 Человек и общество */
+  .g-human .gloss-label { background:#FFF176; color:#5c3d00; }
+  .g-human .gloss-card  { background:#FFF176; }
+  .g-human .gloss-term  { color:#5c3d00; }
+  .g-human .gloss-def   { color:#3d2800; opacity:0.88; }
+  /* 🟢 Экономика */
+  .g-econ .gloss-label { background:#64FFDA; color:#003d30; }
+  .g-econ .gloss-card  { background:#64FFDA; }
+  .g-econ .gloss-term  { color:#003d30; }
+  .g-econ .gloss-def   { color:#00302a; opacity:0.88; }
+  /* 🔴 Политика и государство */
+  .g-pol .gloss-label { background:#D81B60; color:#fff; }
+  .g-pol .gloss-card  { background:#D81B60; }
+  .g-pol .gloss-term  { color:#fff; }
+  .g-pol .gloss-def   { color:rgba(255,255,255,0.88); }
+  /* 🔵 Право */
+  .g-law .gloss-label { background:#4FC3F7; color:#003050; }
+  .g-law .gloss-card  { background:#4FC3F7; }
+  .g-law .gloss-term  { color:#003050; }
+  .g-law .gloss-def   { color:#002540; opacity:0.88; }
+  /* Примеры */
+  .gloss-ex { font-size:11px; font-style:italic; margin-top:6px; padding-top:5px; border-top:1px solid rgba(0,0,0,0.08); }
+  .g-human .gloss-ex { color:#5c3d00; opacity:0.7; }
+  .g-pol   .gloss-ex { color:rgba(255,255,255,0.72); }
+  .g-law   .gloss-ex { color:#003050; opacity:0.7; }
+  .g-econ  .gloss-ex { color:#003d30; opacity:0.7; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:36px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* BANNER */
+  .rad-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(183,28,28,0.35); display:grid; grid-template-columns:180px 1fr; background:var(--bg2); }
+  .rad-img { width:180px; height:200px; object-fit:cover; object-position:center top; display:block; }
+  .rad-emoji { display:flex; align-items:center; justify-content:center; font-size:72px; background:linear-gradient(135deg,#3e0000,#7f0000); min-height:160px; width:180px; }
+  .rad-text { padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .rad-title { font-size:17px; font-weight:700; color:var(--c-rad); }
+  .rad-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .rad-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(27,94,32,0.12);  color:#1b5e20; }
+  .stake-a { background:rgba(2,119,189,0.12); color:#01579b; }
+  .stake-b { background:rgba(202,138,4,0.12); color:#7c4d00; }
+  .stake-c { background:rgba(183,28,28,0.12); color:#7f0000; }
+  .stake-d { background:rgba(74,20,140,0.12); color:#4a148c; }
+  @media(max-width:560px){ .rad-banner{grid-template-columns:1fr;} .rad-emoji{min-height:100px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,30px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-rad),var(--c-gold),var(--c-ger)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-ger); min-width:80px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-rad  { background:var(--c-rad); }
+  .q-ger  { background:var(--c-ger); }
+  .q-dijk { background:#37474f; }
+  .q-lut  { background:var(--c-gold); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:16px; color:var(--text); line-height:1.75; margin-bottom:20px; }
+  .n-rad  { font-weight:700; background:linear-gradient(120deg,var(--c-rad),#e53935); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-ger  { font-weight:700; background:linear-gradient(120deg,var(--c-ger),#388e3c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-dijk { font-weight:700; background:linear-gradient(120deg,#37474f,#607d8b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-lut    { font-weight:700; background:linear-gradient(120deg,var(--c-gold),#ff8f00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .n-zoltan { font-weight:700; background:linear-gradient(120deg,#5d4037,#8d6e63); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .q-zoltan { background:#5d4037; }
+  .term-hl { font-weight:700; font-style:italic; color:var(--c-gold); }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-rad); background:rgba(183,28,28,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--c-ger); background:rgba(27,94,32,0.12); }
+  .opt-btn.correct .opt-letter { color:var(--c-ger); }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#7f1d1d; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:14px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(183,28,28,0.06); border:1px solid rgba(183,28,28,0.22); color:#7f1d1d; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(74,20,140,0.08); border:1px solid rgba(74,20,140,0.25); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:13px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(20px,4vw,34px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(58px,10vw,86px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-rad); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.65; color:var(--text); max-width:520px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(27,94,32,0.12);  color:#1b5e20; }
+  .rank-a { background:rgba(2,119,189,0.12); color:#01579b; }
+  .rank-b { background:rgba(202,138,4,0.12); color:#7c4d00; }
+  .rank-c { background:rgba(183,28,28,0.12); color:#7f0000; }
+  .rank-d { background:rgba(74,20,140,0.12); color:#4a148c; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-rad); background:rgba(183,28,28,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(183,28,28,0.12); color:var(--c-rad); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Обществознание · 9 класс · Ключевые понятия</div>
+    <h1 class="hero-title">
+      <span class="ht1">Знай</span> <span class="ht2">свои</span><br>
+      <span class="ht3">права</span>
+    </h1>
+    <p class="hero-sub">20 ключевых определений · Ведьмак · Wolfenstein · Один ужин с Радовидом</p>
+  </div>
+
+  <!-- ГЛОССАРИЙ -->
+  <div class="sec-head"><span class="sec-badge rule">Глоссарий — все 20 определений</span><div class="sec-line"></div></div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:18px;">Сначала изучи, потом проверяй. Радовид засчитает только точный ответ.</p>
+
+  <div class="gloss-sections">
+
+    <div class="gloss-section g-human">
+      <div class="gloss-label">👤 Человек и общество</div>
+      <div class="gloss-grid">
+        <div class="gloss-card"><div class="gloss-term">Личность</div><div class="gloss-def">Совокупность социально значимых качеств человека, формируемых в обществе</div><div class="gloss-ex">Прим: ведьмак Геральт — личность, хотя и нежелательная в приличном обществе</div></div>
+        <div class="gloss-card"><div class="gloss-term">Деятельность</div><div class="gloss-def">Активность человека, направленная на достижение осознанной цели (субъект → цель → средства → результат)</div><div class="gloss-ex">Прим: Элли учится стрелять — есть цель, средство, результат</div></div>
+        <div class="gloss-card"><div class="gloss-term">Труд</div><div class="gloss-def">Вид деятельности по созданию материальных и духовных благ, необходимых для удовлетворения потребностей</div><div class="gloss-ex">Прим: Лютик пишет баллады — духовные блага (он в это верит)</div></div>
+        <div class="gloss-card"><div class="gloss-term">Мораль</div><div class="gloss-def">Система норм и принципов, регулирующих поведение человека на основе представлений о добре и зле</div><div class="gloss-ex">Прим: Геральту стыдно, что он целовал Трисс — это мораль работает</div></div>
+        <div class="gloss-card"><div class="gloss-term">Социальный статус</div><div class="gloss-def">Положение человека в обществе, связанное с определёнными правами и обязанностями</div><div class="gloss-ex">Прим: Радовид — король (права + обязанности), Дийкстра — начальник разведки</div></div>
+        <div class="gloss-card"><div class="gloss-term">Социализация</div><div class="gloss-def">Процесс усвоения человеком норм, ценностей и моделей поведения, принятых в обществе</div><div class="gloss-ex">Прим: Цири из дикой девочки леса стала ведьмачкой и дипломатом</div></div>
+        <div class="gloss-card"><div class="gloss-term">Социальная норма</div><div class="gloss-def">Правило поведения, регулирующее взаимодействие людей в обществе (включает правовые нормы, мораль, обычаи)</div><div class="gloss-ex">Прим: Лютику не стоит соблазнять чужих жён — норма этикета, не закон</div></div>
+      </div>
+    </div>
+
+    <div class="gloss-section g-pol">
+      <div class="gloss-label">🏛️ Политика и государство</div>
+      <div class="gloss-grid">
+        <div class="gloss-card"><div class="gloss-term">Политика</div><div class="gloss-def">Сфера деятельности, связанная с распределением и использованием государственной власти</div><div class="gloss-ex">Прим: Геральт говорит «я вне политики» — и снова оказывается в центре неё</div></div>
+        <div class="gloss-card"><div class="gloss-term">Политическая партия</div><div class="gloss-def">Организация, нацеленная на получение и использование государственной власти</div><div class="gloss-ex">Прим: «Красная Редания» Радовида — образцовый пример</div></div>
+        <div class="gloss-card"><div class="gloss-term">Государство</div><div class="gloss-def">Политическая организация общества: территория, население, суверенитет, публичная власть, монополия на насилие</div><div class="gloss-ex">Прим: Редания — территория есть, армия есть, налоги есть. Государство</div></div>
+        <div class="gloss-card"><div class="gloss-term">Гражданское общество</div><div class="gloss-def">Совокупность негосударственных организаций и отношений граждан, действующих независимо от государства</div><div class="gloss-ex">Прим: купеческие гильдии Новиграда — без Радовида, сами по себе</div></div>
+        <div class="gloss-card"><div class="gloss-term">Правовое государство</div><div class="gloss-def">Государство, в котором господствует право, верховенство закона, соблюдаются права человека и разделение властей</div><div class="gloss-ex">Прим: Энгель захватила США и уничтожила пр. гос-во — антипример</div></div>
+      </div>
+    </div>
+
+    <div class="gloss-section g-law">
+      <div class="gloss-label">⚖️ Право</div>
+      <div class="gloss-grid">
+        <div class="gloss-card"><div class="gloss-term">Правовая норма</div><div class="gloss-def">Общеобязательное правило поведения, установленное государством и охраняемое его принудительной силой</div><div class="gloss-ex">Прим: «не убий» в кодексе — нарушишь, придут стражники</div></div>
+        <div class="gloss-card"><div class="gloss-term">Правоспособность</div><div class="gloss-def">Способность иметь права и нести обязанности — возникает с рождения, есть у каждого человека</div><div class="gloss-ex">Прим: Цири с рождения — человек, а значит может иметь права: на имя, защиту, трон</div></div>
+        <div class="gloss-card"><div class="gloss-term">Дееспособность</div><div class="gloss-def">Способность своими действиями приобретать и осуществлять права, исполнять обязанности (полная — с 18 лет)</div><div class="gloss-ex">Прим: Геральт сам подписывает контракты — дееспособен давно</div></div>
+        <div class="gloss-card"><div class="gloss-term">Правонарушение</div><div class="gloss-def">Виновное противоправное общественно опасное деяние лица, влекущее юридическую ответственность (проступок или преступление)</div><div class="gloss-ex">Прим: Дийкстра вломился в чужую казну — минимум проступок</div></div>
+        <div class="gloss-card"><div class="gloss-term">Юридическая ответственность</div><div class="gloss-def">Обязанность правонарушителя претерпеть меры государственного принуждения, предусмотренные санкцией нарушенной нормы</div><div class="gloss-ex">Прим: Радовид приговорил Дийкстру — это она и есть</div></div>
+      </div>
+    </div>
+
+    <div class="gloss-section g-econ">
+      <div class="gloss-label">💰 Экономика</div>
+      <div class="gloss-grid">
+        <div class="gloss-card"><div class="gloss-term">Рынок</div><div class="gloss-def">Система отношений между продавцами и покупателями, где цена регулируется спросом и предложением</div><div class="gloss-ex">Прим: Золтан торгует всем подряд в Новиграде — он в рынке</div></div>
+        <div class="gloss-card"><div class="gloss-term">Конкуренция</div><div class="gloss-def">Соперничество участников рынка за более выгодные условия производства, купли и продажи товаров</div><div class="gloss-ex">Прим: три кузницы краснолюдов сбивают цены — соперничают</div></div>
+        <div class="gloss-card"><div class="gloss-term">Налог</div><div class="gloss-def">Обязательный, индивидуально безвозмездный платёж в бюджет государства с физических лиц и организаций</div><div class="gloss-ex">Прим: Радовид берёт налоги — ничего конкретного взамен не обещает</div></div>
+        <div class="gloss-card"><div class="gloss-term">Вклад (депозит)</div><div class="gloss-def">Денежные средства, размещённые в банке для получения дохода в виде процента</div><div class="gloss-ex">Прим: Золтан положил монеты в краснолюдский банк под 4% годовых</div></div>
+        <div class="gloss-card"><div class="gloss-term">Инфляция</div><div class="gloss-def">Процесс обесценивания денег, снижения их покупательной способности (цены растут — за те же деньги меньше товаров)</div><div class="gloss-ex">Прим: вино Радовида за год подорожало вдвое — монета та же, кружка меньше</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="deco-div"><span>Ужин с Радовидом — 27 определений</span></div>
+
+  <!-- BANNER -->
+  <div class="rad-banner">
+    <img class="rad-img" src="https://pbs.twimg.com/media/Fp_SVvRXwAQxJ4l.jpg" alt="Радовид и Геральт" onerror="this.style.display='none';this.nextElementSibling.previousElementSibling.insertAdjacentHTML('beforebegin','<div class=rad-emoji>🍷</div>')">
+    <div class="rad-text">
+      <div class="rad-title">👑 Радовид приглашает Геральта на ужин</div>
+      <div class="rad-desc">«Дорогой ведьмак, я подготовил двадцать семь простых вопросов по обществознанию. Ответишь правильно — останешься на Континенте. Ошибёшься — будешь отправлен в государство госпожи Энгель. Добро пожаловать за стол.» Геральт смотрит на вино с подозрением.</div>
+      <div class="rad-stakes">
+        <span class="stake stake-s">18–20 ✦ Свободен! Геральт уходит, Радовид злится</span>
+        <span class="stake stake-a">14–17 ✦ Условное помилование</span>
+        <span class="stake stake-b">10–13 ✦ Домашний арест в Новиграде</span>
+        <span class="stake stake-c">6–9 ✦ Выслан в провинцию</span>
+        <span class="stake stake-d">0–5 ✦ Добро пожаловать, господин Бласковиц</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Ужин с Радовидом — 27 определений</div>
+      <p class="quiz-sub">Каждый верный ответ — шаг к выходу из королевского замка</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 20</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Сыграть ещё раз</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Обществознание — все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span>
+        <span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span>
+        <span class="qp-badge">← На главную</span>
+      </a>
+      <a class="quest-pill" href="quest_soc1_yenn.html">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">С1</span>
+        <span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Разделы 7–8</span></span>
+        <span class="qp-badge">Йеннифэр</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-rad);color:#fff">С2</span>
+        <span class="qp-info"><span class="qp-name">Знай свои права</span><span class="qp-sub">20 ключевых определений · все разделы</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#0891b2;color:#fff">С3</span>
+        <span class="qp-info"><span class="qp-name">Экономика Гейла</span><span class="qp-sub">Рынок, деньги, бюджет · Раздел 4</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#dc2626;color:#fff">С4</span>
+        <span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Разделы 5–6</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const allQuestions = [
+
+  // ── ЛИЧНОСТЬ ──
+  {
+    src:"rad", topic:"Личность",
+    text:"<span class='n-rad'>Радовид</span> поднимает кубок: «Начнём с простого. Совокупность социально значимых качеств человека, формируемых в обществе» — это...?<br><span class='n-ger'>Геральт</span> смотрит на вино с подозрением.",
+    opts:["Личность","Индивид","Гражданин","Субъект права"],
+    ans:0,
+    fb:"✦ Верно! Личность — именно то, чем Геральт является, несмотря на все старания Радовида это оспорить. Социально значимые качества формируются в обществе, а не при рождении.",
+    trap:"Индивид — просто «отдельный человек как биологическая единица». Личность — это социальная роль и качества. Радовид знает разницу, поэтому и спрашивает.",
+    hint:"Это про социально значимые качества, а не просто про «человека как биологический вид».",
+    ref:"Личность"
+  },
+
+  // ── ДЕЯТЕЛЬНОСТЬ ──
+  {
+    src:"lut", topic:"Деятельность",
+    text:"<span class='n-lut'>Лютик</span> прервал ужин, чтобы спеть балладу. <span class='n-rad'>Радовид</span> раздражённо спрашивает: «В обществознании <em>активность человека, направленная на достижение осознанной цели</em> — это...?»",
+    opts:["Поведение","Рефлекс","Деятельность","Инстинкт"],
+    ans:2,
+    fb:"✦ Верно! Деятельность — активность + осознанная цель. Лютик осознанно мешает ужину — это деятельность. Спорная, но деятельность.",
+    trap:"Поведение — шире, включает и неосознанное. Рефлекс и инстинкт — вообще неосознанные. Деятельность — только осознанная активность с целью.",
+    hint:"Ключевое слово — «осознанная цель». Рефлекс и инстинкт цели не осознают.",
+    ref:"Деятельность"
+  },
+
+  // ── ТРУД ──
+  {
+    src:"lut", topic:"Труд",
+    text:"<span class='n-lut'>Лютик</span> топает ногой: «Мои баллады создают духовные ценности для общества! Это серьёзно!» <span class='n-rad'>Радовид</span>: «Тогда выбери определение, которое это доказывает.»",
+    opts:[
+      "Физические усилия человека по добыче пищи",
+      "Вид деятельности по созданию материальных и духовных благ для удовлетворения потребностей",
+      "Любое занятие человека в рабочее время",
+      "Деятельность, оплачиваемая работодателем"
+    ],
+    ans:1,
+    fb:"✦ Верно! Труд создаёт духовные блага — и баллады Лютика тоже! Правда, гонорары у него невысокие. Но определение на его стороне.",
+    trap:"Труд в обществознании — не только физический и не только оплачиваемый. Духовные блага (музыка, наука, искусство) — тоже продукт труда.",
+    hint:"Ищи определение, которое упоминает и материальные, и духовные блага одновременно. Баллады — это духовные.",
+    ref:"Труд"
+  },
+
+  // ── МОРАЛЬ ──
+  {
+    src:"dijk", topic:"Мораль",
+    text:"<span class='n-dijk'>Дийкстра</span> задумчиво произносит: «Система норм и принципов, регулирующих поведение на основе представлений о добре и зле» — именно это мешает ему спать по ночам?",
+    opts:["Право","Религия","Мораль","Этикет"],
+    ans:2,
+    fb:"✦ Верно! Мораль — регуляция через добро и зло, совесть. Не государство, не санкции — только внутреннее. Дийкстра явно с этим борется... с переменным успехом.",
+    trap:"Право тоже регулирует поведение, но через государство и принуждение. Мораль — через совесть и общественное осуждение. Нарушил право — штраф. Нарушил мораль — стыд.",
+    hint:"Этот регулятор работает через совесть и представления о добре и зле — без принуждения государства.",
+    ref:"Мораль"
+  },
+
+  // ── СОЦИАЛЬНЫЙ СТАТУС ──
+  {
+    src:"rad", topic:"Социальный статус",
+    text:"<span class='n-rad'>Радовид</span> усмехается: «Геральт — ведьмак. Это его положение в обществе, связанное с определёнными правами и обязанностями». Какой термин?",
+    opts:["Социальная роль","Профессия","Социальная группа","Социальный статус"],
+    ans:3,
+    fb:"✦ Верно! Социальный статус — положение в обществе с правами и обязанностями. У Геральта статус ведьмака: право убивать чудовищ, обязанность — делать это по контракту.",
+    trap:"Социальная роль — это поведение в соответствии со статусом. Статус = позиция, роль = поведение. Не путай: статус — это место, роль — это то, как ты его занимаешь.",
+    hint:"Ищи слово «положение». Не как человек себя ведёт, а какое место он занимает.",
+    ref:"Социальный статус"
+  },
+
+  // ── СОЦИАЛИЗАЦИЯ ──
+  {
+    src:"ger", topic:"Социализация",
+    text:"<span class='n-ger'>Цири</span> пришла к Геральту дикой девочкой из леса. За годы она усвоила нормы, ценности, модели поведения. Как называется этот процесс?",
+    opts:["Воспитание","Образование","Адаптация","Социализация"],
+    ans:3,
+    fb:"✦ Верно! Социализация — широкий процесс, включает всё: воспитание, образование, общение, опыт. Цири социализировалась через Геральта, Йеннифэр и, увы, тяжёлый жизненный опыт.",
+    trap:"Воспитание и образование — части социализации, но не весь процесс. Социализация шире — включает и неформальное усвоение норм (улица, друзья, игры).",
+    hint:"Это шире воспитания: включает и школу, и улицу, и опыт — всё, через что человек усваивает нормы.",
+    ref:"Социализация"
+  },
+
+  // ── СОЦИАЛЬНАЯ НОРМА ──
+  {
+    src:"lut", topic:"Социальная норма",
+    text:"<span class='n-lut'>Лютик</span> снова пытается петь за королевским столом. <span class='n-rad'>Радовид</span> делает замечание. <em>Правило поведения, регулирующее взаимодействие людей в обществе</em> — какой это термин?",
+    opts:["Правовая норма","Административный регламент","Социальная норма","Традиция"],
+    ans:2,
+    fb:"✦ Верно! Социальная норма — широкое понятие: правила поведения в обществе. Сюда входят правовые нормы, мораль, обычаи, этикет. Молчать за королевским столом — социальная норма этикета.",
+    trap:"Правовая норма — один из видов социальных норм, конкретно установленная государством. Социальная норма — родовое понятие, шире.",
+    hint:"Ищи самое широкое понятие — то, которое включает все остальные варианты как свои разновидности.",
+    ref:"Социальная норма"
+  },
+
+  // ── ПОЛИТИКА ──
+  {
+    src:"ger", topic:"Политика",
+    text:"<span class='n-rad'>Радовид</span>: «Геральт, как называется сфера деятельности, связанная с распределением и использованием государственной власти?» <span class='n-ger'>Геральт</span>: «Та самая, от которой я всю жизнь бегу.»",
+    opts:["Экономика","Право","Политика","Менеджмент"],
+    ans:2,
+    fb:"✦ Верно! Политика — сфера власти. Геральт всю жизнь говорит «мне плевать на политику», но постоянно в ней оказывается. Это и есть главное свойство политики.",
+    trap:"Экономика — про производство и распределение материальных благ. Политика — про государственную власть.",
+    hint:"Это про государственную власть: кто получает, как распределяет и использует.",
+    ref:"Политика"
+  },
+
+  // ── ПОЛИТИЧЕСКАЯ ПАРТИЯ ──
+  {
+    src:"rad", topic:"Политическая партия",
+    text:"<span class='n-rad'>Радовид</span> гордо произносит: «Моя «Красная Редания» — образцовая структура». Что ТОЧНЕЕ описывает политическую партию?",
+    opts:[
+      "Группа единомышленников, разделяющих общие ценности",
+      "Объединение граждан для защиты профессиональных интересов",
+      "Организация, нацеленная на получение и использование государственной власти",
+      "Армия, подчинённая правителю"
+    ],
+    ans:2,
+    fb:"✦ Верно! Политическая партия — именно про власть. Разделять ценности могут все, но партия отличается целью получить государственную власть. Именно поэтому Радовид её создал.",
+    trap:"Профсоюз тоже объединяет, но не стремится к государственной власти. Партия — именно про власть. Ключевое слово — «государственная власть».",
+    hint:"Ключевое слово — «государственная власть». Не просто единомышленники, а те, кто хочет эту власть получить.",
+    ref:"Политическая партия"
+  },
+
+  // ── ГОСУДАРСТВО ──
+  {
+    src:"ger", topic:"Государство",
+    text:"<span class='n-ger'>Геральт</span> вздыхает: Редания, Нильфгаард, рейх Энгель — всё это государства. Что является ОБЯЗАТЕЛЬНЫМ признаком государства в любой из этих стран?",
+    opts:[
+      "Наличие монарха или президента",
+      "Богатая история и национальные традиции",
+      "Суверенитет и монополия на применение силы",
+      "Собственная валюта"
+    ],
+    ans:2,
+    fb:"✦ Верно! Монополия на насилие — только государство законно применяет силу (армия, полиция). Суверенитет — никому не подчиняется извне. У Рейха Энгель это есть. У Геральта — нет ни того ни другого.",
+    trap:"Монарх необязателен (есть республики). Своя валюта — тоже необязательна (валютные союзы). Суверенитет и монополия на насилие — всегда.",
+    hint:"Из всех признаков государства наиболее уникальны суверенитет и монополия на насилие — их нет у других организаций.",
+    ref:"Государство"
+  },
+
+  // ── ГРАЖДАНСКОЕ ОБЩЕСТВО ──
+  {
+    src:"dijk", topic:"Гражданское общество",
+    text:"<span class='n-dijk'>Дийкстра</span> описывает Новиград: купеческие гильдии, независимые суды, свободная пресса — всё это существует отдельно от власти Радовида. Что это такое?",
+    opts:["Государственный аппарат","Политическая система","Гражданское общество","Местное самоуправление"],
+    ans:2,
+    fb:"✦ Верно! Гражданское общество — всё негосударственное: НКО, профсоюзы, свободная пресса, независимые гильдии. Именно то, чего нет в рейхе Энгель.",
+    trap:"Местное самоуправление — часть государственной системы, хотя и на низовом уровне. Гражданское общество — именно НЕгосударственное.",
+    hint:"Ключевое слово — «негосударственные». Всё, что граждане делают независимо от государства.",
+    ref:"Гражданское общество"
+  },
+
+  // ── ПРАВОВОЕ ГОСУДАРСТВО ──
+  {
+    src:"ger", topic:"Правовое государство",
+    text:"<span class='n-rad'>Радовид</span> недовольно скрещивает руки: «Государство, в котором господствует право, верховенство закона, соблюдаются права человека и разделение властей — как такое называется?» <span class='n-ger'>Геральт</span>: «Не ваш случай, ваше величество.»",
+    opts:["Социальное государство","Теократическое государство","Унитарное государство","Правовое государство"],
+    ans:3,
+    fb:"✦ Верно! Правовое государство — верховенство закона, права человека, разделение властей. Геральт прав: у Радовида с этим есть некоторые сложности.",
+    trap:"Социальное государство — про защиту граждан (пенсии, льготы). Правовое — про верховенство закона. Это разные признаки, хотя одно государство может быть и тем и другим.",
+    hint:"Три ключевых элемента: закон выше всех + права человека защищены + три ветви власти разделены.",
+    ref:"Правовое государство"
+  },
+
+  // ── ПРАВОВАЯ НОРМА ──
+  {
+    src:"dijk", topic:"Правовая норма",
+    text:"<span class='n-dijk'>Дийкстра</span> листает свитки: «Общеобязательное правило поведения, установленное государством и охраняемое его принудительной силой» — как называется?",
+    opts:["Обычай","Мораль","Традиция","Правовая норма"],
+    ans:3,
+    fb:"✦ Верно! Правовая норма — ключевой признак: установлена ГОСУДАРСТВОМ и охраняется принудительной силой. Обычай и мораль — не от государства, принуждения нет.",
+    trap:"Мораль регулирует поведение, но НЕ государством и без принуждения (только совесть). Правовая норма = государство + принуждение.",
+    hint:"Два признака выделяют этот вид из всех правил поведения: установлена государством + охраняется его принуждением.",
+    ref:"Правовая норма"
+  },
+
+  // ── ПРАВОСПОСОБНОСТЬ ──
+  {
+    src:"ger", topic:"Правоспособность",
+    text:"<span class='n-ger'>Геральт</span> задумывается: «Маленькая Цири могла унаследовать состояние Цинтры ещё в детстве — значит, с рождения у неё уже было...?»",
+    opts:[
+      "Дееспособность — способность самостоятельно действовать",
+      "Правосубъектность — только у совершеннолетних",
+      "Правоспособность — способность иметь права и нести обязанности",
+      "Полная дееспособность — с 18 лет"
+    ],
+    ans:2,
+    fb:"✦ Верно! Правоспособность — иметь права и обязанности — возникает с рождения. Даже младенец может иметь право на наследство. Дееспособность — самостоятельно реализовывать права — приходит позже.",
+    trap:"Правоспособность ≠ дееспособность. Правоспособность есть с рождения. Дееспособность — с 6/14/16/18 лет в зависимости от объёма.",
+    hint:"Речь не о самостоятельных действиях. Даже новорождённый может быть наследником — это пассивная способность иметь права.",
+    ref:"Правоспособность"
+  },
+
+  // ── ДЕЕСПОСОБНОСТЬ ──
+  {
+    src:"rad", topic:"Дееспособность",
+    text:"<span class='n-rad'>Радовид</span> прищуривается: «<em>Способность своими действиями приобретать и осуществлять права, исполнять обязанности</em>. Полная — с 18 лет.» <span class='n-lut'>Лютик</span> шепчет Геральту: «Это что, про тебя?» Геральт молчит. Какой это термин?",
+    opts:[
+      "Правоспособность — есть с рождения у всех",
+      "Правомерность — соответствие поведения закону",
+      "Дееспособность — своими действиями приобретать права и нести обязанности",
+      "Правосубъектность — участие в правоотношениях"
+    ],
+    ans:2,
+    fb:"✦ Верно! Дееспособность — своими ДЕЙСТВИЯМИ (сам, самостоятельно). Правоспособность — просто иметь права (с рождения, даже у младенца). Полная дееспособность — с 18 лет.",
+    trap:"Правоспособность ≠ дееспособность. Правоспособность — иметь права. Дееспособность — самостоятельно их осуществлять. Разница в слове «своими действиями».",
+    hint:"Ключевое слово в определении — «своими действиями». Сам действуешь, сам несёшь последствия.",
+    ref:"Дееспособность"
+  },
+
+  // ── РЫНОК ──
+  {
+    src:"zoltan", topic:"Рынок",
+    text:"<span class='n-zoltan'>Золтан Хивай</span> врывается на ужин без приглашения: «Геральт, у краснолюдов в Новиграде тысячи сделок в день — мы продаём, покупаем, цена сама устанавливается. Как называется <em>система отношений между продавцами и покупателями, где цена регулируется спросом и предложением</em>?»",
+    opts:["Ярмарка","Биржа","Торговый союз","Рынок"],
+    ans:3,
+    fb:"✦ Верно! Рынок — не обязательно место с прилавками, это система отношений. Золтан торгует оружием, информацией и, если совсем плохо, услугами охраны — он весь в рынке.",
+    trap:"Ярмарка — конкретное место и время. Биржа — специализированный рынок. Рынок — широкое понятие для любых товарных отношений.",
+    hint:"Это не конкретная площадка. Это система отношений, где цена складывается сама — через спрос и предложение.",
+    ref:"Рынок"
+  },
+
+  // ── КОНКУРЕНЦИЯ ──
+  {
+    src:"zoltan", topic:"Конкуренция",
+    text:"<span class='n-zoltan'>Золтан</span> чешет бороду: «В Новиграде три краснолюдские кузницы. Каждая снижает цену на мечи, чтобы переманить покупателей у соседа. Мы все страдаем, но клиенты довольны. Как это называется в обществознании?»",
+    opts:["Монополия","Картель","Субсидия","Конкуренция"],
+    ans:3,
+    fb:"✦ Верно! Конкуренция — соперничество участников рынка за более выгодные условия. Именно она заставляет краснолюдов снижать цены. Золтан страдает, но рынок здоров.",
+    trap:"Монополия — один продавец, конкуренции нет. Картель — сговор, чтобы устранить конкуренцию. Конкуренция — соперничество, полная противоположность монополии.",
+    hint:"Ключевое: соперничество участников рынка за более выгодные условия. Никаких сговоров.",
+    ref:"Конкуренция"
+  },
+
+  // ── НАЛОГ ──
+  {
+    src:"zoltan", topic:"Налог",
+    text:"<span class='n-zoltan'>Золтан</span> мрачно кладёт монеты перед сборщиком Радовида. «Обязательный, индивидуально безвозмездный платёж в бюджет государства. Каждый год. Без торга.» <span class='n-ger'>Геральт</span>: «Как называется то, что ты только что заплатил?»",
+    opts:["Штраф","Пошлину","Взнос","Налог"],
+    ans:3,
+    fb:"✦ Верно! Налог — обязательный (нельзя не платить) и безвозмездный (Радовид ничего конкретного взамен не обязан). Золтан платит и злится. Это налог.",
+    trap:"Штраф — за нарушение, не регулярный. Пошлина — за конкретное действие (въезд в город). Налог — регулярный и безвозмездный.",
+    hint:"Два ключевых слова: «обязательный» и «безвозмездный» (ничего конкретного взамен).",
+    ref:"Налог"
+  },
+
+  // ── ВКЛАД (ДЕПОЗИТ) ──
+  {
+    src:"zoltan", topic:"Вклад (депозит)",
+    text:"<span class='n-zoltan'>Золтан</span> подмигивает Геральту: «Положил сбережения в краснолюдский банк под 4% годовых. Буду получать доход, не шевельнув пальцем». <span class='n-ger'>Геральт</span>: «Как это называется в обществознании?»",
+    opts:["Кредит","Акция","Инвестиция","Вклад (депозит)"],
+    ans:3,
+    fb:"✦ Верно! Вклад (депозит) — денежные средства в банке для получения дохода в виде процента. Золтан получит доход, Геральт завидует молча.",
+    trap:"Кредит — ты берёшь деньги у банка и платишь процент. Вклад — ты даёшь деньги банку и получаешь процент. Направление противоположное.",
+    hint:"Ты даёшь деньги банку, а он возвращает с добавкой. Направление противоположно кредиту.",
+    ref:"Вклад (депозит)"
+  },
+
+  // ── ИНФЛЯЦИЯ ──
+  {
+    src:"zoltan", topic:"Инфляция",
+    text:"<span class='n-zoltan'>Золтан</span> стучит кружкой по столу: «Три года назад на один ориен покупал полкило железа. Сейчас — треть кило. Те же монеты, меньше товара. Что за напасть?» <span class='n-rad'>Радовид</span> смотрит в сторону.",
+    opts:["Девальвация","Дефляция","Деноминация","Инфляция"],
+    ans:3,
+    fb:"✦ Верно! Инфляция — снижение покупательной способности денег: за те же монеты меньше товара. Золтан всё понял правильно — жаль, что Радовид ничего с этим не делает.",
+    trap:"Дефляция — обратное: цены падают, денег хватает на больше. Девальвация — ослабление курса валюты относительно других. Инфляция — рост цен внутри страны.",
+    hint:"За те же монеты — меньше товара. Покупательная способность денег снижается. Не путай с ослаблением курса к другим валютам.",
+    ref:"Инфляция"
+  }
+
+  ,
+
+  // ═══ БЛОК «УГАДАЙ ТЕРМИН» — определение в вопросе, варианты — термины ═══
+
+  // ── СОЦИАЛЬНЫЙ СТАТУС (угадай термин) ──
+  {
+    src:"rad", topic:"Социальный статус",
+    text:"<span class='n-rad'>Радовид</span> ехидно склоняется к Геральту: «<em>Положение человека в обществе, связанное с определёнными правами и обязанностями</em>. В моём государстве у ведьмаков оно весьма... скромное». О чём говорит Радовид?",
+    opts:["Социальная роль","Социализация","Личность","Социальный статус"],
+    ans:3,
+    fb:"✦ Верно! Социальный статус — позиция в обществе с правами и обязанностями. У Радовида — король. У Геральта — ведьмак. У Лютика — нежелательный гость.",
+    trap:"Социальная РОЛЬ — это поведение в соответствии со статусом. Статус = место, роль = как ты это место занимаешь. Путают почти все.",
+    hint:"Ключевое: «положение» и «права с обязанностями». Это не поведение (роль), это позиция.",
+    ref:"Социальный статус"
+  },
+
+  // ── ПРАВОСПОСОБНОСТЬ (угадай термин) ──
+  {
+    src:"dijk", topic:"Правоспособность",
+    text:"<span class='n-dijk'>Дийкстра</span> тихо, чтобы не слышал Радовид: «<em>Способность иметь права и нести обязанности</em>. Возникает с рождения — даже у новорождённого наследника Цинтры она была». Геральт думает о Цири. О чём говорит Дийкстра?",
+    opts:["Дееспособность","Правовая норма","Правоспособность","Правосубъектность"],
+    ans:2,
+    fb:"✦ Верно! Правоспособность — иметь права — есть с рождения у каждого. Дееспособность — реализовывать права самостоятельно — приходит позже.",
+    trap:"Дееспособность — это «своими действиями». Правоспособность — просто иметь. Цири в детстве не могла действовать самостоятельно, но ИМЕТЬ право на престол — могла.",
+    hint:"Это возникает с рождения, пассивно. Отличается от способности действовать самостоятельно — той, что приходит с возрастом.",
+    ref:"Правоспособность"
+  },
+
+  // ── ГРАЖДАНСКОЕ ОБЩЕСТВО (угадай термин) ──
+  {
+    src:"dijk", topic:"Гражданское общество",
+    text:"<span class='n-dijk'>Дийкстра</span> смотрит в окно на вечерний Новиград: «Купеческие гильдии, вольная пресса, независимые судьи — <em>совокупность негосударственных организаций, действующих независимо от власти</em>. Именно от этого Энгель избавилась в первую очередь». Геральт: «Это...?»",
+    opts:["Государственный аппарат","Правовое государство","Политическая партия","Гражданское общество"],
+    ans:3,
+    fb:"✦ Верно! Гражданское общество — всё негосударственное. Именно поэтому в рейхе Энгель его нет: там всё под контролем государства. Дийкстра это ценит — он сам часть этой независимой системы.",
+    trap:"Правовое государство — про верховенство закона внутри власти. Гражданское общество — про независимые от власти структуры граждан.",
+    hint:"Ключевое слово — «негосударственных». Гильдии, НКО, свободная пресса — всё, что не государство.",
+    ref:"Гражданское общество"
+  },
+
+  // ── КОНКУРЕНЦИЯ (угадай термин) ──
+  {
+    src:"zoltan", topic:"Конкуренция",
+    text:"<span class='n-zoltan'>Золтан</span> врывается с улицы, весь в пыли: «Сосед-краснолюд опять сбросил цену на топоры! <em>Соперничество участников рынка за более выгодные условия производства, купли и продажи</em>. Это законно вообще?!»",
+    opts:["Рынок","Монополия","Инфляция","Конкуренция"],
+    ans:3,
+    fb:"✦ Верно! Конкуренция — законна и полезна. Именно она заставляет снижать цены. Золтан страдает, покупатели довольны. Так работает свободный рынок.",
+    trap:"Рынок — широкое понятие, система отношений. Конкуренция — конкретный механизм внутри рынка: соперничество. Монополия — противоположность конкуренции.",
+    hint:"Соперничество — ключевое слово. Ищи не того, где один на рынке, и не сговор, а честное соперничество участников.",
+    ref:"Конкуренция"
+  },
+
+  // ── МОРАЛЬ (угадай термин) ──
+  {
+    src:"rad", topic:"Мораль",
+    text:"<span class='n-rad'>Радовид</span> смотрит на Дийкстру поверх кубка: «<em>Система норм и принципов, регулирующих поведение на основе представлений о добре и зле</em>. По слухам, именно это тебя по ночам не отпускает, Сигизмунд». <span class='n-dijk'>Дийкстра</span> спокойно допивает вино. Какой термин?",
+    opts:["Право","Социальная норма","Правовая норма","Мораль"],
+    ans:3,
+    fb:"✦ Верно! Мораль — через добро и зло, совесть, без принуждения государства. Право принуждает. Мораль — нет. Дийкстра знает разницу лучше всех за этим столом.",
+    trap:"Социальная норма — шире морали: включает и правовые нормы, и обычаи. Мораль — конкретный вид социальных норм, основанный на добре и зле. Не путай родовое и видовое.",
+    hint:"Источник этого — добро и зло, совесть. Не государство, не традиция. Только внутренняя оценка.",
+    ref:"Мораль"
+  },
+
+  // ── ПРАВОНАРУШЕНИЕ ──
+  {
+    src:"rad", topic:"Правонарушение",
+    text:"<span class='n-rad'>Радовид</span> чуть не подавился вином: «Лютик опоздал на выступление и не заплатил штраф. Виновное, противоправное, общественно опасное деяние, влекущее юридическую ответственность — как это называется?» <span class='n-lut'>Лютик</span> делает вид, что не слышит.",
+    opts:["Аморальный поступок","Правонарушение","Социальный конфликт","Дисциплинарное взыскание"],
+    ans:1,
+    fb:"✦ Верно! Правонарушение — три признака: виновное + противоправное + общественно опасное. Делится на проступки (гражданские, административные, дисциплинарные) и преступления. Лютик явно на стороне проступков.",
+    trap:"Аморальный поступок — нарушение морали, не закона. Правонарушение — нарушение правовой нормы, охраняемой государством принуждением.",
+    hint:"Три признака одновременно: виновное + нарушает правовую норму + влечёт меры принуждения от государства.",
+    ref:"Правонарушение"
+  },
+
+  // ── ЮРИДИЧЕСКАЯ ОТВЕТСТВЕННОСТЬ ──
+  {
+    src:"dijk", topic:"Юридическая ответственность",
+    text:"<span class='n-dijk'>Дийкстра</span> — Сигизмунд Дийкстра — методично объясняет: «<em>Обязанность правонарушителя претерпеть меры государственного принуждения, предусмотренные санкцией нарушенной нормы права</em>». <span class='n-ger'>Геральт</span>: «Это...?»",
+    opts:["Мораль","Правовая норма","Социальная норма","Юридическая ответственность"],
+    ans:3,
+    fb:"✦ Верно! Юридическая ответственность — четыре вида: гражданская (деньги), административная (штраф), уголовная (тюрьма), дисциплинарная (выговор). Дийкстра знает все четыре не понаслышке.",
+    trap:"Правовая норма — само правило поведения. Юридическая ответственность — последствие за его нарушение. Причина и следствие.",
+    hint:"Это последствие, а не само нарушение. Государство применяет санкцию — принуждение из нарушенной нормы.",
+    ref:"Юридическая ответственность"
+  }
+
+];
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts=[], correctIdx=0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur=0; score=0; attempts=0; answered=false;
+}
+initQuiz();
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+const srcLabels = {
+  rad:   `<span class="q-source q-rad">РАДОВИД</span>`,
+  ger:   `<span class="q-source q-ger">ГЕРАЛЬТ</span>`,
+  dijk:  `<span class="q-source q-dijk">ДИЙКСТРА</span>`,
+  lut:   `<span class="q-source q-lut">ЛЮТИК</span>`,
+  zoltan:`<span class="q-source q-zoltan">ЗОЛТАН</span>`
+};
+
+function renderQ() {
+  const q=questions[cur];
+  answered=false; attempts=0;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);
+  correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate'); void qcard.offsetWidth; qcard.classList.add('question-animate');
+  qheader.innerHTML=`${srcLabels[q.src]||srcLabels.rad}<span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box'; qfb.innerHTML=''; qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} правильно`;
+}
+
+function answer(i) {
+  if(answered) return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0) score++;
+    scoredisp.textContent=`✦ ${score} правильно`;
+    btns.forEach(b=>b.disabled=true);
+    btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb; qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать приговор →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong'); btns[i].disabled=true;
+    if(attempts===1){
+      qfb.innerHTML=`😞 Не то. ${q.hint}<br><span class="fb-hint-ref">📖 Глоссарий: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;
+      btns.forEach(b=>b.disabled=true);
+      btns[correctIdx].classList.add('correct');
+      let fb=`😔 Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap) fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb; qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать приговор →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{
+  cur++;
+  if(cur>=questions.length){showResults();return;}
+  renderQ();
+});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results');
+  res.classList.add('show');
+  const s=score, t=questions.length;
+  document.getElementById('rscore').textContent=s;
+  document.getElementById('rtotal').textContent=`из ${t} вопросов`;
+
+  let emoji, title, story, rankClass, rankText;
+  if(s>=18){
+    emoji='🗡️'; title='Свободен! Радовид в ярости';
+    story='Геральт встаёт из-за стола, кладёт кубок обратно и спокойно уходит. Радовид бросает вслед: «Мы ещё встретимся, ведьмак». Геральт не оборачивается. Дийкстра в углу незаметно улыбается.';
+    rankClass='rank-s'; rankText='S-ранг · Свободный ведьмак';
+  } else if(s>=14){
+    emoji='🍷'; title='Условное помилование';
+    story='Радовид допивает вино и нехотя кивает: «Достаточно. На этот раз». Геральт уходит под конвоем. Лютик ждёт снаружи с балладой наготове — но петь её не решается.';
+    rankClass='rank-a'; rankText='A-ранг · Помилован условно';
+  } else if(s>=10){
+    emoji='🏰'; title='Домашний арест в Новиграде';
+    story='«Ты знаешь много, но не всё», — резюмирует Радовид. Геральт остаётся под наблюдением. Дийкстра советует повторить определения из глоссария — особенно разницу между правоспособностью и дееспособностью.';
+    rankClass='rank-b'; rankText='B-ранг · Под надзором';
+  } else if(s>=6){
+    emoji='🌾'; title='Выслан в провинцию';
+    story='«В деревню. Без контрактов». Геральт уныло седлает Плотву. Лютик вызвался сопровождать — это не утешает совсем.';
+    rankClass='rank-c'; rankText='C-ранг · Провинциальная ссылка';
+  } else {
+    emoji='🏭'; title='Добро пожаловать в рейх';
+    story='"Энгель уже ждёт", — говорит Радовид. Геральт вздыхает: надо было учить глоссарий. Лютик обещает написать балладу о провале — это точно не поможет.';
+    rankClass='rank-d'; rankText='D-ранг · Переведён к Энгель';
+  }
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  const rr=document.getElementById('rrank'); rr.textContent=rankText; rr.className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='';
+  initQuiz(); renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
