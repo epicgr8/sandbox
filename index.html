@@ -211,7 +211,7 @@ body {
 .s-chem  .sc-icon { background:rgba(194,65,12,0.22); }
 .s-lit   .sc-icon { background:rgba(139,92,246,0.22); }
 
-.sc-meta { flex:1; }
+.sc-meta { flex:1; min-width:0; }
 .sc-title { font-family:'Rubik',sans-serif; font-size:15px; font-weight:700; margin-bottom:2px; }
 .s-math  .sc-title { color:var(--math); }
 .s-bio   .sc-title { color:var(--bio); }
@@ -219,10 +219,10 @@ body {
 .s-rus   .sc-title { color:var(--rus); }
 .s-chem  .sc-title { color:var(--chem); }
 .s-lit   .sc-title { color:var(--lit); }
-.sc-date { font-family:'Inter',sans-serif; font-size:12px; color:var(--muted); font-weight:400; }
+.sc-date { font-family:'Inter',sans-serif; font-size:12px; color:var(--muted); font-weight:400; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .sc-badge {
-  font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
-  padding:3px 10px; border-radius:20px; white-space:nowrap;
+  font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+  padding:3px 10px; border-radius:20px; white-space:nowrap; flex-shrink:0;
 }
 .badge-done { background:rgba(74,222,128,0.1); color:var(--bio); border:1px solid rgba(74,222,128,0.25); }
 .badge-soon { background:var(--bg3); color:var(--muted); border:1px solid var(--border2); }
@@ -426,7 +426,6 @@ body {
             <div class="sc-title">Математика</div>
             <div class="sc-date">2 июня · 7 квестов + объяснения</div>
           </div>
-          <span class="sc-badge badge-done">Квесты готовы</span>
         </div>
         <div class="sc-quests">
 
@@ -502,9 +501,8 @@ body {
           <div class="sc-icon" aria-hidden="true">🌿</div>
           <div class="sc-meta">
             <div class="sc-title">Биология</div>
-            <div class="sc-date">5 июня · 3 квеста готовы, 2 в разработке</div>
+            <div class="sc-date">5 июня · 3 из 5 квестов</div>
           </div>
-          <span class="sc-badge badge-done">3 квеста готовы</span>
         </div>
         <div class="sc-quests">
 
