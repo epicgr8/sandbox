@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Рынок не прощает — Золтан · Обществознание · Экономика</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #fdf6ed;
+    --bg2:     #fffaf4;
+    --bg3:     #f5ead8;
+    --bg4:     #ecdcc0;
+    --c-zoltan:#b45309;
+    --c-money: #15803d;
+    --c-market:#0891b2;
+    --c-tax:   #dc2626;
+    --c-biz:   #7c3aed;
+    --c-budget:#1e40af;
+    --text:    #1c1008;
+    --muted:   #6b5a3a;
+    --border:  rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 0%,  rgba(180,83,9,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 20%, rgba(21,128,61,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(8,145,178,0.06) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero::after { content:''; display:block; margin:28px auto 0; width:200px; height:2px; border-radius:2px; background:linear-gradient(90deg,transparent,var(--c-zoltan),var(--c-money),var(--c-market),transparent); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color:var(--c-zoltan); }
+  .ht2 { color:var(--c-money); }
+  .ht3 { color:var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1c1008; color:#fffaf4; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.08); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-zoltan::after { background:var(--c-zoltan); }
+  .rule-card.c-money::after  { background:var(--c-money); }
+  .rule-card.c-market::after { background:var(--c-market); }
+  .rule-card.c-tax::after    { background:var(--c-tax); }
+  .rule-card.c-biz::after    { background:var(--c-biz); }
+  .rule-card.c-budget::after { background:var(--c-budget); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .rule-body .law { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:2px 7px; border-radius:4px; display:inline-block; margin:1px 0; }
+  .c-zoltan .rule-body .law { background:rgba(180,83,9,0.1);   color:var(--c-zoltan); }
+  .c-money  .rule-body .law { background:rgba(21,128,61,0.1);  color:var(--c-money); }
+  .c-market .rule-body .law { background:rgba(8,145,178,0.1);  color:var(--c-market); }
+  .c-tax    .rule-body .law { background:rgba(220,38,38,0.1);  color:var(--c-tax); }
+  .c-biz    .rule-body .law { background:rgba(124,58,237,0.1); color:var(--c-biz); }
+  .c-budget .rule-body .law { background:rgba(30,64,175,0.1);  color:var(--c-budget); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; padding:6px 12px; border-radius:7px; display:inline-block; margin:6px 0 10px; letter-spacing:0.03em; line-height:1.5; }
+  .c-zoltan .rule-formula { background:rgba(180,83,9,0.10);   color:var(--c-zoltan); }
+  .c-money  .rule-formula { background:rgba(21,128,61,0.10);  color:var(--c-money); }
+  .c-market .rule-formula { background:rgba(8,145,178,0.10);  color:var(--c-market); }
+  .c-tax    .rule-formula { background:rgba(220,38,38,0.10);  color:var(--c-tax); }
+  .c-biz    .rule-formula { background:rgba(124,58,237,0.10); color:var(--c-biz); }
+  .c-budget .rule-formula { background:rgba(30,64,175,0.10);  color:var(--c-budget); }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color:var(--c-tax); }
+
+  /* BANNER */
+  .zoltan-banner { border-radius:16px; overflow:hidden; margin-bottom:28px; border:2px solid rgba(180,83,9,0.35); display:grid; grid-template-columns:200px 1fr; }
+  .zoltan-img { width:200px; height:220px; object-fit:cover; object-position:center top; display:block; }
+  .zoltan-text { padding:20px 22px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; gap:8px; }
+  .zoltan-title { font-size:17px; font-weight:700; color:var(--c-zoltan); }
+  .zoltan-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+  .zoltan-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(21,128,61,0.12);  color:#14532d; }
+  .stake-a { background:rgba(30,64,175,0.12);  color:#1e3a8a; }
+  .stake-b { background:rgba(180,83,9,0.12);   color:#7c2d12; }
+  .stake-c { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .stake-d { background:rgba(124,58,237,0.12); color:#4c1d95; }
+  @media(max-width:560px){ .zoltan-banner{grid-template-columns:1fr;} .zoltan-img{width:100%;height:160px;object-position:top;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:28px 0 20px; }
+  .quiz-title { font-size:clamp(20px,3.5vw,30px); font-weight:700; color:var(--text); margin-bottom:6px; }
+  .quiz-sub { font-size:14px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-zoltan),var(--c-money),var(--c-market)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-money); min-width:80px; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-zoltan { background:var(--c-zoltan); }
+  .q-money  { background:var(--c-money); }
+  .q-market { background:var(--c-market); }
+  .q-fedra  { background:var(--c-tax); }
+  .q-tlou   { background:#374151; }
+  .q-biz    { background:var(--c-biz); }
+  .q-budget { background:var(--c-budget); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:16px; color:var(--text); line-height:1.75; margin-bottom:20px; }
+  .hero-z { font-weight:700; background:linear-gradient(120deg,var(--c-zoltan),#c2410c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-g { font-weight:700; background:linear-gradient(120deg,var(--c-money),#16a34a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-l { font-weight:700; background:linear-gradient(120deg,#db2777,#be185d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-f { font-weight:700; background:linear-gradient(120deg,var(--c-tax),#b91c1c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-zoltan); background:rgba(180,83,9,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:#15803d; background:rgba(21,128,61,0.12); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#15803d; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); color:#7f1d1d; }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:14px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.22); color:#7f1d1d; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(180,83,9,0.10); border:1px solid rgba(180,83,9,0.30); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:13px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-img { width:120px; height:120px; object-fit:cover; object-position:top; border-radius:50%; margin:0 auto 16px; display:block; border:3px solid var(--c-zoltan); }
+  .results-title { font-size:clamp(20px,4vw,34px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(58px,10vw,86px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-zoltan); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.65; color:var(--text); max-width:520px; margin:0 auto 24px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(21,128,61,0.12);  color:#14532d; }
+  .rank-a { background:rgba(30,64,175,0.12);  color:#1e3a8a; }
+  .rank-b { background:rgba(180,83,9,0.12);   color:#7c2d12; }
+  .rank-c { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .rank-d { background:rgba(124,58,237,0.12); color:#4c1d95; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+
+  /* NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-zoltan); background:rgba(180,83,9,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(180,83,9,0.12); color:var(--c-zoltan); }
+
+  /* ЦВЕТНЫЕ ПИЛЮЛИ для шпаргалки */
+  .pills-row { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 12px; }
+  .pill { display:inline-flex; align-items:center; gap:4px; padding:5px 11px; border-radius:20px; font-size:12px; font-weight:700; line-height:1.3; }
+  .pill-t  { background:rgba(180,83,9,0.15);   color:#92400e; border:1px solid rgba(180,83,9,0.35); }
+  .pill-k  { background:rgba(220,38,38,0.13);  color:#991b1b; border:1px solid rgba(220,38,38,0.35); }
+  .pill-r  { background:rgba(21,128,61,0.14);  color:#14532d; border:1px solid rgba(21,128,61,0.35); }
+  .pill-s  { background:rgba(8,145,178,0.13);  color:#0e7490; border:1px solid rgba(8,145,178,0.35); }
+  .pill-m  { background:rgba(124,58,237,0.13); color:#5b21b6; border:1px solid rgba(124,58,237,0.35); }
+  .pill-o  { background:rgba(8,145,178,0.13);  color:#0e7490; border:1px solid rgba(8,145,178,0.35); }
+  .pill-sn { background:rgba(21,128,61,0.14);  color:#14532d; border:1px solid rgba(21,128,61,0.35); }
+  .pill-md { background:rgba(30,64,175,0.13);  color:#1e3a8a; border:1px solid rgba(30,64,175,0.35); }
+  .pill-pr { background:rgba(180,83,9,0.15);   color:#92400e; border:1px solid rgba(180,83,9,0.35); }
+  .pill-ks { background:rgba(124,58,237,0.13); color:#5b21b6; border:1px solid rgba(124,58,237,0.35); }
+  .pill-ip { background:rgba(124,58,237,0.13); color:#5b21b6; border:1px solid rgba(124,58,237,0.35); }
+  .pill-oo { background:rgba(180,83,9,0.15);   color:#92400e; border:1px solid rgba(180,83,9,0.35); }
+  .rule-row { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:4px; }
+  .rule-row strong { color:var(--text); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Обществознание · 9 класс · Раздел 4</div>
+    <h1 class="hero-title">
+      <span class="ht1">Квест 3:</span><br>
+      <span class="ht2">Рынок</span> <span class="ht3">не прощает</span>
+    </h1>
+    <p class="hero-sub">Экономика · Спрос и предложение · Деньги · Налоги · Семейный бюджет · Ведьмак &amp; The Last of Us</p>
+  </div>
+
+  <!-- ═══ ШПАРГАЛКА ═══ -->
+  <div class="sec-head"><span class="sec-badge rule">Шпаргалка — учи перед квестом</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-zoltan">
+      <div class="rule-icon">📈</div>
+      <div class="rule-title">Законы спроса и предложения</div>
+      <div class="rule-formula">ЦЕНА ↑ → СПРОС ↓<br>ЦЕНА ↑ → ПРЕДЛОЖЕНИЕ ↑</div>
+      <div class="rule-body">
+        <div class="rule-row"><strong>Спрос</strong> — покупатели хотят купить товар</div>
+        <div class="rule-row"><strong>Предложение</strong> — продавцы хотят продать товар</div>
+        <div class="rule-row"><strong>Закон спроса:</strong> цена выросла → покупают меньше</div>
+        <div class="rule-row"><strong>Закон предложения:</strong> цена выросла → продавцов становится больше</div>
+        <div class="rule-row"><span class="law">Равновесная цена</span> — всё раскуплено, очередей нет, излишков нет</div>
+        <span class="warn">⚡ «Цену поднял — спрос упал; ты товара не продал»</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Золтан поднял цену на гвинт-карты с 5 до 20 оренов — покупатели ушли (спрос упал). Когда после войны с Нильфгаардом выросли цены на мечи — кузнецы стали ковать больше (предложение выросло).</div>
+    </div>
+
+    <div class="rule-card c-market">
+      <div class="rule-icon">🏛️</div>
+      <div class="rule-title">4 типа экономических систем</div>
+      <div class="rule-formula">ТКРС → «Торгуй, Когда<br>Разрешит Скеллиге»</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-t">🏕️ Т — Традиционная</span>
+          <span class="pill pill-k">⚔️ К — Командная</span>
+          <span class="pill pill-r">💰 Р — Рыночная</span>
+          <span class="pill pill-s">🌐 С — Смешанная</span>
+        </div>
+        <div class="rule-row"><span class="pill pill-t">Т</span> каждый делает то, что делали его родители. Рыбак — потому что отец рыбак.</div>
+        <div class="rule-row"><span class="pill pill-k">К</span> государство решает всё: что производить, кому сколько давать. Рынка нет.</div>
+        <div class="rule-row"><span class="pill pill-r">Р</span> всё решает спрос и предложение. Хочешь — продавай, хочешь — покупай.</div>
+        <div class="rule-row"><span class="pill pill-s">С</span> рынок плюс государство вмешивается там, где нужно. Большинство стран сегодня.</div>
+        <span class="warn">⚡ Большинство реальных стран сегодня — СМЕШАННАЯ</span>
+      </div>
+      <div class="rule-assoc">🎮 TLOU: В Бостонской КЗ FEDRA раздаёт еду по карточкам и решает кто сколько получит — это <strong>командная экономика</strong>. А Джоэл тайно торгует патронами сам, договаривается о цене — так работает <strong>рыночная экономика</strong>. Два типа существуют одновременно в одном городе.</div>
+    </div>
+
+    <div class="rule-card c-money">
+      <div class="rule-icon">💰</div>
+      <div class="rule-title">Функции денег</div>
+      <div class="rule-formula">МОС · НАК · МД</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-m">📏 М — Мера стоимости</span>
+          <span class="pill pill-o">🔄 О — Обращение</span>
+          <span class="pill pill-sn">🏦 НАК — Накопление</span>
+          <span class="pill pill-md">🌍 МД — Мировые деньги</span>
+        </div>
+        <div class="rule-row"><span class="pill pill-m">М</span> деньги — универсальный ценник. Зелье стоит 30 оренов — понятно всем.</div>
+        <div class="rule-row"><span class="pill pill-o">О</span> платишь деньги → получаешь товар. Геральт даёт орены → получает меч.</div>
+        <div class="rule-row"><span class="pill pill-sn">НАК</span> деньги можно откладывать «на потом». Золтан копит на таверну.</div>
+        <div class="rule-row"><span class="pill pill-md">МД</span> расчёты между разными государствами.</div>
+        <div class="rule-row" style="margin-top:8px"><strong>ЦБ</strong> — только он выпускает деньги. С обычными людьми не работает.</div>
+        <div class="rule-row"><strong>Коммерческий банк</strong> — берёт вклады, даёт кредиты всем желающим.</div>
+        <span class="warn">⚡ Бартер — обмен без денег. Минус: нужно найти того, кому нужно именно то, что у тебя есть</span>
+      </div>
+      <div class="rule-assoc">🎮 TLOU: Джоэл меняет патроны на аптечки у Билла — это <strong>бартер</strong>: товар на товар, без денег. Именно поэтому деньги и придумали: чтобы не тратить время на поиск «нужного человека».</div>
+    </div>
+
+    <div class="rule-card c-tax">
+      <div class="rule-icon">📋</div>
+      <div class="rule-title">Налоги: прямые vs косвенные</div>
+      <div class="rule-formula">НДФЛ — платишь сам<br>НДС — спрятан в ценнике</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-pr">💼 Прямые — с дохода/имущества</span>
+          <span class="pill pill-ks">🏷️ Косвенные — в цене товара</span>
+        </div>
+        <div class="rule-row"><span class="pill pill-pr">Прямые</span> платишь сам, из своего кармана:</div>
+        <div class="rule-row"><strong>НДФЛ 13%</strong> — заработал 1000 р. → 130 р. автоматически идут государству</div>
+        <div class="rule-row"><strong>Налог на имущество</strong> — есть квартира или машина? Плати ежегодно</div>
+        <div class="rule-row" style="margin-top:8px"><span class="pill pill-ks">Косвенные</span> уже «зашиты» в цену, ты платишь не замечая:</div>
+        <div class="rule-row"><strong>НДС</strong> — ценник в магазине: 100 р. уже включают налог. Ты его платишь, когда просто покупаешь.</div>
+        <div class="rule-row"><strong>Акциз</strong> — дополнительный налог на сигареты, алкоголь, бензин</div>
+        <span class="warn">⚡ «НДС в цене — коСВЕНный»</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Геральт убил чудовище — получил 1000 оренов. Государство сразу берёт 130 — это <strong>НДФЛ</strong> (прямой: Геральт платит сам). Потом Геральт купил зелье: в ценнике уже «зашит» налог, который продавец отдаст государству, — это <strong>НДС</strong> (косвенный: Геральт заплатил, не заметив).</div>
+    </div>
+
+    <div class="rule-card c-biz">
+      <div class="rule-icon">🎮</div>
+      <div class="rule-title">Предпринимательство: ИП vs ООО</div>
+      <div class="rule-formula">ИП → рискует ВСЕМ своим<br>ООО → только вкладом</div>
+      <div class="rule-body">
+        <div class="pills-row">
+          <span class="pill pill-ip">👤 ИП — один человек</span>
+          <span class="pill pill-oo">🏢 ООО — компания</span>
+        </div>
+        <div class="rule-row"><span class="pill pill-ip">ИП</span> инди-разработчик сделал игру один, вложил свои 300 000 р. Игра провалилась, долгов на 500 000. Кредиторы придут домой — заберут ноутбук, мебель, всё. <strong>Ответственность без лимита.</strong></div>
+        <div class="rule-row" style="margin-top:6px"><span class="pill pill-oo">ООО</span> как Bethesda или CD Projekt Red — несколько людей скинулись по миллиону и создали компанию. Игра провалилась, долги огромные. Каждый теряет только свой вклад. <strong>Ответственность — только вкладом.</strong></div>
+        <span class="warn">⚡ ИП = «Инди Пиздюк» (всё потеряешь лично); ООО = «Обычно Ограниченная Опасность»</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: Лютик открыл таверну «Лютиков Приют» как ИП. Прогорела — кредиторы придут за лютней, гардеробом и конём. Если бы Лютик с Золтаном открыли ООО, каждый рисковал бы только своим вкладом.</div>
+    </div>
+
+    <div class="rule-card c-budget">
+      <div class="rule-icon">💼</div>
+      <div class="rule-title">Семейный бюджет и прибыль</div>
+      <div class="rule-formula">Д &gt; Р → профицит 🟢<br>Д &lt; Р → дефицит 🔴<br>Прибыль = Выручка − Издержки</div>
+      <div class="rule-body">
+        <div class="rule-row"><strong>Доходы:</strong> зарплата (труд), рента (сдаёшь квартиру), дивиденды (владеешь акциями), пенсия</div>
+        <div class="rule-row"><strong>Обязательные расходы</strong> — нельзя не платить: ЖКХ, налоги, кредит</div>
+        <div class="rule-row"><strong>Необязательные</strong> — можно отложить: кино, ресторан, новый камзол</div>
+        <span class="warn">⚡ Ловушка задания 9: ВЫРУЧКА ≠ ПРИБЫЛЬ! Выручка — всё что заработал. Прибыль — что осталось после всех расходов.</span>
+      </div>
+      <div class="rule-assoc">🎮 Ведьмак: У Лютика всегда дефицит — тратит больше, чем зарабатывает. У Анны Генриетты Туссентской профицит — торгует вместо того чтобы воевать. Результат очевиден.</div>
+    </div>
+
+  </div>
+
+  <!-- ТАБЛИЦА ФАКТОРОВ ПРОИЗВОДСТВА -->
+  <div class="sec-head" style="margin-top:36px"><span class="sec-badge rule">Факторы производства — задание 5</span><div class="sec-line"></div></div>
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;margin-bottom:22px;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;">
+      <thead><tr style="background:var(--bg3);">
+        <th style="padding:10px 16px;text-align:left;border-bottom:1px solid var(--border2);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase">Фактор</th>
+        <th style="padding:10px 16px;text-align:left;border-bottom:1px solid var(--border2);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase">Что это</th>
+        <th style="padding:10px 16px;text-align:left;border-bottom:1px solid var(--border2);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase">Пример в таверне Лютика</th>
+        <th style="padding:10px 16px;text-align:left;border-bottom:1px solid var(--border2);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase">Доход владельца</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 16px;font-weight:700;color:var(--c-money)">🌱 Земля</td><td style="padding:10px 16px;color:var(--muted);font-size:13px">Природные ресурсы и участки</td><td style="padding:10px 16px;font-size:13px">Участок под зданием</td><td style="padding:10px 16px"><span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;background:rgba(21,128,61,0.1);color:var(--c-money);padding:2px 7px;border-radius:4px">Рента</span></td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 16px;font-weight:700;color:var(--c-zoltan)">🔨 Капитал</td><td style="padding:10px 16px;color:var(--muted);font-size:13px">Созданные людьми средства производства</td><td style="padding:10px 16px;font-size:13px">Столы, кухня, оборудование</td><td style="padding:10px 16px"><span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;background:rgba(180,83,9,0.1);color:var(--c-zoltan);padding:2px 7px;border-radius:4px">Процент</span></td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 16px;font-weight:700;color:var(--c-market)">🧑 Труд</td><td style="padding:10px 16px;color:var(--muted);font-size:13px">Умственная и физическая деятельность</td><td style="padding:10px 16px;font-size:13px">Бармены, повара, уборщицы</td><td style="padding:10px 16px"><span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;background:rgba(8,145,178,0.1);color:var(--c-market);padding:2px 7px;border-radius:4px">Зарплата</span></td></tr>
+        <tr><td style="padding:10px 16px;font-weight:700;color:var(--c-biz)">💡 Предприни&shy;мательство</td><td style="padding:10px 16px;color:var(--muted);font-size:13px">Организация производства, принятие риска</td><td style="padding:10px 16px;font-size:13px">Лютик как организатор</td><td style="padding:10px 16px"><span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;background:rgba(124,58,237,0.1);color:var(--c-biz);padding:2px 7px;border-radius:4px">Прибыль</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BANNER -->
+  <div class="zoltan-banner">
+    <img class="zoltan-img" src="https://preview.redd.it/friends-by-hitokirisan-v0-y8b1myg0em211.jpg?auto=webp&s=47c2a8ad4fb1174fadb719e05320daef73fe90fb" alt="Золтан и друзья" onerror="this.style.display='none'">
+    <div class="zoltan-text">
+      <div class="zoltan-title">💰 Золтан Хивай — учитель экономики</div>
+      <div class="zoltan-desc">Краснолюд-купец, игрок в гвинт, проводник по торговым путям. Видел командную экономику Нильфгаарда и рыночную вольницу Ковира. Знает цену всему — особенно налогам. 30 вопросов. Два шанса. Ставки высоки.</div>
+      <div class="zoltan-stakes">
+        <span class="stake stake-s">27–30 ✦ Золтан зовёт в партнёры</span>
+        <span class="stake stake-a">22–26 ✦ Место в Торговом доме</span>
+        <span class="stake stake-b">16–21 ✦ Ученик с задатками</span>
+        <span class="stake stake-c">10–15 ✦ Наёмный работник</span>
+        <span class="stake stake-d">0–9 ✦ Лютик-уровень финансов</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">Рынок не прощает — 30 вопросов</div>
+      <p class="quiz-sub">Ведьмак · The Last of Us · Ковир · FEDRA — экономика везде</p>
+    </div>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✦ 0 правильно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 30</span>
+    </div>
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <img class="results-img" src="https://preview.redd.it/friends-by-hitokirisan-v0-y8b1myg0em211.jpg?auto=webp&s=47c2a8ad4fb1174fadb719e05320daef73fe90fb" alt="Золтан" onerror="this.style.display='none'">
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Пройти ещё раз</button>
+  </div>
+
+  <!-- NAV -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Обществознание — все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span>
+        <span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span>
+        <span class="qp-badge">← На главную</span>
+      </a>
+      <a class="quest-pill" href="quest_soc1_yenn.html">
+        <span class="qp-num" style="background:#7c3aed;color:#fff">С1</span>
+        <span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Разделы 7–8</span></span>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="quest_soc2_terms.html">
+        <span class="qp-num" style="background:#0284c7;color:#fff">С2</span>
+        <span class="qp-info"><span class="qp-name">Знай свои права</span><span class="qp-sub">Термины и определения</span></span>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <span class="qp-num" style="background:var(--c-zoltan);color:#fff">С3</span>
+        <span class="qp-info"><span class="qp-name">Рынок не прощает</span><span class="qp-sub">Экономика · Раздел 4</span></span>
+        <span class="qp-badge qp-here">Здесь</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#dc2626;color:#fff">С4</span>
+        <span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Разделы 5–6</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+      <a class="quest-pill" href="#" style="opacity:0.45;cursor:default">
+        <span class="qp-num" style="background:#15803d;color:#fff">С5</span>
+        <span class="qp-info"><span class="qp-name">Человек и общество</span><span class="qp-sub">Разделы 1–3</span></span>
+        <span class="qp-badge">Скоро</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const srcConfig = {
+  zoltan: {label:'КОВИР / ВЕДЬМАК', cls:'q-zoltan'},
+  kovir:  {label:'ТУССЕНТ',          cls:'q-zoltan'},
+  witcher:{label:'ВЕДЬМАК',          cls:'q-zoltan'},
+  fedra:  {label:'THE LAST OF US',   cls:'q-fedra'},
+  tlou:   {label:'THE LAST OF US',   cls:'q-tlou'},
+  lutik:  {label:'ВЕДЬМАК',          cls:'q-biz'},
+  geralt: {label:'ВЕДЬМАК',          cls:'q-market'},
+};
+
+const allQuestions = [
+
+  // ═══ БЛОК 1 — РЫНОК ═══
+  {
+    src:"zoltan", topic:"Закон спроса",
+    text:"<span class='hero-z'>Золтан Хивай</span> поднял цену на редкие гвинт-карты с 5 до 20 оренов. Покупатели начали приходить значительно реже. Что иллюстрирует эта ситуация?",
+    opts:["Закон предложения","Закон спроса","Монополизацию рынка","Инфляцию"],
+    ans:1,
+    fb:"✦ Верно! Закон спроса: при росте цены объём спроса снижается (при прочих равных). Золтан задрал цену — покупатели ушли.",
+    trap:"Не путай с законом предложения. Предложение — поведение ПРОДАВЦА. Спрос — поведение ПОКУПАТЕЛЯ.",
+    hint:"Кто реагирует на цену в этой ситуации — продавец или покупатель? Действие покупателей — это какой закон?",
+    ref:"Законы спроса и предложения"
+  },
+  {
+    src:"zoltan", topic:"Закон предложения",
+    text:"Цены на мечи в Новиграде выросли вдвое после войны с Нильфгаардом. <span class='hero-z'>Золтан</span> немедленно заказал у кузнецов дополнительную партию — хочет заработать больше. Что иллюстрирует его поведение?",
+    opts:["Закон спроса","Эффект замещения","Закон предложения","Монопольное ценообразование"],
+    ans:2,
+    fb:"✦ Верно! Закон предложения: при росте цены объём предложения увеличивается. Продавцы хотят заработать больше, когда товар стоит дороже.",
+    trap:"Золтан здесь ПРОДАВЕЦ, а не покупатель. Его решение продать больше — это предложение, не спрос.",
+    hint:"Золтан продаёт или покупает? Его желание увеличить продажи при высокой цене — это закон чего?",
+    ref:"Законы спроса и предложения"
+  },
+  {
+    src:"kovir", topic:"Равновесная цена",
+    text:"На рынке Ковира установилась цена один орен за фунт соли. При ней весь товар раскуплен, очередей нет и продавцы довольны. Как называется такая цена?",
+    opts:["Монопольная","Равновесная","Фиксированная","Дефицитная"],
+    ans:1,
+    fb:"✦ Верно! Равновесная цена — цена, при которой объём спроса равен объёму предложения. Нет ни дефицита, ни излишков. Рынок «очищается».",
+    trap:"«Фиксированная» — установленная государством. «Монопольная» — завышенная цена единственного продавца. Равновесная формируется самим рынком.",
+    hint:"При этой цене ничего не осталось лишним и никто не ушёл без товара. Спрос = предложение. Это какая цена?",
+    ref:"Законы спроса и предложения"
+  },
+  {
+    src:"kovir", topic:"Конкуренция",
+    text:"В Ковире несколько торговцев продают одинаковые товары. Чтобы привлечь покупателей, они снижают цены и улучшают качество. Какую роль играет конкуренция в рыночной экономике?",
+    opts:["Ведёт к монополизации рынка","Стимулирует рост цен","Стимулирует снижение цен и повышение качества","Ограничивает частную собственность"],
+    ans:2,
+    fb:"✦ Верно! Конкуренция — двигатель рынка. Она вынуждает снижать цены, повышать качество и искать новые решения. Покупатели выигрывают.",
+    trap:"Монополизация — это исчезновение конкуренции, когда остался один продавец. Конкуренция и монополия — противоположности.",
+    hint:"Несколько продавцов борются за покупателя. Кто от этого выигрывает и что происходит с ценами?",
+    ref:"Конкуренция и монополия"
+  },
+  {
+    src:"fedra", topic:"Монополия",
+    text:"В Бостонской карантинной зоне только <span class='hero-f'>FEDRA</span> распределяет топливо. Других поставщиков нет, и FEDRA устанавливает нормы по своему усмотрению. Как называется такое положение?",
+    opts:["Олигополия","Конкурентный рынок","Монополия","Дуополия"],
+    ans:2,
+    fb:"✦ Верно! Монополия — один продавец на рынке без конкурентов, устанавливающий условия по своему усмотрению. FEDRA в КЗ — классическая монополия.",
+    trap:"Олигополия — несколько крупных фирм. Дуополия — два продавца. FEDRA одна — значит монополия.",
+    hint:"Один продавец, нет альтернатив, диктует условия. Это называется...?",
+    ref:"Конкуренция и монополия"
+  },
+
+  // ═══ БЛОК 2 — ТИПЫ ЭКОНОМИКИ ═══
+  {
+    src:"fedra", topic:"Командная экономика",
+    text:"В Бостонской КЗ <span class='hero-f'>FEDRA</span> централизованно решает: сколько еды производить, кому и в каком объёме выдавать. Частная торговля запрещена. Какой тип экономики описан?",
+    opts:["Рыночная","Смешанная","Командная (плановая)","Традиционная"],
+    ans:2,
+    fb:"✦ Верно! Командная экономика: государство централизованно решает что, как и для кого производить. Частной инициативы почти нет. FEDRA — учебный пример.",
+    trap:"«Традиционная» — экономика на основе обычаев, а не государственных приказов. Здесь не традиция — здесь приказ FEDRA.",
+    hint:"Кто принимает все экономические решения в КЗ — сами граждане через рынок или FEDRA через директиву?",
+    ref:"Типы экономических систем"
+  },
+  {
+    src:"kovir", topic:"Рыночная экономика",
+    text:"В <span class='hero-z'>Ковире</span> производители сами решают, что производить. Покупатели выбирают лучшие товары. Цены формируются через торги. Государство почти не вмешивается. Какой тип экономики?",
+    opts:["Командная","Традиционная","Рыночная","Натуральное хозяйство"],
+    ans:2,
+    fb:"✦ Верно! Рыночная экономика: цены и объёмы производства определяются механизмом спроса и предложения. Свобода предпринимательства и частная собственность. Ковир — торговая витрина.",
+    trap:"«Натуральное хозяйство» — производят только для себя без обмена. Это противоположность рыночной экономики.",
+    hint:"Кто решает что производить: производители и покупатели через цены, или государство по плану?",
+    ref:"Типы экономических систем"
+  },
+  {
+    src:"zoltan", topic:"Традиционная экономика",
+    text:"На Скеллиге каждая семья занимается тем, чем занимались отцы и деды: рыбаки рыбачат, кузнецы куют. Новые технологии отвергаются. Обмен ведётся по обычаю. Какой тип экономики?",
+    opts:["Рыночная","Командная","Смешанная","Традиционная"],
+    ans:3,
+    fb:"✦ Верно! Традиционная экономика основана на обычаях и наследовании профессий. Изменения идут медленно. Скеллиге — классика.",
+    trap:"Это не «командная» — никто не приказывает. Все просто делают «как деды делали». Именно это и есть традиционная экономика.",
+    hint:"Что определяет, кем будет человек — государственный приказ, рыночная конкуренция или семейная традиция?",
+    ref:"Типы экономических систем"
+  },
+
+  // ═══ БЛОК 3 — ДЕНЬГИ ═══
+  {
+    src:"geralt", topic:"Функции денег",
+    text:"<span class='hero-g'>Геральт</span> получил 100 оренов от Кровавого Барона за контракт, а потом пошёл к <span class='hero-l'>Лютику</span> и расплатился этими деньгами за старый долг. Какую функцию денег выполняет этот расчёт?",
+    opts:["Мера стоимости","Средство накопления","Средство обращения","Мировые деньги"],
+    ans:2,
+    fb:"✦ Верно! Средство обращения — деньги используются при расчётах: для оплаты товаров, услуг и погашения долгов. Геральт платит — это обращение.",
+    trap:"«Мера стоимости» — деньги служат для оценки цены товара. «Накопление» — деньги откладывают, не тратят. Геральт их тратит.",
+    hint:"Геральт деньги ТРАТИТ — передаёт их от одного человека другому в расчёт. Какая это функция?",
+    ref:"Деньги и банки"
+  },
+  {
+    src:"zoltan", topic:"Банки",
+    text:"<span class='hero-z'>Золтан</span> положил деньги в банк под 8% годовых. <span class='hero-l'>Лютик</span> взял там же кредит под 18%. Это коммерческий банк. Чем он отличается от Центрального банка РФ?",
+    opts:["Коммерческий банк принимает вклады от населения; ЦБ — не принимает","Коммерческий банк не платит налоги; ЦБ платит","Коммерческий банк выпускает деньги; ЦБ — нет","ЦБ выдаёт кредиты населению; коммерческий — нет"],
+    ans:0,
+    fb:"✦ Верно! Коммерческие банки работают с населением: принимают вклады, выдают кредиты. ЦБ РФ обслуживает только другие банки и государство — с населением напрямую не работает.",
+    trap:"Деньги ВЫПУСКАЕТ только ЦБ — это его монополия. Коммерческие банки денег не печатают. Не перепутай!",
+    hint:"Кто выпускает деньги? Кто принимает вклады у обычных людей — ЦБ или коммерческий банк?",
+    ref:"Деньги и банки"
+  },
+  {
+    src:"lutik", topic:"Инфляция",
+    text:"<span class='hero-l'>Лютик</span> заметил: год назад пинта пива стоила 5 оренов, сегодня — 8. Зарплата та же. На те же деньги можно купить меньше. Как называется этот процесс?",
+    opts:["Дефляция","Девальвация","Инфляция","Деноминация"],
+    ans:2,
+    fb:"✦ Верно! Инфляция — устойчивый рост общего уровня цен, при котором покупательная способность денег снижается. Лютик на те же орены купит меньше пива.",
+    trap:"Дефляция — снижение цен (обратное инфляции). Девальвация — снижение курса валюты. Деноминация — изменение номинала купюр.",
+    hint:"Цены растут, деньги «дешевеют», на ту же сумму меньше купишь. Как это называется?",
+    ref:"Деньги и банки"
+  },
+  {
+    src:"tlou", topic:"Бартер",
+    text:"В постапокалипсисе <span class='hero-f'>Джоэл</span> и Тесс обменивают патроны на аптечки у Билла. Никаких денег — только прямой обмен вещами. Как называется такой способ обмена?",
+    opts:["Косвенный обмен через посредника","Бартер","Кредитная сделка","Безналичный расчёт"],
+    ans:1,
+    fb:"✦ Верно! Бартер — прямой обмен товара на товар без денег. В мире TLOU классический бартер: деньги потеряли смысл вместе с цивилизацией.",
+    trap:"«Косвенный обмен» — когда деньги служат посредником. Здесь денег нет — обмен прямой.",
+    hint:"Товар на товар, без денег, напрямую. Это называется...?",
+    ref:"Деньги и банки"
+  },
+  {
+    src:"tlou", topic:"Недостаток бартера",
+    text:"<span class='hero-f'>Элли</span> хочет обменять консервы на антибиотики. Но у того, у кого есть антибиотики, консервы уже есть — ему они не нужны. Сделка не состоялась. Какой главный недостаток бартера здесь виден?",
+    opts:["Невозможность определить цену товара","Необходимость двойного совпадения потребностей","Отсутствие гарантий качества","Сложность хранения скоропортящихся товаров"],
+    ans:1,
+    fb:"✦ Верно! Главный недостаток бартера — нужно найти человека, у которого есть то, что тебе нужно, И которому нужно то, что есть у тебя. Деньги решают эту проблему.",
+    trap:"«Невозможность определить цену» — не главный изъян бартера. Проблема именно в поиске партнёра с совпадающими потребностями.",
+    hint:"Почему сделка сорвалась? Партнёру не нужно то, что предлагает Элли. Как называется эта проблема бартера?",
+    ref:"Деньги и банки"
+  },
+
+  // ═══ БЛОК 4 — ПРЕДПРИНИМАТЕЛЬСТВО ═══
+  {
+    src:"lutik", topic:"Признаки предпринимательства",
+    text:"<span class='hero-l'>Лютик</span> открыл театр «Лютиков Приют»: нанял актёров, арендовал здание, продаёт билеты. Рискует деньгами — зато надеется на прибыль. Какой ключевой признак предпринимательства здесь выражен?",
+    opts:["Работа по найму за стабильную зарплату","Самостоятельная деятельность на свой риск с целью прибыли","Выполнение государственного заказа","Некоммерческая деятельность"],
+    ans:1,
+    fb:"✦ Верно! Предпринимательство — самостоятельная деятельность, осуществляемая на свой риск, с целью систематического получения прибыли. Лютик организовал сам, рискует своим и хочет заработать.",
+    trap:"«Работа по найму» — это наёмный труд по трудовому договору. Лютик — хозяин театра, не наёмный работник.",
+    hint:"Лютик сам всё организовал, сам рискует, хочет прибыль. Как называется такая деятельность?",
+    ref:"Предпринимательство"
+  },
+  {
+    src:"zoltan", topic:"ИП — ответственность",
+    text:"<span class='hero-z'>Золтан</span> зарегистрировался как ИП и открыл лавку. Дела пошли плохо — долгов 50 000 оренов, а имущество лавки стоит только 30 000. Чем рискует Золтан как индивидуальный предприниматель?",
+    opts:["Только суммой, вложенной в лавку","Только имуществом лавки","Всем своим личным имуществом","Ничем — ИП не несут личной ответственности"],
+    ans:2,
+    fb:"✦ Верно! ИП несёт неограниченную личную имущественную ответственность. Если долгов больше, чем активов бизнеса, кредиторы могут претендовать на всё личное имущество Золтана.",
+    trap:"Ограниченная ответственность — это у ООО (только вклад в уставный капитал). У ИП — полная личная ответственность. Это принципиальное отличие!",
+    hint:"Золтан — ИП. В отличие от ООО, ИП и его личное имущество юридически не разделены.",
+    ref:"Предпринимательство"
+  },
+  {
+    src:"zoltan", topic:"ООО — ответственность",
+    text:"<span class='hero-z'>Золтан</span> и трое краснолюдов создали ООО «Краснолюдские торговые пути», вложив по 10 000 оренов каждый. Фирма обанкротилась с долгами 200 000 оренов. Сколько максимально потеряет каждый учредитель?",
+    opts:["50 000 оренов (пропорционально долгу)","10 000 оренов (только свой вклад)","Всё личное имущество","0 оренов — учредители ни за что не отвечают"],
+    ans:1,
+    fb:"✦ Верно! В ООО участники несут ответственность только в пределах своего вклада в уставный капитал. Золтан потеряет максимум 10 000 оренов. Личное имущество защищено.",
+    trap:"«Ограниченная ответственность» в названии ООО ограничена суммой вклада — не долей в общем долге фирмы.",
+    hint:"«О» в ООО — «Ограниченная». Чем ограничена ответственность учредителя?",
+    ref:"Предпринимательство"
+  },
+  {
+    src:"lutik", topic:"Факторы производства",
+    text:"Лютик перечисляет ресурсы таверны «Под виселицей»: земельный участок под зданием, столы и кухонное оборудование, труд барменов и поваров, его идея по реновации кухни. Что из перечисленного относится к фактору «капитал»?",
+    opts:["Земельный участок","Столы и кухонное оборудование","Труд барменов и поваров","Идея по реновации"],
+    ans:1,
+    fb:"✦ Верно! Капитал — созданные людьми средства производства: оборудование, инструменты, здания. Столы и кухня — физический капитал.",
+    trap:"«Земля» — отдельный фактор (природные ресурсы). «Труд» — деятельность людей. «Идея» — предпринимательство. Капитал — созданные человеком материальные ресурсы.",
+    hint:"Из четырёх факторов (земля, капитал, труд, предпринимательство) — что является созданным людьми физическим средством производства?",
+    ref:"Факторы производства"
+  },
+  {
+    src:"zoltan", topic:"Прибыль — расчёт",
+    text:"<span class='hero-z'>Золтан</span> продал гвинт-карты на 5 000 оренов. Закупка карт — 3 000, аренда лавки — 800, зарплата помощника — 700 оренов. Какова прибыль Золтана?",
+    opts:["5 000 оренов","2 000 оренов","500 оренов","1 500 оренов"],
+    ans:2,
+    fb:"✦ Верно! Прибыль = Выручка − Все издержки. 5 000 − (3 000 + 800 + 700) = 5 000 − 4 500 = 500 оренов. Маловато для краснолюда!",
+    trap:"Ловушка ОГЭ: не путай ВЫРУЧКУ (5 000 — всё полученное) и ПРИБЫЛЬ (500 — что осталось). Выручка ≠ прибыль!",
+    hint:"Прибыль = Выручка − ВСЕ расходы. Сложи все три статьи расходов Золтана и вычти из 5 000.",
+    ref:"Прибыль и издержки"
+  },
+
+  // ═══ БЛОК 5 — НАЛОГИ ═══
+  {
+    src:"geralt", topic:"Расчёт НДФЛ",
+    text:"<span class='hero-g'>Геральт</span> убил василиска и получил гонорар 1 000 оренов. Государство требует НДФЛ по ставке 13%. Сколько оренов составит налог?",
+    opts:["13 оренов","130 оренов","100 оренов","87 оренов"],
+    ans:1,
+    fb:"✦ Верно! НДФЛ = 1 000 × 13% = 130 оренов. Геральту останется 870. Государство берёт своё даже с ведьмаков.",
+    trap:"13% от 1 000 — это 130, а не 13. Цифра 13 — это СТАВКА в процентах, а не сумма налога.",
+    hint:"Налог = Доход × Ставка ÷ 100. Сколько 13% от 1 000?",
+    ref:"Налоги"
+  },
+  {
+    src:"zoltan", topic:"Прямые и косвенные налоги",
+    text:"<span class='hero-z'>Золтан</span> купил меч в оружейной лавке — в цену уже включён НДС. Потом подал декларацию и уплатил НДФЛ с дохода. Определи вид каждого налога.",
+    opts:["Оба прямые","НДФЛ — косвенный, НДС — прямой","НДФЛ — прямой, НДС — косвенный","Оба косвенные"],
+    ans:2,
+    fb:"✦ Верно! Прямые налоги — с дохода или имущества (НДФЛ). Косвенные — включены в цену товара, покупатель платит через продавца (НДС, акцизы).",
+    trap:"НДС кажется «налогом продавца», но по факту его платит покупатель через цену — поэтому он КОСВЕННЫЙ.",
+    hint:"Прямой: платишь сам из дохода. Косвенный: «спрятан» в цене товара.",
+    ref:"Налоги"
+  },
+  {
+    src:"kovir", topic:"Функции налогов",
+    text:"Правительство Ковира собирает налоги и направляет их на строительство дорог, содержание армии и выплату пенсий. Какая функция налогов реализована в первую очередь?",
+    opts:["Стимулирующая","Контрольная","Фискальная","Регулирующая"],
+    ans:2,
+    fb:"✦ Верно! Фискальная функция — пополнение государственного бюджета. «Фискус» по-латыни — «казна». Именно ради этого налоги существуют прежде всего.",
+    trap:"«Стимулирующая» — когда льготы подталкивают к нужному поведению (льготы малому бизнесу). «Регулирующая» — когда налоги влияют на производство и потребление.",
+    hint:"Первичная цель налогов — наполнить государственную казну. Как называется эта функция?",
+    ref:"Налоги"
+  },
+  {
+    src:"geralt", topic:"Налогоплательщики",
+    text:"<span class='hero-g'>Геральт</span> получил гонорар за контракт — с него возьмут НДФЛ. <span class='hero-z'>Золтан</span> ведёт торговлю как ООО — с него возьмут налог на прибыль. Кто в итоге является налогоплательщиком по российскому законодательству?",
+    opts:["Только организации (юридические лица)","Только граждане с доходом выше прожиточного минимума","Физические лица и организации, имеющие объект налогообложения","Только государственные предприятия"],
+    ans:2,
+    fb:"✦ Верно! Налогоплательщики — физические лица И организации, у которых есть объект налогообложения (доход, имущество, прибыль). И Геральт-ведьмак, и Золтан-торговец — оба платят.",
+    trap:"Налоги платят все — и люди, и фирмы. НДФЛ 13% берётся с первого рубля дохода, никакого порога «выше прожиточного минимума» нет.",
+    hint:"Из примеров в вопросе: Геральт — физическое лицо, Золтан — организация. Кого из них освобождают от налогов?",
+    ref:"Налоги"
+  },
+
+  // ═══ БЛОК 6 — СЕМЕЙНЫЙ БЮДЖЕТ ═══
+  {
+    src:"lutik", topic:"Дефицит бюджета",
+    text:"Семья <span class='hero-l'>Лютика</span> в этом месяце: доходы — 30 000 оренов (гонорары + аренда таверны), расходы — 35 000 оренов (долги + жизнь + новый камзол). Как называется это состояние бюджета?",
+    opts:["Профицит","Сбалансированный","Дефицит","Ликвидный"],
+    ans:2,
+    fb:"✦ Верно! Дефицит бюджета: расходы превышают доходы. 35 000 > 30 000 → дефицит 5 000 оренов. Лютик снова залез в долги.",
+    trap:"Профицит — наоборот: доходы > расходы. Лютик ни разу профицита не видел.",
+    hint:"Смотри на знак: Д и Р, кто из них больше? Вспомни формулу из шпаргалки.",
+    ref:"Семейный бюджет"
+  },
+  {
+    src:"kovir", topic:"Профицит бюджета",
+    text:"<span class='hero-z'>Анна Генриетта</span> подвела итоги месяца: в казну Туссента поступило 500 000 золотых, потрачено на нужды герцогства — 420 000. Как называется такое состояние бюджета?",
+    opts:["Дефицит","Профицит","Отрицательное сальдо","Налоговый излишек"],
+    ans:1,
+    fb:"✦ Верно! Профицит: доходы превышают расходы. 500 000 > 420 000 → профицит 80 000 золотых. Торговля вместо войн работает!",
+    trap:"«Отрицательное сальдо» — это синоним дефицита. «Налоговый излишек» — такого термина не существует.",
+    hint:"Картина противоположная предыдущему вопросу: Д и Р поменялись местами. Как это называется?",
+    ref:"Семейный бюджет"
+  },
+  {
+    src:"zoltan", topic:"Виды доходов",
+    text:"<span class='hero-z'>Золтан</span> за месяц получил: зарплату как управляющего таверной, дивиденды от акций торговой компании Ковира, арендную плату за сдачу склада. Что из этого является доходом от <strong>собственности</strong>?",
+    opts:["Только зарплата","Дивиденды и арендная плата","Только арендная плата","Только дивиденды"],
+    ans:1,
+    fb:"✦ Верно! Доходы от собственности — дивиденды (от акций) и рента (арендная плата). Они приходят не за труд, а за то, что у тебя есть имущество или ценные бумаги.",
+    trap:"Зарплата — доход от труда, не от собственности. Золтан получает её за то, что работает, а не за то, что владеет чем-то.",
+    hint:"Какие доходы Золтан получает не за свой труд, а потому что у него что-то есть?",
+    ref:"Семейный бюджет"
+  },
+  {
+    src:"lutik", topic:"Обязательные расходы",
+    text:"В бюджете <span class='hero-l'>Лютика</span>: квартплата (ЖКХ), покупка нового камзола, погашение кредита, ужин в ресторане, налог на имущество. Что из этого — <strong>обязательные</strong> расходы?",
+    opts:["Только квартплата","Квартплата, погашение кредита, налог на имущество","Квартплата, камзол, ресторан","Все расходы обязательны"],
+    ans:1,
+    fb:"✦ Верно! Обязательные расходы — те, что нельзя отложить без юридических или финансовых последствий: ЖКХ, налоги, погашение кредита. Камзол и ресторан — можно отложить.",
+    trap:"«Обязательные» — не значит «самые нужные Лютику». Это расходы, которые он обязан платить по закону или договору.",
+    hint:"За какую неуплату Лютика оштрафуют, выселят или передадут коллекторам?",
+    ref:"Семейный бюджет"
+  },
+  {
+    src:"geralt", topic:"Расчёт семейного бюджета",
+    text:"<span class='hero-g'>Геральт</span> за месяц заработал на трёх контрактах: 800 + 800 + 500 оренов. Потратил: еда — 400, снаряжение — 600, ночлег — 200, медикаменты — 300. Каков остаток бюджета?",
+    opts:["600 оренов","1 100 оренов","500 оренов","800 оренов"],
+    ans:0,
+    fb:"✦ Верно! Доходы: 800 + 800 + 500 = 2 100. Расходы: 400 + 600 + 200 + 300 = 1 500. Остаток: 2 100 − 1 500 = 600 оренов. Геральт хоть что-то сберёг!",
+    trap:"Ловушка: сначала сложи ВСЕ доходы, потом ВСЕ расходы. 2 100 − 1 500 = 600, а не 800.",
+    hint:"Доходы = три контракта. Расходы = четыре статьи. Остаток = доходы − расходы.",
+    ref:"Семейный бюджет"
+  },
+
+  // ═══ БЛОК 7 — МАКРОЭКОНОМИКА ═══
+  {
+    src:"kovir", topic:"ВВП",
+    text:"<span class='hero-z'>Зефирин де Вузело</span>, придворный казначей Туссента, подсчитал стоимость всех товаров и услуг, произведённых на территории герцогства за год: вина, тканей, строительных работ, финансовых операций. Как называется этот показатель?",
+    opts:["Государственный бюджет","Валовой внутренний продукт (ВВП)","Национальный долг","Индекс инфляции"],
+    ans:1,
+    fb:"✦ Верно! ВВП — стоимость всех конечных товаров и услуг, произведённых на территории страны за год. Главный показатель размера экономики.",
+    trap:"«Государственный бюджет» — план доходов и расходов государства, а не стоимость всего производства страны.",
+    hint:"ВВП: Валовой (общий) + Внутренний (на территории) + Продукт (товары и услуги). Всё, что произвели за год.",
+    ref:"Макроэкономика"
+  },
+  {
+    src:"geralt", topic:"Фрикционная безработица",
+    text:"<span class='hero-g'>Геральт</span> завершил контракт в Новиграде и путешествует по Континенту в поисках более выгодного заказа. Он добровольно ищет лучший вариант. Какой вид безработицы иллюстрирует эта ситуация?",
+    opts:["Структурная","Циклическая","Фрикционная","Скрытая"],
+    ans:2,
+    fb:"✦ Верно! Фрикционная безработица — добровольный временный поиск более подходящей работы между двумя занятостями. Геральт не устарел как профессия — он просто ищет контракт получше.",
+    trap:"«Структурная» — когда профессия устарела или не востребована в регионе. Ведьмаки востребованы. Геральт просто между контрактами.",
+    hint:"Геральт ищет работу добровольно, временно, сам выбирает. Это какой вид безработицы?",
+    ref:"Рынок труда"
+  },
+  {
+    src:"tlou", topic:"Структурная безработица",
+    text:"После коллапса цивилизации профессия «менеджер торгового центра» исчезла — торговых центров больше нет. Бывшие менеджеры не могут найти работу: их навыки не нужны в новом мире. Какой вид безработицы это?",
+    opts:["Фрикционная","Структурная","Циклическая","Сезонная"],
+    ans:1,
+    fb:"✦ Верно! Структурная безработица возникает из-за изменений в структуре экономики: целые отрасли исчезают, профессии устаревают. Требуется переобучение.",
+    trap:"«Сезонная» — временная безработица по сезону (строители зимой). Здесь не сезон — отрасль исчезла навсегда.",
+    hint:"Профессия устарела из-за исчезновения целой отрасли — это структурное изменение экономики.",
+    ref:"Рынок труда"
+  },
+  {
+    src:"kovir", topic:"Интенсивный и экстенсивный рост",
+    text:"Туссент увеличил производство вина двумя способами: (1) посадил вдвое больше виноградников; (2) внедрил новую технологию брожения — тот же виноградник даёт больше вина. Какой из способов является <strong>интенсивным</strong> экономическим ростом?",
+    opts:["Только способ 1","Только способ 2","Оба способа","Ни один"],
+    ans:1,
+    fb:"✦ Верно! Интенсивный рост — увеличение производства за счёт улучшения технологий и производительности (больше отдачи от тех же ресурсов). Экстенсивный — просто больше ресурсов.",
+    trap:"«Больше виноградников» = больше ресурсов = ЭКСТЕНСИВНЫЙ. «Лучшая технология» = эффективнее используем то же = ИНТЕНСИВНЫЙ.",
+    hint:"Интенсивный = качество / технологии. Экстенсивный = количество ресурсов. Что применил Туссент в каждом случае?",
+    ref:"Макроэкономика"
+  }
+
+];
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let questions,cur,score,attempts,answered,shuffledOpts=[],correctIdx=0;
+
+function initQuiz(){questions=shuffle(allQuestions);cur=0;score=0;attempts=0;answered=false;}
+initQuiz();
+
+const qcard=document.getElementById('qcard'),qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'),qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'),qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'),qcnt=document.getElementById('qcnt'),
+  scoredisp=document.getElementById('score-disp');
+
+function renderQ(){
+  const q=questions[cur];answered=false;attempts=0;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts=idx.map(i=>q.opts[i]);correctIdx=idx.indexOf(q.ans);
+  qcard.classList.remove('question-animate');void qcard.offsetWidth;qcard.classList.add('question-animate');
+  const sc=srcConfig[q.src]||{label:'ВЕДЬМАК',cls:'q-zoltan'};
+  qheader.innerHTML=`<span class="q-source ${sc.cls}">${sc.label}</span><span class="q-topic">${q.topic}</span>`;
+  qtext.innerHTML=q.text;
+  qopts.innerHTML=shuffledOpts.map((o,i)=>{const L=['A','B','C','D'];return`<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;}).join('');
+  qfb.className='feedback-box';qfb.innerHTML='';qnext.className='next-btn';
+  qcnt.textContent=`${cur+1} / ${questions.length}`;
+  qbar.style.width=`${(cur/questions.length)*100}%`;
+  scoredisp.textContent=`✦ ${score} правильно`;
+}
+
+function answer(i){
+  if(answered)return;
+  const q=questions[cur];
+  const btns=document.querySelectorAll('.opt-btn');
+  const ok=i===correctIdx;
+  if(ok){
+    answered=true;
+    if(attempts===0)score++;
+    scoredisp.textContent=`✦ ${score} правильно`;
+    btns.forEach(b=>b.disabled=true);btns[i].classList.add('correct');
+    let fb=q.fb+' 🥳';
+    if(q.trap)fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML=fb;qfb.className='feedback-box ok';
+    qnext.className='next-btn show';
+    qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+  } else {
+    attempts++;btns[i].classList.add('wrong');btns[i].disabled=true;
+    if(attempts===1){
+      qfb.innerHTML=`😞 Не то. ${q.hint}<br><span class="fb-hint-ref">📖 Шпора: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка!</span>`;
+      qfb.className='feedback-box fail';
+    } else {
+      answered=true;btns.forEach(b=>b.disabled=true);btns[correctIdx].classList.add('correct');
+      let fb=`😔 Правильный ответ выделен.<br>${q.fb}`;
+      if(q.trap)fb+=`<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML=fb;qfb.className='feedback-box fail';
+      qnext.className='next-btn show';
+      qnext.textContent=cur<questions.length-1?'Следующий →':'Узнать итог →';
+    }
+  }
+}
+
+qnext.addEventListener('click',()=>{cur++;if(cur>=questions.length){showResults();return;}renderQ();});
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results');res.classList.add('show');
+  const s=score,t=questions.length;
+  document.getElementById('rscore').textContent=s;
+  document.getElementById('rtotal').textContent=`из ${t} вопросов`;
+  let title,story,rankClass,rankText;
+  if(s>=27){title='Золтан зовёт в партнёры 💰';story='Ты разбираешься в рынке лучше большинства торговцев Новиграда. Спрос, предложение, налоги, бюджет — всё щёлкнуло. Золтан уже готовит контракт о партнёрстве.';rankClass='rank-s';rankText='S-ранг · Партнёр Золтана';}
+  else if(s>=22){title='Место в Торговом доме Ковира 📜';story='Хорошая работа. Большинство тем покорились. Повтори различие прямых и косвенных налогов и расчёт прибыли — на ОГЭ они встречаются часто.';rankClass='rank-a';rankText='A-ранг · Готов к ОГЭ';}
+  else if(s>=16){title='Ученик с задатками 🔨';story='Основы есть, детали плывут. Вернись к шпаргалке — особенно к типам экономики и разнице ИП vs ООО. Там несколько вопросов на ОГЭ.';rankClass='rank-b';rankText='B-ранг · Нужно повторить';}
+  else if(s>=10){title='Наёмный работник 😅';story='Золтан берёт тебя — но только на склад. Перечитай шпаргалку про законы спроса/предложения и семейный бюджет — там простые очки.';rankClass='rank-c';rankText='C-ранг · Повтори снова';}
+  else{title='Лютик-уровень финансов 🎭';story='«Я не понимаю, куда деваются деньги» — Лютик, всегда. Начни со шпаргалки. Особенно фискальная функция налогов и закон спроса — это база.';rankClass='rank-d';rankText='D-ранг · Шпаргалка ждёт';}
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rstory').textContent=story;
+  const rr=document.getElementById('rrank');rr.textContent=rankText;rr.className='results-rank '+rankClass;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  initQuiz();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display='block';
+  renderQ();
+});
+
+renderQ();
+</script>
+</body>
+</html>
