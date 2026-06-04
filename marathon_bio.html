@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биомарафон — ОГЭ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0a120d;
+    --bg2:   #0f1a12;
+    --bg3:   #152018;
+    --bg4:   #1c2a20;
+    --text:  #eef5ef;
+    --muted: #7a9080;
+    --border:  rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --b1: #16a34a;
+    --b2: #0891b2;
+    --b3: #7c3aed;
+    --b4: #c2410c;
+    --b5: #059669;
+    --green: #1db36e;
+    --red:   #dc2626;
+    --gold:  #ca8a04;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size: 16px;
+    line-height: 1.6; min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 0%, rgba(22,163,74,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(5,150,105,0.08) 0%, transparent 55%);
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+  .hero { text-align: center; padding: 48px 0 32px; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .hero-title { font-size: clamp(28px,5vw,48px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+  .hero-title .g1 { color: var(--b1); }
+  .hero-title .g2 { color: var(--b5); }
+  .hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .hero::after { content:''; display:block; margin: 24px auto 0; width:160px; height:2px; border-radius:2px; background: linear-gradient(90deg,var(--b1),var(--b2),var(--b5)); }
+  .sources-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  .src-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid; }
+  .sb1 { background: rgba(22,163,74,0.1);  color: var(--b1); border-color: rgba(22,163,74,0.3); }
+  .sb2 { background: rgba(8,145,178,0.1);   color: var(--b2); border-color: rgba(8,145,178,0.3); }
+  .sb3 { background: rgba(124,58,237,0.1);  color: #a78bfa;   border-color: rgba(124,58,237,0.3); }
+  .sb4 { background: rgba(194,65,12,0.1);   color: #fb923c;   border-color: rgba(194,65,12,0.3); }
+  .sb5 { background: rgba(5,150,105,0.1);   color: var(--b5); border-color: rgba(5,150,105,0.3); }
+  .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .stat-pill { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 100px; }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; }
+  .stat-num.green { color: var(--green); }
+  .stat-num.red   { color: var(--red); }
+  .stat-num.gold  { color: var(--gold); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background: linear-gradient(90deg,var(--b1),var(--b2),var(--b5)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .progress-counter { font-size:12px; font-weight:700; color:var(--muted); min-width:60px; text-align:right; font-family:'Space Mono',monospace; }
+  .q-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .q-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-src { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-src.src-b1 { background: var(--b1); }
+  .q-src.src-b2 { background: var(--b2); }
+  .q-src.src-b3 { background: var(--b3); }
+  .q-src.src-b4 { background: var(--b4); }
+  .q-src.src-b5 { background: var(--b5); }
+  .q-src.src-extra { background: #854d0e; }
+  .q-src.src-egg { background: linear-gradient(135deg, #f59e0b, #16a34a); }
+  .q-card.is-egg { border-color: rgba(245,158,11,0.5); background: linear-gradient(180deg, #0f1a08 0%, var(--bg2) 60px); }
+  .q-card.is-egg .q-header { background: rgba(245,158,11,0.08); border-bottom-color: rgba(245,158,11,0.25); }
+  .egg-banner { text-align:center; padding: 18px 0 6px; font-size:32px; letter-spacing:8px; animation: eggpulse 1.2s ease-in-out infinite; }
+  @keyframes eggpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .q-num { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); margin-left:auto; }
+  .q-body { padding:22px 22px 18px; }
+  .q-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .q-text .hero-name { font-weight:700; background:linear-gradient(120deg,#4ade80,#059669); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .q-text .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .q-text .neq { color:#D81B60; font-weight:700; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg3); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:rgba(22,163,74,0.5); background:rgba(22,163,74,0.08); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--green); background:rgba(29,179,110,0.12); }
+  .opt-btn.correct .opt-letter { color:var(--green); }
+  .opt-btn.wrong { border-color:var(--red); background:rgba(220,38,38,0.1); color:#fca5a5; }
+  .opt-btn.wrong .opt-letter { color:var(--red); }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:12px 16px; border-radius:8px; font-size:14px; line-height:1.6; display:none; animation:fadeIn 0.2s ease; }
+  .feedback-box.ok { background:rgba(29,179,110,0.1); border:1px solid rgba(29,179,110,0.3); color:#86efac; display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.3); color:#fca5a5; display:block; }
+  .q-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+  .results { display:none; text-align:center; padding:56px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:64px; margin-bottom:16px; }
+  .results-title { font-size:clamp(24px,4vw,40px); font-weight:700; margin-bottom:8px; }
+  .results-score { font-size:clamp(64px,11vw,100px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--b1); }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:24px; }
+  .results-breakdown { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
+  .rb { font-size:13px; font-weight:600; padding:6px 16px; border-radius:20px; }
+  .rb-ok { background:rgba(29,179,110,0.12); color:var(--green); }
+  .rb-fail { background:rgba(220,38,38,0.12); color:#f87171; }
+  .rb-pct { background:rgba(22,163,74,0.12); color:#4ade80; }
+  .results-rank { font-size:16px; font-weight:700; color:var(--text); margin-bottom:32px; padding:14px 24px; background:var(--bg2); border:1px solid var(--border2); border-radius:10px; display:inline-block; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .q-animate { animation:fadeIn 0.28s ease; }
+  .intro-screen { animation:fadeIn 0.4s ease; }
+  .intro-card { background:var(--bg2); border:1px solid var(--border2); border-radius:16px; padding:32px 28px; margin-bottom:20px; position:relative; overflow:hidden; }
+  .intro-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(22,163,74,0.12) 0%, transparent 65%); pointer-events:none; }
+  .intro-monster-count { font-family:'Space Mono',monospace; font-size:clamp(36px,7vw,64px); font-weight:700; color:#4ade80; line-height:1; margin-bottom:6px; text-shadow:0 0 40px rgba(22,163,74,0.4); }
+  .intro-monster-label { font-size:14px; color:var(--muted); margin-bottom:28px; letter-spacing:0.05em; }
+  .intro-text { font-size:17px; line-height:1.75; color:var(--text); margin-bottom:28px; }
+  .intro-text em { color:#4ade80; font-style:normal; font-weight:600; }
+  .intro-rules { display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .intro-rule { display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); background:var(--bg3); border-radius:8px; padding:10px 14px; }
+  .intro-rule-icon { font-size:18px; flex-shrink:0; }
+  .start-btn { width:100%; font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; background:linear-gradient(135deg,#16a34a,#059669); color:#fff; border:none; padding:16px 32px; border-radius:12px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; letter-spacing:0.02em; }
+  .start-btn:hover { opacity:0.9; transform:translateY(-2px); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · Биомарафон 2026</div>
+    <h1 class="hero-title"><span class="g1">Био</span><br><span class="g2">марафон</span></h1>
+    <p class="hero-sub">Все 5 квестов · клетка → экосистема · BG3 × TLOU × Ведьмак</p>
+  </div>
+  <div id="intro-screen" class="intro-screen">
+    <div class="intro-card">
+      <div class="intro-monster-count" id="monster-count">167</div>
+      <div class="intro-monster-label">вопросов впереди</div>
+      <div class="intro-text">
+        Геральт и Халсин ведут тебя через <em>всю биологию ОГЭ</em>.<br>
+        Клетка, царства, эволюция, тело человека, мозг и экосистемы — всё вперемешку.<br><br>
+        Элли, Регис, Элизабет, Подсолнух — они рядом.<br>
+        Щелкун болеет за тебя. Шэдоухарт наблюдает из тени.<br><br>
+        Где-то среди вопросов спрятаны <em>8 секретов</em> — найди их все.
+      </div>
+      <div class="intro-rules">
+        <div class="intro-rule"><span class="intro-rule-icon">🌿</span>Все темы вперемешку — клетка, зоология, человек, экология</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🎯</span>Одна попытка на вопрос — верно или нет, без подсказок</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🥚</span>8 пасхалок спрятаны среди вопросов — они появятся неожиданно</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🏃</span>Можно остановиться — прогресс не сохраняется, но это не повод не начинать</div>
+      </div>
+      <button class="start-btn" onclick="startMarathon()">Начать марафон →</button>
+    </div>
+    <div class="sources-row">
+      <span class="src-badge sb1">Б1 — Живое и опасное</span>
+      <span class="src-badge sb2">Б2 — Четыре царства</span>
+      <span class="src-badge sb3">Б3 — Друзья и монстры</span>
+      <span class="src-badge sb4">Б4 — Глубина человечности</span>
+      <span class="src-badge sb5">Б5 — Инстинкт и экосистема</span>
+    </div>
+  </div>
+  <div id="quiz-area" style="display:none">
+    <div class="stats-bar">
+      <div class="stat-pill"><span class="stat-num green" id="s-ok">0</span><span class="stat-label">✓ Верно</span></div>
+      <div class="stat-pill"><span class="stat-num red" id="s-err">0</span><span class="stat-label">✗ Ошибок</span></div>
+      <div class="stat-pill"><span class="stat-num gold" id="s-left">0</span><span class="stat-label">Вопросов осталось</span></div>
+      <div class="stat-pill" style="border-color:rgba(245,158,11,0.3)"><span class="stat-num" style="color:#f59e0b" id="s-egg">0 / 8</span><span class="stat-label">🥚 Секретов</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="qbar"></div></div>
+      <span class="progress-counter" id="qcnt">1 / —</span>
+    </div>
+    <div class="q-card q-animate" id="qcard">
+      <div class="q-header" id="qheader"></div>
+      <div class="q-body">
+        <div class="q-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="q-footer">
+        <button class="next-btn" id="qnext">Дальше →</button>
+      </div>
+    </div>
+  </div>
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-breakdown" id="rbreak"></div>
+    <div class="results-rank" id="rrank"></div>
+    <button class="restart-btn" id="restart">Марафон заново</button>
+  </div>
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все биоквесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="bio_quest1_cell.html"><span class="qp-num" style="background:#16a34a;color:#fff">1</span><span class="qp-info"><span class="qp-name">Живое и опасное</span><span class="qp-sub">Клетка, ткани, методы · TLOU</span></span><span class="qp-badge">Квест</span></a>
+      <a class="quest-pill" href="bio_quest2_kingdoms.html"><span class="qp-num" style="background:#0891b2;color:#fff">2</span><span class="qp-info"><span class="qp-name">Битва четырёх царств</span><span class="qp-sub">Бактерии, грибы, вирусы, растения</span></span><span class="qp-badge">Квест</span></a>
+      <a class="quest-pill" href="bio_quest3_evolution.html"><span class="qp-num" style="background:#7c3aed;color:#fff">3</span><span class="qp-info"><span class="qp-name">Друзья и монстры</span><span class="qp-sub">Зоология, эволюция · Ведьмак</span></span><span class="qp-badge">Квест</span></a>
+      <a class="quest-pill" href="bio_q4_human_body.html"><span class="qp-num" style="background:#c2410c;color:#fff">4</span><span class="qp-info"><span class="qp-name">Глубина человечности</span><span class="qp-sub">Скелет, кровь, иммунитет · TLOU</span></span><span class="qp-badge">Квест</span></a>
+      <a class="quest-pill" href="bio_quest5_brain_ecology.html"><span class="qp-num" style="background:#059669;color:#fff">5</span><span class="qp-info"><span class="qp-name">Инстинкт и экосистема</span><span class="qp-sub">Мозг, рефлексы, экология · BG3</span></span><span class="qp-badge">Квест</span></a>
+      <a class="quest-pill quest-active" href="#"><span class="qp-num" style="background:linear-gradient(135deg,#16a34a,#059669);color:#fff">∞</span><span class="qp-info"><span class="qp-name">Биомарафон</span><span class="qp-sub">Все темы · ~167 вопросов</span></span><span class="qp-badge qp-here">Здесь</span></a>
+    </div>
+  </div>
+</div>
+<script>
+const b1Questions = [
+  // ── ПРИЗНАКИ ЖИВОГО ──
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Джоэл</span> осматривает щелкуна. Заражённый дышит, питается, двигается, реагирует на звук. Какой признак живого является самым универсальным — присущим <span class='term'>любому</span> живому организму без исключения?",
+    opts:["Обмен веществ и превращение энергии","Способность к движению","Высокая температура тела","Наличие нервной системы"],
+    ans:0,
+    fb:"✦ Верно! Обмен веществ — фундаментальный признак всего живого. Даже у кораллов и грибков он есть. Движение или нервная система — не у всех организмов.",
+    trap:"Ловушка ОГЭ: движение есть у большинства животных, но не у растений (которые тоже живые). Обмен веществ — у всех без исключения.",
+    hint:"Подумай: у каких живых организмов НЕТ движения? А обмен веществ есть у всех — от бактерий до китов.",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Элли</span> читает о КЦИ: гриб кордицепс мутировал и смог заражать людей — это раньше было невозможно. Какое <span class='term'>свойство всего живого</span> позволило грибку адаптироваться к температуре тела человека (+37°C)?",
+    opts:["Наследственность и изменчивость","Дыхание","Рост и развитие","Выделение"],
+    ans:0,
+    fb:"✦ Верно! Изменчивость — случайные мутации в ДНК. Наследственность — передача этих изменений потомству. Именно так работает эволюция: выжили те штаммы, которые случайно стали термоустойчивыми.",
+    trap:"Ловушка ОГЭ: рост и развитие — это один из 8 признаков живого, но он не объясняет адаптацию. Адаптация = изменчивость + наследственность + отбор.",
+    hint:"Гриб изменился и передал это изменение потомству. Как называется эта пара свойств живого?",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Дина</span> замечает: щелкун повернул голову точно на её кашель — за 40 метров. Грибковые наросты на голове дают ему это «чувство». Какой признак живого здесь демонстрируется?",
+    opts:["Раздражимость","Размножение","Обмен веществ","Дыхание"],
+    ans:0,
+    fb:"✦ Верно! Раздражимость — способность реагировать на раздражители из среды. У щелкунов это эхолокация через КЦИ-наросты. У людей — нервная система.",
+    trap:"",
+    hint:"Организм реагирует на внешний сигнал (звук). Как называется эта способность?",
+    ref:"Признаки живого 🧬"
+  },
+  {
+    topic:"Признаки живого",
+    text:"<span class='hero-name'>Элли</span> спорит с учёным Светлячков: «Вирусы — это живые?» Учёный отвечает: «Нет, не совсем». Какой ключевой признак живого у вирусов <span class='term'>отсутствует</span>?",
+    opts:["Клеточное строение","Наследственность","Изменчивость","Размножение"],
+    ans:0,
+    fb:"✦ Верно! Вирусы — неклеточная форма жизни. У них нет клетки, нет собственного обмена веществ. Они могут размножаться только внутри чужой клетки-хозяина. КЦИ — гриб, у него клетки есть.",
+    trap:"Ловушка ОГЭ: вирусы УМЕЮТ размножаться и изменяться — но только внутри клетки. Клеточного строения у них нет — вот главное.",
+    hint:"Вирус состоит из ДНК/РНК и белковой оболочки. Клеток у него нет. Что из 8 признаков живого это нарушает?",
+    ref:"Признаки живого 🧬"
+  },
+
+  // ── МЕТОДЫ БИОЛОГИИ ──
+  {
+    topic:"Методы биологии",
+    text:"<span class='hero-name'>Джоэл</span> несколько дней наблюдал за патрулём бегунов — не вступая в контакт, только записывал маршруты и время. Какой метод биологии он применял?",
+    opts:["Наблюдение","Эксперимент","Моделирование","Сравнительный"],
+    ans:0,
+    fb:"✦ Верно! Наблюдение — изучение без вмешательства. Джоэл не менял условия — только фиксировал. Эксперимент предполагает активное изменение условий.",
+    trap:"",
+    hint:"Джоэл не вмешивался, не менял условия, только смотрел и записывал. Как называется такой метод?",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"<span class='hero-name'>Дина</span> проводит опыт: делит клетки КЦИ на две группы. В первую добавляет сыворотку Элли, во вторую — нет. В первой группе клетки погибли. Как называется <span class='term'>вторая группа</span> в этом эксперименте?",
+    opts:["Контрольная группа","Независимая переменная","Зависимая переменная","Гипотеза"],
+    ans:0,
+    fb:"✦ Верно! Контрольная группа — та, где условия не менялись (без сыворотки). Она нужна для сравнения. Независимая переменная — то, что менял исследователь (добавил сыворотку или нет).",
+    trap:"Ловушка ОГЭ: контрольная группа — НЕ та, где что-то изменилось. Это эталон сравнения — «обычные условия».",
+    hint:"В какой группе ничего не меняли? Именно она называется контрольной.",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"Учёные Светлячков сравнивали строение обычного гриба Ophiocordyceps (паразит муравьёв) и мутировавшего КЦИ (паразит людей). Какой метод биологии они использовали?",
+    opts:["Сравнительный","Исторический","Экспериментальный","Моделирование"],
+    ans:0,
+    fb:"✦ Верно! Сравнительный метод — поиск сходства и различий между объектами. Именно сравнение помогло понять, как гриб изменился, чтобы заражать людей.",
+    trap:"",
+    hint:"Учёные искали сходства и различия между двумя видами гриба. Как называется этот метод?",
+    ref:"Методы биологии 🔬"
+  },
+  {
+    topic:"Методы биологии",
+    text:"Специалисты FEDRA написали программу, которая рассчитывала, куда полетят споры КЦИ при разных направлениях ветра — чтобы спланировать эвакуацию Бостонской зоны. Какой метод биологии они применили?",
+    opts:["Моделирование","Наблюдение","Описание","Сравнительный"],
+    ans:0,
+    fb:"✦ Верно! Моделирование — создание аналога (модели) реального процесса. Компьютерная симуляция — это модель. Метод позволяет изучать процессы, которые трудно наблюдать напрямую.",
+    trap:"",
+    hint:"Создали аналог реального процесса — не настоящий, а искусственный. Как называется такой метод?",
+    ref:"Методы биологии 🔬"
+  },
+
+  // ── ПРИБОРЫ ──
+  {
+    topic:"Биологические приборы",
+    text:"<span class='hero-name'>Джоэл</span> находит в заброшенной лаборатории прибор, который увеличивает изображение клеток КЦИ в <span class='term'>400 раз</span>. Что это за прибор?",
+    opts:["Световой микроскоп","Лупа","Спирометр","Термостат"],
+    ans:0,
+    fb:"✦ Верно! Световой микроскоп даёт увеличение до ×2000. Лупа — лишь ×2–30 (не хватит для клеток). Спирометр и термостат — вообще не оптические приборы.",
+    trap:"Ловушка ОГЭ: лупа и микроскоп — оба увеличивают, но кратность разная. Клетки видно только под микроскопом.",
+    hint:"Лупа — это до ×30. Клетки видны только в прибор с увеличением сотни и тысячи раз.",
+    ref:"Биологические приборы 🔭"
+  },
+  {
+    topic:"Биологические приборы",
+    text:"В лаборатории Светлячков культуры КЦИ выращивают при строго +37°C — температуре человеческого тела. Какой прибор поддерживает эту температуру постоянной?",
+    opts:["Термостат","Термометр","Спирометр","рН-метр"],
+    ans:0,
+    fb:"✦ Верно! Термостат — поддерживает заданную температуру. Термометр — только измеряет. Спирометр — объём лёгких. рН-метр — кислотность среды.",
+    trap:"Ловушка ОГЭ: термометр ИЗМЕРЯЕТ, а термостат ПОДДЕРЖИВАЕТ. Разные функции!",
+    hint:"Нужен прибор, который не просто показывает температуру, а удерживает её постоянной.",
+    ref:"Биологические приборы 🔭"
+  },
+
+  // ── СТРОЕНИЕ КЛЕТКИ ──
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Элли</span> рассматривает клетку мха под микроскопом. Она видит зелёные зёрна внутри. Что это за структуры?",
+    opts:["Хлоропласты — пластиды для фотосинтеза","Митохондрии — органоиды дыхания","Лизосомы — пузырьки с ферментами","Вакуоли с клеточным соком"],
+    ans:0,
+    fb:"✦ Верно! Хлоропласты содержат зелёный пигмент хлорофилл — поэтому видны как зелёные зёрна. Они есть только в клетках растений и водорослей.",
+    trap:"Ловушка ОГЭ: зелёный цвет = хлоропласты. Митохондрии тоже есть в растениях, но они не зелёные и очень мелкие.",
+    hint:"Зелёный цвет клеткам растений придаёт пигмент хлорофилл. В каком органоиде он содержится?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Дина</span> изучает клетку из ткани заражённого. В ней есть ядро, митохондрии, рибосомы, лизосомы — но нет клеточной стенки, нет хлоропластов, нет крупных вакуолей. Какой тип клетки она изучает?",
+    opts:["Животная клетка","Растительная клетка","Прокариотическая (бактерия)","Клетка гриба"],
+    ans:0,
+    fb:"✦ Верно! Животная клетка: нет клеточной стенки, нет пластид, нет центральной вакуоли. Есть лизосомы и клеточный центр. Клетки человека и заражённых — животного типа.",
+    trap:"Ловушка ОГЭ: у клеток грибов тоже нет хлоропластов и большой вакуоли, но у них есть клеточная стенка (из хитина). Животная — без стенки.",
+    hint:"Клетка без стенки, без хлоропластов, без большой вакуоли, но с лизосомами — это какой тип?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"КЦИ — это гриб (эукариот). Чем его клетки принципиально отличаются от клеток <span class='term'>бактерий</span>?",
+    opts:["У гриба есть оформленное ядро с мембраной, у бактерий — нет","У гриба нет рибосом, у бактерий — есть","Бактерии крупнее клеток гриба","У гриба нет ДНК, у бактерий — есть"],
+    ans:0,
+    fb:"✦ Верно! Бактерии — прокариоты: нет оформленного ядра. Их ДНК находится в нуклеоиде — прямо в цитоплазме, без мембраны. Поэтому антибиотики помогают против бактерий, но не против КЦИ.",
+    trap:"Ловушка ОГЭ: ДНК есть у всех — и у бактерий, и у грибов. Разница в том, есть ли у ДНК ядерная мембрана.",
+    hint:"Прокариот = до ядра. Что это значит для клетки бактерии?",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Джоэл</span> видит в клетке мелкие органоиды, которые разрушают отработавшие белки и уничтожают попавшие внутрь частицы КЦИ. Что это?",
+    opts:["Лизосомы","Митохондрии","Хлоропласты","Аппарат Гольджи"],
+    ans:0,
+    fb:"✦ Верно! Лизосомы — «пищеварительная система клетки». Содержат ферменты, расщепляющие органические молекулы и чужеродные частицы. Митохондрии — энергия (АТФ).",
+    trap:"",
+    hint:"Какой органоид содержит ферменты для переваривания? Его называют «пищеварительным пузырьком».",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"<span class='hero-name'>Элли</span> рассматривает растительную клетку и видит, что почти весь её центр занят одним большим пузырём с клеточным соком. Как называется эта структура?",
+    opts:["Центральная вакуоль","Ядро","Хлоропласт","Митохондрия"],
+    ans:0,
+    fb:"✦ Верно! Центральная вакуоль — характерная структура зрелой растительной клетки. Создаёт тургорное давление — «надутость» клетки. В животных клетках такой вакуоли нет.",
+    trap:"Ловушка ОГЭ: не путай с ядром — ядро плотное, тёмное, содержит ДНК. Вакуоль — большой, прозрачный пузырь с жидкостью.",
+    hint:"Большой пузырь с жидкостью, занимающий центр растительной клетки — это не ядро.",
+    ref:"Строение клетки 🦠"
+  },
+  {
+    topic:"Строение клетки",
+    text:"Какой органоид есть <span class='term'>во всех без исключения</span> живых клетках — и у растений, и у животных, и у бактерий?",
+    opts:["Рибосомы","Митохондрии","Хлоропласты","Клеточный центр"],
+    ans:0,
+    fb:"✦ Верно! Рибосомы есть у всех — они синтезируют белки. Это самый «древний» органоид. Митохондрии — у эукариот. Хлоропласты — только у растений. Клеточный центр (центриоли) — только у животных клеток.",
+    trap:"Ловушка ОГЭ: митохондрии есть у большинства эукариот, но не у прокариот (бактерий). Рибосомы — единственный органоид всех клеток.",
+    hint:"Этот органоид отвечает за синтез белков и есть даже у бактерий.",
+    ref:"Строение клетки 🦠"
+  },
+
+  // ── ТКАНИ ──
+  {
+    topic:"Ткани человека",
+    text:"Кожа <span class='hero-name'>Джоэла</span> защищает его от спор КЦИ — пока не повреждена. Поверхностный слой кожи образован плотно прилегающими клетками с малым количеством межклеточного вещества. К какому типу ткани он относится?",
+    opts:["Эпителиальная","Соединительная","Мышечная","Нервная"],
+    ans:0,
+    fb:"✦ Верно! Признаки эпителиальной ткани: клетки плотно прилегают, межклеточного вещества мало, обновляется быстро. Покрывает тело снаружи и выстилает полости внутренних органов.",
+    trap:"Ловушка ОГЭ: в соединительной ткани, наоборот, МНОГО межклеточного вещества. Запомни: эпителий — клетки плотно, соединительная — вещества много.",
+    hint:"Снаружи тела, клетки плотно прилегают, межклеточного вещества почти нет. Какая ткань?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"<span class='hero-name'>Элли</span> слышит удар щелкуна — нервный импульс от уха проходит по клеткам с длинными отростками к мозгу за доли секунды. Клетки какой ткани это обеспечивают?",
+    opts:["Нервная","Эпителиальная","Соединительная","Мышечная"],
+    ans:0,
+    fb:"✦ Верно! Нервная ткань состоит из нейронов (с длинными отростками — аксоном и дендритами) и нейроглии. Свойства нервной ткани: возбудимость и проводимость импульса.",
+    trap:"",
+    hint:"Длинные отростки, передают импульсы — это клетки какой ткани?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"В крови <span class='hero-name'>Элли</span> — антитела к КЦИ. Кровь — это тип ткани. К какому виду ткани она относится?",
+    opts:["Соединительная","Эпителиальная","Мышечная","Нервная"],
+    ans:0,
+    fb:"✦ Верно! Соединительная ткань включает кровь, кость, хрящ, жировую ткань. Их объединяет большое количество межклеточного вещества. У крови — жидкое межклеточное вещество: плазма.",
+    trap:"Ловушка ОГЭ: кровь — соединительная ткань. Это нестандартно, но так. Запомни: кость, хрящ, кровь, лимфа, жир — всё соединительная.",
+    hint:"Кровь, кость, хрящ, жир — что у них общего? Много межклеточного вещества. Это какой тип ткани?",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"<span class='hero-name'>Дина</span> прижимает руку к груди — там мерно бьётся что-то живое, чего она не контролирует сознательно. Этот орган не устаёт и работает непрерывно всю жизнь. Какой тип мышечной ткани образует его стенки?",
+    opts:["Сердечная мышечная ткань","Гладкая мышечная ткань","Поперечнополосатая (скелетная) мышечная ткань","Нервная ткань"],
+    ans:0,
+    fb:"✦ Верно! Сердечная мышечная ткань — особый тип: непроизвольная (как гладкая), но быстрая и ритмичная (как поперечнополосатая). Клетки соединены специальными контактами — вставочными дисками.",
+    trap:"Ловушка ОГЭ: 3 вида мышечной ткани: гладкая (стенки органов, непроизвольная), поперечнополосатая (скелетные мышцы, произвольная), сердечная (работает непроизвольно, но очень быстро и ритмично).",
+    hint:"Мышца работает без нашего сознательного контроля — как гладкая. Но она быстрая и ритмичная — как скелетная. Специальный третий тип, только для одного органа.",
+    ref:"Ткани человека 🩻"
+  },
+  {
+    topic:"Ткани человека",
+    text:"Что такое <span class='term'>ткань</span> в биологии? Выбери верное определение.",
+    opts:["Группа клеток сходного строения, выполняющих общую функцию","Один специализированный орган с несколькими функциями","Совокупность органов одной системы","Совокупность всех клеток организма"],
+    ans:0,
+    fb:"✦ Верно! Ткань — уровень организации между клеткой и органом. Ключевые слова: сходное строение + общая функция. Например, нервная ткань — нейроны + нейроглия, обе для передачи импульса.",
+    trap:"",
+    hint:"Ткань — это не орган и не клетка. Что стоит между ними в иерархии организации живого?",
+    ref:"Ткани человека 🩻"
+  },
+
+  // ── ДОП. СЛОЖНЫЕ ──
+  {
+    topic:"Уровни организации живого",
+    text:"<span class='hero-name'>Джоэл</span> осматривает рану: сначала КЦИ повреждает отдельные клетки, потом — ткани, потом органы. В правильном порядке от меньшего к большему это:",
+    opts:["Клетка → Ткань → Орган → Система органов → Организм","Ткань → Клетка → Орган → Организм","Организм → Система → Орган → Ткань → Клетка","Клетка → Орган → Ткань → Организм"],
+    ans:0,
+    fb:"✦ Верно! Иерархия уровней организации живого: молекулярный → клеточный → тканевой → органный → системный → организменный. Для ОГЭ главное: Клетка → Ткань → Орган → Система органов → Организм.",
+    trap:"Ловушка ОГЭ: порядок нарушать нельзя. Ткань всегда состоит из клеток, орган — из тканей.",
+    hint:"Вспомни иерархию: самое маленькое — клетка. Что следующее?",
+    ref:"Уровни организации 🧬"
+  }
+];
+
+const b2Questions = [
+
+  // ── БАКТЕРИИ ──
+  {
+    src:"re", topic:"Бактерии — прокариоты",
+    text:"<span class='hero-name name-eliz'>Элизабет Беннет</span> врывается в лабораторию Umbrella. На столе — препарат клетки под микроскопом: ядра нет, ДНК лежит прямо в цитоплазме, митохондрий нет. Как называются организмы с <span class='term'>таким типом клеточного строения</span>?",
+    opts:["Прокариоты","Эукариоты","Сапрофиты","Анаэробы"],
+    ans:0,
+    fb:"✦ Верно! Про-кариот буквально = «до ядра». Бактерии — единственное царство прокариот. Все остальные (грибы, растения, животные) — эукариоты с настоящим ядром и ядерной мембраной.",
+    trap:"Ловушка ОГЭ: вирусы не являются прокариотами — у них нет клетки вообще. Прокариоты — это именно бактерии (и архебактерии).",
+    hint:"Про-кариот = до ядра. У бактерий ДНК лежит прямо в цитоплазме. Как называется такой тип организации?"
+  },
+  {
+    src:"re", topic:"Споры бактерий",
+    text:"Лаборатория Umbrella уничтожена. Через 50 лет учёные находят в руинах живые бактерии. Как они выжили — без питания, воды, при экстремальной температуре?",
+    opts:["Образовали споры — защитные структуры для переживания неблагоприятных условий","Перешли в форму вируса","Размножились половым путём","Притаились внутри клеток мёртвых хозяев"],
+    ans:0,
+    fb:"✦ Верно! Споры бактерий — это НЕ размножение (в отличие от грибов и растений!). Это выживание: клетка покрывается плотной оболочкой и замирает. Переживает жару, холод, кислоты десятки лет.",
+    trap:"Ловушка ОГЭ: у бактерий споры = ВЫЖИВАНИЕ. У грибов и растений споры = РАЗМНОЖЕНИЕ. Разные функции при одинаковом слове!",
+    hint:"Бактерии не размножаются спорами — они так выживают. В чём разница между выживанием и размножением?"
+  },
+  {
+    src:"re", topic:"Роль бактерий — азотфиксация",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> замечает: поля после зомби-апокалипсиса зарастают клевером. Учёный объясняет — в корнях клевера живут бактерии, которые делают почву плодородной. Что именно они делают?",
+    opts:["Превращают азот воздуха в доступные для растений соединения (азотфиксация)","Разрушают мёртвую органику (гниение)","Сбраживают сахар в молочную кислоту","Выделяют кислород при фотосинтезе"],
+    ans:0,
+    fb:"✦ Верно! Азотфиксирующие бактерии (Rhizobium) живут в клубеньках бобовых — клевера, гороха, сои. Переводят N₂ из воздуха в нитраты. Без них растения не могут усваивать атмосферный азот.",
+    trap:"",
+    hint:"Растения нуждаются в азоте, но не могут брать его из воздуха напрямую. Какие бактерии им в этом помогают?"
+  },
+  {
+    src:"re", topic:"Молочнокислые бактерии",
+    text:"<span class='hero-name name-ellie'>Элли</span> находит на базе выживших запасы кефира. «Живут же люди». Какие бактерии позволяют превращать молоко в кефир и йогурт?",
+    opts:["Молочнокислые бактерии (сбраживают лактозу в молочную кислоту)","Азотфиксирующие бактерии","Болезнетворные (патогенные) бактерии","Гнилостные бактерии"],
+    ans:0,
+    fb:"✦ Верно! Молочнокислые бактерии (Lactobacillus) сбраживают молочный сахар в молочную кислоту. Кислая среда сворачивает белок — получается йогурт, кефир, сыр, сметана.",
+    trap:"Ловушка ОГЭ: брожение (анаэробный процесс) ≠ гниение (разложение белков). Это разные роли разных бактерий. Брожение даёт пищевые продукты, гниение — разрушает трупы.",
+    hint:"Молоко → кефир. Это брожение. Какие бактерии его проводят?"
+  },
+  {
+    src:"re", topic:"Строение бактериальной клетки",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> изучает препарат под микроскопом. Что из перечисленного <span class='term'>есть</span> в клетке бактерии?",
+    opts:["Рибосомы и кольцевая ДНК (нуклеоид)","Митохондрии","Хлоропласты","Аппарат Гольджи"],
+    ans:0,
+    fb:"✦ Верно! У бактерий ЕСТЬ: рибосомы (синтез белков), нуклеоид (ДНК без мембраны), клеточная стенка, плазматическая мембрана. НЕТ: митохондрий, ЭПС, аппарата Гольджи, пластид.",
+    trap:"Ловушка ОГЭ: рибосомы есть у ВСЕХ клеток — и у бактерий тоже. Это единственный органоид, общий для про- и эукариот.",
+    hint:"Бактерии — прокариоты. Из органоидов у них есть только самый древний и простой. Какой?"
+  },
+
+  // ── ГРИБЫ ──
+  {
+    src:"tlou", topic:"Строение гриба",
+    text:"КЦИ распространяется по подземным туннелям невидимыми нитями. Как называется вегетативное тело гриба — сеть тончайших нитей, пронизывающих субстрат?",
+    opts:["Мицелий (грибница)","Плодовое тело","Спора","Гифа (одна нить мицелия)"],
+    ans:0,
+    fb:"✦ Верно! Мицелий (грибница) — основное тело гриба, состоит из гиф. Плодовое тело (шляпка + ножка) — лишь надземная часть, где созревают споры. КЦИ распространяется именно мицелием.",
+    trap:"Ловушка ОГЭ: гифа и мицелий — разные понятия. Гифа — одна нить. Мицелий — вся сеть нитей. На ОГЭ могут спросить оба термина.",
+    hint:"Тело гриба под землёй — это не плодовое тело (шляпка). Как называется вся сеть грибных нитей?"
+  },
+  {
+    src:"tlou", topic:"Питание грибов",
+    text:"<span class='hero-name name-ellie'>Элли</span> спрашивает: «Кордицепс питается мозгом — он как хищник?». Как правильно называется тип питания гриба, который получает органику из тела живого хозяина?",
+    opts:["Паразитизм (гетеротрофное питание)","Автотрофное питание (фотосинтез)","Хемосинтез","Симбиоз"],
+    ans:0,
+    fb:"✦ Верно! Все грибы — гетеротрофы: не синтезируют органику сами. Сапрофиты питаются мёртвой органикой (мукор, пеницилл, дрожжи). Паразиты — живыми хозяевами (кордицепс, трутовик). КЦИ — паразит.",
+    trap:"Ловушка ОГЭ: симбиоз — взаимовыгодное сожительство (лишайники). Паразитизм — один живёт за счёт другого в ущерб хозяину. Кордицепс явно не взаимовыгоден.",
+    hint:"Гриб получает органику ИЗ живого хозяина, нанося ему вред. Как называется такой тип отношений?"
+  },
+  {
+    src:"tlou", topic:"Клеточная стенка грибов",
+    text:"<span class='hero-name name-ellie'>Элли</span> узнаёт: кордицепс устойчив к антибиотикам — отчасти из-за особого состава клеточной стенки. Из какого вещества состоит клеточная стенка <span class='term'>растений</span> — в отличие от грибов?",
+    opts:["Целлюлоза","Хитин","Муреин","Гликоген"],
+    ans:0,
+    fb:"✦ Верно! Растения — целлюлоза. Грибы — хитин (как у насекомых и ракообразных). Бактерии — муреин (особый полисахарид). Это одно из ключевых различий царств.",
+    trap:"Ловушка ОГЭ: и грибы, и растения имеют клеточную стенку — но из разных веществ. Хитин = грибы = насекомые. Целлюлоза = только растения.",
+    hint:"Помни: хитин у грибов, как у насекомых. А у растений что-то своё. Что?"
+  },
+  {
+    src:"tlou", topic:"Запасные вещества грибов",
+    text:"Запасные вещества у разных царств разные. Какое вещество грибы откладывают «про запас» — и этим похожи на животных, а не на растения?",
+    opts:["Гликоген","Крахмал","Жиры","Хлорофилл"],
+    ans:0,
+    fb:"✦ Верно! Запасные вещества: у растений — КРАХМАЛ, у грибов и животных — ГЛИКОГЕН. Именно гликоген и хитин — признаки, сближающие грибов с животными.",
+    trap:"Ловушка ОГЭ: крахмал = растения. Гликоген = грибы + животные. Часто спрашивают именно это.",
+    hint:"Крахмал — это у растений. А у грибов (и у нас тоже) — другое запасное вещество. Какое?"
+  },
+  {
+    src:"re", topic:"Лишайники",
+    text:"На руинах Раккун-сити на камнях выросли серо-зелёные корочки. Лишайники выжили там, где другие организмы погибли. Что такое лишайник по своей биологической природе?",
+    opts:["Симбиоз гриба и водоросли (или цианобактерии)","Особый вид мха","Тип бактерий","Паразитический гриб"],
+    ans:0,
+    fb:"✦ Верно! Лишайник = гриб + водоросль (фотосинтез органики) или цианобактерия. Гриб даёт воду и минералы, водоросль — органику. Взаимовыгодный симбиоз. Лишайники — биоиндикаторы чистоты воздуха.",
+    trap:"Ловушка ОГЭ: лишайник — НЕ отдельное царство живой природы! Это симбиотические организмы, относящиеся к царству Грибы.",
+    hint:"Лишайник состоит из двух организмов. Кто они?"
+  },
+  {
+    src:"re", topic:"Ядовитые грибы",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> находит в лесу белый гриб с зеленоватой шляпкой. Это может быть бледная поганка. Какой признак отличает её от съедобного шампиньона?",
+    opts:["Белые пластинки и вольва (чашечка) у основания ножки","Зелёный цвет шляпки","Неприятный запах","Растёт только в дубовых лесах"],
+    ans:0,
+    fb:"✦ Верно! Бледная поганка: белые пластинки (у шампиньона — розовые!), юбочка на ножке, вольва у основания. Яд — аматоксин — разрушает печень. Симптомы появляются через 6–24 часа.",
+    trap:"Ловушка ОГЭ: белые пластинки = опасность. У молодого шампиньона пластинки розоватые, у зрелого — тёмно-коричневые. Никогда не бери белопластинчатые грибы.",
+    hint:"У бледной поганки и шампиньона разный цвет пластинок под шляпкой. Какой у ядовитой?"
+  },
+  {
+    src:"re", topic:"Плесневые грибы",
+    text:"В заброшенном складе Umbrella — плесень везде. Какое медицинское значение имеет плесневый гриб пеницилл (Penicillium)?",
+    opts:["Из него получают антибиотик пенициллин — первый антибиотик в истории","Он производит противовирусные препараты","Он синтезирует витамины группы B","Из него делают противогрибковые мази"],
+    ans:0,
+    fb:"✦ Верно! Пенициллин открыл Александр Флеминг в 1928 году. Первый антибиотик — революция в медицине. Антибиотики убивают бактерий — но не действуют на вирусы и грибы!",
+    trap:"Ловушка ОГЭ: антибиотики действуют ТОЛЬКО на бактерий. При гриппе (вирус) или молочнице (гриб) антибиотики бесполезны и вредны.",
+    hint:"Пеницилл → пенициллин. Против каких организмов работают антибиотики?"
+  },
+
+  // ── ВИРУСЫ ──
+  {
+    src:"re", topic:"Строение вируса",
+    text:"В лаборатории Umbrella исследуют T-вирус. Из чего он состоит? Выбери правильное описание строения вируса.",
+    opts:["Нуклеиновая кислота (ДНК или РНК) + белковая оболочка (капсид)","Клетка с ядром и митохондриями","Клетка без ядра, как бактерия","Только белки, без нуклеиновой кислоты"],
+    ans:0,
+    fb:"✦ Верно! Вирус = нуклеиновая кислота (только ДНК ИЛИ только РНК) + белковый капсид. Никакой клетки, никаких органоидов.",
+    trap:"Ловушка ОГЭ: у вируса ЛИБО ДНК, ЛИБО РНК — никогда оба. ДНК-вирусы: оспа, герпес. РНК-вирусы: грипп, ВИЧ, коронавирус, T-вирус Umbrella.",
+    hint:"Вирус не имеет клетки. Из каких двух компонентов он состоит?"
+  },
+  {
+    src:"re", topic:"Вирусы — неклеточная форма",
+    text:"T-вирус вне клетки — просто кристалл. Внутри клетки-хозяина — «оживает». Какое утверждение о вирусах <span class='term'>верно</span>?",
+    opts:["Вирусы — неклеточная форма жизни без клеточного строения","Вирусы — мелкие бактерии без клеточной стенки","Вирусы имеют ядро, но без мембраны","Вирусы — простейшие грибы"],
+    ans:0,
+    fb:"✦ Верно! Вирусы занимают промежуточное положение между живым и неживым: вне клетки — кристалл без обмена веществ, внутри — «захватывают» рибосомы хозяина и размножаются.",
+    trap:"Ловушка ОГЭ: бактерии — живые клетки (прокариоты). Вирусы — НЕ клетки вообще. Это принципиальное различие. Антибиотики работают против клеток, не против вирусов.",
+    hint:"Клетки нет — ни с ядром, ни без. Как называется такая форма существования?"
+  },
+  {
+    src:"re", topic:"Антибиотики vs вирусы",
+    text:"Врач объясняет: T-вирус и бактерия — РАЗНЫЕ вещи. Антибиотики помогут от бактерий, но не от T-вируса. Почему антибиотики не работают против вирусов?",
+    opts:["Антибиотики разрушают клеточные структуры бактерий, а у вирусов клетки нет","Вирусы крупнее бактерий и прочнее","Вирусы живут только в крови, куда антибиотик не попадает","T-вирус выработал устойчивость к антибиотикам"],
+    ans:0,
+    fb:"✦ Верно! Антибиотики атакуют клеточную стенку или рибосомы бактерий. У вирусов нет ни клетки, ни клеточной стенки, ни рибосом — нечего атаковать. Против вирусов — только противовирусные препараты.",
+    trap:"Ловушка жизни (не только ОГЭ): грипп — вирус. Пить антибиотики при гриппе бессмысленно и убивает полезную микрофлору кишечника.",
+    hint:"Антибиотики работают против клеточных структур. Есть ли у вирусов клетки?"
+  },
+
+  // ── РАСТЕНИЯ ──
+  {
+    src:"pvz", topic:"Эволюция растений",
+    text:"Горох-стрелок — покрытосеменное растение, самый «современный» отдел. В каком <span class='term'>правильном порядке</span> шла эволюция растений?",
+    opts:["Водоросли → Мхи → Папоротники → Голосеменные → Покрытосеменные","Мхи → Водоросли → Папоротники → Покрытосеменные","Папоротники → Мхи → Голосеменные → Покрытосеменные","Покрытосеменные → Голосеменные → Папоротники → Мхи → Водоросли"],
+    ans:0,
+    fb:"✦ Верно! Мнемоника: «Вросли-Мхи-Папа-Голый-Покрыт» = Водоросли → Мхи → Папоротники → Голосеменные → Покрытосеменные. Каждый следующий отдел лучше приспособлен к жизни на суше.",
+    trap:"Ловушка ОГЭ: Мхи появились ПОСЛЕ водорослей и РАНЬШЕ папоротников, не наоборот. Семена появились у голосеменных, плоды — у покрытосеменных.",
+    hint:"Начни с самых простых — они жили в воде. Потом первые наземные. Потом те, у кого появились семена. Последние — с плодами."
+  },
+  {
+    src:"pvz", topic:"Однодольные и двудольные",
+    text:"Подсолнух-стрелок в PvZ — двудольное растение. Какой признак <span class='term'>двудольных</span> отличает их от однодольных?",
+    opts:["Сетчатое (перистое) жилкование листьев","Параллельное жилкование листьев","Мочковатая корневая система","Одна семядоля в семени"],
+    ans:0,
+    fb:"✦ Верно! Двудольные: 2 семядоли, сетчатое жилкование, стержневой корень, 4–5 лепестков. Однодольные: 1 семядоля, параллельное жилкование, мочковатый корень, 3 лепестка.",
+    trap:"Ловушка ОГЭ: параллельное жилкование = однодольные (злаки, лилии, тюльпаны). Сетчатое = двудольные (яблоня, подсолнух, берёза). Жилкование проще всего увидеть на листе.",
+    hint:"У подсолнуха жилки на листьях — разветвлённые, как сеть. Это признак одно- или двудольного?"
+  },
+  {
+    src:"pvz", topic:"Систематика растений",
+    text:"<span class='hero-name name-ellie'>Элли</span> и <span class='hero-name name-eliz'>Элизабет</span> изучают таксономию. В каком <span class='term'>правильном порядке</span> расположены таксоны — от наименьшего к наибольшему?",
+    opts:["Вид → Род → Семейство → Порядок → Класс → Отдел → Царство","Царство → Класс → Семейство → Вид","Вид → Семейство → Класс → Царство","Род → Вид → Класс → Царство"],
+    ans:0,
+    fb:"✦ Верно! Иерархия: Вид → Род → Семейство → Порядок → Класс → Отдел → Царство (ВИРОСЕ ПОКЛОЦ). Пример: Роза собачья → Род Роза → Семейство Розовые → Класс Двудольные → Отдел Покрытосеменные → Царство Растения.",
+    trap:"Ловушка ОГЭ: семейство стоит ВЫШЕ рода, не ниже. Вид — самый маленький таксон. Запомни порядок как цепочку.",
+    hint:"Самое маленькое — вид. Самое большое — царство. Что между ними по порядку?"
+  },
+  {
+    src:"pvz", topic:"Фотосинтез",
+    text:"Подсолнух-стрелок — главный источник энергии в PvZ. Что является конечными продуктами <span class='term'>фотосинтеза</span>?",
+    opts:["Глюкоза и кислород","Углекислый газ и вода","АТФ и углекислый газ","Крахмал и азот"],
+    ans:0,
+    fb:"✦ Верно! Фотосинтез: 6CO₂ + 6H₂O + свет → C₆H₁₂O₆ + 6O₂. Сырьё: CO₂ + вода + свет. Продукты: глюкоза + кислород. Растения — автотрофы, сами создают органику.",
+    trap:"Ловушка ОГЭ: дыхание — противоположный процесс: глюкоза + O₂ → CO₂ + H₂O + энергия. Не перепутай, что сырьё, а что продукт.",
+    hint:"Фотосинтез: CO₂ и вода ПОГЛОЩАЮТСЯ. Что при этом ВЫДЕЛЯЕТСЯ?"
+  },
+  {
+    src:"pvz", topic:"Проводящие ткани растений",
+    text:"Вишня-бомба переносит питательные вещества по стеблю вниз к корням. Как называется ткань, по которой движется органика от листьев к корням?",
+    opts:["Флоэма (ситовидные трубки)","Ксилема (сосуды)","Меристема","Механическая ткань"],
+    ans:0,
+    fb:"✦ Верно! Флоэма — «продовольственный» транспорт: органика (сахара) от листьев ВНИЗ к корням и плодам. Ксилема — «водный» транспорт: вода и минеральные соли ВВЕРХ от корней.",
+    trap:"Ловушка ОГЭ: ксилема = вода вверх. Флоэма = органика вниз. Запомни: ф(лоэма) — ф(рукты, плоды) — то, ради чего несут питание вниз.",
+    hint:"Ксилема — вода вверх. Флоэма — что и в каком направлении?"
+  },
+
+  // ── ДОПОЛНИТЕЛЬНЫЕ ──
+  {
+    src:"re", topic:"Дрожжи",
+    text:"В бункере выживших <span class='hero-name name-eliz'>Элизабет</span> обнаружила запасы хлеба — он пышный, значит кто-то использовал дрожжи. К какому царству относятся дрожжи?",
+    opts:["Грибы (одноклеточные)","Бактерии","Растения","Животные"],
+    ans:0,
+    fb:"✦ Верно! Дрожжи — одноклеточные грибы. Они сбраживают сахар, выделяют CO₂ (поэтому тесто поднимается) и спирт. Несмотря на одноклеточность — настоящие грибы с хитиновой клеточной стенкой и оформленным ядром.",
+    trap:"Ловушка ОГЭ: дрожжи одноклеточные — но это НЕ бактерии и не простейшие. Бактерии — прокариоты без ядра. Дрожжи — эукариоты, царство Грибы.",
+    hint:"Дрожжи делают хлеб воздушным и производят спирт. Они одноклеточные — но к какому царству относятся?"
+  },
+  {
+    src:"pvz", topic:"Голосеменные и покрытосеменные",
+    text:"Горох-стрелок — покрытосеменное растение. В чём главное отличие покрытосеменных от голосеменных?",
+    opts:["Семена покрытосеменных защищены плодом, у голосеменных плода нет","У покрытосеменных нет семян — только споры","Голосеменные имеют цветки, покрытосеменные — нет","Покрытосеменные появились раньше голосеменных"],
+    ans:0,
+    fb:"✦ Верно! Голосеменные (сосна, ель) — семена лежат открыто на чешуях шишки. Покрытосеменные (яблоня, горох, пшеница) — семена заключены в плод. Отсюда и название. Цветки — тоже только у покрытосеменных.",
+    trap:"Ловушка ОГЭ: шишка у сосны — не цветок. Цветки есть только у покрытосеменных. И покрытосеменные появились ПОЗЖЕ голосеменных — они эволюционно моложе.",
+    hint:"«Покрытосеменные» — семена покрыты чем-то. Чем именно, чего нет у голосеменных?"
+  },
+  {
+    src:"pvz", topic:"Особенности мхов",
+    text:"Подсолнух смотрит на карту эволюции: мхи вышли на сушу раньше папоротников, но так и остались маленькими и влажными. Чего у мхов <span class='term'>нет</span> — чего папоротники уже приобрели?",
+    opts:["Настоящих корней и развитой проводящей системы (ксилемы и флоэмы)","Листьев","Стебля","Хлорофилла"],
+    ans:0,
+    fb:"✦ Верно! У мхов нет настоящих корней — только ризоиды для прикрепления. Нет ксилемы и флоэмы — поэтому мхи маленькие и живут только во влажных местах: они не могут поднять воду высоко по стеблю.",
+    trap:"Ловушка ОГЭ: у мхов есть листья и стебель (пусть примитивные) и есть хлорофилл — они фотосинтезируют. Отсутствуют именно корни и проводящие сосуды.",
+    hint:"Почему мхи живут только во влажных местах и не вырастают высокими? Чего им не хватает для транспорта воды?"
+  },
+
+  // ── СРАВНИТЕЛЬНЫЕ ──
+  {
+    src:"mix", topic:"Сходство грибов с животными",
+    text:"<span class='hero-name name-ellie'>Элли</span> спорит: «Грибы — это же растения?». Что общего у грибов и <span class='term'>животных</span> — чего нет у растений?",
+    opts:["Хитин в клеточной стенке и гликоген как запасное вещество","Наличие хлорофилла","Клеточная стенка из целлюлозы","Автотрофный тип питания"],
+    ans:0,
+    fb:"✦ Верно! Грибы и животные: хитин (стенка/панцирь), гликоген (запас), гетеротрофность. У растений: целлюлоза (стенка), крахмал (запас), автотрофность. Именно поэтому грибы выделены в отдельное царство.",
+    trap:"Ловушка ОГЭ: хлорофилл и автотрофное питание — это РАСТЕНИЯ, а не грибы. Грибы не фотосинтезируют.",
+    hint:"Что объединяет грибы и животных — по клеточной стенке и запасному веществу?"
+  },
+  {
+    src:"mix", topic:"Царства живой природы — сравнение",
+    text:"<span class='hero-name name-eliz'>Элизабет</span> составляет таблицу по царствам. Какое утверждение <span class='term'>верно</span>?",
+    opts:["Только бактерии — прокариоты; грибы, растения, животные — эукариоты","Грибы — автотрофы, как растения","Вирусы относятся к царству Бактерий","Лишайники — самостоятельное царство живой природы"],
+    ans:0,
+    fb:"✦ Верно! Только бактерии (и архебактерии) — прокариоты. Все остальные царства — эукариоты. Вирусы — не клетки, не царство. Лишайники — симбиоз гриба и водоросли, входят в царство Грибы.",
+    trap:"Ловушка ОГЭ: лишайники — не царство! Это частая ошибка. И грибы — НЕ автотрофы: они не фотосинтезируют.",
+    hint:"Одно из четырёх утверждений верно. Проверь каждое по шпоре: про прокариот, автотрофов, вирусы и лишайники."
+  }
+];
+
+const b3Questions = [
+
+  // ── ПРОСТЕЙШИЕ ──
+  {
+    src:"ger", topic:"Простейшие животные",
+    text:"<span class='hero-name n-ger'>Геральт</span> нашёл в болоте крошечную тварь — видна лишь под микроскопом, состоит из одной клетки и самостоятельно охотится на бактерий. Как называется эта группа животных?",
+    opts:["Простейшие (одноклеточные животные)","Кишечнополостные","Бактерии-прокариоты","Водоросли"],
+    ans:0,
+    fb:"✦ Верно! Простейшие — одноклеточные животные: амёба, эвглена, инфузория-туфелька. Несмотря на одну клетку — полноценные организмы с ядром, органоидами и способностью к активному движению.",
+    trap:"Ловушка ОГЭ: простейшие — животные, а не бактерии! Бактерии — прокариоты без ядра. Простейшие — эукариоты. Это принципиальная разница.",
+    hint:"Одна клетка, есть ядро, умеет охотиться. Не бактерия — это более сложный одноклеточный организм. Какая группа?"
+  },
+  {
+    src:"kei", topic:"Эвглена — миксотроф",
+    text:"<span class='hero-name n-kei'>Кейра</span> рассматривает болотный образец: эвглена зелёная на свету фотосинтезирует, а в темноте питается готовой органикой. Как называется такой тип питания?",
+    opts:["Миксотрофный (смешанный)","Автотрофный (только фотосинтез)","Гетеротрофный (только готовая органика)","Паразитический"],
+    ans:0,
+    fb:"✦ Верно! Миксотроф = смешанный тип питания. Эвглена — уникальное существо на границе растений и животных. Именно поэтому её долго не знали, куда отнести.",
+    trap:"Ловушка ОГЭ: эвглена — не чистый автотроф и не чистый гетеротроф. На свету — как растение, в темноте — как животное. Такой тип называется миксотрофным.",
+    hint:"Эвглена умеет и то, и другое. Как называется питание, совмещающее оба способа?"
+  },
+
+  // ── ЧЕРВИ ──
+  {
+    src:"reg", topic:"Типы червей",
+    text:"<span class='hero-name n-reg'>Регис</span> осматривает пациента: в кишечнике паразит длиной до 8 метров с крючьями и присосками на голове. Это бычий цепень. К какому типу червей он относится?",
+    opts:["Плоские черви","Круглые черви","Кольчатые черви","Ресничные черви"],
+    ans:0,
+    fb:"✦ Верно! Бычий цепень — плоский червь (класс Ленточные). Тело лентовидное, сплюснутое. Крючья и присоски — органы прикрепления к стенке кишечника хозяина.",
+    trap:"Ловушка ОГЭ: не путай типы червей! Плоские — сплюснутое тело (планария, цепень, сосальщик). Круглые — цилиндрическое (аскарида, острица). Кольчатые — сегментированное (дождевой червь).",
+    hint:"Тело сплющено, как лента. Это плоский или круглый?"
+  },
+  {
+    src:"reg", topic:"Жизненный цикл бычьего цепня",
+    text:"<span class='hero-name n-reg'>Регис</span> объясняет: бычий цепень живёт в кишечнике человека и откладывает яйца. Яйца попадают к корове и образуют личинки (финны) в мышцах. Чем является корова в этом цикле?",
+    opts:["Промежуточным хозяином — в нём живут личинки","Окончательным хозяином","Переносчиком, который не заражается","Резервуаром без развития паразита"],
+    ans:0,
+    fb:"✦ Верно! Промежуточный хозяин — тот, в котором паразит проходит личиночную стадию. Окончательный хозяин — тот, где паразит достигает половой зрелости (для бычьего цепня — человек).",
+    trap:"Ловушка ОГЭ: окончательный хозяин — где паразит взрослый (человек). Промежуточный — где личинки (корова). Не перепутай!",
+    hint:"В корове паразит не взрослый, а в стадии личинки. Как называется хозяин, где живут личинки?"
+  },
+  {
+    src:"reg", topic:"Аскаридоз — профилактика",
+    text:"<span class='hero-name n-reg'>Регис</span> лечит крестьян от аскаридоза. Как можно заразиться аскаридой?",
+    opts:["Через немытые руки, овощи и фрукты с яйцами аскариды","При укусе насекомого-переносчика","Воздушно-капельным путём при чихании","При тесном контакте с заражённым животным"],
+    ans:0,
+    fb:"✦ Верно! Аскарида — геогельминт: яйца созревают в почве. Заражение — фекально-оральный путь: немытые руки, овощи с грядки. Профилактика: мыть руки, овощи, не пить сырую воду из луж.",
+    trap:"",
+    hint:"Яйца аскариды попадают в почву. Как они оттуда добираются до человека?"
+  },
+  {
+    src:"ger", topic:"Кольчатые черви",
+    text:"<span class='hero-name n-ger'>Геральт</span> роет яму у Каэр Морхена и находит дождевых червей. Что отличает кольчатых червей от плоских и круглых?",
+    opts:["Сегментированное (членистое) тело и замкнутая кровеносная система","Паразитический образ жизни","Сплюснутое тело без полости","Отсутствие нервной системы"],
+    ans:0,
+    fb:"✦ Верно! Кольчатые черви: тело поделено на сегменты (кольца), есть замкнутая кровеносная система — настоящая кровь циркулирует по сосудам. Дождевой червь — почвообразователь, а не паразит.",
+    trap:"Ловушка ОГЭ: кольчатые = сегменты + замкнутая кровеносная. У плоских и круглых — незамкнутая или отсутствует. Дождевой червь — не паразит!",
+    hint:"Главные признаки кольчатых — кольца-сегменты и как устроена кровеносная система?"
+  },
+
+  // ── МОЛЛЮСКИ ──
+  {
+    src:"ves", topic:"Классы моллюсков",
+    text:"<span class='hero-name n-ves'>Весемир</span> листает бестиарий морских тварей: там и Сирена (похожа на осьминога), и мидии, и прудовики. Все — моллюски. На какие три класса делятся моллюски?",
+    opts:["Брюхоногие, двустворчатые, головоногие","Наземные, морские, пресноводные","Паразитические, свободноживущие, симбиотические","Одностворчатые, двустворчатые, трёхстворчатые"],
+    ans:0,
+    fb:"✦ Верно! Брюхоногие (улитки, прудовик — одна раковина, нога-«живот»). Двустворчатые (мидии, перловица — две створки, нет головы). Головоногие (осьминог, кальмар, каракатица — «ноги» на голове).",
+    trap:"Ловушка ОГЭ: классификация моллюсков по строению тела, не по среде обитания. Осьминог — не рыба и не червь, а головоногий моллюск.",
+    hint:"Три класса названы по особенностям строения тела. Брюхоногие — по положению ноги. Двустворчатые — по раковине. А головоногие?"
+  },
+
+  // ── ЧЛЕНИСТОНОГИЕ ──
+  {
+    src:"ves", topic:"Насекомые vs паукообразные",
+    text:"<span class='hero-name n-ger'>Геральт</span> видит огромного паука — Эхидну паукообразную. <span class='hero-name n-ves'>Весемир</span>: «Это не насекомое!» По какому главному признаку пауки отличаются от насекомых?",
+    opts:["У пауков 8 ног и 2 отдела тела, у насекомых — 6 ног и 3 отдела","У пауков нет глаз, у насекомых — есть","Пауки не имеют покровов, насекомые — имеют","У пауков нет крыльев, а у всех насекомых они есть"],
+    ans:0,
+    fb:"✦ Верно! Паукообразные: 8 ног, 2 отдела (головогрудь + брюшко), нет усиков. Насекомые: 6 ног, 3 отдела (голова + грудь + брюшко), 1 пара усиков. Крылья — не у всех насекомых (блохи, вши — бескрылые).",
+    trap:"Ловушка ОГЭ: «у насекомых есть крылья» — НЕВЕРНО для всех. Блохи и вши — насекомые без крыльев. Надёжный признак — число ног: 6 или 8.",
+    hint:"Посчитай ноги: сколько у паука и сколько у мухи?"
+  },
+  {
+    src:"lut", topic:"Полный метаморфоз",
+    text:"<span class='hero-name n-lut'>Лютик</span> наблюдает: гусеница свила кокон, из кокона вылетела бабочка. Это полный метаморфоз. Назови правильный порядок всех стадий.",
+    opts:["Яйцо → Личинка → Куколка → Взрослое насекомое","Яйцо → Личинка → Взрослое насекомое","Яйцо → Куколка → Личинка → Взрослое","Личинка → Яйцо → Куколка → Взрослое"],
+    ans:0,
+    fb:"✦ Верно! Полный метаморфоз: 4 стадии, куколка обязательна. Личинка совсем не похожа на взрослое насекомое — именно это признак полного метаморфоза. Бабочки, жуки, мухи, пчёлы, комары.",
+    trap:"Ловушка ОГЭ: главный маркер полного метаморфоза — КУКОЛКА. Если куколки нет — метаморфоз неполный. Личинка при полном метаморфозе совсем не похожа на взрослое.",
+    hint:"Ключевое слово — кокон. Кокон — это какая стадия метаморфоза?"
+  },
+  {
+    src:"lut", topic:"Неполный метаморфоз",
+    text:"<span class='hero-name n-lut'>Лютик</span> наблюдает за кузнечиком в траве: маленький детёныш выглядел точно как взрослый — только без крыльев и совсем крохотный. Через несколько линек вырос в точно такого же кузнечика. Какой тип метаморфоза это описывает?",
+    opts:["Неполный (яйцо → личинка → взрослое, куколки нет)","Полный (с куколкой)","Прямое развитие без метаморфоза","Живорождение"],
+    ans:0,
+    fb:"✦ Верно! Неполный метаморфоз: 3 стадии, куколки нет. Личинка похожа на взрослое насекомое, только маленькая и без крыльев. Кузнечики, саранча, клопы, стрекозы, тараканы.",
+    trap:"",
+    hint:"Кузнечик родился — уже похож на взрослого, только маленький. Куколки нет. Это полный или неполный?"
+  },
+  {
+    src:"lut", topic:"Примеры полного метаморфоза",
+    text:"<span class='hero-name n-lut'>Лютик</span> решил проверить: «А жук-рогач — это полный или неполный метаморфоз?» Какие из перечисленных насекомых проходят ПОЛНЫЙ метаморфоз?",
+    opts:["Бабочки, жуки, мухи, пчёлы","Кузнечики, саранча, клопы","Тараканы, стрекозы, вши","Все насекомые без исключения"],
+    ans:0,
+    fb:"✦ Верно! Полный метаморфоз — бабочки (чешуекрылые), жуки (жесткокрылые), мухи и комары (двукрылые), пчёлы и осы (перепончатокрылые), блохи. Их личинки (гусеница, личинка жука) совсем не похожи на взрослых.",
+    trap:"Ловушка ОГЭ: стрекозы и тараканы — неполный метаморфоз. Часто ошибаются со стрекозами — у них тоже нет стадии куколки.",
+    hint:"Запомни группы с полным метаморфозом: бабочки, жуки, мухи, пчёлы. У остальных — неполный."
+  },
+
+  // ── ХОРДОВЫЕ ──
+  {
+    src:"reg", topic:"Сердце рыб",
+    text:"<span class='hero-name n-reg'>Регис</span> препарирует рыбу на берегу Понтара. Сколько камер в сердце рыбы и сколько кругов кровообращения?",
+    opts:["2 камеры, 1 круг кровообращения","3 камеры, 2 круга","4 камеры, 2 круга","2 камеры, 2 круга"],
+    ans:0,
+    fb:"✦ Верно! Рыбы — самые «простые» из позвоночных по строению сердца: 2 камеры (предсердие + желудочек), 1 круг кровообращения. Через само сердце рыбы течёт только венозная кровь — она обогащается кислородом в жабрах.",
+    trap:"Ловушка ОГЭ: запомни ряд — 2 камеры (рыбы), 3 камеры (земноводные + рептилии), 4 камеры (птицы + млекопитающие). Каждый шаг эволюции добавляет камеру.",
+    hint:"У рыб — самое простое сердце. Сколько камер у него и сколько кругов кровообращения?"
+  },
+  {
+    src:"ger", topic:"Земноводные",
+    text:"<span class='hero-name n-ger'>Геральт</span> встречает болотного монстра — в юности он дышал жабрами, а теперь и лёгкими, и через кожу. Это земноводное. Что из перечисленного ВЕРНО для земноводных?",
+    opts:["Трёхкамерное сердце, 2 круга кровообращения, холоднокровные","Четырёхкамерное сердце, теплокровные","Двухкамерное сердце, 1 круг, кожа сухая и чешуйчатая","Трёхкамерное сердце с полной перегородкой, сухая кожа"],
+    ans:0,
+    fb:"✦ Верно! Земноводные: 3-камерное сердце (2 предсердия + 1 желудочек), 2 круга, холоднокровные, кожа голая и влажная (дышат через неё). Личинки (головастики) дышат жабрами — взрослые лёгкими и кожей.",
+    trap:"Ловушка ОГЭ: у земноводных 3-камерное сердце — как у рептилий, но кожа ДРУГАЯ. У земноводных — влажная голая, у рептилий — сухая чешуйчатая.",
+    hint:"Земноводные — средняя ступень: больше чем рыбы, меньше чем рептилии. Сердце трёхкамерное, кровь — смешанная в желудочке."
+  },
+  {
+    src:"ves", topic:"Пресмыкающиеся / Василиск",
+    text:"<span class='hero-name n-ves'>Весемир</span> открывает страницу на «Василиск». По каким признакам пресмыкающиеся отличаются от птиц?",
+    opts:["Холоднокровные, сухая кожа с чешуёй или щитками","Постоянная температура тела, перьевой покров","Четырёхкамерное сердце, 2 круга кровообращения","Кормят детёнышей молоком"],
+    ans:0,
+    fb:"✦ Верно! Пресмыкающиеся: холоднокровные, сухая кожа с чешуёй/щитками, яйца с кожистой оболочкой на суше, 3-камерное сердце (+ неполная перегородка). Птицы — теплокровные, с перьями.",
+    trap:"Ловушка ОГЭ: у птиц И пресмыкающихся 4-камерное? Нет! У пресмыкающихся — 3-камерное. Только у крокодилов 4-камерное (но это ОГЭ — можно не углубляться).",
+    hint:"Что теплее — пресмыкающееся или птица? Чем покрыто тело у каждого?"
+  },
+  {
+    src:"lut", topic:"Цепи питания",
+    text:"<span class='hero-name n-lut'>Лютик</span> записывает в дневнике: трава → кузнечик → лягушка → уж. Как называются организмы, стоящие в самом начале любой пищевой цепи?",
+    opts:["Продуценты — сами создают органику из неорганики","Консументы — потребители органики","Редуценты — разрушители органики","Хищники — первичные потребители"],
+    ans:0,
+    fb:"✦ Верно! Продуценты — автотрофы (растения, водоросли), создающие органику через фотосинтез. Они всегда в начале цепи. Консументы: кузнечик — 1-й порядок, лягушка — 2-й, уж — 3-й. Редуценты разлагают мёртвую органику.",
+    trap:"Ловушка ОГЭ: первое звено цепи питания — ВСЕГДА продуцент (растение). Если видишь цепь, начинающуюся с животного — значит, звено пропущено.",
+    hint:"Трава создаёт органику сама, через фотосинтез, — она никого не поедает. Как называется такая группа организмов?"
+  },
+  {
+    src:"cir", topic:"Млекопитающие / Эхидна",
+    text:"<span class='hero-name n-cir'>Цирилла</span> встречает Эхидну — монстра, кормящего детёнышей молоком. Что является главными признаками класса Млекопитающих?",
+    opts:["Кормление детёнышей молоком и наличие волосяного покрова","Откладывание яиц и чешуйчатая кожа","Наличие жабр в личиночном возрасте","Холоднокровность и 3-камерное сердце"],
+    ans:0,
+    fb:"✦ Верно! Два главных признака млекопитающих: 1) молочные железы (вскармливание молоком) и 2) волосяной покров. Плюс — теплокровность, 4-камерное сердце, живорождение у большинства.",
+    trap:"Ловушка ОГЭ: утконос и ехидна — исключения: млекопитающие, откладывающие яйца. Но молоко выделяют. Яйцо ≠ не млекопитающее.",
+    hint:"Как кормит детёнышей млекопитающее? И чем покрыто его тело?"
+  },
+  {
+    src:"ves", topic:"Теплокровность",
+    text:"<span class='hero-name n-ves'>Весемир</span> объясняет: Виверна холоднеет на морозе и становится медленной. Гепард на морозе — нет. Как называются животные с ПОСТОЯННОЙ температурой тела?",
+    opts:["Гомойотермные (теплокровные)","Пойкилотермные (холоднокровные)","Хладнокровные эукариоты","Гетеротрофные"],
+    ans:0,
+    fb:"✦ Верно! Гомойотермные (теплокровные) — птицы и млекопитающие. Температура тела постоянная. Пойкилотермные (холоднокровные) — рыбы, земноводные, рептилии. Их активность зависит от температуры среды.",
+    trap:"Ловушка ОГЭ: термины «гомойотермные» и «пойкилотермные» встречаются в ОГЭ. Гомойо = одинаковый (температура). Пойкило = изменчивый.",
+    hint:"«Гомо» — одинаковый. «Пойкило» — разный. Постоянная температура — какой термин?"
+  },
+
+  // ── СИСТЕМАТИКА (задание №13 тип) ──
+  {
+    src:"mon", topic:"Определение класса по признакам",
+    text:"<span class='hero-name n-ves'>Весемир</span> описывает Вилохвоста: тело покрыто чешуёй, конечностей нет, откладывает яйца с мягкой оболочкой на суше, температура тела меняется вместе с погодой. К какому классу это существо?",
+    opts:["Пресмыкающиеся","Земноводные","Рыбы","Млекопитающие"],
+    ans:0,
+    fb:"✦ Верно! Пресмыкающиеся: чешуя (сухая кожа), яйца на суше с кожистой оболочкой, холоднокровные. Именно так описываются змеи и ящерицы. Отсутствие конечностей — признак змей внутри класса.",
+    trap:"Ловушка ОГЭ: у земноводных кожа влажная голая, яйца без оболочки в воде. У пресмыкающихся — сухая чешуйчатая, яйца на суше. Это ключевое различие.",
+    hint:"Чешуя + яйца на суше + холоднокровное. Это земноводное или пресмыкающееся?"
+  },
+  {
+    src:"mon", topic:"Определение класса по признакам",
+    text:"<span class='hero-name n-ger'>Геральт</span> описывает Клекотуна: тело покрыто перьями, передние конечности — крылья, 4-камерное сердце, детёнышей выводит из яиц. К какому классу он относится?",
+    opts:["Птицы","Рукокрылые (летучие мыши)","Пресмыкающиеся","Насекомые"],
+    ans:0,
+    fb:"✦ Верно! Птицы: перья, крылья из передних конечностей, 4-камерное сердце, теплокровные, яйца с твёрдой известковой скорлупой. Рукокрылые — это летучие мыши (млекопитающие), они не несут яиц.",
+    trap:"Ловушка ОГЭ: летучие мыши — не птицы! Это млекопитающие (рукокрылые): живородящие, кормят молоком, покрыты шерстью.",
+    hint:"Перья, крылья, яйца — три признака определённого класса. Какого?"
+  },
+  {
+    src:"mon", topic:"Цепи питания — уровни",
+    text:"<span class='hero-name n-ves'>Весемир</span> смотрит на цепочку: желудь → мышь → куница → рысь. Консументом какого порядка является куница?",
+    opts:["Второго порядка","Первого порядка","Третьего порядка","Продуцентом"],
+    ans:0,
+    fb:"✦ Верно! Желудь — продуцент. Мышь поедает желудь — консумент 1-го порядка. Куница поедает мышь — консумент 2-го порядка. Рысь поедает куницу — консумент 3-го порядка.",
+    trap:"Ловушка ОГЭ: считай от начала цепи. Первый, кто ПОЕДАЕТ продуцент — 1-й порядок. Каждое следующее звено — +1 порядок.",
+    hint:"Начни счёт с желудя — это продуцент, не считается. Мышь поедает желудь — она первая. Куница поедает мышь — она...?"
+  },
+
+  // ── ЭВОЛЮЦИЯ ──
+  {
+    src:"cir", topic:"Движущие силы эволюции",
+    text:"<span class='hero-name n-cir'>Цирилла</span> спрашивает Весемира: «Почему монстры такие разные — одни летают, другие плавают?» Какие три главные движущие силы эволюции по Дарвину?",
+    opts:["Наследственная изменчивость, борьба за существование, естественный отбор","Мутации, радиация, температура среды","Питание, рост, размножение","Наследственность, адаптация, естественный отбор"],
+    ans:0,
+    fb:"✦ Верно! Три движущие силы по Дарвину: наследственная изменчивость (случайные отличия от родителей) + борьба за существование (конкуренция за ресурсы, хищники, условия) + естественный отбор (выживают самые приспособленные). Все три работают вместе.",
+    trap:"Ловушка ОГЭ: мутации — один из видов изменчивости, но не отдельная движущая сила. Борьба за существование — обязательно в тройке! Без неё отбор невозможен.",
+    hint:"Дарвин назвал три силы. Первая — случайные отличия от родителей. Вторая — конкуренция за выживание. Третья — кто приспособился, тот выжил. Назови их."
+  },
+  {
+    src:"ger", topic:"Естественный отбор",
+    text:"<span class='hero-name n-ger'>Геральт</span> замечает: выживают самые приспособленные монстры — быстрые, незаметные, умные. Остальные гибнут. Как Дарвин назвал этот процесс?",
+    opts:["Естественный отбор","Искусственный отбор","Борьба за существование","Адаптация"],
+    ans:0,
+    fb:"✦ Верно! Естественный отбор — выживание особей с полезными для данных условий признаками и гибель менее приспособленных. Движущий отбор меняет признак, стабилизирующий — сохраняет.",
+    trap:"Ловушка ОГЭ: искусственный отбор — когда ЧЕЛОВЕК выбирает нужные признаки (собаки, культурные растения). Естественный — сама природа. Геральт — не природа, он ведьмак.",
+    hint:"«Естественный» — значит, проводит сама природа, без человека. Как называется этот процесс?"
+  },
+  {
+    src:"lut", topic:"Борьба за существование",
+    text:"<span class='hero-name n-lut'>Лютик</span> пишет: «Два волка грызутся за ту же лань». Как называется конкуренция между особями ОДНОГО вида за одни и те же ресурсы?",
+    opts:["Внутривидовая борьба за существование","Межвидовая борьба","Борьба с условиями среды","Хищничество"],
+    ans:0,
+    fb:"✦ Верно! Внутривидовая борьба — самая острая: особи одного вида нуждаются в одних ресурсах. Межвидовая — между разными видами. Борьба с условиями среды — против холода, засухи и т.д.",
+    trap:"Ловушка ОГЭ: борьба за существование — не только конкуренция. Она включает три формы: внутривидовую, межвидовую и с условиями среды.",
+    hint:"Оба конкурента — кто они? Один вид или разные виды? От этого зависит название формы борьбы."
+  },
+  {
+    src:"kei", topic:"Доказательства эволюции",
+    text:"<span class='hero-name n-kei'>Кейра</span> показывает Цирилле окаменелость в скале — древнее существо, жившее миллионы лет назад. Какой вид доказательств эволюции она демонстрирует?",
+    opts:["Палеонтологические (ископаемые остатки)","Сравнительно-анатомические","Эмбриологические","Биогеографические"],
+    ans:0,
+    fb:"✦ Верно! Палеонтологические доказательства — ископаемые остатки (окаменелости, отпечатки). Они показывают, как менялись организмы со временем. Переходные формы (археоптерикс) особенно ценны.",
+    trap:"Ловушка ОГЭ: три главных доказательства для ОГЭ — палеонтологические (ископаемые), сравнительно-анатомические (гомологичные органы, рудименты), эмбриологические (сходство зародышей).",
+    hint:"Окаменелость в скале — это какой тип доказательств эволюции? Древнее → ископаемое → как называется?"
+  },
+  {
+    src:"reg", topic:"Рудименты",
+    text:"<span class='hero-name n-reg'>Регис</span> осматривает пациента: у него в области таза — крошечные кости, никакой функции не несущие. У китов тоже есть. Как называются такие органы?",
+    opts:["Рудименты — органы, утратившие основную функцию","Атавизмы — признаки далёких предков","Гомологичные органы","Аналогичные органы"],
+    ans:0,
+    fb:"✦ Верно! Рудименты — органы, сохранившиеся в ходе эволюции, но утратившие главную функцию. Примеры: тазовые кости у китов и змей, аппендикс у человека, третье веко.",
+    trap:"Ловушка ОГЭ: рудимент ≠ атавизм. Рудимент — есть у всех особей вида, просто недоразвит. Атавизм — редкое появление признака далёких предков у отдельных особей.",
+    hint:"Орган есть, но не работает — у всех особей. Это рудимент или атавизм?"
+  },
+  {
+    src:"ger", topic:"Атавизмы",
+    text:"<span class='hero-name n-ger'>Геральт</span> встречает человека с хвостом — очень редкий случай. Как называется появление у отдельного человека признаков, характерных для далёких предков?",
+    opts:["Атавизм","Рудимент","Мутация","Адаптация"],
+    ans:0,
+    fb:"✦ Верно! Атавизм — неожиданное появление у отдельных особей признаков далёких предков, отсутствующих у большинства. Хвост у человека, много сосков у людей, густой волосяной покров.",
+    trap:"Ловушка ОГЭ: атавизм — редкий, у единиц. Рудимент — есть у всех (аппендикс у всех людей). Хвост — редкость, значит атавизм.",
+    hint:"Редкий, у отдельных особей, признак далёких предков. Рудимент или атавизм?"
+  },
+
+  {
+    src:"ves", topic:"Гомологичные органы",
+    text:"<span class='hero-name n-ves'>Весемир</span> раскладывает рисунки: крыло летучей мыши, рука человека, ласт дельфина, лапа кошки. Строение костей — одинаковое, хоть функции разные. Как называются такие органы и что они доказывают?",
+    opts:["Гомологичные органы — доказывают общее происхождение","Аналогичные органы — доказывают одинаковые условия жизни","Рудименты — доказывают деградацию вида","Атавизмы — доказывают возврат к предкам"],
+    ans:0,
+    fb:"✦ Верно! Гомологичные органы — единый план строения, разное назначение. Доказывают родство и общего предка. Это сравнительно-анатомическое доказательство эволюции. Аналогичные органы (крыло птицы и крыло бабочки) — одинаковая функция, но разное строение.",
+    trap:"Ловушка ОГЭ: гомологичные ≠ аналогичные. Гомологичные — одно строение, разная функция. Аналогичные — одна функция, разное строение. На ОГЭ путают эти понятия.",
+    hint:"Одинаковый план строения костей, но разные функции. Это гомологичные или аналогичные органы?"
+  },
+
+  // ── АНТРОПОГЕНЕЗ ──
+  {
+    src:"cir", topic:"Этапы антропогенеза",
+    text:"<span class='hero-name n-cir'>Цирилла</span> учится у Весемира: «А откуда взялись люди?» В каком правильном порядке шло развитие предков человека?",
+    opts:["Австралопитек → Homo habilis → Homo erectus → Homo sapiens","Homo sapiens → Homo erectus → Homo habilis → Австралопитек","Homo habilis → Австралопитек → Homo sapiens → Homo erectus","Австралопитек → Homo sapiens → Homo erectus → Homo habilis"],
+    ans:0,
+    fb:"✦ Верно! Этапы антропогенеза: Австралопитек (прямохождение) → Homo habilis (первые орудия) → Homo erectus (огонь, сложные орудия) → Homo sapiens (речь, мышление, искусство).",
+    trap:"Ловушка ОГЭ: «sapiens» = «разумный» — это самый последний и современный. Австралопитек — самый древний из этого ряда. Порядок — от простого к сложному.",
+    hint:"«Sapiens» — разумный, это мы. Кто был перед нами? А перед ними? Восстанови порядок от древнего к современному."
+  },
+  {
+    src:"cir", topic:"Движущие силы антропогенеза",
+    text:"<span class='hero-name n-cir'>Цирилла</span> спрашивает: «Зачем вообще наши предки встали на две ноги? Неудобно же!» Какое главное преимущество дало прямохождение?",
+    opts:["Освободило передние конечности для использования и изготовления орудий труда","Увеличило скорость бега","Уменьшило энергозатраты на передвижение","Улучшило обоняние и слух"],
+    ans:0,
+    fb:"✦ Верно! Прямохождение → свободные руки → орудия труда → развитие мозга → речь → абстрактное мышление. Это цепочка, определившая весь антропогенез. Руки освободились — и всё изменилось.",
+    trap:"",
+    hint:"Что произошло с руками, когда предок встал на две ноги? Что это позволило делать?"
+  },
+  {
+    src:"ves", topic:"Систематика человека",
+    text:"<span class='hero-name n-ves'>Весемир</span> проверяет Цириллу: «К какому классу позвоночных относится человек?»",
+    opts:["Млекопитающие","Приматы","Птицы","Пресмыкающиеся"],
+    ans:0,
+    fb:"✦ Верно! Человек: Царство Животные → Тип Хордовые → Класс Млекопитающие → Отряд Приматы → Вид Homo sapiens. Приматы — это отряд внутри класса Млекопитающие, а не отдельный класс.",
+    trap:"Ловушка ОГЭ: приматы — это ОТРЯД (подразделение класса), а не отдельный класс. Класс — Млекопитающие. Не путай уровни таксономии.",
+    hint:"Человек рожает живых детёнышей, кормит молоком, покрыт волосами. К какому классу это относит его?"
+  }
+];
+
+const b4Questions = [
+
+  // ═══════════════ СКЕЛЕТ И МЫШЦЫ ═══════════════
+
+  {
+    cat:'qs-skel', topic:'Скелет — позвоночник', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> тренируется на руинах больницы и думает о строении позвоночника. Сколько позвонков в поясничном отделе позвоночника человека?",
+    opts:["5","7","12","4"], ans:0,
+    fb:"✦ Верно! Поясничный отдел — 5 крупных позвонков. Именно они несут основную нагрузку при подъёме тяжестей — Эбби это знает лучше всех.",
+    trap:"Запомни: 7 (шейных) — 12 (грудных) — 5 (поясничных) — 5 (крестцовых). Шейных 7, а не 5!",
+    hint:"«Шагай Гордо, Прямо Красиво» — 7, 12, 5, 5. Поясничный — третья группа.",
+    ref:"Скелет 🦴"
+  },
+  {
+    cat:'qs-skel', topic:'Скелет — типы соединений', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> изучает атлас анатомии: какие кости черепа соединены <strong>неподвижно</strong>?",
+    opts:["Кости черепного свода соединены швами","Нижняя челюсть с черепом","Позвонки между собой","Рёбра с грудиной"], ans:0,
+    fb:"✦ Верно! Кости свода черепа срастаются швами — неподвижное соединение. Именно поэтому череп защищает мозг как шлем.",
+    trap:"Нижняя челюсть — подвижное соединение (сустав). Позвонки — полуподвижные (хрящевые диски). Рёбра с грудиной — полуподвижные.",
+    hint:"Кости черепного свода вообще не двигаются — они намертво срослись. Какой из трёх типов соединений это описывает?",
+    ref:"Скелет 🦴"
+  },
+  {
+    cat:'qs-skel', topic:'Мышцы — типы', ege:'№16',
+    text:"<span class='hero-name'>Эбби</span> объясняет Леву: какая мышечная ткань является <strong>одновременно поперечно-полосатой И непроизвольной</strong>?",
+    opts:["Сердечная мышечная ткань","Скелетная мышечная ткань","Гладкая мышечная ткань","Диафрагма"], ans:0,
+    fb:"✦ Верно! Сердечная мышца уникальна: структура как у скелетных (поперечно-полосатая), но управляется автономно (непроизвольная). Сердце нельзя остановить силой мысли.",
+    trap:"Скелетная — поперечно-полосатая, но произвольная. Гладкая — непроизвольная, но НЕ поперечно-полосатая. Только сердечная — и то, и другое!",
+    hint:"Скелетная = произвольная. Гладкая = непроизвольная. Какая ткань нарушает это правило?",
+    ref:"Мышцы 💪"
+  },
+  {
+    cat:'qs-skel', topic:'Мышцы — антагонисты', ege:'№18',
+    text:"В учебнике Элли написано: бицепс и трицепс плеча — мышцы-<strong>антагонисты</strong>. Что это значит?",
+    opts:["Они выполняют противоположные действия: один сгибает, другой разгибает","Они работают одновременно в одном направлении","Они расположены в разных частях тела","Одна из них — гладкая, другая — скелетная"], ans:0,
+    fb:"✦ Верно! Антагонисты действуют противоположно: бицепс сгибает руку, трицепс разгибает. Это обеспечивает точность движений — один сокращается, другой расслабляется.",
+    trap:"Синергисты — работают вместе. Антагонисты — против друг друга. Не путай!",
+    hint:"«Анти» = против. Антагонисты противодействуют друг другу.",
+    ref:"Мышцы 💪"
+  },
+
+  // ═══════════════ КРОВЬ И КРОВЕНОСНАЯ СИСТЕМА ═══════════════
+
+  {
+    cat:'qs-blood', topic:'Кровь — состав', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> сдаёт анализ крови в лаборатории. Какие форменные элементы крови НЕ имеют ядра в зрелом состоянии у человека?",
+    opts:["Эритроциты и тромбоциты","Только лейкоциты","Только эритроциты","Все форменные элементы"], ans:0,
+    fb:"✦ Верно! Зрелые эритроциты теряют ядро для увеличения площади переноса гемоглобина. Тромбоциты — фрагменты клеток без ядра. Ядро есть только у лейкоцитов.",
+    trap:"Лейкоциты — ЕДИНСТВЕННЫЕ клетки крови с ядром. Тромбоциты — не целые клетки, а фрагменты (осколки мегакариоцитов).",
+    hint:"Кто в крови ядерный? Только иммунные клетки.",
+    ref:"Кровь 🩸"
+  },
+  {
+    cat:'qs-blood', topic:'Кровь — функции эритроцитов', ege:'№14',
+    text:"Гемоглобин эритроцитов переносит кислород. Почему при анемии (малокровии) человек быстро устаёт даже при небольших нагрузках? — спрашивает <span class='hero-name'>Дина</span>.",
+    opts:["Клеткам не хватает O₂ для выработки энергии (АТФ)","Не хватает питательных веществ в плазме","Сердце бьётся слишком медленно","Нарушается свёртывание крови"], ans:0,
+    fb:"✦ Верно! Анемия → меньше гемоглобина → меньше O₂ → клетки не могут производить достаточно АТФ в митохондриях → усталость. Связь: кровь → дыхание → обмен веществ.",
+    trap:"",
+    hint:"Без кислорода митохондрии не могут синтезировать АТФ. Что несёт O₂?",
+    ref:"Кровь 🩸"
+  },
+  {
+    cat:'qs-blood', topic:'Кровеносная система — круги', ege:'№16',
+    text:"<span class='hero-name'>Элли</span> рисует схему сердца. В каком отделе сердца начинается <strong>малый (лёгочный) круг кровообращения</strong>?",
+    opts:["Правый желудочек","Левый желудочек","Правое предсердие","Левое предсердие"], ans:0,
+    fb:"✦ Верно! Малый круг: правый желудочек → лёгочная артерия → лёгкие (газообмен) → лёгочные вены → левое предсердие. Большой круг начинается в левом желудочке.",
+    trap:"⚠️ Ловушка ОГЭ: лёгочная АРТЕРИЯ несёт венозную (тёмную) кровь! Название «артерия» по направлению — от сердца, а не по составу крови.",
+    hint:"Малый круг = лёгочный. Откуда выталкивается кровь в лёгкие?",
+    ref:"Кровеносная система 💓"
+  },
+  {
+    cat:'qs-blood', topic:'Кровеносная система — давление', ege:'№18',
+    text:"Нормальное артериальное давление взрослого — 120/80 мм рт. ст. Что означает цифра <strong>80</strong> (нижнее давление)?",
+    opts:["Диастолическое — давление в момент расслабления желудочков","Систолическое — давление при сокращении сердца","Пульсовое давление","Давление в венах"], ans:0,
+    fb:"✦ Верно! 120 — систолическое (при сокращении), 80 — диастолическое (при расслаблении). Разница = пульсовое давление = 40 мм рт. ст.",
+    trap:"«Сис» = сокращение (systole). «Диа» = расслабление (diastole). Верхнее = систолическое.",
+    hint:"Нижнее давление — когда сердце отдыхает между ударами.",
+    ref:"Кровеносная система 💓"
+  },
+
+  // ═══════════════ ИММУНИТЕТ ═══════════════
+
+  {
+    cat:'qs-imm', topic:'Иммунитет — виды', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> — уникальный случай: её иммунитет к кордицепсу <strong>врождённый</strong>. Чем врождённый иммунитет отличается от приобретённого?",
+    opts:["Врождённый не требует предварительного контакта с патогеном, существует с рождения","Врождённый формируется после вакцинации","Врождённый — только клеточный","Врождённый формируется после болезни"], ans:0,
+    fb:"✦ Верно! Врождённый (неспецифический) — кожа, фагоцитоз, воспаление — работает сразу. Приобретённый — формируется после контакта с конкретным антигеном (болезнь, вакцина).",
+    trap:"",
+    hint:"Подумай о самом слове: когда у Элли появился этот иммунитет — до или после контакта с кордицепсом?",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — лимфоциты', ege:'№14',
+    text:"Учёные «Светлячка» исследуют кровь <span class='hero-name'>Элли</span>. Какие клетки <strong>вырабатывают антитела</strong> (иммуноглобулины)?",
+    opts:["В-лимфоциты (плазматические клетки)","Т-лимфоциты (киллеры)","Нейтрофилы","Эритроциты"], ans:0,
+    fb:"✦ Верно! В-лимфоциты при активации превращаются в плазматические клетки и производят антитела — специфические белки против конкретного антигена.",
+    trap:"Т-лимфоциты уничтожают заражённые клетки напрямую — клеточный иммунитет. Антитела — гуморальный иммунитет — это задача В-клеток.",
+    hint:"В = Вещества (антитела) в кровь. Т = Трогает клетки.",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — вакцина vs сыворотка', ege:'№26',
+    text:"<span class='hero-name'>Дину</span> укусила змея. Ей вводят противозмеиную <strong>сыворотку</strong>. Чем это отличается от вакцины?",
+    opts:["Сыворотка — готовые антитела (пассивный иммунитет, быстро, ненадолго); вакцина — антиген для выработки своих антител (активный, медленно, надолго)","Сыворотка и вакцина — одно и то же, просто разные названия","Вакцина действует быстрее сыворотки","Сыворотка формирует иммунную память"], ans:0,
+    fb:"✦ Верно! Сыворотка содержит готовые антитела — помогает немедленно, но иммунная память не формируется. Вакцина заставляет организм самостоятельно выработать антитела и запомнить врага.",
+    trap:"Иммунная память формируется только при АКТИВНОМ иммунитете (болезнь или вакцинация). Сыворотка — пассивный иммунитет, памяти нет.",
+    hint:"Пассивный = получаешь готовое. Активный = делаешь сам. Что быстрее, но короче?",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — фагоцитоз', ege:'№16',
+    text:"Кто открыл явление фагоцитоза и получил за это Нобелевскую премию? — спрашивает <span class='hero-name'>Элли</span>, листая старый учебник.",
+    opts:["Илья Мечников","Луи Пастер","Эдвард Дженнер","Александр Флеминг"], ans:0,
+    fb:"✦ Верно! Илья Мечников (1845–1916) открыл фагоцитоз — поглощение и переваривание чужеродных частиц лейкоцитами. Нобелевская премия по физиологии — 1908 год.",
+    trap:"Пастер создал вакцины (бешенство, холера). Дженнер — первая вакцина (оспа). Флеминг открыл пенициллин. Фагоцитоз = Мечников.",
+    hint:"Русский учёный, морская звезда, иголка — классический опыт по фагоцитозу.",
+    ref:"Иммунитет 🛡️"
+  },
+
+  // ═══════════════ ДЫХАНИЕ ═══════════════
+
+  {
+    cat:'qs-lung', topic:'Дыхание — газообмен в лёгких', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> задержала дыхание, пробираясь через споровую зону. Где в лёгких происходит газообмен между воздухом и кровью?",
+    opts:["В альвеолах","В бронхах","В трахее","В бронхиолах"], ans:0,
+    fb:"✦ Верно! Альвеолы — тонкостенные пузырьки оплетены капиллярами. Только здесь O₂ диффундирует в кровь, CO₂ — из крови в воздух. Площадь всех альвеол ~150 м².",
+    trap:"Бронхи, трахея, бронхиолы — только транспорт воздуха, газообмена нет.",
+    hint:"Последняя «станция» дыхательного пути — самая важная.",
+    ref:"Дыхание 🫁"
+  },
+  {
+    cat:'qs-lung', topic:'Дыхание — регуляция', ege:'№18',
+    text:"<span class='hero-name'>Эбби</span> бежит от хозяина — ЧСС и дыхание резко учащаются. В каком отделе мозга находится <strong>дыхательный центр</strong>?",
+    opts:["Продолговатый мозг","Мозжечок","Кора больших полушарий","Средний мозг"], ans:0,
+    fb:"✦ Верно! Дыхательный центр — продолговатый мозг. Он автоматически регулирует ритм дыхания по уровню CO₂ в крови. Именно поэтому нельзя умереть от задержки дыхания — центр «перехватит» управление.",
+    trap:"Мозжечок — координация движений. Кора — произвольные движения. Дыхание автоматично — продолговатый мозг.",
+    hint:"Жизненно важные функции (дыхание, сердцебиение) — какой отдел мозга самый древний?",
+    ref:"Дыхание 🫁"
+  },
+  {
+    cat:'qs-lung', topic:'Дыхание — ЖЕЛ', ege:'№26',
+    text:"У спортсменов жизненная ёмкость лёгких (ЖЕЛ) больше, чем у нетренированных людей. Что входит в ЖЕЛ?",
+    opts:["Дыхательный объём + резервный объём вдоха + резервный объём выдоха","Только дыхательный объём","Дыхательный объём + остаточный объём","Весь воздух в лёгких, включая остаточный"], ans:0,
+    fb:"✦ Верно! ЖЕЛ = ДО + РОвд + РОвыд. Остаточный объём (~1 л) в ЖЕЛ НЕ входит — его нельзя выдохнуть. У спортсменов ЖЕЛ может достигать 6–7 л (норма ~3,5–5,5 л).",
+    trap:"Остаточный объём всегда остаётся в лёгких и НЕ входит в ЖЕЛ!",
+    hint:"«Жизненная» = то, что можно максимально вдохнуть и выдохнуть. Остаток не в счёт.",
+    ref:"Дыхание 🫁"
+  },
+
+  // ═══════════════ ПИЩЕВАРЕНИЕ ═══════════════
+
+  {
+    cat:'qs-dig', topic:'Пищеварение — ферменты', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> жуёт ржаной сухарь — единственная еда за сутки. Какой фермент слюны начинает расщепление крахмала уже в ротовой полости?",
+    opts:["Амилаза (птиалин)","Пепсин","Трипсин","Липаза"], ans:0,
+    fb:"✦ Верно! Амилаза (птиалин) слюны расщепляет крахмал → мальтозу. Уже через 1–2 минуты жевания хлеб начинает казаться сладковатым — это работа амилазы.",
+    trap:"Пепсин — желудок (белки). Трипсин — поджелудочная (белки). Липаза — поджелудочная (жиры). В рту — только крахмал!",
+    hint:"Какой орган первым встречает пищу? Что там расщепляется?",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — желудок', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> нашла консервы с говядиной. В каком отделе ЖКТ и под действием какого фермента начинается расщепление <strong>белков мяса</strong>?",
+    opts:["В желудке под действием пепсина","В тонком кишечнике под действием трипсина","В ротовой полости под действием амилазы","В толстом кишечнике"], ans:0,
+    fb:"✦ Верно! Пепсин желудка при кислой среде (pH 1,5–2,5) расщепляет белки до пептидов. Затем трипсин поджелудочной железы продолжает работу в тонком кишечнике.",
+    trap:"Белки расщепляются в желудке (начало) и тонком кишечнике (окончание). Углеводы начинают в ротовой полости. Жиры — в основном в тонком кишечнике.",
+    hint:"Желудочный сок — кислая среда. Какой фермент работает в кислоте?",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — роль желчи', ege:'№18',
+    text:"Желчь, вырабатываемая печенью, поступает в 12-перстную кишку. Какова главная роль желчи в пищеварении?",
+    opts:["Эмульгирование жиров — дробление их на мелкие капли для лучшего расщепления липазой","Расщепление белков","Нейтрализация желудочного сока в 12-перстной кишке только","Всасывание глюкозы"], ans:0,
+    fb:"✦ Верно! Желчь не содержит ферментов, но эмульгирует жиры — разбивает их на мелкие капли, увеличивая поверхность для действия липазы. Также нейтрализует кислоту из желудка.",
+    trap:"Желчь — НЕ фермент! Она не расщепляет, только эмульгирует (дробит) жиры. Расщепляет липаза поджелудочной железы.",
+    hint:"Желчь не расщепляет жиры — она только готовит их к расщеплению. Как шеф-повар нарезает мясо перед тем, как отдать его на сковороду.",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — всасывание', ege:'№16',
+    text:"Почему тонкий кишечник — главное место всасывания питательных веществ? <span class='hero-name'>Элли</span> ищет ответ.",
+    opts:["Наличие множества ворсинок, многократно увеличивающих поверхность всасывания","Большая длина кишечника","Наличие сильных ферментов","Щелочная среда"], ans:0,
+    fb:"✦ Верно! Ворсинки (и микроворсинки — «щёточная кайма») увеличивают площадь поверхности тонкого кишечника с нескольких до ~200 м² — больше теннисного корта!",
+    trap:"Длина тоже важна, но главный фактор — ворсинки. В толстой кишке ворсинок нет — там только вода.",
+    hint:"Чем больше площадь поверхности — тем быстрее всасывание. Что создаёт эту площадь?",
+    ref:"Пищеварение 🍎"
+  },
+
+  // ═══════════════ ВЫДЕЛЕНИЕ ═══════════════
+
+  {
+    cat:'qs-exc', topic:'Выделение — нефрон', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> изучает схему нефрона. В клубочке ежесуточно образуется около 180 л первичной мочи — но с мочой выводится лишь 1,5–2 л. Как называется второй этап мочеобразования, на котором глюкоза, аминокислоты и большая часть воды из канальцев переходят в кровь?",
+    opts:["Реабсорбция в канальцах нефрона","Фильтрация в клубочке","Секреция","Осмос в лоханке"], ans:0,
+    fb:"✦ Верно! Реабсорбция — второй этап работы нефрона: из первичной мочи в кровь возвращается ~99% воды, вся глюкоза и аминокислоты. Именно поэтому из 180 л остаётся только 1,5–2 л.",
+    trap:"Фильтрация — первый этап (клубочек → капсула). Реабсорбция — второй (канальцы → кровь). Секреция — третий: добавление лишних веществ в мочу.",
+    hint:"«Ре-» = повторное действие. Первый этап — фильтрация. Как называется второй?",
+    ref:"Выделение 💧"
+  },
+  {
+    cat:'qs-exc', topic:'Выделение — состав мочи', ege:'№18',
+    text:"В анализе мочи <span class='hero-name'>Джоэла</span> обнаружена <strong>глюкоза</strong>. О чём это свидетельствует?",
+    opts:["Нарушение реабсорбции в почках (возможно — сахарный диабет)","Это норма — глюкоза всегда есть в моче","Белки в моче","Повышенное артериальное давление"], ans:0,
+    fb:"✦ Верно! В норме глюкоза полностью реабсорбируется в канальцах нефрона. Её появление в моче (глюкозурия) — признак сахарного диабета или перегрузки почечных канальцев.",
+    trap:"В норме в моче НЕТ: глюкозы, белков, эритроцитов. Есть: мочевина, мочевая кислота, соли, вода.",
+    hint:"Что в норме полностью всасывается обратно в кровь? Если оно в моче — сигнал тревоги.",
+    ref:"Выделение 💧"
+  },
+  {
+    cat:'qs-exc', topic:'Выделение — органы', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> перечисляет органы выделения. Какой из перечисленных органов НЕ является органом выделения?",
+    opts:["Печень","Кожа","Лёгкие","Почки"], ans:0,
+    fb:"✦ Верно! Печень — орган пищеварения и детоксикации, но не выделения. Кожа выделяет воду и соли, лёгкие — CO₂ и воду, почки — мочевину и соли. Печень обезвреживает токсины, но продукты выводит желчью в кишечник.",
+    trap:"Печень — не орган выделения! Хотя желчь содержит продукты распада, её главная роль — пищеварение, а не выделение.",
+    hint:"Органы выделения выводят продукты обмена во внешнюю среду. Что из этого не делает печень напрямую?",
+    ref:"Выделение 💧"
+  },
+
+  // ═══════════════ ОБМЕН ВЕЩЕСТВ ═══════════════
+
+  {
+    cat:'qs-meta', topic:'Обмен веществ — АТФ', ege:'№16',
+    text:"<span class='hero-name'>Эбби</span> поднимает тяжести — мышцы требуют энергии. Какое соединение является <strong>универсальным носителем энергии</strong> в клетке?",
+    opts:["АТФ (аденозинтрифосфат)","Глюкоза","Гликоген","ДНК"], ans:0,
+    fb:"✦ Верно! АТФ — «энергетическая валюта» клетки. При расщеплении одной молекулы глюкозы образуется ~36–38 АТФ. Без АТФ нет ни движения, ни синтеза белков, ни нервного импульса.",
+    trap:"Глюкоза и гликоген — источники энергии, но не её носители. Энергия высвобождается только через АТФ.",
+    hint:"Это вещество называют «энергетической валютой» клетки — без него не работает ни одна мышца. Аббревиатура из трёх букв.",
+    ref:"Обмен веществ ⚡"
+  },
+  {
+    cat:'qs-meta', topic:'Обмен веществ — анаболизм/катаболизм', ege:'№15',
+    text:"Мышцы <span class='hero-name'>Эбби</span> растут после тренировок. Рост мышечных белков — это пример...",
+    opts:["Пластического обмена (анаболизма) — синтез с расходом энергии","Энергетического обмена (катаболизма) — распад с выделением энергии","Основного обмена","Брожения"], ans:0,
+    fb:"✦ Верно! Синтез новых белков (рост мышц) — анаболизм. Он требует энергии АТФ. Катаболизм — наоборот: расщепление сложных веществ с выделением АТФ.",
+    trap:"Анаболизм = строит (и ТРАТИТ АТФ). Катаболизм = разрушает (и ДАЁТ АТФ). Запомни: «Като крушит → даёт энергию».",
+    hint:"Синтез (строительство) или распад (разрушение)?",
+    ref:"Обмен веществ ⚡"
+  },
+
+  // ═══════════════ ПЕРВАЯ ПОМОЩЬ ═══════════════
+
+  {
+    cat:'qs-aid', topic:'Первая помощь — кровотечение', ege:'№26',
+    text:"<span class='hero-name'>Джоэл</span> ранен: из раны бьёт алая кровь пульсирующим фонтаном. Какие действия правильны?",
+    opts:["Наложить жгут ВЫШЕ раны, записать время наложения","Наложить давящую повязку ниже раны","Приложить лёд к ране","Дать выпить воды и ждать скорую"], ans:0,
+    fb:"✦ Верно! Алая кровь фонтаном = артериальное кровотечение. Жгут накладывают выше раны (перекрывая приток). Обязательно записать время — жгут держат не более 1,5–2 часов, иначе некроз конечности.",
+    trap:"⚠️ Ошибка: жгут при АРТЕРИАЛЬНОМ — выше раны. При ВЕНОЗНОМ — давящая повязка. Перепутаешь — потеряешь конечность или человека.",
+    hint:"Артерия = алая = пульсирует. Жгут — выше (между сердцем и раной).",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — ожог', ege:'№15',
+    text:"<span class='hero-name'>Дина</span> обожгла руку у костра. Что нужно сделать <strong>первым делом</strong>?",
+    opts:["Охладить холодной проточной водой 15–20 минут","Смазать маслом или жиром","Вскрыть пузыри","Приложить лёд"], ans:0,
+    fb:"✦ Верно! Холодная проточная вода (15–20 мин) останавливает ожог — ткани продолжают «гореть» ещё несколько минут. Лёд = переохлаждение (опасно). Масло = плёнка не даёт коже охладиться.",
+    trap:"Лёд — нельзя (вызывает обморожение поверх ожога). Масло — нельзя (создаёт плёнку, задерживает жар). Пузыри — не вскрывать (защита от инфекции).",
+    hint:"Ожог = избыток тепла. Что нейтрализует тепло лучше всего?",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — перелом', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> упала с высоты — подозрение на перелом голени. Что нужно сделать до прибытия помощи?",
+    opts:["Иммобилизировать (зафиксировать) конечность шиной, захватив суставы выше и ниже перелома","Вправить кость на место","Нагреть место перелома","Заставить ходить, чтобы проверить степень повреждения"], ans:0,
+    fb:"✦ Верно! Иммобилизация шиной предотвращает смещение костей и повреждение сосудов и нервов. Шина должна захватывать суставы выше и ниже места перелома. НЕ вправлять самостоятельно!",
+    trap:"Вправлять переломы самостоятельно — запрещено! Можно повредить сосуды и нервы. Только шина и госпиталь.",
+    hint:"Главный принцип при переломе: НЕ двигать. Что для этого нужно?",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — обморок', ege:'№18',
+    text:"<span class='hero-name'>Дина</span> потеряла сознание от обезвоживания. Как правильно оказать помощь при обмороке?",
+    opts:["Уложить горизонтально, приподнять ноги, обеспечить приток воздуха","Посадить, дать понюхать нашатырь сразу","Уложить на живот","Дать выпить воды немедленно"], ans:0,
+    fb:"✦ Верно! Горизонтальное положение + ноги выше головы улучшают приток крови к мозгу. Сначала восстановить кровоснабжение мозга, потом — нашатырь. В обморок нельзя давать пить — человек может захлебнуться.",
+    trap:"Не поите в бессознательном состоянии! Сначала — горизонталь и свежий воздух.",
+    hint:"При обмороке мозгу не хватает крови. Как заставить кровь притечь к голове?",
+    ref:"Первая помощь 🩹"
+  },
+
+  // ═══════════════ КОМПЛЕКСНЫЕ ЗАДАНИЯ ═══════════════
+
+  {
+    cat:'qs-imm', topic:'Иммунитет — аллергия', ege:'№26',
+    text:"<span class='hero-name'>Элли</span> заметила, что у некоторых выживших сильная аллергическая реакция на грибковые споры. Аллергия — это...",
+    opts:["Избыточная иммунная реакция на безвредное вещество (аллерген)","Полное отсутствие иммунитета","Иммунодефицит","Аутоиммунное заболевание мышц"], ans:0,
+    fb:"✦ Верно! Аллергия — гиперчувствительность иммунной системы: она атакует безвредные вещества (пыльца, шерсть, споры) как угрозу. Результат — воспаление, отёк, сыпь, в тяжёлых случаях — анафилаксия.",
+    trap:"Аллергия ≠ иммунодефицит. При аллергии иммунитет избыточен. При иммунодефиците — недостаточен.",
+    hint:"«Гипер» = слишком много. Аллергия = слишком много иммунного ответа.",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-blood', topic:'Группы крови', ege:'№16',
+    text:"У <span class='hero-name'>Элли</span> первая группа крови (I). Её называют «универсальным донором». Почему?",
+    opts:["Эритроциты I группы не содержат антигенов A и B, поэтому не вызывают реакций у реципиентов других групп","Потому что у неё иммунитет к кордицепсу","Первая группа встречается реже всех остальных","I группа имеет самые крепкие эритроциты"], ans:0,
+    fb:"✦ Верно! I группа (0) — нет антигенов A и B на эритроцитах → нет реакции отторжения при переливании любому реципиенту. IV группа — «универсальный реципиент» (принимает от всех).",
+    trap:"I группа — универсальный ДОНОР (отдаёт всем). IV группа — универсальный РЕЦИПИЕНТ (принимает от всех). Не путай!",
+    hint:"Антигены = метки на эритроцитах. I группа — без меток → принимают все.",
+    ref:"Кровь 🩸"
+  },
+
+];
+
+const b5Questions = [
+
+  // ═══════════════ НЕРВНАЯ СИСТЕМА ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Нервная система — ЦНС и ПНС', ege:'№17',
+    text:"Грифон ударил <span class='hero-name'>Геральта</span> по голове — ведьмак на секунду потерял сознание, хотя тело продолжало стоять. «Удар пришёлся по черепу — значит, пострадал командный центр», — сказал Весемир. К какому отделу нервной системы относятся <strong>головной и спинной мозг</strong>?",
+    opts:["Центральная нервная система (ЦНС)","Периферическая нервная система (ПНС)","Вегетативная нервная система","Соматическая нервная система"], ans:0,
+    fb:"✦ Верно! ЦНС = головной мозг + спинной мозг. Это главный командный центр. ПНС — всё остальное: нервы и ганглии вне черепа и позвоночника.",
+    trap:"ПНС — это нервы и ганглии. ЦНС — только мозг (головной и спинной). Вегетативная — часть ПНС, управляет внутренними органами.",
+    hint:"ЦНС = центр. Где находится «центр» нашей нервной системы?",
+    ref:"Нервная система 🦑"
+  },
+  {
+    cat:'qs-nerve', topic:'Нервная система — вегетативная', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> выпил зелье «Кошачий глаз» — зрачки расширились, сердце ускорилось, дыхание участилось. Какой отдел вегетативной нервной системы вызывает эти реакции?",
+    opts:["Симпатическая нервная система","Парасимпатическая нервная система","Соматическая нервная система","Центральная нервная система"], ans:0,
+    fb:"✦ Верно! Симпатическая НС — режим «бей или беги»: расширяет зрачки, ускоряет сердце, тормозит пищеварение, выбрасывает адреналин. Парасимпатическая — наоборот: «отдых и пищеварение».",
+    trap:"Парасимпатическая — замедляет сердце, сужает зрачок, активирует пищеварение. Симпатическая — наоборот. Не путай!",
+    hint:"«Симпатия» к врагу? Нет — один отдел вегетативной НС мобилизует тело к бою, другой — к отдыху. Расширение зрачков и учащение сердца — это мобилизация или отдых?",
+    ref:"Нервная система 🦑"
+  },
+  {
+    cat:'qs-nerve', topic:'Нервная система — соматическая vs вегетативная', ege:'№18',
+    text:"<span class='hero-name'>Геральт</span> сидит в медитации после схватки с виверной: дыхание замедляется само собой, сердце успокаивается без усилий — а вот поднять руку он может только если захочет. Какой отдел НС управляет <strong>скелетными мышцами произвольно</strong>?",
+    opts:["Соматическая нервная система","Вегетативная нервная система","Симпатическая нервная система","Продолговатый мозг"], ans:0,
+    fb:"✦ Верно! Соматическая НС управляет скелетными мышцами — это произвольные движения (ты решаешь, когда ударить). Вегетативная — непроизвольные функции: сердце, кишечник, железы.",
+    trap:"Вегетативная = НЕпроизвольная (внутренние органы). Соматическая = произвольная (скелетные мышцы). Запомни разницу.",
+    hint:"«Сома» = тело (греч.). Удар мечом — это произвольное или непроизвольное движение? Какой отдел отвечает за то, что ты контролируешь сам?",
+    ref:"Нервная система 🦑"
+  },
+
+  // ═══════════════ РЕФЛЕКТОРНАЯ ДУГА ═══════════════
+
+  {
+    cat:'qs-reflex', topic:'Рефлекторная дуга — звенья', ege:'№17',
+    text:"<span class='hero-name'>Карлах</span> прикоснулась к раскалённому металлу и мгновенно отдёрнула руку. Какое <strong>первое звено</strong> рефлекторной дуги восприняло раздражение?",
+    opts:["Рецептор в коже руки","Афферентный нерв","Нервный центр в спинном мозге","Эффектор (мышца)"], ans:0,
+    fb:"✦ Верно! Рецептор — первое звено: он воспринимает раздражение и преобразует его в нервный импульс. Путь: рецептор → афферентный нерв → нервный центр → эфферентный нерв → эффектор.",
+    trap:"Рецептор — НАЧАЛО дуги, эффектор — КОНЕЦ. Нервный центр — в середине. Не путай порядок!",
+    hint:"Что первым «почувствовало» жару? Именно это — первое звено.",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлекторная дуга — нервный центр', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> отдёрнул руку от кислоты монстра — простой защитный рефлекс. Где находится <strong>нервный центр</strong> этого рефлекса?",
+    opts:["В спинном мозге","В продолговатом мозге","В коре больших полушарий","В мозжечке"], ans:0,
+    fb:"✦ Верно! Центры простых безусловных рефлексов (отдёргивание, коленный) — в спинном мозге. Это позволяет реагировать ещё быстрее: сигнал не идёт до головного мозга.",
+    trap:"⚠️ Ловушка ОГЭ: центр безусловного рефлекса отдёргивания — СПИННОЙ мозг, не головной! Голова узнаёт об этом уже после того, как рука отдёрнута.",
+    hint:"Для скорости — короткий путь. Какой отдел ближе всего к рукам и ногам?",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлексы — безусловный vs условный', ege:'№18',
+    text:"В Каэр Морхен <span class='hero-name'>Весемир</span> поднёс палец к ладошке новорождённого котёнка рыси — тот мгновенно сжал его, хотя никто этому не учил. «Такое не вырабатывается — с этим рождаются», — сказал старый ведьмак. Какой это тип рефлекса?",
+    opts:["Безусловный (врождённый, видовой)","Условный (приобретённый, индивидуальный)","Динамический стереотип","Инстинкт охоты"], ans:0,
+    fb:"✦ Верно! Хватательный рефлекс новорождённого — безусловный: врождённый, одинаков для всех людей, не требует обучения. Условный рефлекс формируется только после многократного опыта.",
+    trap:"Безусловный — врождённый, есть с рождения, видовой. Условный — приобретается в течение жизни, индивидуален, угасает без подкрепления.",
+    hint:"«Новорождённый, до обучения» — ключевые слова. Ему никто не учил. Это какой рефлекс?",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлексы — условный рефлекс', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> за 100 лет охоты выработал реакцию: почуял запах гнили — рука сама тянется к серебряному мечу. Чем этот рефлекс отличается от врождённого?",
+    opts:["Он приобретённый, индивидуальный и угасает без подкрепления","Он врождённый и одинаков у всех ведьмаков","Его центр находится в спинном мозге","Он не связан с корой больших полушарий"], ans:0,
+    fb:"✦ Верно! Условный рефлекс: приобретён в процессе жизни, индивидуален (не у всех охотников такая реакция), может угаснуть, если Геральт годами не встречает монстров.",
+    trap:"Условный рефлекс замыкается в коре больших полушарий. Без коры условные рефлексы не формируются! У безусловного центр — в спинном или стволе мозга.",
+    hint:"Когда Геральт был новорождённым — он так не реагировал на запах. Значит, навык появился позже — это врождённое или выработанное?",
+    ref:"Рефлексы ⚡"
+  },
+
+  // ═══════════════ ОТДЕЛЫ МОЗГА ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — продолговатый', ege:'№18',
+    text:"<span class='hero-name'>Геральт</span> провёл идеальный удар в основание черепа — противник упал и перестал дышать, хотя сердце ещё билось несколько секунд. «Именно поэтому этот удар смертелен», — думает ведьмак. В каком отделе мозга расположен центр дыхания?",
+    opts:["Продолговатый мозг","Мозжечок","Промежуточный мозг","Средний мозг"], ans:0,
+    fb:"✦ Верно! Продолговатый мозг — нижний отдел ствола, содержит центры дыхания, сердцебиения, глотания, чихания. Повреждение смертельно. Именно поэтому удар в основание черепа опасен.",
+    trap:"Мозжечок — координация движений. Промежуточный (гипоталамус) — голод, жажда, терморегуляция. Дыхание — только продолговатый мозг!",
+    hint:"Жизненно важные функции — самый древний отдел мозга, снизу ствола.",
+    ref:"Отделы мозга 🗺️"
+  },
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — мозжечок', ege:'№18',
+    text:"<span class='hero-name'>Лаэ'зель</span> в бою отступает с закрытыми глазами — но каждый шаг точен, равновесие не хромает, парирование идёт как по нотам. Какой отдел мозга отвечает за <strong>координацию движений и равновесие</strong>?",
+    opts:["Координация движений, равновесие, точность","Дыхание и сердцебиение","Мышление и речь","Голод, жажда и терморегуляция"], ans:0,
+    fb:"✦ Верно! Мозжечок — координация и равновесие. При его повреждении — шаткая походка, тремор, промахи при точных движениях. Но мышление не страдает.",
+    trap:"⚠️ Частая ошибка: мозжечок — НЕ «маленький мозг» для мышления. Только координация и равновесие! Мышление — кора больших полушарий.",
+    hint:"Закрытые глаза, но точные движения — значит, дело не в мышлении. Какой отдел «настраивает» равновесие и моторику?",
+    ref:"Отделы мозга 🗺️"
+  },
+
+  // ═══════════════ ВНД ═══════════════
+
+  {
+    cat:'qs-hnd', topic:'ВНД — динамический стереотип', ege:'№17',
+    text:"<span class='hero-name'>Весемир</span> 60 лет каждое утро: подъём — разминка — медитация — тренировка с мечом — завтрак. Это выполняется автоматически, без раздумий. Как называется такая система рефлексов?",
+    opts:["Динамический стереотип","Инстинкт","Рассудочная деятельность","Безусловный рефлекс"], ans:0,
+    fb:"✦ Верно! Динамический стереотип — система условных рефлексов, выполняемых автоматически в строгом порядке. Формируется при многократном повторении. Легко выполняется в привычных условиях, ломается при их изменении.",
+    trap:"Инстинкт — врождённое поведение (безусловное). Стереотип — приобретённый (условный), но тоже выполняется автоматически. Разница: врождённый или выработанный?",
+    hint:"Система УСЛОВНЫХ рефлексов в фиксированном порядке. Выработана за годы. Что это?",
+    ref:"ВНД 🧬"
+  },
+  {
+    cat:'qs-hnd', topic:'ВНД — условный рефлекс, Павлов', ege:'№18',
+    text:"<span class='hero-name'>Астарион</span> заметил: стоит почуять запах свежей крови — пальцы сами тянутся к клыкам, ещё до того как разум успел подумать. Три века охоты закрепили этот рефлекс намертво. Какой учёный первым описал механизм формирования таких условных рефлексов?",
+    opts:["И.П. Павлов","И.М. Сеченов","Ч. Дарвин","К. Бернар"], ans:0,
+    fb:"✦ Верно! Иван Павлов (1849–1936) — основатель учения об условных рефлексах. Его опыты с собаками: звонок + пища → слюна. После многократных сочетаний — звонок один → слюна. Нобелевская премия 1904 года.",
+    trap:"Сеченов — «рефлексы головного мозга», предшественник Павлова. Дарвин — эволюция. Павлов = условный рефлекс.",
+    hint:"Собака, колокольчик, слюна — чьи опыты?",
+    ref:"ВНД 🧬"
+  },
+
+  // ═══════════════ АНАЛИЗАТОРЫ ═══════════════
+
+  {
+    cat:'qs-analyz', topic:'Анализаторы — 3 части', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> чует запах гарпии за 200 метров — рецепторы сигнал приняли, нерв доставил. Но где именно возникает само <strong>ощущение запаха</strong> — осознанное восприятие?",
+    opts:["Рецептор","Нерв","Зона коры","Эффектор"], ans:2,
+    fb:"✦ Верно! Третье звено любого анализатора — корковый отдел (зона коры). Именно здесь нервный импульс превращается в ощущение. Без этого звена — нет восприятия, даже если рецептор и нерв целы.",
+    trap:"Рецептор — первое звено (принимает сигнал). Нерв — второе (проводит). Зона коры — третье (даёт ощущение). Эффектор — в анализаторе отсутствует.",
+    hint:"Рецептор почуял, нерв передал — кто «превращает» импульс в осознанный запах?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — зрительный', ege:'№18',
+    text:"<span class='hero-name'>Астарион</span> прекрасно видит в темноте: в его сетчатке много палочек. Повреждение какой зоны коры мозга приведёт к потере зрения, даже если глаза целы?",
+    opts:["Затылочная доля коры больших полушарий","Височная доля","Теменная доля","Лобная доля"], ans:0,
+    fb:"✦ Верно! Зрительный анализатор: фоторецепторы сетчатки → зрительный нерв → затылочная доля. При поражении затылочной доли мозг не «видит», хотя глаза работают. Корковое звено — самое важное.",
+    trap:"Височная доля — слуховой анализатор. Теменная — кожный и мышечный. Затылочная — только зрение.",
+    hint:"Зрительный нерв ведёт импульс к задней части больших полушарий. Как называется эта доля коры?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — слуховой', ege:'№17',
+    text:"<span class='hero-name'>Лаэ'зель</span> резко остановила отряд: «Гитьянки. Двое. Сорок шагов». Никто больше ничего не слышал. Какой орган является рецептором <strong>слухового анализатора</strong>, позволяющим уловить такие тихие звуки?",
+    opts:["Кортиев орган (в улитке внутреннего уха)","Барабанная перепонка","Слуховые косточки","Ушная раковина"], ans:0,
+    fb:"✦ Верно! Кортиев орган — слуховые рецепторы во внутреннем ухе (улитка). Путь: кортиев орган → слуховой нерв → височная доля коры. Барабанная перепонка и косточки — передают звук, но рецепторами не являются.",
+    trap:"Барабанная перепонка и слуховые косточки (молоточек, наковальня, стремечко) — передатчики звука, а не рецепторы. Рецепторы — только в кортиевом органе.",
+    hint:"Рецепторы — это то, что преобразует колебания в нервный импульс. Где они в ухе?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — принцип повреждения', ege:'№22',
+    text:"Взрыв в Подземье сбил <span class='hero-name'>Шэдоухарт</span> с ног — виски приложило о камень. Уши целы, перепонки на месте, но она не слышит ни шагов отряда, ни своего имени. Что могло быть повреждено?",
+    opts:["Слуховой нерв или височная доля коры","Только барабанная перепонка","Кортиев орган и ничего более","Ушная раковина"], ans:0,
+    fb:"✦ Верно! Слуховые ощущения исчезают при повреждении ЛЮБОГО звена анализатора: рецептора, нерва или коры. Если уши целы, но не слышит — повреждён нерв или кора (корковая глухота).",
+    trap:"Повреждение барабанной перепонки нарушает проведение звука, но рецепторы и кора целы — частичная потеря, а не полная. Корковая глухота = уши целы, мозг не воспринимает.",
+    hint:"Анализатор — цепочка. Где можно её разорвать?",
+    ref:"Анализаторы 👁️"
+  },
+
+  // ═══════════════ ЭНДОКРИННАЯ РЕГУЛЯЦИЯ ═══════════════
+
+  {
+    cat:'qs-endoc', topic:'Эндокринная — надпочечники', ege:'№22',
+    text:"<span class='hero-name'>Карлах</span> врывается в бой: сердце колотится, зрачки расширились, мышцы наготове — тело готовится к схватке. Какой гормон вызвал эти реакции?",
+    opts:["Адреналин (гормон надпочечников)","Инсулин (поджелудочная железа)","Тироксин (щитовидная железа)","Гормон роста (гипофиз)"], ans:0,
+    fb:"✦ Верно! Адреналин — гормон надпочечников, выбрасывается при стрессе и опасности. Ускоряет сердцебиение, расширяет зрачки, увеличивает приток крови к мышцам, тормозит пищеварение. Классический «бей или беги».",
+    trap:"Инсулин — снижает уровень глюкозы. Тироксин — регулирует обмен веществ долгосрочно. Только адреналин даёт мгновенную реакцию на стресс.",
+    hint:"«Аварийный» гормон на случай опасности. Его выделяют над почками расположенные железы.",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — поджелудочная', ege:'№17',
+    text:"<span class='hero-name'>Астарион</span> несколько дней не пил крови — тело слабело. Похожее происходит с человеком, когда глюкозы в клетки не попадает: клетки «голодают», хотя сахар в крови высокий. Это бывает, когда не хватает гормона, который «открывает» клетки для глюкозы. Какой гормон поджелудочной железы <strong>снижает</strong> уровень глюкозы в крови?",
+    opts:["Инсулин","Глюкагон","Адреналин","Тироксин"], ans:0,
+    fb:"✦ Верно! Инсулин снижает глюкозу в крови, помогая клеткам её усвоить. Глюкагон — наоборот, повышает (при гипогликемии). Оба гормона — из поджелудочной железы.",
+    trap:"Глюкагон ПОВЫШАЕТ глюкозу, инсулин СНИЖАЕТ. Не путай! Недостаток инсулина → сахарный диабет → глюкоза в крови высокая, в клетки не попадает.",
+    hint:"Диабетикам делают инъекции этого гормона — без него клетки не пускают глюкозу внутрь. Его антагонист повышает глюкозу — какой из двух снижает?",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — нервная vs гуморальная', ege:'№22',
+    text:"<span class='hero-name'>Лаэ'зель</span> уклонилась от когтя ещё до осознания — нервный импульс прошёл за доли секунды. Но адреналин из надпочечников держит её в боевом режиме ещё минуты. Какое из утверждений о <strong>нервной регуляции</strong> верно?",
+    opts:["Быстрая (доли секунды), точная (конкретный орган), кратковременная","Медленная (минуты и часы), длительная, действует на весь организм","Осуществляется только через кровь","Не связана с ЦНС"], ans:0,
+    fb:"✦ Верно! Нервная регуляция: скорость — доли секунды (нервный импульс), действие — точечное (конкретный орган), продолжительность — короткая. Гуморальная: минуты/часы, через кровь, системное действие на весь организм.",
+    trap:"Гуморальная = через гуморы (жидкости тела = кровь). Медленно, но широко и долго. Нервная = через нервы. Быстро, точно, коротко.",
+    hint:"«Нервный» человек реагирует мгновенно. Гормоны разносятся кровью — это быстро или медленно?",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — гипофиз', ege:'№18',
+    text:"<span class='hero-name'>Халсин</span> перевязал раненого бойца и заметил закономерность: после тяжёлых ударов в основание черепа у выживших «молчали» и щитовидная, и надпочечники — будто кто-то обрубил нити управления. Почему гипофиз называют <strong>главной эндокринной железой</strong>?",
+    opts:["Он выделяет тропные гормоны, регулирующие работу других эндокринных желёз","Он самый большой по размеру","Он вырабатывает только инсулин","Он расположен в надпочечниках"], ans:0,
+    fb:"✦ Верно! Гипофиз — дирижёр эндокринного оркестра. Его тропные гормоны управляют щитовидной, надпочечниками, половыми железами. Сам гипофиз подчиняется гипоталамусу (промежуточный мозг).",
+    trap:"Гипофиз маленький (около 0.5 г), но очень важный. Размер и главенство — разные вещи.",
+    hint:"«Тропный» = направляющий. Гипофиз направляет другие железы. Как штаб командует войсками.",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — щитовидная', ege:'№17',
+    text:"<span class='hero-name'>Халсин</span> осматривает беженца из-под Тени-Проклятья: отёки, вялость, все реакции замедлены — будто «жизнь на паузе». Виновен дефицит гормона железы на шее. Какая железа регулирует интенсивность обмена веществ?",
+    opts:["Щитовидная железа (тироксин)","Надпочечники (адреналин)","Поджелудочная железа (инсулин)","Гипофиз (гормон роста)"], ans:0,
+    fb:"✦ Верно! Тироксин щитовидной железы регулирует интенсивность обмена веществ. Его недостаток (гипотиреоз) → замедление метаболизма, отёки, вялость. Избыток → учащённое сердцебиение, похудение.",
+    trap:"Адреналин — быстрый стресс-гормон. Инсулин — регуляция глюкозы. Щитовидная железа (тироксин) — долгосрочная регуляция обмена веществ.",
+    hint:"Эта железа находится на шее и имеет форму щита. Её гормон задаёт «скорость жизни» — ускоряет или замедляет весь обмен веществ.",
+    ref:"Эндокрин ⚗️"
+  },
+
+  // ═══════════════ ЭКОЛОГИЯ — РОЛИ И ЦЕПИ ═══════════════
+
+  {
+    cat:'qs-eco', topic:'Экосистема — консументы', ege:'№19',
+    text:"В Изумрудной Роще олень объедает кору священного дерева, а совомедведица охотится на оленей. Как называются организмы, которые <strong>питаются готовой органикой</strong>, но сами её не создают и не разлагают?",
+    opts:["Консументы","Продуценты","Редуценты","Автотрофы"], ans:0,
+    fb:"✦ Верно! Консументы (от латинского «потреблять») — гетеротрофы, которые питаются готовой органикой. Олень — консумент I (ест растения), совомедведица — консумент II (ест травоядных). В отличие от продуцентов — не создают, в отличие от редуцентов — не разлагают мёртвое.",
+    trap:"Автотрофы = продуценты (сами создают органику). Редуценты — разлагают мёртвое. Консументы — едят живое. Не путай!",
+    hint:"Консумент — от латинского «потреблять». Они не производят и не разлагают — только едят готовое.",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экосистема — продуцент', ege:'№20',
+    text:"Тень-Проклятье убила всю растительность в Балдур-Гейт. <span class='hero-name'>Халсин</span> смотрит на мёртвый лес: нет трав — ушли травоядные, за ними исчезли хищники. Вся цепь рухнула за недели. Почему пищевая цепь <strong>всегда начинается с продуцента</strong>?",
+    opts:["Продуценты — единственные организмы, создающие органику из неорганической (через фотосинтез)","Продуценты питаются всеми остальными","Продуценты разлагают мёртвое вещество","Продуценты — это животные первого звена"], ans:0,
+    fb:"✦ Верно! Продуценты (растения, водоросли) — автотрофы: они синтезируют органику из CO₂, воды и солнечного света (фотосинтез). Без них нет начальной энергии для всей цепи.",
+    trap:"Продуцент = производит (латынь). Это НЕ то, кто размножается быстро — это тот, кто производит органику. Консументы только потребляют, редуценты — разлагают.",
+    hint:"Только один тип организмов создаёт органику из неорганики через фотосинтез — без них энергии в цепи нет. Как называется «производитель» в экосистеме?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — правило записи', ege:'№20',
+    text:"В Андердарке: пещерные насекомые поедают светящийся мох на камнях, а Крюкоужасы — насекомых. Какая запись пищевой цепи <strong>правильная</strong>?",
+    opts:["Мох → Насекомые → Крюкоужасы","Крюкоужасы → Насекомые → Мох","Насекомые → Мох → Крюкоужасы","Крюкоужасы ← Насекомые ← Мох"], ans:0,
+    fb:"✦ Верно! Стрелка в цепи питания показывает направление ПОТОКА ЭНЕРГИИ (= «кого ест»). Начинается с продуцента. Мох → Насекомое = насекомое ест мох, энергия переходит от мха к насекомому.",
+    trap:"Стрелка «→» означает: ЭТО ЕСТ ТО, НА ЧТО УКАЗЫВАЕТ СТРЕЛКА. Мох → Насекомое = насекомое ест мох. Цепь начинается с продуцента (растение), а не с вершины!",
+    hint:"Стрелка = «переходит энергия к». Кто первый в цепи? Тот, кто создаёт энергию.",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — правило 10%', ege:'№25',
+    text:"<span class='hero-name'>Халсин</span> смотрит на огромный луг: тысячи кг травы, но оленей в разы меньше, а волков — совсем мало. «Это не случайность», — думает он. Если биомасса травы в экосистеме 10 000 кг, то какова биомасса травоядных животных по правилу 10%?",
+    opts:["1 000 кг","100 кг","10 000 кг","500 кг"], ans:0,
+    fb:"✦ Верно! Правило 10% (Линдеман): при переходе на следующий трофический уровень передаётся ~10% энергии. 10 000 кг растений → 10% → 1 000 кг травоядных → 10% → 100 кг хищников I.",
+    trap:"90% энергии теряется на тепловыделение и жизнедеятельность организмов. Только 10% переходит на следующий уровень. НЕ 50%!",
+    hint:"10% от 10 000 = ? Это одна десятая часть.",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — расчёт пирамиды', ege:'№25',
+    text:"<span class='hero-name'>Геральт</span> следит за лисой: та только что поела зайца, который целый день щипал траву. Ведьмак прикидывает: сколько же килограммов травы ушло, чтобы в итоге перед ним оказался <strong>1 кг лисы</strong>? Трава → заяц → лиса.",
+    opts:["100 кг травы","10 кг травы","1 кг травы","1 000 кг травы"], ans:0,
+    fb:"✦ Верно! Два перехода от травы до лисы: трава → заяц (×10) → лиса (×10). 1 кг лисы требует 10 кг зайцев, а 10 кг зайцев — 100 кг травы. Каждый уровень вверх = умножаем на 10.",
+    trap:"Два уровня от растения до лисы: ×10 ×10 = ×100. Не ×10! Считай переходы, а не уровни.",
+    hint:"Между травой и лисой — два уровня (трава → заяц → лиса). Каждый переход оставляет только 10%. Сколько переходов, столько раз делишь на 10.",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — факторы среды', ege:'№21',
+    text:"Тень-Проклятье Кетерика заблокировало солнечный свет → растения погибли → вся цепь рухнула. Солнечный свет — это какой вид экологического фактора?",
+    opts:["Абиотический (фактор неживой природы)","Биотический (влияние живых организмов)","Антропогенный (деятельность человека)","Эдафический (почвенный)"], ans:0,
+    fb:"✦ Верно! Абиотические факторы — неживая природа: свет, температура, вода, состав воздуха, почва. Биотические — влияние живых организмов друг на друга. Антропогенные — деятельность человека.",
+    trap:"Само по себе солнце — абиотический фактор. Антропогенный — это вырубка леса, выброс CO₂, осушение болот. Тень-Проклятье — игровой образ катастрофы, не пример антропогенного фактора для ОГЭ.",
+    hint:"Солнце — живое или неживое? Неживая природа = какой тип фактора?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — биотические отношения', ege:'№21',
+    text:"Кордицепс (как в The Last of Us) живёт внутри человека, питается его тканями и медленно убивает хозяина. Какой тип биотических отношений это описывает?",
+    opts:["Паразитизм (+/−): паразит получает выгоду, хозяин страдает","Хищничество (+/−): хищник убивает жертву мгновенно","Мутуализм (+/+): оба получают выгоду","Комменсализм (+/0): один получает, другому нейтрально"], ans:0,
+    fb:"✦ Верно! Паразитизм: паразит (+) использует хозяина как среду обитания и источник питания, хозяин (−) страдает и может погибнуть, но не сразу. Кордицепс — классический паразит.",
+    trap:"Хищничество: хищник убивает жертву быстро, не живёт внутри неё. Паразит: живёт внутри/на хозяине, убивает медленно или не убивает вовсе — пока хозяин нужен.",
+    hint:"Кордицепс живёт ВНУТРИ хозяина, использует его и медленно убивает. Хищник убивает быстро и не живёт внутри — это другой тип. Какой тип отношений описан здесь?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — агроэкосистема', ege:'№19',
+    text:"<span class='hero-name'>Геральт</span> проезжает мимо брошенной деревни: ещё три года назад здесь колосилось ржаное поле. Теперь его не узнать — сорняки, молодые берёзы, дикие травы. Поле вернулось в лес быстро, как только хозяева ушли. Чем <strong>агроэкосистема отличается от природной</strong>?",
+    opts:["Низкое биоразнообразие, нестабильна без вмешательства человека, высокая продуктивность одного вида","Более устойчива, чем природная экосистема","Не зависит от абиотических факторов","Содержит больше видов, чем природный лес"], ans:0,
+    fb:"✦ Верно! Агроэкосистема (поле, сад, огород): один-два вида, высокая продуктивность, но без человека (прополки, полива, удобрений) быстро разрушается. Природная экосистема — высокое биоразнообразие, само-регуляция, устойчивость.",
+    trap:"Агроэкосистема — НЕ более устойчива! Она очень уязвима: стоит прекратить уход — её захватят сорняки. Биоразнообразие маленькое = низкая устойчивость.",
+    hint:"«Агро» = поле. Монокультура устойчивее или уязвимее разнообразного леса?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — кордицепс как редуцент', ege:'№20',
+    text:"<span class='hero-name'>Джоэл</span> и <span class='hero-name'>Элли</span> обходят стороной тело заражённого: из глазниц и рта уже торчат наросты кордицепса. Через неделю грибница разошлась по трупу и ушла корнями в землю. На этом этапе кордицепс выполняет роль...",
+    opts:["Редуцента — разлагает мёртвую органику до минеральных веществ","Консумента I — питается растениями","Продуцента — создаёт органику","Консумента II — хищника"], ans:0,
+    fb:"✦ Верно! Кордицепс уникален: при жизни хозяина — паразит (биотические отношения +/−). После гибели хозяина — редуцент (разлагает мёртвую органику). Одна из редких тварей, меняющих роль в экосистеме.",
+    trap:"Редуцент работает с МЁРТВОЙ органикой. Пока хозяин жив — кордицепс паразит. После смерти — редуцент. Роль меняется!",
+    hint:"Труп — это мёртвая органика. Кто её разлагает?",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — антропогенный фактор', ege:'№21',
+    text:"Войска Радовида рубят деревья на краю <strong>Брокилона</strong> — священного леса дриад. <span class='hero-name'>Геральт</span> видит: там, где была чаща, теперь голая земля. Дичь ушла, ручьи обмелели, птицы замолчали. Как называется влияние людей на природу, вызывающее такие последствия?",
+    opts:["Антропогенный фактор","Биотический фактор","Абиотический фактор","Эдафический фактор"], ans:0,
+    fb:"✦ Верно! Антропогенный фактор — любое воздействие человека на природу: вырубка лесов, загрязнение, охота, строительство, земледелие.",
+    trap:"Биотический = влияние живых организмов друг на друга (волк ест зайца). Антропогенный = именно деятельность человека. Разница: целенаправленность и масштаб.",
+    hint:"«Антропос» = человек (греч.). Вырубка лесов, стройки, загрязнение — всё это целенаправленная деятельность разума. К какому типу экологических факторов относится деятельность человека?",
+    ref:"Экосистемы 🌿"
+  },
+
+  // ═══════════════ НОВЫЕ ВОПРОСЫ ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — промежуточный', ege:'№18',
+    text:"<span class='hero-name'>Гейл</span> снова голоден — как всегда, в самый неподходящий момент. «Я не могу это контролировать», — жалуется он. Какой отдел мозга регулирует голод, жажду и температуру тела?",
+    opts:["Промежуточный мозг (гипоталамус)","Мозжечок","Продолговатый мозг","Кора больших полушарий"], ans:0,
+    fb:"✦ Верно! Промежуточный мозг содержит гипоталамус — центр голода, жажды, терморегуляции, сна и эмоций. Именно поэтому Гейл не может «решить» перестать чувствовать голод — это не кора, это гипоталамус.",
+    trap:"Продолговатый мозг — дыхание и сердцебиение. Мозжечок — координация. Кора — мышление и воля. Голод, жажда, температура — промежуточный мозг (гипоталамус)!",
+    hint:"Гейл не может усилием воли убрать голод — значит это не кора. Какой отдел управляет базовыми потребностями тела?",
+    ref:"Отделы мозга 🗺️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — кожный', ege:'№18',
+    text:"<span class='hero-name'>Карлах</span> с закрытыми глазами ощупывает трофейный меч и точно чувствует каждую гравировку. Повреждение какой зоны коры лишит её этого тактильного восприятия — даже если рецепторы кожи целы?",
+    opts:["Теменная доля коры больших полушарий","Затылочная доля","Височная доля","Лобная доля"], ans:0,
+    fb:"✦ Верно! Кожный анализатор: рецепторы кожи → чувствительные нервы → теменная доля коры. Именно здесь прикосновение становится осознанным ощущением. При поражении теменной доли — тактильная агнозия: кожа чувствует, но мозг не понимает.",
+    trap:"Затылочная доля — зрение. Височная — слух. Лобная — движения и мышление. Теменная — кожные ощущения (тактильный анализатор).",
+    hint:"Ощущение прикосновения возникает в доле коры между лбом и затылком. Как она называется?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — большие полушария', ege:'№18',
+    text:"<span class='hero-name'>Весемир</span> говорит: «Лисы и волки умеют многое — но ни один зверь не напишет трактат и не сочинит балладу». Какой отдел мозга отвечает за мышление, речь и осознанную память — и наиболее развит именно у человека?",
+    opts:["Кора больших полушарий","Мозжечок","Средний мозг","Продолговатый мозг"], ans:0,
+    fb:"✦ Верно! Кора больших полушарий — самый «молодой» в эволюции отдел. Именно здесь мышление, речь, осознанная память, творчество, воля. У человека кора наиболее развита — именно это отличает нас от остальных животных.",
+    trap:"Мозжечок — координация. Средний мозг — рефлексы на свет/звук. Продолговатый — дыхание и сердцебиение. Всё мышление и речь — только кора больших полушарий.",
+    hint:"Написать трактат — это мышление и речь. Какой отдел мозга за это отвечает?",
+    ref:"Отделы мозга 🗺️"
+  },
+
+  // ═══════════════ ПРОБЕЛЫ ШПОРЫ ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Нервная система — парасимпатическая', ege:'№17',
+    text:"После пиршества в лагере <span class='hero-name'>Геральт</span> сидит у костра: сердце бьётся спокойно, зрачки сузились, желудок активно переваривает еду. Какой отдел вегетативной нервной системы вызвал эти реакции?",
+    opts:["Парасимпатическая нервная система","Симпатическая нервная система","Соматическая нервная система","Центральная нервная система"], ans:0,
+    fb:"✦ Верно! Парасимпатическая НС — режим «отдыхай и переваривай»: замедляет сердце, сужает зрачки, активирует пищеварение. Симпатическая — наоборот: мобилизация к бою.",
+    trap:"Симпатическая — ускоряет сердце и расширяет зрачки. После сытного обеда организм отдыхает и переваривает — это парасимпатическая, не симпатическая!",
+    hint:"Сердце замедлилось, зрачки сузились, желудок работает — это мобилизация к бою или режим отдыха и пищеварения?",
+    ref:"Нервная система 🦑"
+  },
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — средний', ege:'№18',
+    text:"За спиной <span class='hero-name'>Лаэ'зель</span> хрустнула ветка — голова сама повернулась на звук, ещё до того как она осознала угрозу. В каком отделе мозга находятся центры таких <strong>ориентировочных рефлексов</strong> на свет и звук?",
+    opts:["Средний мозг","Мозжечок","Продолговатый мозг","Промежуточный мозг"], ans:0,
+    fb:"✦ Верно! Средний мозг содержит центры ориентировочных рефлексов: поворот головы и глаз на источник света или звука, а также регулирует мышечный тонус.",
+    trap:"Мозжечок — координация движений. Промежуточный — голод, жажда, сон. Продолговатый — дыхание и сердцебиение. Поворот головы на звук — средний мозг!",
+    hint:"Рефлекс «повернуться на звук» — не координация и не голод. Какой отдел между мозжечком и промежуточным?",
+    ref:"Отделы мозга 🗺️"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлекторная дуга — эффектор', ege:'№17',
+    text:"<span class='hero-name'>Карлах</span> получила сигнал от спинного мозга — и кисть сама сжалась, отдёргивая ладонь от раскалённого металла. Какое <strong>последнее звено</strong> рефлекторной дуги выполнило это движение?",
+    opts:["Эффектор (скелетная мышца руки)","Рецептор в коже","Афферентный нерв","Нервный центр в спинном мозге"], ans:0,
+    fb:"✦ Верно! Эффектор — последнее, пятое звено дуги: орган, который выполняет ответную реакцию (скелетная мышца или железа). Путь: рецептор → афферентный нерв → центр → эфферентный нерв → эффектор.",
+    trap:"Рецептор — первое звено (принимает). Центр — в середине. Эффектор — КОНЕЦ дуги: тот, кто двигается. Не путай начало и конец!",
+    hint:"Движение выполнила мышца — это начало дуги или её финал?",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — глюкагон', ege:'№17',
+    text:"<span class='hero-name'>Астарион</span> несколько часов не пил крови — уровень глюкозы в крови упал, тело слабело. Какой гормон поджелудочной железы <strong>повышает</strong> уровень глюкозы в крови?",
+    opts:["Глюкагон","Инсулин","Адреналин","Тироксин"], ans:0,
+    fb:"✦ Верно! Глюкагон повышает глюкозу в крови (выбрасывает запасы из печени). Инсулин — наоборот, снижает. Оба гормона вырабатываются поджелудочной железой и работают как антагонисты.",
+    trap:"Инсулин СНИЖАЕТ глюкозу, глюкагон ПОВЫШАЕТ. Не путай пару! При голоде организму нужен именно глюкагон.",
+    hint:"Инсулин снижает глюкозу — его антагонист делает противоположное. Какой гормон поднимает сахар в крови?",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — биотический фактор', ege:'№21',
+    text:"В лесу у Каэр Морхен волк съел зайца — зайцев стало меньше, а трава на поляне подросла. Влияние волка на популяцию зайцев — это какой вид экологического фактора?",
+    opts:["Биотический (влияние живых организмов друг на друга)","Абиотический (фактор неживой природы)","Антропогенный (деятельность человека)","Эдафический (почвенный)"], ans:0,
+    fb:"✦ Верно! Биотический фактор — влияние одного живого организма на другой: хищник на добычу, конкуренция, паразитизм. Волк → заяц = классический биотический фактор.",
+    trap:"Абиотический — свет, вода, температура (неживая природа). Антропогенный — деятельность человека. Волк влияет на зайца как живое существо — это биотический!",
+    hint:"Волк — живой организм, заяц — тоже. Один влияет на другого. Это неживая природа, человек или живые существа друг на друга?",
+    ref:"Экосистемы 🌿"
+  },
+
+];
+
+const extraQuestions = [
+  {
+    topic:"Расчёт калорийности — №26", ege:"№26",
+    text:"<span class='hero-name'>Элли</span> пробежала 30 минут (расход 8 ккал/мин), потом съела батончик на 250 ккал. Сколько <strong>чистых</strong> калорий она потратила на бег?",
+    opts:["240 ккал (8 × 30)","250 ккал","480 ккал","30 ккал"], ans:0,
+    fb:"✦ Верно! Энергозатраты = ккал/мин × минуты = 8 × 30 = 240 ккал. Батончик — это поступление, не расход. На ОГЭ считают именно затраты.",
+  },
+  {
+    topic:"Сердце человека — камеры", ege:"№15",
+    text:"<span class='hero-name'>Эбби</span> рисует схему сердца для Элли. Сколько камер в сердце <strong>взрослого человека</strong> и сколько кругов кровообращения?",
+    opts:["4 камеры, 2 круга кровообращения","3 камеры, 2 круга","4 камеры, 1 круг","2 камеры, 1 круг"], ans:0,
+    fb:"✦ Верно! Сердце человека — 4 камеры (2 предсердия + 2 желудочка), 2 круга: большой (тело) и малый (лёгкие).",
+  },
+  {
+    topic:"Сердце — фазы цикла", ege:"№16",
+    text:"<span class='hero-name'>Элли</span> слушает сердцебиение Джоэла. В какой фазе сердечного цикла <strong>желудочки сокращаются</strong> и выталкивают кровь?",
+    opts:["Систола (сокращение)","Диастола (расслабление)","Асистолия","Рефрактерный период"], ans:0,
+    fb:"✦ Верно! Систола — сокращение (сердце «бьётся»). Диастола — расслабление, наполнение камер кровью. Верхнее давление — при систоле, нижнее — при диастоле.",
+  },
+  {
+    topic:"ВНД — темперамент", ege:"№18",
+    text:"<span class='hero-name'>Весемир</span> наблюдает ученика: быстро загорается, импульсивен, энергичен, но быстро остывает. К какому типу <strong>темперамента</strong> это ближе?",
+    opts:["Холерик","Сангвиник","Флегматик","Меланхолик"], ans:0,
+    fb:"✦ Верно! Холерик — быстрый, импульсивный, вспыльчивый. Сангвиник — живой, но уравновешенный. Флегматик — медлительный, спокойный. Меланхолик — чувствительный, ранимый.",
+  },
+  {
+    topic:"Анализаторы — вкусовой", ege:"№17",
+    text:"<span class='hero-name'>Геральт</span> пробует наваристый бульон после охоты. Какие рецепторы первыми распознают <strong>солёный</strong> вкус?",
+    opts:["Вкусовые рецепторы на языке (вкусовые луковицы)","Обонятельные рецепторы в носу","Кожные рецепторы губ","Рецепторы сетчатки глаза"], ans:0,
+    fb:"✦ Верно! Вкусовой анализатор: рецепторы на языке → нерв → кора. Основные вкусы: сладкий, солёный, кислый, горький, umami. Запах — обонятельный анализатор.",
+  },
+  {
+    topic:"Первая помощь — отморожение", ege:"№26",
+    text:"<span class='hero-name'>Джоэл</span> нашёл замёрзшего выжившего. Пальцы белые, он не чувствует боли. Какую <strong>первую помощь</strong> оказывают при отморожении?",
+    opts:["Медленно согревать тёплой (не горячей!) водой, не тереть снегом","Сразу растирать снегом и греть у костра","Наложить жгут выше места отморожения","Промыть спиртом и оставить на морозе"], ans:0,
+    fb:"✦ Верно! Отморожение: убрать в тепло, согревать постепенно тёплой водой (37–40°C). Нельзя растирать снегом — травмирует ткани. Жгут не нужен.",
+  },
+  {
+    topic:"Экология — среды обитания", ege:"№19",
+    text:"<span class='hero-name'>Халсин</span> изучает лес у Нетербрейна. Рыбы живут в реке, птицы — в кронах, дождевые черви — в почве. Это примеры каких <strong>сред обитания</strong>?",
+    opts:["Водная, наземно-воздушная, почвенная","Только абиотических факторов","Искусственных сообществ","Внутриорганизменных паразитов"], ans:0,
+    fb:"✦ Верно! Три основные среды: водная (рыбы), наземно-воздушная (птицы, звери), почвенная (черви, насекомые). Плюс внутриорганизменная — у паразитов.",
+  },
+  {
+    topic:"Экология — пищевые сети", ege:"№21",
+    text:"<span class='hero-name'>Геральт</span> видит схему: трава связана с кузнечиком, мышью и зайцем; те — с лисой и совой; лиса — с бактериями. Что это?",
+    opts:["Пищевая сеть — несколько переплетённых цепей","Одна линейная пищевая цепь","Круговорот азота","Симбиоз"], ans:0,
+    fb:"✦ Верно! Пищевая сеть — множество цепей, связанных через общие звенья. Один организм может быть консументом I у одного и II у другого.",
+  },
+  {
+    topic:"Растения — корневая система", ege:"№3",
+    text:"<span class='hero-name'>Элли</span> сравнивает морковь (один толстый корень) и лук (много тонких корней). Как называются эти типы <strong>корневых систем</strong>?",
+    opts:["Стержневая и мочковатая","Главная и второстепенная","Параллельная и сетчатая","Однодольная и двудольная"], ans:0,
+    fb:"✦ Верно! Стержневая (морковь, одуванчик) — один главный корень. Мочковатая (лук, пшеница) — много придаточных корней примерно одинаковой толщины.",
+  },
+  {
+    topic:"Растения — транспирация", ege:"№7",
+    text:"В жаркий день растение теряет воду через устьица листьев — испарение уходит в воздух и тянет воду из корней вверх. Как называется этот процесс?",
+    opts:["Транспирация","Фотосинтез","Дыхание растений","Опыление"], ans:0,
+    fb:"✦ Верно! Транспирация — испарение воды через листья. Тянет воду из корней вверх (вместе с ксилемой). Фотосинтез — синтез органики из CO₂ и света.",
+  },
+  {
+    topic:"Эволюция — эволюционное древо", ege:"№24",
+    text:"<span class='hero-name'>Цири</span> смотрит на схему: у кошки и собаки общий предок ниже, чем у кошки и рыбы. Что это означает?",
+    opts:["Кошка и собака ближе родственники, чем кошка и рыба","Кошка произошла от собаки","Рыба новее кошки","Все три вида одинаково далеки"], ans:0,
+    fb:"✦ Верно! На эволюционном древе чем ближе точка слияния веток — тем ближе родство. Общий предок кошки и собаки — более «свежий», чем у кошки и рыбы.",
+  },
+  {
+    topic:"Зоология — задание №13", ege:"№13",
+    text:"<span class='hero-name'>Геральт</span> оценивает кота: круглая голова, короткая морда, большие округлые глаза, уши стоячие и широкие у основания. Это признаки какого <strong>типа экстерьера</strong>?",
+    opts:["«Детского» (кошачьего) типа — признаки домашней породы","Дикого лесного типа","Паразитарного типа","Рудиментарного типа"], ans:0,
+    fb:"✦ Верно! На ОГЭ №13: «детский» экстерьер (круглая голова, короткая морда, большие глаза) — признак одомашненных пород. «Дикий» — вытянутая морда, острые уши.",
+  },
+  {
+    topic:"Развитие человека", ege:"№4",
+    text:"<span class='hero-name'>Элли</span> вспоминает урок: после оплодотворения зигота делится, формируются органы, потом рождение, детство, подростковый период. Как называется развитие <strong>внутри материнского организма</strong>?",
+    opts:["Эмбриогенез (эмбриональное развитие)","Антропогенез","Метаморфоз","Онтогенез взрослого"], ans:0,
+    fb:"✦ Верно! Эмбриогенез — развитие эмбриона от зиготы до рождения. Онтогенез — всё индивидуальное развитие (эмбрион + постэмбриональное).",
+  },
+  {
+    topic:"Эндокринная — половые железы", ege:"№18",
+    text:"<span class='hero-name'>Йеннифэр</span> объясняет: в пубертат начинают работать железы, выделяющие половые гормоны. Какие это железы?",
+    opts:["Яичники (у девочек) и яички (у мальчиков)","Щитовидная и поджелудочная","Надпочечники и гипофиз","Слюнные и потовые"], ans:0,
+    fb:"✦ Верно! Половые железы: яичники (эстрогены) и яички (тестостерон). Гипофиз запускает их работу тропными гормонами в пубертат.",
+  },
+];
+
+const easterEggs = [
+  {
+    easter:true, emoji:"🌿",
+    topic:"Друидский перекус",
+    text:"<span class='hero-name'>Халсин</span> материализуется из кустов, протягивает тебе ягодный батончик и смотрит добрыми глазами. «Ты заслужил». Что делаешь?",
+    opts:["Берёшь с благодарностью — вкусно","Отказываешься — на диете","Спрашиваешь, ягоды ли это","Плачешь от внезапной заботы"], ans:0,
+    fb:"✦ Правильный выбор! Халсин удовлетворённо кивает и превращается в медведя. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🧟",
+    topic:"Необъяснимая поддержка",
+    text:"Щелкун подошёл, щёлкнул три раза и сел рядом. Кажется, он болеет за тебя. Смотрит на экран. Щёлкает одобрительно. Что происходит?",
+    opts:["Принимаешь поддержку — болельщики нужны всем","Убегаешь из марафона","Щёлкаешь в ответ","Даёшь ему задачку про клетку"], ans:0,
+    fb:"✦ Щелкун щёлкнул ещё раз — по-видимому, радостно — и растворился. Даже монстры уважают биологов. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🦇",
+    topic:"Ночной визит",
+    text:"<span class='hero-name'>Регис</span> заглянул из темноты. «Не думал, что ты зайдёшь так далеко в биологии». Долгая пауза. «Это комплимент». Что отвечаешь?",
+    opts:["«Спасибо, Регис» — принимаешь с достоинством","Краснеешь","Делаешь вид, что так и должно быть","Спрашиваешь, следил ли он давно"], ans:0,
+    fb:"✦ Регис одобрительно исчезает. Это лучшее, чего от вампира можно ожидать. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🧬",
+    topic:"Лабораторный визит",
+    text:"<span class='hero-name'>Элизабет Беннет</span> врывается в марафон: «Umbrella закрыта, но знания — навсегда! Ты справляешься лучше, чем их учёные». Что делаешь?",
+    opts:["Киваешь и продолжаешь","Просишь автограф","Спрашиваешь про T-вирус","Убегаешь"], ans:0,
+    fb:"✦ Элизабет довольна. Лаборатория в руинах, но ОГЭ — в твоих руках. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"☀️",
+    topic:"Солнечная энергия",
+    text:"Подсолнух из PvZ машет листьями: «Sun! Sun! Ты собираешь знания быстрее, чем я — энергию!» Что отвечаешь?",
+    opts:["«Спасибо, солнышко!» — и дальше","Ставишь его в первый ряд","Спрашиваешь про фотосинтез","Игнорируешь растение"], ans:0,
+    fb:"✦ Подсолнух доволен. Хлоропласты одобряют. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"⚔️",
+    topic:"Ведьмачий вердикт",
+    text:"<span class='hero-name'>Геральт</span> смотрит на твой прогресс, хмыкает и говорит одно слово: «Hmm». Это одобрение или нет?",
+    opts:["Одобрение — для Геральта это почти восторг","Недовольство","Он хочет монету","Он забыл, что хотел сказать"], ans:0,
+    fb:"✦ Hmm от Геральта = высшая похвала. Ведьмаки не скупятся на слова. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🌙",
+    topic:"Тёмная поддержка",
+    text:"<span class='hero-name'>Шэдоухарт</span> шепчет из тени: «Shar не одобряет слабых. Но ты… пока не разочаровываешь». Что отвечаешь?",
+    opts:["«Постараюсь не разочаровать» — и идёшь дальше","Пугаешься","Спрашиваешь, кто такая Shar","Просишь исцеление"], ans:0,
+    fb:"✦ Шэдоухарт едва заметно кивает. От неё это — комплимент. Продолжай! 🥳",
+  },
+  {
+    easter:true, emoji:"🍄",
+    topic:"Грибной совет",
+    text:"Кордицепс (как в The Last of Us) шепчет с потолка: «Мы разлагаем мёртвое — ты разлагаешь незнание. Симметрично». Что делаешь?",
+    opts:["Соглашаешься и продолжаешь","Бежишь","Споришь с грибом","Фотографируешь для науки"], ans:0,
+    fb:"✦ Гриб доволен. Редуцент одобрил редуцирование пробелов. Продолжай! 🥳",
+  },
+];
+
+
+const allMarathonQuestions = [...b1Questions, ...b2Questions, ...b3Questions, ...b4Questions, ...b5Questions, ...extraQuestions, ...easterEggs];
+
+function getSrc(q) {
+  if (q.easter)                    return {cls:'src-egg',   name:"🥚 Пасхалка"};
+  if (b1Questions.includes(q))     return {cls:'src-b1',    name:"Б1 · Живое и опасное"};
+  if (b2Questions.includes(q))     return {cls:'src-b2',    name:"Б2 · Четыре царства"};
+  if (b3Questions.includes(q))     return {cls:'src-b3',    name:"Б3 · Друзья и монстры"};
+  if (b4Questions.includes(q))     return {cls:'src-b4',    name:"Б4 · Глубина человечности"};
+  if (b5Questions.includes(q))     return {cls:'src-b5',    name:"Б5 · Инстинкт и экосистема"};
+  if (extraQuestions.includes(q))  return {cls:'src-extra', name:"Доп · Пробелы ОГЭ"};
+  return {cls:'src-b1', name:"—"};
+}
+
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+let questions, cur, correct, errors, answered;
+let shuffledOpts=[], correctIdx=0;
+let eggsFound = 0;
+
+function init() {
+  const regular = shuffle([...allMarathonQuestions].filter(q => !q.easter));
+  const eggs    = shuffle([...easterEggs]);
+  const step = Math.floor(regular.length / eggs.length);
+  const mixed = [];
+  let eggIdx = 0;
+  for (let i = 0; i < regular.length; i++) {
+    mixed.push(regular[i]);
+    if (eggIdx < eggs.length && (i + 1) % step === Math.floor(step / 2)) {
+      mixed.push(eggs[eggIdx++]);
+    }
+  }
+  while (eggIdx < eggs.length) mixed.push(eggs[eggIdx++]);
+  questions = mixed;
+  cur=0; correct=0; errors=0; eggsFound=0; answered=false;
+  updateStats();
+}
+
+init();
+
+const mc = document.getElementById('monster-count');
+if (mc) mc.textContent = questions.length;
+
+function startMarathon() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+}
+
+const qcard=document.getElementById('qcard'), qheader=document.getElementById('qheader'),
+  qtext=document.getElementById('qtext'), qopts=document.getElementById('qopts'),
+  qfb=document.getElementById('qfb'), qnext=document.getElementById('qnext'),
+  qbar=document.getElementById('qbar'), qcnt=document.getElementById('qcnt');
+
+function updateStats() {
+  document.getElementById('s-ok').textContent   = correct;
+  document.getElementById('s-err').textContent  = errors;
+  document.getElementById('s-left').textContent = Math.max(0, questions.length - cur);
+  document.getElementById('s-egg').textContent  = eggsFound + ' / 8';
+}
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false;
+  const idx=[0,1,2,3];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  shuffledOpts = idx.map(i => q.opts[i]);
+  correctIdx   = idx.indexOf(q.ans);
+
+  qcard.classList.remove('q-animate', 'is-egg');
+  void qcard.offsetWidth;
+  qcard.classList.add('q-animate');
+  if (q.easter) qcard.classList.add('is-egg');
+
+  const src = getSrc(q);
+  const topic = q.topic || q.type || '';
+  qheader.innerHTML = `<span class="q-src ${src.cls}">${src.name}</span><span class="q-topic">${topic}</span><span class="q-num">${cur+1} / ${questions.length}</span>`;
+
+  const eggBanner = q.easter ? `<div class="egg-banner">${q.emoji || '🥚'}</div>` : '';
+  qtext.innerHTML = eggBanner + q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className='feedback-box'; qfb.innerHTML='';
+  qnext.className='next-btn';
+
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  updateStats();
+}
+
+function answer(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[correctIdx].classList.add('correct');
+
+  if (i === correctIdx) {
+    correct++;
+    if (q.easter) {
+      eggsFound++;
+      qfb.innerHTML = q.fb + `<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 8</span>`;
+      qfb.className = 'feedback-box ok';
+    } else {
+      qfb.textContent = '✓ Верно!';
+      qfb.className = 'feedback-box ok';
+    }
+  } else {
+    errors++;
+    btns[i].classList.add('wrong');
+    if (q.easter) {
+      eggsFound++;
+      qfb.innerHTML = `Тоже неплохо 😄 ${q.fb}<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 8</span>`;
+      qfb.className = 'feedback-box ok';
+    } else {
+      qfb.textContent = '✗ Ошибка.';
+      qfb.className = 'feedback-box fail';
+    }
+  }
+
+  qnext.className = 'next-btn show';
+  qnext.textContent = cur < questions.length-1 ? 'Дальше →' : 'Результат →';
+  updateStats();
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display='none';
+  const res=document.getElementById('results'); res.classList.add('show');
+  const total = questions.length;
+  const pct = Math.round(correct/total*100);
+  document.getElementById('rscore').textContent = correct;
+  document.getElementById('rtotal').textContent = `из ${total} вопросов`;
+  document.getElementById('rbreak').innerHTML =
+    `<span class="rb rb-ok">✓ ${correct} верно</span>` +
+    `<span class="rb rb-fail">✗ ${errors} ошибок</span>` +
+    `<span class="rb rb-pct">${pct}% точность</span>` +
+    `<span class="rb" style="background:rgba(245,158,11,0.12);color:#f59e0b">🥚 ${eggsFound} / 8 секретов</span>`;
+
+  let emoji, title, rank;
+  if (pct >= 90)      { emoji='🏆'; title='Легенда ОГЭ!';           rank='Все темы пройдены на отлично'; }
+  else if (pct >= 75) { emoji='🌿';  title='Уверенный биолог';       rank='Большинство тем под контролем'; }
+  else if (pct >= 60) { emoji='🔬';  title='Хороший уровень';        rank='Есть над чем поработать'; }
+  else if (pct >= 45) { emoji='📖';  title='Нужно повторить';        rank='Вернись к слабым квестам'; }
+  else                { emoji='🌱';  title='Начало пути';             rank='Начни с шпор в каждом квесте'; }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rrank').textContent  = rank;
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  eggsFound = 0;
+  init();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('intro-screen').style.display = 'block';
+  document.getElementById('quiz-area').style.display = 'none';
+  const mc = document.getElementById('monster-count');
+  if (mc) mc.textContent = questions.length;
+});
+
+</script>
+</body>
+</html>
