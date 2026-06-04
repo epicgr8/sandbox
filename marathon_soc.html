@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Большой совет — ОГЭ Обществознание Марафон</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d0d14;
+    --bg2:   #13131e;
+    --bg3:   #1a1a28;
+    --bg4:   #222235;
+    --text:  #eeeaf8;
+    --muted: #7a7490;
+    --border:  rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --cs1: #7c3aed;
+    --cs2: #0284c7;
+    --cs3: #b45309;
+    --cs4: #c62828;
+    --cs5: #9c2752;
+    --green: #1db36e;
+    --red:   #dc2626;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size: 16px;
+    line-height: 1.6; min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 0%, rgba(124,58,237,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(156,39,82,0.07) 0%, transparent 55%);
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+  .hero { text-align: center; padding: 48px 0 32px; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .hero-title { font-size: clamp(28px,5vw,48px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+  .hero-title .g1 { color: var(--cs1); }
+  .hero-title .g2 { color: var(--cs3); }
+  .hero-title .g3 { color: var(--cs5); }
+  .hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .hero::after { content:''; display:block; margin: 24px auto 0; width:160px; height:2px; border-radius:2px; background: linear-gradient(90deg,var(--cs1),var(--cs2),var(--cs3),var(--cs5)); }
+  .sources-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  .src-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid; }
+  .sb1 { background: rgba(124,58,237,0.1); color:#a78bfa; border-color:rgba(124,58,237,0.3); }
+  .sb2 { background: rgba(2,132,199,0.1);  color:#38bdf8; border-color:rgba(2,132,199,0.3); }
+  .sb3 { background: rgba(180,83,9,0.1);   color:#f59e0b; border-color:rgba(180,83,9,0.3); }
+  .sb4 { background: rgba(198,40,40,0.1);  color:#f87171; border-color:rgba(198,40,40,0.3); }
+  .sb5 { background: rgba(156,39,82,0.1);  color:#f9a8d4; border-color:rgba(156,39,82,0.3); }
+  .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .stat-pill { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 100px; }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; }
+  .stat-num.green { color: var(--green); }
+  .stat-num.red   { color: var(--red); }
+  .stat-num.gold  { color: var(--cs3); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background: linear-gradient(90deg,var(--cs1),var(--cs3),var(--cs5)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .progress-counter { font-size:12px; font-weight:700; color:var(--muted); min-width:60px; text-align:right; font-family:'Space Mono',monospace; }
+  .q-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .q-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-src { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; }
+  .q-src.src-s1 { background: var(--cs1); }
+  .q-src.src-s2 { background: var(--cs2); }
+  .q-src.src-s3 { background: var(--cs3); }
+  .q-src.src-s4 { background: var(--cs4); }
+  .q-src.src-s5 { background: var(--cs5); }
+  .q-src.src-extra { background: #059669; }
+  .q-src.src-egg { background: linear-gradient(135deg, #f59e0b, #ec4899); }
+  .q-card.is-egg { border-color: rgba(245,158,11,0.5); background: linear-gradient(180deg, #1a1500 0%, var(--bg2) 60px); }
+  .q-card.is-egg .q-header { background: rgba(245,158,11,0.08); border-bottom-color: rgba(245,158,11,0.25); }
+  .egg-banner { text-align:center; padding: 18px 0 6px; font-size:32px; letter-spacing:8px; animation: eggpulse 1.2s ease-in-out infinite; }
+  @keyframes eggpulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .q-num { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); margin-left:auto; }
+  .q-body { padding:22px 22px 18px; }
+  .q-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  /* Hero name styles */
+  .q-text span[class*="hero-"] { font-weight: 700; }
+  .q-text .hero-name { font-weight:700; background:linear-gradient(120deg,#a78bfa,#c084fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .q-text .hero-yen { color: #a78bfa; -webkit-text-fill-color: #a78bfa; }
+  .q-text .hero-wolf, .q-text .hero-e { color: #f87171; -webkit-text-fill-color: #f87171; }
+  .q-text .hero-geralt, .q-text .hero-ger, .q-text .hero-g { color: #4ade80; -webkit-text-fill-color: #4ade80; }
+  .q-text .hero-z, .q-text .n-zoltan { color: #fb923c; -webkit-text-fill-color: #fb923c; }
+  .q-text .hero-l, .q-text .n-lut, .q-text .lut { color: #f59e0b; -webkit-text-fill-color: #f59e0b; }
+  .q-text .hero-f { color: #94a3b8; -webkit-text-fill-color: #94a3b8; }
+  .q-text .hero-b { color: #34d399; -webkit-text-fill-color: #34d399; }
+  .q-text .hero-n { color: #a3a3a3; -webkit-text-fill-color: #a3a3a3; }
+  .q-text .hero-r, .q-text .n-rad { color: #f43f5e; -webkit-text-fill-color: #f43f5e; }
+  .q-text .hero-s { color: #38bdf8; -webkit-text-fill-color: #38bdf8; }
+  .q-text .hero-t, .q-text .hero-ann { color: #e879f9; -webkit-text-fill-color: #e879f9; }
+  .q-text .hero-kei { color: #38bdf8; -webkit-text-fill-color: #38bdf8; }
+  .q-text .hero-lam { color: #fb923c; -webkit-text-fill-color: #fb923c; }
+  .q-text .hero-reg { color: #a78bfa; -webkit-text-fill-color: #a78bfa; }
+  .q-text .hero-par, .q-text .par { color: #f472b6; -webkit-text-fill-color: #f472b6; }
+  .q-text .n-dijk { font-weight:700; color: #60a5fa; -webkit-text-fill-color: #60a5fa; }
+  .q-text .n-ger { font-weight:700; color: #4ade80; -webkit-text-fill-color: #4ade80; }
+  .q-text .n-rad { font-weight:700; }
+  .q-text .n-lut { font-weight:700; }
+  .q-text .law-ref { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2); color:#a78bfa; padding:4px 10px; border-radius:6px; display:inline-block; margin:2px 0; }
+  .q-text .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg3); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s,background 0.14s,transform 0.1s; display:flex; align-items:center; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:rgba(124,58,237,0.5); background:rgba(124,58,237,0.08); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; }
+  .opt-btn.correct { border-color:var(--green); background:rgba(29,179,110,0.12); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:var(--green); }
+  .opt-btn.wrong   { border-color:var(--red); background:rgba(220,38,38,0.1); color:#fca5a5; }
+  .opt-btn.wrong   .opt-letter { color:var(--red); }
+  .opt-btn:disabled { cursor:default; }
+  .feedback-box { margin-top:14px; padding:12px 16px; border-radius:8px; font-size:14px; line-height:1.6; display:none; animation:fadeIn 0.2s ease; }
+  .feedback-box.ok   { background:rgba(29,179,110,0.1); border:1px solid rgba(29,179,110,0.3); color:#86efac; display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.3); color:#fca5a5; display:block; }
+  .q-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+  .results { display:none; text-align:center; padding:56px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:64px; margin-bottom:16px; }
+  .results-title { font-size:clamp(24px,4vw,40px); font-weight:700; margin-bottom:8px; }
+  .results-score { font-size:clamp(64px,11vw,100px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--cs1); }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:24px; }
+  .results-breakdown { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
+  .rb { font-size:13px; font-weight:600; padding:6px 16px; border-radius:20px; }
+  .rb-ok   { background:rgba(29,179,110,0.12); color:var(--green); }
+  .rb-fail { background:rgba(220,38,38,0.12);  color:#f87171; }
+  .rb-pct  { background:rgba(124,58,237,0.12); color:#a78bfa; }
+  .results-rank { font-size:16px; font-weight:700; color:var(--text); margin-bottom:32px; padding:14px 24px; background:var(--bg2); border:1px solid var(--border2); border-radius:10px; display:inline-block; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; background:var(--text); color:var(--bg); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .q-animate { animation:fadeIn 0.28s ease; }
+  .intro-screen { animation:fadeIn 0.4s ease; }
+  .intro-card { background:var(--bg2); border:1px solid var(--border2); border-radius:16px; padding:32px 28px; margin-bottom:20px; position:relative; overflow:hidden; }
+  .intro-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 65%); pointer-events:none; }
+  .intro-monster-count { font-family:'Space Mono',monospace; font-size:clamp(36px,7vw,64px); font-weight:700; color:#a78bfa; line-height:1; margin-bottom:6px; text-shadow:0 0 40px rgba(124,58,237,0.4); }
+  .intro-monster-label { font-size:14px; color:var(--muted); margin-bottom:28px; letter-spacing:0.05em; }
+  .intro-text { font-size:17px; line-height:1.75; color:var(--text); margin-bottom:28px; }
+  .intro-text em { color:#a78bfa; font-style:normal; font-weight:600; }
+  .intro-rules { display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .intro-rule { display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); background:var(--bg3); border-radius:8px; padding:10px 14px; }
+  .intro-rule-icon { font-size:18px; flex-shrink:0; }
+  .start-btn { width:100%; font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; background:linear-gradient(135deg,#7c3aed,#9c2752); color:#fff; border:none; padding:16px 32px; border-radius:12px; cursor:pointer; transition:opacity 0.15s,transform 0.1s; letter-spacing:0.02em; }
+  .start-btn:hover { opacity:0.9; transform:translateY(-2px); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Обществознание · Большой совет</div>
+    <h1 class="hero-title"><span class="g1">Большой</span><br><span class="g2">совет</span></h1>
+    <p class="hero-sub">Все персонажи обществознания собрались на финальный экзамен перед ОГЭ</p>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen" class="intro-screen">
+    <div class="intro-card">
+      <div class="intro-monster-count" id="monster-count">166</div>
+      <div class="intro-monster-label">вопросов впереди</div>
+      <div class="intro-text">
+        Большой совет объявлен открытым.<br>
+        <em>Йеннифэр</em>, <em>Геральт</em>, <em>Зольтан</em>, <em>Энгель</em>, <em>Анна Генриетта</em> — все здесь.<br>
+        Регис наблюдает. Лютик сочиняет балладу о происходящем.<br>
+        Мадам Пармезан оценивает — молча и строго.<br><br>
+        Конституция, экономика, социальные нормы, политика, культура —<br>
+        весь ОГЭ по обществознанию за один марафон.<br>
+        Где-то среди вопросов спрятаны <em>7 секретов</em> Большого совета.
+      </div>
+      <div class="intro-rules">
+        <div class="intro-rule"><span class="intro-rule-icon">⚖️</span>Все темы вперемешку — право, экономика, социальные нормы, политика, культура</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🎯</span>Одна попытка на вопрос — верно или нет, без подсказок</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🥚</span>7 секретов спрятаны среди вопросов — они появятся неожиданно</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🏃</span>Прогресс не сохраняется — но Большой совет умеет ждать</div>
+      </div>
+      <button class="start-btn" onclick="startMarathon()">Начать марафон →</button>
+    </div>
+
+    <div class="sources-row">
+      <span class="src-badge sb1">С1 · Йеннифэр — Конституция и право</span>
+      <span class="src-badge sb2">С2 · Термины — Понятия обществознания</span>
+      <span class="src-badge sb3">С3 · Зольтан — Экономика</span>
+      <span class="src-badge sb4">С4 · Энгель — Социальная сфера и политика</span>
+      <span class="src-badge sb5">С5 · Туссент — Человек, общество, культура</span>
+    </div>
+  </div>
+
+  <div id="quiz-area" style="display:none">
+    <div class="stats-bar">
+      <div class="stat-pill"><span class="stat-num green" id="s-ok">0</span><span class="stat-label">✓ Верно</span></div>
+      <div class="stat-pill"><span class="stat-num red"   id="s-err">0</span><span class="stat-label">✗ Ошибок</span></div>
+      <div class="stat-pill"><span class="stat-num gold"  id="s-left">0</span><span class="stat-label">📜 Вопросов осталось</span></div>
+      <div class="stat-pill" style="border-color:rgba(245,158,11,0.3)"><span class="stat-num" style="color:#f59e0b" id="s-egg">0 / 7</span><span class="stat-label">🥚 Секретов</span></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="qbar"></div></div>
+      <span class="progress-counter" id="qcnt">1 / —</span>
+    </div>
+
+    <div class="q-card q-animate" id="qcard">
+      <div class="q-header" id="qheader"></div>
+      <div class="q-body">
+        <div class="q-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="q-footer">
+        <button class="next-btn" id="qnext">Дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-breakdown" id="rbreak"></div>
+    <div class="results-rank"  id="rrank"></div>
+    <button class="restart-btn" id="restart">Марафон заново</button>
+  </div>
+
+  <div class="quests-nav">
+    <div class="quests-nav-title">Вернуться к квесту</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="index.html"><span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span><span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span><span class="qp-badge">← На главную</span></a>
+      <a class="quest-pill" href="quest_soc1_yenn.html"><span class="qp-num" style="background:#7c3aed;color:#fff">С1</span><span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Йеннифэр</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest_soc2_terms.html"><span class="qp-num" style="background:#0284c7;color:#fff">С2</span><span class="qp-info"><span class="qp-name">Знай свои права</span><span class="qp-sub">Термины и определения · все разделы</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest_soc3_zoltan.html"><span class="qp-num" style="background:#b45309;color:#fff">С3</span><span class="qp-info"><span class="qp-name">Рынок не прощает</span><span class="qp-sub">Экономика · Зольтан</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest_soc4_engel.html"><span class="qp-num" style="background:#c62828;color:#fff">С4</span><span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Энгель</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest_soc5_culture.html"><span class="qp-num" style="background:#9c2752;color:#fff">С5</span><span class="qp-info"><span class="qp-name">Бал в Туссенте</span><span class="qp-sub">Человек, общество, культура · Анна Генриетта</span></span><span class="qp-badge"></span></a>
+    </div>
+  </div>
+
+</div>
+<script>
