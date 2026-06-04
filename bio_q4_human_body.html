@@ -116,6 +116,7 @@
   .rule-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
   .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
   .rule-body strong { color:var(--text); }
+  .neq { color:#D81B60; font-weight:700; }
   .ff { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 8px; border-radius:5px; display:inline-block; color:var(--text); background:var(--bg3); margin:2px 0; }
   .rule-mnemonic { margin-top:10px; font-size:12px; background:var(--bg3); border-radius:7px; padding:8px 11px; line-height:1.55; }
   .rule-assoc { margin-top:8px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
@@ -387,18 +388,17 @@
       <div class="rule-cat">Лайфхаки ОГЭ</div>
       <div class="rule-title">9 ключей к правильному ответу</div>
       <div class="rule-body">
-        1. Читай вопрос дважды — ищи слова <strong>«НЕ»</strong>, <strong>«НЕ является»</strong>, <strong>«кроме»</strong>.<br>
-        2. Не знаешь ответ — убирай явно ложные варианты: обычно 1–2 из них абсурдны.<br>
-        3. <strong>Антиген ≠ антитело</strong>: анти-ГЕН — чужое (враг), анти-ТЕЛО — защита (наш агент).<br>
-        4. <strong>Артерия ≠ алая кровь</strong>: лёгочная артерия несёт венозную. Артерия — по направлению, не по цвету.<br>
-        5. <strong>Жгут — только при артериальном</strong>, давящая повязка — при венозном. Перепутал = потерял конечность.<br>
-        6. <strong>В рот только крахмал</strong> (амилаза слюны). Белки — с желудка. Жиры — с 12-перстной кишки.<br>
-        7. <strong>Остаточный объём</strong> в ЖЕЛ НЕ входит — он не выдыхается никогда.<br>
-        8. В <strong>норме в моче нет</strong> ни глюкозы, ни белков, ни эритроцитов. Есть — сигнал тревоги.<br>
-        9. <strong>Сыворотка ≠ вакцина</strong>: сыворотка — быстро, ненадолго (готовые антитела). Вакцина — медленно, надолго (иммунная память).
+        1. Читай вопрос дважды — ищи слова <strong>«НЕ»</strong>, <strong>«НЕ является»</strong>, <strong>«кроме»</strong>. Они переворачивают смысл.<br>
+        2. Не знаешь ответ — вычёркивай явно ложные варианты: обычно 1–2 из них абсурдны.<br>
+        3. <strong>Антиген <span class="neq">≠</span> антитело</strong>: антиГЕН — это чужак (кусочек вируса или бактерии). антиТЕЛО — наша защита, которая его обезвреживает.<br>
+        4. <strong>Артерия <span class="neq">≠</span> «красная кровь»</strong>. Артерия — это сосуд, по которому кровь течёт <strong>ОТ сердца</strong>, цвет тут ни при чём. Обычно в артериях кровь алая (с кислородом), <em>но</em> лёгочная артерия несёт тёмную кровь — потому что идёт от сердца к лёгким. Запоминай артерию по <strong>направлению</strong>, а не по цвету.<br>
+        5. <strong>Жгут — только при артериальном кровотечении</strong> (кровь алая, бьёт фонтаном). При венозном (тёмная, течёт ровно) — давящая повязка. Перепутал — потерял конечность.<br>
+        6. <strong>Переваривание крахмала начинается уже во рту</strong> — его расщепляет фермент амилаза из слюны. А вот белки начинают перевариваться только в желудке, жиры — ещё позже, в тонком кишечнике (12-перстная кишка).<br>
+        7. <strong>Остаточный объём воздуха</strong> в ЖЕЛ НЕ входит — он всегда остаётся в лёгких и не выдыхается.<br>
+        8. В <strong>норме в моче нет</strong> ни глюкозы, ни белка, ни эритроцитов. Если они есть — это сигнал болезни.<br>
+        9. <strong>Сыворотка <span class="neq">≠</span> вакцина</strong>: сыворотка действует быстро, но недолго (вводят готовые антитела). Вакцина — медленно, зато надолго (организм сам формирует иммунную память).
       </div>
       <div class="rule-mnemonic">🧠 Главный лайфхак: если два ответа кажутся верными — выбирай более полный и конкретный. ОГЭ проверяет понимание, а не угадывание.</div>
-      <div class="rule-assoc">🗝️ <strong>Метафора:</strong> эта карточка — запасная связка ключей. Когда все другие карточки прочитаны и почти забыты, именно эти 9 правил откроют нужную дверь на экзамене.</div>
     </div>
 
   </div><!-- /rules-grid -->
@@ -428,13 +428,13 @@
   <div id="quiz-area">
     <div class="quiz-header">
       <div class="quiz-title">🧬 Тест лаборатории «Светлячок»</div>
-      <div class="quiz-sub">28 испытаний · 2 попытки · Спаси человечество</div>
+      <div class="quiz-sub">30 испытаний · 2 попытки · Спаси человечество</div>
     </div>
 
     <div class="quiz-progress-wrap">
       <span id="score-disp" class="quiz-score-badge">✦ 0 верно</span>
       <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
-      <span class="quiz-counter" id="qcnt">1 / 28</span>
+      <span class="quiz-counter" id="qcnt">1 / 30</span>
     </div>
 
     <div class="question-card question-animate" id="qcard">
