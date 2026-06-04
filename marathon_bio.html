@@ -68,6 +68,7 @@
   .q-src.src-b4 { background: var(--b4); }
   .q-src.src-b5 { background: var(--b5); }
   .q-src.src-extra { background: #854d0e; }
+  .q-src.src-memory { background: #7c2d12; }
   .q-src.src-egg { background: linear-gradient(135deg, #f59e0b, #16a34a); }
   .q-card.is-egg { border-color: rgba(245,158,11,0.5); background: linear-gradient(180deg, #0f1a08 0%, var(--bg2) 60px); }
   .q-card.is-egg .q-header { background: rgba(245,158,11,0.08); border-bottom-color: rgba(245,158,11,0.25); }
@@ -129,6 +130,13 @@
   .intro-monster-label { font-size:14px; color:var(--muted); margin-bottom:28px; letter-spacing:0.05em; }
   .intro-text { font-size:17px; line-height:1.75; color:var(--text); margin-bottom:28px; }
   .intro-text em { color:#4ade80; font-style:normal; font-weight:600; }
+  .intro-lead { font-size:15px; line-height:1.7; color:var(--muted); margin-bottom:18px; padding:14px 16px; background:var(--bg3); border-radius:10px; border-left:3px solid var(--b1); }
+  .intro-lead strong { color:var(--text); font-weight:600; }
+  .intro-trio { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:22px; }
+  .intro-trio span { font-size:12px; font-weight:700; padding:5px 12px; border-radius:20px; border:1px solid; }
+  .it-ger { color:#c4b5fd; border-color:rgba(196,181,253,0.35); background:rgba(124,58,237,0.1); }
+  .it-hal { color:#86efac; border-color:rgba(134,239,172,0.35); background:rgba(22,163,74,0.1); }
+  .it-ell { color:#fca5a5; border-color:rgba(252,165,165,0.35); background:rgba(220,38,38,0.08); }
   .intro-rules { display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
   .intro-rule { display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); background:var(--bg3); border-radius:8px; padding:10px 14px; }
   .intro-rule-icon { font-size:18px; flex-shrink:0; }
@@ -141,26 +149,37 @@
   <div class="hero">
     <div class="hero-eyebrow">ОГЭ · Биология · Биомарафон 2026</div>
     <h1 class="hero-title"><span class="g1">Био</span><br><span class="g2">марафон</span></h1>
-    <p class="hero-sub">Все 5 квестов · клетка → экосистема · BG3 × TLOU × Ведьмак</p>
+    <p class="hero-sub">Параллельная планета · три мира слились · расклей вселенные</p>
   </div>
   <div id="intro-screen" class="intro-screen">
     <div class="intro-card">
-      <div class="intro-monster-count" id="monster-count">172</div>
-      <div class="intro-monster-label">вопросов впереди</div>
+      <div class="intro-monster-count" id="monster-count">184</div>
+      <div class="intro-monster-label">монстров впереди</div>
+      <div class="intro-trio">
+        <span class="it-ger">⚔️ Геральт</span>
+        <span class="it-hal">🌿 Халсин</span>
+        <span class="it-ell">🏃 Элли</span>
+      </div>
+      <div class="intro-lead">
+        Портал выбросил их на <strong>параллельную планету</strong>, где все миры перемешались:
+        Континент, Светлячки, Каэр Морхен — в одной куче, без адреса для писем.
+      </div>
       <div class="intro-text">
-        Геральт и Халсин ведут тебя через <em>всю биологию ОГЭ</em>.<br>
-        Клетка, царства, эволюция, тело человека, мозг и экосистемы — всё вперемешку.<br><br>
-        Элли, Регис, Элизабет, Подсолнух — они рядом.<br>
-        Щелкун болеет за тебя. Шэдоухарт наблюдает из тени.<br><br>
-        Где-то среди вопросов спрятаны <em>8 секретов</em> — найди их все.
+        Клетка, царства, эволюция, тело человека, мозг и экосистемы — <em>всё вперемешку</em>, как будто кто-то склеил учебники скotchем.<br><br>
+        Задача троицы: <em>уничтожить монстров</em> — искажения биологии на этой планете — и <em>расклеить вселенные</em>.
+        Тогда каждый вернётся домой и снова сможет переписываться, а не кричать через межмировую щель.<br><br>
+        Ты идёшь с ними. Каждый верный ответ — удар по монстру. Каждая ошибка — вселенные снова липнут друг к другу.<br><br>
+        Регис, Цири, Щелкун и остальные тоже здесь — застряли между мирами.
+        Где-то среди монстров спрятаны <em>8 секретов</em> — артефакты на стыке реальностей.
       </div>
       <div class="intro-rules">
-        <div class="intro-rule"><span class="intro-rule-icon">🌿</span>Все темы вперемешку — клетка, зоология, человек, экология</div>
-        <div class="intro-rule"><span class="intro-rule-icon">🎯</span>Одна попытка на вопрос — верно или нет, без подсказок</div>
-        <div class="intro-rule"><span class="intro-rule-icon">🥚</span>8 пасхалок спрятаны среди вопросов — они появятся неожиданно</div>
-        <div class="intro-rule"><span class="intro-rule-icon">🏃</span>Можно остановиться — прогресс не сохраняется, но это не повод не начинать</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🌍</span>Планета-лоскут: все 5 биоквестов вперемешку — клетка, зоология, человек, экология</div>
+        <div class="intro-rule"><span class="intro-rule-icon">⚔️</span>Каждый вопрос — монстр из перемешанной вселенной. Верный ответ = поражение</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🎯</span>Одна попытка — как в бою: без подсказок, только знания</div>
+        <div class="intro-rule"><span class="intro-rule-icon">📮</span>Расклеишь вселенные — герои вернутся домой и напишут друг другу</div>
+        <div class="intro-rule"><span class="intro-rule-icon">🥚</span>8 секретов на стыке миров — появятся неожиданно</div>
       </div>
-      <button class="start-btn" onclick="startMarathon()">Начать марафон →</button>
+      <button class="start-btn" onclick="startMarathon()">Расклеивать вселенные →</button>
     </div>
     <div class="sources-row">
       <span class="src-badge sb1">Б1 — Живое и опасное</span>
@@ -172,9 +191,9 @@
   </div>
   <div id="quiz-area" style="display:none">
     <div class="stats-bar">
-      <div class="stat-pill"><span class="stat-num green" id="s-ok">0</span><span class="stat-label">✓ Верно</span></div>
-      <div class="stat-pill"><span class="stat-num red" id="s-err">0</span><span class="stat-label">✗ Ошибок</span></div>
-      <div class="stat-pill"><span class="stat-num gold" id="s-left">0</span><span class="stat-label">Вопросов осталось</span></div>
+      <div class="stat-pill"><span class="stat-num green" id="s-ok">0</span><span class="stat-label">⚔️ Побед</span></div>
+      <div class="stat-pill"><span class="stat-num red" id="s-err">0</span><span class="stat-label">💥 Промахов</span></div>
+      <div class="stat-pill"><span class="stat-num gold" id="s-left">0</span><span class="stat-label">🧟 Монстров осталось</span></div>
       <div class="stat-pill" style="border-color:rgba(245,158,11,0.3)"><span class="stat-num" style="color:#f59e0b" id="s-egg">0 / 8</span><span class="stat-label">🥚 Секретов</span></div>
     </div>
     <div class="progress-wrap">
@@ -210,7 +229,7 @@
       <a class="quest-pill" href="bio_quest3_evolution.html"><span class="qp-num" style="background:#7c3aed;color:#fff">3</span><span class="qp-info"><span class="qp-name">Друзья и монстры</span><span class="qp-sub">Зоология, эволюция · Ведьмак</span></span><span class="qp-badge">Квест</span></a>
       <a class="quest-pill" href="bio_q4_human_body.html"><span class="qp-num" style="background:#c2410c;color:#fff">4</span><span class="qp-info"><span class="qp-name">Глубина человечности</span><span class="qp-sub">Скелет, кровь, иммунитет · TLOU</span></span><span class="qp-badge">Квест</span></a>
       <a class="quest-pill" href="bio_quest5_brain_ecology.html"><span class="qp-num" style="background:#059669;color:#fff">5</span><span class="qp-info"><span class="qp-name">Инстинкт и экосистема</span><span class="qp-sub">Мозг, рефлексы, экология · BG3</span></span><span class="qp-badge">Квест</span></a>
-      <a class="quest-pill quest-active" href="#"><span class="qp-num" style="background:linear-gradient(135deg,#16a34a,#059669);color:#fff">∞</span><span class="qp-info"><span class="qp-name">Биомарафон</span><span class="qp-sub">Все темы · ~172 вопросов</span></span><span class="qp-badge qp-here">Здесь</span></a>
+      <a class="quest-pill quest-active" href="#"><span class="qp-num" style="background:linear-gradient(135deg,#16a34a,#059669);color:#fff">∞</span><span class="qp-info"><span class="qp-name">Биомарафон</span><span class="qp-sub">Планета-лоскут · ~184 монстров</span></span><span class="qp-badge qp-here">Здесь</span></a>
     </div>
   </div>
 </div>
@@ -1975,6 +1994,105 @@ const extraQuestions = [
   }
 ];
 
+const memoryQuestions = [
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"<span class='hero-name'>Цири</span> в библиотеке Весемира читает записку: «между предсердиями и желудочками — створки; кровь не может течь назад; орган работает как насос, два круга кровообращения». О каком <strong>органе</strong> речь?",
+    opts:["Печень","Почки","Лёгкие","Сердце"],
+    ans:3,
+    fb:"✦ Верно! Сердце — 4 камеры, клапаны между ними, насосная функция. Малый и большой круги кровообращения начинаются и заканчиваются в сердце.",
+    trap:"Печень фильтрует кровь, почки — мочу, лёгкие — газообмен. Только сердце перекачивает кровь по кругам."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Весемир оставил на полке свиток для Цири: «внутри — миллионы тонких пузырьков; общая площадь как у теннисного корта; кислород входит в кровь, углекислый газ уходит». Что описано?",
+    opts:["Бронхи","Лёгкие","Трахея","Диафрагма"],
+    ans:1,
+    fb:"✦ Верно! Газообмен идёт в альвеолах лёгких — тонкостенных пузырьках, оплетённых капиллярами. Площадь всех альвеол ~150 м².",
+    trap:"Бронхи и трахея — только проводят воздух. Диафрагма — мышца, помогает вдоху. Газообмен — только в лёгких."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Цири находит схему мозга: «отдел сзади головного мозга; без него мышцы работают, но координации нет; равновесие, точность движений, мышечный тонус». Какой отдел?",
+    opts:["Продолговатый мозг","Кора больших полушарий","Промежуточный мозг","Мозжечок"],
+    ans:3,
+    fb:"✦ Верно! Мозжечок — координация, равновесие, точность. Продолговатый — дыхание и сердцебиение. Кора — мышление. Промежуточный (гипоталамус) — голод и температура.",
+    trap:"Не путай с корой: мыслить можно, а встать с лошади без мозжечка — нет."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Весемир пометил на полях: «продолжение головного мозга в позвоночном канале; здесь проходит центр отдёргивающего рефлекса — рука убирается раньше, чем мозг «узнает»». Что описано?",
+    opts:["Спинной мозг","Периферическая нервная система","Мозжечок","Продолговатый мозг"],
+    ans:0,
+    fb:"✦ Верно! Спинной мозг — часть ЦНС в позвоночнике. Центр простых безусловных рефлексов (отдёргивание) — здесь, не в голове.",
+    trap:"Продолговатый мозг — в черепе, дыхание и сердце. ПНС — нервы снаружи. Мозжечок — координация."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Старый трактат на полке: «сложное врождённое поведение всего вида — без обучения, передаётся генетически: гнездо, миграция, забота о потомстве по программе». Как называется такое поведение?",
+    opts:["Динамический стереотип","Условный рефлекс","Инстинкт","Рассудочная деятельность"],
+    ans:2,
+    fb:"✦ Верно! Инстинкт — врождённое сложное поведение вида (безусловное). Стереотип — привычка из условных рефлексов. Рассудочная — решение новой задачи.",
+    trap:"Стереотип вырабатывается (школа, тренировка). Инстинкт есть с рождения у всего вида."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Цири читает заметку Весемира о Геральте: «впервые столкнулся с незнакомым монстром — и за минуту нашёл слабое место, хотя такого не учили. Это не рефлекс и не привычка». Как называется такая деятельность?",
+    opts:["Инстинкт","Рассудочная деятельность","Безусловный рефлекс","Динамический стереотип"],
+    ans:1,
+    fb:"✦ Верно! Рассудочная деятельность — «инсайт»: решение новой нестандартной задачи без готового алгоритма.",
+    trap:"Инстинкт и рефлексы — автоматические. Стереотип — отработанная цепочка. Рассудочная — именно новое решение."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Анатомический атлас: «длинная полость внутри, костный мозг; примеры — бедро, плечо, пальцы. Такие кости называются…»",
+    opts:["Трубчатые","Плоские","Губчатые","Смешанные"],
+    ans:0,
+    fb:"✦ Верно! Трубчатые — длинные кости конечностей. Плоские — череп, лопатка. Губчатые — запястье. Смешанные — позвонки.",
+    trap:"Плоские — широкие пластины. Губчатые — короткие, «кубики» кисти и стопы."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Ботанический свиток: «цветок даёт нектар и пыльцу, насекомое переносит пыльцу на другой цветок — оба получают выгоду (+/+)». Как называется это биотическое отношение?",
+    opts:["Паразитизм","Хищничество","Комменсализм","Мутуализм"],
+    ans:3,
+    fb:"✦ Верно! Мутуализм (+/+) — оба выигрывают. Комменсализм (+/0) — одному хорошо, другому нейтрально. Паразитизм и хищничество — один страдает.",
+    trap:"Комменсализм: второму не вредит и не помогает. Здесь оба в плюсе — это мутуализм."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Зоологическая записка: «рыба-прилипала едет на акуле, не тратя сил; акула не получает ни вреда, ни пользы (+/0)». Какое отношение?",
+    opts:["Мутуализм","Паразитизм","Комменсализм","Хищничество"],
+    ans:2,
+    fb:"✦ Верно! Комменсализм: один получает пользу, другому нейтрально. Мутуализм — оба в плюсе. Паразитизм — хозяин страдает.",
+    trap:"Не путай с мутуализмом: акула ничего не выигрывает — это не (+/+)."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Весемир подчеркнул в учебнике: «зародыши рыбы, лягушки, птицы и человека на ранних стадиях очень похожи — жабры, хвост… Это доказательство эволюции какого типа?»",
+    opts:["Палеонтологическое","Эмбриологическое","Биогеографическое","Сравнительно-анатомическое"],
+    ans:1,
+    fb:"✦ Верно! Эмбриологическое доказательство — сходство зародышей. Палеонтологическое — ископаемые. Сравнительно-анатомическое — гомологи и рудименты.",
+    trap:"Сходство взрослых органов — сравнительно-анатомическое. Сходство зародышей — эмбриологическое."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Цири листает главу о теле: «наружный барьер организма; верхний слой из мёртвых клеток; потовые железы; выводит воду и соли; первый рубеж иммунитета». Что описано?",
+    opts:["Кожа","Слизистая оболочка","Эпителий желудка","Лимфа"],
+    ans:0,
+    fb:"✦ Верно! Кожа — орган покрова и выделения: эпидермис, пот, физический барьер иммунитета. Слизистые — внутри полостей.",
+    trap:"Эпителий — тип ткани, а не орган целиком. Лимфа — жидкость иммунной системы."
+  },
+  {
+    topic:"Память — библиотека Каэр Морхен",
+    text:"Ботаника на полке: «перенос пыльцы с тычинок на рыльце пестика — ветром, насекомыми или водой; без этого не будет семян». Как называется этот процесс?",
+    opts:["Оплодотворение","Транспирация","Фотосинтез","Опыление"],
+    ans:3,
+    fb:"✦ Верно! Опыление — перенос пыльцы. Оплодотворение — слияние половых клеток после. Транспирация — испарение воды листьями.",
+    trap:"Оплодотворение идёт ПОСЛЕ опыления. Пыльца должна сначала попасть на пестик."
+  }
+];
+
 const easterEggs = [
   {
     topic:"Друидский перекус",
@@ -2050,7 +2168,7 @@ const easterEggs = [
   }
 ];
 
-const allMarathonQuestions = [...b1Questions, ...b2Questions, ...b3Questions, ...b4Questions, ...b5Questions, ...extraQuestions, ...easterEggs];
+const allMarathonQuestions = [...b1Questions, ...b2Questions, ...b3Questions, ...b4Questions, ...b5Questions, ...extraQuestions, ...memoryQuestions, ...easterEggs];
 
 function getSrc(q) {
   if (q.easter)                    return {cls:'src-egg',   name:"🥚 Пасхалка"};
@@ -2060,6 +2178,7 @@ function getSrc(q) {
   if (b4Questions.includes(q))     return {cls:'src-b4',    name:"Б4 · Глубина человечности"};
   if (b5Questions.includes(q))     return {cls:'src-b5',    name:"Б5 · Инстинкт и экосистема"};
   if (extraQuestions.includes(q))  return {cls:'src-extra', name:"Доп · Пробелы ОГЭ"};
+  if (memoryQuestions.includes(q)) return {cls:'src-memory', name:"🌍 Стык миров"};
   return {cls:'src-b1', name:"—"};
 }
 
@@ -2160,7 +2279,7 @@ function answer(i) {
       qfb.innerHTML = q.fb + `<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 8</span>`;
       qfb.className = 'feedback-box ok';
     } else {
-      qfb.textContent = '✓ Верно!';
+      qfb.textContent = '⚔️ Монстр повержен!';
       qfb.className = 'feedback-box ok';
     }
   } else {
@@ -2171,7 +2290,7 @@ function answer(i) {
       qfb.innerHTML = `Тоже неплохо 😄 ${q.fb}<br><span style="font-size:12px;opacity:0.7">🥚 Секрет найден! ${eggsFound} / 8</span>`;
       qfb.className = 'feedback-box ok';
     } else {
-      qfb.textContent = '✗ Ошибка.';
+      qfb.textContent = '💥 Промах — вселенные снова липнут...';
       qfb.className = 'feedback-box fail';
     }
   }

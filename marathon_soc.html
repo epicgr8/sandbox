@@ -33,14 +33,74 @@
       radial-gradient(ellipse 50% 50% at 80% 80%, rgba(156,39,82,0.07) 0%, transparent 55%);
   }
   .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
-  .hero { text-align: center; padding: 48px 0 32px; }
-  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  .hero-title { font-size: clamp(28px,5vw,48px); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
-  .hero-title .g1 { color: var(--cs1); }
-  .hero-title .g2 { color: var(--cs3); }
-  .hero-title .g3 { color: var(--cs5); }
-  .hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
-  .hero::after { content:''; display:block; margin: 24px auto 0; width:160px; height:2px; border-radius:2px; background: linear-gradient(90deg,var(--cs1),var(--cs2),var(--cs3),var(--cs5)); }
+  .hero { text-align: center; padding: 56px 0 36px; position: relative; }
+  .hero::before {
+    content: '⚖️ ✦ ⚖️ ✦ ⚖️';
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.45em;
+    opacity: 0.45;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--cs1), var(--cs5));
+    margin-bottom: 22px;
+    padding: 5px 18px;
+    border-radius: 20px;
+  }
+  .hero-title {
+    font-size: clamp(44px, 10vw, 96px);
+    font-weight: 700;
+    line-height: 0.92;
+    margin-bottom: 14px;
+    letter-spacing: -0.025em;
+  }
+  .hero-title .ht1 {
+    display: block;
+    background: linear-gradient(120deg, #c0435a 0%, #e879f9 38%, #fb923c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 24px rgba(192,67,90,0.45));
+    animation: fadeIn 0.8s ease;
+  }
+  .hero-title .ht2 {
+    display: block;
+    font-size: 0.28em;
+    font-weight: 500;
+    letter-spacing: 0.55em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 10px 0 8px;
+    -webkit-text-fill-color: var(--muted);
+    animation: fadeIn 1s ease;
+  }
+  .hero-title .ht3 {
+    display: block;
+    background: linear-gradient(120deg, #f59e0b 0%, #fbbf24 28%, #a78bfa 72%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 24px rgba(124,58,237,0.4));
+    animation: fadeIn 1.1s ease;
+  }
+  .hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.03em; }
+  .hero::after {
+    content: '';
+    display: block;
+    margin: 28px auto 0;
+    width: min(340px, 90%);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--cs5), var(--cs3), var(--cs1), var(--cs2), transparent);
+  }
   .sources-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
   .src-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid; }
   .sb1 { background: rgba(124,58,237,0.1); color:#a78bfa; border-color:rgba(124,58,237,0.3); }
@@ -178,7 +238,11 @@
 
   <div class="hero">
     <div class="hero-eyebrow">ОГЭ · Обществознание · Большой совет</div>
-    <h1 class="hero-title"><span class="g1">Большой</span><br><span class="g2">совет</span></h1>
+    <h1 class="hero-title">
+      <span class="ht1">Большой</span>
+      <span class="ht2">✦ · ✦</span>
+      <span class="ht3">совет</span>
+    </h1>
     <p class="hero-sub">Все персонажи обществознания собрались на финальный экзамен перед ОГЭ</p>
   </div>
 
@@ -189,7 +253,7 @@
       <div class="intro-monster-label">монстров впереди</div>
       <div class="intro-text">
         Большой совет объявлен открытым. Обсуждаем, как обустроить Континент.<br>
-        <em>Йеннифэр</em>, <em>Геральт</em>, <em>Зольтан</em>, <em>Энгель</em>, <em>Анна Генриетта</em>, <em>Радовид</em> — все здесь.<br>
+        <em>Йеннифэр</em>, <em>Геральт</em>, <em>Золтан</em>, <em>Энгель</em>, <em>Анна Генриетта</em>, <em>Радовид</em> — все здесь.<br>
         Регис наблюдает. Лютик сочиняет балладу о происходящем.<br>
         Важно понять, как ужиться вместе Старшим и младшим расам и защитить мир от посягательств всяких там Диких охот.<br><br>
         Конституция, экономика, социальные нормы, политика, культура —<br>
@@ -248,7 +312,7 @@
       <a class="quest-pill" href="index.html"><span class="qp-num" style="background:#0f172a;color:#fff;font-size:16px">🏠</span><span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span><span class="qp-badge">← На главную</span></a>
       <a class="quest-pill" href="quest_soc1_yenn.html"><span class="qp-num" style="background:#7c3aed;color:#fff">С1</span><span class="qp-info"><span class="qp-name">Закон или смерть</span><span class="qp-sub">Конституция и право · Йеннифэр</span></span><span class="qp-badge"></span></a>
       <a class="quest-pill" href="quest_soc2_terms.html"><span class="qp-num" style="background:#0284c7;color:#fff">С2</span><span class="qp-info"><span class="qp-name">Знай свои права</span><span class="qp-sub">Термины и определения · все разделы</span></span><span class="qp-badge"></span></a>
-      <a class="quest-pill" href="quest_soc3_zoltan.html"><span class="qp-num" style="background:#b45309;color:#fff">С3</span><span class="qp-info"><span class="qp-name">Рынок не прощает</span><span class="qp-sub">Экономика · Зольтан</span></span><span class="qp-badge"></span></a>
+      <a class="quest-pill" href="quest_soc3_zoltan.html"><span class="qp-num" style="background:#b45309;color:#fff">С3</span><span class="qp-info"><span class="qp-name">Рынок не прощает</span><span class="qp-sub">Экономика · Золтан</span></span><span class="qp-badge"></span></a>
       <a class="quest-pill" href="quest_soc4_engel.html"><span class="qp-num" style="background:#c62828;color:#fff">С4</span><span class="qp-info"><span class="qp-name">Нейтралитет невозможен</span><span class="qp-sub">Социальная сфера и политика · Энгель</span></span><span class="qp-badge"></span></a>
       <a class="quest-pill" href="quest_soc5_culture.html"><span class="qp-num" style="background:#9c2752;color:#fff">С5</span><span class="qp-info"><span class="qp-name">Бал в Туссенте</span><span class="qp-sub">Человек, общество, культура · Анна Генриетта</span></span><span class="qp-badge"></span></a>
     </div>
@@ -664,7 +728,7 @@ const soc2Questions = [
   }
 ];
 
-// ═══ КВЕСТ 3 — ЗОЛЬТАН: Экономика (31 вопрос) ═══
+// ═══ КВЕСТ 3 — ЗОЛТАН: Экономика (31 вопрос) ═══
 const soc3Questions = [
   {
     topic:"Закон спроса",
@@ -1899,10 +1963,10 @@ const easterEggs = [
     easter:true,
     emoji:'🪓',
     topic:'Большой совет',
-    text:"<strong>🪓 ЗОЛЬТАН</strong> открывает заседание: «Братья и сёстры по мечу! Я изучил все ответы на все вопросы ОГЭ и могу сказать одно: главный секрет успеха — это…»",
+    text:"<strong>🪓 ЗОЛТАН</strong> открывает заседание: «Братья и сёстры по мечу! Я изучил все ответы на все вопросы ОГЭ и могу сказать одно: главный секрет успеха — это…»",
     opts:["Выучить всё наизусть в последнюю ночь","Надеяться на удачу и хорошее настроение экзаменатора","Систематически готовиться, понимать логику и не зубрить бессмысленно","Дружить с кем-то из комиссии"],
     ans:2,
-    fb:"✅ Мудрость дварфов! Зольтан — практик. Систематическая подготовка бьёт зубрёжку в ночь перед экзаменом."
+    fb:"✅ Мудрость дварфов! Золтан — практик. Систематическая подготовка бьёт зубрёжку в ночь перед экзаменом."
   },
   {
     easter:true,
@@ -1976,7 +2040,7 @@ function getSrc(q) {
   if (q.easter) return { cls:'src-egg', name:'🥚 Пасхалка' };
   if (soc1Questions.includes(q)) return { cls:'src-s1', name:'С1 · Йеннифэр' };
   if (soc2Questions.includes(q)) return { cls:'src-s2', name:'С2 · Термины' };
-  if (soc3Questions.includes(q)) return { cls:'src-s3', name:'С3 · Зольтан' };
+  if (soc3Questions.includes(q)) return { cls:'src-s3', name:'С3 · Золтан' };
   if (soc4Questions.includes(q)) return { cls:'src-s4', name:'С4 · Энгель' };
   if (soc5Questions.includes(q)) return { cls:'src-s5', name:'С5 · Туссент' };
   return { cls:'src-extra', name:'✦ Дополнение' };
@@ -2120,7 +2184,7 @@ function showResults() {
   let msg = '';
   if (pct >= 90) msg = '«Большой совет» одобряет! Анна Генриетта вручает тебе Орден Туссента. ОГЭ покорён! 🌹';
   else if (pct >= 70) msg = 'Регис кивает с уважением: «Ты справился достойно. Осталось довести до блеска». Повтори ошибки!';
-  else if (pct >= 50) msg = 'Зольтан хлопает по плечу: «Не так плохо. Но не так хорошо. Ещё раз — и победа!»';
+  else if (pct >= 50) msg = 'Золтан хлопает по плечу: «Не так плохо. Но не так хорошо. Ещё раз — и победа!»';
   else msg = 'Геральт молча смотрит. Потом говорит: «Хм». Это значит — повтори квесты и приходи снова.';
 
   document.getElementById('remoji').textContent = emoji;
