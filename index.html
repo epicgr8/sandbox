@@ -402,11 +402,11 @@ body {
 
     <div class="timeline">
 
-      <div class="tl-item tl-done tl-math">
+      <div class="tl-item tl-soon tl-math">
         <div class="tl-date">2 июня</div>
         <div class="tl-subject">Математика</div>
-        <div class="tl-days-left"><span class="tl-days-num" style="font-size:32px; color:var(--bio)">✓</span><span class="tl-days-label">Экзамен сдан</span></div>
-        <div class="tl-status status-done">Квесты завершены</div>
+        <div class="tl-days-left" id="days-math"><span class="tl-days-num">—</span><span class="tl-days-label">дней осталось</span></div>
+        <div class="tl-status status-soon">⏳ Скоро</div>
       </div>
 
       <div class="tl-item tl-soon tl-bio">
@@ -733,6 +733,7 @@ body {
 <script>
 // Считаем дни до экзаменов
 const exams = [
+  { id:'math', date:'2026-06-02', daysId:'days-math' },
   { id:'bio',  date:'2026-06-05', badgeId:'badge-bio',  daysId:'days-bio'  },
   { id:'soc',  date:'2026-06-05', badgeId:'badge-soc',  daysId:'days-soc'  },
   { id:'rus',  date:'2026-06-09', badgeId:'badge-rus',  daysId:'days-rus'  },
@@ -752,15 +753,27 @@ exams.forEach(e => {
   
   const numEl = daysEl ? daysEl.querySelector('.tl-days-num') : null;
   const lblEl = daysEl ? daysEl.querySelector('.tl-days-label') : null;
-  if (diff <= 0) {
-    if (numEl)   numEl.textContent   = '✓';
+  const tlItem = daysEl ? daysEl.closest('.tl-item') : null;
+  const statusEl = tlItem ? tlItem.querySelector('.tl-status') : null;
+
+  if (diff < 0) {
+    if (numEl)   { numEl.textContent = '✓'; numEl.style.fontSize = '32px'; }
     if (lblEl)   lblEl.textContent   = 'Экзамен сдан';
     if (badgeEl) badgeEl.textContent = 'Квест завершён';
+    if (tlItem)  { tlItem.classList.remove('tl-soon'); tlItem.classList.add('tl-done'); }
+    if (statusEl){ statusEl.className = 'tl-status status-done'; statusEl.textContent = 'Квесты завершены'; }
+  } else if (diff === 0) {
+    if (numEl)   { numEl.textContent = '0'; numEl.style.fontSize = ''; }
+    if (lblEl)   lblEl.textContent   = 'экзамен сегодня';
+    if (badgeEl) badgeEl.textContent = 'Сегодня!';
+    if (statusEl){ statusEl.className = 'tl-status status-soon'; statusEl.textContent = '📋 Сегодня'; }
   } else if (diff === 1) {
+    if (numEl)   numEl.style.fontSize = '';
     if (numEl)   numEl.textContent   = '1';
     if (lblEl)   lblEl.textContent   = 'день остался';
     if (badgeEl) badgeEl.textContent = 'Завтра!';
   } else {
+    if (numEl)   numEl.style.fontSize = '';
     if (numEl)   numEl.textContent   = diff;
     if (lblEl)   lblEl.textContent   = diff < 5 ? 'дня осталось' : 'дней осталось';
     if (badgeEl) badgeEl.textContent = `${diff} дн.`;
