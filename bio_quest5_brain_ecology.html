@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биоквест 5: Мозг и экосистемы — ОГЭ Биология 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede9;
+    --bg2:     #faf8f5;
+    --bg3:     #e8e3dc;
+    --bg4:     #ddd8d0;
+    --c-nerve: #5e35b1;   /* нервная система — индиго */
+    --c-reflex:#16a34a;   /* рефлексы — зелёный */
+    --c-brain: #00897b;   /* отделы мозга — тёмный бирюзовый */
+    --c-hnd:   #b45309;   /* ВНД — янтарный */
+    --c-analyz:#7c3aed;   /* анализаторы — фиолетовый */
+    --c-endoc: #c2410c;   /* эндокрин — оранжевый */
+    --c-eco:   #059669;   /* экология — изумрудный */
+    --c-chain: #0f766e;   /* цепи питания — тёмно-бирюзовый */
+    --c-hack:  #d97706;   /* лайфхаки */
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5%  0%,  rgba(94,53,177,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(5,150,105,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(0,137,123,0.05) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:940px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:56px 0 38px; }
+  .hero::after {
+    content:''; display:block; margin:30px auto 0;
+    width:280px; height:3px; border-radius:3px;
+    background:linear-gradient(90deg, transparent, var(--c-nerve), var(--c-brain), var(--c-reflex), var(--c-eco), var(--c-chain), transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:18px; }
+  .hero-title { font-size:clamp(30px,5vw,58px); font-weight:700; line-height:1.08; margin-bottom:12px; }
+  .ht-line1 {
+    display:block;
+    background: linear-gradient(110deg, #5e35b1 0%, #00897b 40%, #16a34a 70%, #059669 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.01em;
+    filter: drop-shadow(0 2px 16px rgba(94,53,177,0.13));
+  }
+  .ht-line2 {
+    display:block; font-size:0.62em; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; color: var(--muted); margin-top:6px;
+  }
+  .hero-sub { font-size:14px; color:var(--muted); }
+  .cast { display:flex; gap:12px; justify-content:center; margin:28px 0 0; flex-wrap:wrap; }
+  .cast-card { background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:10px 16px; font-size:13px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:8px; }
+  .cast-card .role { font-size:10px; font-weight:500; color:var(--muted); display:block; }
+  .cast-emoji { font-size:22px; }
+
+  /* SECTION */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-badge.quiz-b { background:var(--c-nerve); color:#fff; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; margin-bottom:8px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rc-nerve::after  { background:var(--c-nerve); }
+  .rc-reflex::after { background:var(--c-reflex); }
+  .rc-brain::after  { background:var(--c-brain); }
+  .rc-hnd::after    { background:var(--c-hnd); }
+  .rc-analyz::after { background:var(--c-analyz); }
+  .rc-endoc::after  { background:var(--c-endoc); }
+  .rc-eco::after    { background:var(--c-eco); }
+  .rc-chain::after  { background:var(--c-chain); }
+  .rc-hack::after   { background:var(--c-hack); }
+
+  .rule-icon { font-size:22px; margin-bottom:8px; margin-top:6px; }
+  .rule-cat { font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:4px; }
+  .rc-nerve  .rule-cat { color:var(--c-nerve); }
+  .rc-reflex .rule-cat { color:var(--c-reflex); }
+  .rc-brain  .rule-cat { color:var(--c-brain); }
+  .rc-hnd    .rule-cat { color:var(--c-hnd); }
+  .rc-analyz .rule-cat { color:var(--c-analyz); }
+  .rc-endoc  .rule-cat { color:var(--c-endoc); }
+  .rc-eco    .rule-cat { color:var(--c-eco); }
+  .rc-chain  .rule-cat { color:var(--c-chain); }
+  .rc-hack   .rule-cat { color:var(--c-hack); }
+
+  .rule-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
+  .rule-body  { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .ff { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 8px; border-radius:5px; display:inline-block; color:var(--text); background:var(--bg3); margin:2px 0; }
+  .neq { color:#D81B60; font-weight:700; }
+  .rule-mnemonic { margin-top:10px; font-size:12px; background:var(--bg3); border-radius:7px; padding:8px 11px; line-height:1.55; }
+  .rule-assoc { margin-top:8px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+
+  /* ARC VISUAL */
+  .arc-strip { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin:10px 0; }
+  .arc-node { background:var(--bg3); border:1px solid var(--border2); border-radius:7px; padding:6px 10px; text-align:center; font-size:11px; min-width:72px; flex-shrink:0; }
+  .arc-node .an-title { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; color:var(--c-nerve); }
+  .arc-node .an-sub { color:var(--muted); font-size:10px; margin-top:1px; }
+  .arc-arrow { color:var(--c-nerve); font-size:1rem; padding:0 3px; flex-shrink:0; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:32px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* MISSION */
+  .mission { border-radius:16px; background:var(--bg2); border:2px solid rgba(5,150,105,0.25); padding:24px 28px; margin-bottom:28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
+  .mission-emoji { font-size:52px; }
+  .mission-title { font-size:18px; font-weight:700; color:var(--c-eco); margin-bottom:6px; }
+  .mission-text  { font-size:14px; color:var(--muted); line-height:1.65; }
+  .mission-tags  { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .mtag { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .mt-i { background:rgba(94,53,177,0.1);  color:#3b0764; }
+  .mt-g { background:rgba(22,163,74,0.1);  color:#14532d; }
+  .mt-t { background:rgba(0,137,123,0.12); color:#004d40; }
+  .mt-e { background:rgba(5,150,105,0.1);  color:#064e3b; }
+  .mt-a { background:rgba(180,83,9,0.1);   color:#78350f; }
+  @media(max-width:520px){ .mission{grid-template-columns:1fr;} .mission-emoji{font-size:36px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:24px 0 18px; }
+  .quiz-title { font-size:clamp(18px,3vw,28px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-nerve),var(--c-brain),var(--c-eco)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-eco); min-width:76px; }
+
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; white-space:nowrap; }
+  .qs-nerve  { background:var(--c-nerve); }
+  .qs-reflex { background:var(--c-reflex); }
+  .qs-endoc  { background:var(--c-endoc); }
+  .qs-analyz { background:var(--c-analyz); }
+  .qs-hnd    { background:var(--c-hnd); }
+  .qs-eco    { background:var(--c-eco); }
+  .qs-chain  { background:var(--c-chain); }
+  .q-topic { font-size:12px; color:var(--muted); font-weight:500; }
+  .q-ege   { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:rgba(0,0,0,0.07); color:var(--muted); }
+
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; padding:0 2px;
+    background:linear-gradient(120deg,var(--c-nerve),var(--c-eco));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:flex-start; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-eco); background:rgba(5,150,105,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; flex-shrink:0; margin-top:2px; }
+  .opt-btn.correct { border-color:#16a34a; background:rgba(22,163,74,0.13); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#16a34a; }
+  .opt-btn.wrong   { border-color:#dc2626; background:rgba(220,38,38,0.07); }
+  .opt-btn.wrong .opt-letter   { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(234,88,12,0.1); border:1px solid rgba(234,88,12,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:14px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-nerve); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.7; color:var(--text); max-width:520px; margin:0 auto 24px; padding:18px 22px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(5,150,105,0.12);  color:#064e3b; }
+  .rank-a { background:rgba(94,53,177,0.12);  color:#3b0764; }
+  .rank-b { background:rgba(180,83,9,0.12);   color:#78350f; }
+  .rank-c { background:rgba(234,88,12,0.12);  color:#7c2d12; }
+  .rank-d { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-eco); background:rgba(5,150,105,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here  { background:rgba(5,150,105,0.12); color:var(--c-eco); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · Мозг и экосистемы · 2026</div>
+    <h1 class="hero-title">
+      <span class="ht-line1">Инстинкт и экосистема</span>
+      <span class="ht-line2">задания №17–18, 19–22, 25</span>
+    </h1>
+    <p class="hero-sub">Геральт читает следы — рефлекторная дуга в действии · Кордицепс в пищевой цепи · BG3 × Ведьмак × Wolfenstein × TLOU</p>
+    <div class="cast">
+      <div class="cast-card"><span class="cast-emoji">🐺</span><div><span>Геральт</span><span class="role">рефлексы / анализаторы</span></div></div>
+      <div class="cast-card"><span class="cast-emoji">🗡️</span><div><span>Весемир</span><span class="role">ВНД / стереотип</span></div></div>
+      <div class="cast-card"><span class="cast-emoji">🧠</span><div><span>Древний Мозг</span><span class="role">ЦНС / эндокрин</span></div></div>
+      <div class="cast-card"><span class="cast-emoji">💣</span><div><span>B.J. Blazkowicz</span><span class="role">надпочечники / стресс</span></div></div>
+      <div class="cast-card"><span class="cast-emoji">🍄</span><div><span>Кордицепс</span><span class="role">паразит в цепи питания</span></div></div>
+      <div class="cast-card"><span class="cast-emoji">🐻</span><div><span>Халсин</span><span class="role">биоценоз / пирамида</span></div></div>
+    </div>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Шпора ведьмака</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card rc-nerve">
+      <div class="rule-icon">🦑</div>
+      <div class="rule-cat">Нервная система</div>
+      <div class="rule-title">ЦНС, ПНС, вегетативная</div>
+      <div class="rule-body">
+        <strong>ЦНС</strong> = головной мозг + спинной мозг<br>
+        <strong>ПНС</strong> = черепно-мозговые нервы + спинномозговые нервы + ганглии<br><br>
+        <strong>Соматическая НС</strong> — управляет скелетными мышцами, произвольная<br>
+        <strong>Вегетативная НС</strong> — управляет внутренними органами, <span class="neq">НЕ</span>произвольная:<br>
+        · Симпатическая — «бей или беги» (ускоряет сердце, расширяет зрачок)<br>
+        · Парасимпатическая — «отдыхай и переваривай» (замедляет, сужает зрачок)
+      </div>
+      <div class="rule-mnemonic">🧠 Древний Мозг BG3 = ЦНС (командует всей колонией). Иллитиды-охотники = ПНС (несут сигналы). Вегетативная — как автопереваривание мозга жертвы: никто не командовал, само происходит.</div>
+      <div class="rule-assoc">🎮 Геральт не думает, как переваривать зелья — вегетативная НС управляет этим сама. Но удар мечом — соматическая, произвольная.</div>
+    </div>
+
+    <div class="rule-card rc-reflex">
+      <div class="rule-icon">⚡</div>
+      <div class="rule-cat">Рефлекс и рефлекторная дуга</div>
+      <div class="rule-title">5 звеньев дуги</div>
+      <div class="rule-body">
+        <div class="arc-strip">
+          <div class="arc-node"><div class="an-title">1. РЕЦЕПТОР</div><div class="an-sub">чувствует раздражение</div></div>
+          <div class="arc-arrow">→</div>
+          <div class="arc-node"><div class="an-title">2. АФФ. НЕРВ</div><div class="an-sub">чувствительный, в мозг</div></div>
+          <div class="arc-arrow">→</div>
+          <div class="arc-node"><div class="an-title">3. ЦЕНТР</div><div class="an-sub">спинной / головной</div></div>
+          <div class="arc-arrow">→</div>
+          <div class="arc-node"><div class="an-title">4. ЭФФ. НЕРВ</div><div class="an-sub">двигательный, к органу</div></div>
+          <div class="arc-arrow">→</div>
+          <div class="arc-node"><div class="an-title">5. ЭФФЕКТОР</div><div class="an-sub">мышца / железа</div></div>
+        </div>
+        <strong>Безусловный</strong> — врождённый, видовой, постоянный<br>
+        <strong>Условный</strong> — приобретённый, индивидуальный, угасает без подкрепления
+      </div>
+      <div class="rule-mnemonic">🧠 Геральт учует монстра за 50 шагов и рука уже на рукояти — это не мышление, это условный рефлекс, выработанный за 100 лет охоты. Отдёрнул руку от кислоты — безусловный.</div>
+      <div class="rule-assoc">🎮 Карлах уклонилась ещё до того, как осознала удар: рецептор → спинной мозг → мышца. Нервный центр безусловного рефлекса — в спинном мозге, не в головном!</div>
+    </div>
+
+    <div class="rule-card rc-brain">
+      <div class="rule-icon">🗺️</div>
+      <div class="rule-cat">Отделы головного мозга</div>
+      <div class="rule-title">5 отделов — снизу вверх</div>
+      <div class="rule-body">
+        🟤 <strong>Продолговатый</strong> — дыхание, сердцебиение, глотание. Повреждение = смерть.<br>
+        🟢 <strong>Мозжечок</strong> — координация движений, равновесие, точность<br>
+        🔵 <strong>Средний</strong> — ориентировочные рефлексы на свет/звук, тонус мышц<br>
+        🟡 <strong>Промежуточный</strong> — таламус (боль, сон), гипоталамус (голод, жажда, темп.)<br>
+        🔵 <strong>Большие полушария</strong> — мышление, речь, память, сознание
+      </div>
+      <div class="rule-mnemonic">🧠 Мнемоника «П-М-С-П-П» снизу вверх: <strong>П</strong>родолговатый → <strong>М</strong>озжечок → <strong>С</strong>редний → <strong>П</strong>ромежуточный → <strong>П</strong>олушария.<br>⚠️ Мозжечок ≠ маленький мозг. Это отдельный отдел — координация!</div>
+      <div class="rule-assoc">🎮 Лаэ'зель парирует без раздумий — это мозжечок. Весемир помнит каждый рецепт зелья — большие полушария. Гейл постоянно голоден — промежуточный мозг (гипоталамус).</div>
+    </div>
+
+    <div class="rule-card rc-hnd">
+      <div class="rule-icon">🧬</div>
+      <div class="rule-cat">ВНД и условные рефлексы</div>
+      <div class="rule-title">Павлов, стереотип, инстинкт</div>
+      <div class="rule-body">
+        <strong>Условный рефлекс:</strong> условный раздражитель + безусловный → при многократном сочетании → устойчивая реакция. Угасает без подкрепления.<br><br>
+        <strong>Динамический стереотип</strong> = система условных рефлексов в фиксированном порядке (привычка). Ломается при изменении условий.<br><br>
+        <strong>Инстинкт</strong> = сложное врождённое поведение (безусловное).<br>
+        <strong>Рассудочная деятельность</strong> = «инсайт» — решение новой задачи без обучения.
+      </div>
+      <div class="rule-mnemonic">🧠 Весемир 60 лет учил Геральта по одной программе: проснулся → тренировка → медитация → охота. Это динамический стереотип. Ломается, когда Геральт попадает в мир без монстров.</div>
+      <div class="rule-assoc">🎮 «Истинные Души» BG3 тянутся к головастику: использовал силу → получил награду → рефлекс закрепился. Это Павлов, только вместо колокольчика — иллитид.</div>
+    </div>
+
+    <div class="rule-card rc-analyz">
+      <div class="rule-icon">👁️</div>
+      <div class="rule-cat">Анализаторы</div>
+      <div class="rule-title">3 части любого анализатора</div>
+      <div class="rule-body">
+        Любой анализатор = <strong>рецептор → нерв → зона коры</strong><br><br>
+        <strong>Зрительный:</strong> палочки и колбочки (сетчатка) → зрительный нерв → <em>затылочная доля</em> коры<br>
+        <strong>Слуховой:</strong> кортиев орган (улитка) → слуховой нерв → <em>височная доля</em> коры<br>
+        <strong>Кожный:</strong> рецепторы кожи → чувствительные нервы → <em>теменная доля</em> коры<br><br>
+        ⚠️ Повреждение любого звена = потеря функции. Поражение затылочной доли = слепота, даже если глаза целые!
+      </div>
+      <div class="rule-mnemonic">🧠 «Рецептор — Нерв — Кора» — три слова на память. Поражение последнего звена (коры) самое коварное: орган цел, но человек не воспринимает.</div>
+      <div class="rule-assoc">🎮 Геральт видит и слышит лучше людей — обострённые рецепторы. Но Шэдоухарт в Тёмных землях теряет восприятие — зрительный анализатор блокируется на уровне коры.</div>
+    </div>
+
+    <div class="rule-card rc-endoc">
+      <div class="rule-icon">⚗️</div>
+      <div class="rule-cat">Эндокринная регуляция</div>
+      <div class="rule-title">Железы и нервная vs гуморальная</div>
+      <div class="rule-body">
+        🧪 <strong>Гипофиз</strong> — главная железа, управляет всеми остальными. Гормон роста (СТГ).<br>
+        🔥 <strong>Надпочечники</strong> — адреналин (стресс, «бей или беги»), кортизол<br>
+        🍬 <strong>Поджелудочная</strong> — инсулин (снижает глюкозу), глюкагон (повышает)<br>
+        🌡️ <strong>Щитовидная</strong> — тироксин, регулирует обмен веществ, рост<br><br>
+        <strong>Нервная регуляция:</strong> быстрая (доли секунды), короткая, точная (конкретный орган)<br>
+        <strong>Гуморальная:</strong> медленная (минуты–часы), длительная, широкая (через кровь)
+      </div>
+      <div class="rule-mnemonic">🧠 B.J. врывается в крепость: за 0.01 с нервный импульс летит к надпочечникам — <strong>это нервная регуляция (быстро)</strong>. Надпочечники выбрасывают адреналин в кровь, и он ещё минуты держит тело в боевом режиме — <strong>это уже гуморальная (медленно, долго)</strong>. Адреналин = гормон = гуморальная! Нервная только запускает его выброс.</div>
+      <div class="rule-assoc">🎮 Без инсулина — диабет: глюкоза не попадает в клетки. Без тироксина — замедление всех процессов. Гипофиз = штаб-квартира: скомандует — остальные железы выполнят.</div>
+    </div>
+
+    <div class="rule-card rc-eco">
+      <div class="rule-icon">🌿</div>
+      <div class="rule-cat">Экосистема и роли организмов</div>
+      <div class="rule-title">Продуценты · Консументы · Редуценты</div>
+      <div class="rule-body">
+        🌱 <strong>Продуценты</strong> — автотрофы, синтезируют органику из неорганики (растения, водоросли). Начало любой цепи.<br>
+        🐰 <strong>Консументы I</strong> — травоядные, питаются продуцентами<br>
+        🐺 <strong>Консументы II</strong> — хищники, питаются консументами I<br>
+        🍄 <strong>Редуценты</strong> — грибы, бактерии: разлагают мёртвую органику до минеральных веществ. Замыкают круговорот.<br><br>
+        <strong>Среды обитания:</strong> наземно-воздушная, водная, почвенная, организменная
+      </div>
+      <div class="rule-mnemonic">🧠 В Изумрудной Роще BG3: дерево (продуцент) → олень (консумент I) → совомедведица (консумент II) → майконоиды разлагают трупы (редуценты) → минералы в почву → снова дерево.</div>
+      <div class="rule-assoc">🎮 Кордицепс TLOU — паразит, но после гибели хозяина становится редуцентом: грибы разлагают труп. Одна из редких тварей, играющих две роли.</div>
+    </div>
+
+    <div class="rule-card rc-chain">
+      <div class="rule-icon">🔗</div>
+      <div class="rule-cat">Цепи питания и правило 10%</div>
+      <div class="rule-title">Пирамида энергии · Агроэкосистема</div>
+      <div class="rule-body">
+        Цепь начинается с <strong>продуцента</strong>: растение → травоядное → хищник I → хищник II<br>
+        Стрелка = «кого съедает»: гриб <strong>→</strong> насекомое <strong>→</strong> птица<br><br>
+        <strong>Правило 10%</strong> (Линдеман): при переходе на следующий трофический уровень передаётся только <span class="ff">~10%</span> энергии; 90% — тепло и жизнедеятельность.<br><br>
+        <strong>Агроэкосистема</strong> — созданная человеком, низкое биоразнообразие, нестабильна без вмешательства, высокая продуктивность одного вида.<br>
+        <strong>Биотические факторы</strong> — влияние живых организмов; <strong>абиотические</strong> — неживой среды; <strong>антропогенные</strong> — деятельность человека.
+      </div>
+      <div class="rule-mnemonic">🧠 Правило нуля: 1 кг хищника = 10 кг добычи = 100 кг растений. Каждый уровень вверх — добавляй ноль. Wolfenstein: выжженные земли рейха убили продуцентов → рухнула вся цепь.</div>
+      <div class="rule-assoc">🎮 Нетерберег BG3 — один, потому что 10⁴ кг грибов → 10³ кг насекомых → 10² кг Крюкоужасов → 10 кг иллитидов → 1 кг Нетерберега. Пирамида работает.</div>
+    </div>
+
+    <div class="rule-card rc-hack">
+      <div class="rule-icon">🗝️</div>
+      <div class="rule-cat">Лайфхаки ОГЭ</div>
+      <div class="rule-title">8 ловушек, которые стоят баллов</div>
+      <div class="rule-body">
+        1. <strong>Центр безусловного рефлекса</strong> (отдёрнуть руку) — в <em>спинном</em> мозге, не головном.<br>
+        2. <strong>Мозжечок ≠ «маленький мозг»</strong>: отвечает за координацию, не мышление.<br>
+        3. <strong>Нервная <span class="neq">≠</span> гуморальная</strong>: нервная быстрее, гуморальная — дольше и шире.<br>
+        4. <strong>Условный рефлекс угасает</strong> без подкрепления — безусловный нет.<br>
+        5. <strong>3 части анализатора</strong> — рецептор, нерв, зона коры. Поражение любого = нет функции.<br>
+        6. <strong>Продуцент ≠ консумент I</strong>: продуцент сам создаёт органику; консумент I только ест продуцента.<br>
+        7. <strong>Редуцент ≠ консумент</strong>: редуцент разлагает мёртвое, консумент ест живое.<br>
+        8. <strong>Правило 10%</strong>: на вопрос «сколько нужно растений, чтобы вырастить 1 кг волка» — 2 уровня выше → ×10×10 = 100 кг растений.
+      </div>
+      <div class="rule-mnemonic">🧠 Главный лайфхак: читай «НЕ», «кроме», «НЕ является» — они переворачивают вопрос. Потерял балл? Скорее всего, именно из-за этого.</div>
+    </div>
+
+  </div><!-- /rules-grid -->
+
+  <!-- МИССИЯ -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Миссия</span><div class="sec-line"></div></div>
+
+  <div class="mission">
+    <div class="mission-emoji">🧠</div>
+    <div>
+      <div class="mission-title">Ведьмак и Друид идут в Андердарк</div>
+      <div class="mission-text">Геральт и Халсин договорились: ведьмак знает рефлексы и анализаторы — друид знает экосистемы и пищевые цепи. Вместе они попали в Андердарк, где иллитиды нарушили биоценоз — уничтожили продуцентов и заблокировали пси-связи. Чтобы выйти живыми, нужно ответить на 30 вопросов ОГЭ. Провалишься — Древний Мозг съест твои знания.</div>
+      <div class="mission-tags">
+        <span class="mtag mt-i">🦑 Нервная система</span>
+        <span class="mtag mt-g">⚡ Рефлексы и ВНД</span>
+        <span class="mtag mt-t">⚗️ Эндокрин</span>
+        <span class="mtag mt-i">👁️ Анализаторы</span>
+        <span class="mtag mt-e">🌿 Экосистемы</span>
+        <span class="mtag mt-a">🔗 Цепи и правило 10%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="deco-div"><span>⚔️ Начинаем охоту</span></div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">🧠 Испытание Древнего Мозга</div>
+      <div class="quiz-sub">30 вопросов · 2 попытки · Задания №17–22, 25</div>
+    </div>
+
+    <div class="quiz-progress-wrap">
+      <span id="score-disp" class="quiz-score-badge">✦ 0 верно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 30</span>
+    </div>
+
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий шаг →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div><br>
+    <button class="restart-btn" id="restart">Повторить охоту 🐺</button>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все биоквесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="bio_quest1_cell.html">
+        <div class="qp-num" style="background:#16a34a">1</div>
+        <div class="qp-info"><div class="qp-name">Живое и опасное</div><div class="qp-sub">Клетка, ткани, методы · TLOU</div></div>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="bio_quest2_kingdoms.html">
+        <div class="qp-num" style="background:#C62828">2</div>
+        <div class="qp-info"><div class="qp-name">Битва четырёх царств</div><div class="qp-sub">Бактерии, грибы, вирусы, растения</div></div>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="bio_quest3_evolution.html">
+        <div class="qp-num" style="background:#1B5E20">3</div>
+        <div class="qp-info"><div class="qp-name">Друзья и монстры</div><div class="qp-sub">Зоология, эволюция, антропогенез · Ведьмак</div></div>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill" href="bio_q4_human_body.html">
+        <div class="qp-num" style="background:#16a34a">4</div>
+        <div class="qp-info"><div class="qp-name">Глубина человечности</div><div class="qp-sub">Скелет, кровь, иммунитет, дыхание · TLOU</div></div>
+        <span class="qp-badge">Квест</span>
+      </a>
+      <a class="quest-pill quest-active" href="#">
+        <div class="qp-num" style="background:#059669">5</div>
+        <div class="qp-info"><div class="qp-name">Инстинкт и экосистема</div><div class="qp-sub">Мозг, рефлексы, ВНД, экология · BG3 × Ведьмак</div></div>
+        <span class="qp-badge qp-here">Ты здесь</span>
+      </a>
+    </div>
+    <div style="margin-top:20px">
+      <a class="quest-pill" href="index.html">
+        <div class="qp-num" style="background:#7c3aed">↩</div>
+        <div class="qp-info"><div class="qp-name">Все квесты ОГЭ 2026</div><div class="qp-sub">Главная страница</div></div>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+const allQuestions = [
+
+  // ═══════════════ НЕРВНАЯ СИСТЕМА ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Нервная система — ЦНС и ПНС', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> читает следы и анализирует ситуацию. К какому отделу нервной системы относятся <strong>головной и спинной мозг</strong>?",
+    opts:["Центральная нервная система (ЦНС)","Периферическая нервная система (ПНС)","Вегетативная нервная система","Соматическая нервная система"], ans:0,
+    fb:"✦ Верно! ЦНС = головной мозг + спинной мозг. Это главный командный центр. ПНС — всё остальное: нервы и ганглии вне черепа и позвоночника.",
+    trap:"ПНС — это нервы и ганглии. ЦНС — только мозг (головной и спинной). Вегетативная — часть ПНС, управляет внутренними органами.",
+    hint:"ЦНС = центр. Где находится «центр» нашей нервной системы?",
+    ref:"Нервная система 🦑"
+  },
+  {
+    cat:'qs-nerve', topic:'Нервная система — вегетативная', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> выпил зелье «Кошачий глаз» — зрачки расширились, сердце ускорилось, дыхание участилось. Какой отдел вегетативной нервной системы вызывает эти реакции?",
+    opts:["Симпатическая нервная система","Парасимпатическая нервная система","Соматическая нервная система","Центральная нервная система"], ans:0,
+    fb:"✦ Верно! Симпатическая НС — режим «бей или беги»: расширяет зрачки, ускоряет сердце, тормозит пищеварение, выбрасывает адреналин. Парасимпатическая — наоборот: «отдых и пищеварение».",
+    trap:"Парасимпатическая — замедляет сердце, сужает зрачок, активирует пищеварение. Симпатическая — наоборот. Не путай!",
+    hint:"«Симпатия» к врагу? Нет — симпатическая НС готовит тебя к бою.",
+    ref:"Нервная система 🦑"
+  },
+  {
+    cat:'qs-nerve', topic:'Нервная система — соматическая vs вегетативная', ege:'№18',
+    text:"<span class='hero-name'>Весемир</span> объясняет Геральту: «Ты можешь контролировать удар мечом, но не биение сердца». Какой отдел НС управляет <strong>скелетными мышцами произвольно</strong>?",
+    opts:["Соматическая нервная система","Вегетативная нервная система","Симпатическая нервная система","Продолговатый мозг"], ans:0,
+    fb:"✦ Верно! Соматическая НС управляет скелетными мышцами — это произвольные движения (ты решаешь, когда ударить). Вегетативная — непроизвольные функции: сердце, кишечник, железы.",
+    trap:"Вегетативная = НЕпроизвольная (внутренние органы). Соматическая = произвольная (скелетные мышцы). Запомни разницу.",
+    hint:"«Сома» = тело (греч.). Соматическая — значит телесная, управляет движениями тела.",
+    ref:"Нервная система 🦑"
+  },
+
+  // ═══════════════ РЕФЛЕКТОРНАЯ ДУГА ═══════════════
+
+  {
+    cat:'qs-reflex', topic:'Рефлекторная дуга — звенья', ege:'№17',
+    text:"<span class='hero-name'>Карлах</span> прикоснулась к раскалённому металлу и мгновенно отдёрнула руку. Какое <strong>первое звено</strong> рефлекторной дуги восприняло раздражение?",
+    opts:["Рецептор в коже руки","Афферентный нерв","Нервный центр в спинном мозге","Эффектор (мышца)"], ans:0,
+    fb:"✦ Верно! Рецептор — первое звено: он воспринимает раздражение и преобразует его в нервный импульс. Путь: рецептор → афферентный нерв → нервный центр → эфферентный нерв → эффектор.",
+    trap:"Рецептор — НАЧАЛО дуги, эффектор — КОНЕЦ. Нервный центр — в середине. Не путай порядок!",
+    hint:"Что первым «почувствовало» жару? Именно это — первое звено.",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлекторная дуга — нервный центр', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> отдёрнул руку от кислоты монстра — простой защитный рефлекс. Где находится <strong>нервный центр</strong> этого рефлекса?",
+    opts:["В спинном мозге","В продолговатом мозге","В коре больших полушарий","В мозжечке"], ans:0,
+    fb:"✦ Верно! Центры простых безусловных рефлексов (отдёргивание, коленный) — в спинном мозге. Это позволяет реагировать ещё быстрее: сигнал не идёт до головного мозга.",
+    trap:"⚠️ Ловушка ОГЭ: центр безусловного рефлекса отдёргивания — СПИННОЙ мозг, не головной! Голова узнаёт об этом уже после того, как рука отдёрнута.",
+    hint:"Для скорости — короткий путь. Какой отдел ближе всего к рукам и ногам?",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлексы — безусловный vs условный', ege:'№18',
+    text:"<span class='hero-name'>Весемир</span> объясняет ученику: «Новорождённый ведьмачонок ещё до обучения умеет схватить предмет в ладонь — это рефлекс». Какой это тип рефлекса?",
+    opts:["Безусловный (врождённый, видовой)","Условный (приобретённый, индивидуальный)","Динамический стереотип","Инстинкт охоты"], ans:0,
+    fb:"✦ Верно! Хватательный рефлекс новорождённого — безусловный: врождённый, одинаков для всех людей, не требует обучения. Условный рефлекс формируется только после многократного опыта.",
+    trap:"Безусловный — врождённый, есть с рождения, видовой. Условный — приобретается в течение жизни, индивидуален, угасает без подкрепления.",
+    hint:"«Новорождённый, до обучения» — ключевые слова. Ему никто не учил. Это какой рефлекс?",
+    ref:"Рефлексы ⚡"
+  },
+  {
+    cat:'qs-reflex', topic:'Рефлексы — условный рефлекс', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> за 100 лет охоты выработал реакцию: почуял запах гнили — рука сама тянется к серебряному мечу. Чем этот рефлекс отличается от врождённого?",
+    opts:["Он приобретённый, индивидуальный и угасает без подкрепления","Он врождённый и одинаков у всех ведьмаков","Его центр находится в спинном мозге","Он не связан с корой больших полушарий"], ans:0,
+    fb:"✦ Верно! Условный рефлекс: приобретён в процессе жизни, индивидуален (не у всех охотников такая реакция), может угаснуть, если Геральт годами не встречает монстров.",
+    trap:"Условный рефлекс замыкается в коре больших полушарий. Без коры условные рефлексы не формируются! У безусловного центр — в спинном или стволе мозга.",
+    hint:"Приобретённый = условный. Когда Геральт был новорождённым — он так не реагировал на запах.",
+    ref:"Рефлексы ⚡"
+  },
+
+  // ═══════════════ ОТДЕЛЫ МОЗГА ═══════════════
+
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — продолговатый', ege:'№18',
+    text:"<span class='hero-name'>Весемир</span> учит: «Удар в основание черепа смертелен — там находится центр дыхания». В каком отделе мозга расположен дыхательный центр?",
+    opts:["Продолговатый мозг","Мозжечок","Промежуточный мозг","Средний мозг"], ans:0,
+    fb:"✦ Верно! Продолговатый мозг — нижний отдел ствола, содержит центры дыхания, сердцебиения, глотания, чихания. Повреждение смертельно. Именно поэтому удар в основание черепа опасен.",
+    trap:"Мозжечок — координация движений. Промежуточный (гипоталамус) — голод, жажда, терморегуляция. Дыхание — только продолговатый мозг!",
+    hint:"Жизненно важные функции — самый древний отдел мозга, снизу ствола.",
+    ref:"Отделы мозга 🗺️"
+  },
+  {
+    cat:'qs-nerve', topic:'Отделы мозга — мозжечок', ege:'№18',
+    text:"<span class='hero-name'>Лаэ'зель</span> выполняет сложный боевой приём с закрытыми глазами: точность идеальна, равновесие не нарушено. За что отвечает <strong>мозжечок</strong>?",
+    opts:["Координация движений, равновесие, точность","Дыхание и сердцебиение","Мышление и речь","Голод, жажда и терморегуляция"], ans:0,
+    fb:"✦ Верно! Мозжечок — координация и равновесие. При его повреждении — шаткая походка, тремор, промахи при точных движениях. Но мышление не страдает.",
+    trap:"⚠️ Частая ошибка: мозжечок — НЕ «маленький мозг» для мышления. Только координация и равновесие! Мышление — кора больших полушарий.",
+    hint:"«Мозжечок» — маленький по размеру, но большой по задачам. Не мышление, а что?",
+    ref:"Отделы мозга 🗺️"
+  },
+
+  // ═══════════════ ВНД ═══════════════
+
+  {
+    cat:'qs-hnd', topic:'ВНД — динамический стереотип', ege:'№17',
+    text:"<span class='hero-name'>Весемир</span> 60 лет каждое утро: подъём — разминка — медитация — тренировка с мечом — завтрак. Это выполняется автоматически, без раздумий. Как называется такая система рефлексов?",
+    opts:["Динамический стереотип","Инстинкт","Рассудочная деятельность","Безусловный рефлекс"], ans:0,
+    fb:"✦ Верно! Динамический стереотип — система условных рефлексов, выполняемых автоматически в строгом порядке. Формируется при многократном повторении. Легко выполняется в привычных условиях, ломается при их изменении.",
+    trap:"Инстинкт — врождённое поведение (безусловное). Стереотип — приобретённый (условный), но тоже выполняется автоматически. Разница: врождённый или выработанный?",
+    hint:"Система УСЛОВНЫХ рефлексов в фиксированном порядке. Выработана за годы. Что это?",
+    ref:"ВНД 🧬"
+  },
+  {
+    cat:'qs-hnd', topic:'ВНД — условный рефлекс, Павлов', ege:'№18',
+    text:"«Истинные Души» BG3 тянутся к иллитидским головастикам: каждое использование силы приносило удовольствие, и тяга закрепилась. Какой учёный первым описал механизм формирования условного рефлекса?",
+    opts:["И.П. Павлов","И.М. Сеченов","Ч. Дарвин","К. Бернар"], ans:0,
+    fb:"✦ Верно! Иван Павлов (1849–1936) — основатель учения об условных рефлексах. Его опыты с собаками: звонок + пища → слюна. После многократных сочетаний — звонок один → слюна. Нобелевская премия 1904 года.",
+    trap:"Сеченов — «рефлексы головного мозга», предшественник Павлова. Дарвин — эволюция. Павлов = условный рефлекс.",
+    hint:"Собака, колокольчик, слюна — чьи опыты?",
+    ref:"ВНД 🧬"
+  },
+
+  // ═══════════════ АНАЛИЗАТОРЫ ═══════════════
+
+  {
+    cat:'qs-analyz', topic:'Анализаторы — 3 части', ege:'№17',
+    text:"<span class='hero-name'>Геральт</span> чует запах гарпии за 200 метров. Как называется первое звено любого анализатора, воспринимающее раздражение?",
+    opts:["Рецептор","Нерв","Зона коры","Эффектор"], ans:0,
+    fb:"✦ Верно! Любой анализатор: рецептор (1) → нерв (2) → зона коры (3). Рецептор преобразует раздражение в нервный импульс. Обонятельные рецепторы Геральта позволяют ему учуять то, что люди не замечают.",
+    trap:"Эффектор — звено рефлекторной дуги (исполнитель), не анализатора. В анализаторе эффектора нет — он только воспринимает.",
+    hint:"Анализатор воспринимает информацию. Что первым «встречает» раздражитель?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — зрительный', ege:'№18',
+    text:"<span class='hero-name'>Астарион</span> прекрасно видит в темноте: в его сетчатке много палочек. Повреждение какой зоны коры мозга приведёт к потере зрения, даже если глаза целы?",
+    opts:["Затылочная доля коры больших полушарий","Височная доля","Теменная доля","Лобная доля"], ans:0,
+    fb:"✦ Верно! Зрительный анализатор: фоторецепторы сетчатки → зрительный нерв → затылочная доля. При поражении затылочной доли мозг не «видит», хотя глаза работают. Корковое звено — самое важное.",
+    trap:"Височная доля — слуховой анализатор. Теменная — кожный и мышечный. Затылочная — только зрение.",
+    hint:"«За затылком — зрение»: зрительная кора в затылке.",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — слуховой', ege:'№17',
+    text:"Харперы BG3 получили донесение шёпотом. Какой орган является рецептором <strong>слухового анализатора</strong>?",
+    opts:["Кортиев орган (в улитке внутреннего уха)","Барабанная перепонка","Слуховые косточки","Ушная раковина"], ans:0,
+    fb:"✦ Верно! Кортиев орган — слуховые рецепторы во внутреннем ухе (улитка). Путь: кортиев орган → слуховой нерв → височная доля коры. Барабанная перепонка и косточки — передают звук, но рецепторами не являются.",
+    trap:"Барабанная перепонка и слуховые косточки (молоточек, наковальня, стремечко) — передатчики звука, а не рецепторы. Рецепторы — только в кортиевом органе.",
+    hint:"Рецепторы — это то, что преобразует колебания в нервный импульс. Где они в ухе?",
+    ref:"Анализаторы 👁️"
+  },
+  {
+    cat:'qs-analyz', topic:'Анализаторы — принцип повреждения', ege:'№22',
+    text:"<span class='hero-name'>Шэдоухарт</span> получила травму — у неё исчезли слуховые ощущения, хотя уши целы. Что могло быть повреждено?",
+    opts:["Слуховой нерв или височная доля коры","Только барабанная перепонка","Кортиев орган и ничего более","Ушная раковина"], ans:0,
+    fb:"✦ Верно! Слуховые ощущения исчезают при повреждении ЛЮБОГО звена анализатора: рецептора, нерва или коры. Если уши целы, но не слышит — повреждён нерв или кора (корковая глухота).",
+    trap:"Повреждение барабанной перепонки нарушает проведение звука, но рецепторы и кора целы — частичная потеря, а не полная. Корковая глухота = уши целы, мозг не воспринимает.",
+    hint:"Анализатор — цепочка. Где можно её разорвать?",
+    ref:"Анализаторы 👁️"
+  },
+
+  // ═══════════════ ЭНДОКРИННАЯ РЕГУЛЯЦИЯ ═══════════════
+
+  {
+    cat:'qs-endoc', topic:'Эндокринная — надпочечники', ege:'№22',
+    text:"<span class='hero-name'>B.J. Blazkowicz</span> врывается в крепость рейха: сердце колотится, зрачки расширились, мышцы наготове. Какой гормон вызвал эти реакции?",
+    opts:["Адреналин (гормон надпочечников)","Инсулин (поджелудочная железа)","Тироксин (щитовидная железа)","Гормон роста (гипофиз)"], ans:0,
+    fb:"✦ Верно! Адреналин — гормон надпочечников, выбрасывается при стрессе и опасности. Ускоряет сердцебиение, расширяет зрачки, увеличивает приток крови к мышцам, тормозит пищеварение. Классический «бей или беги».",
+    trap:"Инсулин — снижает уровень глюкозы. Тироксин — регулирует обмен веществ долгосрочно. Только адреналин даёт мгновенную реакцию на стресс.",
+    hint:"«Аварийный» гормон на случай опасности. Его выделяют над почками расположенные железы.",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — поджелудочная', ege:'№17',
+    text:"Геральт выпил зелья с высоким содержанием сахара — уровень глюкозы в крови вырос. Какой гормон поджелудочной железы <strong>снижает</strong> уровень глюкозы в крови?",
+    opts:["Инсулин","Глюкагон","Адреналин","Тироксин"], ans:0,
+    fb:"✦ Верно! Инсулин снижает глюкозу в крови, помогая клеткам её усвоить. Глюкагон — наоборот, повышает (при гипогликемии). Оба гормона — из поджелудочной железы.",
+    trap:"Глюкагон ПОВЫШАЕТ глюкозу, инсулин СНИЖАЕТ. Не путай! Недостаток инсулина → сахарный диабет → глюкоза в крови высокая, в клетки не попадает.",
+    hint:"«Ин» — внутрь клеток. Инсулин = пускает глюкозу внутрь → уровень в крови снижается.",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — нервная vs гуморальная', ege:'№22',
+    text:"<span class='hero-name'>Весемир</span> объясняет: «Нервная регуляция молниеносна — но гуморальная долгосрочна». Какое из утверждений о нервной регуляции верно?",
+    opts:["Быстрая (доли секунды), точная (конкретный орган), кратковременная","Медленная (минуты и часы), длительная, действует на весь организм","Осуществляется только через кровь","Не связана с ЦНС"], ans:0,
+    fb:"✦ Верно! Нервная регуляция: скорость — доли секунды (нервный импульс), действие — точечное (конкретный орган), продолжительность — короткая. Гуморальная: минуты/часы, через кровь, системное действие на весь организм.",
+    trap:"Гуморальная = через гуморы (жидкости тела = кровь). Медленно, но широко и долго. Нервная = через нервы. Быстро, точно, коротко.",
+    hint:"«Нервный» человек реагирует мгновенно. Гормоны разносятся кровью — это быстро или медленно?",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — гипофиз', ege:'№18',
+    text:"«Гипофиз управляет всей эндокринной системой» — сказал доктор в лаборатории Wolfenstein. Почему гипофиз называют <strong>главной эндокринной железой</strong>?",
+    opts:["Он выделяет тропные гормоны, регулирующие работу других эндокринных желёз","Он самый большой по размеру","Он вырабатывает только инсулин","Он расположен в надпочечниках"], ans:0,
+    fb:"✦ Верно! Гипофиз — дирижёр эндокринного оркестра. Его тропные гормоны (ТТГ, АКТГ, ГТ) управляют щитовидной, надпочечниками, половыми железами. Сам гипофиз подчиняется гипоталамусу (промежуточный мозг).",
+    trap:"Гипофиз маленький (около 0.5 г), но очень важный. Размер и главенство — разные вещи.",
+    hint:"«Тропный» = направляющий. Гипофиз направляет другие железы. Как штаб командует войсками.",
+    ref:"Эндокрин ⚗️"
+  },
+  {
+    cat:'qs-endoc', topic:'Эндокринная — щитовидная', ege:'№17',
+    text:"В заражённых зонах Wolfenstein многие страдали от замедленного обмена веществ и отёков. Недостаток гормона какой железы вызывает замедление всех обменных процессов?",
+    opts:["Щитовидная железа (тироксин)","Надпочечники (адреналин)","Поджелудочная железа (инсулин)","Гипофиз (гормон роста)"], ans:0,
+    fb:"✦ Верно! Тироксин щитовидной железы регулирует интенсивность обмена веществ. Его недостаток (гипотиреоз) → замедление метаболизма, отёки, вялость. Избыток → учащённое сердцебиение, похудение.",
+    trap:"Адреналин — быстрый стресс-гормон. Инсулин — регуляция глюкозы. Щитовидная железа (тироксин) — долгосрочная регуляция обмена веществ.",
+    hint:"«Щит» + «видная» = щитовидная. Она влияет на скорость жизни всего организма.",
+    ref:"Эндокрин ⚗️"
+  },
+
+  // ═══════════════ ЭКОЛОГИЯ — РОЛИ И ЦЕПИ ═══════════════
+
+  {
+    cat:'qs-eco', topic:'Экосистема — роли организмов', ege:'№19',
+    text:"В Изумрудной Роще BG3 майконоиды разлагают упавшие ветки и трупы животных до минеральных веществ. Какую роль в экосистеме выполняют эти грибы?",
+    opts:["Редуценты — разлагают мёртвую органику","Продуценты — создают органику из неорганики","Консументы I — питаются растениями","Консументы II — хищники"], ans:0,
+    fb:"✦ Верно! Редуценты (деструкторы) — грибы и бактерии, разлагающие мёртвую органику до минеральных веществ. Они замыкают круговорот веществ: возвращают минералы в почву и воду для продуцентов.",
+    trap:"⚠️ Ловушка ОГЭ: редуцент ≠ консумент. Консумент ест живое. Редуцент разлагает мёртвое. Майконоиды — редуценты, не хищники!",
+    hint:"«Редуцировать» = разлагать, уменьшать. Они разлагают мёртвое, а не охотятся.",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экосистема — продуцент', ege:'№20',
+    text:"<span class='hero-name'>Халсин</span> говорит: «Всё начинается с растений — уничтожь их, и цепь рухнет». Почему пищевая цепь <strong>всегда начинается с продуцента</strong>?",
+    opts:["Продуценты — единственные организмы, создающие органику из неорганической (через фотосинтез)","Продуценты питаются всеми остальными","Продуценты разлагают мёртвое вещество","Продуценты — это животные первого звена"], ans:0,
+    fb:"✦ Верно! Продуценты (растения, водоросли) — автотрофы: они синтезируют органику из CO₂, воды и солнечного света (фотосинтез). Без них нет начальной энергии для всей цепи.",
+    trap:"Продуцент = производит (латынь). Это НЕ то, кто размножается быстро — это тот, кто производит органику. Консументы только потребляют, редуценты — разлагают.",
+    hint:"«Продуцировать» = производить. Кто производит органику с нуля из солнца и воздуха?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — правило записи', ege:'№20',
+    text:"В Андердарке: биолюминесцентные грибы поедают пещерные насекомые, а их — Крюкоужасы. Какая запись пищевой цепи <strong>правильная</strong>?",
+    opts:["Грибы → Насекомые → Крюкоужасы","Крюкоужасы → Насекомые → Грибы","Насекомые → Грибы → Крюкоужасы","Крюкоужасы ← Насекомые ← Грибы"], ans:0,
+    fb:"✦ Верно! Стрелка в цепи питания показывает направление ПОТОКА ЭНЕРГИИ (= «кого ест»). Начинается с продуцента. Гриб → Насекомое = насекомое ест гриб, энергия переходит от гриба к насекомому.",
+    trap:"Стрелка «→» означает: ЭТО ЕСТ ТО, НА ЧТО УКАЗЫВАЕТ СТРЕЛКА. Гриб → Насекомое = насекомое ест гриб. Цепь начинается с продуцента, а не с вершины!",
+    hint:"Стрелка = «переходит энергия к». Кто первый в цепи? Тот, кто создаёт энергию.",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — правило 10%', ege:'№25',
+    text:"<span class='hero-name'>Халсин</span> объясняет друид-студентам правило Линдемана. Если биомасса травы в экосистеме 10 000 кг, то какова биомасса травоядных животных по правилу 10%?",
+    opts:["1 000 кг","100 кг","10 000 кг","500 кг"], ans:0,
+    fb:"✦ Верно! Правило 10% (Линдеман): при переходе на следующий трофический уровень передаётся ~10% энергии. 10 000 кг растений → 10% → 1 000 кг травоядных → 10% → 100 кг хищников I.",
+    trap:"90% энергии теряется на тепловыделение и жизнедеятельность организмов. Только 10% переходит на следующий уровень. НЕ 50%!",
+    hint:"10% от 10 000 = ? Это одна десятая часть.",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — расчёт пирамиды', ege:'№25',
+    text:"В лесу Wolfenstein: трава (продуцент) → кролик (консумент I) → лиса (консумент II). Сколько кг травы нужно, чтобы вырастить <strong>1 кг лисы</strong>?",
+    opts:["100 кг травы","10 кг травы","1 кг травы","1 000 кг травы"], ans:0,
+    fb:"✦ Верно! Два перехода от травы до лисы: трава → кролик (×10) → лиса (×10). 1 кг лисы требует 10 кг кроликов, а 10 кг кроликов — 100 кг травы. Каждый уровень вверх = умножаем на 10.",
+    trap:"Два уровня от растения до лисы: ×10 ×10 = ×100. Не ×10! Считай переходы, а не уровни.",
+    hint:"Лиса — второй уровень выше травы. Значит, два перехода по правилу 10%. 10 × 10 = ?",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — факторы среды', ege:'№21',
+    text:"Тень-Проклятье Кетерика заблокировало солнечный свет → растения погибли → вся цепь рухнула. Солнечный свет — это какой вид экологического фактора?",
+    opts:["Абиотический (фактор неживой природы)","Биотический (влияние живых организмов)","Антропогенный (деятельность человека)","Эдафический (почвенный)"], ans:0,
+    fb:"✦ Верно! Абиотические факторы — неживая природа: свет, температура, вода, состав воздуха, почва. Биотические — влияние живых организмов друг на друга. Антропогенные — деятельность человека.",
+    trap:"Кетерик создал проклятье (это антропогенный фактор). Само солнце, которое исчезло — абиотическое. Не путай причину катастрофы и сам фактор среды.",
+    hint:"Солнце — живое или неживое? Неживая природа = какой тип фактора?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — биотические отношения', ege:'№21',
+    text:"<span class='hero-name'>Кордицепс TLOU</span> живёт внутри человека, питается его тканями, медленно убивая хозяина. Какой тип биотических отношений это описывает?",
+    opts:["Паразитизм (+/−): паразит получает выгоду, хозяин страдает","Хищничество (+/−): хищник убивает жертву мгновенно","Мутуализм (+/+): оба получают выгоду","Комменсализм (+/0): один получает, другому нейтрально"], ans:0,
+    fb:"✦ Верно! Паразитизм: паразит (+) использует хозяина как среду обитания и источник питания, хозяин (−) страдает и может погибнуть, но не сразу. Кордицепс — классический паразит.",
+    trap:"Хищничество: хищник убивает жертву быстро, не живёт внутри неё. Паразит: живёт внутри/на хозяине, убивает медленно или не убивает вовсе — пока хозяин нужен.",
+    hint:"«Пара-зит» — «живущий рядом (внутри)». Медленная эксплуатация изнутри — это паразитизм.",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — агроэкосистема', ege:'№19',
+    text:"Поля пшеницы в Wolfenstein — полностью контролируемые человеком. Чем <strong>агроэкосистема отличается от природной</strong>?",
+    opts:["Низкое биоразнообразие, нестабильна без вмешательства человека, высокая продуктивность одного вида","Более устойчива, чем природная экосистема","Не зависит от абиотических факторов","Содержит больше видов, чем природный лес"], ans:0,
+    fb:"✦ Верно! Агроэкосистема (поле, сад, огород): один-два вида, высокая продуктивность, но без человека (прополки, полива, удобрений) быстро разрушается. Природная экосистема — высокое биоразнообразие, само-регуляция, устойчивость.",
+    trap:"Агроэкосистема — НЕ более устойчива! Она очень уязвима: стоит прекратить уход — её захватят сорняки. Биоразнообразие маленькое = низкая устойчивость.",
+    hint:"«Агро» = поле. Монокультура устойчивее или уязвимее разнообразного леса?",
+    ref:"Экосистемы 🌿"
+  },
+  {
+    cat:'qs-chain', topic:'Цепи питания — кордицепс как редуцент', ege:'№20',
+    text:"После гибели заражённого человека кордицепс продолжает расти, разлагая труп. На этом этапе кордицепс выполняет роль...",
+    opts:["Редуцента — разлагает мёртвую органику до минеральных веществ","Консумента I — питается растениями","Продуцента — создаёт органику","Консумента II — хищника"], ans:0,
+    fb:"✦ Верно! Кордицепс уникален: при жизни хозяина — паразит (биотические отношения +/−). После гибели хозяина — редуцент (разлагает мёртвую органику). Одна из редких тварей, меняющих роль в экосистеме.",
+    trap:"Редуцент работает с МЁРТВОЙ органикой. Пока хозяин жив — кордицепс паразит. После смерти — редуцент. Роль меняется!",
+    hint:"Труп — это мёртвая органика. Кто её разлагает?",
+    ref:"Цепи питания 🔗"
+  },
+  {
+    cat:'qs-eco', topic:'Экология — антропогенный фактор', ege:'№21',
+    text:"Рейх Wolfenstein вырубил леса, загрязнил реки, уничтожил целые экосистемы ради заводов. Как называется влияние разумных существ на природу?",
+    opts:["Антропогенный фактор","Биотический фактор","Абиотический фактор","Эдафический фактор"], ans:0,
+    fb:"✦ Верно! Антропогенный фактор — любое воздействие человека на природу: вырубка лесов, загрязнение, охота, строительство, земледелие. В широком смысле — влияние разумных существ (потому и Кетерик BG3 — тоже антропогенный).",
+    trap:"Биотический = влияние живых организмов друг на друга (волк ест зайца). Антропогенный = именно деятельность человека. Разница: целенаправленность и масштаб.",
+    hint:"«Антропос» = человек (греч.). Антропогенный = вызванный человеком.",
+    ref:"Экосистемы 🌿"
+  },
+
+];
+
+// ───── ENGINE ─────
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+
+  qheader.innerHTML = `<span class="q-source ${q.cat}">🧬 Биология</span><span class="q-topic">${q.topic}</span><span class="q-ege">${q.ege}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} верно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} верно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий шаг →' : 'Узнать результат →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (attempts === 1) {
+      qfb.innerHTML = `🔍 ${q.hint}<br><span class="fb-hint-ref">📖 Шпора: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий шаг →' : 'Узнать результат →';
+    }
+  }
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+
+  let emoji, title, story, rankText, rankClass;
+  const pct = score / questions.length;
+
+  if (pct >= 0.85) {
+    emoji = '🧠'; title = 'Ведьмак-учёный!';
+    story = 'Геральт пожимает руку Халсину: «Ты знаешь и мозг, и лес». Иллитиды расступились — Древний Мозг не рискнул съедать столь ценные знания. Халсин смотрит на возрождающийся лес Тени-Проклятья: «Экосистема восстановится. Как твои знания ОГЭ». Ты готов к реальному экзамену.';
+    rankText = '🐺 Мастер-ведьмак и эколог'; rankClass = 'rank-s';
+  } else if (pct >= 0.70) {
+    emoji = '🌿'; title = 'Хороший охотник!';
+    story = 'Геральт кивает: «Ты понимаешь природу. Несколько вопросов ускользнули — как старый Лешен в тумане». Халсин добавляет: «Повтори анализаторы и правило 10% — они любят появляться на ОГЭ». Ты близко к цели.';
+    rankText = '🗡️ Ведьмак-ученик II ступени'; rankClass = 'rank-a';
+  } else if (pct >= 0.55) {
+    emoji = '📋'; title = 'Знания растут';
+    story = 'Весемир смотрит на твои ответы: «Половина пути пройдена. Нервная система — хорошо. Экология — нужно повторить». Геральт достаёт шпору: «Продуценты, консументы, редуценты — три слова, которые решают задачи». Иди учиться!';
+    rankText = '🌱 Молодой охотник'; rankClass = 'rank-b';
+  } else if (pct >= 0.40) {
+    emoji = '⚠️'; title = 'Опасная зона';
+    story = 'Крюкоужасы окружают. Халсин говорит: «Ты не знаешь экосистему — она тебя поглотит». Геральт: «Сначала шпора — потом охота. Иначе будешь как Кетерик: уничтожил то, что кормило всех». Начни с шпоры.';
+    rankText = '📚 Повтори шпору полностью'; rankClass = 'rank-c';
+  } else {
+    emoji = '🍄'; title = 'Кордицепс захватил мозг';
+    story = 'Древний Мозг торжествует: «Твои знания были тонкими, как грибница». Геральт смотрит сквозь споры: «Мы вернёмся. Изучи нервную систему и экологию заново — по шпоре, сверху донизу». Начни с самого начала.';
+    rankText = '🔄 Начни с шпоры'; rankClass = 'rank-d';
+  }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rstory').textContent = story;
+  document.getElementById('rrank').textContent = rankText;
+  document.getElementById('rrank').className = 'results-rank ' + rankClass;
+}
+
+document.getElementById('restart').onclick = () => {
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  initQuiz();
+  renderQ();
+};
+
+renderQ();
+</script>
+</body>
+</html>
