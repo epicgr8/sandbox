@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест: Глубина человечности — Тело человека ОГЭ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ede9;
+    --bg2:     #faf8f5;
+    --bg3:     #e8e3dc;
+    --bg4:     #ddd8d0;
+    --c-skel:  #b91c1c;   /* скелет/мышцы — красный */
+    --c-blood: #dc2626;   /* кровь — алый */
+    --c-imm:   #16a34a;   /* иммунитет — зелёный (Элли!) */
+    --c-lung:  #2563eb;   /* дыхание — синий */
+    --c-dig:   #ea580c;   /* пищеварение — оранжевый */
+    --c-exc:   #7c3aed;   /* выделение — фиолетовый */
+    --c-meta:  #0891b2;   /* обмен веществ — бирюзовый */
+    --c-aid:   #db2777;   /* первая помощь — розовый */
+    --text:    #1a1814;
+    --muted:   #6b6560;
+    --border:  rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size:16px;
+    line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5%  0%,  rgba(185,28,28,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(22,163,74,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%,rgba(37,99,235,0.05) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:940px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:52px 0 36px; }
+  .hero::after {
+    content:''; display:block; margin:28px auto 0;
+    width:220px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, transparent, var(--c-skel), var(--c-imm), var(--c-lung), var(--c-aid), transparent);
+  }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
+  .hero-title { font-size:clamp(26px,4.5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
+  .ht1 { color: var(--c-skel); }
+  .ht2 { color: var(--c-imm); }
+  .ht3 { color: var(--text); }
+  .hero-sub { font-size:14px; color:var(--muted); }
+
+  .cast { display:flex; gap:12px; justify-content:center; margin:28px 0 0; flex-wrap:wrap; }
+  .cast-card { background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:10px 16px; font-size:13px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:8px; }
+  .cast-card .role { font-size:10px; font-weight:500; color:var(--muted); display:block; }
+  .cast-emoji { font-size:22px; }
+
+  /* SEC */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:#1a1814; color:#faf9f5; }
+  .sec-badge.quiz-b { background:var(--c-skel); color:#fff; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* CHEAT SHEET CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:10px; margin-bottom:8px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rc-skel::after  { background:var(--c-skel); }
+  .rc-blood::after { background:var(--c-blood); }
+  .rc-imm::after   { background:var(--c-imm); }
+  .rc-lung::after  { background:var(--c-lung); }
+  .rc-dig::after   { background:var(--c-dig); }
+  .rc-exc::after   { background:var(--c-exc); }
+  .rc-meta::after  { background:var(--c-meta); }
+  .rc-aid::after   { background:var(--c-aid); }
+
+  .rule-icon { font-size:22px; margin-bottom:8px; margin-top:6px; }
+  .rule-cat { font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:4px; }
+  .rc-skel  .rule-cat  { color:var(--c-skel); }
+  .rc-blood .rule-cat  { color:var(--c-blood); }
+  .rc-imm   .rule-cat  { color:var(--c-imm); }
+  .rc-lung  .rule-cat  { color:var(--c-lung); }
+  .rc-dig   .rule-cat  { color:var(--c-dig); }
+  .rc-exc   .rule-cat  { color:var(--c-exc); }
+  .rc-meta  .rule-cat  { color:var(--c-meta); }
+  .rc-aid   .rule-cat  { color:var(--c-aid); }
+
+  .rule-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
+  .rule-body strong { color:var(--text); }
+  .ff { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 8px; border-radius:5px; display:inline-block; color:var(--text); background:var(--bg3); margin:2px 0; }
+  .rule-mnemonic { margin-top:10px; font-size:12px; background:var(--bg3); border-radius:7px; padding:8px 11px; line-height:1.55; }
+  .rule-assoc { margin-top:8px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+
+  /* DECO */
+  .deco-div { text-align:center; margin:32px 0; display:flex; align-items:center; gap:12px; }
+  .deco-div::before,.deco-div::after { content:''; flex:1; height:1px; background:var(--border2); }
+  .deco-div span { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* MISSION BANNER */
+  .mission { border-radius:16px; background:var(--bg2); border:2px solid rgba(22,163,74,0.25); padding:24px 28px; margin-bottom:28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
+  .mission-emoji { font-size:52px; }
+  .mission-title { font-size:18px; font-weight:700; color:var(--c-imm); margin-bottom:6px; }
+  .mission-text { font-size:14px; color:var(--muted); line-height:1.65; }
+  .mission-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .mtag { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .mt-r { background:rgba(185,28,28,0.1); color:#7f1d1d; }
+  .mt-g { background:rgba(22,163,74,0.1); color:#14532d; }
+  .mt-b { background:rgba(37,99,235,0.1); color:#1e3a8a; }
+  .mt-o { background:rgba(234,88,12,0.1); color:#7c2d12; }
+  .mt-p { background:rgba(124,58,237,0.1); color:#4c1d95; }
+  @media(max-width:520px){ .mission{grid-template-columns:1fr;} .mission-emoji{font-size:36px;} }
+
+  /* QUIZ */
+  .quiz-header { text-align:center; padding:24px 0 18px; }
+  .quiz-title { font-size:clamp(18px,3vw,28px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--muted); }
+  .quiz-progress-wrap { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--c-skel),var(--c-imm),var(--c-lung)); border-radius:3px; transition:width 0.4s ease; width:0%; }
+  .quiz-counter { font-size:13px; font-weight:700; color:var(--muted); min-width:56px; text-align:right; }
+  .quiz-score-badge { font-size:13px; font-weight:700; color:var(--c-imm); min-width:76px; }
+
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:8px 20px; background:var(--bg3); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .q-source { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; white-space:nowrap; }
+  .qs-skel  { background:var(--c-skel); }
+  .qs-blood { background:var(--c-blood); }
+  .qs-imm   { background:var(--c-imm); }
+  .qs-lung  { background:var(--c-lung); }
+  .qs-dig   { background:var(--c-dig); }
+  .qs-exc   { background:var(--c-exc); }
+  .qs-meta  { background:var(--c-meta); }
+  .qs-aid   { background:var(--c-aid); }
+  .q-topic  { font-size:12px; color:var(--muted); font-weight:500; }
+  .q-ege    { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:rgba(0,0,0,0.07); color:var(--muted); }
+
+  .question-body { padding:22px 22px 18px; }
+  .question-text { font-size:17px; color:var(--text); line-height:1.65; margin-bottom:20px; }
+  .question-text .hero-name { font-weight:700; padding:0 2px; background:linear-gradient(120deg,var(--c-skel),var(--c-imm)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt-btn { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:11px 16px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; color:var(--text); cursor:pointer; text-align:left; transition:border-color 0.14s, background 0.14s, transform 0.1s; display:flex; align-items:flex-start; gap:10px; }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-imm); background:rgba(22,163,74,0.05); transform:translateX(4px); }
+  .opt-btn .opt-letter { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--muted); min-width:18px; flex-shrink:0; margin-top:2px; }
+  .opt-btn.correct { border-color:#16a34a; background:rgba(22,163,74,0.13); color:var(--text); }
+  .opt-btn.correct .opt-letter { color:#16a34a; }
+  .opt-btn.wrong { border-color:#dc2626; background:rgba(220,38,38,0.07); }
+  .opt-btn.wrong .opt-letter { color:#dc2626; }
+  .opt-btn:disabled { cursor:default; }
+
+  .feedback-box { margin-top:14px; padding:14px 18px; border-radius:8px; font-size:15px; line-height:1.7; display:none; animation:fadeIn 0.22s ease; }
+  .feedback-box.ok   { background:var(--bg3); border:1px solid var(--border2); color:var(--text); display:block; }
+  .feedback-box.fail { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); color:#7a1a1a; display:block; }
+  .fb-trap { display:block; margin-top:10px; background:rgba(234,88,12,0.1); border:1px solid rgba(234,88,12,0.35); color:var(--text); border-radius:6px; padding:6px 12px; font-size:14px; font-weight:500; }
+  .fb-trap::before { content:'⚠️ '; }
+  .fb-hint-ref { display:block; margin-top:8px; color:var(--muted); font-size:14px; }
+  .fb-retry { display:block; margin-top:8px; font-size:14px; font-weight:700; color:#991b1b; }
+  .question-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:10px 24px; border-radius:8px; cursor:pointer; transition:opacity 0.15s, transform 0.1s; display:none; }
+  .next-btn:hover { opacity:0.85; transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 20px; animation:fadeIn 0.4s ease; }
+  .results.show { display:block; }
+  .results-emoji { font-size:72px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--text); margin-bottom:8px; }
+  .results-score { font-size:clamp(60px,10vw,88px); font-weight:700; line-height:1; margin:12px 0 4px; color:var(--c-skel); }
+  .results-total { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .results-story { font-size:15px; line-height:1.7; color:var(--text); max-width:520px; margin:0 auto 24px; padding:18px 22px; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(22,163,74,0.12);  color:#14532d; }
+  .rank-a { background:rgba(37,99,235,0.12);  color:#1e3a8a; }
+  .rank-b { background:rgba(202,138,4,0.12);  color:#92400e; }
+  .rank-c { background:rgba(234,88,12,0.12);  color:#7c2d12; }
+  .rank-d { background:rgba(220,38,38,0.12);  color:#991b1b; }
+  .restart-btn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.04em; background:var(--text); color:var(--bg2); border:none; padding:12px 36px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.8; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .question-animate { animation:fadeIn 0.28s ease; }
+
+  /* QUESTS NAV */
+  .quests-nav { margin-top:56px; padding-top:32px; border-top:1px solid var(--border2); }
+  .quests-nav-title { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .quests-pills { display:flex; flex-direction:column; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .quest-pill:hover { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+  .quest-pill.quest-active { border-color:var(--c-imm); background:rgba(22,163,74,0.04); }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qp-info { flex:1; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(22,163,74,0.12); color:var(--c-imm); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Биология · Тело человека · 2026</div>
+    <h1 class="hero-title">
+      <span class="ht1">Глубина</span> <span class="ht2">человечности</span><br>
+      <span class="ht3">как спасти мир</span>
+    </h1>
+    <p class="hero-sub">Элли и Эбби изучают тело человека — ключ к иммунитету и выживанию · Задания №13–16, 22, 25</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Шпора Элли</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card rc-skel">
+      <div class="rule-icon">🦴</div>
+      <div class="rule-cat">Скелет и мышцы</div>
+      <div class="rule-title">Позвоночник и типы костей</div>
+      <div class="rule-body">
+        Позвонков всего <span class="ff">33–34</span> = 5 отделов:<br>
+        <strong>Ш</strong>ейных — 7 · <strong>Г</strong>рудных — 12 · <strong>П</strong>оясничных — 5<br>
+        <strong>К</strong>рестцовых — 5 (срастаются в крестец) · <strong>К</strong>опчиковых — 4–5 (рудимент хвоста, срастаются)<br><br>
+        Типы костей: <strong>трубчатые</strong> (бедро, плечо), <strong>плоские</strong> (лопатка, череп), <strong>губчатые</strong> (запястье), <strong>смешанные</strong> (позвонки).<br><br>
+        Мышцы: скелетные — <strong>поперечно-полосатые</strong>, произвольные · гладкие — непроизвольные (внутренние органы) · сердечная — поперечно-полосатая, но <strong>НЕпроизвольная</strong>.
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>Мнемоника:</strong> «<strong>Ш</strong>агай <strong>Г</strong>ордо, <strong>П</strong>рямо <strong>К</strong>расиво — <strong>К</strong>уда?» — 7, 12, 5, 5, 4–5.<br>Пять слов = пять отделов: Шейный, Грудной, Поясничный, Крестцовый, Копчиковый.<br>🎮 TLOU: у Элли все 33 позвонка целы — иначе она не выжила бы под обломками торгового центра.</div>
+    </div>
+
+    <div class="rule-card rc-blood">
+      <div class="rule-icon">🩸</div>
+      <div class="rule-cat">Кровь и кровеносная система</div>
+      <div class="rule-title">Состав крови и круги кровообращения</div>
+      <div class="rule-body">
+        <strong>Эритроциты</strong> — безъядерные, гемоглобин, 120 дней жизни, 4–5 млн/мкл<br>
+        <strong>Лейкоциты</strong> — ядерные, иммунитет, 4–9 тыс/мкл<br>
+        <strong>Тромбоциты</strong> — безъядерные, свёртывание, 200–400 тыс/мкл<br><br>
+        🔴 <strong>Большой круг:</strong> Лев. желудочек → аорта → органы → правое предсердие<br>
+        🔵 <strong>Малый круг:</strong> Прав. желудочек → лёгкие → левое предсердие
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>Артерии</strong> — несут кровь <strong>ОТ</strong> сердца (в любую сторону, не обязательно богатую O₂).<br><strong>Вены</strong> — несут кровь <strong>К</strong> сердцу.<br>⚠️ Главная ловушка ОГЭ: лёгочная <em>артерия</em> несёт тёмную венозную кровь — потому что идёт ОТ сердца в лёгкие. Называют по направлению, а не по составу!</div>
+      <div class="rule-assoc">🎮 TLOU: Кровь Элли содержит мутировавший кордицепс — он есть у всех инфицированных, но у неё антитела блокируют нейротоксин. Это и есть иммунитет в крови.</div>
+    </div>
+
+    <div class="rule-card rc-imm">
+      <div class="rule-icon">🛡️</div>
+      <div class="rule-cat">Иммунитет</div>
+      <div class="rule-title">Специфический и неспецифический</div>
+      <div class="rule-body">
+        <strong>По механизму:</strong><br>
+        🧱 <strong>Неспецифический</strong> (врождённый) — против любого чужеродного агента:<br>
+        кожа и слизистые (физический барьер), фагоцитоз (лейкоциты пожирают бактерии), воспаление, лихорадка<br><br>
+        🎯 <strong>Специфический</strong> (приобретённый) — против конкретного антигена (метки чужеродного агента):<br>
+        • <strong>Клеточный</strong>: Т-лимфоциты уничтожают заражённые клетки напрямую<br>
+        • <strong>Гуморальный</strong>: В-лимфоциты → плазматические клетки → антитела в кровь (антитело связывается с антигеном и нейтрализует его)<br><br>
+        <strong>По способу получения:</strong><br>
+        💉 <strong>Активный</strong> — болезнь или вакцина: организм сам вырабатывает антитела. Медленно, надолго, формирует иммунную память.<br>
+        🩸 <strong>Пассивный</strong> — сыворотка: вводят готовые чужие антитела. Быстро, но ненадолго, памяти нет.
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>В-лимфоциты = В</strong>ыделяют антитела <strong>В</strong> кровь (гуморальный)<br><strong>Т-лимфоциты = Т</strong>рогают заражённые клетки напрямую (клеточный)<br>Антиген = то, что чужое (кусочек бактерии, вируса). Антитело = «замок» под конкретный антиген.</div>
+      <div class="rule-assoc">🎮 TLOU: В-лимфоциты Элли производят антитела, которые нейтрализуют токсин кордицепса ДО того, как он поразит мозг. Именно эти антитела хочет воспроизвести лаборатория «Светлячка».</div>
+    </div>
+
+    <div class="rule-card rc-lung">
+      <div class="rule-icon">🫁</div>
+      <div class="rule-cat">Дыхание</div>
+      <div class="rule-title">Дыхательные пути и газообмен</div>
+      <div class="rule-body">
+        <strong>Путь воздуха:</strong> носовая полость → носоглотка → гортань → трахея → бронхи → бронхиолы → <strong>альвеолы</strong><br>
+        (Газообмен происходит только в альвеолах — всё остальное только транспорт)<br><br>
+        В альвеолах: O₂ диффундирует в кровь, CO₂ — из крови в воздух<br><br>
+        <strong>ЖЕЛ</strong> (жизненная ёмкость лёгких) = дыхательный объём + резервный объём вдоха + резервный объём выдоха. Остаточный объём (~1 л) в ЖЕЛ НЕ входит — он не выдыхается никогда.<br><br>
+        Дыхательный центр — <strong>продолговатый мозг</strong>. Дыхание стимулирует избыток CO₂ в крови (не нехватка O₂!).
+      </div>
+      <div class="rule-mnemonic">🧠 Запомни путь: «<strong>Н</strong>аша <strong>Н</strong>осоглотка <strong>Г</strong>отовит <strong>Т</strong>рахею, <strong>Б</strong>ронхи <strong>Б</strong>егут к <strong>А</strong>львеолам»<br>= Нос, Носоглотка, Гортань, Трахея, Бронхи, Бронхиолы, Альвеолы</div>
+      <div class="rule-assoc">🎮 TLOU: Споры кордицепса попадают через лёгкие — именно поэтому в заражённых зонах носят противогазы. Альвеолы — главная точка входа паразита.</div>
+    </div>
+
+    <div class="rule-card rc-dig">
+      <div class="rule-icon">🍎</div>
+      <div class="rule-cat">Пищеварение</div>
+      <div class="rule-title">Где что переваривается</div>
+      <div class="rule-body">
+        🦷 <strong>Рот:</strong> амилаза слюны → крахмал → мальтоза<br>
+        💛 <strong>Желудок:</strong> пепсин (pH 1,5–2,5) → белки → пептиды<br>
+        🟤 <strong>12-перстная кишка:</strong> поджелудочный сок (трипсин — белки, липаза — жиры, амилаза — углеводы), желчь — эмульгирование жиров<br>
+        🌿 <strong>Тонкая кишка:</strong> всасывание питательных веществ, ворсинки<br>
+        💧 <strong>Толстая кишка:</strong> всасывание воды, формирование кала
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>«Р-Ж-12-Т-Т»</strong>: Рот (углеводы), Желудок (белки), 12-перстная (все + желчь), Тонкая (всасывание), Толстая (вода).</div>
+      <div class="rule-assoc">🎮 TLOU: Консервы + дичь = выживание. Эбби знает: белки мяса начинают расщепляться в желудке под действием пепсина. Без желудочного сока — голодная смерть.</div>
+    </div>
+
+    <div class="rule-card rc-exc">
+      <div class="rule-icon">💧</div>
+      <div class="rule-cat">Выделение</div>
+      <div class="rule-title">Почки и нефрон</div>
+      <div class="rule-body">
+        <strong>Нефрон</strong> = мальпигиево тельце (клубочек + капсула Боумена) + канальцы<br><br>
+        Три этапа мочеобразования:<br>
+        1️⃣ <strong>Фильтрация</strong> в клубочке → первичная моча (~170–180 л/сут) — похожа на плазму крови, без белков<br>
+        2️⃣ <strong>Реабсорбция</strong> в канальцах → обратно в кровь всасываются вода, глюкоза, аминокислоты → остаётся 1,5–2 л вторичной мочи<br>
+        3️⃣ <strong>Секреция</strong> — в канальцах добавляются лишние вещества (например, избыток солей)<br><br>
+        В норме в моче НЕТ: белков (молекулы крупные, не проходят в фильтрат), глюкозы (реабсорбируется вся), эритроцитов<br>
+        Другие органы выделения: кожа (вода, соли), лёгкие (CO₂, H₂O), кишечник
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>Ключ:</strong> глюкоза в моче = сигнал диабета (не реабсорбируется). Белок в моче = повреждение нефрона.</div>
+      <div class="rule-assoc">🎮 TLOU: Дефицит воды в апокалипсисе опасен — почки концентрируют мочу, но при сильном обезвоживании нефроны отказывают. Элли пьёт воду первым делом.</div>
+    </div>
+
+    <div class="rule-card rc-meta">
+      <div class="rule-icon">⚡</div>
+      <div class="rule-cat">Обмен веществ</div>
+      <div class="rule-title">Пластический и энергетический</div>
+      <div class="rule-body">
+        <strong>Пластический обмен (анаболизм):</strong> синтез органических веществ, <em>расходует</em> энергию (АТФ)<br>
+        <strong>Энергетический обмен (катаболизм):</strong> расщепление органических веществ, <em>выделяет</em> энергию → АТФ<br><br>
+        <strong>АТФ</strong> — универсальный носитель энергии клетки<br>
+        Основной обмен — энергия в покое<br>
+        Рабочий обмен = основной + нагрузка
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>А</strong>наболизм = <strong>А</strong>ссемблинг (сборка, строит)<br><strong>К</strong>атаболизм = <strong>К</strong>рушит (разрушает, даёт энергию)</div>
+      <div class="rule-assoc">🎮 TLOU: Тренировки Эбби — анаболизм (мышцы растут, белки синтезируются). Бег от щелкунов — катаболизм (гликоген → АТФ → движение).</div>
+    </div>
+
+    <div class="rule-card rc-aid">
+      <div class="rule-icon">🩹</div>
+      <div class="rule-cat">Первая помощь</div>
+      <div class="rule-title">Кровотечения, травмы, ожоги</div>
+      <div class="rule-body">
+        🔴 <strong>Артериальное:</strong> алая кровь, пульсирующий фонтан → <strong>жгут ВЫШЕ раны</strong>, записка со временем, не более 1,5–2 ч<br>
+        🔵 <strong>Венозное:</strong> тёмная кровь, равномерно → давящая повязка<br>
+        🟡 <strong>Капиллярное:</strong> останавливается само + стерильная повязка<br><br>
+        🦴 <strong>Перелом:</strong> шина, не двигать, иммобилизация<br>
+        🔥 <strong>Ожог:</strong> холодная вода 15–20 мин, НЕ масло, НЕ лёд<br>
+        😵 <strong>Обморок:</strong> горизонтально, ноги выше головы
+      </div>
+      <div class="rule-mnemonic">🧠 <strong>Артерия = Алая = выше = Жгут</strong> (три А + Ж)<br><strong>Вена = тёмная = давящая повязка</strong></div>
+      <div class="rule-assoc">🎮 TLOU: Дина накладывает жгут выше артериального ранения Джоэла. Записывает время на руке — если забыть, конечность отомрёт. Первая помощь = разница между жизнью и смертью.</div>
+    </div>
+
+  </div><!-- /rules-grid -->
+
+  <!-- МИССИЯ -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Миссия</span><div class="sec-line"></div></div>
+
+  <div class="mission">
+    <div class="mission-emoji">🧫</div>
+    <div>
+      <div class="mission-title">Лаборатория «Светлячок» — день X</div>
+      <div class="mission-text">Кордицепс мутировал — теперь он поражает даже иммунных. Элли и Эбби проникают в секретную лабораторию Firefly, где хранятся данные о строении человека. Чтобы создать вакцину, нужно знать тело человека изнутри: от скелета до иммунных клеток. У вас 90 минут, пока паразит не захватил вентиляцию.</div>
+      <div class="mission-tags">
+        <span class="mtag mt-r">🦴 Скелет и мышцы</span>
+        <span class="mtag mt-r">🩸 Кровь и сосуды</span>
+        <span class="mtag mt-g">🛡️ Иммунитет</span>
+        <span class="mtag mt-b">🫁 Дыхание</span>
+        <span class="mtag mt-o">🍎 Пищеварение</span>
+        <span class="mtag mt-p">💧 Выделение и обмен</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="deco-div"><span>⚗️ Начинаем эксперимент</span></div>
+
+  <!-- QUIZ -->
+  <div id="quiz-area">
+    <div class="quiz-header">
+      <div class="quiz-title">🧬 Тест лаборатории «Светлячок»</div>
+      <div class="quiz-sub">28 испытаний · 2 попытки · Спаси человечество</div>
+    </div>
+
+    <div class="quiz-progress-wrap">
+      <span id="score-disp" class="quiz-score-badge">✦ 0 верно</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 28</span>
+    </div>
+
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qheader"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+        <div class="feedback-box" id="qfb"></div>
+      </div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext">Следующий шаг →</button>
+      </div>
+    </div>
+  </div><!-- /quiz-area -->
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div><br>
+    <button class="restart-btn" id="restart">Повторить эксперимент 🔬</button>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Все квесты по биологии ОГЭ</div>
+    <div class="quests-pills">
+      <a class="quest-pill quest-active" href="#">
+        <div class="qp-num" style="background:var(--c-imm)">🧬</div>
+        <div class="qp-info"><div class="qp-name">Глубина человечности</div><div class="qp-sub">Тело человека · Скелет, кровь, иммунитет, дыхание, пищеварение</div></div>
+        <span class="qp-badge qp-here">Ты здесь</span>
+      </a>
+      <a class="quest-pill" href="index.html">
+        <div class="qp-num" style="background:#6b6560">🏠</div>
+        <div class="qp-info"><div class="qp-name">Главная ОГЭ</div><div class="qp-sub">Все предметы и квесты</div></div>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+const allQuestions = [
+
+  // ═══════════════ СКЕЛЕТ И МЫШЦЫ ═══════════════
+
+  {
+    cat:'qs-skel', topic:'Скелет — позвоночник', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> тренируется на руинах больницы и думает о строении позвоночника. Сколько позвонков в поясничном отделе позвоночника человека?",
+    opts:["5","7","12","4"], ans:0,
+    fb:"✦ Верно! Поясничный отдел — 5 крупных позвонков. Именно они несут основную нагрузку при подъёме тяжестей — Эбби это знает лучше всех.",
+    trap:"Запомни: 7 (шейных) — 12 (грудных) — 5 (поясничных) — 5 (крестцовых). Шейных 7, а не 5!",
+    hint:"«Шагай Гордо, Прямо Красиво» — 7, 12, 5, 5. Поясничный — третья группа.",
+    ref:"Скелет 🦴"
+  },
+  {
+    cat:'qs-skel', topic:'Скелет — типы соединений', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> изучает атлас анатомии: какие кости черепа соединены <strong>неподвижно</strong>?",
+    opts:["Кости черепного свода соединены швами","Нижняя челюсть с черепом","Позвонки между собой","Рёбра с грудиной"], ans:0,
+    fb:"✦ Верно! Кости свода черепа срастаются швами — неподвижное соединение. Именно поэтому череп защищает мозг как шлем.",
+    trap:"Нижняя челюсть — подвижное соединение (сустав). Позвонки — полуподвижные (хрящевые диски). Рёбра с грудиной — полуподвижные.",
+    hint:"Кости черепного свода вообще не двигаются — они намертво срослись. Какой из трёх типов соединений это описывает?",
+    ref:"Скелет 🦴"
+  },
+  {
+    cat:'qs-skel', topic:'Мышцы — типы', ege:'№16',
+    text:"<span class='hero-name'>Эбби</span> объясняет Леву: какая мышечная ткань является <strong>одновременно поперечно-полосатой И непроизвольной</strong>?",
+    opts:["Сердечная мышечная ткань","Скелетная мышечная ткань","Гладкая мышечная ткань","Диафрагма"], ans:0,
+    fb:"✦ Верно! Сердечная мышца уникальна: структура как у скелетных (поперечно-полосатая), но управляется автономно (непроизвольная). Сердце нельзя остановить силой мысли.",
+    trap:"Скелетная — поперечно-полосатая, но произвольная. Гладкая — непроизвольная, но НЕ поперечно-полосатая. Только сердечная — и то, и другое!",
+    hint:"Скелетная = произвольная. Гладкая = непроизвольная. Какая ткань нарушает это правило?",
+    ref:"Мышцы 💪"
+  },
+  {
+    cat:'qs-skel', topic:'Мышцы — антагонисты', ege:'№18',
+    text:"В учебнике Элли написано: бицепс и трицепс плеча — мышцы-<strong>антагонисты</strong>. Что это значит?",
+    opts:["Они выполняют противоположные действия: один сгибает, другой разгибает","Они работают одновременно в одном направлении","Они расположены в разных частях тела","Одна из них — гладкая, другая — скелетная"], ans:0,
+    fb:"✦ Верно! Антагонисты действуют противоположно: бицепс сгибает руку, трицепс разгибает. Это обеспечивает точность движений — один сокращается, другой расслабляется.",
+    trap:"Синергисты — работают вместе. Антагонисты — против друг друга. Не путай!",
+    hint:"«Анти» = против. Антагонисты противодействуют друг другу.",
+    ref:"Мышцы 💪"
+  },
+
+  // ═══════════════ КРОВЬ И КРОВЕНОСНАЯ СИСТЕМА ═══════════════
+
+  {
+    cat:'qs-blood', topic:'Кровь — состав', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> сдаёт анализ крови в лаборатории. Какие форменные элементы крови НЕ имеют ядра в зрелом состоянии у человека?",
+    opts:["Эритроциты и тромбоциты","Только лейкоциты","Только эритроциты","Все форменные элементы"], ans:0,
+    fb:"✦ Верно! Зрелые эритроциты теряют ядро для увеличения площади переноса гемоглобина. Тромбоциты — фрагменты клеток без ядра. Ядро есть только у лейкоцитов.",
+    trap:"Лейкоциты — ЕДИНСТВЕННЫЕ клетки крови с ядром. Тромбоциты — не целые клетки, а фрагменты (осколки мегакариоцитов).",
+    hint:"Кто в крови ядерный? Только иммунные клетки.",
+    ref:"Кровь 🩸"
+  },
+  {
+    cat:'qs-blood', topic:'Кровь — функции эритроцитов', ege:'№14',
+    text:"Гемоглобин эритроцитов переносит кислород. Почему при анемии (малокровии) человек быстро устаёт даже при небольших нагрузках? — спрашивает <span class='hero-name'>Дина</span>.",
+    opts:["Клеткам не хватает O₂ для выработки энергии (АТФ)","Не хватает питательных веществ в плазме","Сердце бьётся слишком медленно","Нарушается свёртывание крови"], ans:0,
+    fb:"✦ Верно! Анемия → меньше гемоглобина → меньше O₂ → клетки не могут производить достаточно АТФ в митохондриях → усталость. Связь: кровь → дыхание → обмен веществ.",
+    trap:"",
+    hint:"Без кислорода митохондрии не могут синтезировать АТФ. Что несёт O₂?",
+    ref:"Кровь 🩸"
+  },
+  {
+    cat:'qs-blood', topic:'Кровеносная система — круги', ege:'№16',
+    text:"<span class='hero-name'>Элли</span> рисует схему сердца. В каком отделе сердца начинается <strong>малый (лёгочный) круг кровообращения</strong>?",
+    opts:["Правый желудочек","Левый желудочек","Правое предсердие","Левое предсердие"], ans:0,
+    fb:"✦ Верно! Малый круг: правый желудочек → лёгочная артерия → лёгкие (газообмен) → лёгочные вены → левое предсердие. Большой круг начинается в левом желудочке.",
+    trap:"⚠️ Ловушка ОГЭ: лёгочная АРТЕРИЯ несёт венозную (тёмную) кровь! Название «артерия» по направлению — от сердца, а не по составу крови.",
+    hint:"Малый круг = лёгочный. Откуда выталкивается кровь в лёгкие?",
+    ref:"Кровеносная система 💓"
+  },
+  {
+    cat:'qs-blood', topic:'Кровеносная система — давление', ege:'№18',
+    text:"Нормальное артериальное давление взрослого — 120/80 мм рт. ст. Что означает цифра <strong>80</strong> (нижнее давление)?",
+    opts:["Диастолическое — давление в момент расслабления желудочков","Систолическое — давление при сокращении сердца","Пульсовое давление","Давление в венах"], ans:0,
+    fb:"✦ Верно! 120 — систолическое (при сокращении), 80 — диастолическое (при расслаблении). Разница = пульсовое давление = 40 мм рт. ст.",
+    trap:"«Сис» = сокращение (systole). «Диа» = расслабление (diastole). Верхнее = систолическое.",
+    hint:"Нижнее давление — когда сердце отдыхает между ударами.",
+    ref:"Кровеносная система 💓"
+  },
+
+  // ═══════════════ ИММУНИТЕТ ═══════════════
+
+  {
+    cat:'qs-imm', topic:'Иммунитет — виды', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> — уникальный случай: её иммунитет к кордицепсу <strong>врождённый</strong>. Чем врождённый иммунитет отличается от приобретённого?",
+    opts:["Врождённый не требует предварительного контакта с патогеном, существует с рождения","Врождённый формируется после вакцинации","Врождённый — только клеточный","Врождённый формируется после болезни"], ans:0,
+    fb:"✦ Верно! Врождённый (неспецифический) — кожа, фагоцитоз, воспаление — работает сразу. Приобретённый — формируется после контакта с конкретным антигеном (болезнь, вакцина).",
+    trap:"",
+    hint:"Подумай о самом слове: когда у Элли появился этот иммунитет — до или после контакта с кордицепсом?",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — лимфоциты', ege:'№14',
+    text:"Учёные «Светлячка» исследуют кровь <span class='hero-name'>Элли</span>. Какие клетки <strong>вырабатывают антитела</strong> (иммуноглобулины)?",
+    opts:["В-лимфоциты (плазматические клетки)","Т-лимфоциты (киллеры)","Нейтрофилы","Эритроциты"], ans:0,
+    fb:"✦ Верно! В-лимфоциты при активации превращаются в плазматические клетки и производят антитела — специфические белки против конкретного антигена.",
+    trap:"Т-лимфоциты уничтожают заражённые клетки напрямую — клеточный иммунитет. Антитела — гуморальный иммунитет — это задача В-клеток.",
+    hint:"В = Вещества (антитела) в кровь. Т = Трогает клетки.",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — вакцина vs сыворотка', ege:'№26',
+    text:"<span class='hero-name'>Дину</span> укусила змея. Ей вводят противозмеиную <strong>сыворотку</strong>. Чем это отличается от вакцины?",
+    opts:["Сыворотка — готовые антитела (пассивный иммунитет, быстро, ненадолго); вакцина — антиген для выработки своих антител (активный, медленно, надолго)","Сыворотка и вакцина — одно и то же, просто разные названия","Вакцина действует быстрее сыворотки","Сыворотка формирует иммунную память"], ans:0,
+    fb:"✦ Верно! Сыворотка содержит готовые антитела — помогает немедленно, но иммунная память не формируется. Вакцина заставляет организм самостоятельно выработать антитела и запомнить врага.",
+    trap:"Иммунная память формируется только при АКТИВНОМ иммунитете (болезнь или вакцинация). Сыворотка — пассивный иммунитет, памяти нет.",
+    hint:"Пассивный = получаешь готовое. Активный = делаешь сам. Что быстрее, но короче?",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-imm', topic:'Иммунитет — фагоцитоз', ege:'№16',
+    text:"Кто открыл явление фагоцитоза и получил за это Нобелевскую премию? — спрашивает <span class='hero-name'>Элли</span>, листая старый учебник.",
+    opts:["Илья Мечников","Луи Пастер","Эдвард Дженнер","Александр Флеминг"], ans:0,
+    fb:"✦ Верно! Илья Мечников (1845–1916) открыл фагоцитоз — поглощение и переваривание чужеродных частиц лейкоцитами. Нобелевская премия по физиологии — 1908 год.",
+    trap:"Пастер создал вакцины (бешенство, холера). Дженнер — первая вакцина (оспа). Флеминг открыл пенициллин. Фагоцитоз = Мечников.",
+    hint:"Русский учёный, морская звезда, иголка — классический опыт по фагоцитозу.",
+    ref:"Иммунитет 🛡️"
+  },
+
+  // ═══════════════ ДЫХАНИЕ ═══════════════
+
+  {
+    cat:'qs-lung', topic:'Дыхание — газообмен в лёгких', ege:'№15',
+    text:"<span class='hero-name'>Элли</span> задержала дыхание, пробираясь через споровую зону. Где в лёгких происходит газообмен между воздухом и кровью?",
+    opts:["В альвеолах","В бронхах","В трахее","В бронхиолах"], ans:0,
+    fb:"✦ Верно! Альвеолы — тонкостенные пузырьки оплетены капиллярами. Только здесь O₂ диффундирует в кровь, CO₂ — из крови в воздух. Площадь всех альвеол ~150 м².",
+    trap:"Бронхи, трахея, бронхиолы — только транспорт воздуха, газообмена нет.",
+    hint:"Последняя «станция» дыхательного пути — самая важная.",
+    ref:"Дыхание 🫁"
+  },
+  {
+    cat:'qs-lung', topic:'Дыхание — регуляция', ege:'№18',
+    text:"<span class='hero-name'>Эбби</span> бежит от хозяина — ЧСС и дыхание резко учащаются. В каком отделе мозга находится <strong>дыхательный центр</strong>?",
+    opts:["Продолговатый мозг","Мозжечок","Кора больших полушарий","Средний мозг"], ans:0,
+    fb:"✦ Верно! Дыхательный центр — продолговатый мозг. Он автоматически регулирует ритм дыхания по уровню CO₂ в крови. Именно поэтому нельзя умереть от задержки дыхания — центр «перехватит» управление.",
+    trap:"Мозжечок — координация движений. Кора — произвольные движения. Дыхание автоматично — продолговатый мозг.",
+    hint:"Жизненно важные функции (дыхание, сердцебиение) — какой отдел мозга самый древний?",
+    ref:"Дыхание 🫁"
+  },
+  {
+    cat:'qs-lung', topic:'Дыхание — ЖЕЛ', ege:'№26',
+    text:"У спортсменов жизненная ёмкость лёгких (ЖЕЛ) больше, чем у нетренированных людей. Что входит в ЖЕЛ?",
+    opts:["Дыхательный объём + резервный объём вдоха + резервный объём выдоха","Только дыхательный объём","Дыхательный объём + остаточный объём","Весь воздух в лёгких, включая остаточный"], ans:0,
+    fb:"✦ Верно! ЖЕЛ = ДО + РОвд + РОвыд. Остаточный объём (~1 л) в ЖЕЛ НЕ входит — его нельзя выдохнуть. У спортсменов ЖЕЛ может достигать 6–7 л (норма ~3,5–5,5 л).",
+    trap:"Остаточный объём всегда остаётся в лёгких и НЕ входит в ЖЕЛ!",
+    hint:"«Жизненная» = то, что можно максимально вдохнуть и выдохнуть. Остаток не в счёт.",
+    ref:"Дыхание 🫁"
+  },
+
+  // ═══════════════ ПИЩЕВАРЕНИЕ ═══════════════
+
+  {
+    cat:'qs-dig', topic:'Пищеварение — ферменты', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> жуёт ржаной сухарь — единственная еда за сутки. Какой фермент слюны начинает расщепление крахмала уже в ротовой полости?",
+    opts:["Амилаза (птиалин)","Пепсин","Трипсин","Липаза"], ans:0,
+    fb:"✦ Верно! Амилаза (птиалин) слюны расщепляет крахмал → мальтозу. Уже через 1–2 минуты жевания хлеб начинает казаться сладковатым — это работа амилазы.",
+    trap:"Пепсин — желудок (белки). Трипсин — поджелудочная (белки). Липаза — поджелудочная (жиры). В рту — только крахмал!",
+    hint:"Какой орган первым встречает пищу? Что там расщепляется?",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — желудок', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> нашла консервы с говядиной. В каком отделе ЖКТ и под действием какого фермента начинается расщепление <strong>белков мяса</strong>?",
+    opts:["В желудке под действием пепсина","В тонком кишечнике под действием трипсина","В ротовой полости под действием амилазы","В толстом кишечнике"], ans:0,
+    fb:"✦ Верно! Пепсин желудка при кислой среде (pH 1,5–2,5) расщепляет белки до пептидов. Затем трипсин поджелудочной железы продолжает работу в тонком кишечнике.",
+    trap:"Белки расщепляются в желудке (начало) и тонком кишечнике (окончание). Углеводы начинают в ротовой полости. Жиры — в основном в тонком кишечнике.",
+    hint:"Желудочный сок — кислая среда. Какой фермент работает в кислоте?",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — роль желчи', ege:'№18',
+    text:"Желчь, вырабатываемая печенью, поступает в 12-перстную кишку. Какова главная роль желчи в пищеварении?",
+    opts:["Эмульгирование жиров — дробление их на мелкие капли для лучшего расщепления липазой","Расщепление белков","Нейтрализация желудочного сока в 12-перстной кишке только","Всасывание глюкозы"], ans:0,
+    fb:"✦ Верно! Желчь не содержит ферментов, но эмульгирует жиры — разбивает их на мелкие капли, увеличивая поверхность для действия липазы. Также нейтрализует кислоту из желудка.",
+    trap:"Желчь — НЕ фермент! Она не расщепляет, только эмульгирует (дробит) жиры. Расщепляет липаза поджелудочной железы.",
+    hint:"Желчь не расщепляет жиры — она только готовит их к расщеплению. Как шеф-повар нарезает мясо перед тем, как отдать его на сковороду.",
+    ref:"Пищеварение 🍎"
+  },
+  {
+    cat:'qs-dig', topic:'Пищеварение — всасывание', ege:'№16',
+    text:"Почему тонкий кишечник — главное место всасывания питательных веществ? <span class='hero-name'>Элли</span> ищет ответ.",
+    opts:["Наличие множества ворсинок, многократно увеличивающих поверхность всасывания","Большая длина кишечника","Наличие сильных ферментов","Щелочная среда"], ans:0,
+    fb:"✦ Верно! Ворсинки (и микроворсинки — «щёточная кайма») увеличивают площадь поверхности тонкого кишечника с нескольких до ~200 м² — больше теннисного корта!",
+    trap:"Длина тоже важна, но главный фактор — ворсинки. В толстой кишке ворсинок нет — там только вода.",
+    hint:"Чем больше площадь поверхности — тем быстрее всасывание. Что создаёт эту площадь?",
+    ref:"Пищеварение 🍎"
+  },
+
+  // ═══════════════ ВЫДЕЛЕНИЕ ═══════════════
+
+  {
+    cat:'qs-exc', topic:'Выделение — нефрон', ege:'№15',
+    text:"<span class='hero-name'>Эбби</span> изучает схему нефрона. В клубочке ежесуточно образуется около 180 л первичной мочи — но с мочой выводится лишь 1,5–2 л. Как называется второй этап мочеобразования, на котором глюкоза, аминокислоты и большая часть воды из канальцев переходят в кровь?",
+    opts:["Реабсорбция в канальцах нефрона","Фильтрация в клубочке","Секреция","Осмос в лоханке"], ans:0,
+    fb:"✦ Верно! Реабсорбция — второй этап работы нефрона: из первичной мочи в кровь возвращается ~99% воды, вся глюкоза и аминокислоты. Именно поэтому из 180 л остаётся только 1,5–2 л.",
+    trap:"Фильтрация — первый этап (клубочек → капсула). Реабсорбция — второй (канальцы → кровь). Секреция — третий: добавление лишних веществ в мочу.",
+    hint:"«Ре-» = повторное действие. Первый этап — фильтрация. Как называется второй?",
+    ref:"Выделение 💧"
+  },
+  {
+    cat:'qs-exc', topic:'Выделение — состав мочи', ege:'№18',
+    text:"В анализе мочи <span class='hero-name'>Джоэла</span> обнаружена <strong>глюкоза</strong>. О чём это свидетельствует?",
+    opts:["Нарушение реабсорбции в почках (возможно — сахарный диабет)","Это норма — глюкоза всегда есть в моче","Белки в моче","Повышенное артериальное давление"], ans:0,
+    fb:"✦ Верно! В норме глюкоза полностью реабсорбируется в канальцах нефрона. Её появление в моче (глюкозурия) — признак сахарного диабета или перегрузки почечных канальцев.",
+    trap:"В норме в моче НЕТ: глюкозы, белков, эритроцитов. Есть: мочевина, мочевая кислота, соли, вода.",
+    hint:"Что в норме полностью всасывается обратно в кровь? Если оно в моче — сигнал тревоги.",
+    ref:"Выделение 💧"
+  },
+  {
+    cat:'qs-exc', topic:'Выделение — органы', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> перечисляет органы выделения. Какой из перечисленных органов НЕ является органом выделения?",
+    opts:["Печень","Кожа","Лёгкие","Почки"], ans:0,
+    fb:"✦ Верно! Печень — орган пищеварения и детоксикации, но не выделения. Кожа выделяет воду и соли, лёгкие — CO₂ и воду, почки — мочевину и соли. Печень обезвреживает токсины, но продукты выводит желчью в кишечник.",
+    trap:"Печень — не орган выделения! Хотя желчь содержит продукты распада, её главная роль — пищеварение, а не выделение.",
+    hint:"Органы выделения выводят продукты обмена во внешнюю среду. Что из этого не делает печень напрямую?",
+    ref:"Выделение 💧"
+  },
+
+  // ═══════════════ ОБМЕН ВЕЩЕСТВ ═══════════════
+
+  {
+    cat:'qs-meta', topic:'Обмен веществ — АТФ', ege:'№16',
+    text:"<span class='hero-name'>Эбби</span> поднимает тяжести — мышцы требуют энергии. Какое соединение является <strong>универсальным носителем энергии</strong> в клетке?",
+    opts:["АТФ (аденозинтрифосфат)","Глюкоза","Гликоген","ДНК"], ans:0,
+    fb:"✦ Верно! АТФ — «энергетическая валюта» клетки. При расщеплении одной молекулы глюкозы образуется ~36–38 АТФ. Без АТФ нет ни движения, ни синтеза белков, ни нервного импульса.",
+    trap:"Глюкоза и гликоген — источники энергии, но не её носители. Энергия высвобождается только через АТФ.",
+    hint:"Это вещество называют «энергетической валютой» клетки — без него не работает ни одна мышца. Аббревиатура из трёх букв.",
+    ref:"Обмен веществ ⚡"
+  },
+  {
+    cat:'qs-meta', topic:'Обмен веществ — анаболизм/катаболизм', ege:'№15',
+    text:"Мышцы <span class='hero-name'>Эбби</span> растут после тренировок. Рост мышечных белков — это пример...",
+    opts:["Пластического обмена (анаболизма) — синтез с расходом энергии","Энергетического обмена (катаболизма) — распад с выделением энергии","Основного обмена","Брожения"], ans:0,
+    fb:"✦ Верно! Синтез новых белков (рост мышц) — анаболизм. Он требует энергии АТФ. Катаболизм — наоборот: расщепление сложных веществ с выделением АТФ.",
+    trap:"Анаболизм = строит (и ТРАТИТ АТФ). Катаболизм = разрушает (и ДАЁТ АТФ). Запомни: «Като крушит → даёт энергию».",
+    hint:"Синтез (строительство) или распад (разрушение)?",
+    ref:"Обмен веществ ⚡"
+  },
+
+  // ═══════════════ ПЕРВАЯ ПОМОЩЬ ═══════════════
+
+  {
+    cat:'qs-aid', topic:'Первая помощь — кровотечение', ege:'№26',
+    text:"<span class='hero-name'>Джоэл</span> ранен: из раны бьёт алая кровь пульсирующим фонтаном. Какие действия правильны?",
+    opts:["Наложить жгут ВЫШЕ раны, записать время наложения","Наложить давящую повязку ниже раны","Приложить лёд к ране","Дать выпить воды и ждать скорую"], ans:0,
+    fb:"✦ Верно! Алая кровь фонтаном = артериальное кровотечение. Жгут накладывают выше раны (перекрывая приток). Обязательно записать время — жгут держат не более 1,5–2 часов, иначе некроз конечности.",
+    trap:"⚠️ Ошибка: жгут при АРТЕРИАЛЬНОМ — выше раны. При ВЕНОЗНОМ — давящая повязка. Перепутаешь — потеряешь конечность или человека.",
+    hint:"Артерия = алая = пульсирует. Жгут — выше (между сердцем и раной).",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — ожог', ege:'№15',
+    text:"<span class='hero-name'>Дина</span> обожгла руку у костра. Что нужно сделать <strong>первым делом</strong>?",
+    opts:["Охладить холодной проточной водой 15–20 минут","Смазать маслом или жиром","Вскрыть пузыри","Приложить лёд"], ans:0,
+    fb:"✦ Верно! Холодная проточная вода (15–20 мин) останавливает ожог — ткани продолжают «гореть» ещё несколько минут. Лёд = переохлаждение (опасно). Масло = плёнка не даёт коже охладиться.",
+    trap:"Лёд — нельзя (вызывает обморожение поверх ожога). Масло — нельзя (создаёт плёнку, задерживает жар). Пузыри — не вскрывать (защита от инфекции).",
+    hint:"Ожог = избыток тепла. Что нейтрализует тепло лучше всего?",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — перелом', ege:'№14',
+    text:"<span class='hero-name'>Элли</span> упала с высоты — подозрение на перелом голени. Что нужно сделать до прибытия помощи?",
+    opts:["Иммобилизировать (зафиксировать) конечность шиной, захватив суставы выше и ниже перелома","Вправить кость на место","Нагреть место перелома","Заставить ходить, чтобы проверить степень повреждения"], ans:0,
+    fb:"✦ Верно! Иммобилизация шиной предотвращает смещение костей и повреждение сосудов и нервов. Шина должна захватывать суставы выше и ниже места перелома. НЕ вправлять самостоятельно!",
+    trap:"Вправлять переломы самостоятельно — запрещено! Можно повредить сосуды и нервы. Только шина и госпиталь.",
+    hint:"Главный принцип при переломе: НЕ двигать. Что для этого нужно?",
+    ref:"Первая помощь 🩹"
+  },
+  {
+    cat:'qs-aid', topic:'Первая помощь — обморок', ege:'№18',
+    text:"<span class='hero-name'>Дина</span> потеряла сознание от обезвоживания. Как правильно оказать помощь при обмороке?",
+    opts:["Уложить горизонтально, приподнять ноги, обеспечить приток воздуха","Посадить, дать понюхать нашатырь сразу","Уложить на живот","Дать выпить воды немедленно"], ans:0,
+    fb:"✦ Верно! Горизонтальное положение + ноги выше головы улучшают приток крови к мозгу. Сначала восстановить кровоснабжение мозга, потом — нашатырь. В обморок нельзя давать пить — человек может захлебнуться.",
+    trap:"Не поите в бессознательном состоянии! Сначала — горизонталь и свежий воздух.",
+    hint:"При обмороке мозгу не хватает крови. Как заставить кровь притечь к голове?",
+    ref:"Первая помощь 🩹"
+  },
+
+  // ═══════════════ КОМПЛЕКСНЫЕ ЗАДАНИЯ ═══════════════
+
+  {
+    cat:'qs-imm', topic:'Иммунитет — аллергия', ege:'№26',
+    text:"<span class='hero-name'>Элли</span> заметила, что у некоторых выживших сильная аллергическая реакция на грибковые споры. Аллергия — это...",
+    opts:["Избыточная иммунная реакция на безвредное вещество (аллерген)","Полное отсутствие иммунитета","Иммунодефицит","Аутоиммунное заболевание мышц"], ans:0,
+    fb:"✦ Верно! Аллергия — гиперчувствительность иммунной системы: она атакует безвредные вещества (пыльца, шерсть, споры) как угрозу. Результат — воспаление, отёк, сыпь, в тяжёлых случаях — анафилаксия.",
+    trap:"Аллергия ≠ иммунодефицит. При аллергии иммунитет избыточен. При иммунодефиците — недостаточен.",
+    hint:"«Гипер» = слишком много. Аллергия = слишком много иммунного ответа.",
+    ref:"Иммунитет 🛡️"
+  },
+  {
+    cat:'qs-blood', topic:'Группы крови', ege:'№16',
+    text:"У <span class='hero-name'>Элли</span> первая группа крови (I). Её называют «универсальным донором». Почему?",
+    opts:["Эритроциты I группы не содержат антигенов A и B, поэтому не вызывают реакций у реципиентов других групп","Потому что у неё иммунитет к кордицепсу","Первая группа встречается реже всех остальных","I группа имеет самые крепкие эритроциты"], ans:0,
+    fb:"✦ Верно! I группа (0) — нет антигенов A и B на эритроцитах → нет реакции отторжения при переливании любому реципиенту. IV группа — «универсальный реципиент» (принимает от всех).",
+    trap:"I группа — универсальный ДОНОР (отдаёт всем). IV группа — универсальный РЕЦИПИЕНТ (принимает от всех). Не путай!",
+    hint:"Антигены = метки на эритроцитах. I группа — без меток → принимают все.",
+    ref:"Кровь 🩸"
+  },
+
+];
+
+// ───── ENGINE ─────
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0, 20);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+
+  const indices = [0,1,2,3];
+  for (let i = indices.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  shuffledOpts = indices.map(i => q.opts[i]);
+  correctIdx = indices.indexOf(q.ans);
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+
+  qheader.innerHTML = `<span class="q-source ${q.cat}">🧬 Биология</span><span class="q-topic">${q.topic}</span><span class="q-ege">${q.ege}</span>`;
+  qtext.innerHTML = q.text;
+  qopts.innerHTML = shuffledOpts.map((o,i) => {
+    const L=['A','B','C','D'];
+    return `<button class="opt-btn" onclick="answer(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`;
+  }).join('');
+  qfb.className = 'feedback-box';
+  qfb.innerHTML = '';
+  qnext.className = 'next-btn';
+  qcnt.textContent = `${cur+1} / ${questions.length}`;
+  qbar.style.width = `${(cur/questions.length)*100}%`;
+  scoredisp.textContent = `✦ ${score} верно`;
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  const ok = i === correctIdx;
+
+  if (ok) {
+    answered = true;
+    if (attempts === 0) score++;
+    scoredisp.textContent = `✦ ${score} верно`;
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add('correct');
+    let fbHtml = q.fb + ' 🥳';
+    if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+    qfb.innerHTML = fbHtml;
+    qfb.className = 'feedback-box ok';
+    qnext.className = 'next-btn show';
+    qnext.textContent = cur < questions.length-1 ? 'Следующий образец →' : 'Узнать результат эксперимента →';
+  } else {
+    attempts++;
+    btns[i].classList.add('wrong');
+    btns[i].disabled = true;
+    if (attempts === 1) {
+      qfb.innerHTML = `🔬 ${q.hint}<br><span class="fb-hint-ref">📖 Шпора: <strong>${q.ref}</strong></span><br><span class="fb-retry">Осталась 1 попытка — подумай!</span>`;
+      qfb.className = 'feedback-box fail';
+    } else {
+      answered = true;
+      btns.forEach(b => b.disabled = true);
+      btns[correctIdx].classList.add('correct');
+      let fbHtml = `😔 Не получилось. Правильный ответ выделен.<br>${q.fb}`;
+      if (q.trap) fbHtml += `<br><span class="fb-trap">${q.trap}</span>`;
+      qfb.innerHTML = fbHtml;
+      qfb.className = 'feedback-box fail';
+      qnext.className = 'next-btn show';
+      qnext.textContent = cur < questions.length-1 ? 'Следующий образец →' : 'Узнать результат эксперимента →';
+    }
+  }
+}
+
+qnext.addEventListener('click', () => {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+});
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('rscore').textContent = score;
+  document.getElementById('rtotal').textContent = `из ${questions.length} вопросов`;
+
+  let emoji, title, story, rankText, rankClass;
+  const pct = score / questions.length;
+
+  if (pct >= 0.85) {
+    emoji = '🧬'; title = 'Вакцина создана!';
+    story = 'Элли и Эбби завершили анализ. Данные загружены в сервер «Светлячка». Через 72 часа первая партия вакцины поступит в карантинные зоны. «Ты знаешь тело человека лучше, чем любой врач в этом мире», — говорит Эбби. Элли смотрит на пробирку с антителами. Человечество получило шанс.';
+    rankText = '🧬 Иммунолог высшего класса'; rankClass = 'rank-s';
+  } else if (pct >= 0.70) {
+    emoji = '🔬'; title = 'Прорыв в исследовании!';
+    story = 'Большинство данных расшифровано. Несколько файлов повреждены — придётся восстанавливать. «Это лучший результат за годы», — говорит доктор лаборатории. Эбби добавляет: «Повтори шпору по иммунитету — и вакцина станет реальностью».';
+    rankText = '💉 Перспективный исследователь'; rankClass = 'rank-a';
+  } else if (pct >= 0.55) {
+    emoji = '📋'; title = 'Данные частично собраны';
+    story = 'Половина образцов обработана. Элли смотрит на экран: «Нам нужно больше данных о крови и иммунитете». Эбби листает учебник. «Повтори разделы — мы почти у цели».';
+    rankText = '🧪 Лаборант-стажёр'; rankClass = 'rank-b';
+  } else if (pct >= 0.40) {
+    emoji = '⚠️'; title = 'Кордицепс в вентиляции!';
+    story = 'Тревога — споры в системе вентиляции. Данные не успели обработать. Элли и Эбби отступают. «Нам нужно лучше знать тело человека, прежде чем мы сможем его спасти», — говорит Эбби.';
+    rankText = '📚 Повтори шпору'; rankClass = 'rank-c';
+  } else {
+    emoji = '🦠'; title = 'Лаборатория захвачена';
+    story = 'Кордицепс распространился быстрее, чем мы думали. Данные потеряны. Элли смотрит на заражённых через стекло: «Мы вернёмся. И в следующий раз — будем готовы». Начни с шпоры заново.';
+    rankText = '🔄 Начни сначала'; rankClass = 'rank-d';
+  }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rstory').textContent = story;
+  document.getElementById('rrank').textContent = rankText;
+  document.getElementById('rrank').className = 'results-rank ' + rankClass;
+}
+
+document.getElementById('restart').onclick = () => {
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  initQuiz();
+  renderQ();
+};
+
+renderQ();
+</script>
+</body>
+</html>
