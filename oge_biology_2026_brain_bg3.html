@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ Биология — Мозг и Экосистемы через мир Baldur's Gate 3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Golos+Text:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #06040e;
+  --bg2: #09061a;
+  --card: #0e0a1e;
+  --card2: #13102b;
+  --gold: #c9a84c;
+  --gold2: #e8c87a;
+  --gold-pale: #f5e8b0;
+  --purple: #7b4fc1;
+  --purple2: #9b69e8;
+  --illithid: #1a4a6e;
+  --illithid2: #2b7baa;
+  --illithid3: #4db8d8;
+  --shadow: #1a0a2e;
+  --fire: #d4522a;
+  --fire2: #f0843a;
+  --nature: #2d6e40;
+  --nature2: #4aab68;
+  --blood: #8b0000;
+  --rune: rgba(155,105,232,0.18);
+  --border: rgba(201,168,76,0.2);
+  --border2: rgba(201,168,76,0.4);
+  --text: #e8dfc8;
+  --muted: #9488b0;
+  --danger: #f87171;
+  --success: #6ee7b7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Golos Text', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+/* BG texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(123,79,193,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 80% at 0% 100%, rgba(26,74,110,0.1) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 80% at 100% 100%, rgba(45,110,64,0.06) 0%, transparent 50%);
+}
+
+/* HERO */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 380px;
+  background: linear-gradient(180deg, #06040e 0%, #0d0620 40%, #12082a 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 20px 56px;
+  border-bottom: 1px solid var(--border2);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(201,168,76,0.04)' stroke-width='0.5'%3E%3Ccircle cx='50' cy='50' r='40'/%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3Ccircle cx='50' cy='50' r='20'/%3E%3Cline x1='10' y1='50' x2='90' y2='50'/%3E%3Cline x1='50' y1='10' x2='50' y2='90'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.25em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; height: 1px; width: 40px; background: var(--gold); opacity: 0.5;
+}
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 5vw, 3rem); font-weight: 900;
+  line-height: 1.15; margin-bottom: 14px;
+  color: var(--gold-pale);
+  text-shadow: 0 0 40px rgba(201,168,76,0.3);
+}
+.hero h1 .title-sub { display: block; font-size: 0.5em; color: var(--purple2); margin-top: 6px; font-weight: 600; letter-spacing: 0.05em; }
+.hero-desc { font-size: 0.95rem; color: var(--muted); max-width: 600px; line-height: 1.7; margin-bottom: 32px; }
+.hero-chars {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+}
+.char-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.78rem; color: var(--muted);
+}
+.char-pill .char-emoji { font-size: 1.1rem; }
+
+/* NAV */
+nav {
+  background: rgba(6,4,14,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  padding: 0 20px;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  color: var(--muted); text-decoration: none;
+  font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.08em; padding: 14px 16px;
+  white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+nav .part-label {
+  display: flex; align-items: center; font-size: 0.6rem;
+  color: rgba(255,255,255,0.15); padding: 14px 8px 14px 20px; white-space: nowrap;
+}
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+/* PART HEADER */
+.part-header {
+  padding: 52px 0 8px;
+  display: flex; align-items: flex-start; gap: 18px;
+}
+.part-icon { font-size: 2.4rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.part-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.2em; margin-bottom: 5px;
+}
+.part-eyebrow.gold { color: var(--gold); }
+.part-eyebrow.illithid { color: var(--illithid3); }
+.part-eyebrow.nature { color: var(--nature2); }
+.part-h2 {
+  font-family: 'Cinzel', serif; font-size: clamp(1.1rem, 3vw, 1.7rem); font-weight: 700;
+  color: var(--gold-pale); line-height: 1.2;
+}
+.part-lore {
+  font-family: 'Crimson Text', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-top: 8px;
+}
+
+/* SECTION DIVIDER */
+.divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 44px 0;
+}
+
+/* CHAPTER BLOCK */
+.chapter {
+  margin-bottom: 44px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+}
+.chapter-header {
+  padding: 18px 22px 16px;
+  display: flex; gap: 14px; align-items: flex-start;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.chapter-header.illithid-h { background: linear-gradient(90deg, rgba(26,74,110,0.25) 0%, rgba(255,255,255,0.01) 100%); }
+.chapter-header.nature-h { background: linear-gradient(90deg, rgba(45,110,64,0.2) 0%, rgba(255,255,255,0.01) 100%); }
+.chapter-header.fire-h { background: linear-gradient(90deg, rgba(212,82,42,0.15) 0%, rgba(255,255,255,0.01) 100%); }
+.ch-icon { font-size: 2rem; flex-shrink: 0; }
+.ch-num {
+  font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.15em; margin-bottom: 3px;
+}
+.ch-num.illithid { color: var(--illithid3); }
+.ch-num.nature { color: var(--nature2); }
+.ch-num.fire { color: var(--fire2); }
+.ch-title {
+  font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+  color: var(--gold-pale); margin-bottom: 4px;
+}
+.ch-bio { font-size: 0.78rem; color: var(--purple2); font-weight: 600; }
+.chapter-body { padding: 22px; }
+
+/* LORE BOX */
+.lore-box {
+  background: rgba(123,79,193,0.08);
+  border: 1px solid rgba(123,79,193,0.25);
+  border-left: 3px solid var(--purple2);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  display: flex; gap: 14px;
+}
+.lore-box.illithid-l {
+  background: rgba(26,74,110,0.12);
+  border-color: rgba(77,184,216,0.25);
+  border-left-color: var(--illithid3);
+}
+.lore-box.nature-l {
+  background: rgba(45,110,64,0.1);
+  border-color: rgba(74,171,104,0.25);
+  border-left-color: var(--nature2);
+}
+.lore-box.fire-l {
+  background: rgba(212,82,42,0.08);
+  border-color: rgba(240,132,58,0.25);
+  border-left-color: var(--fire2);
+}
+.lore-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1.2; }
+.lore-game-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.15em; margin-bottom: 4px; color: var(--purple2);
+}
+.illithid-l .lore-game-label { color: var(--illithid3); }
+.nature-l .lore-game-label { color: var(--nature2); }
+.fire-l .lore-game-label { color: var(--fire2); }
+.lore-text {
+  font-family: 'Crimson Text', serif; font-size: 1rem;
+  color: var(--text); line-height: 1.7;
+}
+.lore-text em { color: var(--gold); font-style: italic; }
+.lore-text strong { color: var(--gold-pale); }
+
+/* BRIDGE ARROW */
+.bridge {
+  display: flex; align-items: center; gap: 12px; margin: 14px 0;
+  font-family: 'Cinzel', serif; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.12em; color: var(--gold);
+}
+.bridge::before, .bridge::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* BIO BLOCK */
+.bio-grid { display: grid; gap: 10px; }
+.bio-item {
+  background: var(--card2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 13px 16px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px; align-items: start;
+  font-size: 0.83rem;
+}
+@media(max-width:600px){ .bio-item { grid-template-columns: 1fr; } }
+.bio-term {
+  font-family: 'Cinzel', serif; font-weight: 700;
+  font-size: 0.78rem; color: var(--gold); line-height: 1.4;
+}
+.bio-char {
+  font-size: 0.72rem; color: var(--purple2);
+  margin-top: 2px; display: block; font-style: italic;
+}
+.bio-def { color: var(--muted); line-height: 1.55; }
+.bio-def strong { color: var(--text); }
+.bio-def em { color: var(--gold2); font-style: normal; }
+
+/* CHARACTER SCENE */
+.scene {
+  background: linear-gradient(135deg, var(--card2) 0%, rgba(19,16,43,0.5) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 18px 0;
+  position: relative;
+  overflow: hidden;
+}
+.scene::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.scene-title {
+  font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--gold); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.scene-chars {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.char-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px; padding: 10px 12px;
+  text-align: center; min-width: 80px;
+  transition: border-color 0.2s;
+}
+.char-card:hover { border-color: var(--gold); }
+.char-card .emoji { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+.char-card .char-name { font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; color: var(--gold2); }
+.char-card .char-role { font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+.char-card.illithid-c { background: rgba(26,74,110,0.2); border-color: rgba(77,184,216,0.2); }
+.char-card.nature-c { background: rgba(45,110,64,0.15); border-color: rgba(74,171,104,0.2); }
+.char-card.fire-c { background: rgba(212,82,42,0.15); border-color: rgba(240,132,58,0.2); }
+.char-card.shadow-c { background: rgba(26,10,46,0.4); border-color: rgba(123,79,193,0.15); }
+.scene-text { font-family: 'Crimson Text', serif; font-size: 1rem; color: var(--text); line-height: 1.75; }
+.scene-text em { color: var(--gold2); font-style: italic; }
+.scene-text strong { color: var(--gold-pale); font-style: normal; }
+.dialogue { font-style: italic; color: var(--muted); border-left: 2px solid var(--border2); padding-left: 12px; margin: 8px 0; }
+.dialogue em { color: var(--gold2); }
+
+/* REFLEX ARC VISUAL */
+.reflex-arc {
+  display: flex; align-items: center; gap: 0;
+  flex-wrap: wrap; margin: 14px 0;
+}
+.ra-node {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 11px; text-align: center;
+  font-size: 0.73rem; min-width: 80px; flex-shrink: 0;
+}
+.ra-node .rn-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.65rem; color: var(--gold); }
+.ra-node .rn-bio { color: var(--text); font-size: 0.7rem; margin-top: 2px; }
+.ra-node .rn-game { font-size: 0.65rem; color: var(--muted); margin-top: 1px; font-style: italic; }
+.ra-arrow { color: var(--gold); font-size: 1.1rem; padding: 0 4px; flex-shrink: 0; }
+
+/* ECOLOGY TABLE */
+.eco-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.eco-table th {
+  background: rgba(201,168,76,0.1); color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; padding: 9px 14px; text-align: left;
+  border-bottom: 1px solid var(--border2);
+}
+.eco-table td { padding: 9px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.5; }
+.eco-table td:first-child { font-weight: 700; color: var(--gold-pale); white-space: nowrap; }
+.eco-table td:nth-child(2) { color: var(--illithid3); font-style: italic; }
+.eco-table td:last-child { color: var(--muted); }
+.eco-table tr:hover td { background: rgba(255,255,255,0.02); }
+.eco-table tr:last-child td { border-bottom: none; }
+
+/* PYRAMID */
+.pyramid { margin: 18px auto; max-width: 400px; }
+.py-level {
+  margin: 0 auto 4px;
+  border-radius: 6px;
+  text-align: center;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  font-family: 'Cinzel', serif;
+}
+.py-level .py-name { font-weight: 700; font-size: 0.72rem; }
+.py-level .py-game { font-size: 0.68rem; font-style: italic; margin-top: 2px; opacity: 0.8; }
+.py-level .py-energy { font-size: 0.68rem; opacity: 0.7; }
+
+/* QUIZ BOX */
+.quiz {
+  background: rgba(123,79,193,0.07);
+  border: 1px solid rgba(123,79,193,0.2);
+  border-radius: 12px; padding: 18px; margin-top: 20px;
+}
+.quiz-title {
+  font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--purple2); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.quiz-title::after { content: ''; flex: 1; height: 1px; background: rgba(155,105,232,0.2); }
+.quiz-q { font-size: 0.85rem; color: var(--text); line-height: 1.6; margin-bottom: 8px; }
+.quiz-hint { font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+/* MEMORY CARD */
+.mem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 16px; }
+.mem-card {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 11px; padding: 14px 15px;
+  position: relative; overflow: hidden;
+}
+.mem-card::after {
+  content: attr(data-bg); position: absolute;
+  top: 8px; right: 10px; font-size: 0.6rem;
+  font-family: 'Cinzel', serif; font-weight: 700;
+  letter-spacing: 0.1em; opacity: 0.5; color: var(--gold);
+}
+.mem-icon { font-size: 1.6rem; margin-bottom: 8px; }
+.mem-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; color: var(--gold-pale); margin-bottom: 5px; letter-spacing: 0.05em; }
+.mem-body { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+.mem-body em { color: var(--gold2); font-style: normal; }
+
+/* VERDICT */
+.verdict {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(123,79,193,0.06));
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 18px 20px;
+  margin-top: 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.verdict-icon { font-size: 1.8rem; flex-shrink: 0; }
+.verdict-text strong { display: block; font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 700; color: var(--gold); margin-bottom: 5px; letter-spacing: 0.08em; }
+.verdict-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+.verdict-text p em { color: var(--gold2); font-style: normal; }
+
+footer { background: #04030a; border-top: 1px solid var(--border); text-align: center; padding: 24px 20px; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--muted); position: relative; z-index: 1; margin-top: 60px; }
+footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Baldur's Gate 3 × ОГЭ Биология 2026</div>
+  <h1>Мозг и Экосистемы<span class="title-sub">Учебный путеводитель по Фаэруну</span></h1>
+  <p class="hero-desc">Иллитиды объяснят строение нервной системы. Проклятые земли Кетерика — экологическую катастрофу. Майконоиды Андердарка — роль редуцентов. Каждая биология-тема = сцена из BG3.</p>
+  <div class="hero-chars">
+    <div class="char-pill"><span class="char-emoji">🧠</span> Древний Мозг → ЦНС</div>
+    <div class="char-pill"><span class="char-emoji">🦑</span> Иллитиды → нейроны</div>
+    <div class="char-pill"><span class="char-emoji">⚡</span> Карлах → рефлекторная дуга</div>
+    <div class="char-pill"><span class="char-emoji">🌑</span> Тень-Проклятье → экокатастрофа</div>
+    <div class="char-pill"><span class="char-emoji">🍄</span> Майконоиды → редуценты</div>
+    <div class="char-pill"><span class="char-emoji">🐻</span> Халсин → биоценоз</div>
+  </div>
+</div>
+
+<nav>
+  <span class="part-label">ЧАСТЬ I: МОЗГ</span>
+  <a href="#cns">🧠 ЦНС/ПНС</a>
+  <a href="#brain-parts">🗺 Отделы мозга</a>
+  <a href="#reflex">⚡ Рефлекс</a>
+  <a href="#hna">🧬 ВНД</a>
+  <a href="#analyzers">👁 Анализаторы</a>
+  <span class="part-label">ЧАСТЬ II: ЭКОСИСТЕМЫ</span>
+  <a href="#ecosystem">🌿 Компоненты</a>
+  <a href="#chains">🔗 Цепи питания</a>
+  <a href="#biotic">🤝 Биотика</a>
+  <a href="#catastrophe">🌑 Катастрофа</a>
+  <a href="#pyramid">📐 Пирамида</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════════════════ PART I: BRAIN ═══════════════════════ -->
+<div class="part-header">
+  <div class="part-icon">🧠</div>
+  <div>
+    <div class="part-eyebrow illithid">ЧАСТЬ ПЕРВАЯ · НЕЙРОЛОГИЧЕСКОЕ ГОСПОДСТВО</div>
+    <h2 class="part-h2">Мозг и нервная система через иллитидов</h2>
+    <p class="part-lore">«В пучине Иллитидского Колония всё едино. Мысли каждого — общее достояние Древнего Мозга. Разрыв связи — смерть.»</p>
+  </div>
+</div>
+
+<!-- ══ ЦНС/ПНС ══ -->
+<div class="chapter" id="cns">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">🦑</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 7 · ЗАДАНИЯ 14–18 ОГЭ</div>
+      <div class="ch-title">Центральная и периферическая нервная система</div>
+      <div class="ch-bio">ЦНС = головной + спинной мозг · ПНС = нервы + ганглии</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🧠</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ЛОР ИЛЛИТИДОВ</div>
+        <div class="lore-text">
+          В центре каждой колонии иллитидов плавает <strong>Древний Мозг</strong> — огромный студенистый орган, объединяющий всех иллитидов колонии в единое сознание через <em>пси-сеть</em>. Он хранит тысячелетия памяти, раздаёт приказы, управляет всем. Без него иллитиды теряют ориентиры. Каждый иллитид — это независимый охотник, но вся его воля пронизана телепатическими нитями Древнего Мозга.
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ БИОЛОГИЯ ⟵</div>
+
+    <div class="scene">
+      <div class="scene-title">🎭 СЦЕНА: Колония = Нервная система</div>
+      <div class="scene-chars">
+        <div class="char-card illithid-c">
+          <span class="emoji">🧠</span>
+          <div class="char-name">Древний Мозг</div>
+          <div class="char-role">ЦНС</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">🦑</span>
+          <div class="char-name">Иллитиды</div>
+          <div class="char-role">Периф. нервы</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">🪱</span>
+          <div class="char-name">Головастики</div>
+          <div class="char-role">Нервные сигналы</div>
+        </div>
+        <div class="char-card shadow-c">
+          <span class="emoji">⚡</span>
+          <div class="char-name">Нетерберег</div>
+          <div class="char-role">Вся система</div>
+        </div>
+      </div>
+      <div class="scene-text">
+        <strong>Древний Мозг</strong> — это твой <em>головной и спинной мозг вместе взятые (ЦНС)</em>. Он принимает решения, хранит память, управляет всей колонией.
+        <br><br>
+        <strong>Иллитиды-охотники</strong>, рассеянные по всему Фаэруну — это <em>периферическая нервная система (ПНС)</em>: нервные стволы и узлы, которые несут информацию туда-обратно, но сами не командуют.
+        <br><br>
+        <strong>Голова стика</strong> внутри твоего черепа — это <em>нервный сигнал (нервный импульс)</em>, передающий управление от ЦНС к органам.
+        <div class="dialogue">— <em>«Когда Нетерберег прикажет — твоё тело подчинится. Твой мозг — лишь ретранслятор его воли»</em>, — говорит Император.</div>
+        А соматическая vs вегетативная нервная система? <strong>Иллитиды, которые охотятся сознательно</strong> = соматическая (управляет скелетными мышцами). <strong>Иллитиды, которые автоматически переваривают мозг жертвы</strong> = вегетативная (управляет внутренними органами автоматически).
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">ЦНС<span class="bio-char">= Древний Мозг в бассейне</span></div>
+        <div class="bio-def">Головной мозг + спинной мозг. Главный командный центр. Обрабатывает информацию, принимает решения. <em>Повреди — вся система рухнет.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">ПНС<span class="bio-char">= Иллитиды вне базы</span></div>
+        <div class="bio-def">Черепно-мозговые и спинномозговые нервы + ганглии. Соединяют ЦНС с органами. <em>Передают сигналы, но сами не принимают решений.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Соматическая<span class="bio-char">= Сознательные охотники</span></div>
+        <div class="bio-def">Управляет скелетными мышцами. Подчиняется воле. <em>Геральт решил ударить — его рука ударила.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Вегетативная<span class="bio-char">= Автопилот колонии</span></div>
+        <div class="bio-def">Управляет внутренними органами (сердце, лёгкие, пищеварение). НЕ подчиняется воле. <em>Симпатическая (стресс) и парасимпатическая (покой).</em></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ОТДЕЛЫ МОЗГА ══ -->
+<div class="chapter" id="brain-parts">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">🗺️</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 7 · ЗАДАНИЕ 16 ОГЭ</div>
+      <div class="ch-title">Отделы головного мозга и их функции</div>
+      <div class="ch-bio">5 отделов: продолговатый · мозжечок · средний · промежуточный · большие полушария</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🛸</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · НАУТИЛОИД</div>
+        <div class="lore-text">
+          Наутилоид — психический корабль иллитидов — управляется слоями. <strong>Нижний уровень (трюм)</strong>: базовые системы жизнеобеспечения — работают автоматически. <strong>Средний уровень</strong>: пространственная навигация и восприятие угроз. <strong>Рулевая рубка (верхний уровень)</strong>: осознанное управление курсом и тактика. Уничтожь рулевую — корабль продолжит лететь на автопилоте. Уничтожь трюм — весь экипаж умрёт.
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ КАРТА МОЗГА ЧЕРЕЗ ПЕРСОНАЖЕЙ ⟵</div>
+
+    <div class="scene">
+      <div class="scene-title">🎭 СЦЕНА: Каждый герой — отдел мозга</div>
+      <div class="scene-chars">
+        <div class="char-card">
+          <span class="emoji">🏴‍☠️</span>
+          <div class="char-name">Трюм</div>
+          <div class="char-role">Продолговатый</div>
+        </div>
+        <div class="char-card fire-c">
+          <span class="emoji">⚔️</span>
+          <div class="char-name">Лаэ'зель</div>
+          <div class="char-role">Мозжечок</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">👁️</span>
+          <div class="char-name">Астарион</div>
+          <div class="char-role">Средний мозг</div>
+        </div>
+        <div class="char-card shadow-c">
+          <span class="emoji">🍽️</span>
+          <div class="char-name">Гейл</div>
+          <div class="char-role">Промежуточный</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">🧠</span>
+          <div class="char-name">Древний Мозг</div>
+          <div class="char-role">Полушария</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">Продолговатый мозг<span class="bio-char">= Трюм Наутилоида</span></div>
+        <div class="bio-def">Управляет дыханием, сердцебиением, глотанием, кашлем. <strong>Повреждение = немедленная смерть.</strong> <em>Уничтожь трюм — весь экипаж погибнет, даже без боя.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Мозжечок<span class="bio-char">= Лаэ'зель в бою</span></div>
+        <div class="bio-def">Координация движений, равновесие, точность. <em>Лаэ'зель парирует любой удар, не думая — это мозжечок, а не кора.</em> При его повреждении — тремор, шаткость.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Средний мозг<span class="bio-char">= Зрение Астариона</span></div>
+        <div class="bio-def">Ориентировочные рефлексы на свет и звук. Регуляция тонуса мышц. <em>Астарион слышит шаг стражника на 50 метров — это средний мозг.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Промежуточный мозг<span class="bio-char">= Голод Гейла</span></div>
+        <div class="bio-def">Терморегуляция, голод, жажда, сон, боль, эмоции. <em>Гейлу постоянно нужна магическая пища — его «промежуточный мозг» требует.</em> Таламус и гипоталамус.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Большие полушария<span class="bio-char">= Щупальца Древнего Мозга</span></div>
+        <div class="bio-def">Мышление, речь, память, сознание, высшие эмоции. <em>Весь интеллект, вся личность, весь разум Нетерберега — это его «щупальца-полушария».</em> Кора = самый молодой отдел эволюции.</div>
+      </div>
+    </div>
+
+    <div class="mem-grid">
+      <div class="mem-card" data-bg="МНЕМОНИКА">
+        <div class="mem-icon">🔢</div>
+        <div class="mem-title">«ПМ-СП-П» — снизу вверх</div>
+        <div class="mem-body"><em>П</em>родолговатый → <em>М</em>озжечок → <em>С</em>редний → <em>П</em>ромежуточный → <em>П</em>олушария. Как Наутилоид: трюм → навигация → рубка.</div>
+      </div>
+      <div class="mem-card" data-bg="ОГЭ">
+        <div class="mem-icon">⚠️</div>
+        <div class="mem-title">Частая ловушка ОГЭ</div>
+        <div class="mem-body">Мозжечок ≠ «маленький мозжок». Это <em>отдельная структура</em> (задняя часть), отвечает за координацию, а не мышление. Путаница = потеря балла.</div>
+      </div>
+      <div class="mem-card" data-bg="ОГЭ">
+        <div class="mem-icon">🧩</div>
+        <div class="mem-title">«Дыхание — где?»</div>
+        <div class="mem-body">Дыхательный центр — <em>продолговатый мозг</em>. Центр терморегуляции — <em>гипоталамус</em> (промежуточный). Это разные отделы!</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ РЕФЛЕКС ══ -->
+<div class="chapter" id="reflex">
+  <div class="chapter-header fire-h">
+    <div class="ch-icon">⚡</div>
+    <div>
+      <div class="ch-num fire">РАЗДЕЛ 7 · ЗАДАНИЯ 15, 17 ОГЭ</div>
+      <div class="ch-title">Рефлекс и рефлекторная дуга</div>
+      <div class="ch-bio">Рецептор → афферентный нерв → нервный центр → эфферентный нерв → эффектор</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box fire-l">
+      <div class="lore-icon">🔥</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · КАРЛАХ В БОЮ</div>
+        <div class="lore-text">
+          Карлах — тифлинг с адским двигателем вместо сердца. В бою она реагирует на удар <em>быстрее, чем успевает подумать</em>: рука уходит в сторону ещё до того, как сознание осознало опасность. Это не магия — это рефлекс, записанный в её спинном мозге после сотен сражений в Авернусе. Даже разбудив её внезапно, она успеет поставить блок.
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ РЕФЛЕКТОРНАЯ ДУГА КАРЛАХ ⟵</div>
+
+    <div class="reflex-arc">
+      <div class="ra-node">
+        <div class="rn-title">РЕЦЕПТОР</div>
+        <div class="rn-bio">Болевой рецептор руки</div>
+        <div class="rn-game">Кожа Карлах чувствует удар</div>
+      </div>
+      <div class="ra-arrow">→</div>
+      <div class="ra-node">
+        <div class="rn-title">АФФ. НЕРВ</div>
+        <div class="rn-bio">Чувствительный нерв</div>
+        <div class="rn-game">Сигнал летит в спинной мозг</div>
+      </div>
+      <div class="ra-arrow">→</div>
+      <div class="ra-node">
+        <div class="rn-title">ЦЕНТР</div>
+        <div class="rn-bio">Спинной мозг (для простых) / Мозг (для сложных)</div>
+        <div class="rn-game">Переключение без сознания</div>
+      </div>
+      <div class="ra-arrow">→</div>
+      <div class="ra-node">
+        <div class="rn-title">ЭФФ. НЕРВ</div>
+        <div class="rn-bio">Двигательный нерв</div>
+        <div class="rn-game">Команда мышцам руки</div>
+      </div>
+      <div class="ra-arrow">→</div>
+      <div class="ra-node">
+        <div class="rn-title">ЭФФЕКТОР</div>
+        <div class="rn-bio">Мышца сокращается</div>
+        <div class="rn-game">Карлах уклонилась</div>
+      </div>
+    </div>
+
+    <div class="bio-grid" style="margin-top:16px;">
+      <div class="bio-item">
+        <div class="bio-term">Безусловный рефлекс<span class="bio-char">= Лаэ'зель vs гитьянки</span></div>
+        <div class="bio-def"><strong>Врождённый, видовой, постоянный.</strong> Лаэ'зель атакует незнакомого гитьянки автоматически — это вложено в неё от рождения. <em>Примеры: отдёргивание руки от огня, кашель, сосательный рефлекс новорождённого.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Условный рефлекс<span class="bio-char">= Гейл и магические предметы</span></div>
+        <div class="bio-def"><strong>Приобретённый, индивидуальный, угасает без подкрепления.</strong> Гейл инстинктивно тянется к магическим предметам — это выработалось за годы. <em>Формируется на базе безусловного (как у собаки Павлова).</em></div>
+      </div>
+    </div>
+
+    <div class="quiz">
+      <div class="quiz-title">📜 КВЕСТ-ПРОВЕРКА</div>
+      <div class="quiz-q">Карлах обожглась о горячую сковороду и отдёрнула руку. Нарисуй путь сигнала. Какой это тип рефлекса? Где находится нервный центр?</div>
+      <div class="quiz-hint">💡 Ответ: безусловный рефлекс. Центр в спинном мозге (не в головном!). Путь: болевой рецептор → чувствительный нерв → спинной мозг → двигательный нерв → мышца руки.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ВНД ══ -->
+<div class="chapter" id="hna">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">🧬</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 7 · ЗАДАНИЯ 17–18 ОГЭ</div>
+      <div class="ch-title">Высшая нервная деятельность (ВНД)</div>
+      <div class="ch-bio">Условные рефлексы · Динамический стереотип · Инстинкт · Инсайт · Типы ВНД</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🪱</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ПОДЧИНЕНИЕ ГОЛОВАСТИКОМ</div>
+        <div class="lore-text">
+          «Истинные Души» — инфицированные головастиком — начинают реагировать на зов Абсолюта. Сначала это слабые голоса, потом всё сильнее. <em>Каждое использование силы головастика создаёт новый условный рефлекс</em>: «силы дал = хорошо». Чем больше используешь, тем сильнее тяга. <strong>Это классическое формирование условного рефлекса по И.П. Павлову</strong> — только вместо колокольчика и мяса — головастик и могущество.
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">Условный рефлекс<span class="bio-char">= Тяга к головастикам</span></div>
+        <div class="bio-def">Вырабатывается при многократном сочетании условного раздражителя с безусловным. <em>Использовал головастик (условный) → получил силу (безусловное подкрепление) → рефлекс закрепился.</em> Без подкрепления угасает.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Динамический стереотип<span class="bio-char">= Тренинг Лаэ'зель</span></div>
+        <div class="bio-def">Система условных рефлексов, выполняемых автоматически в фиксированном порядке. <em>Лаэ'зель с детства делает одно и то же: проснулась → тренировка → дисциплина → повиновение Влаакит.</em> Ломается при изменении условий.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Инстинкт<span class="bio-char">= Реакция совы-медведя</span></div>
+        <div class="bio-def">Сложное врождённое поведение. <em>Совомедведица атакует любого, кто приближается к детёнышу — даже игрока с добрыми намерениями.</em> Нет обучения — только биология.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Рассудочная деятельность<span class="bio-char">= Нетерберег vs Избранные</span></div>
+        <div class="bio-def">Решение задач без предварительного обучения, через «инсайт». <em>Нетерберег просчитал 100 ходов вперёд, использовал Избранных как пешки — это высшая форма ВНД.</em></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ АНАЛИЗАТОРЫ ══ -->
+<div class="chapter" id="analyzers">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">👁️</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 7 · ЗАДАНИЯ 14, 16 ОГЭ</div>
+      <div class="ch-title">Анализаторы: зрительный и слуховой</div>
+      <div class="ch-bio">3 части любого анализатора: рецептор → нерв → зона коры</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🦑</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ТЕЛЕПАТИЯ ИЛЛИТИДОВ</div>
+        <div class="lore-text">
+          Иллитиды воспринимают мир иначе людей. У них слабое зрение, зато развита <em>телепатия</em> — они «слышат» мысли через отросток головастика. У Астариона как вампира — исключительное ночное зрение (обострённый зрительный анализатор). Шэдоухарт, под влиянием Шар, частично лишена восприятия в тёмных областях. Каждый персонаж — это урок о том, как по-разному работают анализаторы.
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">Зрительный анализатор<span class="bio-char">= Ночное зрение Астариона</span></div>
+        <div class="bio-def"><strong>Рецептор:</strong> палочки и колбочки сетчатки. <strong>Нерв:</strong> зрительный нерв. <strong>Корковый отдел:</strong> затылочная доля коры. <em>Астарион видит в темноте — у него больше палочек активно. Но при повреждении затылочной доли — слепота, даже если глаза целы.</em></div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Слуховой анализатор<span class="bio-char">= Харперы слышат заговор</span></div>
+        <div class="bio-def"><strong>Рецептор:</strong> кортиев орган (улитка). <strong>Нерв:</strong> слуховой нерв. <strong>Корковый отдел:</strong> височная доля коры. <em>Харперы узнают о планах Абсолюта из шёпота — их слуховой анализатор на страже. Поражение височной доли = глухота при целых ушах.</em></div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-icon">🏆</div>
+      <div class="verdict-text">
+        <strong>ЗОЛОТОЕ ПРАВИЛО АНАЛИЗАТОРА</strong>
+        <p>Любой анализатор = <em>рецептор + нерв + зона коры</em>. Повреждение ЛЮБОГО звена = потеря функции. Нет коры → нет восприятия, даже если орган чувств целый. Это объясняет, почему иллитиды «вырезают» именно зоны коры у жертв — они лишают их восприятия, не трогая глаза.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════ PART II: ECOSYSTEMS ═══════════════════════ -->
+<div class="part-header">
+  <div class="part-icon">🌿</div>
+  <div>
+    <div class="part-eyebrow nature">ЧАСТЬ ВТОРАЯ · ЭКОЛОГИЯ ФАЭРУНА</div>
+    <h2 class="part-h2">Экосистемы через Изумрудную Рощу, Андердарк и Проклятые Земли</h2>
+    <p class="part-lore">«Земля — это не просто почва и корни. У неё есть дух, и когда его ранят — умирает всё живое», — Халсин, Первый Друид.</p>
+  </div>
+</div>
+
+<!-- ══ КОМПОНЕНТЫ ЭКОСИСТЕМЫ ══ -->
+<div class="chapter" id="ecosystem">
+  <div class="chapter-header nature-h">
+    <div class="ch-icon">🌳</div>
+    <div>
+      <div class="ch-num nature">РАЗДЕЛ 2 · ЗАДАНИЯ 19–21 ОГЭ</div>
+      <div class="ch-title">Компоненты экосистемы: Изумрудная Роща до осады</div>
+      <div class="ch-bio">Продуценты · Консументы I и II · Редуценты · Абиотические факторы</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box nature-l">
+      <div class="lore-icon">🐻</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ИЗУМРУДНАЯ РОЩА</div>
+        <div class="lore-text">
+          Изумрудная Роща — это живой оазис в Фаэруне. Друиды под руководством Халсина защищают её равновесие. Здесь растёт священное дерево, пасутся олени, живёт совомедведица с детёнышем, грибки разлагают упавшие ветки, а ручьи несут жизнь. <em>Это идеальная экосистема до вмешательства гоблинов — живой учебник по биоценозу.</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ ТАБЛИЦА КОМПОНЕНТОВ ЭКОСИСТЕМЫ ⟵</div>
+
+    <div style="overflow-x:auto;">
+      <table class="eco-table">
+        <thead>
+          <tr>
+            <th>Компонент</th>
+            <th>Персонаж / Объект BG3</th>
+            <th>Биология</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🌿 Продуценты</td>
+            <td>Священное дерево Рощи, трава, цветы, водоросли в ручье</td>
+            <td>Автотрофы. Синтезируют органику из неорганики через <strong>фотосинтез</strong>. Начало любой пищевой цепи.</td>
+          </tr>
+          <tr>
+            <td>🦌 Консументы I</td>
+            <td>Детёныш совомедведя, олени, кролики вокруг Рощи</td>
+            <td>Травоядные. Питаются продуцентами. Получают ~10% энергии растений.</td>
+          </tr>
+          <tr>
+            <td>🦅 Консументы II</td>
+            <td>Совомедведица (мать), Скратч охотится за кроликами</td>
+            <td>Хищники. Питаются консументами I. Ещё ~10% от тех 10%.</td>
+          </tr>
+          <tr>
+            <td>🍄 Редуценты</td>
+            <td>Грибки-поганки в углах Рощи, майконоиды Андердарка</td>
+            <td>Разрушают мёртвую органику до неорганических веществ. <strong>Замыкают круговорот.</strong></td>
+          </tr>
+          <tr>
+            <td>☀️ Абиотические факторы</td>
+            <td>Солнечный свет через кроны, дождь, тип почвы, температура</td>
+            <td>Неживые компоненты среды. <strong>Без света = нет фотосинтеза = нет цепи.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ЦЕПИ ПИТАНИЯ ══ -->
+<div class="chapter" id="chains">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">🔗</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 2 · ЗАДАНИЕ 20 ОГЭ</div>
+      <div class="ch-title">Пищевые цепи: Экосистема Андердарка</div>
+      <div class="ch-bio">Андердарк без солнца — особый случай: продуценты без фотосинтеза!</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🍄</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · АНДЕРДАРК — МРАК И ЖИЗНЬ</div>
+        <div class="lore-text">
+          В Андердарке нет солнца. Но жизнь кипит: <strong>биолюминесцентные грибы</strong> светятся в темноте, питая маленьких пещерных существ. Те становятся добычей для Крюкоужасов — массивных хитиновых хищников. А над всеми возвышаются иллитиды, буквально <em>«едящие мозги»</em> на вершине пищевой пирамиды. Майконоиды разлагают всё, что умерло. <strong>Замкнутый цикл без единого фотона солнца.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ ПИЩЕВЫЕ ЦЕПИ АНДЕРДАРКА ⟵</div>
+
+    <div class="scene">
+      <div class="scene-title">🔗 ЦЕПИ ПИТАНИЯ (начало всегда — продуцент!)</div>
+      <div class="scene-chars">
+        <div class="char-card nature-c">
+          <span class="emoji">🍄</span>
+          <div class="char-name">Грибы-биолюм.</div>
+          <div class="char-role">Продуцент</div>
+        </div>
+        <div class="char-card">
+          <span class="emoji">🐛</span>
+          <div class="char-name">Пещ. насекомые</div>
+          <div class="char-role">Консумент I</div>
+        </div>
+        <div class="char-card fire-c">
+          <span class="emoji">🦂</span>
+          <div class="char-name">Крюкоужас</div>
+          <div class="char-role">Консумент II</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">🦑</span>
+          <div class="char-name">Иллитид</div>
+          <div class="char-role">Консумент III</div>
+        </div>
+        <div class="char-card illithid-c">
+          <span class="emoji">🧠</span>
+          <div class="char-name">Древний Мозг</div>
+          <div class="char-role">Консумент IV</div>
+        </div>
+      </div>
+      <div class="scene-text">
+        Гриб → Пещерное насекомое → Крюкоужас → Иллитид → (смерть → Майконоид разлагает)
+        <br><br>
+        <strong>Правило записи цепи питания:</strong> стрелка показывает, <em>кто кого ест</em>, а не кто кому передаёт энергию. «Гриб → Насекомое» = насекомое ест гриб.
+        <div class="dialogue">— <em>«Почему в Андердарке так мало Древних Мозгов?»</em><br>— <em>«Потому что чтобы вырастить одного иллитида, нужно в 1000 раз больше грибов, чем его вес. Пирамида, друг мой.»</em></div>
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">Правило «10%»<span class="bio-char">= Почему один мозг?</span></div>
+        <div class="bio-def">При переходе с одного уровня на другой передаётся только <strong>~10% энергии</strong>. Остальные 90% тратятся на жизнедеятельность. <em>Значит, чтобы вырастить Древний Мозг на 1 кг массы нужно 10 кг иллитидов → 100 кг крюкоужасов → 1000 кг насекомых → 10 000 кг грибов.</em></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ БИОТИЧЕСКИЕ ОТНОШЕНИЯ ══ -->
+<div class="chapter" id="biotic">
+  <div class="chapter-header nature-h">
+    <div class="ch-icon">🤝</div>
+    <div>
+      <div class="ch-num nature">РАЗДЕЛ 2 · ЗАДАНИЕ 21 ОГЭ</div>
+      <div class="ch-title">Биотические отношения: Акт I — кто с кем и как</div>
+      <div class="ch-bio">Хищничество · Паразитизм · Мутуализм · Комменсализм · Конкуренция</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="bridge">⟶ КАЖДАЯ СВЯЗЬ В BG3 — ТИП БИОТИЧЕСКИХ ОТНОШЕНИЙ ⟵</div>
+
+    <div style="overflow-x:auto;">
+      <table class="eco-table">
+        <thead>
+          <tr>
+            <th>Тип отношений</th>
+            <th>Пример из BG3</th>
+            <th>Кто выигрывает / проигрывает</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🐺 Хищничество</td>
+            <td>Гоблины атакуют Изумрудную Рощу</td>
+            <td>Хищник (+), жертва (–). Гоблины получают территорию; друиды теряют дом.</td>
+          </tr>
+          <tr>
+            <td>🪱 Паразитизм</td>
+            <td>Головастик иллитида в черепе героя</td>
+            <td>Паразит (+), хозяин (–). Головастик растёт, медленно меняет хозяина.</td>
+          </tr>
+          <tr>
+            <td>🌿 Мутуализм</td>
+            <td>Халсин ↔ дух леса Таниэль</td>
+            <td>Оба (+). Халсин защищает лес — лес даёт Халсину силы и знания.</td>
+          </tr>
+          <tr>
+            <td>🐕 Комменсализм</td>
+            <td>Скратч (пёс) ↔ герой в лагере</td>
+            <td>Скратч (+), герой (0). Пёс получает еду и защиту; игроку это не мешает.</td>
+          </tr>
+          <tr>
+            <td>⚔️ Конкуренция</td>
+            <td>Гоблины vs Друиды за территорию Рощи</td>
+            <td>Оба (–/–). Оба тратят ресурсы на борьбу за одну территорию.</td>
+          </tr>
+          <tr>
+            <td>🧠 Нейтрализм</td>
+            <td>Майконоиды Андердарка vs Крюкоужасы</td>
+            <td>Оба (0/0). Живут рядом, не взаимодействуют напрямую.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mem-grid">
+      <div class="mem-card" data-bg="МНЕМОНИКА">
+        <div class="mem-icon">🧮</div>
+        <div class="mem-title">«+–» система знаков</div>
+        <div class="mem-body">Мутуализм: <em>+/+</em>. Паразитизм: <em>+/–</em>. Хищничество: <em>+/–</em>. Комменсализм: <em>+/0</em>. Конкуренция: <em>–/–</em>. Нейтрализм: <em>0/0</em>.</div>
+      </div>
+      <div class="mem-card" data-bg="ОГЭ">
+        <div class="mem-icon">⚠️</div>
+        <div class="mem-title">Паразитизм ≠ Хищничество</div>
+        <div class="mem-body">Хищник убивает сразу. Паразит — живёт внутри, убивает медленно. <em>Головастик — паразит, пока не превратит в иллитида.</em></div>
+      </div>
+      <div class="mem-card" data-bg="ОГЭ">
+        <div class="mem-icon">💡</div>
+        <div class="mem-title">Симбиоз = группа</div>
+        <div class="mem-body">«Симбиоз» — это общее название для всех длительных совместных отношений. Мутуализм, комменсализм и паразитизм — это всё виды симбиоза.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ЭКОЛОГИЧЕСКАЯ КАТАСТРОФА ══ -->
+<div class="chapter" id="catastrophe">
+  <div class="chapter-header fire-h">
+    <div class="ch-icon">🌑</div>
+    <div>
+      <div class="ch-num fire">РАЗДЕЛ 2 · ЗАДАНИЯ 22–24 ОГЭ</div>
+      <div class="ch-title">Антропогенное разрушение экосистемы: Тень-Проклятье</div>
+      <div class="ch-bio">Антропогенные факторы · Экологическая сукцессия · Восстановление экосистемы</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box fire-l">
+      <div class="lore-icon">🌑</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ЗЕМЛИ ТЕНИ-ПРОКЛЯТЬЯ</div>
+        <div class="lore-text">
+          До прихода Кетерика Торна эти земли были <strong>«богатыми и плодородными»</strong>: леса, олени, медведи, кролики. Кетерик, поклонившийся Шар, выпустил Тень-Проклятье — и за несколько лет всё живое исчезло. <em>Солнечный свет заблокирован.</em> Растения мертвы. Животные превратились в теневых существ или погибли. Путешественники описывали земли как «мёртвые». Лишь небольшой форт, защищённый магией Изобель, остался живым островком. Халсин говорит: <em>«Когда мы снимем проклятие — земля постепенно возродится».</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ ПАРАЛЛЕЛЬ: ТЕНЬ-ПРОКЛЯТЬЕ = АНТРОПОГЕННАЯ КАТАСТРОФА ⟵</div>
+
+    <div class="scene">
+      <div class="scene-title">🌑 СЦЕНА: Шаг за шагом — как разрушается экосистема</div>
+      <div class="scene-chars">
+        <div class="char-card fire-c">
+          <span class="emoji">💀</span>
+          <div class="char-name">Кетерик Торн</div>
+          <div class="char-role">Антропоген. фактор</div>
+        </div>
+        <div class="char-card shadow-c">
+          <span class="emoji">🌑</span>
+          <div class="char-name">Тень-Проклятье</div>
+          <div class="char-role">Загрязнение среды</div>
+        </div>
+        <div class="char-card nature-c">
+          <span class="emoji">☀️</span>
+          <div class="char-name">Блок солнца</div>
+          <div class="char-role">Нет фотосинтеза</div>
+        </div>
+        <div class="char-card nature-c">
+          <span class="emoji">🐻</span>
+          <div class="char-name">Халсин</div>
+          <div class="char-role">Экологическая реставрация</div>
+        </div>
+      </div>
+      <div class="scene-text">
+        <strong>Механизм катастрофы (как в учебнике):</strong>
+        <br><br>
+        1. <em>Кетерик (антропогенный фактор)</em> блокирует солнечный свет → нет фотосинтеза.
+        <br>
+        2. Продуценты (растения) гибнут → консументы I теряют пищу.
+        <br>
+        3. Консументы I гибнут → хищники теряют добычу.
+        <br>
+        4. Вся пищевая цепь рушится снизу вверх. Экосистема мертва.
+        <br>
+        5. Тень-существа = «инвазивные» виды, адаптированные к новым условиям.
+        <br><br>
+        <strong>Восстановление (сукцессия):</strong>
+        <br>
+        После смерти Кетерика солнце возвращается → первыми появляются бактерии и споры грибов (пионеры) → затем однолетние травы → кустарники → деревья → полное восстановление через десятилетия.
+        <div class="dialogue">— <em>«Мы подняли проклятие. Со временем эти земли расцветут снова»</em>, — Халсин.</div>
+        Биологический аналог: вырубка тропического леса → очищение → сукцессия от пионерных видов к климаксному сообществу. Занимает 100–200 лет.
+      </div>
+    </div>
+
+    <div class="bio-grid">
+      <div class="bio-item">
+        <div class="bio-term">Антропогенный фактор<span class="bio-char">= Кетерик</span></div>
+        <div class="bio-def">Фактор, созданный человеком (или разумным существом). <em>Проклятье — сознательное действие, уничтожившее экосистему.</em> Реальные примеры: вырубка лесов, загрязнение рек, выброс CO₂.</div>
+      </div>
+      <div class="bio-item">
+        <div class="bio-term">Экологическая сукцессия<span class="bio-char">= Возрождение после проклятья</span></div>
+        <div class="bio-def">Последовательная смена сообществ при изменении условий среды. <strong>Первичная</strong> = на голом субстрате (лишайники → мхи → травы → лес). <strong>Вторичная</strong> = на нарушенной, но сохранившей почву территории. <em>Земли Кетерика = вторичная сукцессия: почва есть, жизни нет.</em></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ПИРАМИДА ЭНЕРГИИ ══ -->
+<div class="chapter" id="pyramid">
+  <div class="chapter-header illithid-h">
+    <div class="ch-icon">📐</div>
+    <div>
+      <div class="ch-num illithid">РАЗДЕЛ 2 · ЗАДАНИЕ 25 ОГЭ</div>
+      <div class="ch-title">Правило экологической пирамиды (10%)</div>
+      <div class="ch-bio">Пирамида численности · пирамида биомассы · пирамида энергии</div>
+    </div>
+  </div>
+  <div class="chapter-body">
+
+    <div class="lore-box illithid-l">
+      <div class="lore-icon">🧠</div>
+      <div>
+        <div class="lore-game-label">◆ BALDUR'S GATE 3 · ПОЧЕМУ ТОЛЬКО ОДИН НЕТЕРБЕРЕГ?</div>
+        <div class="lore-text">
+          В Андердарке миллионы грибов. Тысячи пещерных насекомых. Сотни Крюкоужасов. Несколько десятков иллитидов. И — только один Нетерберег. Это не случайность. <em>Каждый уровень питания может поддержать в 10 раз меньше особей, чем предыдущий.</em> Энергия теряется на движение, тепло, жизнедеятельность. Нетерберег — вершина пирамиды, где сосредоточена крошечная доля изначальной энергии грибов.
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">⟶ ПИРАМИДА АНДЕРДАРКА ⟵</div>
+
+    <div class="pyramid">
+      <div class="py-level" style="width:100%;background:rgba(45,110,64,0.25);border:1px solid rgba(74,171,104,0.3);">
+        <div class="py-name" style="color:var(--nature2)">🍄 ГРИБЫ-ПРОДУЦЕНТЫ</div>
+        <div class="py-game" style="color:var(--muted)">Светящиеся грибы Андердарка</div>
+        <div class="py-energy" style="color:var(--nature2)">100 000 кДж · 10 000 особей</div>
+      </div>
+      <div class="py-level" style="width:80%;background:rgba(77,184,216,0.12);border:1px solid rgba(77,184,216,0.2);">
+        <div class="py-name" style="color:var(--illithid3)">🐛 ПЕЩЕРНЫЕ НАСЕКОМЫЕ (Консум. I)</div>
+        <div class="py-game" style="color:var(--muted)">Личинки, жуки пещер</div>
+        <div class="py-energy" style="color:var(--illithid3)">10 000 кДж · 1000 особей</div>
+      </div>
+      <div class="py-level" style="width:60%;background:rgba(212,82,42,0.12);border:1px solid rgba(240,132,58,0.2);">
+        <div class="py-name" style="color:var(--fire2)">🦂 КРЮКОУЖАСЫ (Консум. II)</div>
+        <div class="py-game" style="color:var(--muted)">Хитиновые хищники</div>
+        <div class="py-energy" style="color:var(--fire2)">1 000 кДж · 100 особей</div>
+      </div>
+      <div class="py-level" style="width:40%;background:rgba(123,79,193,0.15);border:1px solid rgba(155,105,232,0.25);">
+        <div class="py-name" style="color:var(--purple2)">🦑 ИЛЛИТИДЫ (Консум. III)</div>
+        <div class="py-game" style="color:var(--muted)">Пожиратели разумов</div>
+        <div class="py-energy" style="color:var(--purple2)">100 кДж · 10 особей</div>
+      </div>
+      <div class="py-level" style="width:20%;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);">
+        <div class="py-name" style="color:var(--gold)">🧠 НЕТЕРБЕРЕГ (Консум. IV)</div>
+        <div class="py-game" style="color:var(--muted)">Вершина колонии</div>
+        <div class="py-energy" style="color:var(--gold)">10 кДж · 1 особь</div>
+      </div>
+    </div>
+
+    <div class="mem-grid">
+      <div class="mem-card" data-bg="ПРАВИЛО">
+        <div class="mem-icon">📐</div>
+        <div class="mem-title">Правило 10% (Линдеман)</div>
+        <div class="mem-body">На каждый следующий уровень переходит <em>только 10% энергии</em> предыдущего. 90% уходит на тепло и жизнедеятельность. Поэтому хищников всегда меньше, чем жертв.</div>
+      </div>
+      <div class="mem-card" data-bg="ОГЭ">
+        <div class="mem-icon">🧮</div>
+        <div class="mem-title">Расчётная задача ОГЭ</div>
+        <div class="mem-body">«Чтобы вырастить 1 кг иллитида, нужно сколько кг грибов?» → 2 уровня выше: <em>1 × 10 × 10 = 100 кг грибов.</em> Каждый уровень = ×10.</div>
+      </div>
+      <div class="mem-card" data-bg="МНЕМОНИКА">
+        <div class="mem-icon">🔟</div>
+        <div class="mem-title">«Правило одного нуля»</div>
+        <div class="mem-body">На каждый уровень вверх добавляй ноль. 1 кг хищника = 10 кг добычи = 100 кг растений. <em>Нетерберег весом 100 кг = 100 000 кг грибов.</em></div>
+      </div>
+    </div>
+
+    <div class="quiz">
+      <div class="quiz-title">📜 КВЕСТ: ЗАДАНИЕ В СТИЛЕ ОГЭ №25</div>
+      <div class="quiz-q">
+        В экосистеме Андердарка зафиксированы: биомасса грибов — 50 000 кг, Крюкоужасов — 500 кг.
+        <br>a) Какова биомасса пещерных насекомых (Консументы I)?
+        <br>b) Объясни, почему иллитидов в Андердарке значительно меньше, чем Крюкоужасов?
+      </div>
+      <div class="quiz-hint">💡 a) 5 000 кг (10% от 50 000). b) Правило 10%: каждый переход теряет 90% энергии → иллитидов ~50 кг (10% от 500 кг Крюкоужасов). Меньше доступной энергии = меньше особей.</div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-icon">🏆</div>
+      <div class="verdict-text">
+        <strong>ГЛАВНАЯ МЫСЛЬ ЧАСТИ II</strong>
+        <p>Нетерберег существует только потому, что существуют миллионы грибов. Уничтожь продуцентов — рухнет всё. <em>Тень-Проклятье Кетерика именно это и сделало: убило базу пирамиды (свет → растения) → разрушилась вся цепь.</em> Любая экологическая катастрофа начинается с удара по продуцентам или абиотическим факторам. Это и есть главный урок экологии ОГЭ 2026.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <span>Baldur's Gate 3 © Larian Studios, 2023</span><br>
+  Образовательный контент основан на кодификаторе ОГЭ по биологии 2026 · ФИПИ · 9 класс<br>
+  Мир Фаэруна и все персонажи принадлежат правообладателям · Учебное использование
+</footer>
+
+</body>
+</html>
