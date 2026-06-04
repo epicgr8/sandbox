@@ -41,17 +41,31 @@
   .wrap { position:relative; z-index:1; max-width:940px; margin:0 auto; padding:0 24px 80px; }
 
   /* HERO */
-  .hero { text-align:center; padding:52px 0 36px; }
+  .hero { text-align:center; padding:56px 0 38px; }
   .hero::after {
-    content:''; display:block; margin:28px auto 0;
-    width:220px; height:2px; border-radius:2px;
-    background:linear-gradient(90deg, transparent, var(--c-skel), var(--c-imm), var(--c-lung), var(--c-aid), transparent);
+    content:''; display:block; margin:30px auto 0;
+    width:280px; height:3px; border-radius:3px;
+    background:linear-gradient(90deg, transparent, var(--c-skel), #ea580c, var(--c-imm), var(--c-lung), var(--c-aid), transparent);
   }
-  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; }
-  .hero-title { font-size:clamp(26px,4.5vw,50px); font-weight:700; line-height:1.1; margin-bottom:10px; }
-  .ht1 { color: var(--c-skel); }
-  .ht2 { color: var(--c-imm); }
-  .ht3 { color: var(--text); }
+  .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; margin-bottom:18px; }
+  .hero-title { font-size:clamp(30px,5vw,58px); font-weight:700; line-height:1.08; margin-bottom:12px; }
+  .ht-line1 {
+    display:block;
+    background: linear-gradient(110deg, #b91c1c 0%, #dc2626 25%, #16a34a 55%, #2563eb 80%, #db2777 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.01em;
+    filter: drop-shadow(0 2px 16px rgba(185,28,28,0.13));
+  }
+  .ht-line2 {
+    display:block;
+    font-size:0.62em;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--muted);
+    margin-top:6px;
+  }
   .hero-sub { font-size:14px; color:var(--muted); }
 
   .cast { display:flex; gap:12px; justify-content:center; margin:28px 0 0; flex-wrap:wrap; }
@@ -78,6 +92,7 @@
   .rc-exc::after   { background:var(--c-exc); }
   .rc-meta::after  { background:var(--c-meta); }
   .rc-aid::after   { background:var(--c-aid); }
+  .rc-hack::after  { background:#d97706; }
 
   .rule-icon { font-size:22px; margin-bottom:8px; margin-top:6px; }
   .rule-cat { font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:4px; }
@@ -89,6 +104,14 @@
   .rc-exc   .rule-cat  { color:var(--c-exc); }
   .rc-meta  .rule-cat  { color:var(--c-meta); }
   .rc-aid   .rule-cat  { color:var(--c-aid); }
+  .rc-hack  .rule-cat  { color:#d97706; }
+
+  /* HOUSE METAPHOR STRIP */
+  .house-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:6px; margin-bottom:28px; }
+  .house-item { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:10px 12px; text-align:center; font-size:12px; line-height:1.45; }
+  .house-item .hi-emoji { font-size:20px; display:block; margin-bottom:4px; }
+  .house-item .hi-sys { font-weight:700; color:var(--text); font-size:11px; display:block; }
+  .house-item .hi-meta { color:var(--muted); font-size:11px; }
 
   .rule-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
   .rule-body { font-size:13px; color:var(--muted); line-height:1.6; }
@@ -97,6 +120,7 @@
   .rule-mnemonic { margin-top:10px; font-size:12px; background:var(--bg3); border-radius:7px; padding:8px 11px; line-height:1.55; }
   .rule-assoc { margin-top:8px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
   .term { font-weight:700; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .neq { color:#D81B60; font-weight:700; }
 
   /* DECO */
   .deco-div { text-align:center; margin:32px 0; display:flex; align-items:center; gap:12px; }
@@ -207,14 +231,27 @@
   <div class="hero">
     <div class="hero-eyebrow">ОГЭ · Биология · Тело человека · 2026</div>
     <h1 class="hero-title">
-      <span class="ht1">Глубина</span> <span class="ht2">человечности</span><br>
-      <span class="ht3">как спасти мир</span>
+      <span class="ht-line1">Глубина человечности</span>
+      <span class="ht-line2">как спасти мир</span>
     </h1>
     <p class="hero-sub">Элли и Эбби изучают тело человека — ключ к иммунитету и выживанию · Задания №13–16, 22, 25</p>
   </div>
 
   <!-- ШПОРА -->
   <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Шпора Элли</span><div class="sec-line"></div></div>
+
+  <!-- МЕТАФОРА ДОМА -->
+  <div class="house-strip">
+    <div class="house-item"><span class="hi-emoji">🏠</span><span class="hi-sys">Скелет и мышцы</span><span class="hi-meta">стены и лифты дома</span></div>
+    <div class="house-item"><span class="hi-emoji">🚰</span><span class="hi-sys">Кровь и сосуды</span><span class="hi-meta">трубы, вода, насос</span></div>
+    <div class="house-item"><span class="hi-emoji">🔐</span><span class="hi-sys">Иммунитет</span><span class="hi-meta">замки и охрана</span></div>
+    <div class="house-item"><span class="hi-emoji">🪟</span><span class="hi-sys">Дыхание</span><span class="hi-meta">окна и вентиляция</span></div>
+    <div class="house-item"><span class="hi-emoji">🍳</span><span class="hi-sys">Пищеварение</span><span class="hi-meta">кухня и мусоропровод</span></div>
+    <div class="house-item"><span class="hi-emoji">🚿</span><span class="hi-sys">Выделение</span><span class="hi-meta">канализация и вытяжка</span></div>
+    <div class="house-item"><span class="hi-emoji">⚡</span><span class="hi-sys">Обмен веществ</span><span class="hi-meta">электропроводка (АТФ = ток)</span></div>
+    <div class="house-item"><span class="hi-emoji">🧯</span><span class="hi-sys">Первая помощь</span><span class="hi-meta">аптечка и огнетушитель</span></div>
+    <div class="house-item"><span class="hi-emoji">🗝️</span><span class="hi-sys">Лайфхаки ОГЭ</span><span class="hi-meta">ключ от всех комнат</span></div>
+  </div>
 
   <div class="rules-grid">
 
@@ -229,7 +266,8 @@
         Типы костей: <strong>трубчатые</strong> (бедро, плечо), <strong>плоские</strong> (лопатка, череп), <strong>губчатые</strong> (запястье), <strong>смешанные</strong> (позвонки).<br><br>
         Мышцы: скелетные — <strong>поперечно-полосатые</strong>, произвольные · гладкие — непроизвольные (внутренние органы) · сердечная — поперечно-полосатая, но <strong>НЕпроизвольная</strong>.
       </div>
-      <div class="rule-mnemonic">🧠 <strong>Мнемоника:</strong> «<strong>Ш</strong>агай <strong>Г</strong>ордо, <strong>П</strong>рямо <strong>К</strong>расиво — <strong>К</strong>уда?» — 7, 12, 5, 5, 4–5.<br>Пять слов = пять отделов: Шейный, Грудной, Поясничный, Крестцовый, Копчиковый.<br>🎮 TLOU: у Элли все 33 позвонка целы — иначе она не выжила бы под обломками торгового центра.</div>
+      <div class="rule-mnemonic">🧠 <strong>Мнемоника:</strong> «<strong>Ш</strong>агай <strong>Г</strong>ордо, <strong>П</strong>рямо <strong>К</strong>расиво — <strong>К</strong>уда?» — 7, 12, 5, 5, 4–5.<br>Пять слов = пять отделов: Шейный, Грудной, Поясничный, Крестцовый, Копчиковый.</div>
+      <div class="rule-assoc">Скелет Элли — 33 позвонка. Именно он позволяет ей нести арбалет и выживать под обломками торгового центра.</div>
     </div>
 
     <div class="rule-card rc-blood">
@@ -244,7 +282,7 @@
         🔵 <strong>Малый круг:</strong> Прав. желудочек → лёгкие → левое предсердие
       </div>
       <div class="rule-mnemonic">🧠 <strong>Артерии</strong> — несут кровь <strong>ОТ</strong> сердца (в любую сторону, не обязательно богатую O₂).<br><strong>Вены</strong> — несут кровь <strong>К</strong> сердцу.<br>⚠️ Главная ловушка ОГЭ: лёгочная <em>артерия</em> несёт тёмную венозную кровь — потому что идёт ОТ сердца в лёгкие. Называют по направлению, а не по составу!</div>
-      <div class="rule-assoc">🎮 TLOU: Кровь Элли содержит мутировавший кордицепс — он есть у всех инфицированных, но у неё антитела блокируют нейротоксин. Это и есть иммунитет в крови.</div>
+      <div class="rule-assoc">Кровь Элли содержит мутировавший кордицепс — он есть у всех инфицированных, но у неё антитела блокируют нейротоксин. Это и есть иммунитет в крови.</div>
     </div>
 
     <div class="rule-card rc-imm">
@@ -263,7 +301,7 @@
         🩸 <strong>Пассивный</strong> — сыворотка: вводят готовые чужие антитела. Быстро, но ненадолго, памяти нет.
       </div>
       <div class="rule-mnemonic">🧠 <strong>В-лимфоциты = В</strong>ыделяют антитела <strong>В</strong> кровь (гуморальный)<br><strong>Т-лимфоциты = Т</strong>рогают заражённые клетки напрямую (клеточный)<br>Антиген = то, что чужое (кусочек бактерии, вируса). Антитело = «замок» под конкретный антиген.</div>
-      <div class="rule-assoc">🎮 TLOU: В-лимфоциты Элли производят антитела, которые нейтрализуют токсин кордицепса ДО того, как он поразит мозг. Именно эти антитела хочет воспроизвести лаборатория «Светлячка».</div>
+      <div class="rule-assoc">Иммунитет Элли — мутация В-лимфоцитов: они производят антитела, нейтрализующие токсин кордицепса ДО поражения мозга. Именно это хочет воспроизвести лаборатория «Светлячка».</div>
     </div>
 
     <div class="rule-card rc-lung">
@@ -278,7 +316,7 @@
         Дыхательный центр — <strong>продолговатый мозг</strong>. Дыхание стимулирует избыток CO₂ в крови (не нехватка O₂!).
       </div>
       <div class="rule-mnemonic">🧠 Запомни путь: «<strong>Н</strong>аша <strong>Н</strong>осоглотка <strong>Г</strong>отовит <strong>Т</strong>рахею, <strong>Б</strong>ронхи <strong>Б</strong>егут к <strong>А</strong>львеолам»<br>= Нос, Носоглотка, Гортань, Трахея, Бронхи, Бронхиолы, Альвеолы</div>
-      <div class="rule-assoc">🎮 TLOU: Споры кордицепса попадают через лёгкие — именно поэтому в заражённых зонах носят противогазы. Альвеолы — главная точка входа паразита.</div>
+      <div class="rule-assoc">Споры кордицепса попадают через лёгкие — именно поэтому в заражённых зонах носят противогазы. Альвеолы — главная точка входа паразита.</div>
     </div>
 
     <div class="rule-card rc-dig">
@@ -293,7 +331,7 @@
         💧 <strong>Толстая кишка:</strong> всасывание воды, формирование кала
       </div>
       <div class="rule-mnemonic">🧠 <strong>«Р-Ж-12-Т-Т»</strong>: Рот (углеводы), Желудок (белки), 12-перстная (все + желчь), Тонкая (всасывание), Толстая (вода).</div>
-      <div class="rule-assoc">🎮 TLOU: Консервы + дичь = выживание. Эбби знает: белки мяса начинают расщепляться в желудке под действием пепсина. Без желудочного сока — голодная смерть.</div>
+      <div class="rule-assoc">Консервы + дичь = выживание. Эбби знает: белки мяса начинают расщепляться в желудке под действием пепсина. Без желудочного сока — голодная смерть.</div>
     </div>
 
     <div class="rule-card rc-exc">
@@ -310,7 +348,7 @@
         Другие органы выделения: кожа (вода, соли), лёгкие (CO₂, H₂O), кишечник
       </div>
       <div class="rule-mnemonic">🧠 <strong>Ключ:</strong> глюкоза в моче = сигнал диабета (не реабсорбируется). Белок в моче = повреждение нефрона.</div>
-      <div class="rule-assoc">🎮 TLOU: Дефицит воды в апокалипсисе опасен — почки концентрируют мочу, но при сильном обезвоживании нефроны отказывают. Элли пьёт воду первым делом.</div>
+      <div class="rule-assoc">Дефицит воды в апокалипсисе опасен — почки концентрируют мочу, но при сильном обезвоживании нефроны отказывают. Элли пьёт воду первым делом.</div>
     </div>
 
     <div class="rule-card rc-meta">
@@ -325,7 +363,7 @@
         Рабочий обмен = основной + нагрузка
       </div>
       <div class="rule-mnemonic">🧠 <strong>А</strong>наболизм = <strong>А</strong>ссемблинг (сборка, строит)<br><strong>К</strong>атаболизм = <strong>К</strong>рушит (разрушает, даёт энергию)</div>
-      <div class="rule-assoc">🎮 TLOU: Тренировки Эбби — анаболизм (мышцы растут, белки синтезируются). Бег от щелкунов — катаболизм (гликоген → АТФ → движение).</div>
+      <div class="rule-assoc">Тренировки Эбби — анаболизм (мышцы растут, белки синтезируются). Бег от щелкунов — катаболизм (гликоген → АТФ → движение).</div>
     </div>
 
     <div class="rule-card rc-aid">
@@ -341,7 +379,26 @@
         😵 <strong>Обморок:</strong> горизонтально, ноги выше головы
       </div>
       <div class="rule-mnemonic">🧠 <strong>Артерия = Алая = выше = Жгут</strong> (три А + Ж)<br><strong>Вена = тёмная = давящая повязка</strong></div>
-      <div class="rule-assoc">🎮 TLOU: Дина накладывает жгут выше артериального ранения Джоэла. Записывает время на руке — если забыть, конечность отомрёт. Первая помощь = разница между жизнью и смертью.</div>
+      <div class="rule-assoc">Дина накладывает жгут выше артериального ранения Джоэла. Записывает время на руке — если забыть, конечность отомрёт. Первая помощь = разница между жизнью и смертью.</div>
+    </div>
+
+    <div class="rule-card rc-hack">
+      <div class="rule-icon">🗝️</div>
+      <div class="rule-cat">Лайфхаки ОГЭ</div>
+      <div class="rule-title">9 ключей к правильному ответу</div>
+      <div class="rule-body">
+        1. Читай вопрос дважды — ищи слова <strong>«НЕ»</strong>, <strong>«НЕ является»</strong>, <strong>«кроме»</strong>.<br>
+        2. Не знаешь ответ — убирай явно ложные варианты: обычно 1–2 из них абсурдны.<br>
+        3. <strong>Антиген ≠ антитело</strong>: анти-ГЕН — чужое (враг), анти-ТЕЛО — защита (наш агент).<br>
+        4. <strong>Артерия ≠ алая кровь</strong>: лёгочная артерия несёт венозную. Артерия — по направлению, не по цвету.<br>
+        5. <strong>Жгут — только при артериальном</strong>, давящая повязка — при венозном. Перепутал = потерял конечность.<br>
+        6. <strong>В рот только крахмал</strong> (амилаза слюны). Белки — с желудка. Жиры — с 12-перстной кишки.<br>
+        7. <strong>Остаточный объём</strong> в ЖЕЛ НЕ входит — он не выдыхается никогда.<br>
+        8. В <strong>норме в моче нет</strong> ни глюкозы, ни белков, ни эритроцитов. Есть — сигнал тревоги.<br>
+        9. <strong>Сыворотка ≠ вакцина</strong>: сыворотка — быстро, ненадолго (готовые антитела). Вакцина — медленно, надолго (иммунная память).
+      </div>
+      <div class="rule-mnemonic">🧠 Главный лайфхак: если два ответа кажутся верными — выбирай более полный и конкретный. ОГЭ проверяет понимание, а не угадывание.</div>
+      <div class="rule-assoc">🗝️ <strong>Метафора:</strong> эта карточка — запасная связка ключей. Когда все другие карточки прочитаны и почти забыты, именно эти 9 правил откроют нужную дверь на экзамене.</div>
     </div>
 
   </div><!-- /rules-grid -->
@@ -740,7 +797,7 @@ let questions, cur, score, attempts, answered;
 let shuffledOpts = [], correctIdx = 0;
 
 function initQuiz() {
-  questions = shuffle(allQuestions).slice(0, 20);
+  questions = shuffle(allQuestions);
   cur = 0; score = 0; attempts = 0; answered = false;
 }
 initQuiz();
