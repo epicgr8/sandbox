@@ -330,6 +330,41 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── ЦВЕТ КАРТОЧЕК КВЕСТОВ ПО ПРЕДМЕТУ ── */
+.s-math .quest-link { background:rgba(124,58,237,0.05); border-color:rgba(124,58,237,0.18); }
+.s-math .quest-link:hover { background:rgba(124,58,237,0.10); border-color:rgba(124,58,237,0.30); }
+.s-math .ql-num { background:rgba(124,58,237,0.15); color:var(--math); }
+.s-math .ql-tag { background:rgba(124,58,237,0.12); color:var(--math); }
+
+.s-bio .quest-link { background:rgba(22,163,74,0.05); border-color:rgba(22,163,74,0.18); }
+.s-bio .quest-link:hover { background:rgba(22,163,74,0.10); border-color:rgba(22,163,74,0.30); }
+.s-bio .ql-num { background:rgba(22,163,74,0.15); color:var(--bio); }
+.s-bio .ql-tag { background:rgba(22,163,74,0.12); color:var(--bio); }
+
+.s-soc .quest-link { background:rgba(2,132,199,0.05); border-color:rgba(2,132,199,0.18); }
+.s-soc .quest-link:hover { background:rgba(2,132,199,0.10); border-color:rgba(2,132,199,0.30); }
+.s-soc .ql-num { background:rgba(2,132,199,0.15); color:var(--soc); }
+.s-soc .ql-tag { background:rgba(2,132,199,0.12); color:var(--soc); }
+
+.s-rus .quest-link { background:rgba(219,39,119,0.05); border-color:rgba(219,39,119,0.18); }
+.s-rus .quest-link:hover { background:rgba(219,39,119,0.10); border-color:rgba(219,39,119,0.30); }
+.s-rus .ql-num { background:rgba(219,39,119,0.15); color:var(--rus); }
+.s-rus .ql-tag { background:rgba(219,39,119,0.12); color:var(--rus); }
+
+.s-chem { border-left-color:#FF8A65; }
+.s-chem .sc-icon { background:rgba(255,138,101,0.22); }
+.s-chem .quest-link { background:rgba(255,138,101,0.06); border-color:rgba(255,138,101,0.22); }
+.s-chem .quest-link:hover { background:rgba(255,138,101,0.12); border-color:rgba(255,138,101,0.35); }
+.s-chem .ql-num { background:rgba(255,138,101,0.18); color:var(--chem); }
+.s-chem .ql-tag { background:rgba(255,138,101,0.14); color:var(--chem); }
+
+.s-lit { border-left-color:#EA80FC; }
+.s-lit .sc-icon { background:rgba(234,128,252,0.22); }
+.s-lit .quest-link { background:rgba(234,128,252,0.05); border-color:rgba(234,128,252,0.20); }
+.s-lit .quest-link:hover { background:rgba(234,128,252,0.10); border-color:rgba(234,128,252,0.35); }
+.s-lit .ql-num { background:rgba(234,128,252,0.18); color:var(--lit); }
+.s-lit .ql-tag { background:rgba(234,128,252,0.14); color:var(--lit); }
 </style>
 </head>
 <body>
@@ -383,7 +418,7 @@ body {
 
       <div class="tl-item tl-soon tl-soc">
         <div class="tl-date">5 июня</div>
-        <div class="tl-subject">Обществознание</div>
+        <div class="tl-subject">Общество</div>
         <div class="tl-days-left" id="days-soc"><span class="tl-days-num">—</span><span class="tl-days-label">дней осталось</span></div>
         <div class="tl-status status-soon">⏳ Скоро</div>
       </div>
@@ -424,7 +459,7 @@ body {
           <div class="sc-icon" aria-hidden="true">📐</div>
           <div class="sc-meta">
             <div class="sc-title">Математика</div>
-            <div class="sc-date">2 июня · 7 квестов + объяснения</div>
+            <div class="sc-date">2 июня</div>
           </div>
         </div>
         <div class="sc-quests">
@@ -501,7 +536,7 @@ body {
           <div class="sc-icon" aria-hidden="true">🌿</div>
           <div class="sc-meta">
             <div class="sc-title">Биология</div>
-            <div class="sc-date">5 июня · 3 из 5 квестов</div>
+            <div class="sc-date">5 июня</div>
           </div>
         </div>
         <div class="sc-quests">
@@ -516,7 +551,7 @@ body {
           </a>
 
           <a class="quest-link q2" href="bio_quest2_kingdoms.html">
-            <span class="ql-num" style="background:#C62828;color:#fff">2</span>
+            <span class="ql-num">2</span>
             <span class="ql-info">
               <span class="ql-name">Битва четырёх царств</span>
               <span class="ql-sub">Бактерии, грибы, вирусы, растения · RE × PvZ</span>
@@ -525,7 +560,7 @@ body {
           </a>
 
           <a class="quest-link q2" href="bio_quest3_evolution.html">
-            <span class="ql-num" style="background:#1B5E20;color:#fff">3</span>
+            <span class="ql-num">3</span>
             <span class="ql-info">
               <span class="ql-name">Друзья и монстры</span>
               <span class="ql-sub">Зоология, эволюция, антропогенез · Ведьмак</span>
@@ -534,7 +569,7 @@ body {
           </a>
 
           <div class="quest-link" style="opacity:0.45;cursor:default">
-            <span class="ql-num" style="background:rgba(194,65,12,0.12);color:#c2410c">4</span>
+            <span class="ql-num">4</span>
             <span class="ql-info">
               <span class="ql-name">Тело человека</span>
               <span class="ql-sub">Скелет, кровь, дыхание, пищеварение</span>
@@ -543,7 +578,7 @@ body {
           </div>
 
           <div class="quest-link" style="opacity:0.45;cursor:default">
-            <span class="ql-num" style="background:rgba(202,138,4,0.12);color:#ca8a04">5</span>
+            <span class="ql-num">5</span>
             <span class="ql-info">
               <span class="ql-name">Мозг и экосистемы</span>
               <span class="ql-sub">ВНД, анализаторы, экология</span>
@@ -559,47 +594,47 @@ body {
         <div class="sc-header">
           <div class="sc-icon" aria-hidden="true">⚖️</div>
           <div class="sc-meta">
-            <div class="sc-title">Обществознание</div>
+            <div class="sc-title">Общество</div>
             <div class="sc-date">5 июня</div>
           </div>
           <span class="sc-badge badge-3d" id="badge-soc">3 дня</span>
         </div>
         <div class="sc-quests">
 
-          <a class="quest-link" style="background:rgba(2,132,199,0.05);border-color:rgba(2,132,199,0.18)" href="quest_soc1_yenn.html">
-            <span class="ql-num" style="background:var(--soc);color:#fff">1</span>
+          <a class="quest-link" href="quest_soc1_yenn.html">
+            <span class="ql-num">1</span>
             <span class="ql-info">
               <span class="ql-name">Закон или смерть</span>
               <span class="ql-sub">Йеннифэр</span>
             </span>
-            <span class="ql-tag" style="background:rgba(2,132,199,0.10);color:var(--soc)">Квест</span>
+            <span class="ql-tag">Квест</span>
           </a>
 
-          <a class="quest-link" style="background:rgba(2,132,199,0.05);border-color:rgba(2,132,199,0.18)" href="quest_soc2_terms.html">
-            <span class="ql-num" style="background:var(--soc);color:#fff">2</span>
+          <a class="quest-link" href="quest_soc2_terms.html">
+            <span class="ql-num">2</span>
             <span class="ql-info">
               <span class="ql-name">Знай свои права</span>
               <span class="ql-sub">Термины и определения</span>
             </span>
-            <span class="ql-tag" style="background:rgba(2,132,199,0.10);color:var(--soc)">Квест</span>
+            <span class="ql-tag">Квест</span>
           </a>
 
-          <a class="quest-link" style="background:rgba(180,83,9,0.05);border-color:rgba(180,83,9,0.18)" href="quest_soc3_zoltan.html">
-            <span class="ql-num" style="background:#b45309;color:#fff">3</span>
+          <a class="quest-link" href="quest_soc3_zoltan.html">
+            <span class="ql-num">3</span>
             <span class="ql-info">
               <span class="ql-name">Рынок не прощает</span>
               <span class="ql-sub">Золтан · Экономика</span>
             </span>
-            <span class="ql-tag" style="background:rgba(180,83,9,0.10);color:#b45309">Квест</span>
+            <span class="ql-tag">Квест</span>
           </a>
 
-          <a class="quest-link" style="background:rgba(198,40,40,0.05);border-color:rgba(198,40,40,0.18)" href="quest_soc4_engel.html">
-            <span class="ql-num" style="background:#c62828;color:#fff">4</span>
+          <a class="quest-link" href="quest_soc4_engel.html">
+            <span class="ql-num">4</span>
             <span class="ql-info">
               <span class="ql-name">Нейтралитет невозможен</span>
               <span class="ql-sub">Энгель · Социальная сфера и политика</span>
             </span>
-            <span class="ql-tag" style="background:rgba(198,40,40,0.10);color:#c62828">Квест</span>
+            <span class="ql-tag">Квест</span>
           </a>
 
         </div>
