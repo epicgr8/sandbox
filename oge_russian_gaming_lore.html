@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ Русский язык 2026 — Квестовый гид по пяти мирам</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Golos+Text:wght@400;500;600;700&display=swap');
+
+:root {
+  --parchment: #f5efe3;
+  --parchment2: #ede4d2;
+  --ink: #1a1408;
+  --ink-mid: #3a2e1a;
+  --gold: #c9912a;
+  --gold2: #e8b84a;
+  --border-parchment: #c8b89a;
+
+  /* Witcher / Nilfgaard / Soviet */
+  --w-bg: #0a1a0a;
+  --w-card: #0f2010;
+  --w-green: #2d5a1e;
+  --w-gold: #c9912a;
+  --w-red: #8b1a1a;
+  --w-pale: #e8f4e0;
+  --w-border: rgba(201,145,42,0.3);
+
+  /* BG3 / Illithid */
+  --bg3-bg: #0a0618;
+  --bg3-card: #120c2a;
+  --bg3-purple: #5b2d8e;
+  --bg3-gold: #c9a84c;
+  --bg3-cyan: #00b4d8;
+  --bg3-pale: #e8e0f8;
+  --bg3-border: rgba(91,45,142,0.4);
+
+  /* Hogwarts / Durmstrang */
+  --hw-bg: #1a0808;
+  --hw-card: #2a1010;
+  --hw-crimson: #7a1a1a;
+  --hw-gold: #d4a843;
+  --hw-silver: #9ab0c0;
+  --hw-pale: #f5eaea;
+  --hw-border: rgba(212,168,67,0.3);
+
+  /* Groups */
+  --g1: #c9912a;   /* text */
+  --g2: #2a7a4a;   /* lexics */
+  --g3: #1a4a8a;   /* morph */
+  --g4: #8a2a1a;   /* ortho */
+  --g5: #5a1a8a;   /* syntax */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Golos Text', sans-serif;
+}
+
+/* ══ COVER ══ */
+.cover {
+  min-height: 520px;
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 50%, rgba(10,26,10,0.92) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 70% 50%, rgba(10,6,24,0.88) 0%, transparent 70%),
+    linear-gradient(135deg, #0a1a0a 0%, #0a0618 50%, #1a0808 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 80px 20px 70px; position: relative; overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='55' stroke='rgba(201,168,67,0.04)' fill='none' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='35' stroke='rgba(201,168,67,0.04)' fill='none' stroke-width='1'/%3E%3Cpath d='M60 5 L60 115 M5 60 L115 60' stroke='rgba(201,168,67,0.03)' stroke-width='0.5'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.cover-inner { position: relative; z-index: 1; max-width: 700px; }
+.cover-rune {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
+  color: rgba(201,168,67,0.5); margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.cover h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight: 900;
+  line-height: 1.2; margin-bottom: 16px;
+  color: var(--parchment);
+  text-shadow: 0 0 40px rgba(201,168,67,0.3);
+}
+.cover h1 .hl { color: var(--gold2); }
+.cover-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 1.1rem; color: rgba(245,239,227,0.7);
+  line-height: 1.8; margin-bottom: 32px;
+}
+.world-trio {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+}
+.world-badge {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid; border-radius: 999px;
+  padding: 7px 16px; font-family: 'Cinzel', serif;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+}
+.wb-w { color: #a8d8a8; border-color: rgba(168,216,168,0.3); background: rgba(45,90,30,0.3); }
+.wb-b { color: #c0a8f8; border-color: rgba(91,45,142,0.4); background: rgba(18,12,42,0.5); }
+.wb-h { color: #f8c8a8; border-color: rgba(212,168,67,0.3); background: rgba(42,16,16,0.4); }
+
+/* ══ NAV ══ */
+.nav-wrap { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
+nav {
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  max-width: 1100px; margin: 0 auto;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  color: rgba(245,239,227,0.5); text-decoration: none;
+  font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.1em; padding: 12px 14px; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s; display: block;
+}
+nav a:hover { color: var(--gold2); border-bottom-color: var(--gold2); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+
+/* ══ GROUP HEADERS ══ */
+.group-header {
+  padding: 52px 0 8px;
+  display: flex; align-items: flex-start; gap: 18px;
+}
+.gh-icon { font-size: 2.8rem; flex-shrink: 0; }
+.gh-num {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.2em; margin-bottom: 4px;
+}
+.gh-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.1rem, 3vw, 1.8rem); font-weight: 700;
+  line-height: 1.2;
+}
+.gh-tasks { font-size: 0.8rem; color: var(--ink-mid); margin-top: 6px; font-weight: 600; }
+
+/* group colour theming */
+.g1 .gh-num, .g1 .gh-title { color: var(--g1); }
+.g2 .gh-num, .g2 .gh-title { color: var(--g2); }
+.g3 .gh-num, .g3 .gh-title { color: var(--g3); }
+.g4 .gh-num, .g4 .gh-title { color: var(--g4); }
+.g5 .gh-num, .g5 .gh-title { color: var(--g5); }
+
+/* ══ TOPICS OVERVIEW ══ */
+.topics-block {
+  background: white; border: 1px solid var(--border-parchment);
+  border-radius: 14px; padding: 20px; margin: 20px 0;
+}
+.tb-title {
+  font-family: 'Cinzel', serif; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.15em; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.tb-title::after { content: ''; flex: 1; height: 1px; background: var(--border-parchment); }
+.topics-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.topic-chip {
+  background: var(--parchment2); border: 1px solid var(--border-parchment);
+  border-radius: 8px; padding: 7px 11px;
+  font-size: 0.78rem; color: var(--ink-mid); line-height: 1.45;
+  display: flex; gap: 6px; align-items: baseline;
+}
+.topic-chip::before { content: '◆'; font-size: 0.55rem; flex-shrink: 0; color: var(--gold); margin-top: 3px; }
+.topic-chip strong { color: var(--ink); }
+
+/* ══ HARD QUESTIONS BLOCK ══ */
+.hard-block {
+  display: grid; gap: 10px; margin-bottom: 24px;
+}
+.hard-q {
+  background: white; border: 1.5px solid;
+  border-radius: 12px; padding: 14px 16px;
+  display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;
+}
+.hq-level {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700;
+  text-align: center; line-height: 1.3; letter-spacing: 0.08em;
+}
+.hq-level span { display: block; font-size: 1.6rem; font-weight: 900; }
+.hq-body { font-size: 0.82rem; color: var(--ink-mid); line-height: 1.6; }
+.hq-body strong { color: var(--ink); }
+.hq-body em { font-style: normal; font-weight: 700; }
+.hq-body code { background: #f0ece0; padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+.hq-trap { font-size: 0.75rem; margin-top: 5px; opacity: 0.8; }
+
+/* ══ LIFEHACKS ══ */
+.lh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 11px; margin-bottom: 28px; }
+.lh-card {
+  background: white; border: 1px solid var(--border-parchment);
+  border-radius: 11px; padding: 13px 14px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.lh-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1.1; }
+.lh-card strong { display: block; font-size: 0.8rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.lh-card p { font-size: 0.77rem; color: var(--ink-mid); line-height: 1.55; }
+.lh-card p em { font-style: normal; font-weight: 600; }
+
+/* ══ SECTION DIVIDER ══ */
+.quest-divider {
+  text-align: center; margin: 28px 0 22px;
+  font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.2em; color: var(--gold);
+  display: flex; align-items: center; gap: 12px;
+}
+.quest-divider::before, .quest-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-parchment), transparent);
+}
+
+/* ══ QUEST CARDS ══ */
+.quests-trio { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 48px; }
+
+.quest-card { border-radius: 16px; overflow: hidden; position: relative; }
+
+/* WITCHER QUEST */
+.qc-w {
+  background: linear-gradient(160deg, var(--w-bg) 0%, var(--w-card) 100%);
+  border: 1px solid var(--w-border);
+}
+.qc-w .qh { background: rgba(45,90,30,0.3); border-bottom: 1px solid var(--w-border); }
+.qc-w .uni-badge { background: rgba(45,90,30,0.5); border: 1px solid rgba(168,216,168,0.3); color: #a8d8a8; }
+.qc-w .quest-title { color: var(--w-gold); }
+.qc-w .quest-body { color: rgba(232,244,224,0.85); }
+.qc-w .rule-box { background: rgba(45,90,30,0.25); border: 1px solid rgba(201,145,42,0.3); border-left: 3px solid var(--w-gold); }
+.qc-w .rule-box strong { color: var(--w-gold); }
+.qc-w .practice { background: rgba(0,0,0,0.3); border: 1px solid rgba(168,216,168,0.15); }
+.qc-w .practice .p-label { color: #a8d8a8; }
+
+/* BG3 QUEST */
+.qc-b {
+  background: linear-gradient(160deg, var(--bg3-bg) 0%, var(--bg3-card) 100%);
+  border: 1px solid var(--bg3-border);
+}
+.qc-b .qh { background: rgba(91,45,142,0.25); border-bottom: 1px solid var(--bg3-border); }
+.qc-b .uni-badge { background: rgba(91,45,142,0.4); border: 1px solid rgba(192,168,248,0.3); color: #c0a8f8; }
+.qc-b .quest-title { color: var(--bg3-gold); }
+.qc-b .quest-body { color: rgba(232,224,248,0.85); }
+.qc-b .rule-box { background: rgba(91,45,142,0.2); border: 1px solid rgba(201,168,76,0.25); border-left: 3px solid var(--bg3-gold); }
+.qc-b .rule-box strong { color: var(--bg3-gold); }
+.qc-b .practice { background: rgba(0,0,0,0.35); border: 1px solid rgba(0,180,216,0.15); }
+.qc-b .practice .p-label { color: var(--bg3-cyan); }
+
+/* HOGWARTS QUEST */
+.qc-h {
+  background: linear-gradient(160deg, var(--hw-bg) 0%, var(--hw-card) 100%);
+  border: 1px solid var(--hw-border);
+}
+.qc-h .qh { background: rgba(122,26,26,0.3); border-bottom: 1px solid var(--hw-border); }
+.qc-h .uni-badge { background: rgba(122,26,26,0.5); border: 1px solid rgba(248,200,168,0.3); color: #f8c8a8; }
+.qc-h .quest-title { color: var(--hw-gold); }
+.qc-h .quest-body { color: rgba(245,234,234,0.85); }
+.qc-h .rule-box { background: rgba(122,26,26,0.2); border: 1px solid rgba(212,168,67,0.3); border-left: 3px solid var(--hw-gold); }
+.qc-h .rule-box strong { color: var(--hw-gold); }
+.qc-h .practice { background: rgba(0,0,0,0.3); border: 1px solid rgba(154,176,192,0.15); }
+.qc-h .practice .p-label { color: var(--hw-silver); }
+
+.qh { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+.uni-badge {
+  font-family: 'Cinzel', serif; font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.12em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+}
+.quest-header-text { flex: 1; }
+.quest-title { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; line-height: 1.3; }
+.quest-subtitle { font-size: 0.68rem; opacity: 0.65; font-style: italic; }
+.qb { padding: 16px; }
+.char-line {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.char-emoji { font-size: 1.6rem; }
+.char-name { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; opacity: 0.8; }
+.char-role { font-size: 0.65rem; opacity: 0.55; margin-top: 1px; font-style: italic; }
+.quest-body {
+  font-family: 'EB Garamond', serif; font-size: 0.97rem; line-height: 1.75; margin-bottom: 14px;
+}
+.quest-body em { font-style: italic; opacity: 0.9; }
+.quest-body strong { font-weight: 700; }
+.rule-box { padding: 11px 14px; border-radius: 9px; margin-bottom: 12px; }
+.rule-box strong { display: block; font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 5px; }
+.rule-box p { font-size: 0.8rem; opacity: 0.9; line-height: 1.6; }
+.rule-box p code { background: rgba(255,255,255,0.15); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+.practice { padding: 10px 13px; border-radius: 8px; }
+.p-label { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 5px; }
+.p-text { font-size: 0.78rem; opacity: 0.85; line-height: 1.55; }
+.p-text strong { opacity: 1; font-weight: 700; }
+.p-ans { font-size: 0.75rem; margin-top: 4px; opacity: 0.7; font-style: italic; }
+
+/* ══ MNEMONICS SECTION ══ */
+.mnemonic-strip {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 16px 0 28px;
+}
+.mn {
+  background: white; border: 1px solid var(--border-parchment);
+  border-radius: 10px; padding: 12px 13px;
+}
+.mn-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.mn-title { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 4px; }
+.mn-body { font-size: 0.75rem; color: var(--ink-mid); line-height: 1.55; }
+.mn-body em { font-style: normal; font-weight: 700; color: var(--ink); }
+
+/* ══ HARD LEVELS ══ */
+.lvl-fire { border-color: #e87040; }
+.lvl-fire .hq-level { color: #e87040; }
+.lvl-fire .hq-level span { color: #c04020; }
+.lvl-skull { border-color: #9a2a2a; }
+.lvl-skull .hq-level { color: #9a2a2a; }
+.lvl-skull .hq-level span { color: #7a1010; }
+.lvl-warn { border-color: #c9912a; }
+.lvl-warn .hq-level { color: #c9912a; }
+.lvl-warn .hq-level span { color: #9a6a10; }
+
+/* ══ OVERVIEW STRIP ══ */
+.overview-strip {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 28px 0 36px;
+}
+@media(max-width:700px){ .overview-strip { grid-template-columns: 1fr 1fr; } }
+.ov-card {
+  border-radius: 12px; padding: 14px 13px; text-align: center; cursor: pointer;
+  transition: transform 0.2s;
+}
+.ov-card:hover { transform: translateY(-3px); }
+.ov-num { font-family: 'Cinzel Decorative', serif; font-size: 0.55rem; letter-spacing: 0.2em; opacity: 0.7; margin-bottom: 4px; }
+.ov-title { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; margin: 4px 0; line-height: 1.3; }
+.ov-tasks { font-size: 0.65rem; opacity: 0.6; }
+.ov-1 { background: #fffbeb; border: 1.5px solid #f7d87a; color: #8a5c0a; }
+.ov-2 { background: #f0fff8; border: 1.5px solid #a5e0bf; color: #1a5a3a; }
+.ov-3 { background: #eff6ff; border: 1.5px solid #b8caf8; color: #1a3a7a; }
+.ov-4 { background: #fff5f5; border: 1.5px solid #fca9a5; color: #7a1a1a; }
+.ov-5 { background: #f8f0ff; border: 1.5px solid #d4b8f8; color: #4a1a7a; }
+
+footer { background: var(--ink); color: rgba(245,239,227,0.4); text-align: center; padding: 28px 20px; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.12em; margin-top: 60px; }
+footer span { color: var(--gold2); }
+
+hr.group-sep { border: none; border-top: 1px solid var(--border-parchment); margin: 20px 0 0; }
+
+@media(max-width:600px){
+  .quests-trio { grid-template-columns: 1fr; }
+  .lh-grid { grid-template-columns: 1fr; }
+  .hard-q { grid-template-columns: 1fr; }
+  .topics-cols { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-rune">◈ Codex Grammaticus ◈ ОГЭ 2026 ◈ Тайные знания ◈</div>
+    <h1>Русский язык<br><span class="hl">через три мира</span></h1>
+    <p class="cover-sub">
+      Нильфгаард открыл Советский Союз. Иллитиды изучают морфологию.<br>
+      Дурмстранг приехал на обмен. Русская грамматика — магия всех миров.
+    </p>
+    <div class="world-trio">
+      <div class="world-badge wb-w">⚔️ Ведьмак 3 · Нильфгаард & СССР</div>
+      <div class="world-badge wb-b">🧠 Baldur's Gate 3 · Иллитиды & Завоеватели</div>
+      <div class="world-badge wb-h">🧙 Хогвартс · Обмен с Дурмстрангом</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <nav>
+    <a href="#map">🗺 Карта</a>
+    <a href="#g1">I · Текст</a>
+    <a href="#g2">II · Лексика</a>
+    <a href="#g3">III · Морфология</a>
+    <a href="#g4">IV · Орфография</a>
+    <a href="#g5">V · Синтаксис</a>
+  </nav>
+</div>
+
+<div class="page">
+
+<!-- ══ КАРТА ══ -->
+<section id="map" style="padding:40px 0 20px">
+  <div style="text-align:center;margin-bottom:24px">
+    <div style="font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:8px">ПЯТЬ СМЫСЛОВЫХ ГРУППЫ · ОДИН ЭКЗАМЕН</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--ink)">Карта знаний ОГЭ по русскому языку 2026</div>
+  </div>
+  <div class="overview-strip">
+    <a href="#g1" style="text-decoration:none"><div class="ov-card ov-1"><div class="ov-num">ГРУППА I</div><div style="font-size:1.5rem">📜</div><div class="ov-title">Острова смысла</div><div class="ov-tasks">Текст · Речь · Стили<br>Задание 1 + 10</div></div></a>
+    <a href="#g2" style="text-decoration:none"><div class="ov-card ov-2"><div class="ov-num">ГРУППА II</div><div style="font-size:1.5rem">📖</div><div class="ov-title">Живое слово</div><div class="ov-tasks">Лексика · Фразеология<br>Выразительность · 11, 12</div></div></a>
+    <a href="#g3" style="text-decoration:none"><div class="ov-card ov-3"><div class="ov-num">ГРУППА III</div><div style="font-size:1.5rem">⚙️</div><div class="ov-title">Форма и норма</div><div class="ov-tasks">Морфология · Словообраз.<br>Задания 8, 9</div></div></a>
+    <a href="#g4" style="text-decoration:none"><div class="ov-card ov-4"><div class="ov-num">ГРУППА IV</div><div style="font-size:1.5rem">🏰</div><div class="ov-title">Бастион букв</div><div class="ov-tasks">Орфография<br>Задания 6, 7</div></div></a>
+    <a href="#g5" style="text-decoration:none"><div class="ov-card ov-5"><div class="ov-num">ГРУППА V</div><div style="font-size:1.5rem">🏛</div><div class="ov-title">Архитектура предложения</div><div class="ov-tasks">Синтаксис · Пунктуация<br>Сочинение · 2–5, 9, 13</div></div></a>
+  </div>
+
+  <div style="background:white;border:1px solid var(--border-parchment);border-radius:14px;padding:18px;margin-bottom:8px">
+    <div style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px">◈ КАК РАБОТАТЬ С ЭТИМ ГИДОМ</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;font-size:0.8rem;color:var(--ink-mid);">
+      <div>📜 <strong style="color:var(--ink)">Каждая группа</strong> = одна логическая тема ОГЭ с полным перечнем подтем</div>
+      <div>💀 <strong style="color:var(--ink)">«Самые сложные»</strong> = задания, на которых реально теряют баллы. Отрабатывай особо.</div>
+      <div>⚡ <strong style="color:var(--ink)">Лайфхаки и мнемоники</strong> = как запомнить правило раз и навсегда</div>
+      <div>🎮 <strong style="color:var(--ink)">Квест-карточки</strong> = правило вписано в сюжет. Запоминай через историю, не зубрёжку.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ГРУППА I ═══════════════════ -->
+<hr class="group-sep">
+<section id="g1" class="g1">
+  <div class="group-header">
+    <div class="gh-icon">📜</div>
+    <div>
+      <div class="gh-num">ГРУППА ПЕРВАЯ</div>
+      <div class="gh-title">Острова смысла</div>
+      <div class="gh-tasks">Задание 1 (Изложение) · Задание 10 (Смысловой анализ)</div>
+    </div>
+  </div>
+
+  <div class="topics-block">
+    <div class="tb-title" style="color:var(--g1)">ТЕМЫ КОДИФИКАТОРА</div>
+    <div class="topics-cols">
+      <div class="topic-chip"><strong>Микротема</strong> — смысловой кусок текста, объединённый одной мыслью</div>
+      <div class="topic-chip"><strong>Приём «исключение»</strong> — убрать повторы, детали, примеры</div>
+      <div class="topic-chip"><strong>Приём «обобщение»</strong> — конкретные факты → обобщающее суждение</div>
+      <div class="topic-chip"><strong>Приём «замена»</strong> — длинный перечень → одно слово</div>
+      <div class="topic-chip"><strong>Стили речи</strong>: разговорный, научный, деловой, публицистический, художественный</div>
+      <div class="topic-chip"><strong>Типы речи</strong>: описание, повествование, рассуждение</div>
+      <div class="topic-chip"><strong>Связность текста</strong>: цепная и параллельная связь предложений</div>
+      <div class="topic-chip"><strong>Смысловой анализ</strong>: соответствие суждений тексту (задание 10)</div>
+    </div>
+  </div>
+
+  <div class="tb-title" style="color:var(--g4);margin-bottom:12px">💀 САМЫЕ СЛОЖНЫЕ ЗАДАЧИ ГРУППЫ I</div>
+  <div class="hard-block">
+    <div class="hard-q lvl-fire">
+      <div class="hq-level"><span>🔥</span>Тяжёло</div>
+      <div class="hq-body"><strong>Три микротемы за два прослушивания.</strong> Студенты слышат текст дважды и должны выделить именно три смысловых блока. Типичная ошибка: сделать 4 микротемы или слить две в одну. <span class="hq-trap">🔺 Ловушка: количество абзацев ≠ количество микротем. Обычно — три, но бывает две.</span></div>
+    </div>
+    <div class="hard-q lvl-warn">
+      <div class="hq-level"><span>⚠️</span>Ловушка</div>
+      <div class="hq-body"><strong>Не применять приёмы сжатия в каждой части.</strong> Нужно сократить <em>каждую</em> микротему. Если одну сжал, а две другие переписал близко к тексту — балл по ИК2 = 1. <code>Цель: 70–100 слов, не переписывать!</code></div>
+    </div>
+    <div class="hard-q lvl-warn">
+      <div class="hq-level"><span>🎯</span>Задание 10</div>
+      <div class="hq-body"><strong>Ловушка «почти правда».</strong> В задании 10 одно утверждение выглядит верным, но слово «только», «всегда», «никогда» делает его ложным. Проверяй по тексту буквально каждое слово утверждения.</div>
+    </div>
+  </div>
+
+  <div class="lh-grid">
+    <div class="lh-card"><div class="lh-icon">🎧</div><div><strong>Правило двух ладоней</strong><p>Перед первым прослушиванием подними три пальца. При каждой смене темы загибай палец. Три пальца = три части = три абзаца изложения.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">✂️</div><div><strong>Приём «половина»</strong><p>После черновика посчитай слова. Если больше 120 — сокращай. Убирай прилагательные-украшения, примеры, вводные слова. Оставляй только суть.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">🔑</div><div><strong>Ключевые слова — на полях</strong><p>Пиши только ключевые слова: имена, числа, глаголы действия. Они — каркас. Всё остальное восстановишь сам при написании черновика.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">⚖️</div><div><strong>140 слов — жизнь или смерть</strong><p>Изложение + сочинение ≥ 140 слов. Иначе — 0 за все 13 баллов грамотности. Проверяй после написания.</p></div></div>
+  </div>
+
+  <div class="quest-divider">⚔️ КВЕСТЫ: ОСТРОВА СМЫСЛА В ТРЁХ МИРАХ ⚔️</div>
+  <div class="quests-trio">
+
+    <div class="quest-card qc-w">
+      <div class="qh">
+        <div class="uni-badge">⚔️ ВЕДЬМАК 3 · НИЛЬФГААРД</div>
+      </div>
+      <div class="qb">
+        <div class="char-line">
+          <div class="char-emoji">🦅</div>
+          <div><div class="char-name">ЛЕЙТЕНАНТ МЕННО ЦОЭ</div><div class="char-role">Начальник разведки Эмгыра · Институт советских исследований</div></div>
+        </div>
+        <div class="quest-body">
+          После того как Цири случайно провалилась через измерительный портал в мир советской Москвы 1952 года, она вернулась с пачкой документов — <em>«Правдой» за 14 октября и военным донесением Генштаба</em>. Эмгыр вар Эмрейс, увидев в советских бюрократических структурах идеальную модель империи, основал тайный «Институт советских исследований» в Нильфгаарде. Лейтенант Цоэ хватает тебя в порту Новиграда: <em>«Геральт, ты учился в Каэр Морхене. Там были академические дисциплины. Нам нужно сжатое изложение этого советского радиодонесения для доклада императору — три микротемы, не больше ста слов!»</em>
+        </div>
+        <div class="rule-box">
+          <strong>📜 ПРАВИЛО СЖАТОГО ИЗЛОЖЕНИЯ</strong>
+          <p>Каждый абзац исходного текста = отдельная микротема. Для каждой применяй приём сжатия: <code>убери детали</code>, <code>обобщи перечисление</code>, <code>замени синонимом</code>. Передай главную мысль каждой части.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ЗАДАНИЕ ГЕРАЛЬТА</div>
+          <div class="p-text">Исходный текст: «На заводе №5 рабочие Иванов, Петров и Сидоров досрочно выполнили план. Станочники выточили 347 деталей. Слесари собрали 12 агрегатов. Маляры покрасили корпуса.»<br><strong>Сожми до одного предложения.</strong></div>
+          <div class="p-ans">✓ Ответ: «Рабочие завода №5 досрочно выполнили план.» (приём обобщения)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-b">
+      <div class="qh">
+        <div class="uni-badge">🧠 BALDUR'S GATE 3</div>
+      </div>
+      <div class="qb">
+        <div class="char-line">
+          <div class="char-emoji">📚</div>
+          <div><div class="char-name">ГЕЙЛ ИЗ УОТЕРДИПА</div><div class="char-role">Волшебник · Нашёл советский свиток в развалинах Верхнего города</div></div>
+        </div>
+        <div class="quest-body">
+          Гейл поднял с земли свиток, явно попавший через случайный межпространственный разрыв. <em>«Это русский текст — я могу его перевести, но он слишком длинный! Нетерберег уже требует краткого резюме для анализа человеческих коммуникационных паттернов. Если я передам полный текст, мозг просто поглотит всех нас в попытке обработать лишнюю информацию!»</em> Тебе нужно помочь Гейлу применить приём исключения к каждой из трёх частей научного текста.
+        </div>
+        <div class="rule-box">
+          <strong>📜 ПРИЁМ «ИСКЛЮЧЕНИЕ»</strong>
+          <p>Убери из абзаца: уточняющие детали, повторяющиеся слова, вводные конструкции, примеры. Оставь только ту информацию, без которой смысл утерян. Это как Гейл выжимает магическую энергию — берёт только суть.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🧠 ЗАДАНИЕ ГЕЙЛА</div>
+          <div class="p-text">«Учёные, которые работают в различных институтах страны, в течение многих лет проводили разнообразные исследования и опыты, ставили многочисленные эксперименты и наконец, после долгих попыток, открыли принципиально новый метод.»<br><strong>Убери всё лишнее.</strong></div>
+          <div class="p-ans">✓ Ответ: «Учёные открыли принципиально новый метод.»</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-h">
+      <div class="qh">
+        <div class="uni-badge">🧙 ХОГВАРТС · ДУРМСТРАНГ</div>
+      </div>
+      <div class="qb">
+        <div class="char-line">
+          <div class="char-emoji">📰</div>
+          <div><div class="char-name">ГЕРМИОНА ГРЕЙНДЖЕР</div><div class="char-role">Готовит статью для «Ежедневного Пророка» · Русский текст для обмена знаниями</div></div>
+        </div>
+        <div class="quest-body">
+          Студенты Дурмстранга привезли с собой журналы советской педагогики — Виктор Крам объяснил, что программа обмена требует написать краткий реферат для школьной газеты. <em>«Гарри, ты видишь три разных текста в журнале? Каждый об отдельном — это три микротемы. Мне нужно их сжать и связать в единый абзац для "Пророка"!»</em> Гермиона смотрит на тебя с надеждой. Профессор МакГонагалл стоит в дверях.
+        </div>
+        <div class="rule-box">
+          <strong>📜 СВЯЗЬ МЕЖДУ ЧАСТЯМИ ИЗЛОЖЕНИЯ</strong>
+          <p>После каждой микротемы добавляй связующие слова: <code>Таким образом</code>, <code>В связи с этим</code>, <code>Именно поэтому</code>. Они создают логику — как заклинание Finite Incantatem собирает разрозненные части в целое.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🧙 ЗАДАНИЕ ГЕРМИОНЫ</div>
+          <div class="p-text">Свяжи три микротемы: 1) «Образование важно» 2) «Чтение развивает мышление» 3) «Грамотные люди нужны обществу»<br><strong>Напиши 2-3 предложения, используя связку.</strong></div>
+          <div class="p-ans">✓ Образование — важнейший инструмент развития. Чтение формирует критическое мышление. Именно поэтому грамотные люди составляют основу любого общества.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ ГРУППА II ═══════════════════ -->
+<hr class="group-sep">
+<section id="g2" class="g2">
+  <div class="group-header">
+    <div class="gh-icon">📖</div>
+    <div>
+      <div class="gh-num">ГРУППА ВТОРАЯ</div>
+      <div class="gh-title">Живое слово</div>
+      <div class="gh-tasks">Лексика · Фразеология · Средства выразительности · Задания 11, 12</div>
+    </div>
+  </div>
+
+  <div class="topics-block">
+    <div class="tb-title" style="color:var(--g2)">ТЕМЫ КОДИФИКАТОРА</div>
+    <div class="topics-cols">
+      <div class="topic-chip"><strong>Синонимы</strong> — слова с близким значением (смелый = храбрый). Контекстные синонимы!</div>
+      <div class="topic-chip"><strong>Антонимы</strong> — противоположные (добро ↔ зло, горячий ↔ холодный)</div>
+      <div class="topic-chip"><strong>Паронимы</strong> — похожие по звучанию, разные по смыслу: одеть/надеть, эффектный/эффективный</div>
+      <div class="topic-chip"><strong>Омонимы</strong> — одинаковое написание, разный смысл (ключ — от двери / ключ — родник)</div>
+      <div class="topic-chip"><strong>Фразеологизмы</strong> — устойчивые сочетания, значение ≠ сумме слов (кот наплакал)</div>
+      <div class="topic-chip"><strong>Устаревшие слова</strong> — историзмы (боярин) и архаизмы (чело = лоб)</div>
+      <div class="topic-chip"><strong>Неологизмы</strong> — новые слова (хайп, лайкнуть, ресёрч)</div>
+      <div class="topic-chip"><strong>Эпитет</strong> — образное определение (золотые руки, мёртвая тишина)</div>
+      <div class="topic-chip"><strong>Метафора</strong> — перенос значения без сравнительного союза (море огней, буря чувств)</div>
+      <div class="topic-chip"><strong>Олицетворение</strong> — неживое = живое (ветер поёт, лес молчит)</div>
+      <div class="topic-chip"><strong>Сравнение</strong> — с союзом «как», «будто», «словно» (белый как снег)</div>
+      <div class="topic-chip"><strong>Гипербола / Литота</strong> — преувеличение / преуменьшение (сто раз говорил / мальчик с пальчик)</div>
+    </div>
+  </div>
+
+  <div class="tb-title" style="color:var(--g4);margin-bottom:12px">💀 САМЫЕ СЛОЖНЫЕ — ГРУППА II</div>
+  <div class="hard-block">
+    <div class="hard-q lvl-skull">
+      <div class="hq-level"><span>💀</span>Главный враг</div>
+      <div class="hq-body"><strong>Паронимы на задании 12.</strong> <em>«Надеть» vs «одеть»</em> — надевают НА себя (надеть пальто), одевают КОГО-ТО (одеть ребёнка). <em>«Эффектный»</em> = производящий впечатление, <em>«эффективный»</em> = дающий результат. Мнемоника: <code>эффектный — это театр, эффективный — это завод</code>.</div>
+    </div>
+    <div class="hard-q lvl-fire">
+      <div class="hq-level"><span>🔥</span>Ловушка</div>
+      <div class="hq-body"><strong>Метафора vs Олицетворение.</strong> Олицетворение — частный случай метафоры: приписывает живые качества неживым. Если в задании просят найти метафору — правильный ответ может содержать олицетворение! Проверь: есть ли там «живое действие» для неживого?</div>
+    </div>
+    <div class="hard-q lvl-warn">
+      <div class="hq-level"><span>⚠️</span>Задание 12</div>
+      <div class="hq-body"><strong>Синоним в контексте ≠ синоним в словаре.</strong> Слово «красный» в тексте про флаг ≠ синониму «алый» в тексте про закат. Синоним должен подходить ИМЕННО в данном предложении. Проверяй подстановкой.</div>
+    </div>
+  </div>
+
+  <div class="mnemonic-strip">
+    <div class="mn"><div class="mn-icon">👗</div><div class="mn-title">НАДЕТЬ / ОДЕТЬ</div><div class="mn-body"><em>НА</em>деть — <em>НА</em> себя (пальто, шапку, перчатки). <em>О</em>деть — <em>О</em>бъект одевания (ребёнка, куклу).</div></div>
+    <div class="mn"><div class="mn-icon">🌊</div><div class="mn-title">МЕТАФОРА</div><div class="mn-body">«Море огней» — нет союза «как». Это <em>скрытое</em> сравнение. Если есть «как, словно, будто» — уже сравнение, не метафора.</div></div>
+    <div class="mn"><div class="mn-icon">🌬️</div><div class="mn-title">ОЛИЦЕТВОРЕНИЕ</div><div class="mn-body">Ветер <em>поёт</em>. Лес <em>думает</em>. Ночь <em>говорит</em>. Неживое + живой глагол/прилагательное = олицетворение.</div></div>
+    <div class="mn"><div class="mn-icon">😤</div><div class="mn-title">ГИПЕРБОЛА</div><div class="mn-body"><em>«Сто лет не видел»</em>, <em>«море слёз»</em>, <em>«целую вечность ждал»</em>. Явное преувеличение, невозможное буквально.</div></div>
+    <div class="mn"><div class="mn-icon">📚</div><div class="mn-title">ИСТОРИЗМ vs АРХАИЗМ</div><div class="mn-body"><em>Историзм</em>: предмет/явление исчезло (кольчуга, боярин). <em>Архаизм</em>: слово устарело, но понятие живёт (чело = лоб, уста = губы).</div></div>
+  </div>
+
+  <div class="quest-divider">📖 КВЕСТЫ: ЖИВОЕ СЛОВО В ТРЁХ МИРАХ 📖</div>
+  <div class="quests-trio">
+
+    <div class="quest-card qc-w">
+      <div class="qh"><div class="uni-badge">⚔️ ВЕДЬМАК 3 · СКЕЛЛИГЕ</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🦁</div><div><div class="char-name">КРАГ АН КРАЙТ</div><div class="char-role">Ярл Скеллиге · Нашёл русскую книгу пословиц на советском корабле</div></div></div>
+        <div class="quest-body">
+          Скеллигское судно подобрало советский корабль, унесённый через межпространственный шторм. На борту нашли учебник советских пословиц — <em>«Медведь на ухо наступил», «Прокатиться с ветерком», «Вешать лапшу на уши»</em>. Краг в ярости: <em>«Геральт, это что за звери? Медведь на ушах — это охота или пытка? Это угроза моим воинам?»</em> Помоги ярлу понять, что это фразеологизмы — и они ничего общего не имеют с буквальным смыслом.
+        </div>
+        <div class="rule-box">
+          <strong>⚔️ ПРАВИЛО ФРАЗЕОЛОГИЗМА</strong>
+          <p>Значение фразеологизма НЕ складывается из значений отдельных слов. <code>Медведь наступил на ухо</code> = нет музыкального слуха. <code>Повесить лапшу</code> = обмануть. Запоминай как единый блок — как заклинание: произнёс всё вместе = нужный эффект.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ЗАДАНИЕ КРАГ АН КРАЙТА</div>
+          <div class="p-text">Объясни значение: <strong>«Бить баклуши»</strong>, <strong>«Водить за нос»</strong>, <strong>«Кот наплакал»</strong>.<br>Проверь: можно ли заменить каждый синонимом-словом?</div>
+          <div class="p-ans">✓ Бездельничать · Обманывать · Очень мало. Синоним к фразеологизму — это одно слово или короткое сочетание.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-b">
+      <div class="qh"><div class="uni-badge">🧠 BALDUR'S GATE 3</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🧛</div><div><div class="char-name">АСТАРИОН АНКУНИН</div><div class="char-role">Высший вампир · Хранит тайную библиотеку из разных миров, найдена рукопись XIX в.</div></div></div>
+        <div class="quest-body">
+          <em>«Я прожил 200 лет и читал всё, что попадало мне в руки»</em>, — говорит Астарион, листая пожелтевший дневник. — <em>«Но этот русский манускрипт — мне нужна твоя помощь. Там написано: "Отправился на поклон к вельможам, облачился в парадные одежды, поклонился в пояс и вопрошал об их благополучии." Что это вообще значит на современном языке?»</em>
+        </div>
+        <div class="rule-box">
+          <strong>🧛 ПРАВИЛО АРХАИЗМОВ И ИСТОРИЗМОВ</strong>
+          <p><code>Вельможа</code> = знатный человек (историзм — такого сословия уже нет). <code>Облачиться</code> = одеться (архаизм — заменилось современным словом). <code>Вопрошать</code> = спрашивать (архаизм). <code>Поклониться в пояс</code> = приветственный поклон (историзм — обычай ушёл). При нахождении в тексте: историзм = понятие исчезло; архаизм = понятие живёт, слово устарело.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🧛 ЗАДАНИЕ АСТАРИОНА</div>
+          <div class="p-text">Определи: <strong>«перст»</strong>, <strong>«давеча»</strong>, <strong>«кафтан»</strong>, <strong>«уста»</strong> — историзм или архаизм?</div>
+          <div class="p-ans">✓ Перст (архаизм: палец существует) · Давеча (архаизм: «недавно» — понятие живо) · Кафтан (историзм: одежды нет) · Уста (архаизм: губы существуют)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-h">
+      <div class="qh"><div class="uni-badge">🧙 ХОГВАРТС · ДУРМСТРАНГ</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🏋️</div><div><div class="char-name">ВИКТОР КРАМ</div><div class="char-role">Квиддич · Добровольный учитель русского языка при обмене</div></div></div>
+        <div class="quest-body">
+          Виктор Крам взял на себя роль куратора языкового обмена. <em>«В русском языке есть слова, которые звучат одинаково, но значат разное — паронимы. Однажды я написал "надеть ребёнка" вместо "одеть ребёнка" — нянечки в Дурмстранге смотрели на меня как на троля. Гарри, Гермиона — запомните разницу раз и навсегда!»</em>
+        </div>
+        <div class="rule-box">
+          <strong>🏋️ ПРАВИЛО ПАРОНИМОВ</strong>
+          <p><code>НА-деть</code> = надеть <em>НА</em> что-то (шапку, пальто, кольцо). <code>О-деть</code> = одеть живого человека (ребёнка, больного). Тест: можно ли добавить «на голову / на руку»? Да → надеть. Нет → одеть. То же: <code>эффЕктный</code> (театр) = производит впечатление; <code>эффекТИВный</code> (КТИВный = активный, то есть действенный) = даёт результат.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🏋️ ЗАДАНИЕ КРАМА</div>
+          <div class="p-text">Выбери правильное слово: «Мать <strong>надела/одела</strong> ребёнку шапку». «Учёный провёл <strong>эффектный/эффективный</strong> эксперимент, получив результат».</div>
+          <div class="p-ans">✓ Надела (на голову — подходит «НА»). Эффективный (даёт результат).</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ ГРУППА III ═══════════════════ -->
+<hr class="group-sep">
+<section id="g3" class="g3">
+  <div class="group-header">
+    <div class="gh-icon">⚙️</div>
+    <div>
+      <div class="gh-num">ГРУППА ТРЕТЬЯ</div>
+      <div class="gh-title">Форма и норма</div>
+      <div class="gh-tasks">Морфология · Словообразование · Грамматические нормы · Задания 8, 9</div>
+    </div>
+  </div>
+
+  <div class="topics-block">
+    <div class="tb-title" style="color:var(--g3)">ТЕМЫ КОДИФИКАТОРА</div>
+    <div class="topics-cols">
+      <div class="topic-chip"><strong>Самостоятельные части речи</strong>: сущ., прил., числ., мест., глагол, прич., деепр., нареч.</div>
+      <div class="topic-chip"><strong>Служебные</strong>: предлог, союз, частица, междометие</div>
+      <div class="topic-chip"><strong>Задание 8 — нормы</strong>: числительные в падежах, нормы употребления деепричастий</div>
+      <div class="topic-chip"><strong>Числительные</strong>: оба/обе, пятьюстами, нет шестисот, полтора/полтораста</div>
+      <div class="topic-chip"><strong>Деепричастный оборот</strong>: субъект дееприч. = субъект сказуемого</div>
+      <div class="topic-chip"><strong>Задание 9 — синонимия словосочетаний</strong>: согласование ↔ управление ↔ примыкание</div>
+      <div class="topic-chip"><strong>Согласование</strong>: зависимое = главное в роде/числе/падеже (тихий вечер)</div>
+      <div class="topic-chip"><strong>Управление</strong>: зависимое в нужном падеже, не меняется при изменении главного (читать книгу)</div>
+      <div class="topic-chip"><strong>Примыкание</strong>: зависимое неизменяемо (идти быстро, очень красивый)</div>
+    </div>
+  </div>
+
+  <div class="tb-title" style="color:var(--g4);margin-bottom:12px">💀 САМЫЕ СЛОЖНЫЕ — ГРУППА III</div>
+  <div class="hard-block">
+    <div class="hard-q lvl-skull">
+      <div class="hq-level"><span>💀</span>Враг №1</div>
+      <div class="hq-body"><strong>Задание 9 — грамматическая синонимия.</strong> Алгоритм: 1) Найди зависимое слово. 2) Определи тип связи. 3) Главное слово остаётся неизменным! 4) Переделай зависимое.<br>
+      <em>«лесная тропинка»</em> (согл.) → <em>«тропинка леса»</em> (упр.). Зависимое «лесная» → «леса» (р.п.).<br>
+      <span class="hq-trap">🔺 Ловушка: «каменный забор» → «забор из камня», не «камень забор»!</span></div>
+    </div>
+    <div class="hard-q lvl-fire">
+      <div class="hq-level"><span>🔥</span>Числ.</div>
+      <div class="hq-body"><strong>Числительные в косвенных падежах.</strong> <em>500</em> = пятьсот (им.) / пятисот (р.) / пятистам (д.) / пятьюстами (тв.) / о пятистах (пр.). Ловушка: числительные изменяются в <em>обеих</em> частях: и «пять-», и «-сот».</div>
+    </div>
+    <div class="hard-q lvl-warn">
+      <div class="hq-level"><span>⚠️</span>Дееприч.</div>
+      <div class="hq-body"><strong>Ошибка с деепричастным оборотом.</strong> <em>«Выйдя из дома, меня охватила радость»</em> — ошибка! Субъект деепричастия (тот, кто вышел) ≠ субъект сказуемого («меня»). Должно быть: «Выйдя из дома, я почувствовал радость».</div>
+    </div>
+  </div>
+
+  <div class="lh-grid">
+    <div class="lh-card"><div class="lh-icon">🔄</div><div><strong>Формула задания 9</strong><p>Согласование → Управление: прилагательное → существительное в р.п. <em>«стеклянный кувшин» → «кувшин из стекла»</em>. Главное слово НЕ ТРОГАТЬ.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">🔢</div><div><strong>Числительные: ОБА / ОБЕ</strong><p><em>«Оба»</em> — м.р. и ср.р. (оба друга, оба окна). <em>«Обе»</em> — только ж.р. (обе сестры, обе руки). Р.п.: обоих/обеих. Д.п.: обоим/обеим.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">🎯</div><div><strong>Тест на деепричастие</strong><p>Замени деепричастный оборот на «и он (она)...». «Выйдя из дома, он улыбнулся» = «Он вышел из дома и улыбнулся». Если субъект тот же — правильно!</p></div></div>
+    <div class="lh-card"><div class="lh-icon">🔑</div><div><strong>Примыкание — неизменяемое!</strong><p>Зависимое слово в примыкании — наречие, деепричастие, инфинитив или неизменяемое прилагательное. Его нельзя поставить в другой падеж. Если можно — это не примыкание.</p></div></div>
+  </div>
+
+  <div class="quest-divider">⚙️ КВЕСТЫ: ФОРМА И НОРМА В ТРЁХ МИРАХ ⚙️</div>
+  <div class="quests-trio">
+
+    <div class="quest-card qc-w">
+      <div class="qh"><div class="uni-badge">⚔️ ВЕДЬМАК 3 · НИЛЬФГААРД</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">📋</div><div><div class="char-name">СЕКРЕТАРЬ ПЯТИЛЕТКИ</div><div class="char-role">Нильфгаардское Министерство Плановой Экономики · Перевод советских документов</div></div></div>
+        <div class="quest-body">
+          Эмгыр вар Эмрейс, восхитившись советской плановой экономикой, приказал воспроизвести «пятилетний план» для Нильфгаарда. Секретарь в ужасе: <em>«Геральт, мне нужно зачитать декрет на нильфгаардском совете: "Предприятие выпустило товаров на сумму семисот восьмидесяти пяти тысяч монет." Я не могу произнести эти числа в творительном падеже! Если ошибусь — Эмгыр казнит меня как безграмотного холопа!»</em>
+        </div>
+        <div class="rule-box">
+          <strong>📋 ПРАВИЛО ЧИСЛИТЕЛЬНЫХ В ТВОРИТЕЛЬНОМ ПАДЕЖЕ</strong>
+          <p>Изменяются ОБЕ части: <code>семьюстами</code> (не «семистами»!) + <code>восьмьюдесятью</code> + <code>пятью</code>. Проверь: тысяч <strong>ами</strong> = нет. «Тысяч» — только в р.п. мн.ч. В тв.п.: «тысячью» или «тысячами» в зависимости от контекста.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ЗАДАНИЕ ДЛЯ НИЛЬФГААРДА</div>
+          <div class="p-text">Поставь в творительный падеж: <strong>580</strong>, <strong>оба воина</strong>, <strong>полтора часа</strong>.</div>
+          <div class="p-ans">✓ Пятьюстами восьмьюдесятью · обоими воинами · полутора часами</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-b">
+      <div class="qh"><div class="uni-badge">🧠 BALDUR'S GATE 3</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">⚔️</div><div><div class="char-name">ЛАЭ'ЗЕЛЬ</div><div class="char-role">Гитьянки · Нашла советский военный устав в Крепости Утонувшей Цитадели</div></div></div>
+        <div class="quest-body">
+          Лаэ'зель, изучая трофейный советский военный устав (попавший через межпространственный разлом), наткнулась на предложение и нахмурилась: <em>«Прочитав устав, солдатам было приказано построиться.»</em> — <em>«Это неправильно, и я это ЧУВСТВУЮ. Но я не могу объяснить почему. Ты — маг-не-маг, но ты знаешь грамматику. Объясни или я пронзу тебя мечом!»</em>
+        </div>
+        <div class="rule-box">
+          <strong>⚔️ ПРАВИЛО ДЕЕПРИЧАСТНОГО ОБОРОТА</strong>
+          <p>Субъект деепричастия = субъект сказуемого. <code>«Прочитав устав» (кто читал?) → солдаты.</code> Сказуемое: «было приказано» → субъект = командование. Разные субъекты → ошибка! Исправление: <code>«Когда солдаты прочитали устав, им было приказано построиться»</code> или <code>«Прочитав устав, солдаты построились»</code>.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ЗАДАНИЕ ЛАЭ'ЗЕЛЬ</div>
+          <div class="p-text">Найди ошибку: <strong>«Подходя к базе, нас обстреляли.»</strong><br>Исправь: кто должен быть субъектом при «подходя»?</div>
+          <div class="p-ans">✓ Ошибка: «нас» ≠ «мы подходили». Верно: «Подходя к базе, мы попали под обстрел.»</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quest-card qc-h">
+      <div class="qh"><div class="uni-badge">🧙 ХОГВАРТС · ДУРМСТРАНГ</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🎓</div><div><div class="char-name">ПРОФЕССОР МАКГОНАГАЛЛ</div><div class="char-role">Трансфигурация · Ведёт специальный урок грамматики синонимии для обменных студентов</div></div></div>
+        <div class="quest-body">
+          <em>«Мистер Поттер, задание простое. Я даю вам словосочетание с согласованием — вы заменяете его управлением. Это как трансфигурация: форма меняется, суть остаётся. Деревянная ложка — и вы превращаете её в ложку из дерева. Суть та же. Главное слово — то же. Только зависимое меняет облик. Начнём?»</em> Гарри пытается хоть что-то вспомнить. Гермиона уже поднимает руку.
+        </div>
+        <div class="rule-box">
+          <strong>🎓 ПРАВИЛО ЗАДАНИЯ 9: СИНОНИМИЯ СЛОВОСОЧЕТАНИЙ</strong>
+          <p>Согласование → Управление: <code>прилагательное → сущ. в р.п.</code><br>«Кленовый лист» → «лист клёна». <br>Управление → Согласование: <code>сущ. в р.п. → прилагательное</code><br>«Хвост лисы» → «лисий хвост». <br>Правило: <strong>главное слово — неизменно!</strong> Меняешь только зависимое.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🎓 ЗАДАНИЕ МакГОНАГАЛЛ</div>
+          <div class="p-text">Замени управлением: <strong>«золотой кубок»</strong>.<br>Замени согласованием: <strong>«крыльцо дома»</strong>.</div>
+          <div class="p-ans">✓ Кубок из золота (или: кубок из золота). Домашнее крыльцо (или: крыльцо дома → домашнее). Проверка: главное слово «кубок» и «крыльцо» не изменились!</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ ГРУППА IV ═══════════════════ -->
+<hr class="group-sep">
+<section id="g4" class="g4">
+  <div class="group-header">
+    <div class="gh-icon">🏰</div>
+    <div>
+      <div class="gh-num">ГРУППА ЧЕТВЁРТАЯ</div>
+      <div class="gh-title">Бастион букв</div>
+      <div class="gh-tasks">Орфография — главный источник ошибок на ОГЭ · Задания 6, 7</div>
+    </div>
+  </div>
+
+  <div class="topics-block">
+    <div class="tb-title" style="color:var(--g4)">ТЕМЫ КОДИФИКАТОРА (ТОП-сложные подчёркнуты)</div>
+    <div class="topics-cols">
+      <div class="topic-chip"><strong style="color:#8a2a1a">★ Н/НН</strong> — в прилаг., причаст., кратких формах, наречиях</div>
+      <div class="topic-chip"><strong style="color:#8a2a1a">★ НЕ с причастиями</strong> — полные/краткие, есть/нет зависимого слова</div>
+      <div class="topic-chip"><strong style="color:#8a2a1a">★ ПРЕ-/ПРИ-</strong> — семантические пары (прЕступить/прИступить)</div>
+      <div class="topic-chip"><strong>Чередующиеся корни</strong>: -лаг-/-лож-, -раст-/-рос-, -гар-/-гор-, -зар-/-зор-, -кас-/-кос-</div>
+      <div class="topic-chip"><strong>Корни с -бир-/-бер-, -мир-/-мер-</strong> и другие: есть суфф. -а- → первый вариант</div>
+      <div class="topic-chip"><strong style="color:#8a2a1a">★ НЕ/НИ</strong> — слитно/раздельно: самая частая ошибка по данным ФИПИ</div>
+      <div class="topic-chip"><strong>Приставки на -з/-с</strong>: без/бес, воз/вос, из/ис, раз/рас</div>
+      <div class="topic-chip"><strong>Суффиксы -ова-/-ева- и -ыва-/-ива-</strong> в глаголах</div>
+      <div class="topic-chip"><strong style="color:#8a2a1a">★ Слитно/раздельно/дефисно</strong>: «тоже»/«то же», «также»/«так же», «чтобы»/«что бы»</div>
+    </div>
+  </div>
+
+  <div class="tb-title" style="color:var(--g4);margin-bottom:12px">💀 САМЫЕ СЛОЖНЫЕ — ГРУППА IV (из данных ФИПИ 2025)</div>
+  <div class="hard-block">
+    <div class="hard-q lvl-skull">
+      <div class="hq-level"><span>💀</span>Враг №1</div>
+      <div class="hq-body"><strong>Н/НН в причастиях и отглагольных прилагательных.</strong><br>
+      ПРИЧАСТИЕ с НН: <em>1) есть приставка (кроме НЕ-)</em>, <em>2) есть зависимое слово</em>, <em>3) глагол сов.вида</em>. ПРИЛАГАТЕЛЬНОЕ с Н: одиночное, без приставки, от глагола несов.вида.<br>
+      <code>Жареная рыба (Н)</code> vs <code>Поджаренная рыба (НН — приставка!)</code> vs <code>Жаренная на масле рыба (НН — зависимое!)</code><br>
+      <span class="hq-trap">🔺 Ловушка: краткие причастия — всегда Н: Рыба поджарена. Окно разбито.</span></div>
+    </div>
+    <div class="hard-q lvl-skull">
+      <div class="hq-level"><span>💀</span>Враг №2</div>
+      <div class="hq-body"><strong>НЕ/НИ — более 50% сдающих допускают ошибки (ФИПИ 2025).</strong> НЕ-глагол — всегда раздельно (кроме слов без НЕ: ненавидеть, недоумевать). НЕ-причастие: полное без зависимых/без противопост. = слитно; иначе = раздельно; краткое = раздельно. НЕ-сущ./прил.: есть противопоставление или «вовсе не/совсем не» → раздельно; иначе слитно.<br>
+      <code>Невысокий человек (слитно)</code> vs <code>Не
+      <code>Не высокий, а низкий (раздельно)</code></div>
+    </div>
+    <div class="hard-q lvl-fire">
+      <div class="hq-level"><span>🔥</span>Ловушка</div>
+      <div class="hq-body"><strong>«Тоже»/«то же», «также»/«так же», «чтобы»/«что бы».</strong> Проверка: убери «же»/«бы» — смысл сохранился? → раздельно. <code>Сделай то же самое</code> (= то самое) — раздельно. <code>Он тоже пришёл</code> (= тоже нельзя убрать) — слитно.</div>
+    </div>
+  </div>
+
+  <div class="mnemonic-strip">
+    <div class="mn"><div class="mn-icon">🔥</div><div class="mn-title">Н/НН: ТРИ КЛЮЧА</div><div class="mn-body">1) Приставка (не НЕ!) → НН. 2) Зависимое слово → НН. 3) Глагол совершенного вида → НН. Ни одного → Н.</div></div>
+    <div class="mn"><div class="mn-icon">⚡</div><div class="mn-title">ПРЕ- vs ПРИ-</div><div class="mn-body"><em>ПРИ-</em>: приближение, присоединение, неполнота, рядом. <em>ПРЕ-</em>: ОЧЕНЬ (= пре-) или ПЕРЕ-. Претворить = перевоплотить.</div></div>
+    <div class="mn"><div class="mn-icon">🌿</div><div class="mn-title">ЧЕРЕДУЮЩИЕСЯ -А-</div><div class="mn-body">Если после корня есть суффикс -А-, пишем первый вариант: кас-кос → кАСание. лАГ-лОЖ → слАГаемое, слОЖить.</div></div>
+    <div class="mn"><div class="mn-icon">🎭</div><div class="mn-title">СОЮЗ или МЕСТОИМЕНИЕ?</div><div class="mn-body">«Чтобы» = союз, слитно. «Что бы» = бы можно перенести: «что бы ни случилось».</div></div>
+    <div class="mn"><div class="mn-icon">❌</div><div class="mn-title">КРАТКИЕ ПРИЧАСТИЯ = Н!</div><div class="mn-body">Всегда только Н: задача решеНа, письмо написаНо, дверь открытА.</div></div>
+  </div>
+
+  <div class="quest-divider">🏰 КВЕСТЫ: ОРФОГРАФИЧЕСКИЙ БАСТИОН В ТРЁХ МИРАХ 🏰</div>
+  <div class="quests-trio">
+    <div class="quest-card qc-w">
+      <div class="qh"><div class="uni-badge">⚔️ ВЕДЬМАК 3 · НИЛЬФГААРД</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🦅</div><div><div class="char-name">ЭМГЫР ВАР ЭМРЕЙС</div><div class="char-role">Белое Пламя · Лично правит декреты</div></div></div>
+        <div class="quest-body">На имперском совете зачитывают декрет: <em>«Вяза__ые придворными одежды с вышитыми узорами запрещены.»</em> Одна буква меняет смысл. «Вязаные» (просто из вязки) или «вязанные» (те, что именно придворными вязались)? Эмгыр смотрит тяжёлым взглядом.</div>
+        <div class="rule-box">
+          <strong>🦅 ПРАВИЛО Н/НН: ЗАВИСИМОЕ СЛОВО</strong>
+          <p>«Вяза__ые <code>придворными</code>»: «придворными» = зависимое слово (кем?). Есть зависимое слово → причастие → НН. Без зависимого: «вязаН ая шапка» → Н (прилагательное).</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ДЕКРЕТ ЭМГЫРА</div>
+          <div class="p-text">Вставь Н или НН: «КрашеН/НН ые стены», «ПокрашеН/НН ые рабочими», «РешеН/НН а задача».</div>
+          <div class="p-ans">✓ КрашеН ые (без прист., без зав.сл.) · ПокрашеНН ые (приставка по-) · РешеН а (краткое = всегда Н)</div>
+        </div>
+      </div>
+    </div>
+    <div class="quest-card qc-b">
+      <div class="qh"><div class="uni-badge">🧠 BALDUR'S GATE 3</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🌑</div><div><div class="char-name">ШЭДОУХАРТ</div><div class="char-role">Клерик Шар · Расшифровывает молитвенник ключом Н/НН</div></div></div>
+        <div class="quest-body"><em>«Написа__ые всеми письма» или «написа__ое им письмо»? Правильная буква откроет следующую страницу молитвенника. Помоги, прошу.»</em></div>
+        <div class="rule-box">
+          <strong>🌑 НН ИЛИ Н — АЛГОРИТМ</strong>
+          <p>«Написа__ое им» → «им» = зависимое слово → НН. «Написа__ое» без зависимых → «написать» (сов.вид) → НН. «Писа__ые правила» → «писать» (несов.вид) + нет зависимых → Н.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🌑 ШИФР ШЭДОУХАРТ</div>
+          <div class="p-text">Н или НН: «Написа__ое послание», «Писа__ые от руки слова», «Послание написа__о».</div>
+          <div class="p-ans">✓ НаписаНН ое (сов.вид) · ПисаН ые (несов.вид, нет зав.сл.) · НаписаН о (краткое = Н)</div>
+        </div>
+      </div>
+    </div>
+    <div class="quest-card qc-h">
+      <div class="qh"><div class="uni-badge">🧙 ХОГВАРТС · СНЕЙП</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🧪</div><div><div class="char-name">ПРОФЕССОР СНЕЙП</div><div class="char-role">«Приставочная бомба» в советском учебнике фармацевтики</div></div></div>
+        <div class="quest-body"><em>«Поттер! В рецепте написано "ПРИПОДНЯТЬ температуру" вместо "ПРЕПОДНЕСТИ к огню". Одна буква — взрыв. Объясни ПРЕ-/ПРИ- ВСЕМ. НЕМЕДЛЕННО.»</em></div>
+        <div class="rule-box">
+          <strong>🧪 ПРАВИЛО ПРЕ-/ПРИ-</strong>
+          <p><code>ПРИ-</code>: приближение (ПРИйти), присоединение (ПРИшить), неполнота (ПРИоткрыть). <code>ПРЕ-</code>: ОЧЕНЬ (ПРЕкрасный) или ПЕРЕ- (ПРЕодолеть=ПЕРЕшагнуть). Пары: прИступить (начать) / прЕступить (нарушить).</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🧪 ЭКСПЕРИМЕНТ СНЕЙПА</div>
+          <div class="p-text">ПРЕ- или ПРИ-: «__вратить», «__бить гвоздь», «__красный вид», «__открыть дверь».</div>
+          <div class="p-ans">✓ ПРЕвратить (=перевоплотить) · ПРИбить (присоединить) · ПРЕкрасный (очень!) · ПРИоткрыть (неполное действие)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ГРУППА V ═══════════════════ -->
+<hr class="group-sep">
+<section id="g5" class="g5">
+  <div class="group-header">
+    <div class="gh-icon">🏛</div>
+    <div>
+      <div class="gh-num">ГРУППА ПЯТАЯ</div>
+      <div class="gh-title">Архитектура предложения</div>
+      <div class="gh-tasks">Синтаксис · Пунктуация · Сочинение 13 · Задания 2–5, 9, 13</div>
+    </div>
+  </div>
+
+  <div class="topics-block">
+    <div class="tb-title" style="color:var(--g5)">ТЕМЫ КОДИФИКАТОРА</div>
+    <div class="topics-cols">
+      <div class="topic-chip"><strong>Грамматическая основа</strong>: подлежащее + сказуемое (ПГС, СГС, СИС)</div>
+      <div class="topic-chip"><strong>Обособленные члены</strong>: причастный оборот после определяемого, деепричастный оборот — всегда</div>
+      <div class="topic-chip"><strong>Вводные слова</strong>: во-первых, следовательно, конечно, по-моему — всегда запятые</div>
+      <div class="topic-chip"><strong style="color:#5a1a8a">★ БСП: знаки</strong>: запятая (перечисление), двоеточие (причина/пояснение), тире (следствие/противопоставление)</div>
+      <div class="topic-chip"><strong style="color:#5a1a8a">★ Виды придаточных</strong>: определительное (какой?), изъяснительное (что?), обстоятельственное (где? когда?)</div>
+      <div class="topic-chip"><strong>ССП</strong>: запятая перед и, но, а, однако, зато, или, либо</div>
+      <div class="topic-chip"><strong style="color:#5a1a8a">★ Сочинение 13.1</strong> — лингвистическая тема: самое сложное задание</div>
+      <div class="topic-chip"><strong>Сочинение 13.2</strong> — смысл фрагмента текста + 2 примера из текста + вывод</div>
+      <div class="topic-chip"><strong>Сочинение 13.3</strong> — нравственное понятие: оба примера ТОЛЬКО из текста (2026!)</div>
+    </div>
+  </div>
+
+  <div class="tb-title" style="color:var(--g4);margin-bottom:12px">💀 САМЫЕ СЛОЖНЫЕ — ГРУППА V</div>
+  <div class="hard-block">
+    <div class="hard-q lvl-skull">
+      <div class="hq-level"><span>💀</span>БСП</div>
+      <div class="hq-body"><strong>Знаки в БСП — 4 варианта!</strong><br>
+      <em>Запятая</em>: перечисление (Светило солнце, пели птицы).<br>
+      <em>Двоеточие</em>: вторая часть = причина или пояснение (вставь «а именно» / «потому что»).<br>
+      <em>Тире</em>: следствие или противопоставление (вставь «и поэтому» / «но»).<br>
+      <span class="hq-trap">🔺 Ловушка: «Пришёл — увидел — победил» = тире (быстрая смена).</span></div>
+    </div>
+    <div class="hard-q lvl-fire">
+      <div class="hq-level"><span>🔥</span>СПП</div>
+      <div class="hq-body"><strong>Виды придаточных — определить по вопросу!</strong><br>
+      <em>Определительное</em>: КАКОЙ? к существительному. Союзные слова: который, какой, чей.<br>
+      <em>Изъяснительное</em>: ЧТО? КОГО? к глаголу. Союзы: что, как, чтобы.<br>
+      <em>Обстоятельственное</em>: ГДЕ? КОГДА? ПОЧЕМУ? КАК?<br>
+      <span class="hq-trap">🔺 Ловушка: «Место, где он жил» — определительное! (какое место?), не место действия.</span></div>
+    </div>
+    <div class="hard-q lvl-warn">
+      <div class="hq-level"><span>⚠️</span>Сочинение 13.1</div>
+      <div class="hq-body"><strong>13.1 — самое сложное.</strong> Нужно ответить на лингвистический вопрос + 2 примера из текста с объяснением + вывод. Ошибка: дать примеры без объяснения ФУНКЦИИ. Алгоритм: тезис → пример 1 + «это помогает автору…» → пример 2 + «кроме того…» → «Таким образом…»</div>
+    </div>
+  </div>
+
+  <div class="lh-grid">
+    <div class="lh-card"><div class="lh-icon">🔷</div><div><strong>БСП: тест двоеточие/тире</strong><p>Двоеточие: вставь «потому что» или «а именно». Тире: вставь «и тогда» или «но». Подходит — ставь!</p></div></div>
+    <div class="lh-card"><div class="lh-icon">❓</div><div><strong>Придаточное: задай вопрос!</strong><p>КАКОЙ? → определительное. ЧТО/КОГО? → изъяснительное. ГДЕ/КОГДА/ПОЧЕМУ? → обстоятельственное.</p></div></div>
+    <div class="lh-card"><div class="lh-icon">📝</div><div><strong>Шаблон сочинения 13</strong><p>Тезис → Пример 1 + «это помогает/свидетельствует…» → Пример 2 → «Таким образом, [вывод]». Минимум 70 слов!</p></div></div>
+    <div class="lh-card"><div class="lh-icon">⚠️</div><div><strong>«Однако»: союз или вводное?</strong><p>В начале предложения → союз (нет запятой). В середине → вводное (запятые с двух сторон).</p></div></div>
+  </div>
+
+  <div class="quest-divider">🏛 КВЕСТЫ: АРХИТЕКТУРА ПРЕДЛОЖЕНИЯ В ТРЁХ МИРАХ 🏛</div>
+  <div class="quests-trio">
+    <div class="quest-card qc-w">
+      <div class="qh"><div class="uni-badge">⚔️ ВЕДЬМАК 3 · НИЛЬФГААРД</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🎖️</div><div><div class="char-name">ГОНЕЦ ЦИДАРИС</div><div class="char-role">Нильфгаардская разведка · Доставляет донесения Эмгыру</div></div></div>
+        <div class="quest-body"><em>«Геральт! Текст донесения: "Погода хорошая выступаем завтра наши войска готовы задержки не будет." Знаков нет! Один неверный знак — и Эмгыр поймёт приказ наоборот!»</em></div>
+        <div class="rule-box">
+          <strong>🎖️ БСП: ДВОЕТОЧИЕ ИЛИ ТИРЕ?</strong>
+          <p>«Погода хорошая — выступаем завтра» = <code>тире</code> (следствие: хорошая погода → поэтому выступаем).<br>«Я понял причину: он опоздал» = <code>двоеточие</code> (объяснение того, что в первой части).</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">⚔️ ДОНЕСЕНИЕ</div>
+          <div class="p-text">Двоеточие или тире: «Наступило утро ___ запели птицы.» · «Я понял причину ___ он не пришёл.»</div>
+          <div class="p-ans">✓ Тире (следствие утра — птицы запели). · Двоеточие (объяснение причины).</div>
+        </div>
+      </div>
+    </div>
+    <div class="quest-card qc-b">
+      <div class="qh"><div class="uni-badge">🧠 BALDUR'S GATE 3</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">🧠</div><div><div class="char-name">НЕТЕРБЕРЕГ</div><div class="char-role">Изучает СПП для усиления телепатических команд</div></div></div>
+        <div class="quest-body"><em>«"Я знаю, ЧТО ты думаешь" и "Книга, КОТОРУЮ я прочёл" — разные структуры сознания. Объясни мне типы придаточных, смертный, или стань частью коллективного разума.»</em></div>
+        <div class="rule-box">
+          <strong>🧠 ТИПЫ ПРИДАТОЧНЫХ: 3 ВОПРОСА</strong>
+          <p>КАКОЙ? от существительного → <code>определительное</code> (союзное слово «который»).<br>ЧТО? КОГО? от глагола → <code>изъяснительное</code>.<br>ГДЕ? КОГДА? ПОЧЕМУ? → <code>обстоятельственное</code>.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">🧠 ИСПЫТАНИЕ НЕТЕРБЕРЕГА</div>
+          <div class="p-text">Тип: «Место, где жил маг.» · «Она сказала, что придёт.» · «Дом, который искали.»</div>
+          <div class="p-ans">✓ Определительное (какое место?) · Изъяснительное (сказала что?) · Определительное (какой дом?)</div>
+        </div>
+      </div>
+    </div>
+    <div class="quest-card qc-h">
+      <div class="qh"><div class="uni-badge">🧙 ХОГВАРТС · ДУРМСТРАНГ</div></div>
+      <div class="qb">
+        <div class="char-line"><div class="char-emoji">📚</div><div><div class="char-name">ГЕРМИОНА ГРЕЙНДЖЕР</div><div class="char-role">Пишет сочинение 13.1 · Профессор МакГонагалл = строгий эксперт ОГЭ</div></div></div>
+        <div class="quest-body"><em>«Гарри, мне задали написать сочинение-рассуждение: "Какова роль тире в тексте?" Я нашла два примера — но МакГонагалл говорит: без вывода балл снижается! Как структурировать?»</em></div>
+        <div class="rule-box">
+          <strong>📚 СТРУКТУРА 13.1 (НОВОЕ 2026)</strong>
+          <p>1. Тезис: ответ на вопрос темы.<br>2. Пример 1 + объяснение ПОЧЕМУ именно здесь тире.<br>3. Пример 2 + другое объяснение.<br>4. Вывод: «Таким образом, тире помогает автору…»<br>Оба примера — только из текста! Мин. 70 слов.</p>
+        </div>
+        <div class="practice">
+          <div class="p-label">📚 СКЕЛЕТ ОТВЕТА ГЕРМИОНЫ</div>
+          <div class="p-text">Заполни: «Тире в тексте выполняет роль [тезис]. В предложении N автор использует тире, чтобы [функция 1]. В предложении M тире [функция 2]. Таким образом, [вывод].»</div>
+          <div class="p-ans">✓ Структура верна! Функции 1 и 2 должны быть РАЗНЫМИ (напр.: пропуск глагола в простом пред-нии + следствие в БСП).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<footer>
+  <span>ОГЭ Русский язык 2026 · 9 класс</span> · ФИПИ · Кодификатор · Спецификация<br>
+  <span>Ведьмак 3 © CD Projekt RED</span> · <span>Baldur's Gate 3 © Larian Studios</span> · <span>Гарри Поттер © J.K. Rowling / Warner Bros</span><br>
+  Все персонажи и вселенные принадлежат правообладателям · Образовательное использование
+</footer>
+</body>
+</html>
