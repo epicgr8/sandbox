@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Орфография · Институт советских исследований · Ведьмак</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d1117;
+    --bg2:   #111820;
+    --bg3:   #162030;
+    --bg4:   #1c2a3a;
+    --c-ger: #2d8a3e;
+    --c-cir: #c9912a;
+    --c-coe: #c0392b;
+    --c-yen: #8b5cf6;
+    --c-emh: #6b7280;
+    --text:  #dde6ee;
+    --muted: #7a90a4;
+    --border:  rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(201,145,42,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 5%  20%,  rgba(45,138,62,0.05)  0%, transparent 55%),
+      radial-gradient(ellipse 55% 40% at 95% 15%,  rgba(192,57,43,0.06)  0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 100%, rgba(139,92,246,0.04) 0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:72px 0 48px; position:relative; }
+  .hero::before {
+    content:'⚔️ ✦ ☭ ✦ ⚔️';
+    display:block; font-size:14px; letter-spacing:0.5em; opacity:0.3;
+    margin-bottom:24px; animation:fadein-slow 1.2s ease;
+  }
+  .hero::after {
+    content:''; display:block; margin:34px auto 0;
+    width:340px; max-width:90%; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,#c9912a,#c0392b,#2d8a3e,transparent);
+  }
+  .hero-eyebrow {
+    display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.24em;
+    color:#fff; background:var(--c-coe); text-transform:uppercase;
+    margin-bottom:24px; padding:5px 18px; border-radius:20px;
+  }
+  .hero-title {
+    font-size:clamp(42px,9vw,92px); font-weight:700;
+    line-height:0.92; margin-bottom:16px; letter-spacing:-0.025em;
+  }
+  .ht1 {
+    display:block;
+    background:linear-gradient(120deg,#c9912a 0%,#e8b84a 45%,#c0392b 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(201,145,42,0.4));
+    animation:fadein-slow 0.8s ease;
+  }
+  .ht2 {
+    display:block; font-size:0.27em; font-weight:500; letter-spacing:0.55em;
+    color:var(--muted); text-transform:uppercase; margin:10px 0 8px;
+    -webkit-text-fill-color:var(--muted); animation:fadein-slow 1s ease;
+  }
+  .ht3 {
+    display:block;
+    background:linear-gradient(120deg,#c0392b 0%,#e74c3c 35%,#c9912a 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(192,57,43,0.35));
+    animation:fadein-slow 1.1s ease;
+  }
+  .hero-sub { font-size:13px; color:var(--muted); letter-spacing:0.04em; }
+  @keyframes fadein-slow { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:var(--c-coe); color:#fff; }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.4); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-ger::after { background:var(--c-ger); }
+  .rule-card.c-cir::after { background:var(--c-cir); }
+  .rule-card.c-coe::after { background:var(--c-coe); }
+  .rule-card.c-yen::after { background:var(--c-yen); }
+  .rule-card.c-emh::after { background:var(--c-emh); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.65; }
+  .rule-body strong { color:var(--text); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
+  .c-cir .rule-formula { background:rgba(201,145,42,0.15); color:#e8b84a; }
+  .c-ger .rule-formula { background:rgba(45,138,62,0.15); color:#4ade80; }
+  .c-coe .rule-formula { background:rgba(192,57,43,0.15); color:#f87171; }
+  .c-yen .rule-formula { background:rgba(139,92,246,0.15); color:#a78bfa; }
+  .c-emh .rule-formula { background:rgba(107,114,128,0.15); color:#9ca3af; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:#fbbf24; }
+  .t-blue   { color:#60a5fa; font-weight:700; }
+  .t-green  { color:#4ade80; font-weight:700; }
+  .t-purple { color:#a78bfa; font-weight:700; }
+  .t-orange { color:#e8b84a; font-weight:700; }
+  .t-red    { color:#f87171; font-weight:700; }
+  .t-teal   { color:#2dd4bf; font-weight:700; }
+  .quiz-lore { font-size:13px; color:var(--muted); line-height:1.6; margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+
+  /* QUIZ BANNER */
+  .quiz-banner { border-radius:16px; overflow:hidden; margin-bottom:22px; background:var(--bg2); border:1px solid var(--border2); display:grid; grid-template-columns:220px 1fr; }
+  .quiz-banner-img { width:220px; height:100%; min-height:160px; object-fit:cover; object-position:center top; display:block; }
+  .quiz-banner-body { padding:20px 24px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+  @media(max-width:560px){
+    .quiz-banner { grid-template-columns:1fr; }
+    .quiz-banner-img { width:100%; height:180px; min-height:unset; }
+  }
+  .quiz-title { font-size:clamp(17px,3vw,24px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--muted); }
+
+  /* QUIZ UI */
+  .quiz-progress-wrap { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .quiz-score-badge { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:#4ade80; white-space:nowrap; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:var(--c-coe); border-radius:3px; width:0%; transition:width 0.4s; }
+  .quiz-counter { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); white-space:nowrap; }
+
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:10px 16px 8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--bg3); display:flex; align-items:center; gap:8px; }
+  .qh-src { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .src-ger { background:rgba(45,138,62,0.2);  color:#4ade80; }
+  .src-cir { background:rgba(201,145,42,0.2); color:#e8b84a; }
+  .src-coe { background:rgba(192,57,43,0.2);  color:#f87171; }
+  .src-yen { background:rgba(139,92,246,0.2); color:#a78bfa; }
+  .src-emh { background:rgba(107,114,128,0.2);color:#9ca3af; }
+
+  .question-body { padding:20px 20px 0; }
+  .question-text { font-size:15px; line-height:1.65; margin-bottom:16px; }
+  .hero-name { font-weight:700; }
+  .hero-ger { color:#4ade80; }
+  .hero-cir { color:#e8b84a; }
+  .hero-coe { color:#f87171; }
+  .hero-yen { color:#a78bfa; }
+  .hero-emh { color:#9ca3af; }
+  .term { font-style:italic; color:#e8b84a; font-weight:600; }
+
+  .opts { display:grid; gap:8px; margin-bottom:0; }
+  .opt-btn { width:100%; text-align:left; padding:12px 16px; font-size:14px; font-family:'Outfit',sans-serif; background:var(--bg); border:1.5px solid var(--border2); border-radius:10px; cursor:pointer; transition:border-color 0.15s,background 0.15s; line-height:1.45; color:var(--text); }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-cir); background:rgba(201,145,42,0.06); }
+  .opt-btn.correct { background:rgba(21,128,61,0.15); border-color:#15803d; color:#86efac; font-weight:600; }
+  .opt-btn.wrong   { background:rgba(185,28,28,0.12); border-color:#b91c1c; color:#fca5a5; }
+
+  .feedback-box { padding:12px 16px; font-size:13px; line-height:1.55; display:none; border-top:1px solid var(--border); }
+  .feedback-box.correct-fb { background:rgba(21,128,61,0.10); color:#86efac; }
+  .feedback-box.wrong-fb   { background:rgba(185,28,28,0.08); color:#fca5a5; }
+
+  .question-footer { padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { padding:10px 26px; font-size:14px; font-family:'Outfit',sans-serif; font-weight:600; background:var(--c-coe); color:#fff; border:none; border-radius:10px; cursor:pointer; display:none; transition:opacity 0.15s; }
+  .next-btn:hover { opacity:0.88; }
+
+  .question-animate { animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 24px; }
+  .results-emoji { font-size:56px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,32px); font-weight:700; color:var(--text); margin-bottom:10px; }
+  .results-score { font-family:'Space Mono',monospace; font-size:28px; font-weight:700; color:var(--c-cir); margin-bottom:6px; }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:16px; }
+  .results-story { font-size:15px; color:var(--text); max-width:540px; margin:0 auto 20px; line-height:1.65; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(201,145,42,0.15); color:#e8b84a; }
+  .rank-a { background:rgba(45,138,62,0.15);  color:#4ade80; }
+  .rank-b { background:rgba(139,92,246,0.15); color:#a78bfa; }
+  .rank-c { background:rgba(192,57,43,0.15);  color:#f87171; }
+  .rank-d { background:rgba(107,114,128,0.12);color:#9ca3af; }
+  .restart-btn { padding:12px 32px; font-size:15px; font-family:'Outfit',sans-serif; font-weight:700; background:var(--c-coe); color:#fff; border:none; border-radius:12px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.88; }
+
+  /* NAV */
+  .quests-nav { margin-top:48px; border-top:1px solid var(--border2); padding-top:28px; }
+  .quests-nav-title { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .quests-pills { display:grid; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.3); }
+  .quest-pill.quest-active { border-color:var(--c-coe); background:rgba(192,57,43,0.06); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(192,57,43,0.2); color:#f87171; }
+
+  :focus-visible { outline:2px solid var(--c-cir); outline-offset:3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Русский язык · 9 класс · Квест 1 · Задание 5</div>
+    <h1 class="hero-title">
+      <span class="ht1">Институт</span>
+      <span class="ht2">✦ советских ✦</span>
+      <span class="ht3">исследований</span>
+    </h1>
+    <p class="hero-sub">Орфография · 30 испытаний · Ведьмак 3 × Нильфгаард × СССР</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Шпора — запомни до старта</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-cir">
+      <div class="rule-icon">🌿</div>
+      <div class="rule-title">Чередующиеся корни I: -лаг-/-лож-, -раст-/-рос-, -гар-/-гор-</div>
+      <div class="rule-body">
+        <span class="rule-formula">-лаг- / -лож-</span><br>
+        Есть суффикс <span class="t-orange">-А-</span> после корня → <span class="t-orange">-ЛАГ-</span>: слАГать, полАГать<br>
+        Нет суффикса -А- → <span class="t-green">-ЛОЖ-</span>: полОЖить, прилОЖение<br><br>
+        <span class="rule-formula">-раст- / -рос-</span><br>
+        Перед <span class="t-orange">СТ</span> или <span class="t-orange">Щ</span> → <span class="t-orange">-РАСТ-/-РАЩ-</span>: рАСТение, вырАЩивать<br>
+        В остальных случаях → <span class="t-green">-РОС-</span>: вырОСли, порОСль<br>
+        <span class="warn">⚠️ Исключения:</span> рОСток, пОДросток, рОСтов, рОСтислав; <span class="t-teal">отрАСль</span><br><br>
+        <span class="rule-formula">-гар- / -гор-</span><br>
+        Без ударения → <span class="t-green">-ГОР-</span>: загОРать, прогОРел<br>
+        Под ударением → <span class="t-orange">-ГАР-</span>: загАР, угАР
+      </div>
+      <div class="rule-assoc">🌟 Цири: «В советских архивах я нашла слово "загОРать" — ударение не на корень, значит О. Правило работает даже в секретных документах.»</div>
+    </div>
+
+    <div class="rule-card c-ger">
+      <div class="rule-icon">⚔️</div>
+      <div class="rule-title">Чередующиеся корни II: -кас-/-кос-, -бир-/-бер-, -мир-/-мер-</div>
+      <div class="rule-body">
+        <span class="rule-formula">-кас- / -кос-</span><br>
+        Есть <span class="t-orange">-А-</span> после корня → <span class="t-orange">-КАС-</span>: кАСаться, кАСательная<br>
+        Нет -А- → <span class="t-green">-КОС-</span>: кОСнуться, прикОСновение<br><br>
+        <span class="rule-formula">-бир-/-бер-, -мир-/-мер-<br>-тир-/-тер-, -пир-/-пер-</span><br>
+        Есть суффикс <span class="t-orange">-А-</span> после корня → пишем <span class="t-orange">И</span>: собИРАть, замИРАть<br>
+        Нет суффикса -А- → пишем <span class="t-green">Е</span>: соБЕРу, замЕРеть<br><br>
+        <span class="warn">💡 Единое правило для обеих групп:</span> суффикс -А- после корня → первый вариант (-ЛАГ-, -КАС-, -БИР-, -МИР-); нет суффикса -А- → второй (-ЛОЖ-, -КОС-, -БЕР-, -МЕР-).
+      </div>
+      <div class="rule-assoc">🗡️ Геральт: «Ведьмаки умеют замирАть (замир-А-ть) и замереть (замер-еть). Суффикс -А- — вот секрет.»</div>
+    </div>
+
+    <div class="rule-card c-coe">
+      <div class="rule-icon">📋</div>
+      <div class="rule-title">Приставки: з/с и пре-/при-</div>
+      <div class="rule-body">
+        <span class="rule-formula">без-/бес-, воз-/вос-, из-/ис-<br>раз-/рас-, вз-/вс-, низ-/нис-</span><br>
+        Перед <span class="t-orange">звонким</span> согласным → <span class="t-orange">З</span>: беЗграмотный, раЗжечь<br>
+        Перед <span class="t-red">глухим</span> согласным → <span class="t-red">С</span>: беСполезный, иСтратить<br><br>
+        <span class="rule-formula">пре- / при-</span><br>
+        <span class="t-orange">ПРЕ-</span> = «очень» или «пере-»: прЕкрасный (= очень), прЕодолеть (= пере-)<br>
+        <span class="t-green">ПРИ-</span> = приближение, присоединение, неполнота, рядом:<br>
+        прИбыть (приближение), прИшить (присоединение), прИоткрыть (неполнота)<br><br>
+        <span class="warn">⚠️ Пары-ловушки:</span> прИступить (начать) ≠ прЕступить (нарушить)<br>
+        прИдать (придать форму) ≠ прЕдать (изменить)
+      </div>
+      <div class="rule-assoc">☭ Лейтенант Цоэ: «В Нильфгаарде за "безПолезный" вместо "беСполезный" — разжалование. Перед П — глухой.»</div>
+    </div>
+
+    <div class="rule-card c-yen">
+      <div class="rule-icon">📜</div>
+      <div class="rule-title">Н / НН в прилагательных и причастиях</div>
+      <div class="rule-body">
+        <strong>Прилагательные от существительных:</strong><br>
+        Суфф. <span class="t-orange">-ОНН-/-ЕНН-</span> → <span class="t-orange">НН</span>: станциОННый, государствЕННый<br>
+        Суфф. <span class="t-red">-АН-/-ЯН-/-ИН-</span> → <span class="t-red">Н</span>: кожАНый, глинЯНый, лебедИНый<br>
+        <span class="warn">⚠️ Три исключения:</span> <span class="t-teal">деревЯНный, стеклЯНный, оловЯНный</span> — НН!<br><br>
+        <strong>Причастия полные:</strong><br>
+        <span class="t-orange">НН</span> если: есть приставка (не НЕ-) <em>или</em> есть зависимое слово <em>или</em> глагол СВ<br>
+        <span class="t-red">Н</span> если: одиночное, без приставки, от глагола НСВ: жАРеная рыба<br><br>
+        <strong>Краткие причастия:</strong> <span class="t-teal">ВСЕГДА Н</span>: задача решеНа, письмо написаНо<br><br>
+        <strong>Наречия:</strong> сохраняют НН исходного слова: увереНН о (от уверенный)
+      </div>
+      <div class="rule-assoc">💜 Йеннифэр: «Краткое причастие — одно Н. Всегда. Исключений нет. Запомни как заклинание.»</div>
+    </div>
+
+    <div class="rule-card c-coe">
+      <div class="rule-icon">✖️</div>
+      <div class="rule-title">НЕ с разными частями речи</div>
+      <div class="rule-body">
+        <span class="t-red">Глаголы</span> → <span class="t-red">всегда раздельно</span>: не знать, не прийти<br>
+        Кроме слов без НЕ: <span class="t-orange">ненавидеть, недоумевать, нездоровится</span><br><br>
+        <span class="t-red">Краткие причастия</span> → <span class="t-red">всегда раздельно</span>: не написан, не решена<br><br>
+        <span class="t-orange">Полные причастия</span> → слитно (нет зависимых, нет противопоставления): неЗАкрытая дверь<br>
+        → раздельно (есть зависимое слово или «а»): не закрытая <em>мной</em> дверь<br><br>
+        <span class="t-orange">Сущ. / прилагательные</span> → слитно (можно заменить синонимом): неудача (= провал)<br>
+        → раздельно (есть противопоставление с «а» или «вовсе не»): не смелый, <em>а</em> трусливый<br><br>
+        Слова без НЕ (всегда слитно): <span class="t-teal">неряха, нелепый, небрежный</span>
+      </div>
+      <div class="rule-assoc">☭ Цоэ: «В советской канцелярии "нелюбить" — орфографическое преступление. Глагол — всегда раздельно.»</div>
+    </div>
+
+    <div class="rule-card c-ger">
+      <div class="rule-icon">🔧</div>
+      <div class="rule-title">Суффиксы глаголов: -ова-/-ыва- и -тся/-ться</div>
+      <div class="rule-body">
+        <span class="rule-formula">-ова-/-ева- vs -ыва-/-ива-</span><br>
+        Поставь глагол в форму «<strong>я</strong>»:<br>
+        Заканчивается на <span class="t-orange">-ую/-юю</span> → суффикс <span class="t-orange">-ОВА-/-ЕВА-</span>: советОВАть (я советую)<br>
+        Заканчивается на <span class="t-green">-ываю/-иваю</span> → суффикс <span class="t-green">-ЫВА-/-ИВА-</span>: рассказЫВАть (я рассказываю)<br><br>
+        <span class="rule-formula">-тся vs -ться</span><br>
+        Задай вопрос «<strong>что делает?</strong>» или «<strong>что делают?</strong>» → <span class="t-red">-ТСЯ</span>: он строится<br>
+        Задай вопрос «<strong>что делать?</strong>» → <span class="t-orange">-ТЬСЯ</span>: нужно строиться<br>
+        Быстрая проверка: в вопросе есть мягкий знак («делатЬ?») — значит, он нужен и в слове.
+      </div>
+      <div class="rule-assoc">🗡️ Геральт: «Рассказывать (я рассказываю → -ываю → -ЫВА-). Советовать (я советую → -ую → -ОВА-). Провери себя через «я».»</div>
+    </div>
+
+    <div class="rule-card c-emh">
+      <div class="rule-icon">📎</div>
+      <div class="rule-title">Слитно / раздельно: тоже, также, чтобы</div>
+      <div class="rule-body">
+        <span class="rule-formula">тоже / то же</span><br>
+        <span class="t-orange">Тоже</span> (слитно) — союз: замени на «и» или «также» → смысл сохранился? → слитно<br>
+        «Он <em>тоже</em> пришёл» = «Он <em>и</em> пришёл» ✓<br>
+        <span class="t-green">То же</span> (раздельно) — местоим. + частица: «же» можно убрать или переставить<br>
+        «То же самое» → «то самое» ✓<br><br>
+        <span class="rule-formula">чтобы / что бы</span><br>
+        <span class="t-orange">Чтобы</span> (слитно) — союз цели: «бы» нельзя убрать/перенести<br>
+        «Пришёл, <em>чтобы</em> помочь» — «бы» к «помочь» не перенести<br>
+        <span class="t-green">Что бы</span> (раздельно) — местоим. + частица: «бы» переносится<br>
+        «<em>Что бы</em> ни случилось» → «что ни случилось бы» ✓<br><br>
+        <span class="rule-formula">также / так же</span><br>
+        <span class="t-orange">Также</span> (слитно) — союз: замени на «и» или «тоже»<br>
+        <span class="t-green">Так же</span> (раздельно) — «же» можно убрать: «так хорошо»
+      </div>
+      <div class="rule-assoc">🦅 Эмгыр: «В имперском указе каждое "чтобы" и "тоже" на своём месте. Нильфгаард — это порядок.»</div>
+    </div>
+
+  </div><!-- /rules-grid -->
+
+  <!-- КВИЗ -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Испытание от лейтенанта Цоэ</span><div class="sec-line"></div></div>
+
+  <div class="quiz-banner">
+    <img class="quiz-banner-img" src="https://i.imgur.com/placeholder.jpg" alt="Нильфгаард" onerror="this.style.display='none'">
+    <div class="quiz-banner-body">
+      <div class="quiz-title">☭ Разбор документов Института</div>
+      <div class="quiz-sub">30 вопросов · 2 попытки · Орфография · Задание 5 ОГЭ</div>
+      <div class="quiz-lore">Цири случайно провалилась через портал в советскую Москву 1952 года. Вернулась с пачкой документов — «Правдой» за 14 октября и военным донесением Генштаба. Эмгыр, увидев в советской бюрократии идеальную модель империи, основал тайный Институт советских исследований. Лейтенант Цоэ хватает Геральта в порту: «Дело имперской важности! Если будет тяжело — зови Йеннифэр.»</div>
+    </div>
+  </div>
+
+  <div class="quiz-progress-wrap">
+    <span id="score-disp" class="quiz-score-badge">⚔ 0 верно</span>
+    <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+    <span class="quiz-counter" id="qcnt">1 / 30</span>
+  </div>
+
+  <div class="question-card question-animate" id="qcard">
+    <div class="question-header" id="qheader"></div>
+    <div class="question-body">
+      <div class="question-text" id="qtext"></div>
+      <div class="opts" id="qopts"></div>
+      <div class="feedback-box" id="qfb"></div>
+    </div>
+    <div class="question-footer">
+      <button class="next-btn" id="qnext">Следующий документ →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div><br>
+    <button class="restart-btn" id="restart">Разобрать документы снова ☭</button>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Русский язык — все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill quest-active" href="rus_quest1_ortho.html">
+        <span class="qp-num" style="background:var(--c-coe)">Р1</span>
+        <span class="qp-info"><span class="qp-name">Институт советских исследований</span><span class="qp-sub">Орфография · Задание 5 · Ведьмак × СССР</span></span>
+        <span class="qp-badge qp-here">Ты здесь</span>
+      </a>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#374151">Р2</span>
+        <span class="qp-info"><span class="qp-name">Синтаксис и пунктуация</span><span class="qp-sub">Задания 2–4 · Скоро</span></span>
+        <span class="qp-badge">Скоро</span>
+      </span>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#374151">Р3</span>
+        <span class="qp-info"><span class="qp-name">Смысловой анализ текста</span><span class="qp-sub">Задания 6, 9–10 · Скоро</span></span>
+        <span class="qp-badge">Скоро</span>
+      </span>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#374151">Р4</span>
+        <span class="qp-info"><span class="qp-name">Лексика и выразительность</span><span class="qp-sub">Задания 7, 8, 11, 12 · Скоро</span></span>
+        <span class="qp-badge">Скоро</span>
+      </span>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#374151">Р5</span>
+        <span class="qp-info"><span class="qp-name">Изложение и сочинение</span><span class="qp-sub">Задания 1 и 13 · Скоро</span></span>
+        <span class="qp-badge">Скоро</span>
+      </span>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:linear-gradient(135deg,#c0392b,#8b5cf6);font-size:16px">∞</span>
+        <span class="qp-info"><span class="qp-name">Языковой марафон</span><span class="qp-sub">Все темы русского · Скоро</span></span>
+        <span class="qp-badge">Марафон</span>
+      </span>
+    </div>
+    <div style="margin-top:16px">
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#1f2937;font-size:16px">🏠</span>
+        <span class="qp-info"><span class="qp-name">Главная страница</span><span class="qp-sub">Расписание ОГЭ · Все предметы</span></span>
+        <span class="qp-badge">На главную</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+const srcLabels = {
+  ger: { cls:'src-ger', text:'Геральт' },
+  cir: { cls:'src-cir', text:'Цири' },
+  coe: { cls:'src-coe', text:'Лейтенант Цоэ' },
+  yen: { cls:'src-yen', text:'Йеннифэр' },
+  emh: { cls:'src-emh', text:'Эмгыр' },
+};
+
+const allQuestions = [
+
+  // ═══ ТЕМА 1: ЧЕРЕДУЮЩИЕСЯ КОРНИ I (-лаг-/-лож-, -раст-/-рос-, -гар-/-гор-) ═══
+
+  {
+    src:'coe', topic:'Корни -лаг-/-лож-',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> диктует писарю слова из советского донесения. В каком слове на месте пропуска пишется буква <strong>О</strong>?",
+    opts:['пол_жение','пол_гать','изл_гать','сл_гаемое'],
+    ans:0,
+    fb:"✦ Верно! Корень -ЛОЖ- пишется, когда после него нет суффикса -А-: полОЖение, прилОЖить. Если после корня есть суффикс -А- — пишем -ЛАГ-: полАГать, излАГать, слАГаемое.",
+    trap:"Ловушка: суффикс -А- после корня — сигнал для -ЛАГ-. Нет -А- — пишем -ЛОЖ-.",
+    hint:"Посмотри на слог сразу после корня. Там есть -А-? Тогда нужна А в корне. Нет -А- — нужна О.",
+    ref:"Чередующиеся корни"
+  },
+
+  {
+    src:'cir', topic:'Корни -раст-/-рос-',
+    text:"<span class='hero-name hero-cir'>Цири</span> переводит записи советского ботаника. В каком слове на месте пропуска пишется буква <strong>А</strong>?",
+    opts:['р_сли','р_стение','р_сток','пор_сль'],
+    ans:1,
+    fb:"✦ Верно! Корень -РАСТ- пишется перед сочетанием СТ или Щ: рАСТение. Без СТ и Щ — пишем -РОС-: рОСли, порОСль. Исключение: рОСток — несмотря на СТ, пишется О (словарное слово).",
+    trap:"Ловушка: «росток» — классическое исключение на ОГЭ! Перед СТ должно быть А, но «росток» — исключение с О.",
+    hint:"Ищи в слове сочетание СТ или Щ после корня — это сигнал для А. Но одно слово на СТ является исключением.",
+    ref:"Чередующиеся корни"
+  },
+
+  {
+    src:'ger', topic:'Корни -гар-/-гор-',
+    text:"<span class='hero-name hero-ger'>Геральт</span> просматривает советскую газету. Какое слово написано <strong>правильно</strong>?",
+    opts:['загарать','загарел','загорать','прогарел'],
+    ans:2,
+    fb:"✦ Верно! Без ударения пишем -ГОР-: загОРать, загОРел, прогОРел. Под ударением — -ГАР-: загАР, угАР. Проверяй: ударение на корне — слышишь А или О? Нет ударения — пишем О.",
+    trap:"Ловушка: «загарел», «загарать» — ошибки, у обоих корень без ударения → -ГОР-. «Загар» — правильно (под ударением).",
+    hint:"Поставь ударение. На корень падает — слышишь А или О? Ударения нет — пишем О.",
+    ref:"Чередующиеся корни"
+  },
+
+  {
+    src:'yen', topic:'Корни -кас-/-кос-',
+    text:"<span class='hero-name hero-yen'>Йеннифэр</span> исправляет описки в донесении. В каком слове на месте пропуска пишется буква <strong>О</strong>?",
+    opts:['к_саться','к_сательная','к_сание','прик_снуться'],
+    ans:3,
+    fb:"✦ Верно! Корень -КОС- — когда после него нет суффикса -А-: прикОСнуться. Если после корня есть суффикс -А- — пишем -КАС-: кАСаться, кАСательная, кАСание (кас-а-ние).",
+    trap:"Ловушка: «касание» — суффикс -НИ- виден сразу, но до него тоже есть -А- (кас-А-ние), поэтому -КАС-.",
+    hint:"Ищи суффикс -А- между корнем и окончанием: кас-А-ться. Нет -А-? Тогда -КОС-.",
+    ref:"Чередующиеся корни"
+  },
+
+  {
+    src:'emh', topic:'Корни -бир-/-бер-',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> проверяет рапорт разведки. Какое слово написано <strong>правильно</strong>?",
+    opts:['собирать','соберать','сабирать','сберать'],
+    ans:0,
+    fb:"✦ Верно! Корень -БИР- — когда после него есть суффикс -А-: собИРАть (соб-ир-А-ть). Без суффикса -А- — корень -БЕР-: соБЕРу, соБЕРёт. «Соберать», «сберать», «сабирать» — всё ошибки.",
+    trap:"Ловушка: «соберать» — частая ошибка. «Собрать» — без суффикса -А- (другая форма того же глагола, корень -БР-). Именно «собирАть» — суффикс -А- есть → -БИР-.",
+    hint:"Есть ли -А- после корня? Со-бир-А-ть — да. Значит нужен корень с И.",
+    ref:"Чередующиеся корни"
+  },
+
+  {
+    src:'cir', topic:'Корни -мир-/-мер-',
+    text:"<span class='hero-name hero-cir'>Цири</span> читает вслух советскую листовку. В каком слове на месте пропуска пишется буква <strong>И</strong>?",
+    opts:['зам_реть','зам_рать','ум_реть','пром_рзнуть'],
+    ans:1,
+    fb:"✦ Верно! Корень -МИР- — когда после него есть суффикс -А-: замИРАть (зам-ир-А-ть). Без суффикса -А- — корень -МЕР-: замЕРеть, умЕРеть. «Промёрзнуть» — другой корень (-мёрз-).",
+    trap:"Ловушка: «промёрзнуть» — это корень -мёрз- (мороз), он не чередующийся. Не путай с -мир-/-мер-.",
+    hint:"Проверь каждое слово: есть ли суффикс -А- сразу после корня? Какой из четырёх вариантов содержит этот суффикс?",
+    ref:"Чередующиеся корни"
+  },
+
+
+  // ═══ ТЕМА 2: ПРИСТАВКИ ═══
+
+  {
+    src:'coe', topic:'Приставки на з/с — найди ошибку',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> проверяет рапорт. В каком слове <strong>допущена орфографическая ошибка</strong>?",
+    opts:['расцветать','безграмотный','изтратить','разжечь'],
+    ans:2,
+    fb:"✦ Верно! «Изтратить» — ошибка: перед Т (глухой) приставка на -з/-с оканчивается на С, нужно «иСтратить». Расцветать (Ц — глухой → рас-), безграмотный (Г — звонкий → без-), разжечь (Ж — звонкий → раз-) — все верны.",
+    trap:"Ловушка: Ж — звонкий (разжечь), Г — звонкий (безграмотный), Ц — глухой (расцветать). Буква Т — тоже глухая, поэтому не «из-», а «ис-».",
+    hint:"Посмотри на первую букву после приставки в каждом слове. Она звонкая или глухая? Применяй правило: перед глухой → С, перед звонкой → З.",
+    ref:"Приставки на з/с"
+  },
+
+  {
+    src:'ger', topic:'Приставка пре- (значение «пере-»)',
+    text:"<span class='hero-name hero-ger'>Геральт</span> читает плакат: «Партия призывает __одолеть трудности!» Какой вариант <strong>правильный</strong>?",
+    opts:['приодолеть','пероодолеть','периодолеть','преодолеть'],
+    ans:3,
+    fb:"✦ Верно! ПРЕ- пишется, если значение = «пере-» или «очень»: прЕодолеть = перешагнуть через трудности. ПРИ- означало бы приближение или присоединение — здесь не подходит.",
+    trap:"Ловушка: «пере-» и «пре-» не одно и то же по написанию. В слове именно приставка ПРЕ-, а не переписанная приставка «пере-».",
+    hint:"Значение слова «__одолеть трудности» = перешагнуть через них, победить. Это значение «пере-». Какая приставка соответствует значению «пере-»?",
+    ref:"Приставки пре-/при-"
+  },
+
+  {
+    src:'coe', topic:'Приставка при- (приближение)',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> зачитывает донесение: «Подкрепление __было ночью — достигло расположения отряда». Какое слово написано <strong>правильно</strong>?",
+    opts:['прибыло','пребыло','прыбыло','прьбыло'],
+    ans:0,
+    fb:"✦ Верно! ПРИ-было — приставка ПРИ- со значением приближения, достижения цели: прийти, приехать, прибыть. ПРЕ- не подходит — здесь нет значения «очень» или «пере-».",
+    trap:"Ловушка: это не «прЕбыло» (как «пребывать» = находиться), а «прИбыло» (= прибыть, достичь). Разные слова!",
+    hint:"Подкрепление... что сделало? Достигло места, подошло. Это значение приближения. Какая приставка означает приближение?",
+    ref:"Приставки пре-/при-"
+  },
+
+  {
+    src:'cir', topic:'Приставки при-/пре- — пара приступить/преступить',
+    text:"<span class='hero-name hero-cir'>Цири</span> расшифровывает советскую телеграмму: «Рабочие __ступили к выполнению плана». Какой вариант написан <strong>правильно</strong>?",
+    opts:['преступили','приступили','прыступили','преступали'],
+    ans:1,
+    fb:"✦ Верно! ПРИступить = начать (ПРИ- = приближение к действию). ПРЕступить = нарушить (ПРЕ- = переступить через запрет). Контекст «приступили к плану» = начали работу — только ПРИ-.",
+    trap:"Ловушка ОГЭ: «приступить» и «преступить» — классическая пара. «Приступить к работе» = начать. «Преступить закон» = нарушить.",
+    hint:"Рабочие начали выполнять план — это приближение к действию. Какая приставка означает приближение?",
+    ref:"Приставки пре-/при-"
+  },
+
+  {
+    src:'emh', topic:'Неизменяемые приставки',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> диктует текст указа. Какое слово написано <strong>правильно</strong>?",
+    opts:['аттгулять','одтгулять','отгулять','оттгулять'],
+    ans:2,
+    fb:"✦ Верно! Приставка ОТ- — неизменяемая, всегда пишется именно так. Приставки ПОД-, НАД-, ОТ-, ОБ-, ВЫ-, ДО-, С- никогда не меняются вне зависимости от следующего звука.",
+    trap:"Ловушка: неизменяемые приставки (ОТ-, ПОД-, НАД-...) не подчиняются правилу «з/с». Они всегда одинаковые.",
+    hint:"Это одна из неизменяемых приставок. Она пишется всегда одинаково, независимо от того, звонкий или глухой стоит дальше.",
+    ref:"Приставки неизменяемые"
+  },
+
+
+  // ═══ ТЕМА 3: Н / НН ═══
+
+  {
+    src:'coe', topic:'НН в суффиксе -ЕНН-',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> заполняет бланк. Какое слово написано <strong>правильно</strong>?",
+    opts:['государствеая','государственная','государственнная','государствнная'],
+    ans:1,
+    fb:"✦ Верно! Суффикс -ЕНН- даёт НН: государствЕНН ая, станциОНН ый, традициОНН ый. Суффикс -ЕНН- — один из «удвоенных» суффиксов.",
+    trap:"Ловушка: не пишите три Н подряд (государственнная) — НН это ровно две буквы Н.",
+    hint:"Суффикс -ЕНН- — в нём уже два Н. Сколько Н надо написать в слове?",
+    ref:"Н/НН в прилагательных"
+  },
+
+  {
+    src:'ger', topic:'НН в причастии — зависимое слово',
+    text:"<span class='hero-name hero-ger'>Геральт</span> читает: «Вяза__ые <em>солдатами</em> узлы не держатся». Сколько Н на месте пропуска?",
+    opts:['Н — от глагола несовершенного вида','Н — нет приставки','НН — есть зависимое слово «солдатами»','НН — слово стоит в конце предложения'],
+    ans:2,
+    fb:"✦ Верно! Полное причастие с зависимым словом пишется с НН: «вязанНые солдатами» — «солдатами» (кем?) — это зависимое слово, значит НН. Без зависимого: «вязаная шапка» — одно Н.",
+    trap:"Ловушка: без зависимых слов «вязаная» — одно Н (прилагательное). Но добавь «вязанная кем-то» — уже НН (причастие с зависимым).",
+    hint:"Есть ли слово, отвечающее на вопрос «кем?», «чем?», «где?» рядом с причастием? Вяза__ые — кем? Солдатами.",
+    ref:"НН в причастиях"
+  },
+
+  {
+    src:'cir', topic:'Краткое причастие — всегда Н',
+    text:"<span class='hero-name hero-cir'>Цири</span> читает донесение: «Задание выполне__ командиром». Сколько Н на месте пропуска?",
+    opts:['НН — глагол совершенного вида','НН — есть зависимое слово «командиром»','НН — суффикс причастия','Н — краткое причастие всегда пишется с одним Н'],
+    ans:3,
+    fb:"✦ Верно! Краткие причастия — всегда одно Н: задание выполнеН о, дверь открытА, письмо написаН о. Это правило без исключений.",
+    trap:"Ловушка: полное причастие «выполненный» — НН (совершенный вид), но его краткая форма «выполнен» — всегда одно Н.",
+    hint:"Какая это форма — полная или краткая? Можно ли сказать «выполненное задание»? Если да, то «выполнено» — краткое.",
+    ref:"НН в причастиях"
+  },
+
+  {
+    src:'yen', topic:'Одиночное прилагательное без приставки — Н',
+    text:"<span class='hero-name hero-yen'>Йеннифэр</span> проверяет опись советской столовой. Какое слово написано <strong>правильно</strong>?",
+    opts:['жареная рыба','жаренная рыба','жареннная рыба','жарённая рыба'],
+    ans:0,
+    fb:"✦ Верно! «Жареная» — одно Н: глагол «жарить» несовершенного вида, нет приставки, нет зависимых слов → отглагольное прилагательное с Н. С зависимым: «жаренная на масле» — НН.",
+    trap:"Ловушка: «жаренная на масле» — НН (зависимое слово). «Жареная рыба» — Н (одиночное, без зависимых, от глагола НСВ).",
+    hint:"Есть ли приставка? Нет. Есть ли зависимое слово (кем? чем? где? на чём?)? Нет. Глагол совершенного вида? «Жарить» — нет. Всё три «нет» — одно Н.",
+    ref:"НН в причастиях"
+  },
+
+  {
+    src:'emh', topic:'Приставка → НН в причастии',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> описывает трофеи Нильфгаарда. Какое слово написано <strong>правильно</strong>?",
+    opts:['покрашеная стена','покрашения стена','покрашенаая стена','покрашенная стена'],
+    ans:3,
+    fb:"✦ Верно! «Покрашенная» — НН: есть приставка ПО- (не НЕ-). Наличие приставки (кроме НЕ-) — одно из трёх условий НН в причастии.",
+    trap:"Ловушка: «покрашеная» — распространённая ошибка. Приставка ПО- есть → НН обязательно.",
+    hint:"Есть ли в слове приставка? Если да — и это не НЕ- — значит выполняется одно из условий для НН. Проверь каждый вариант.",
+    ref:"НН в причастиях"
+  },
+
+  {
+    src:'coe', topic:'НН в исключениях деревянный/стеклянный/оловянный',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> составляет опись имущества. Какое слово написано <strong>правильно</strong>?",
+    opts:['оловяный солдатик','деревяная дверь','стеклянный стакан','кожанный пояс'],
+    ans:2,
+    fb:"✦ Верно! «Стеклянный» — НН: это одно из трёх слов-исключений суффикса -ЯН- (который обычно даёт одно Н). Исключения: деревянный, стеклянный, оловянный. «Кожаный» — суффикс -АН-, не исключение, одно Н.",
+    trap:"Ловушка ОГЭ: «кожанный» — ошибка! Правильно «кожаный» — суффикс -АН-, не исключение, одно Н. «Деревяная», «оловяный» — тоже ошибки, там должно быть НН.",
+    hint:"Суффикс -ЯН- обычно даёт одно Н, но есть ровно три слова-исключения с НН. Кожа входит в эти три?",
+    ref:"Н/НН исключения"
+  },
+
+
+  // ═══ ТЕМА 4: НЕ ═══
+
+  {
+    src:'cir', topic:'НЕ с глаголами — найди ошибку',
+    text:"<span class='hero-name hero-cir'>Цири</span> читает советский дневник. В каком слове НЕ написано <strong>неправильно</strong>?",
+    opts:['не знать','не прийти','не думать','нелюбить'],
+    ans:3,
+    fb:"✦ Верно! «НЕ любить» пишется раздельно: НЕ с глаголами — всегда раздельно (если слово употребляется без НЕ). «Нелюбить» — ошибка. «Ненавидеть» — слитно, потому что без НЕ не употребляется.",
+    trap:"Ловушка: «нелюбить» кажется правильным по аналогии с «ненавидеть». Но «любить» существует без НЕ → раздельно.",
+    hint:"Все четыре слова — глаголы с НЕ. Правило одно: с глаголами НЕ раздельно, если глагол существует без НЕ. Проверь каждое.",
+    ref:"НЕ с глаголами"
+  },
+
+  {
+    src:'yen', topic:'НЕ с существительными — слитно',
+    text:"<span class='hero-name hero-yen'>Йеннифэр</span> исправляет черновик. Какое слово написано <strong>правильно</strong>?",
+    opts:['неряха','не ряха','нееряха','не—ряха'],
+    ans:0,
+    fb:"✦ Верно! «Неряха» — слитно: слово без НЕ не употребляется, значит НЕ — часть корня. То же правило для: нелепый, небрежный, недотёпа.",
+    trap:"Ловушка: нельзя сказать «ряха» в значении аккуратного человека — такого слова нет. Значит «не-» слитно, это часть слова.",
+    hint:"Попробуй убрать НЕ. Существует ли слово «ряха» в нужном значении? Если нет — пишем слитно.",
+    ref:"НЕ со словами без НЕ"
+  },
+
+  {
+    src:'ger', topic:'НЕ с прилагательным — противопоставление',
+    text:"<span class='hero-name hero-ger'>Геральт</span> читает характеристику: «Солдат оказался __смелым, а трусливым». Как пишется НЕ?",
+    opts:['Слитно: несмелым — можно заменить синонимом «робким»','Раздельно: не смелым — есть союз «а» с противопоставлением','Слитно: прилагательное без зависимых слов','Раздельно: с прилагательными НЕ всегда раздельно'],
+    ans:1,
+    fb:"✦ Верно! Есть противопоставление с союзом «а» → НЕ пишется раздельно: «не смелым, а трусливым». Без противопоставления было бы слитно: «несмелый человек» = робкий.",
+    trap:"Ловушка: «несмелый» слитно — когда нет противопоставления. Но здесь «а трусливым» — это прямое противопоставление, значит раздельно.",
+    hint:"Найди союз «а» в предложении. Что означает союз «а» рядом с прилагательным, у которого есть НЕ?",
+    ref:"НЕ с прилагательными"
+  },
+
+  {
+    src:'emh', topic:'НЕ с полным причастием — слитно (нет зависимых)',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> диктует: «__законченный отчёт передать в архив». Как пишется НЕ?",
+    opts:['Раздельно: НЕ с причастиями всегда раздельно','Раздельно: есть приставка за-','Слитно: полное причастие без зависимых слов и без противопоставления','Слитно: НЕ с причастиями всегда слитно'],
+    ans:2,
+    fb:"✦ Верно! «Незаконченный» — слитно: это полное причастие, нет зависимых слов («кем?», «чем?»), нет противопоставления с «а». Раздельно: «не законченный мной отчёт» (зависимое: мной).",
+    trap:"Ловушка: «НЕ с причастиями всегда раздельно» — неверное правило. Полное причастие без зависимых слов и противопоставления пишется с НЕ слитно.",
+    hint:"Ответь на два вопроса: есть ли рядом зависимое слово (кем? чем?)? Есть ли союз «а»? Потом применяй правило о написании НЕ с полным причастием.",
+    ref:"НЕ с причастиями"
+  },
+
+
+  // ═══ ТЕМА 5: СУФФИКСЫ ═══
+
+  {
+    src:'coe', topic:'Суффиксы -ова-/-ыва- — найди правильное',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> пишет доклад. Какое слово написано <strong>правильно</strong>?",
+    opts:['командывать','рассказовать','советовать','докладывывать'],
+    ans:2,
+    fb:"✦ Верно! «Советовать»: я советую → -ую → суффикс -ОВА-. «Командывать» — ошибка: командую → -ую → -ОВА-: командОВАть. «Рассказовать» — ошибка: рассказываю → -ываю → -ЫВА-: рассказЫВАть.",
+    trap:"Ловушка: «рассказовать» — суффикс перепутан. Я рассказываю → -ываю → нужен суффикс -ЫВА-, а не -ОВА-.",
+    hint:"Проверь через форму «я»: я советую — заканчивается на -ую, значит суффикс -ОВА-. Так же для других слов.",
+    ref:"Суффиксы -ова-/-ыва-"
+  },
+
+  {
+    src:'cir', topic:'Суффиксы -ыва-/-ива-',
+    text:"<span class='hero-name hero-cir'>Цири</span> расшифровывает советскую телеграмму. В каком слове на месте пропуска пишется суффикс <strong>-ЫВА-</strong>?",
+    opts:['совет_вать','команд_вать','настаив_ть','рассказ_вать'],
+    ans:3,
+    fb:"✦ Верно! Рассказывать: я рассказываю → -ываю → суффикс -ЫВА-. Советовать: я советую → -ую → -ОВА-. Командовать: я командую → -ую → -ОВА-. Настаивать: я настаиваю → -иваю → -ИВА-.",
+    trap:"Ловушка: «настаивать» — суффикс -ИВА- (я настаиваю), а не -ЫВА-. Их нужно различать через форму «я».",
+    hint:"Поставь каждый глагол в форму «я» и слушай окончание: -ую/-юю или -ываю/-иваю?",
+    ref:"Суффиксы -ова-/-ыва-"
+  },
+
+  {
+    src:'emh', topic:'Как определить -ова-/-ыва-',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> спрашивает секретаря: «Как определить, -ОВА- или -ЫВА-?» Какой ответ правильный?",
+    opts:['Поставь глагол в форму «я»: -ую/-юю → суффикс -ОВА-/-ЕВА-','Суффикс зависит от корня: короткий корень → -ОВА-','Суффикс -ОВА- только у иностранных слов','Суффикс -ЫВА- только у глаголов с приставкой РАЗ-'],
+    ans:0,
+    fb:"✦ Верно! Единственное правило: форма «я». Советовать → я советую (оканчивается на -ую) → -ОВА-. Рассказывать → я рассказываю (оканчивается на -ываю) → -ЫВА-.",
+    trap:"Ловушка: нет никакого правила про «длину корня» или «иностранное происхождение». Только форма «я» — это единственный надёжный способ.",
+    hint:"Форма «я» — единственный способ. Оканчивается на -ую или -юю? Или на -ываю/-иваю?",
+    ref:"Суффиксы -ова-/-ыва-"
+  },
+
+  {
+    src:'coe', topic:'-тся и -ться',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> диктует: «Все рабочие обязаны строить_я в колонну». Какое окончание нужно?",
+    opts:['-ТСЯ — он строится, 3-е лицо','-ТЬСЯ — должны что делать? строиться, инфинитив','-ТЬ — неопределённая форма без -СЯ','-СЯ — без твёрдого знака'],
+    ans:1,
+    fb:"✦ Верно! После «должны» — инфинитив: что делать? строиться → -ТЬСЯ. Правило: в вопросе «что делатЬ?» есть мягкий знак — значит, он нужен и в глаголе.",
+    trap:"Ловушка: «обязаны строятся» — неверно. «Строятся» = 3-е лицо (они строятся — что делают?). «Строиться» = инфинитив (должны что делать?).",
+    hint:"Задай вопрос к слову «строить_я». Что делать? или что делают? В вопросе «что делатЬ?» есть мягкий знак?",
+    ref:"-тся/-ться"
+  },
+
+
+  // ═══ ТЕМА 6: ОКОНЧАНИЯ ═══
+
+  {
+    src:'ger', topic:'Спряжение — II спряжение исключения',
+    text:"<span class='hero-name hero-ger'>Геральт</span> читает: «Солдат слыш_т звуки снаружи». Какое окончание верное?",
+    opts:['-ЕТ — I спряжение','-ИТ — «слышать» входит в 11 глаголов-исключений II спряжения','-ЯТ — 3-е лицо мн.ч.','-УТ — I спряжение мн.ч.'],
+    ans:1,
+    fb:"✦ Верно! «Слышать» — II спряжение (исключение). Список: гнать, держать, смотреть, видеть, слышать, дышать, ненавидеть, зависеть, вертеть, обидеть, терпеть + все на -ить. II спр.: он слышИТ.",
+    trap:"Ловушка ОГЭ: глагол «слышать» оканчивается на -АТЬ, а не -ИТЬ. Можно принять за I спряжение. Но это исключение — II спряжение.",
+    hint:"«Слышать» не на -ИТЬ, но входит в список 11 исключений. Ты помнишь эти 11 глаголов?",
+    ref:"Спряжение глаголов"
+  },
+
+  {
+    src:'cir', topic:'Спряжение — II спряжение на -ить',
+    text:"<span class='hero-name hero-cir'>Цири</span> читает вслух советский лозунг: «Рабочий стро_т завод». Какое окончание правильное?",
+    opts:['-ИТ — «строить» на -ить, II спряжение','-ЕТ — I спряжение','-ЯТ — мн.ч. II спр.','-УТ — мн.ч. I спр.'],
+    ans:0,
+    fb:"✦ Верно! «Строить» оканчивается на -ИТЬ → II спряжение → он строИТ. Личные окончания II спр.: -ю, -ишь, -ит, -им, -ите, -ят(-ат).",
+    trap:"Ловушка: глагол на -ИТЬ всегда II спряжение (кроме «брить» и «стелить»). Он строит, а не строет.",
+    hint:"Какое окончание у инфинитива? «Строить» → -ИТЬ. Глагол на -ИТЬ — какое спряжение?",
+    ref:"Спряжение глаголов"
+  },
+
+  {
+    src:'emh', topic:'Окончания существительных III склонения — Т.п.',
+    text:"<span class='hero-name hero-emh'>Эмгыр</span> пишет: «Работать с большой точност_». Творительный падеж. Какое окончание?",
+    opts:['-ЬЮ — III склонение, Т.п.','-ОЙ — I склонение','-ЕЙ — II склонение','-ЮЮ — неверное'],
+    ans:0,
+    fb:"✦ Верно! «Точность» — III склонение (существительные ж.р. на -Ь). Т.п. III скл.: -ЬЮ. Точность → точностью. I скл. Т.п.: -ой/-ей. II скл. Т.п.: -ом/-ем.",
+    trap:"Ловушка: «точностью» — Т.п. III скл. (-ЬЮ). Не путать с Р.п. (-и) и Д.п. (-и): точности.",
+    hint:"«Точность» — женский род, оканчивается на -Ь. Это III склонение. Какое окончание у III скл. в творительном падеже?",
+    ref:"Окончания существительных"
+  },
+
+
+  // ═══ ТЕМА 7: СЛИТНО / РАЗДЕЛЬНО ═══
+
+  {
+    src:'coe', topic:'Чтобы / что бы',
+    text:"<span class='hero-name hero-coe'>Лейтенант Цоэ</span> зачитывает приказ: «Явиться к командиру, ___ получить инструкции». Как написать выделенное слово?",
+    opts:['Раздельно: что бы — «бы» можно убрать','Слитно: чтобы — союз цели, «бы» нельзя убрать или перенести','Слитно: чтобы — наречие','Раздельно: после запятой всегда раздельно'],
+    ans:1,
+    fb:"✦ Верно! «Чтобы» — слитно: это союз цели. Попробуй убрать «бы» — «явиться, что получить инструкции» — смысл нарушен, «бы» нельзя убрать. Значит, союз → слитно.",
+    trap:"Ловушка: «что бы» раздельно — только если «бы» можно переставить: «что бы ни случилось» → «что ни случилось бы». Здесь так не получается.",
+    hint:"Попробуй убрать «бы» из предложения или поставить его в другое место. Смысл сохранился? Если нет — это союз «чтобы», пишем слитно.",
+    ref:"Слитно/раздельно: чтобы"
+  },
+
+  {
+    src:'yen', topic:'Тоже / то же',
+    text:"<span class='hero-name hero-yen'>Йеннифэр</span> читает: «Он ___ пришёл на собрание» (= и он, наравне с другими). Как написать выделенное слово?",
+    opts:['Раздельно: то же — местоимение «то» + частица «же»','Слитно: тоже — союз, заменяется на «и» или «также»','Через дефис: то-же','Раздельно: перед глаголом всегда раздельно'],
+    ans:1,
+    fb:"✦ Верно! «Тоже» — слитно: это союз. Проверка: замени на «и»: «И он пришёл на собрание» — смысл тот же. Замена на «и» работает → союз «тоже» → слитно.",
+    trap:"Ловушка: «то же» раздельно — когда это местоимение + частица: «то же самое», «в то же время» — «же» можно убрать или заменить «самое».",
+    hint:"Замени «тоже»/«то же» на союз «и». «Он и пришёл» — звучит естественно? Если да — это союз «тоже», пишем слитно.",
+    ref:"Слитно/раздельно: тоже"
+  },
+
+];
+
+function shuffle(a) {
+  const arr = [...a];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+
+  const idx = [0,1,2,3];
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  shuffledOpts = idx.map(i => q.opts[i]);
+  correctIdx = idx.indexOf(q.ans);
+
+  const sl = srcLabels[q.src] || { cls:'', text:'' };
+  qheader.innerHTML = `<span class="qh-src ${sl.cls}">${sl.text}</span><span style="color:var(--muted);font-size:10px;font-weight:500">${q.topic}</span>`;
+
+  qtext.innerHTML = q.text;
+
+  qopts.innerHTML = '';
+  shuffledOpts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answer(i);
+    qopts.appendChild(btn);
+  });
+
+  qfb.style.display = 'none';
+  qfb.className = 'feedback-box';
+  qnext.style.display = 'none';
+
+  qcnt.textContent = `${cur + 1} / ${questions.length}`;
+  qbar.style.width = `${(cur / questions.length) * 100}%`;
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = qopts.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+
+  if (i === correctIdx) {
+    btns[i].classList.add('correct');
+    score++;
+    scoredisp.textContent = `⚔ ${score} верно`;
+    answered = true;
+    qfb.className = 'feedback-box correct-fb';
+    qfb.innerHTML = `🥳 ${q.fb}${q.ref ? `<br><em style="opacity:0.7">Тема: ${q.ref}</em>` : ''}`;
+    qfb.style.display = 'block';
+    qnext.style.display = 'block';
+    qnext.textContent = cur < questions.length - 1 ? 'Следующий документ →' : 'Узнать результат →';
+  } else {
+    btns[i].classList.add('wrong');
+    attempts++;
+    if (attempts < 2) {
+      btns.forEach(b => b.disabled = false);
+      btns[i].disabled = true;
+      qfb.className = 'feedback-box wrong-fb';
+      qfb.innerHTML = `💡 ${q.hint || 'Подумай ещё раз — у тебя есть вторая попытка.'}`;
+      qfb.style.display = 'block';
+    } else {
+      btns[correctIdx].classList.add('correct');
+      answered = true;
+      qfb.className = 'feedback-box wrong-fb';
+      qfb.innerHTML = `❌ ${q.trap || q.fb}${q.ref ? `<br><em style="opacity:0.7">Тема: ${q.ref}</em>` : ''}`;
+      qfb.style.display = 'block';
+      qnext.style.display = 'block';
+      qnext.textContent = cur < questions.length - 1 ? 'Следующий документ →' : 'Узнать результат →';
+    }
+  }
+}
+
+document.getElementById('qnext').onclick = () => {
+  cur++;
+  if (cur < questions.length) renderQ();
+  else showResults();
+};
+
+function showResults() {
+  qcard.style.display = 'none';
+  document.querySelector('.quiz-progress-wrap').style.display = 'none';
+  const pct = score / questions.length;
+  let emoji, title, story, rankClass, rankText;
+
+  if (pct >= 0.93) {
+    emoji = '🦅'; title = 'Нильфгаард доволен!';
+    story = 'Лейтенант Цоэ вытягивается по стойке смирно: «Геральт, Эмгыр лично просит тебя в Институт. Ты читаешь советские документы лучше, чем половина имперской канцелярии.»';
+    rankClass = 'rank-s'; rankText = 'Ранг: Главный аналитик Института ✦';
+  } else if (pct >= 0.77) {
+    emoji = '⚔️'; title = 'Достойный грамотей';
+    story = 'Цири улыбается: «Не плохо для ведьмака. Я думала, ты только мечами умеешь.» Цоэ кивает сдержанно.';
+    rankClass = 'rank-a'; rankText = 'Ранг: Полевой переводчик Нильфгаарда';
+  } else if (pct >= 0.57) {
+    emoji = '📋'; title = 'Работа над ошибками';
+    story = 'Йеннифэр поднимает бровь: «Советские документы сложнее, чем кажется. Перечитай шпору — и особенно Н/НН.»';
+    rankClass = 'rank-b'; rankText = 'Ранг: Стажёр Института';
+  } else if (pct >= 0.37) {
+    emoji = '📜'; title = 'Эмгыр недоволен';
+    story = 'Цоэ качает головой: «Больше ошибок, чем в советской цензуре. Вернись к шпоре, Геральт. Особенно к чередующимся корням.»';
+    rankClass = 'rank-c'; rankText = 'Ранг: Кандидат на переаттестацию';
+  } else {
+    emoji = '☭'; title = 'Документы засекречены';
+    story = 'Цири тихо: «Геральт, может, лучше на чудовищ?..» Йеннифэр вздыхает и берёт шпору.';
+    rankClass = 'rank-d'; rankText = 'Ранг: Нуждается в опеке Йеннифэр';
+  }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rscore').textContent = `${score} / ${questions.length}`;
+  document.getElementById('rtotal').textContent = 'правильных ответов';
+  document.getElementById('rstory').textContent = story;
+  const rrank = document.getElementById('rrank');
+  rrank.textContent = rankText;
+  rrank.className = `results-rank ${rankClass}`;
+  document.getElementById('results').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('restart').onclick = () => {
+  document.getElementById('results').style.display = 'none';
+  qcard.style.display = '';
+  document.querySelector('.quiz-progress-wrap').style.display = '';
+  scoredisp.textContent = '⚔ 0 верно';
+  initQuiz();
+  renderQ();
+};
+
+renderQ();
+</script>
+</body>
+</html>
