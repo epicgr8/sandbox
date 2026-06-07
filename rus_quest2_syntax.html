@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Синтаксис · Сигнал с Аляски · TLOU</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d1117;
+    --bg2:   #111820;
+    --bg3:   #162030;
+    --bg4:   #1c2a3a;
+    --c-eli: #34d399;
+    --c-tom: #60a5fa;
+    --c-din: #a78bfa;
+    --c-abb: #fb923c;
+    --c-main: #34d399;
+    --text:  #dde6ee;
+    --muted: #7a90a4;
+    --border:  rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(52,211,153,0.07)  0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 5%  20%,  rgba(96,165,250,0.05)  0%, transparent 55%),
+      radial-gradient(ellipse 55% 40% at 95% 15%,  rgba(167,139,250,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 100%, rgba(251,146,60,0.04)  0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:72px 0 48px; position:relative; }
+  .hero::before {
+    content:'🍄 ✦ ⚡ ✦ 🍄';
+    display:block; font-size:14px; letter-spacing:0.5em; opacity:0.3;
+    margin-bottom:24px; animation:fadein-slow 1.2s ease;
+  }
+  .hero::after {
+    content:''; display:block; margin:34px auto 0;
+    width:340px; max-width:90%; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,#34d399,#60a5fa,#a78bfa,transparent);
+  }
+  .hero-eyebrow {
+    display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.24em;
+    color:#fff; background:var(--c-eli); text-transform:uppercase;
+    margin-bottom:24px; padding:5px 18px; border-radius:20px; color:#0d1117;
+  }
+  .hero-title {
+    font-size:clamp(42px,9vw,92px); font-weight:700;
+    line-height:0.92; margin-bottom:16px; letter-spacing:-0.025em;
+  }
+  .ht1 {
+    display:block;
+    background:linear-gradient(120deg,#34d399 0%,#6ee7b7 45%,#60a5fa 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(52,211,153,0.4));
+    animation:fadein-slow 0.8s ease;
+  }
+  .ht2 {
+    display:block; font-size:0.27em; font-weight:500; letter-spacing:0.55em;
+    color:var(--muted); text-transform:uppercase; margin:10px 0 8px;
+    -webkit-text-fill-color:var(--muted); animation:fadein-slow 1s ease;
+  }
+  .ht3 {
+    display:block;
+    background:linear-gradient(120deg,#60a5fa 0%,#a78bfa 50%,#fb923c 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(96,165,250,0.35));
+    animation:fadein-slow 1.1s ease;
+  }
+  .hero-sub { font-size:13px; color:var(--muted); letter-spacing:0.04em; }
+  @keyframes fadein-slow { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+  /* LORE INTRO */
+  .lore-intro {
+    background:var(--bg2); border:1px solid var(--border2); border-radius:14px;
+    padding:20px 24px; margin-bottom:32px; font-size:14px; color:var(--text);
+    line-height:1.7; border-left:4px solid var(--c-eli);
+    animation:fadein-slow 0.6s ease;
+  }
+  .lore-intro p { margin-bottom:8px; }
+  .lore-intro p:last-child { margin-bottom:0; }
+  .lore-cast { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .cast-pill { font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; }
+  .cp-eli { background:rgba(52,211,153,0.15); color:#34d399; }
+  .cp-tom { background:rgba(96,165,250,0.15); color:#60a5fa; }
+  .cp-din { background:rgba(167,139,250,0.15); color:#a78bfa; }
+  .cp-abb { background:rgba(251,146,60,0.15); color:#fb923c; }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule { background:var(--c-eli); color:#0d1117; }
+  .sec-badge.task2 { background:rgba(52,211,153,0.2); color:var(--c-eli); }
+  .sec-badge.task3 { background:rgba(96,165,250,0.2); color:var(--c-tom); }
+  .sec-badge.task4 { background:rgba(167,139,250,0.2); color:var(--c-din); }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* SHPORA TOGGLE */
+  .shpora-toggle { display:flex; align-items:center; gap:8px; padding:8px 16px; background:var(--bg2); border:1.5px solid var(--c-eli); border-radius:8px; color:var(--c-eli); font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; }
+  .shpora-toggle:hover { background:rgba(52,211,153,0.08); }
+  .shpora-toggle.open { background:var(--c-eli); color:#0d1117; }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; margin-bottom:8px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.4); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-eli::after { background:var(--c-eli); }
+  .rule-card.c-tom::after { background:var(--c-tom); }
+  .rule-card.c-din::after { background:var(--c-din); }
+  .rule-card.c-abb::after { background:var(--c-abb); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:13px; color:var(--muted); line-height:1.65; }
+  .rule-body strong { color:var(--text); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
+  .c-eli .rule-formula { background:rgba(52,211,153,0.12); color:#34d399; }
+  .c-tom .rule-formula { background:rgba(96,165,250,0.12); color:#60a5fa; }
+  .c-din .rule-formula { background:rgba(167,139,250,0.12); color:#a78bfa; }
+  .c-abb .rule-formula { background:rgba(251,146,60,0.12); color:#fb923c; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:#fbbf24; }
+  .t-eli   { color:#34d399; font-weight:700; }
+  .t-tom   { color:#60a5fa; font-weight:700; }
+  .t-din   { color:#a78bfa; font-weight:700; }
+  .t-abb   { color:#fb923c; font-weight:700; }
+  .t-red   { color:#f87171; font-weight:700; }
+  .t-teal  { color:#2dd4bf; font-weight:700; }
+
+  /* QUIZ BANNER */
+  .quiz-banner { border-radius:16px; overflow:hidden; margin-bottom:22px; background:var(--bg2); border:1px solid var(--border2); display:grid; grid-template-columns:1fr; }
+  .quiz-banner-body { padding:20px 24px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+  .quiz-title { font-size:clamp(17px,3vw,24px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--muted); }
+  .quiz-lore { font-size:13px; color:var(--muted); line-height:1.6; margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+  .quiz-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(52,211,153,0.15);  color:#34d399; }
+  .stake-a { background:rgba(96,165,250,0.15);   color:#60a5fa; }
+  .stake-b { background:rgba(167,139,250,0.15);  color:#a78bfa; }
+  .stake-c { background:rgba(251,146,60,0.15);   color:#fb923c; }
+  .stake-d { background:rgba(107,114,128,0.15);  color:#9ca3af; }
+
+  /* QUIZ UI */
+  .quiz-progress-wrap { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .quiz-score-badge { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--c-eli); white-space:nowrap; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:var(--c-eli); border-radius:3px; width:0%; transition:width 0.4s; }
+  .quiz-counter { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); white-space:nowrap; }
+
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:10px 16px 8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--bg3); display:flex; align-items:center; gap:8px; }
+  .qh-src { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .qh-task { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .src-eli { background:rgba(52,211,153,0.2);  color:#34d399; }
+  .src-tom { background:rgba(96,165,250,0.2);  color:#60a5fa; }
+  .src-din { background:rgba(167,139,250,0.2); color:#a78bfa; }
+  .src-abb { background:rgba(251,146,60,0.2);  color:#fb923c; }
+  .task-2  { background:rgba(52,211,153,0.1);  color:#34d399; }
+  .task-3  { background:rgba(96,165,250,0.1);  color:#60a5fa; }
+  .task-4  { background:rgba(167,139,250,0.1); color:#a78bfa; }
+
+  .question-body { padding:20px 20px 0; }
+  .question-text { font-size:15px; line-height:1.65; margin-bottom:16px; }
+  .hero-name { font-weight:700; }
+  .hero-eli { color:#34d399; }
+  .hero-tom { color:#60a5fa; }
+  .hero-din { color:#a78bfa; }
+  .hero-abb { color:#fb923c; }
+  .hero-rus { color:#fbbf24; }
+  .term { font-style:italic; color:#fbbf24; font-weight:600; }
+
+  .opts { display:grid; gap:8px; margin-bottom:0; }
+  .opt-btn { width:100%; text-align:left; padding:12px 16px; font-size:14px; font-family:'Outfit',sans-serif; background:var(--bg); border:1.5px solid var(--border2); border-radius:10px; cursor:pointer; transition:border-color 0.15s,background 0.15s; line-height:1.45; color:var(--text); }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-eli); background:rgba(52,211,153,0.06); }
+  .opt-btn.correct { background:rgba(21,128,61,0.15); border-color:#15803d; color:#86efac; font-weight:600; }
+  .opt-btn.wrong   { background:rgba(185,28,28,0.12); border-color:#b91c1c; color:#fca5a5; }
+
+  .feedback-box { padding:12px 16px; font-size:13px; line-height:1.55; display:none; border-top:1px solid var(--border); }
+  .feedback-box.correct-fb { background:rgba(21,128,61,0.10); color:#86efac; }
+  .feedback-box.wrong-fb   { background:rgba(185,28,28,0.08); color:#fca5a5; }
+
+  .question-footer { padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { padding:10px 26px; font-size:14px; font-family:'Outfit',sans-serif; font-weight:600; background:var(--c-eli); color:#0d1117; border:none; border-radius:10px; cursor:pointer; display:none; transition:opacity 0.15s; }
+  .next-btn:hover { opacity:0.85; }
+
+  .question-animate { animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 24px; }
+  .results-emoji { font-size:56px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,32px); font-weight:700; color:var(--text); margin-bottom:10px; }
+  .results-score { font-family:'Space Mono',monospace; font-size:28px; font-weight:700; color:var(--c-eli); margin-bottom:6px; }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:16px; }
+  .results-story { font-size:15px; color:var(--text); max-width:540px; margin:0 auto 20px; line-height:1.65; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(52,211,153,0.15);  color:#34d399; }
+  .rank-a { background:rgba(96,165,250,0.15);   color:#60a5fa; }
+  .rank-b { background:rgba(167,139,250,0.15);  color:#a78bfa; }
+  .rank-c { background:rgba(251,146,60,0.15);   color:#fb923c; }
+  .rank-d { background:rgba(107,114,128,0.12);  color:#9ca3af; }
+  .restart-btn { padding:12px 32px; font-size:15px; font-family:'Outfit',sans-serif; font-weight:700; background:var(--c-eli); color:#0d1117; border:none; border-radius:12px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.85; }
+
+  /* NAV */
+  .quests-nav { margin-top:48px; border-top:1px solid var(--border2); padding-top:28px; }
+  .quests-nav-title { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .quests-pills { display:grid; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.3); }
+  .quest-pill.quest-active { border-color:var(--c-main); background:rgba(52,211,153,0.05); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(52,211,153,0.2); color:#34d399; }
+  .qp-soon { background:rgba(107,114,128,0.15); color:#9ca3af; }
+
+  :focus-visible { outline:2px solid var(--c-eli); outline-offset:3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Русский язык · 9 класс · Квест 2 · Задания 2, 3, 4</div>
+    <h1 class="hero-title">
+      <span class="ht1">Сигнал</span>
+      <span class="ht2">✦ с ✦</span>
+      <span class="ht3">Аляски</span>
+    </h1>
+    <p class="hero-sub">Синтаксис и пунктуация · 35 вопросов · The Last of Us × Русские выжившие</p>
+  </div>
+
+  <!-- LORE INTRO -->
+  <div class="lore-intro">
+    <p>На частоте, которой нет ни в одной базе данных, <span class="hero-name hero-eli">Элли</span> поймала сигнал. Русские. Они переправились через Берингов пролив ещё в самом начале заражения и нашли нечто, меняющее всё — способ противостоять кордицепсу. Способ, который работает.</p>
+    <p><span class="hero-name hero-tom">Томми</span> проверил оружие. <span class="hero-name hero-din">Дина</span> взяла переводчик. <span class="hero-name hero-abb">Эбби</span> уже у двери. Единственная проблема: в записях выживших — замысловатый синтаксис. Расшифруй его — и формула иммунитета ваша.</p>
+    <div class="lore-cast">
+      <span class="cast-pill cp-eli">🟢 Элли — разведчик</span>
+      <span class="cast-pill cp-tom">🔵 Томми — переговорщик</span>
+      <span class="cast-pill cp-din">🟣 Дина — переводчик</span>
+      <span class="cast-pill cp-abb">🟠 Эбби — силовая поддержка</span>
+    </div>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Шпора: запомни до старта</span><div class="sec-line"></div></div>
+  <button class="shpora-toggle open" id="shpora-btn" onclick="toggleShpora()">▲ Скрыть шпаргалку</button>
+  <div id="shpora-block">
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div class="sec-head" style="margin-top:24px">
+      <span class="sec-badge task2">Задание 2 — Грамматическая основа</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-eli">
+        <div class="rule-icon">🧩</div>
+        <div class="rule-title">Нестандартные формы подлежащего</div>
+        <div class="rule-body">
+          <span class="rule-formula">Инфинитив</span><br>
+          Глагол в неопределённой форме = подлежащее:<br>
+          «<span class="t-eli">Выжить</span> — значит продолжать бороться.» → подлежащее: «выжить»<br><br>
+          <span class="rule-formula">Числительное + существительное</span><br>
+          Неделимое словосочетание: «<span class="t-eli">Семь выживших</span> вышли к берегу.»<br>
+          Подлежащее = всё словосочетание целиком<br><br>
+          <span class="rule-formula">Неопределённое местоимение</span><br>
+          «<span class="t-eli">Кто-то</span> подал сигнал.» / «<span class="t-eli">Нечто</span> изменилось.»
+        </div>
+        <div class="rule-assoc">🟢 Элли: «Написано — "Кто-то позвонил". Кто подлежащее? "Кто-то": неопределённое местоимение. Запомни: не всегда это существительное.»</div>
+      </div>
+
+      <div class="rule-card c-tom">
+        <div class="rule-icon">⚙️</div>
+        <div class="rule-title">Типы сказуемого</div>
+        <div class="rule-body">
+          <span class="rule-formula">ПГС — простое глагольное</span><br>
+          Один глагол в личной форме: «Ветер <span class="t-tom">стихал</span>.»<br><br>
+          <span class="rule-formula">СГС — составное глагольное</span><br>
+          Вспомогательный глагол + инфинитив:<br>
+          начало/конец: <span class="t-tom">начал петь</span>, <span class="t-tom">перестал слушать</span><br>
+          желание/стремление: <span class="t-tom">хотел уйти</span>, <span class="t-tom">стремился победить</span><br>
+          возможность/долженствование: <span class="t-tom">мог помочь</span>, <span class="t-tom">должен ответить</span><br><br>
+          <span class="rule-formula">СИС — составное именное</span><br>
+          Связка (быть / стать / казаться / оказаться…) + именная часть:<br>
+          «Небо <span class="t-tom">казалось</span> <span class="t-eli">тёмным</span>.» / «Томми <span class="t-tom">стал</span> <span class="t-eli">командиром</span>.»
+        </div>
+        <div class="rule-assoc">🔵 Томми: «"Начал переводить": это не один глагол. "Начал" — вспомогательный. "Переводить" — инфинитив. Вместе → СГС.»</div>
+      </div>
+
+      <div class="rule-card c-din">
+        <div class="rule-icon">➖</div>
+        <div class="rule-title">Нулевая связка и тире</div>
+        <div class="rule-body">
+          <span class="rule-formula">Тире СТАВИТСЯ если:</span><br>
+          Оба главных члена — <span class="t-din">существительные в И.п.</span>: «Сигнал — шанс»<br>
+          Оба — <span class="t-din">инфинитивы</span>: «Выжить — значит сражаться»<br>
+          Оба — <span class="t-din">числительные</span>: «Дважды два — четыре»<br><br>
+          <span class="rule-formula">Тире НЕ ставится если:</span><br>
+          Подлежащее — <span class="t-red">личное местоимение</span>: «Она хороший переводчик»<br>
+          Перед сказуемым стоит <span class="t-red">частица НЕ</span>: «Слово не воробей»<br>
+          Перед сказуемым — <span class="t-red">вводное слово</span>: «Аляска, кажется, последний рубеж»
+        </div>
+        <div class="rule-assoc">🟣 Дина: «"Она опытный переводчик": тире нет, подлежащее "она" — личное местоимение. А "Аляска — рубеж": оба существительных в И.п., тире!»</div>
+      </div>
+
+      <div class="rule-card c-abb">
+        <div class="rule-icon">🔇</div>
+        <div class="rule-title">Односоставные предложения</div>
+        <div class="rule-body">
+          <span class="rule-formula">Безличное</span><br>
+          Нет и не может быть подлежащего. Действие без деятеля:<br>
+          «<span class="t-abb">Светало</span>.» / «Мне <span class="t-abb">не спалось</span>.» / «Нас <span class="t-abb">знобило</span>.»<br>
+          Безличный глагол или личный глагол в безличном значении.<br><br>
+          <span class="rule-formula">Неопределённо-личное</span><br>
+          Глагол 3-го лица множественного числа; деятель неизвестен или неважен:<br>
+          «В дверь <span class="t-abb">постучали</span>.» / «По радио <span class="t-abb">передавали</span> сигнал.»<br>
+          <span class="warn">⚠️ Отличие от безличного:</span> при неопредел.-личном деятеля можно назвать («кто-то постучал»); при безличном это физически невозможно.
+        </div>
+        <div class="rule-assoc">🟠 Эбби: «"Смеркалось" — безличное: нельзя добавить "кто-то смеркался". "Объявили эвакуацию" — неопределённо-личное: кто-то объявил, просто неважно кто.»</div>
+      </div>
+
+    </div>
+
+    <!-- ЗАДАНИЕ 3 -->
+    <div class="sec-head" style="margin-top:28px">
+      <span class="sec-badge task3">Задание 3 — Пунктуация</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-tom">
+        <div class="rule-icon">🔤</div>
+        <div class="rule-title">Запятые в простом предложении</div>
+        <div class="rule-body">
+          <span class="rule-formula">Однородные члены</span><br>
+          Перед одиночным «<span class="t-red">и / или / да (=и)</span>» перед последним — <span class="t-red">НЕТ запятой</span>.<br>
+          При повторяющихся «и…и» или «ни…ни» — запятая перед каждым.<br><br>
+          <span class="rule-formula">Причастный оборот</span><br>
+          Обособляется <span class="t-tom">ПОСЛЕ</span> определяемого слова:<br>
+          «Записка, <span class="t-tom">оставленная выжившими</span>, лежала на столе.» — да<br>
+          «<span class="t-tom">Оставленная выжившими</span> записка» — нет<br><br>
+          <span class="rule-formula">Деепричастный оборот</span><br>
+          Выделяется запятыми <span class="t-tom">всегда</span>: в начале, в конце, в середине.<br><br>
+          <span class="rule-formula">Вводные слова</span><br>
+          конечно, кстати, во-первых, следовательно, итак, к счастью…<br>
+          «Наконец» — вводное только в рядах «во-первых… наконец».<br><br>
+          <span class="rule-formula">Обращение</span><br>
+          Слово, называющее того, к кому обращаются, выделяется запятыми:<br>
+          «<span class="t-tom">Томми</span>, ты слышишь меня?» / «Слушай, <span class="t-tom">Дина</span>, это важно.»<br>
+          <span class="warn">⚠️ Обращение ≠ подлежащее:</span> «Томми, иди сюда» — основа предложения «иди», «Томми» — обращение вне состава предложения.
+        </div>
+        <div class="rule-assoc">🔵 Томми: «"Дина, переведя записку, кивнула". Деепричастный оборот — запятые с обеих сторон. Место не важно. "Дина" в начале — обращение? Нет, здесь подлежащее! Обращение — то, к кому говорят.»</div>
+      </div>
+
+      <div class="rule-card c-eli">
+        <div class="rule-icon">🔗</div>
+        <div class="rule-title">Запятые в сложном предложении</div>
+        <div class="rule-body">
+          <span class="rule-formula">ССП (сочинительная связь)</span><br>
+          Запятая перед «<span class="t-eli">и / но / а / однако / зато</span>»,<br>
+          если у частей <span class="t-eli">разные грамматические основы</span>:<br>
+          «Метель стихла<span class="t-red">,</span> и туман рассеялся.» — да (2 основы)<br>
+          «Элли подошла и остановилась.» — нет (1 основа)<br><br>
+          <span class="rule-formula">СПП (подчинительная связь)</span><br>
+          Придаточное выделяется запятыми:<br>
+          придаточное до главного: запятая <span class="t-eli">после</span> придаточного<br>
+          придаточное после главного: запятая <span class="t-eli">перед</span> подчинительным союзом<br>
+          Два однородных придаточных с одиночным «и»: запятая между ними <span class="t-red">не ставится</span>.
+        </div>
+        <div class="rule-assoc">🟢 Элли: «"Я не знала, когда они придут и долго ли пробудут". Два придаточных с "и" — запятую между ними не ставим. Перед "когда" — ставим.»</div>
+      </div>
+
+      <div class="rule-card c-abb">
+        <div class="rule-icon">➡️</div>
+        <div class="rule-title">Тире в предложении</div>
+        <div class="rule-body">
+          <span class="rule-formula">Тире в простом предложении</span><br>
+          Оба главных члена — сущ. И.п.: «Аляска — рубеж»<br>
+          Оба — инфинитивы: «Уйти — сдаться»<br>
+          Оба — числительные: «Пятью пять — двадцать пять»<br><br>
+          <span class="rule-formula">Тире в БСП (бессоюзном сложном)</span><br>
+          <span class="t-abb">Противопоставление</span> (можно вставить «а»):<br>
+          «Эбби сражалась — Дина переводила.»<br>
+          <span class="t-abb">Быстрая смена событий</span>: «Мы открыли дверь — пахнуло холодом.»<br>
+          <span class="t-abb">Следствие / условие</span>: «Рассветёт — выступим.»<br><br>
+          <span class="warn">НЕ путай:</span> тире (противопоставление, следствие) vs двоеточие (пояснение, причина)
+        </div>
+        <div class="rule-assoc">🟠 Эбби: «"Рассветёт — выступим": условие, тире. "Эбби взглянула на берег: вдали костёр": второе — что увидела, двоеточие. Не путай!»</div>
+      </div>
+
+      <div class="rule-card c-din">
+        <div class="rule-icon">⬛</div>
+        <div class="rule-title">Двоеточие в предложении</div>
+        <div class="rule-body">
+          <span class="rule-formula">Двоеточие в простом предложении</span><br>
+          Обобщающее слово + однородные члены:<br>
+          «Выжившие принесли всё: <span class="t-din">хлеб, соль, рыбу и воду</span>.»<br><br>
+          <span class="rule-formula">Двоеточие в БСП</span><br>
+          Вторая часть — <span class="t-din">пояснение</span> (= «а именно»):<br>
+          «Она знала одно: надо действовать.»<br>
+          Вторая часть — <span class="t-din">причина</span> (= «потому что»):<br>
+          «Дина остановилась: впереди что-то шевелилось» (потому что увидела)<br>
+          Вторая часть — <span class="t-din">содержание воспринятого</span> (= «и увидела, что»):<br>
+          «Эбби взглянула на берег: вдали дымился костёр.»
+        </div>
+        <div class="rule-assoc">🟣 Дина: «Двоеточие — это "смотри, что дальше". Тире — это "и вдруг!" или "а вот". Выбирай по смыслу.»</div>
+      </div>
+
+    </div>
+
+    <!-- ЗАДАНИЕ 4 -->
+    <div class="sec-head" style="margin-top:28px">
+      <span class="sec-badge task4">Задание 4 — Виды связи в словосочетании</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-eli">
+        <div class="rule-icon">🤝</div>
+        <div class="rule-title">Согласование</div>
+        <div class="rule-body">
+          Зависимое слово согласуется с главным в <span class="t-eli">роде, числе, падеже</span>.<br><br>
+          Зависимые части речи:<br>
+          <span class="t-eli">прилагательное</span>: русская речь, тёмное небо<br>
+          <span class="t-eli">причастие</span>: замёрзший берег, найденный сигнал<br>
+          <span class="t-eli">порядковое числительное</span>: третий сигнал<br>
+          <span class="t-eli">притяжательное местоимение</span>: наш лагерь<br><br>
+          <span class="rule-formula">Признак-тест</span><br>
+          Измени главное слово → зависимое меняется вместе:<br>
+          русская речь → русской речи → русскую речь ✓
+        </div>
+        <div class="rule-assoc">🟢 Элли: «"Замёрзший берег": причастие. Берег стал "замёрзшего берега" — и причастие изменилось. Согласование.»</div>
+      </div>
+
+      <div class="rule-card c-tom">
+        <div class="rule-icon">📌</div>
+        <div class="rule-title">Управление</div>
+        <div class="rule-body">
+          Главное слово <span class="t-tom">требует</span> от зависимого конкретного падежа.<br><br>
+          Зависимые: <span class="t-tom">существительное или местоимение</span> в косвенном падеже.<br><br>
+          Примеры:<br>
+          слушать <span class="t-tom">рацию</span> (В.п.) — без предлога<br>
+          выйти <span class="t-tom">к берегу</span> (Д.п.) — с предлогом<br>
+          доверие <span class="t-tom">к выжившим</span> (Д.п.)<br><br>
+          <span class="rule-formula">Признак-тест</span><br>
+          Измени главное слово → падеж зависимого <span class="t-red">НЕ меняется</span>:<br>
+          слушать рацию / слушал рацию / слушает рацию ✓
+        </div>
+        <div class="rule-assoc">🔵 Томми: «"Доверие к выжившим": существительное в Д.п. Кто командует падежом? Слово "доверие". Управление.»</div>
+      </div>
+
+      <div class="rule-card c-din">
+        <div class="rule-icon">〰️</div>
+        <div class="rule-title">Примыкание</div>
+        <div class="rule-body">
+          Зависимое слово — <span class="t-din">неизменяемое</span>. Связь только по смыслу.<br><br>
+          Зависимые части речи:<br>
+          <span class="t-din">наречие</span>: говорить <span class="t-din">тихо</span>, идти <span class="t-din">молча</span><br>
+          <span class="t-din">инфинитив</span>: просить <span class="t-din">остаться</span>, решить <span class="t-din">переговорить</span><br>
+          <span class="t-din">деепричастие</span>: слушала <span class="t-din">не дыша</span><br>
+          <span class="t-din">сравнительная степень прилаг.</span>: ответ <span class="t-din">проще</span><br><br>
+          <span class="rule-formula">Признак-тест</span><br>
+          Зависимое слово нельзя ни просклонять, ни проспрягать → примыкание.
+        </div>
+        <div class="rule-assoc">🟣 Дина: «"Говорить тихо": "тихо" — наречие, не склоняется. Нельзя спросить "тихого?" — нет падежа. Только смысл. Примыкание.»</div>
+      </div>
+
+    </div>
+  </div><!-- /#shpora-block -->
+
+  <!-- QUIZ BANNER -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Квест: 35 вопросов</span><div class="sec-line"></div></div>
+
+  <div class="quiz-banner">
+    <div class="quiz-banner-body">
+      <div class="quiz-title">⚡ Сигнал с Аляски</div>
+      <div class="quiz-sub">Задания 2 (11 вопросов) · 3 (12 вопросов) · 4 (12 вопросов)</div>
+      <div class="quiz-lore">Каждый правильный ответ — шаг к расшифровке формулы. Два шанса на вопрос. Перемешивание активно. Удачи, выживший.</div>
+      <div class="quiz-stakes">
+        <span class="stake stake-s">S: ≥33 — Формула расшифрована</span>
+        <span class="stake stake-a">A: ≥27 — Союз заключён</span>
+        <span class="stake stake-b">B: ≥20 — Торговый пост открыт</span>
+        <span class="stake stake-c">C: ≥13 — Связь потеряна</span>
+        <span class="stake stake-d">D: &lt;13 — Миссия провалена</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-progress-wrap" class="quiz-progress-wrap">
+    <span class="quiz-score-badge" id="score-disp">⚔ 0 верно</span>
+    <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+    <span class="quiz-counter" id="qcnt">1 / 35</span>
+  </div>
+
+  <div class="question-card question-animate" id="qcard">
+    <div class="question-header" id="qheader"></div>
+    <div class="question-body">
+      <div class="question-text" id="qtext"></div>
+      <div class="opts" id="qopts"></div>
+    </div>
+    <div class="feedback-box" id="qfb"></div>
+    <div class="question-footer">
+      <button class="next-btn" id="qnext">Следующий →</button>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-emoji" id="remoji"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-score" id="rscore"></div>
+    <div class="results-total" id="rtotal"></div>
+    <div class="results-story" id="rstory"></div>
+    <div class="results-rank" id="rrank"></div>
+    <br>
+    <button class="restart-btn" id="restart">🔄 Пройти ещё раз</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="quests-nav">
+    <div class="quests-nav-title">Квесты по русскому языку</div>
+    <div class="quests-pills">
+      <a href="rus_quest1_ortho.html" class="quest-pill">
+        <div class="qp-num" style="background:#c0392b">Р1</div>
+        <div class="qp-info">
+          <span class="qp-name">Институт нильфо-советских исследований</span>
+          <span class="qp-sub">Орфография · Задание 5 · 45 вопросов · Ведьмак × Нильфгаард × СССР</span>
+        </div>
+        <span class="qp-badge">← назад</span>
+      </a>
+      <a class="quest-pill quest-active">
+        <div class="qp-num" style="background:#34d399;color:#0d1117">Р2</div>
+        <div class="qp-info">
+          <span class="qp-name">Сигнал с Аляски</span>
+          <span class="qp-sub">Синтаксис и пунктуация · Задания 2, 3, 4 · 35 вопросов · TLOU</span>
+        </div>
+        <span class="qp-badge qp-here">здесь</span>
+      </a>
+      <a class="quest-pill quest-locked">
+        <div class="qp-num" style="background:#374151">Р3</div>
+        <div class="qp-info">
+          <span class="qp-name">Квест 3</span>
+          <span class="qp-sub">Задание 6 · Анализ предложений</span>
+        </div>
+        <span class="qp-badge qp-soon">скоро</span>
+      </a>
+      <a class="quest-pill quest-locked">
+        <div class="qp-num" style="background:#374151">∞</div>
+        <div class="qp-info">
+          <span class="qp-name">Марафон по русскому</span>
+          <span class="qp-sub">Все квесты</span>
+        </div>
+        <span class="qp-badge qp-soon">скоро</span>
+      </a>
+    </div>
+  </nav>
+
+</div><!-- /.wrap -->
+
+<script>
+function toggleShpora() {
+  const block = document.getElementById('shpora-block');
+  const btn   = document.getElementById('shpora-btn');
+  const open  = block.style.display !== 'none';
+  block.style.display = open ? 'none' : '';
+  btn.textContent = open ? '▼ Показать шпаргалку' : '▲ Скрыть шпаргалку';
+  btn.className = open ? 'shpora-toggle' : 'shpora-toggle open';
+}
+
+const srcLabels = {
+  eli: { cls:'src-eli', text:'Элли' },
+  tom: { cls:'src-tom', text:'Томми' },
+  din: { cls:'src-din', text:'Дина' },
+  abb: { cls:'src-abb', text:'Эбби' },
+};
+
+const taskLabels = {
+  2: { cls:'task-2', text:'Задание 2' },
+  3: { cls:'task-3', text:'Задание 3' },
+  4: { cls:'task-4', text:'Задание 4' },
+};
+
+const allQuestions = [
+
+  // ═══════════════════════════════════════
+  // ЗАДАНИЕ 2 — ГРАММАТИЧЕСКАЯ ОСНОВА
+  // ═══════════════════════════════════════
+
+  // — Нестандартные формы подлежащего —
+
+  {
+    task:2, src:'eli', topic:'Инфинитив как подлежащее',
+    text:"<span class='hero-name hero-eli'>Элли</span> записала в дневнике главную мысль первых выживших после сигнала. В каком из предложений подлежащее выражено <strong>инфинитивом</strong>?",
+    opts:[
+      "Томми ждал ответа у рации.",
+      "Выжить — значит продолжать бороться.",
+      "Нам стало холодно к ночи.",
+      "Русские появились на рассвете."
+    ],
+    ans:1,
+    fb:"✦ Верно! «Выжить» — инфинитив, стоит на месте подлежащего; «значит продолжать бороться» — сказуемое. В остальных предложениях подлежащее — существительное («Томми», «Русские») или личное местоимение («Нам»), то есть стандартные формы.",
+    trap:"Ловушка: подлежащее не обязательно существительное. Инфинитив (неопределённая форма глагола) может быть подлежащим — «Выжить» отвечает на вопрос «что?».",
+    hint:"Найди предложение, где вопрос «что является темой/субъектом?» предполагает ответ — действие в неопределённой форме. В каком предложении нет конкретного существительного-деятеля?",
+    ref:"Задание 2 · Подлежащее"
+  },
+
+  {
+    task:2, src:'tom', topic:'Числительное + существительное',
+    text:"<span class='hero-name hero-tom'>Томми</span> сообщил по рации: «Двенадцать выживших движутся к маяку». Подлежащее в этом предложении выражено:",
+    opts:[
+      "Числительным «двенадцать»",
+      "Существительным «выживших»",
+      "Неделимым словосочетанием «двенадцать выживших»",
+      "Деепричастным оборотом"
+    ],
+    ans:2,
+    fb:"✦ Верно! «Двенадцать выживших» — неделимое сочетание числительного и существительного в Р.п.; оно является подлежащим целиком. Числительное и существительное по отдельности подлежащими не являются.",
+    trap:"Ловушка: не выбирай только числительное. «Двенадцать» само по себе не может быть подлежащим здесь — только вместе с «выживших» как неделимая группа.",
+    hint:"Задай вопрос «кто движется?»: один выживший? нет. Двенадцать? нет. Двенадцать выживших? Да — всё словосочетание целиком.",
+    ref:"Задание 2 · Подлежащее"
+  },
+
+  {
+    task:2, src:'din', topic:'Неопределённое местоимение как подлежащее',
+    text:"<span class='hero-name hero-din'>Дина</span> перехватила обрывок русской передачи: «Кто-то передаёт сигнал SOS». Подлежащее в этой части выражено:",
+    opts:[
+      "Относительным местоимением «кто»",
+      "Неопределённым местоимением «кто-то»",
+      "Личным местоимением",
+      "Именем существительным"
+    ],
+    ans:1,
+    fb:"✦ Верно! «Кто-то» — неопределённое местоимение, является подлежащим. Неопределённые местоимения (кто-то, что-то, кое-кто, нечто) могут быть подлежащими — это нестандартная форма, которую важно знать для ОГЭ.",
+    trap:"Ловушка: «кто» и «кто-то» — разные местоимения. «Кто» — относительное или вопросительное. «Кто-то» — неопределённое, и оно-то и является подлежащим.",
+    hint:"«Кто-то» — это местоимение с суффиксом -то. К какому разряду местоимений относятся слова с суффиксами -то, -либо, -нибудь, с приставкой кое-?",
+    ref:"Задание 2 · Подлежащее"
+  },
+
+  // — Типы сказуемого —
+
+  {
+    task:2, src:'abb', topic:'Простое глагольное сказуемое',
+    text:"<span class='hero-name hero-abb'>Эбби</span> попросила всех вспомнить: ПГС — это один глагол, без инфинитивов рядом. Томми поморщился: зачем им синтаксис на Аляске? Эбби открыла дневник: чтобы понять записку, надо знать правила. В каком из предложений сказуемое является <strong>простым глагольным</strong>?",
+    opts:[
+      "Элли решила разбить лагерь на склоне.",
+      "Томми продолжал переводить записку.",
+      "Костёр потрескивал в темноте.",
+      "Дина старалась не шуметь."
+    ],
+    ans:2,
+    fb:"✦ Верно! «Потрескивал» — один глагол в личной форме = ПГС. В А «решила разбить» — СГС (решила + инфинитив). В Б «продолжал переводить» — СГС (начало + инфинитив). В Г «старалась не шуметь» — СГС (стремление + инфинитив).",
+    trap:"Ловушка: два глагола рядом («решила разбить», «продолжал переводить») — это почти всегда СГС, а не ПГС. ПГС = один глагол.",
+    hint:"Посчитай глаголы в каждом сказуемом. Если один — ПГС. Если вспомогательный + инфинитив — СГС. В каком варианте ровно один глагол?",
+    ref:"Задание 2 · Сказуемое"
+  },
+
+  {
+    task:2, src:'eli', topic:'СГС со значением начала действия',
+    text:"По пути к маяку <span class='hero-name hero-eli'>Элли</span> разглядывала чужие записи. Русские писали короткими предложениями, как команды. «Странно устроен язык», подумала она. В каком предложении составное глагольное сказуемое образовано вспомогательным глаголом со значением <strong>НАЧАЛА</strong> действия?",
+    opts:[
+      "Эбби хотела выйти на разведку.",
+      "Томми мог объяснить маршрут.",
+      "Костёр начал разгораться в темноте.",
+      "Русские должны были ответить на сигнал."
+    ],
+    ans:2,
+    fb:"✦ Верно! «Начал разгораться»: «начал» — вспомогательный глагол со значением начала действия + инфинитив «разгораться» = СГС. В А — желание («хотела»). В Б — возможность («мог»). В Г — долженствование («должны были»).",
+    trap:"Ловушка: все четыре варианта — СГС, но значения вспомогательных глаголов разные. Нужен именно глагол НАЧАЛА: начать, стать, приступить, пуститься.",
+    hint:"Начало действия: какой вспомогательный глагол выражает это значение? Где он стоит: «хотела», «мог», «начал» или «должны были»?",
+    ref:"Задание 2 · Сказуемое"
+  },
+
+  {
+    task:2, src:'din', topic:'Составное именное сказуемое',
+    text:"<span class='hero-name hero-din'>Дина</span> переводила первую страницу дневника выживших и объясняла команде: связка плюс прилагательное или существительное — это СИС, не ПГС. Укажите предложение с <strong>составным именным сказуемым</strong>.",
+    opts:[
+      "Элли побежала к сигнальному костру.",
+      "Радиосигнал оказался слабым.",
+      "Томми начал переводить запись.",
+      "Выжившие спешили навстречу."
+    ],
+    ans:1,
+    fb:"✦ Верно! «Оказался слабым»: «оказался» — связка + «слабым» (прилагательное) — именная часть = СИС. В А и Г — ПГС (один глагол). В В — СГС (начал + инфинитив).",
+    trap:"Ловушка: «оказался» может казаться обычным глаголом, но это связка. Связки: быть, стать, казаться, оказаться, становиться, являться — после них именная часть (прилагательное или существительное).",
+    hint:"Найди предложение, где сказуемое = глагол-связка + прилагательное или существительное. Можно подставить «является»: «Сигнал является слабым».",
+    ref:"Задание 2 · Сказуемое"
+  },
+
+  {
+    task:2, src:'abb', topic:'Грамматическая основа: СИС с существительным',
+    text:"<span class='hero-name hero-abb'>Эбби</span> читает вслух записку, найденную у маяка. Укажите <strong>грамматическую основу</strong> предложения: «Старый маяк у бухты был единственным ориентиром».",
+    opts:[
+      "маяк был",
+      "маяк был ориентиром",
+      "старый маяк единственным",
+      "был единственным ориентиром"
+    ],
+    ans:1,
+    fb:"✦ Верно! «Маяк» — подлежащее (сущ. И.п.). «Был ориентиром» — СИС: связка «был» + именная часть «ориентиром» (сущ. в Т.п.). «Старый» и «у бухты» — определение и дополнение. «Единственным» — часть именного сказуемого, не включается в основу отдельно.",
+    trap:"Ловушка: «был» — не самостоятельное сказуемое, а связка. Сказуемое целиком = «был ориентиром». Вариант А «маяк был» неполный: без именной части СИС потеряно главное содержание сказуемого. Вариант Г не содержит подлежащего.",
+    hint:"Найди подлежащее (кто/что — тема предложения) и сказуемое (что о нём говорится). Глагол «был» — связка, он требует именной части после себя. Сказуемое = связка + то, что стоит после неё.",
+    ref:"Задание 2 · Грамматическая основа"
+  },
+
+  // — Нулевая связка и тире —
+
+  {
+    task:2, src:'tom', topic:'Тире между подлежащим и сказуемым',
+    text:"<span class='hero-name hero-tom'>Томми</span> нашёл среди записей несколько фраз без знаков. «Тут пропущены тире», сказал он. В каком предложении между подлежащим и сказуемым необходимо поставить <strong>тире</strong>?",
+    opts:[
+      "Она опытный переводчик.",
+      "Слово не воробей.",
+      "Аляска, конечно, последний рубеж.",
+      "Дважды два четыре."
+    ],
+    ans:3,
+    fb:"✦ Верно! «Дважды два — четыре»: оба главных члена — числительные → тире. В А «она» — личное местоимение → тире не ставится. В Б перед сказуемым стоит «не» → тире не ставится. В В «конечно» — вводное слово между подлежащим и сказуемым → тире тоже не ставится, хотя оба члена существительные.",
+    trap:"Ловушка: три запрета на тире: 1) подлежащее — личное местоимение, 2) частица «не» перед сказуемым, 3) вводное слово перед сказуемым. Тире ставится при: числительное — числительное, сущ.И.п. — сущ.И.п., инфинитив — инфинитив.",
+    hint:"Перебери каждый вариант: есть ли частица «не» перед сказуемым? Личное местоимение как подлежащее? Или оба члена — числительные? Найди, где выполняется условие для тире.",
+    ref:"Задание 2 · Тире"
+  },
+
+  {
+    task:2, src:'din', topic:'Тире НЕ ставится: частица НЕ',
+    text:"<span class='hero-name hero-din'>Дина</span> нашла в блокноте выживших четыре фразы без знаков. В трёх из них надо поставить тире. Найди исключение: в каком предложении тире между подлежащим и сказуемым <strong>НЕ ставится</strong>?",
+    opts:[
+      "Аляска — последний рубеж.",
+      "Встретить выживших — наша цель.",
+      "Слово не воробей.",
+      "Доверие — основа союза."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В перед сказуемым стоит частица «не» → тире не ставится. В А, Б, Г: тире ставится: в А — сущ. И.п. — сущ. И.п., в Б — инфинитив — сущ. И.п. (смешанный тип, но тире всё равно ставится), в Г — сущ. И.п. — сущ. И.п.",
+    trap:"Ловушка: «слово» — сущ. И.п., «воробей» — сущ. И.п., казалось бы тире нужно. Но «не» перед сказуемым блокирует тире.",
+    hint:"Внимательно посмотри на предложение В. Есть ли слово, которое по правилу отменяет тире между подлежащим и сказуемым, даже если оба — существительные?",
+    ref:"Задание 2 · Тире"
+  },
+
+  // — Односоставные предложения —
+
+  {
+    task:2, src:'eli', topic:'Безличное предложение',
+    text:"Ночью на маяке <span class='hero-name hero-eli'>Элли</span> слушала эфир и переписывала обрывки русских фраз в блокнот. «Кто тут подлежащее?» — думала она, глядя на чужие слова. Укажите <strong>безличное</strong> предложение — то, где нет и не может быть деятеля.",
+    opts:[
+      "Русские разожгли костёр на берегу.",
+      "В наушниках слышались слова на незнакомом языке.",
+      "К вечеру заметно похолодало.",
+      "Мы вышли к маяку перед рассветом."
+    ],
+    ans:2,
+    fb:"✦ Верно! «Похолодало» — безличный глагол; подлежащего нет и быть не может. Нельзя сказать «кто-то похолодал». В А подлежащее «Русские». В Б — можно задать вопрос (что слышалось?), подлежащее — «слова». В Г подлежащее «Мы».",
+    trap:"Ловушка: «в наушниках слышались слова» — двусоставное: «слова» (подлежащее) слышались. А «похолодало» — нет деятеля и быть не может.",
+    hint:"Задай вопрос «кто или что выполняет действие?» для каждого предложения. В безличном — никто и ничто, действие совершается само собой.",
+    ref:"Задание 2 · Односоставные"
+  },
+
+  {
+    task:2, src:'tom', topic:'Неопределённо-личное предложение',
+    text:"<span class='hero-name hero-tom'>Томми</span> вспоминал свои переговоры с русскими по рации: короткие фразы, деятель не назван. «Кто передавал? Понятия не имею». Укажите <strong>неопределённо-личное</strong> предложение — там глагол в форме 3-го лица множественного числа, деятель неизвестен.",
+    opts:[
+      "Вечерело над бухтой.",
+      "В лагере им выдали запасы и карту.",
+      "Туман стелился по воде.",
+      "Нам стало жутко от тишины."
+    ],
+    ans:1,
+    fb:"✦ Верно! «Выдали» — глагол 3-го лица мн.ч.; деятель не назван и неважен кто именно = неопределённо-личное. В А «вечерело» — безличное. В В подлежащее «туман» — двусоставное. В Г «стало» — безличное.",
+    trap:"Ловушка: «им выдали» — здесь «им» (кому?) — дополнение, а не подлежащее. Нет подлежащего, глагол 3 л. мн.ч. («выдали») → неопределённо-личное.",
+    hint:"Найди предложение, где глагол стоит в форме 3-го лица множественного числа, а подлежащее отсутствует — но при желании деятеля можно было бы назвать.",
+    ref:"Задание 2 · Односоставные"
+  },
+
+
+  // ═══════════════════════════════════════
+  // ЗАДАНИЕ 3 — ПУНКТУАЦИЯ
+  // ═══════════════════════════════════════
+
+  // — Запятые в простом предложении —
+
+  {
+    task:3, src:'abb', topic:'Причастный оборот: обособление после определяемого слова',
+    text:"<span class='hero-name hero-abb'>Эбби</span> прошлась по заброшенному зданию маяка. На стенах висели объявления. Слова расплылись от сырости, знаков почти не видно. В каком предложении выделенный причастный оборот [в квадратных скобках] <strong>обособляется</strong> запятыми?",
+    opts:[
+      "[Замёрзший за ночь] лёд трещал под ногами.",
+      "Мы нашли [занесённую снегом] тропу.",
+      "На берегу горел [разведённый выжившими] костёр.",
+      "Эбби прочитала записку [оставленную русскими]."
+    ],
+    ans:3,
+    fb:"✦ Верно! Причастный оборот обособляется только ПОСЛЕ определяемого слова. В Г: «записку» — определяемое слово, оборот «оставленную русскими» стоит после него → запятая. В А, Б, В — обороты стоят перед определяемым существительным → не обособляются.",
+    trap:"Ловушка: причастный оборот перед существительным — запятых нет. После существительного — обязательны. Проверяй позицию оборота относительно определяемого слова.",
+    hint:"Найди в каждом варианте определяемое слово (существительное, к которому относится причастие). В каком варианте оборот стоит ПОСЛЕ этого существительного?",
+    ref:"Задание 3 · Причастный оборот"
+  },
+
+  {
+    task:3, src:'din', topic:'Деепричастный оборот между подлежащим и сказуемым',
+    text:"<span class='hero-name hero-din'>Дина</span> переписала четыре предложения из дневника и выделила обороты скобками. В каком из них деепричастный оборот [в квадратных скобках] стоит именно <strong>между подлежащим и сказуемым</strong>?",
+    opts:[
+      "[Переведя записку], Дина обернулась к команде.",
+      "Элли слушала передачу, [сжимая рукоять ножа].",
+      "[Переглянувшись], Томми и Эбби кивнули.",
+      "Томми, [не отрывая взгляда от горизонта], молчал."
+    ],
+    ans:3,
+    fb:"✦ Верно! В Г: «Томми» — подлежащее, «молчал» — сказуемое; оборот «не отрывая взгляда от горизонта» стоит между ними → запятые с обеих сторон. В А и В — оборот в начале предложения. В Б — в конце.",
+    trap:"Ловушка: деепричастный оборот выделяется запятыми всегда, но вопрос — где именно. При позиции между подлежащим и сказуемым — запятые нужны с обеих сторон.",
+    hint:"Найди подлежащее и сказуемое в каждом варианте. В каком предложении деепричастный оборот «вклинился» именно между этими двумя членами?",
+    ref:"Задание 3 · Деепричастный оборот"
+  },
+
+  {
+    task:3, src:'eli', topic:'Однородные члены: подсчёт запятых',
+    text:"<span class='hero-name hero-eli'>Элли</span> проверила блокнот Дины: одно предложение было записано без знаков препинания. Сколько запятых нужно поставить в предложении «Русские принесли хлеб соль рыбу мёд и травяной чай»?",
+    opts:["2", "3", "4", "5"],
+    ans:1,
+    fb:"✦ Верно! Пять однородных дополнений: хлеб, соль, рыбу, мёд и чай. Перед последним словом стоит одиночное «и» — запятая перед ним не нужна. Итого три запятые: после «хлеб», «соль», «рыбу». Перед «мёд» и «и чай» запятых нет.",
+    trap:"Ловушка: «мёд и травяной чай» — пара с одиночным «и» перед последним однородным. По правилу: перед одиночным «и» запятая НЕ ставится.",
+    hint:"Перечисли все однородные члены. Сколько их? Запомни: запятые ставятся между однородными, но перед последним, если стоит одиночный союз «и», запятая не нужна.",
+    ref:"Задание 3 · Однородные члены"
+  },
+
+  {
+    task:3, src:'tom', topic:'Вводное слово «наконец» в ряду',
+    text:"Перед переговорами <span class='hero-name hero-tom'>Томми</span> инструктировал: «Во-первых, не спешить. Во-вторых, слушать. Наконец, дать знак». Потом поймал себя на мысли: а всегда ли «наконец» вводное? В каком предложении слово «наконец» является <strong>вводным</strong> и выделяется запятыми?",
+    opts:[
+      "Наконец они увидели огни маяка.",
+      "Наконец-то пришёл ответный сигнал.",
+      "Во-первых, спрячься; во-вторых, слушай; наконец, подай сигнал.",
+      "Наконец всё стихло над бухтой."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В: «наконец» входит в ряд «во-первых… во-вторых… наконец» — это вводное слово при перечислении → выделяется запятой. В А, Г — «наконец» = наречие «в конце концов» (не вводное). В Б — «наконец-то» — частица с «-то» (не вводное).",
+    trap:"Ловушка: «наконец» само по себе почти никогда не является вводным. Вводным оно становится только в перечислениях: «во-первых… во-вторых… наконец».",
+    hint:"Посмотри на контекст каждого предложения. В каком из них «наконец» стоит в ряду других вводных слов-перечислителей типа «во-первых», «во-вторых»?",
+    ref:"Задание 3 · Вводные слова"
+  },
+
+  // — Запятые в сложном предложении —
+
+  {
+    task:3, src:'abb', topic:'ССП: запятая перед союзом «и»',
+    text:"<span class='hero-name hero-abb'>Эбби</span> диктовала Дине предложения для перевода, и Дина сверялась: одна грамматическая основа или две? Это меняет всё. В каком предложении перед союзом «и» необходимо поставить запятую?",
+    opts:[
+      "Эбби подошла к берегу и остановилась.",
+      "Томми сел у костра и задумался.",
+      "Метель стихла и туман над бухтой рассеялся.",
+      "Элли прочитала записку и улыбнулась."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В: «Метель стихла» (первая основа) и «туман рассеялся» (вторая основа) — разные грамматические основы → ССП, запятая перед «и». В А, Б, Г — у двух глаголов одно подлежащее, это простое предложение с однородными сказуемыми.",
+    trap:"Ловушка: один союз «и» — не показатель сложного предложения. Проверяй: сколько грамматических основ? Одна → запятой перед «и» нет. Две — запятая нужна.",
+    hint:"В каждом предложении найди все подлежащие. Если в одном предложении два разных подлежащих при двух разных сказуемых — это ССП, нужна запятая.",
+    ref:"Задание 3 · ССП"
+  },
+
+  {
+    task:3, src:'eli', topic:'СПП: придаточное перед главной',
+    text:"Русские объясняли свой путь через Берингов пролив сложными предложениями. <span class='hero-name hero-eli'>Элли</span> слушала и разбирала структуру: где главная часть, где придаточная, где запятая. В каком предложении придаточная часть стоит <strong>перед</strong> главной и запятая ставится ПОСЛЕ придаточной?",
+    opts:[
+      "Мы выдвинемся, когда рассветёт.",
+      "Томми сказал, что знает дорогу к маяку.",
+      "Когда они вышли на берег, русские уже ждали.",
+      "Элли не знала, сколько их было."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В: «Когда они вышли на берег» — придаточное стоит перед главной частью «русские уже ждали»; запятая ставится после придаточного (после «берег»). В А и Б придаточное стоит после главной. В Г — тоже после главной.",
+    trap:"Ловушка: в А «когда рассветёт» стоит после главной — запятая перед «когда». В В «когда» открывает всё предложение — придаточное перед главной, запятая в конце придаточного.",
+    hint:"Найди подчинительный союз в каждом предложении. Перед ним стоит главная часть, или придаточная начинается с него? В каком варианте придаточное идёт первым?",
+    ref:"Задание 3 · СПП"
+  },
+
+  {
+    task:3, src:'din', topic:'СПП: однородные придаточные с «и»',
+    text:"<span class='hero-name hero-din'>Дина</span> потренировалась на своей же фразе: записала её без знаков и дала команде расставить запятые. Сколько нужно поставить: «Дина не знала кто они такие и долго ли они здесь»?",
+    opts:["0", "1", "2", "3"],
+    ans:1,
+    fb:"✦ Верно! Одна запятая: перед первым придаточным «кто они такие» (после «знала»). Два придаточных — «кто они такие» и «долго ли они здесь» — соединены одиночным «и», запятая между ними не нужна.",
+    trap:"Ловушка: два придаточных кажется требуют запятой между собой. Но при однородных придаточных, соединённых одиночным «и», запятая между ними НЕ ставится — по той же логике, что при однородных членах.",
+    hint:"Найди главную часть и оба придаточных. Они однородные (оба отвечают на один вопрос при одном слове главной части). Соединены одиночным «и». Нужна ли запятая между однородными придаточными с «и»?",
+    ref:"Задание 3 · СПП"
+  },
+
+  // — Тире —
+
+  {
+    task:3, src:'abb', topic:'Тире в БСП: противопоставление',
+    text:"<span class='hero-name hero-abb'>Эбби</span> листала шпаргалку: тире в БСП бывает разным. Условие, смена событий, противопоставление. В каком предложении тире выражает именно <strong>противопоставление</strong>?",
+    opts:[
+      "Рассветёт — выступим к берегу.",
+      "Элли оглянулась — никого не было.",
+      "Эбби сражалась — Дина переводила.",
+      "Пройдём перевал — окажемся на побережье."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В: «Эбби сражалась — Дина переводила» — противопоставление двух действий, можно вставить союз «а»: «Эбби сражалась, а Дина переводила». В А и Г — следствие/условие. В Б — быстрая смена событий.",
+    trap:"Ловушка: не путай противопоставление с быстрой сменой событий. Проверка: можно ли вставить «а» между частями? Если да — противопоставление и тире.",
+    hint:"Попробуй вставить союз «а» между частями каждого предложения. Где это получается естественно и осмысленно? Это и будет противопоставление.",
+    ref:"Задание 3 · Тире в БСП"
+  },
+
+  {
+    task:3, src:'tom', topic:'Тире между подлежащим и сказуемым: числительные',
+    text:"<span class='hero-name hero-tom'>Томми</span> нашёл в блокноте четыре предложения, записанных без знаков. Где-то нужно тире между подлежащим и сказуемым, где-то нет. В каком предложении тире необходимо?",
+    opts:[
+      "Он бывалый охотник и следопыт.",
+      "Пятью пять двадцать пять.",
+      "Аляска не потерянный рай.",
+      "Она смелая и решительная девушка."
+    ],
+    ans:1,
+    fb:"✦ Верно! «Пятью пять — двадцать пять»: оба главных члена — числительные → тире. В А и Г подлежащее — «он»/«она» (личное местоимение) → тире не ставится. В В — ловушка: «Аляска» (сущ.) как подлежащее, но перед сказуемым стоит «не» → тире не ставится даже при подлежащем-существительном.",
+    trap:"Ловушка: «Аляска не потерянный рай» — подлежащее «Аляска» (не местоимение!), но «не» перед сказуемым отменяет тире. Это стандартная ловушка ОГЭ: три правила НЕ ставить тире — местоимение, «не» перед сказуемым, вводное слово перед сказуемым.",
+    hint:"Посмотри на каждое предложение отдельно: в А/Г есть личное местоимение? В В — что стоит перед сказуемым? В Б — какие части речи у подлежащего и сказуемого?",
+    ref:"Задание 3 · Тире"
+  },
+
+  // — Двоеточие —
+
+  {
+    task:3, src:'eli', topic:'Двоеточие после обобщающего слова',
+    text:"<span class='hero-name hero-eli'>Элли</span> читала записи вслух, помечая разные случаи двоеточия. Одно из предложений её особо заинтересовало. В каком двоеточие стоит после <strong>обобщающего слова</strong> перед рядом однородных членов?",
+    opts:[
+      "Я смотрела в темноту: там кто-то был.",
+      "Русские принесли всё необходимое: хлеб, соль, рыбу и воду.",
+      "Элли поняла одно: надо рискнуть.",
+      "Томми обернулся: за холмами мерцали огни."
+    ],
+    ans:1,
+    fb:"✦ Верно! В Б: «всё необходимое» — обобщающее слово, за которым стоит перечисление однородных дополнений «хлеб, соль, рыбу и воду». В А, В — двоеточие перед пояснением в БСП. В Г — двоеточие перед содержанием воспринятого.",
+    trap:"Ловушка: двоеточие ставится в нескольких случаях. Нужен именно случай «обобщающее слово + перечисление». Проверяй: есть ли слово, которое называет всё перечисленное сразу?",
+    hint:"Найди предложение, где перед двоеточием стоит обобщающее слово (называет всё перечисленное сразу), а после него — конкретный список предметов или явлений. Задай вопрос: слово перед двоеточием охватывает то, что идёт после?",
+    ref:"Задание 3 · Двоеточие"
+  },
+
+  {
+    task:3, src:'din', topic:'Двоеточие в БСП: содержание воспринятого',
+    text:"Какой знак препинания нужно поставить на месте пропуска в предложении «Эбби взглянула на берег ___ вдали дымился костёр русских»?",
+    opts:["Запятую", "Тире", "Точку с запятой", "Двоеточие"],
+    ans:3,
+    fb:"✦ Верно! Первая часть — действие восприятия («взглянула»); вторая поясняет, что именно увидел персонаж (можно вставить «и увидела, что»). Классический случай для двоеточия в БСП: содержание воспринятого.",
+    trap:"Ловушка: тире здесь не подходит — нет противопоставления, быстрой смены событий или следствия-условия. Двоеточие: вторая часть = то, что «увидели».",
+    hint:"Вставь вместо пропуска слова «и увидела, что». Если предложение звучит естественно, нужно двоеточие — это случай «содержание воспринятого».",
+    ref:"Задание 3 · Двоеточие в БСП"
+  },
+
+  {
+    task:3, src:'tom', topic:'Двоеточие vs тире в БСП',
+    text:"<span class='hero-name hero-tom'>Томми</span> диктовал, <span class='hero-name hero-din'>Дина</span> проверяла знаки: двоеточие или тире? В каком предложении между частями БСП нужно двоеточие, а не тире?",
+    opts:[
+      "Рассветёт — выступим в путь.",
+      "Туман поднялся — стало видно маяк.",
+      "Дина развернула записку: там был адрес базы.",
+      "Найдём дорогу — вернёмся к своим."
+    ],
+    ans:2,
+    fb:"✦ Верно! В В: вторая часть «там был адрес базы» поясняет и раскрывает содержание первой (что именно в записке) → двоеточие. В А и Г — условие/следствие → тире. В Б «Туман поднялся — стало видно маяк» — следствие (видно маяк = результат того, что туман поднялся) → тире.",
+    trap:"Ловушка: в Б вторая часть — следствие первой, а не пояснение: туман поднялся → поэтому стало видно. Следствие/вывод → тире. В В «там был адрес» — раскрытие содержания записки → двоеточие.",
+    hint:"Задай вопрос к соотношению частей. «Почему?»/«А именно что?» → двоеточие. «И вдруг?»/«Тогда?»/«В результате?» → тире.",
+    ref:"Задание 3 · Двоеточие vs тире"
+  },
+
+
+  // ═══════════════════════════════════════
+  // ЗАДАНИЕ 4 — ВИДЫ СВЯЗИ В СЛОВОСОЧЕТАНИИ
+  // ═══════════════════════════════════════
+
+  // — Согласование —
+
+  {
+    task:4, src:'eli', topic:'Согласование: прилагательное',
+    text:"<span class='hero-name hero-eli'>Элли</span> разглядывала первую страницу записей выживших: фраза «русская речь» мелькала несколько раз. Определите тип подчинительной связи в этом словосочетании.",
+    opts:["Примыкание", "Управление", "Согласование", "Сочинительная связь"],
+    ans:2,
+    fb:"✦ Верно! «Русская» — прилагательное; согласуется с «речь» в роде (ж.р.), числе (ед.ч.), падеже (И.п.) → согласование. Измени «речь» — «русской речи», «русскую речь» — прилагательное меняется вместе.",
+    trap:"Ловушка: управление — это когда зависимое слово стоит в определённом падеже по требованию главного. У прилагательного нет «требуемого падежа» — оно просто соглашается с существительным.",
+    hint:"Зависимое слово «русская» — это прилагательное. Прилагательное всегда связано с существительным каким типом связи?",
+    ref:"Задание 4 · Согласование"
+  },
+
+  {
+    task:4, src:'abb', topic:'Согласование: причастие',
+    text:"<span class='hero-name hero-abb'>Эбби</span> вышла к морю и остановилась: замёрзший берег уходил в туман. Пока ждала остальных, сформулировала задание для себя. Определите тип связи в словосочетании <strong>«замёрзший берег»</strong>.",
+    opts:["Управление", "Примыкание", "Согласование", "Координация"],
+    ans:2,
+    fb:"✦ Верно! «Замёрзший» — причастие; согласуется с «берег» по роду (м.р.), числу (ед.ч.), падежу (И.п.) → согласование. Замёрзшего берега, замёрзшим берегом — оба меняются одновременно.",
+    trap:"Ловушка: причастие по типу связи — то же самое, что прилагательное: согласование. Не путай с управлением, при котором зависимое — существительное или местоимение в косвенном падеже.",
+    hint:"«Замёрзший» — это причастие (отвечает на вопрос «какой?»). К какому типу связи относятся прилагательные и причастия при зависимой позиции?",
+    ref:"Задание 4 · Согласование"
+  },
+
+  {
+    task:4, src:'din', topic:'Согласование: порядковое числительное',
+    text:"<span class='hero-name hero-din'>Дина</span> перехватила третий сигнал за день. «Может, он важнее?» Пока разбиралась, задалась вопросом: какой тип связи в словосочетании <strong>«третий сигнал»</strong>?",
+    opts:["Примыкание", "Управление", "Согласование", "Предикативная связь"],
+    ans:2,
+    fb:"✦ Верно! «Третий» — порядковое числительное; согласуется с «сигнал» в роде (м.р.), числе (ед.ч.), падеже (И.п.) → согласование. Порядковые числительные (первый, второй, третий…) ведут себя как прилагательные.",
+    trap:"Ловушка: количественные числительные (два, три, пять) при подлежащем управляют существительным (пять сигналов — Р.п. мн.ч.). А порядковые (третий, первый) согласуются, как прилагательные.",
+    hint:"«Третий» — порядковое числительное. По изменению форм оно похоже на прилагательное: третьего, третьему, третий. Какой тип связи у прилагательного с существительным?",
+    ref:"Задание 4 · Согласование"
+  },
+
+  // — Управление —
+
+  {
+    task:4, src:'abb', topic:'Управление: существительное в В.п.',
+    text:"<span class='hero-name hero-abb'>Эбби</span> часами слушала рацию, не отвлекаясь. Определите тип связи в словосочетании <strong>«слушать рацию»</strong>.",
+    opts:["Согласование", "Примыкание", "Управление", "Двойная связь"],
+    ans:2,
+    fb:"✦ Верно! «Рацию» — существительное в В.п.; форма падежа требуется главным словом «слушать». При изменении главного слова падеж зависимого не меняется: слушал рацию — слушает рацию — слушать рацию → управление.",
+    trap:"Ловушка: примыкание — это неизменяемые слова (наречия, инфинитивы). «Рацию» — изменяемое существительное в конкретном падеже, это управление.",
+    hint:"«Рацию» — существительное в В.п. Кто требует этот падеж — глагол «слушать». Зависимое стоит в конкретном падеже по требованию главного — какой это тип связи?",
+    ref:"Задание 4 · Управление"
+  },
+
+  {
+    task:4, src:'eli', topic:'Управление: предложное',
+    text:"<span class='hero-name hero-eli'>Элли</span> решила: выйти к берегу одной, без лишнего шума. Укажите тип связи в словосочетании <strong>«выйти к берегу»</strong>.",
+    opts:["Примыкание", "Согласование", "Управление", "Аппозиция"],
+    ans:2,
+    fb:"✦ Верно! «К берегу» — существительное в Д.п. с предлогом; форма задаётся глаголом «выйти». Это предложное управление. Изменишь «выйти» → «вышел к берегу» — «к берегу» не меняется.",
+    trap:"Ловушка: примыкание подходит только для неизменяемых слов. «Берег» — изменяемое существительное; оно стоит в конкретном падеже (Д.п.) по требованию глагола.",
+    hint:"«К берегу» — это предлог + существительное. Существительное стоит в конкретном падеже. Кто требует именно Д.п.? Глагол «выйти». Это предложное или беспредложное управление?",
+    ref:"Задание 4 · Управление"
+  },
+
+  {
+    task:4, src:'tom', topic:'Управление: отличие от согласования',
+    text:"<span class='hero-name hero-tom'>Томми</span> составил список словосочетаний для разбора: три на согласование, одно на управление. Найди то, что выбивается. В каком из них тип связи — <strong>УПРАВЛЕНИЕ</strong>, а не согласование?",
+    opts:[
+      "Тихая бухта",
+      "Уцелевший приёмник",
+      "Доверие к выжившим",
+      "Заснеженный перевал"
+    ],
+    ans:2,
+    fb:"✦ Верно! «Доверие к выжившим»: «к выжившим» — существительное (причастие в роли сущ.) в Д.п. с предлогом; падеж задаётся словом «доверие» → управление. В А, Б, Г — прилагательное/причастие согласуется с существительным.",
+    trap:"Ловушка: «уцелевший» и «заснеженный» — причастия, связь согласование. «К выжившим» — существительное в косвенном падеже, управляемое главным словом.",
+    hint:"Найди словосочетание, где зависимое слово — не прилагательное и не причастие, а существительное (или слово в роли существительного) в косвенном падеже.",
+    ref:"Задание 4 · Управление"
+  },
+
+  // — Примыкание —
+
+  {
+    task:4, src:'din', topic:'Примыкание: наречие',
+    text:"<span class='hero-name hero-din'>Дина</span> объяснила: говорить тихо — и только так. Любой шум привлечёт лишнее внимание. Определите тип связи в словосочетании <strong>«говорить тихо»</strong>.",
+    opts:["Согласование", "Управление", "Примыкание", "Именная связь"],
+    ans:2,
+    fb:"✦ Верно! «Тихо» — наречие, неизменяемое слово; присоединяется к «говорить» только по смыслу → примыкание. У наречия нет рода, числа, падежа, что подтверждает: это не согласование и не управление.",
+    trap:"Ловушка: «тихо» нельзя спросить «тихого?», «тихому?» — у наречия нет падежей. Значит, зависимое слово неизменяемое. Неизменяемое зависимое — всегда примыкание.",
+    hint:"Попробуй склонять слово «тихо»: «тихого», «тихому», «тихим»? Нет — оно не изменяется. Неизменяемое зависимое слово указывает на какой тип связи?",
+    ref:"Задание 4 · Примыкание"
+  },
+
+  {
+    task:4, src:'abb', topic:'Примыкание: инфинитив',
+    text:"<span class='hero-name hero-abb'>Эбби</span> решила переговорить с русскими лично, не через рацию. Определите тип связи в словосочетании <strong>«решить переговорить»</strong>.",
+    opts:["Управление", "Примыкание", "Согласование", "Сочинительная связь"],
+    ans:1,
+    fb:"✦ Верно! «Переговорить» — инфинитив, неизменяемая форма глагола; присоединяется к «решить» только по смыслу → примыкание. Инфинитив нельзя ни проспрягать, ни просклонять в этой роли.",
+    trap:"Ловушка: кажется, что два глагола — это что-то особенное. Но инфинитив при другом глаголе — это зависимое неизменяемое слово. Неизменяемое = примыкание.",
+    hint:"«Переговорить» — инфинитив. Он изменяемый? Нет: это неопределённая форма. Неизменяемое зависимое слово — какой тип связи?",
+    ref:"Задание 4 · Примыкание"
+  },
+
+  {
+    task:4, src:'eli', topic:'Примыкание: деепричастие',
+    text:"В словосочетании <strong>«слушала не дыша»</strong> зависимое слово — деепричастие. Почему тип связи здесь — примыкание, а не управление?",
+    opts:[
+      "Деепричастие — форма глагола и управляется главным глаголом.",
+      "Деепричастие не изменяется; его связь с главным словом только смысловая.",
+      "Деепричастие согласуется с подлежащим в лице и числе.",
+      "К деепричастию можно поставить падежный вопрос — значит, это управление."
+    ],
+    ans:1,
+    fb:"✦ Верно! Деепричастие — неизменяемая форма: нет рода, числа, падежа. Нельзя спросить «не дышащего?» или «не дышащему?» — падежа нет. Связь только смысловая → примыкание.",
+    trap:"Ловушка: деепричастие действительно форма глагола, но к нему нельзя поставить падежный вопрос — у деепричастия нет падежа. Значит, это не управление.",
+    hint:"Попробуй изменить деепричастие «не дыша» по падежам или по числам. Получается? Если слово не изменяется — какой тип связи оно образует?",
+    ref:"Задание 4 · Примыкание"
+  },
+
+  {
+    task:4, src:'tom', topic:'Примыкание: отличие от управления',
+    text:"<span class='hero-name hero-tom'>Томми</span> собрал четыре словосочетания: в трёх управление, в одном примыкание. Найди это одно. В каком зависимое слово связано с главным <strong>ПРИМЫКАНИЕМ</strong>, а не управлением?",
+    opts:[
+      "Написать записку",
+      "Думать об иммунитете",
+      "Говорить с русскими",
+      "Идти молча"
+    ],
+    ans:3,
+    fb:"✦ Верно! «Идти молча»: «молча» — деепричастие (или наречие), неизменяемое слово; примыкает к глаголу только по смыслу → примыкание. В А «записку» — В.п., В Б «об иммунитете» — П.п. с предлогом, В В «с русскими» — Т.п. с предлогом: всё это управление.",
+    trap:"Ловушка: «написать», «думать», «говорить» управляют существительными в падежах. «Идти» + «молча»: у «молча» нет падежа — это неизменяемое слово-примыкание.",
+    hint:"Найди словосочетание, где зависимое слово нельзя поставить в никакой падеж. Запиши: «молча» — какой это падеж? Никакого. Значит, это примыкание.",
+    ref:"Задание 4 · Примыкание"
+  },
+
+
+  // ═══ ДОПОЛНИТЕЛЬНЫЕ: ОБРАЩЕНИЕ (задание 3) ═══
+
+  {
+    task:3, src:'eli', topic:'Обращение: запятая',
+    text:"<span class='hero-name hero-eli'>Элли</span> наконец-то заговорила с выжившими. В каком предложении <strong>правильно</strong> расставлены знаки препинания при обращении?",
+    opts:[
+      "Томми ты слышишь меня?",
+      "Томми, ты слышишь меня?",
+      "Слушай, Дина. это важно.",
+      "Ребята мы добрались."
+    ],
+    ans:1,
+    fb:"✦ Верно! «Томми» — обращение, называет того, к кому обращаются; выделяется запятой: «Томми, ты слышишь меня?». В А нет запятой — ошибка. В В запятая стоит после «Дина», но точка в середине — ошибка (нужна запятая). В Г перед «мы» нужна запятая после обращения «ребята».",
+    trap:"Ловушка: обращение всегда выделяется запятыми — с одной или с двух сторон в зависимости от позиции. Его нельзя путать с подлежащим: «Томми, приходи» — «Томми» обращение, нет подлежащего; «Томми пришёл» — «Томми» подлежащее.",
+    hint:"Найди предложение, где слово, называющее адресата речи, правильно отделено запятой. Обращение в начале предложения → запятая после него.",
+    ref:"Задание 3 · Обращение"
+  },
+
+  {
+    task:3, src:'din', topic:'Обращение: позиция в предложении',
+    text:"<span class='hero-name hero-din'>Дина</span> переводила слова русских. В каком предложении обращение стоит <strong>в середине</strong> предложения и выделяется запятыми <strong>с обеих сторон</strong>?",
+    opts:[
+      "Друзья, мы рады вашему приходу.",
+      "Мы рады, друзья, вашему приходу.",
+      "Мы рады вашему приходу, друзья.",
+      "Дорогие друзья мы ждали вас."
+    ],
+    ans:1,
+    fb:"✦ Верно! В Б: «друзья» стоит в середине предложения — выделяется запятыми с обеих сторон: «Мы рады, друзья, вашему приходу». В А — обращение в начале (запятая только после). В В — обращение в конце (запятая только перед). В Г — нет запятых при обращении (ошибка).",
+    trap:"Ловушка: позиция обращения определяет, сколько запятых нужно. Начало → запятая после. Конец → запятая до. Середина → запятые с обеих сторон.",
+    hint:"Найди предложение, где слово-обращение «зажато» между другими членами предложения. Сколько сторон у него будут запятые?",
+    ref:"Задание 3 · Обращение"
+  }
+
+];
+
+// ─── ШАГ 1: Перетасовать вопросы ───────────────────────────────────
+function shuffle(a) {
+  const arr = [...a];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+let questions, cur, score, attempts, answered;
+let shuffledOpts = [], correctIdx = 0;
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+}
+initQuiz();
+
+const qcard     = document.getElementById('qcard');
+const qheader   = document.getElementById('qheader');
+const qtext     = document.getElementById('qtext');
+const qopts     = document.getElementById('qopts');
+const qfb       = document.getElementById('qfb');
+const qnext     = document.getElementById('qnext');
+const qbar      = document.getElementById('qbar');
+const qcnt      = document.getElementById('qcnt');
+const scoredisp = document.getElementById('score-disp');
+
+function renderQ() {
+  const q = questions[cur];
+  answered = false; attempts = 0;
+
+  // Перетасовать варианты ответа
+  const idx = [0,1,2,3];
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  shuffledOpts = idx.map(i => q.opts[i]);
+  correctIdx = idx.indexOf(q.ans);
+
+  // Отрисовка заголовка карточки
+  const sl = srcLabels[q.src] || { cls:'', text:'' };
+  const tl = taskLabels[q.task] || { cls:'', text:'' };
+  qheader.innerHTML =
+    `<span class="qh-src ${sl.cls}">${sl.text}</span>` +
+    `<span class="qh-task ${tl.cls}">${tl.text}</span>` +
+    `<span style="color:var(--muted);font-size:10px;font-weight:500">${q.topic}</span>`;
+
+  qtext.innerHTML = q.text;
+
+  qopts.innerHTML = '';
+  shuffledOpts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answer(i);
+    qopts.appendChild(btn);
+  });
+
+  qfb.style.display = 'none';
+  qfb.className = 'feedback-box';
+  qnext.style.display = 'none';
+
+  qcnt.textContent = `${cur + 1} / ${questions.length}`;
+  qbar.style.width = `${(cur / questions.length) * 100}%`;
+
+  qcard.classList.remove('question-animate');
+  void qcard.offsetWidth;
+  qcard.classList.add('question-animate');
+}
+
+function answer(i) {
+  if (answered) return;
+  const q = questions[cur];
+  const btns = qopts.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+
+  if (i === correctIdx) {
+    btns[i].classList.add('correct');
+    score++;
+    scoredisp.textContent = `⚔ ${score} верно`;
+    answered = true;
+    qfb.className = 'feedback-box correct-fb';
+    qfb.innerHTML = `🥳 ${q.fb}${q.ref ? `<br><em style="opacity:0.7">Тема: ${q.ref}</em>` : ''}`;
+    qfb.style.display = 'block';
+    qnext.style.display = 'block';
+    qnext.textContent = cur < questions.length - 1 ? 'Следующий вопрос →' : 'Узнать результат →';
+  } else {
+    btns[i].classList.add('wrong');
+    attempts++;
+    if (attempts < 2) {
+      btns.forEach(b => b.disabled = false);
+      btns[i].disabled = true;
+      qfb.className = 'feedback-box wrong-fb';
+      qfb.innerHTML = `💡 ${q.hint || 'Подумай ещё раз — у тебя есть вторая попытка.'}`;
+      qfb.style.display = 'block';
+    } else {
+      btns[correctIdx].classList.add('correct');
+      answered = true;
+      qfb.className = 'feedback-box wrong-fb';
+      qfb.innerHTML = `❌ ${q.trap || q.fb}${q.ref ? `<br><em style="opacity:0.7">Тема: ${q.ref}</em>` : ''}`;
+      qfb.style.display = 'block';
+      qnext.style.display = 'block';
+      qnext.textContent = cur < questions.length - 1 ? 'Следующий вопрос →' : 'Узнать результат →';
+    }
+  }
+}
+
+document.getElementById('qnext').onclick = () => {
+  cur++;
+  if (cur < questions.length) renderQ();
+  else showResults();
+};
+
+function showResults() {
+  qcard.style.display = 'none';
+  document.getElementById('quiz-progress-wrap').style.display = 'none';
+  const pct = score / questions.length;
+  let emoji, title, story, rankClass, rankText;
+
+  // Пороги: S≥33 A≥27 B≥20 C≥13 D<13  (35 вопросов: ceil(0.93×35)=33, 0.77=27, 0.57=20, 0.37=13)
+  if (pct >= 0.93) {
+    emoji = '📡';
+    title = 'Формула иммунитета расшифрована!';
+    story = 'Дина расшифровала последнюю строку. Русские вышли из укрытия. Рукопожатие. Обмен. Томми уже звонит в Джексон: «Это не конец. Это начало». Элли смотрит на океан и, кажется, впервые за долгое время улыбается.';
+    rankClass = 'rank-s';
+    rankText = 'Ранг: Главный лингвист Аляски ✦';
+  } else if (pct >= 0.77) {
+    emoji = '🤝';
+    title = 'Союз заключён';
+    story = 'Большую часть записей удалось разобрать. Русские согласны на союз. Формула ещё требует проверки, но контакт установлен. Томми вздыхает с облегчением. Эбби начинает учить слово «привет».';
+    rankClass = 'rank-a';
+    rankText = 'Ранг: Переводчик штаба выживших';
+  } else if (pct >= 0.57) {
+    emoji = '🏕️';
+    title = 'Торговый пост открыт';
+    story = 'Часть записей осталась нечитаемой. Но русские открыли торговый пост у маяка — это уже что-то. Дина записывает новые слова. Элли разглядывает чужие рисунки на стенах. Прогресс.';
+    rankClass = 'rank-b';
+    rankText = 'Ранг: Дипломат торгового поста';
+  } else if (pct >= 0.37) {
+    emoji = '📻';
+    title = 'Связь потеряна';
+    story = 'Помехи. Сигнал пропал. Русские спрятались — их спугнул шум. Томми качает головой. «Нам нужен переводчик получше», говорит Эбби, глядя в пустой эфир. Придётся вернуться.';
+    rankClass = 'rank-c';
+    rankText = 'Ранг: Специалист по помехам';
+  } else {
+    emoji = '🌊';
+    title = 'Миссия провалена';
+    story = 'Русские уплыли обратно. Записи не расшифрованы. Над Беринговым проливом — только ветер и молчание. Элли закрывает дневник. Томми смотрит в карту. «В следующий раз», — тихо говорит он.';
+    rankClass = 'rank-d';
+    rankText = 'Ранг: Турист на Аляске';
+  }
+
+  document.getElementById('remoji').textContent = emoji;
+  document.getElementById('rtitle').textContent = title;
+  document.getElementById('rscore').textContent = `${score} / ${questions.length}`;
+  document.getElementById('rtotal').textContent = 'правильных ответов';
+  document.getElementById('rstory').textContent = story;
+  const rrank = document.getElementById('rrank');
+  rrank.textContent = rankText;
+  rrank.className = `results-rank ${rankClass}`;
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+document.getElementById('restart').onclick = () => {
+  document.getElementById('results').style.display = 'none';
+  qcard.style.display = '';
+  document.getElementById('quiz-progress-wrap').style.display = '';
+  initQuiz();
+  renderQ();
+};
+
+// Старт
+renderQ();
+</script>
+</body>
+</html>
