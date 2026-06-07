@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квест ОГЭ: Смысловой анализ · Тайный архив Дурмстранга · HP × ОГЭ</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d1117;
+    --bg2:   #111820;
+    --bg3:   #162030;
+    --bg4:   #1c2a3a;
+    --c-har: #ef4444;
+    --c-her: #60a5fa;
+    --c-ron: #fb923c;
+    --c-kru: #f59e0b;
+    --c-kar: #a78bfa;
+    --c-hag: #84cc16;
+    --c-main: #a78bfa;
+    --text:  #dde6ee;
+    --muted: #7a90a4;
+    --border:  rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(167,139,250,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 5%  20%,  rgba(239,68,68,0.05)   0%, transparent 55%),
+      radial-gradient(ellipse 55% 40% at 95% 15%,  rgba(96,165,250,0.05)  0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 100%, rgba(245,158,11,0.04)  0%, transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:72px 0 48px; position:relative; }
+  .hero::before {
+    content:'⚡ ✦ 🔍 ✦ ⚡';
+    display:block; font-size:14px; letter-spacing:0.5em; opacity:0.3;
+    margin-bottom:24px; animation:fadein-slow 1.2s ease;
+  }
+  .hero::after {
+    content:''; display:block; margin:34px auto 0;
+    width:340px; max-width:90%; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,#a78bfa,#60a5fa,#ef4444,transparent);
+  }
+  .hero-eyebrow {
+    display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.24em;
+    color:#0d1117; background:var(--c-kar); text-transform:uppercase;
+    margin-bottom:24px; padding:5px 18px; border-radius:20px;
+  }
+  .hero-title {
+    font-size:clamp(42px,9vw,92px); font-weight:700;
+    line-height:0.92; margin-bottom:16px; letter-spacing:-0.025em;
+  }
+  .ht1 {
+    display:block;
+    background:linear-gradient(120deg,#a78bfa 0%,#c4b5fd 45%,#60a5fa 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(167,139,250,0.4));
+    animation:fadein-slow 0.8s ease;
+  }
+  .ht2 {
+    display:block; font-size:0.27em; font-weight:500; letter-spacing:0.55em;
+    color:var(--muted); text-transform:uppercase; margin:10px 0 8px;
+    -webkit-text-fill-color:var(--muted); animation:fadein-slow 1s ease;
+  }
+  .ht3 {
+    display:block;
+    background:linear-gradient(120deg,#60a5fa 0%,#ef4444 50%,#fb923c 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(239,68,68,0.35));
+    animation:fadein-slow 1.1s ease;
+  }
+  .hero-sub { font-size:13px; color:var(--muted); letter-spacing:0.04em; }
+  @keyframes fadein-slow { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+  /* LORE INTRO */
+  .lore-intro {
+    background:var(--bg2); border:1px solid var(--border2); border-radius:14px;
+    padding:20px 24px; margin-bottom:32px; font-size:14px; color:var(--text);
+    line-height:1.7; border-left:4px solid var(--c-kar);
+    animation:fadein-slow 0.6s ease;
+  }
+  .lore-intro p { margin-bottom:8px; }
+  .lore-intro p:last-child { margin-bottom:0; }
+  .lore-cast { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .cast-pill { font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; }
+  .cp-har { background:rgba(239,68,68,0.15);   color:#ef4444; }
+  .cp-her { background:rgba(96,165,250,0.15);  color:#60a5fa; }
+  .cp-ron { background:rgba(251,146,60,0.15);  color:#fb923c; }
+  .cp-kru { background:rgba(245,158,11,0.15);  color:#f59e0b; }
+  .cp-kar { background:rgba(167,139,250,0.15); color:#a78bfa; }
+  .cp-hag { background:rgba(132,204,22,0.15);  color:#84cc16; }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule  { background:var(--c-kar); color:#0d1117; }
+  .sec-badge.task6 { background:rgba(167,139,250,0.2); color:var(--c-kar); }
+  .sec-badge.task9 { background:rgba(239,68,68,0.2);   color:var(--c-har); }
+  .sec-badge.task10{ background:rgba(96,165,250,0.2);  color:var(--c-her); }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* SHPORA TOGGLE */
+  .shpora-toggle { display:flex; align-items:center; gap:8px; padding:8px 16px; background:var(--bg2); border:1.5px solid var(--c-kar); border-radius:8px; color:var(--c-kar); font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; }
+  .shpora-toggle:hover { background:rgba(167,139,250,0.08); }
+  .shpora-toggle.open { background:var(--c-kar); color:#0d1117; }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; margin-bottom:8px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+  .rule-card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.4); }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-har::after { background:var(--c-har); }
+  .rule-card.c-her::after { background:var(--c-her); }
+  .rule-card.c-ron::after { background:var(--c-ron); }
+  .rule-card.c-kru::after { background:var(--c-kru); }
+  .rule-card.c-kar::after { background:var(--c-kar); }
+  .rule-card.c-hag::after { background:var(--c-hag); }
+  .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:14px; color:#a8bccc; line-height:1.65; }
+  .rule-body strong { color:var(--text); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
+  .c-har .rule-formula { background:rgba(239,68,68,0.12);   color:#ef4444; }
+  .c-her .rule-formula { background:rgba(96,165,250,0.12);  color:#60a5fa; }
+  .c-ron .rule-formula { background:rgba(251,146,60,0.12);  color:#fb923c; }
+  .c-kru .rule-formula { background:rgba(245,158,11,0.12);  color:#f59e0b; }
+  .c-kar .rule-formula { background:rgba(167,139,250,0.12); color:#a78bfa; }
+  .c-hag .rule-formula { background:rgba(132,204,22,0.12);  color:#84cc16; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:#fbbf24; }
+  .t-har  { color:#ef4444; font-weight:700; }
+  .t-her  { color:#60a5fa; font-weight:700; }
+  .t-ron  { color:#fb923c; font-weight:700; }
+  .t-kru  { color:#f59e0b; font-weight:700; }
+  .t-kar  { color:#a78bfa; font-weight:700; }
+  .t-hag  { color:#84cc16; font-weight:700; }
+  .t-red  { color:#f87171; font-weight:700; }
+  .t-gold { color:#fbbf24; font-weight:700; }
+
+  /* QUIZ BANNER */
+  .quiz-banner { border-radius:16px; overflow:hidden; margin-bottom:22px; background:var(--bg2); border:1px solid var(--border2); }
+  .quiz-banner-body { padding:20px 24px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+  .quiz-title { font-size:clamp(17px,3vw,24px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--muted); }
+  .quiz-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(167,139,250,0.15); color:#a78bfa; }
+  .stake-a { background:rgba(96,165,250,0.15);  color:#60a5fa; }
+  .stake-b { background:rgba(132,204,22,0.15);  color:#84cc16; }
+  .stake-c { background:rgba(251,146,60,0.15);  color:#fb923c; }
+  .stake-d { background:rgba(107,114,128,0.15); color:#9ca3af; }
+
+  /* QUIZ UI */
+  .quiz-progress-wrap { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .quiz-score-badge { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--c-kar); white-space:nowrap; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:var(--c-kar); border-radius:3px; width:0%; transition:width 0.4s; }
+  .quiz-counter { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); white-space:nowrap; }
+
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:10px 16px 8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--bg3); display:flex; align-items:center; gap:8px; }
+  .qh-src  { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .qh-task { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .src-har { background:rgba(239,68,68,0.2);   color:#ef4444; }
+  .src-her { background:rgba(96,165,250,0.2);  color:#60a5fa; }
+  .src-ron { background:rgba(251,146,60,0.2);  color:#fb923c; }
+  .src-kru { background:rgba(245,158,11,0.2);  color:#f59e0b; }
+  .src-kar { background:rgba(167,139,250,0.2); color:#a78bfa; }
+  .src-hag { background:rgba(132,204,22,0.2);  color:#84cc16; }
+  .task-6  { background:rgba(167,139,250,0.1); color:#a78bfa; }
+  .task-9  { background:rgba(239,68,68,0.1);   color:#ef4444; }
+  .task-10 { background:rgba(96,165,250,0.1);  color:#60a5fa; }
+
+  .question-body { padding:20px 20px 0; }
+  .question-text { font-size:15px; line-height:1.65; margin-bottom:16px; }
+  .hero-name { font-weight:700; }
+  .hero-har { color:#ef4444; }
+  .hero-her { color:#60a5fa; }
+  .hero-ron { color:#fb923c; }
+  .hero-kru { color:#f59e0b; }
+  .hero-kar { color:#a78bfa; }
+  .hero-hag { color:#84cc16; }
+  .term { font-style:italic; color:#fbbf24; font-weight:600; }
+
+  .opts { display:grid; gap:8px; margin-bottom:0; }
+  .opt-btn { width:100%; text-align:left; padding:12px 16px; font-size:14px; font-family:'Outfit',sans-serif; background:var(--bg); border:1.5px solid var(--border2); border-radius:10px; cursor:pointer; transition:border-color 0.15s,background 0.15s; line-height:1.45; color:var(--text); }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-kar); background:rgba(167,139,250,0.06); }
+  .opt-btn.correct { background:rgba(21,128,61,0.15); border-color:#15803d; color:#86efac; font-weight:600; }
+  .opt-btn.wrong   { background:rgba(185,28,28,0.12); border-color:#b91c1c; color:#fca5a5; }
+
+  .feedback-box { padding:12px 16px; font-size:13px; line-height:1.55; display:none; border-top:1px solid var(--border); }
+  .feedback-box.correct-fb { background:rgba(21,128,61,0.10); color:#86efac; }
+  .feedback-box.wrong-fb   { background:rgba(185,28,28,0.08); color:#fca5a5; }
+
+  .question-footer { padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { padding:10px 26px; font-size:14px; font-family:'Outfit',sans-serif; font-weight:600; background:var(--c-kar); color:#0d1117; border:none; border-radius:10px; cursor:pointer; display:none; transition:opacity 0.15s; }
+  .next-btn:hover { opacity:0.85; }
+
+  .question-animate { animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+  /* RESULTS */
+  .results { display:none; text-align:center; padding:48px 24px; }
+  .results-emoji { font-size:56px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,32px); font-weight:700; color:var(--text); margin-bottom:10px; }
+  .results-score { font-family:'Space Mono',monospace; font-size:28px; font-weight:700; color:var(--c-kar); margin-bottom:6px; }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:16px; }
+  .results-story { font-size:15px; color:var(--text); max-width:540px; margin:0 auto 20px; line-height:1.65; }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(167,139,250,0.15); color:#a78bfa; }
+  .rank-a { background:rgba(96,165,250,0.15);  color:#60a5fa; }
+  .rank-b { background:rgba(132,204,22,0.15);  color:#84cc16; }
+  .rank-c { background:rgba(251,146,60,0.15);  color:#fb923c; }
+  .rank-d { background:rgba(107,114,128,0.12); color:#9ca3af; }
+  .restart-btn { padding:12px 32px; font-size:15px; font-family:'Outfit',sans-serif; font-weight:700; background:var(--c-kar); color:#0d1117; border:none; border-radius:12px; cursor:pointer; transition:opacity 0.15s; }
+  .restart-btn:hover { opacity:0.85; }
+
+  /* NAV */
+  .quests-nav { margin-top:48px; border-top:1px solid var(--border2); padding-top:28px; }
+  .quests-nav-title { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .quests-pills { display:grid; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; }
+  .quest-pill:hover:not(.quest-locked) { border-color:var(--border2); transform:translateX(4px); box-shadow:0 4px 16px rgba(0,0,0,0.3); }
+  .quest-pill.quest-active { border-color:var(--c-main); background:rgba(167,139,250,0.05); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; color:var(--text); }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--muted); white-space:nowrap; }
+  .qp-here { background:rgba(167,139,250,0.2); color:#a78bfa; }
+  .qp-soon { background:rgba(107,114,128,0.15); color:#9ca3af; }
+
+  :focus-visible { outline:2px solid var(--c-kar); outline-offset:3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Русский язык · 9 класс · Квест 3 · Задания 6, 9, 10</div>
+    <h1 class="hero-title">
+      <span class="ht1">Тайный</span>
+      <span class="ht2">✦ архив ✦</span>
+      <span class="ht3">Дурмстранга</span>
+    </h1>
+    <p class="hero-sub">Смысловой анализ текста · 40 вопросов · Гарри Поттер × ОГЭ 2026</p>
+  </div>
+
+  <!-- ШПОРА -->
+  <div class="sec-head"><span class="sec-badge rule">Шпора: запомни до старта</span><div class="sec-line"></div></div>
+  <button class="shpora-toggle open" id="shpora-btn" onclick="toggleShpora()">▲ Скрыть шпаргалку</button>
+  <div id="shpora-block">
+
+    <!-- ЗАДАНИЕ 6 -->
+    <div class="sec-head" style="margin-top:28px">
+      <span class="sec-badge task6">Задание 6 — Смысловой анализ текста</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-her">
+        <div class="rule-icon">📋</div>
+        <div class="rule-title">Главная мысль текста</div>
+        <div class="rule-body">
+          <span class="rule-formula">Главная мысль ≠ тема</span><br>
+          <strong>Тема</strong> — о чём текст («о дружбе»).<br>
+          <strong>Главная мысль</strong> — что автор хочет сказать этой темой («настоящая дружба проверяется в трудностях»).<br><br>
+          Главная мысль часто <strong>не сформулирована прямо</strong> — её нужно вывести из всего текста.<br><br>
+          <span class="rule-formula">Где искать:</span><br>
+          В начале (тезис) или в конце (вывод). Иногда — в середине, в кульминации.<br>
+          Варианты без подтверждения в тексте — неверные.
+        </div>
+        <div class="rule-assoc">📘 Гермиона: «Смотрите на финальный абзац — там почти всегда вывод. Если вывода нет, ищите предложение, которое подитоживает всё сказанное выше.»</div>
+      </div>
+
+      <div class="rule-card c-kar">
+        <div class="rule-icon">📰</div>
+        <div class="rule-title">Стили речи</div>
+        <div class="rule-body">
+          <span class="rule-formula">Пять стилей:</span><br>
+          <strong>Художественный</strong>: образы, эпитеты, метафоры, эмоции, авторская позиция. Задача — воздействовать.<br><br>
+          <strong>Публицистический</strong>: актуальность, обращение к обществу, оценочность, призывы. «Мы должны…», «По данным…»<br><br>
+          <strong>Научный</strong>: термины, определения, логика, без эмоций. «Организм — это…»<br><br>
+          <strong>Официально-деловой</strong>: клише, стандарты, сухость: «В соответствии с…», «Настоящим уведомляю…»<br><br>
+          <strong>Разговорный</strong>: неполные предложения, просторечия, эмоции, упрощения.
+        </div>
+        <div class="rule-assoc">🔮 Каркаров: «В документе Дурмстранга — официально-деловой. Никаких "нуу, короч". Только "в соответствии с уставом школы".»</div>
+      </div>
+
+      <div class="rule-card c-har">
+        <div class="rule-icon">✅</div>
+        <div class="rule-title">Соответствие утверждений тексту</div>
+        <div class="rule-body">
+          <span class="rule-formula">Алгоритм проверки:</span><br>
+          1. Прочитай утверждение.<br>
+          2. Найди в тексте фрагмент, к которому оно относится.<br>
+          3. Сравни: утверждение точно совпадает с текстом, или только «похоже»?<br><br>
+          <span class="warn">⚠️ Ловушки:</span><br>
+          — «Почти правда»: детали изменены (не тот персонаж, не то место, не то время)<br>
+          — Противоположное значение: «все» вместо «некоторые», «всегда» вместо «иногда»<br>
+          — Утверждение, которого в тексте нет совсем — тоже неверное
+        </div>
+        <div class="rule-assoc">⚡ Гарри: «Каркаров написал "периодически". В варианте ответа написано "постоянно". Это уже ложь. Слова меняют смысл.»</div>
+      </div>
+
+      <div class="rule-card c-ron">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 6</div>
+        <div class="rule-body">
+          <span class="rule-formula">Не знаешь главную мысль?</span><br>
+          Спроси себя: «Зачем автор написал этот текст? Что он хотел, чтобы читатель понял или почувствовал?»<br>
+          Ответ — и есть главная мысль.<br><br>
+          <span class="rule-formula">Не знаешь стиль?</span><br>
+          Найди слово или фразу, которая звучит «выбивающимися»:<br>
+          «Короч» → разговорный. «В соответствии с» → деловой. «Клетки делятся путём» → научный. «Закатное небо пламенело» → художественный.<br><br>
+          <span class="rule-formula">Проверяешь утверждение?</span><br>
+          Найди то предложение в тексте, откуда взялось это утверждение. Если не находишь — скорее всего, утверждение ложное.
+        </div>
+        <div class="rule-assoc">🧡 Рон: «Я просто ищу ключевое слово из варианта прямо в тексте. Если нахожу — сравниваю. Если не нахожу вообще — скорее всего, неверно.»</div>
+      </div>
+
+    </div>
+
+    <!-- ЗАДАНИЕ 9 -->
+    <div class="sec-head" style="margin-top:28px">
+      <span class="sec-badge task9">Задание 9 — Средства выразительности (тропы)</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-har">
+        <div class="rule-icon">🖼️</div>
+        <div class="rule-title">Тропы: сравнение, эпитет, метафора</div>
+        <div class="rule-body">
+          <span class="rule-formula">Сравнение</span><br>
+          Прямое уподобление с союзами: <strong>как, словно, будто, точно, похож на</strong>.<br>
+          «Витька бежал <span class="t-har">как медведь</span>.»<br><br>
+          <span class="rule-formula">Эпитет</span><br>
+          Образное определение, усиливающее признак:<br>
+          «<span class="t-har">свинцовая</span> тишина», «<span class="t-har">золотой</span> закат».<br>
+          <span class="warn">⚠️ Не каждое прилагательное — эпитет!</span> «Деревянный стол» — не эпитет.<br><br>
+          <span class="rule-formula">Метафора</span><br>
+          Скрытое сравнение без союзов:<br>
+          «<span class="t-har">Буря</span> в его глазах», «Время <span class="t-har">летит</span>».
+        </div>
+        <div class="rule-assoc">⚡ Гарри: «Сравнение всегда можно переформулировать: "похоже на X". Метафора говорит, что это и есть X. Если есть "как" — почти точно сравнение.»</div>
+      </div>
+
+      <div class="rule-card c-kru">
+        <div class="rule-icon">📢</div>
+        <div class="rule-title">Тропы: олицетворение, гипербола, литота</div>
+        <div class="rule-body">
+          <span class="rule-formula">Олицетворение</span><br>
+          Неживому приписываются <strong>свойства живого</strong>:<br>
+          «Лес <span class="t-kru">молчал</span>», «Ветер <span class="t-kru">плакал</span>».<br><br>
+          <span class="rule-formula">Гипербола</span><br>
+          <strong>Художественное преувеличение</strong>:<br>
+          «Сто раз тебе говорил», «борщевик <span class="t-kru">высотой до неба</span>».<br><br>
+          <span class="rule-formula">Литота</span><br>
+          <strong>Художественное преуменьшение</strong>:<br>
+          «мальчик с пальчик», «ни в зуб ногой», «<span class="t-kru">капля смелости</span>».<br><br>
+          <span class="warn">⚠️ Гипербола ≠ литота:</span> гипербола — больше, литота — меньше.
+        </div>
+        <div class="rule-assoc">🦅 Витька: «У нас в Дурмстранге говорят: "Я умру от холода". Это гипербола — не умрёт. "Чуть-чуть устал" после трёх часов квиддича — это литота.»</div>
+      </div>
+
+      <div class="rule-card c-her">
+        <div class="rule-icon">😏</div>
+        <div class="rule-title">Тропы: ирония, аллегория, перифраз</div>
+        <div class="rule-body">
+          <span class="rule-formula">Ирония</span><br>
+          Слова означают <strong>противоположное</strong>:<br>
+          «Ну конечно, <span class="t-her">умнейший</span> директор» (о Каркарове, с сарказмом).<br><br>
+          <span class="rule-formula">Аллегория</span><br>
+          Абстрактное понятие воплощается через <strong>конкретный образ</strong>:<br>
+          Весы → справедливость. Лиса → хитрость.<br><br>
+          <span class="rule-formula">Перифраз</span><br>
+          Замена слова <strong>описательным оборотом</strong>:<br>
+          «царь зверей» вместо «лев», «туманный Альбион» вместо «Англия».
+        </div>
+        <div class="rule-assoc">📘 Гермиона: «Иронию выдаёт контекст. Если ситуация плохая, а слово хвалебное — это ирония. Перифраз легко найти: замените оборот одним словом — оно и будет исходным.»</div>
+      </div>
+
+      <div class="rule-card c-ron">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 9</div>
+        <div class="rule-body">
+          <span class="rule-formula">Не знаешь троп?</span><br>
+          Задай три вопроса:<br>
+          1. Есть «как/словно/будто»? → <strong>Сравнение</strong>.<br>
+          2. Неживое делает что-то живое? → <strong>Олицетворение</strong>.<br>
+          3. Прилагательное создаёт образ, а не просто описывает? → <strong>Эпитет</strong>.<br>
+          4. Преувеличено? → <strong>Гипербола</strong>. Преуменьшено? → <strong>Литота</strong>.<br>
+          5. Слова, но смысл обратный? → <strong>Ирония</strong>.<br>
+          6. Предмет заменён описанием? → <strong>Перифраз</strong>.<br>
+          7. Один предмет = абстрактная идея? → <strong>Аллегория</strong>.<br><br>
+          <span class="rule-formula">Скрытое сравнение без союзов = метафора.</span>
+        </div>
+        <div class="rule-assoc">🧡 Рон: «Я всегда ищу "как" или "словно". Есть — сравнение. Нет союзов, но похожая конструкция — метафора. Неживое ожило — олицетворение. Главное не паниковать.»</div>
+      </div>
+
+    </div>
+
+    <!-- ЗАДАНИЕ 10 -->
+    <div class="sec-head" style="margin-top:28px">
+      <span class="sec-badge task10">Задание 10 — Синтаксические средства выразительности</span><div class="sec-line"></div>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card c-kar">
+        <div class="rule-icon">🔁</div>
+        <div class="rule-title">Анафора, эпифора, параллелизм</div>
+        <div class="rule-body">
+          <span class="rule-formula">Анафора</span><br>
+          Повторение <strong>в начале</strong> смежных предложений или строк:<br>
+          «<span class="t-kar">Нет</span> страха. <span class="t-kar">Нет</span> сомнений. <span class="t-kar">Нет</span> пути назад.»<br><br>
+          <span class="rule-formula">Эпифора</span><br>
+          Повторение <strong>в конце</strong>:<br>
+          «Мы шли вперёд. Они шли вперёд. Все шли <span class="t-kar">вперёд</span>.»<br><br>
+          <span class="rule-formula">Синтаксический параллелизм</span><br>
+          Одинаковое построение нескольких предложений:<br>
+          «Медведь бежал. Балалайка пела. Борщевик рос.»
+        </div>
+        <div class="rule-assoc">🔮 Каркаров: «Анафора — начало совпадает. Эпифора — конец совпадает. Параллелизм — вся структура совпадает. Запомните раз и навсегда.»</div>
+      </div>
+
+      <div class="rule-card c-her">
+        <div class="rule-icon">❓</div>
+        <div class="rule-title">Риторический вопрос и обращение</div>
+        <div class="rule-body">
+          <span class="rule-formula">Риторический вопрос</span><br>
+          Вопрос, <strong>не требующий ответа</strong>. Усиливает высказывание:<br>
+          «Разве можно молчать о таком?» (= нельзя молчать).<br><br>
+          <span class="rule-formula">Риторическое обращение</span><br>
+          Обращение к <strong>отсутствующему, неодушевлённому или обобщённому</strong>:<br>
+          «О Хогвартс, стены твои помнят всё!»<br>
+          «Поколение наше, опомнись!»<br><br>
+          <span class="warn">⚠️ Оба приёма — публицистические, призваны воздействовать на читателя, а не спрашивать или звать.</span>
+        </div>
+        <div class="rule-assoc">📘 Гермиона: «Риторический вопрос легко проверить: если ответ очевиден или вопрос вообще не нуждается в ответе — риторический. Функция — усиление, а не информация.»</div>
+      </div>
+
+      <div class="rule-card c-hag">
+        <div class="rule-icon">⋯</div>
+        <div class="rule-title">Умолчание, инверсия, градация</div>
+        <div class="rule-body">
+          <span class="rule-formula">Умолчание</span><br>
+          Мысль обрывается — читатель <strong>додумывает сам</strong>. Маркер: «…»<br>
+          «Если бы я тогда знал…»<br><br>
+          <span class="rule-formula">Инверсия</span><br>
+          <strong>Нарушение обычного порядка слов</strong> для усиления:<br>
+          «Долго шли они» (вместо «Они долго шли»).<br>
+          «Мрачным был тот вечер» (вместо «Тот вечер был мрачным»).<br><br>
+          <span class="rule-formula">Градация</span><br>
+          Нарастание (или убывание) по силе:<br>
+          «Было холодно, очень холодно, нестерпимо холодно.»
+        </div>
+        <div class="rule-assoc">🌿 Хагрид: «Я не мастак по этим делам, но градацию помню: всё нарастает — раз, два, три — и вот уже огромно! Как борщевик в теплице Спраут — сначала маленький, потом с меня, потом со школу.»</div>
+      </div>
+
+      <div class="rule-card c-har">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 10</div>
+        <div class="rule-body">
+          <span class="rule-formula">Не знаешь синтаксическое средство?</span><br>
+          1. Одинаковое начало нескольких предложений? → <strong>Анафора</strong>.<br>
+          2. Одинаковый конец? → <strong>Эпифора</strong>.<br>
+          3. Вопрос без ожидания ответа? → <strong>Риторический вопрос</strong>.<br>
+          4. Обращение к неживому / толпе / эпохе? → <strong>Риторическое обращение</strong>.<br>
+          5. Три точки в середине мысли? → <strong>Умолчание</strong>.<br>
+          6. Слова стоят «задом наперёд»? → <strong>Инверсия</strong>.<br>
+          7. Нарастание или убывание по силе? → <strong>Градация</strong>.<br><br>
+          <span class="rule-formula">Структура одинакова у нескольких предложений = параллелизм.</span>
+        </div>
+        <div class="rule-assoc">⚡ Гарри: «Я запомнил так: анафора — начало, эпифора — конец, параллелизм — вся структура. Остальные ищу по маркерам: "…" — умолчание, нарастание — градация.»</div>
+      </div>
+
+    </div>
+  </div><!-- /shpora-block -->
+
+  <!-- QUIZ BANNER -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Начать квест</span><div class="sec-line"></div></div>
+  <div class="quiz-banner">
+    <div class="quiz-banner-body">
+      <div class="quiz-title">🔍 Тайный архив Дурмстранга</div>
+      <div class="quiz-sub">40 вопросов · Задания 6, 9, 10 · Смысловой анализ текста</div>
+      <div class="quiz-lore">
+        В Хогвартсе творится неладное. На уроке зельеварения Снейп обнаружил самогонный аппарат — никто не признался. В теплице у профессора Спраут вырос борщевик высотой с Хагрида. По третьему этажу промчался медведь в меховой шапке. Из туалета Плаксы Миртл доносится балалайка. <span class="t-har">Гарри</span> и <span class="t-ron">Рон</span> пробрались в гостиную дурмстранговцев и стащили целую стопку документов. Но чтобы их расшифровать — нужно сперва разобраться в текстах. <span class="t-her">Гермиона</span> уже в библиотеке. <span class="t-kru">Витька Крам</span> неожиданно предложил помощь. <span class="t-kar">Каркаров</span> явно что-то скрывает.
+      </div>
+      <div class="quiz-stakes">
+        <span class="stake stake-s">S ≥38: Досье раскрыто. Каркаров схвачен.</span>
+        <span class="stake stake-a">A ≥31: Большинство документов расшифровано.</span>
+        <span class="stake stake-b">B ≥23: Медведь пойман. Борщевик скошен.</span>
+        <span class="stake stake-c">C ≥15: Подозреваемый ушёл через потайной ход.</span>
+        <span class="stake stake-d">D: «Нам надо в библиотеку», — говорит Гермиона.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div id="quiz-area">
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✓ 0</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 40</span>
+    </div>
+
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qhead"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+      </div>
+      <div class="feedback-box" id="qfb"></div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext" onclick="nextQ()">Далее →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-emoji" id="res-emoji">🔍</div>
+    <div class="results-title" id="res-title"></div>
+    <div class="results-score" id="res-score"></div>
+    <div class="results-total" id="res-total"></div>
+    <div class="results-rank" id="res-rank"></div>
+    <div class="results-story" id="res-story"></div>
+    <button class="restart-btn" id="restart" onclick="initQuiz()">Расследовать снова →</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="quests-nav">
+    <div class="quests-nav-title">Русский язык · все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="rus_quest1_ortho.html">
+        <div class="qp-num" style="background:#c0392b">Р1</div>
+        <div class="qp-info">
+          <div class="qp-name">Институт нильфо-советских исследований</div>
+          <div class="qp-sub">Задание 5 — Орфография · 45 вопросов</div>
+        </div>
+        <span class="qp-badge">Ведьмак × СССР</span>
+      </a>
+      <a class="quest-pill" href="rus_quest2_syntax.html">
+        <div class="qp-num" style="background:#2d8a3e">Р2</div>
+        <div class="qp-info">
+          <div class="qp-name">Сигнал с Аляски</div>
+          <div class="qp-sub">Задания 2, 3, 4 — Синтаксис · 41 вопрос</div>
+        </div>
+        <span class="qp-badge">TLOU × Синтаксис</span>
+      </a>
+      <a class="quest-pill quest-active" href="rus_quest3_text.html">
+        <div class="qp-num" style="background:#a78bfa">Р3</div>
+        <div class="qp-info">
+          <div class="qp-name">Тайный архив Дурмстранга</div>
+          <div class="qp-sub">Задания 6, 9, 10 — Смысловой анализ · 40 вопросов</div>
+        </div>
+        <span class="qp-badge qp-here">Вы здесь</span>
+      </a>
+      <div class="quest-pill quest-locked">
+        <div class="qp-num" style="background:#4b5563">Р4</div>
+        <div class="qp-info">
+          <div class="qp-name">Квест 4 — Скоро</div>
+          <div class="qp-sub">Задания 7, 8, 11, 12</div>
+        </div>
+        <span class="qp-badge qp-soon">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <div class="qp-num" style="background:#4b5563">Р5</div>
+        <div class="qp-info">
+          <div class="qp-name">Квест 5 — Скоро</div>
+          <div class="qp-sub">Сочинение и изложение</div>
+        </div>
+        <span class="qp-badge qp-soon">Скоро</span>
+      </div>
+      <div class="quest-pill quest-locked">
+        <div class="qp-num" style="background:#4b5563">∞</div>
+        <div class="qp-info">
+          <div class="qp-name">Марафон по русскому — Скоро</div>
+          <div class="qp-sub">Все задания · Все квесты</div>
+        </div>
+        <span class="qp-badge qp-soon">Скоро</span>
+      </div>
+    </div>
+  </nav>
+
+</div><!-- /wrap -->
+
+<script>
+const srcLabels = {
+  har: { cls:'src-har', text:'Гарри Поттер' },
+  her: { cls:'src-her', text:'Гермиона' },
+  ron: { cls:'src-ron', text:'Рон Уизли' },
+  kru: { cls:'src-kru', text:'Витька Крам' },
+  kar: { cls:'src-kar', text:'Каркаров' },
+  hag: { cls:'src-hag', text:'Хагрид' },
+};
+const taskLabels = {
+  6:  { cls:'task-6',  text:'Зад. 6' },
+  9:  { cls:'task-9',  text:'Зад. 9' },
+  10: { cls:'task-10', text:'Зад. 10' },
+};
+
+const allQuestions = [
+
+  // ========== ЗАДАНИЕ 6: СМЫСЛОВОЙ АНАЛИЗ ТЕКСТА (15 вопросов) ==========
+
+  {
+    task:6, src:'her',
+    topic:'Главная мысль текста',
+    text:'<span class="hero-name hero-her">Гермиона</span> изучает первый документ из архива. Текст заканчивается так: «Обмен учениками призван не просто расширить кругозор, но и научить видеть в чужом — своё, а в непохожем — ценное». Что является главной мыслью этого фрагмента?',
+    opts:[
+      'Обмен учениками существует уже несколько веков.',
+      'Понимание и принятие различий между людьми — цель образовательного обмена.',
+      'Дурмстранг отправляет студентов в Хогвартс каждые четыре года.',
+      'Расширение кругозора важнее академических знаний.'
+    ],
+    ans:1,
+    fb:'Финальная фраза «научить видеть в чужом — своё» прямо выражает главную мысль: принятие различий. Остальные варианты — частности или домыслы, которых в тексте нет.',
+    trap:'Тема текста — обмен учениками. Но главная мысль — зачем он нужен, что он воспитывает.',
+    hint:'Перечитай финальное предложение фрагмента. Что автор считает целью обмена?'
+  },
+
+  {
+    task:6, src:'har',
+    topic:'Соответствие утверждений тексту',
+    text:'<span class="hero-name hero-har">Гарри</span> читает докладную записку: «Ученики Дурмстранга периодически посещают библиотеку Хогвартса, однако в основном изучают специализированную литературу по Тёмным искусствам». Какое утверждение соответствует этому тексту?',
+    opts:[
+      'Ученики Дурмстранга постоянно проводят время в библиотеке Хогвартса.',
+      'Ученики Дурмстранга не пользуются библиотекой Хогвартса.',
+      'Ученики Дурмстранга бывают в библиотеке Хогвартса не всегда, читая преимущественно книги по Тёмным искусствам.',
+      'Ученики Дурмстранга изучают в библиотеке все разделы магической литературы.'
+    ],
+    ans:2,
+    fb:'«Периодически посещают» — не постоянно. «В основном изучают Тёмные искусства» — преимущественно. Третий вариант точно воспроизводит оба этих смысла.',
+    trap:'«Периодически» ≠ «постоянно» и ≠ «никогда». Следи за словами, обозначающими частоту.',
+    hint:'Найди в тексте слово, обозначающее частоту визитов. Какой из вариантов использует это слово точно?'
+  },
+
+  {
+    task:6, src:'ron',
+    topic:'Стиль текста',
+    text:'<span class="hero-name hero-ron">Рон</span> вытаскивает из стопки листок. На нём написано: «Ребята, там медведь! Настоящий! В шапке! Третий этаж, короче, не ходите туда пока». Какой стиль характерен для этого текста?',
+    opts:[
+      'Официально-деловой',
+      'Научный',
+      'Разговорный',
+      'Публицистический'
+    ],
+    ans:2,
+    fb:'«Ребята», «короче», восклицания, неполные предложения — признаки разговорного стиля. Этот текст явно написан в спешке, неформально.',
+    trap:'Не путай публицистический (обращение к обществу, оценочность) и разговорный (просторечия, упрощения). «Короче» — маркер разговорного.',
+    hint:'Найди слово, которое звучит как живая речь, не как официальный документ.'
+  },
+
+  {
+    task:6, src:'kar',
+    topic:'Стиль текста',
+    text:'<span class="hero-name hero-kar">Каркаров</span> составил официальный ответ: «В соответствии с Уставом Международного союза волшебников, настоящим уведомляю администрацию школы Хогвартс о временном прикомандировании пяти учеников школы Дурмстранг на период не более трёх академических месяцев». Какой стиль представлен в этом тексте?',
+    opts:[
+      'Художественный',
+      'Разговорный',
+      'Научный',
+      'Официально-деловой'
+    ],
+    ans:3,
+    fb:'«В соответствии с», «настоящим уведомляю», «временном прикомандировании» — клише официально-делового стиля. Ни эмоций, ни образов, ни разговорных слов.',
+    trap:'Научный стиль содержит термины и определения. Деловой — клише и стандартные обороты. Здесь нет терминов-определений, только бюрократические формулы.',
+    hint:'Какой стиль использует обороты «в соответствии с», «настоящим уведомляю»?'
+  },
+
+  {
+    task:6, src:'her',
+    topic:'Соответствие утверждений тексту',
+    text:'<span class="hero-name hero-her">Гермиона</span> читает отчёт: «Профессор Спраут отметила, что в оранжерее появился борщевик, предположительно занесённый с одеждой кого-то из приезжих студентов. Растение было удалено до начала повреждения других культур». Какое утверждение соответствует тексту?',
+    opts:[
+      'Борщевик уничтожил все растения в оранжерее.',
+      'Борщевик появился из-за халатности профессора Спраут.',
+      'Борщевик был удалён прежде, чем причинил вред другим растениям.',
+      'Происхождение борщевика точно установлено — его принёс конкретный студент.'
+    ],
+    ans:2,
+    fb:'«Удалено до начала повреждения» = удалено прежде, чем причинил вред. «Предположительно» означает, что происхождение не установлено точно — четвёртый вариант неверен.',
+    trap:'«Предположительно занесённый» — не факт, а предположение. Не путай его с точно установленным фактом.',
+    hint:'Обрати внимание на слово «предположительно» и оборот «до начала повреждения».'
+  },
+
+  {
+    task:6, src:'kru',
+    topic:'Главная мысль текста',
+    text:'<span class="hero-name hero-kru">Витька Крам</span> передаёт Гарри листок со своими записями: «Каркаров всегда говорит, что сила — в закрытости. Но я видел, как открытость Хогвартса рождает нечто, чего в Дурмстранге нет: доверие между людьми». Что является главной мыслью этой записи?',
+    opts:[
+      'Каркаров придерживается политики закрытости в Дурмстранге.',
+      'Витька предпочитает Хогвартс Дурмстрангу по бытовым причинам.',
+      'Открытость создаёт доверие — то, чего не даёт закрытость.',
+      'В Хогвартсе учится больше студентов, чем в Дурмстранге.'
+    ],
+    ans:2,
+    fb:'Противопоставление «закрытость Каркарова — открытость Хогвартса» работает на главную мысль: открытость порождает доверие. Витька делает именно этот вывод.',
+    trap:'То, что «Каркаров говорит» — это позиция, которую Витька оспаривает. Главная мысль — вывод самого Витьки.',
+    hint:'Что Витька противопоставляет позиции Каркарова? Какой вывод он делает в конце?'
+  },
+
+  {
+    task:6, src:'hag',
+    topic:'Стиль текста',
+    text:'<span class="hero-name hero-hag">Хагрид</span> написал записку профессору Дамблдору: «Значица так, профессор, я тут поймал того медведя с третьего этажа, он смирный оказался, я его в хижину к себе посадил, вы не против? Он борщевик хоть не ест». Какой стиль характерен для этого текста?',
+    opts:[
+      'Научный',
+      'Публицистический',
+      'Официально-деловой',
+      'Разговорный'
+    ],
+    ans:3,
+    fb:'«Значица», «тут», «смирный», «вы не против», длинные цепочки без знаков препинания — разговорный стиль. Хагрид пишет так, как говорит.',
+    trap:'«Публицистический» предполагает обращение к обществу и полемику. Здесь Хагрид просто рассказывает другу. Это разговорный.',
+    hint:'Найди слово «значица». Оно характерно для какого стиля?'
+  },
+
+  {
+    task:6, src:'har',
+    topic:'Соответствие утверждений тексту',
+    text:'<span class="hero-name hero-har">Гарри</span> читает страницу из дневника дурмстранговца: «Первые дни в Хогвартсе были непростыми: еда незнакомая, традиции непонятные. Но постепенно стало легче — особенно после того, как Хагрид угостил нас жареными сосисками и налил по кружке горячего чая». Какое утверждение соответствует тексту?',
+    opts:[
+      'Дурмстранговцам сразу понравилась жизнь в Хогвартсе.',
+      'Адаптация проходила постепенно, и Хагрид помог в этом процессе.',
+      'Главной трудностью была языковая барьер.',
+      'Хагрид был назначен официальным куратором дурмстранговцев.'
+    ],
+    ans:1,
+    fb:'«Первые дни непростые», «постепенно легче», «особенно после Хагрида» — адаптация шла не сразу, и встреча с Хагридом стала поворотной. Второй вариант точен.',
+    trap:'Языковой барьер в тексте не упоминается. Официальный куратор — тоже домысел. Ищи только то, что в тексте есть.',
+    hint:'Что в тексте сказано о том, как со временем менялось отношение к жизни в Хогвартсе?'
+  },
+
+  {
+    task:6, src:'her',
+    topic:'Стиль текста',
+    text:'<span class="hero-name hero-her">Гермиона</span> нашла в архиве статью: «Международное образовательное сотрудничество волшебных школ переживает кризис доверия. Мы обязаны восстановить диалог, пока не стало слишком поздно. Завтра может прийти поздно — действуй сегодня!» Какой стиль характерен для этого текста?',
+    opts:[
+      'Официально-деловой',
+      'Разговорный',
+      'Публицистический',
+      'Научный'
+    ],
+    ans:2,
+    fb:'«Мы обязаны», «пока не стало слишком поздно», призыв «действуй сегодня» — это публицистика: обращение к обществу, оценочность, призыв к действию.',
+    trap:'Деловой стиль — сухой, без призывов. Разговорный — просторечия. Научный — термины. Публицистика — эмоциональный призыв к обществу.',
+    hint:'Есть ли в тексте прямой призыв к действию или обращение к обществу?'
+  },
+
+  {
+    task:6, src:'ron',
+    topic:'Главная мысль текста',
+    text:'<span class="hero-name hero-ron">Рон</span> вытащил ещё один лист: «Самогонный аппарат на уроке зельеварения обнаружил профессор Снейп. По имеющимся сведениям, аппарат функционировал. Снейп конфисковал устройство, занёс в журнал и передал в хранилище. Виновные не установлены». Какова главная мысль этого официального отчёта?',
+    opts:[
+      'Снейп — лучший преподаватель зельеварения в Хогвартсе.',
+      'Факт нарушения зафиксирован, однако виновные остались неизвестны.',
+      'Самогоноварение является серьёзным нарушением устава Хогвартса.',
+      'Хранилище Хогвартса содержит опасные предметы.'
+    ],
+    ans:1,
+    fb:'Отчёт сообщает: факт есть, меры приняты, виновные не найдены. Это и есть его суть — документальная фиксация события с открытым финалом.',
+    trap:'Ответ про нарушение устава — возможный вывод, но в тексте про устав ничего не говорится. Главная мысль должна следовать из самого текста.',
+    hint:'Что отчёт констатирует в своём итоге? Обрати внимание на последнее предложение.'
+  },
+
+  {
+    task:6, src:'kru',
+    topic:'Соответствие утверждений тексту',
+    text:'<span class="hero-name hero-kru">Витька</span> показывает ещё один документ: «Директор Каркаров запретил ученикам Дурмстранга слушать музыку Хогвартса — в частности, упомянул певицу Монеточку и группу Pugacheva. Запрет был объявлен устно и не зафиксирован в официальных документах». Какое утверждение соответствует тексту?',
+    opts:[
+      'Каркаров письменно оформил запрет на музыку.',
+      'Запрет касался только певицы Монеточки.',
+      'Каркаров запретил слушать музыку устно, не издав официального приказа.',
+      'Ученики Дурмстранга слушали Монеточку вопреки запрету Каркарова.'
+    ],
+    ans:2,
+    fb:'«Запрет был объявлен устно и не зафиксирован» — третий вариант точно воспроизводит это. Четвёртый вариант — домысел: о нарушении запрета в тексте не сказано.',
+    trap:'«Не зафиксирован в официальных документах» = не письменный приказ. Не путай устный запрет с полным отсутствием запрета.',
+    hint:'Было ли запрет оформлен официально? Найди ответ в последнем предложении.'
+  },
+
+  {
+    task:6, src:'har',
+    topic:'Стиль текста',
+    text:'<span class="hero-name hero-har">Гарри</span> читает письмо Витьки родителям: «Дорогая мама! Хогвартс — не то, что я ожидал. Эти англичане едят что-то горячее три раза в день, а в качестве перекуса — конфеты с разными вкусами (попалась со вкусом селёдки, кстати). Здесь странно, но интересно». Какой стиль характерен для этого письма?',
+    opts:[
+      'Официально-деловой',
+      'Художественный',
+      'Разговорный',
+      'Научный'
+    ],
+    ans:2,
+    fb:'«Дорогая мама», «что-то горячее», «кстати» — это живая непринуждённая речь, разговорный стиль. Художественный предполагает образы и метафоры — их здесь нет.',
+    trap:'Художественный ≠ красивый текст. Художественный стиль — это образы, тропы, авторская позиция в литературном тексте.',
+    hint:'Как ты назовёшь стиль письма другу или маме — с «кстати» и короткими ремарками?'
+  },
+
+  {
+    task:6, src:'her',
+    topic:'Главная мысль текста',
+    text:'<span class="hero-name hero-her">Гермиона</span> дочитала научную справку: «Балалайка является традиционным народным инструментом, насчитывающим более пяти веков истории. Звук, извлекаемый из треугольного корпуса, отличается характерным тембром. Инструмент является символом русской музыкальной культуры». Что является главной мыслью этого текста?',
+    opts:[
+      'Балалайка изготовлена из дерева треугольной формы.',
+      'Балалайка — это старинный инструмент, ставший символом русской музыкальной культуры.',
+      'Игра на балалайке требует многолетней практики.',
+      'Балалайка используется в оркестрах по всему миру.'
+    ],
+    ans:1,
+    fb:'Текст описывает историю и значение инструмента. Итоговая фраза «символ русской музыкальной культуры» — вывод. Главная мысль: это важный культурный символ со многовековой историей.',
+    trap:'«Корпус треугольной формы» — детталь, а не главная мысль. «Требует практики» — не упоминается.',
+    hint:'Какой вывод делается в финальном предложении текста?'
+  },
+
+  {
+    task:6, src:'ron',
+    topic:'Соответствие утверждений тексту',
+    text:'<span class="hero-name hero-ron">Рон</span> нашёл страницу с расписанием: «Ученики Дурмстранга проводят в Хогвартсе занятия дважды в неделю: по средам — практику зельеварения, по пятницам — совместные занятия по чарам. В остальное время они занимаются в выделенных им помещениях». Какое утверждение соответствует тексту?',
+    opts:[
+      'Дурмстранговцы занимаются с хогвартсовцами каждый день.',
+      'Совместные занятия по зельеварению проходят по пятницам.',
+      'Дважды в неделю дурмстранговцы занимаются вместе с хогвартсовцами.',
+      'В выделенных помещениях дурмстранговцы изучают только Тёмные искусства.'
+    ],
+    ans:2,
+    fb:'«Дважды в неделю» — именно это сказано. По средам зельеварение, по пятницам чары — не наоборот. Четвёртый вариант — домысел: о содержании занятий в помещениях текст молчит.',
+    trap:'Второй вариант перепутал дни: по пятницам — чары, а не зельеварение. Внимательно!',
+    hint:'Какой день недели назначен для каждого предмета? Не перепутай среду и пятницу.'
+  },
+
+  {
+    task:6, src:'hag',
+    topic:'Главная мысль текста',
+    text:'<span class="hero-name hero-hag">Хагрид</span> рассказывает Гарри и Рону: «Я с Витькой побеседовал. Хороший парень. Они там в Дурмстранге строгие, конечно, но он сам по себе — добрый. Налил я ему сто грамм холодненькой, он тост толкнул — за дружбу между школами. Я прослезился». Что является главной мыслью этого рассказа?',
+    opts:[
+      'Хагрид умеет готовить крепкие напитки.',
+      'Дурмстранг — суровая школа с жёсткими правилами.',
+      'Личное общение помогает преодолевать разногласия между людьми и школами.',
+      'Витька Крам является лучшим учеником Дурмстранга.'
+    ],
+    ans:2,
+    fb:'Тост за дружбу, слёзы Хагрида — это иллюстрация того, как живой разговор снимает барьеры. Главная мысль — личный контакт важнее официальных разногласий.',
+    trap:'«Хороший парень» и «строгие» — детали, не главная мысль. Главное — к чему привело это знакомство.',
+    hint:'Что произошло после разговора с Витькой? Какой вывод из этого можно сделать?'
+  },
+
+  // ========== ЗАДАНИЕ 9: СРЕДСТВА ВЫРАЗИТЕЛЬНОСТИ — ТРОПЫ (15 вопросов) ==========
+
+  {
+    task:9, src:'har',
+    topic:'Метафора',
+    text:'<span class="hero-name hero-har">Гарри</span> читает вслух из документа: «Страх медленно полз по коридорам Хогвартса, забираясь в самые тёмные углы». Какое средство выразительности использовано в этой фразе?',
+    opts:['Сравнение','Метафора','Гипербола','Олицетворение'],
+    ans:1,
+    fb:'«Страх полз по коридорам» — страх наделён движением живого существа (полз), но нет союза «как». Это метафора — скрытое сравнение. Если бы сказали «страх, как туман, полз» — это было бы сравнение.',
+    trap:'Олицетворение — когда неживое совершает действие живого. Метафора — скрытое сравнение (без «как»). Здесь «страх полз» = скрытое сравнение страха с чем-то ползущим.',
+    hint:'Есть ли союз «как» или «словно»? Если нет, но образ создан через сравнение — это не сравнение, а...'
+  },
+
+  {
+    task:9, src:'her',
+    topic:'Эпитет',
+    text:'<span class="hero-name hero-her">Гермиона</span> подчеркнула красным: «Свинцовая тишина опустилась на подвал после того, как Каркаров захлопнул дверь». Какое средство выразительности использовано?',
+    opts:['Метафора','Гипербола','Эпитет','Сравнение'],
+    ans:2,
+    fb:'«Свинцовая тишина» — «свинцовая» это образное определение, создающее ощущение тяжёлой, давящей тишины. Это эпитет. Не просто «тихая тишина» (не эпитет), а образное прилагательное.',
+    trap:'Метафора — скрытое сравнение. Эпитет — образное определение при существительном. «Свинцовая» не сравнивает тишину с чем-то, а характеризует её образно.',
+    hint:'Прилагательное «свинцовая» — это буквальное описание или образная характеристика?'
+  },
+
+  {
+    task:9, src:'ron',
+    topic:'Сравнение',
+    text:'<span class="hero-name hero-ron">Рон</span> прочитал описание Витьки: «Он двигался бесшумно, словно медведь в сугробе знает, куда поставить лапу». Какое средство выразительности использовано?',
+    opts:['Олицетворение','Метафора','Литота','Сравнение'],
+    ans:3,
+    fb:'«Словно медведь» — это прямое уподобление с союзом «словно». Сравнение. Если убрать «словно», стала бы метафора. Ключевое слово — «словно».',
+    trap:'Метафора не использует союзы сравнения. Здесь «словно» — прямой маркер сравнения.',
+    hint:'Найди союз сравнения. Его присутствие однозначно указывает на тип тропа.'
+  },
+
+  {
+    task:9, src:'kru',
+    topic:'Ирония',
+    text:'<span class="hero-name hero-kru">Витька</span> написал в своих записях про директора: «Каркаров — умнейший руководитель, ничего не скажешь. Он запретил слушать Монеточку и назвал это угрозой национальной безопасности». Какое средство выразительности использовано в первом предложении?',
+    opts:['Гипербола','Метафора','Ирония','Эпитет'],
+    ans:2,
+    fb:'«Умнейший руководитель» сказано с явным сарказмом — следующее предложение показывает абсурдность запрета. Когда слова означают противоположное (хвалим, но на деле критикуем) — это ирония.',
+    trap:'Гипербола — преувеличение без скрытого смысла противоположного. Ирония — когда хвалят, а подразумевают насмешку.',
+    hint:'Как второе предложение меняет смысл первого? Искренняя ли похвала?'
+  },
+
+  {
+    task:9, src:'har',
+    topic:'Гипербола',
+    text:'<span class="hero-name hero-har">Гарри</span> читает запись: «Из туалета Плаксы Миртл балалайка звучала так, что было слышно в каждом уголке замка, на всех семи башнях и, говорят, даже в деревне». Какое средство выразительности использовано?',
+    opts:['Литота','Гипербола','Олицетворение','Сравнение'],
+    ans:1,
+    fb:'«На всех башнях», «даже в деревне» — явное преувеличение для усиления впечатления. Это гипербола — художественное преувеличение.',
+    trap:'Литота — преуменьшение. Здесь, напротив, масштаб явно раздут. Гипербола.',
+    hint:'Преувеличено или преуменьшено явление? Могла ли балалайка реально звучать «в деревне»?'
+  },
+
+  {
+    task:9, src:'her',
+    topic:'Олицетворение',
+    text:'<span class="hero-name hero-her">Гермиона</span> указывает: «Борщевик заполнил теплицу за одну ночь, будто земля сама помогала ему расти». Какое средство выразительности встречается в этой фразе?',
+    opts:['Эпитет','Метафора','Гипербола','Олицетворение'],
+    ans:3,
+    fb:'«Земля сама помогала» — земля (неживой объект) совершает человеческое действие «помогать». Это олицетворение. Если бы было «как живая» — сравнение. Но здесь прямо приписан живой мотив.',
+    trap:'Метафора — скрытое сравнение. Олицетворение — неживое действует как живое. «Земля помогала» = олицетворение.',
+    hint:'Что делает «земля» в этом предложении? Может ли земля буквально «помогать»?'
+  },
+
+  {
+    task:9, src:'ron',
+    topic:'Литота',
+    text:'<span class="hero-name hero-ron">Рон</span> смущённо сказал: «Я в этой ситуации ни в зуб ногой — ну совсем ничего не понимаю». Какое средство выразительности использовано во фразе «ни в зуб ногой»?',
+    opts:['Гипербола','Олицетворение','Литота','Сравнение'],
+    ans:2,
+    fb:'«Ни в зуб ногой» — устойчивое выражение, означающее полное незнание. Это литота — преуменьшение своих возможностей (хотя Рон что-то умеет, он говорит «совсем ничего»). Литота часто встречается в разговорных преуменьшениях.',
+    trap:'Гипербола преувеличивает. Литота преуменьшает. «Ни в зуб ногой» — преуменьшение знания, литота.',
+    hint:'Что происходит с масштабом явления: оно раздувается или, наоборот, занижается?'
+  },
+
+  {
+    task:9, src:'kru',
+    topic:'Перифраз',
+    text:'<span class="hero-name hero-kru">Витька</span> в тексте написал про Хагрида: «Хранитель ключей и великан с добрым сердцем проводил нас через запретный лес». Какое средство выразительности выделено в обращении «великан с добрым сердцем»?',
+    opts:['Эпитет','Метафора','Перифраз','Аллегория'],
+    ans:2,
+    fb:'«Великан с добрым сердцем» — это описательный оборот вместо имени «Хагрид». Перифраз заменяет слово описанием его качеств или признаков.',
+    trap:'Эпитет — это образное прилагательное, но здесь целый оборот замещает имя. «Великан с добрым сердцем» — перифраз.',
+    hint:'«Великан с добрым сердцем» заменяет что-то одно слово. Что это за приём?'
+  },
+
+  {
+    task:9, src:'har',
+    topic:'Метафора',
+    text:'<span class="hero-name hero-har">Гарри</span> читает поэтический фрагмент из дневника дурмстранговца: «Хогвартс — это старая книга, которую перечитываешь всю жизнь и каждый раз находишь что-то новое». Какое средство выразительности использовано?',
+    opts:['Сравнение','Гипербола','Метафора','Олицетворение'],
+    ans:2,
+    fb:'«Хогвартс — это старая книга» — прямое отождествление без союза «как». Метафора. Если бы было «Хогвартс похож на старую книгу» — сравнение. Здесь Хогвартс назван книгой напрямую.',
+    trap:'Сравнение требует союза («как», «словно»). Метафора отождествляет напрямую через глагол «есть» или тире.',
+    hint:'Есть ли союз «как» или «словно»? Хогвартс сравнивается с книгой или объявляется ею?'
+  },
+
+  {
+    task:9, src:'her',
+    topic:'Эпитет',
+    text:'<span class="hero-name hero-her">Гермиона</span> цитирует описание ночного задания: «Они шли по мрачным коридорам, освещённым лишь мерцающим светом факелов». Какое средство выразительности использовано в словосочетании «мрачным коридорам»?',
+    opts:['Сравнение','Метафора','Олицетворение','Эпитет'],
+    ans:3,
+    fb:'«Мрачным» создаёт образную, эмоциональную характеристику коридора — это эпитет. Слово подчёркивает атмосферу, а не просто констатирует факт («тёмным» — не эпитет, «мрачным» — уже образ).',
+    trap:'Не каждое прилагательное — эпитет. Эпитет должен создавать образ или усиливать эмоцию. «Мрачным» — именно такое слово.',
+    hint:'«Мрачный» — это только описание (тёмный) или образ, передающий атмосферу?'
+  },
+
+  {
+    task:9, src:'kru',
+    topic:'Олицетворение',
+    text:'<span class="hero-name hero-kru">Витька</span> записал своё впечатление: «Хогвартс встречал нас холодным ветром, а лес у стен, казалось, шептал что-то на незнакомом языке». Какое средство выразительности выделено в словах «лес шептал»?',
+    opts:['Метафора','Гипербола','Сравнение','Олицетворение'],
+    ans:3,
+    fb:'«Лес шептал» — лесу приписывается человеческое действие (шептать). Это олицетворение — одушевление неживого.',
+    trap:'Метафора создаёт скрытое сравнение. Олицетворение даёт неживому живые признаки. «Лес шептал» — живое действие у неживого объекта.',
+    hint:'Может ли лес буквально «шептать»? Какое действие ему приписано?'
+  },
+
+  {
+    task:9, src:'ron',
+    topic:'Гипербола',
+    text:'<span class="hero-name hero-ron">Рон</span> пересказывает Гарри: «Хагрид сказал, что ел эту тушёнку тысячу раз и всегда с удовольствием». Какое средство выразительности использовано?',
+    opts:['Литота','Ирония','Гипербола','Эпитет'],
+    ans:2,
+    fb:'«Тысячу раз» — очевидное преувеличение. Хагрид не считал, сколько раз ел тушёнку. Это гипербола — художественное преувеличение для выразительности.',
+    trap:'«Тысячу раз» — это не буквальная цифра, а преувеличение. Ирония предполагает скрытый противоположный смысл — его здесь нет.',
+    hint:'Могло ли «тысячу раз» быть точным числом? Это преувеличение или преуменьшение?'
+  },
+
+  {
+    task:9, src:'har',
+    topic:'Ирония',
+    text:'<span class="hero-name hero-har">Гарри</span> с усмешкой читает: «Профессор Снейп, чьё незаурядное чувство юмора всем известно, встретил самогонный аппарат в классе с неподдельным восторгом». Какой троп использован?',
+    opts:['Гипербола','Олицетворение','Метафора','Ирония'],
+    ans:3,
+    fb:'«Незаурядное чувство юмора Снейпа» и «неподдельный восторг» — слова явно противоречат тому, что мы знаем о Снейпе. Автор хвалит, но подразумевает обратное. Это ирония.',
+    trap:'Если контекст делает похвалу насмешкой — это ирония. Снейп и юмор, Снейп и восторг — явный сарказм.',
+    hint:'Соответствует ли похвала реальности? Что мы знаем о Снейпе?'
+  },
+
+  {
+    task:9, src:'her',
+    topic:'Сравнение',
+    text:'<span class="hero-name hero-her">Гермиона</span> читает описание балалайки из справки: «Звук балалайки тонок и чист, точно серебряная нить, протянувшаяся в ночи». Какое средство выразительности использовано?',
+    opts:['Метафора','Эпитет','Олицетворение','Сравнение'],
+    ans:3,
+    fb:'«Точно серебряная нить» — союз «точно» = «словно/как». Это прямое сравнение. С союзом «точно» всегда сравнение, а не метафора.',
+    trap:'«Точно» здесь = «словно». Это союз сравнения, а не наречие «точно = правильно». Контекст решает всё.',
+    hint:'Какую функцию выполняет слово «точно» в этом предложении — сравнение или утверждение?'
+  },
+
+  {
+    task:9, src:'ron',
+    topic:'Метафора',
+    text:'<span class="hero-name hero-ron">Рон</span> находит в архиве яркое описание: «Каркаров — ледяной камень, о который разбиваются любые добрые намерения». Какое средство выразительности использовано?',
+    opts:['Эпитет','Сравнение','Олицетворение','Метафора'],
+    ans:3,
+    fb:'«Каркаров — ледяной камень» — без союза «как», Каркаров напрямую назван камнем. Это метафора. Кроме того, «ледяной» здесь эпитет внутри метафоры, но главный троп — метафора.',
+    trap:'Если бы было «как ледяной камень» — сравнение. Без «как», с тире или глаголом «есть» — метафора.',
+    hint:'Используется ли союз сравнения? Каркаров сравнивается или объявляется камнем?'
+  },
+
+  // ========== ЗАДАНИЕ 10: СИНТАКСИЧЕСКИЕ СРЕДСТВА ВЫРАЗИТЕЛЬНОСТИ (10 вопросов) ==========
+
+  {
+    task:10, src:'kar',
+    topic:'Анафора',
+    text:'<span class="hero-name hero-kar">Каркаров</span> написал патетическое письмо: «Нет страха в сердцах наших учеников. Нет сомнений в правильности пути. Нет слабости там, где учит Дурмстранг». Какое синтаксическое средство использовано?',
+    opts:['Эпифора','Анафора','Риторический вопрос','Градация'],
+    ans:1,
+    fb:'«Нет… Нет… Нет…» — одинаковое слово в начале каждого предложения. Это анафора — повторение в начале.',
+    trap:'Эпифора — повторение в конце. Анафора — повторение в начале. «Нет» стоит в начале каждого предложения.',
+    hint:'Где именно повторяется одинаковое слово — в начале или в конце предложений?'
+  },
+
+  {
+    task:10, src:'her',
+    topic:'Риторический вопрос',
+    text:'<span class="hero-name hero-her">Гермиона</span> указывает на фразу в документе: «Разве можно молчать, когда в коридорах Хогвартса разгуливает медведь?» Какое синтаксическое средство использовано?',
+    opts:['Умолчание','Инверсия','Риторическое обращение','Риторический вопрос'],
+    ans:3,
+    fb:'«Разве можно молчать...» — вопрос, на который не ожидается ответа. Автор уже знает ответ (нельзя молчать) и лишь усиливает высказывание вопросительной формой. Это риторический вопрос.',
+    trap:'Риторическое обращение — это обращение к кому-то (неодушевлённому или обобщённому). Здесь не обращение, а вопрос.',
+    hint:'Ожидает ли автор реального ответа на этот вопрос?'
+  },
+
+  {
+    task:10, src:'har',
+    topic:'Градация',
+    text:'<span class="hero-name hero-har">Гарри</span> читает вслух: «Было тихо. Было очень тихо. Было невыносимо, мертвенно тихо». Какое средство выразительности использовано?',
+    opts:['Анафора','Параллелизм','Эпифора','Градация'],
+    ans:3,
+    fb:'«Тихо → очень тихо → невыносимо, мертвенно тихо» — нарастание интенсивности. Это градация. Каждый следующий элемент сильнее предыдущего.',
+    trap:'Анафора — повторение в начале. Здесь нарастание по смыслу — это признак градации, а не анафоры.',
+    hint:'Нарастает ли интенсивность от предложения к предложению?'
+  },
+
+  {
+    task:10, src:'ron',
+    topic:'Умолчание',
+    text:'<span class="hero-name hero-ron">Рон</span> читает записку, подписанную неизвестным: «Если бы я знал тогда, что в том сундуке… впрочем, ничего. Не спрашивайте». Какое средство выразительности использовано в первом предложении?',
+    opts:['Инверсия','Анафора','Умолчание','Градация'],
+    ans:2,
+    fb:'«Что в том сундуке…» — мысль обрывается многоточием. Автор не договаривает, оставляя читателя додумывать. Это умолчание. Маркер — «…» посередине незавершённой мысли.',
+    trap:'Инверсия — нарушение порядка слов, а не обрыв мысли. Умолчание маркируется «…» и намеренной незавершённостью.',
+    hint:'Чем заканчивается фраза? Есть ли многоточие? Что оно означает?'
+  },
+
+  {
+    task:10, src:'kru',
+    topic:'Инверсия',
+    text:'<span class="hero-name hero-kru">Витька</span> написал по-русски: «Долго шли мы по тёмным коридорам, слушая балалайку вдали». Какое средство выразительности использовано?',
+    opts:['Риторический вопрос','Анафора','Градация','Инверсия'],
+    ans:3,
+    fb:'Обычный порядок: «Мы долго шли». Здесь: «Долго шли мы» — вынесение обстоятельства и сказуемого вперёд, подлежащее перемещено. Это инверсия — нарушение обычного порядка слов для выразительности.',
+    trap:'Анафора — повторение. Инверсия — изменение порядка слов. «Долго шли мы» вместо «Мы шли долго» — инверсия.',
+    hint:'Как звучало бы это предложение в обычном порядке слов? Что изменено?'
+  },
+
+  {
+    task:10, src:'kar',
+    topic:'Риторическое обращение',
+    text:'<span class="hero-name hero-kar">Каркаров</span> завершил речь словами: «О великий Дурмстранг, стены твои воспитали героев, и снова воспитают!» Какое средство выразительности использовано?',
+    opts:['Анафора','Умолчание','Инверсия','Риторическое обращение'],
+    ans:3,
+    fb:'«О великий Дурмстранг» — обращение к неодушевлённому объекту (школе) с восклицанием. Это риторическое обращение. Школа не может ответить, но обращение усиливает пафос.',
+    trap:'Риторический вопрос — это вопрос без ответа. Риторическое обращение — это обращение к неодушевлённому или обобщённому. Здесь обращение к школе.',
+    hint:'К кому или к чему обращается говорящий? Может ли адресат ответить?'
+  },
+
+  {
+    task:10, src:'her',
+    topic:'Параллелизм',
+    text:'<span class="hero-name hero-her">Гермиона</span> указывает на структуру предложений: «Медведь бежал. Балалайка пела. Борщевик рос. Хогвартс жил». Какое средство выразительности использовано?',
+    opts:['Эпифора','Градация','Анафора','Синтаксический параллелизм'],
+    ans:3,
+    fb:'Все четыре предложения построены по одной схеме: подлежащее + сказуемое. Одинаковая структура нескольких предложений — синтаксический параллелизм.',
+    trap:'Анафора — одинаковое слово в начале. Здесь начала разные (медведь, балалайка, борщевик, Хогвартс), но структура одинакова. Это параллелизм.',
+    hint:'Одинаковые ли слова повторяются в начале? Или одинакова грамматическая структура?'
+  },
+
+  {
+    task:10, src:'har',
+    topic:'Анафора',
+    text:'<span class="hero-name hero-har">Гарри</span> нашёл в архиве воззвание: «Каждый год мы ждём. Каждый год мы надеемся. Каждый год мы разочаровываемся». Какое средство выразительности использовано?',
+    opts:['Эпифора','Инверсия','Умолчание','Анафора'],
+    ans:3,
+    fb:'«Каждый год» повторяется в начале каждого предложения. Это анафора — единоначатие.',
+    trap:'Эпифора — повторение в конце. «Каждый год» стоит в начале каждой фразы — анафора.',
+    hint:'Посмотри, где именно повторяется «каждый год»: в начале или в конце?'
+  },
+
+  {
+    task:10, src:'ron',
+    topic:'Эпифора',
+    text:'<span class="hero-name hero-ron">Рон</span> читает странный текст: «Мы шли и шли вперёд. Они шли вперёд. Все шли вперёд». Какое средство выразительности использовано?',
+    opts:['Анафора','Градация','Параллелизм','Эпифора'],
+    ans:3,
+    fb:'«Вперёд» повторяется в конце каждого предложения. Это эпифора — повторение в конце.',
+    trap:'Анафора — начало. Эпифора — конец. «Вперёд» стоит в конце каждой фразы — эпифора.',
+    hint:'Где именно повторяется слово «вперёд» — в начале или в конце предложений?'
+  },
+
+  {
+    task:10, src:'kru',
+    topic:'Инверсия',
+    text:'<span class="hero-name hero-kru">Витька</span> записал по-русски: «Страшным было то молчание в подвале». Какое средство выразительности использовано в этом предложении?',
+    opts:['Анафора','Умолчание','Градация','Инверсия'],
+    ans:3,
+    fb:'Обычный порядок: «То молчание в подвале было страшным». Здесь сказуемое («было») и определение («страшным») вынесены вперёд. Это инверсия — нарушение обычного порядка слов для усиления.',
+    trap:'Умолчание маркируется «…» — его здесь нет. Инверсия — изменённый порядок слов для акцента.',
+    hint:'Как звучало бы это предложение с обычным порядком слов? Что вынесено на необычное место?'
+  }
+
+]; // конец allQuestions
+
+let questions = [];
+let cur = 0, score = 0, attempts = 0, answered = false;
+
+function shuffle(a) {
+  const arr = [...a];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[cur];
+  const total = questions.length;
+  document.getElementById('qbar').style.width = (cur / total * 100) + '%';
+  document.getElementById('qcnt').textContent = (cur + 1) + ' / ' + total;
+  document.getElementById('score-disp').textContent = '✓ ' + score;
+
+  const src = srcLabels[q.src];
+  const tsk = taskLabels[q.task];
+  document.getElementById('qhead').innerHTML =
+    `<span class="qh-src ${src.cls}">${src.text}</span>` +
+    (tsk ? `<span class="qh-task ${tsk.cls}">${tsk.text}</span>` : '') +
+    `<span style="color:var(--muted);font-size:10px;margin-left:auto">${q.topic}</span>`;
+
+  document.getElementById('qtext').innerHTML = q.text;
+
+  const shuffledOpts = shuffle(q.opts.map((o, i) => ({ o, i })));
+  let correctBtn = null;
+
+  const optsEl = document.getElementById('qopts');
+  optsEl.innerHTML = '';
+  shuffledOpts.forEach(({ o, i }, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = o;
+    btn.dataset.orig = i;
+    btn.onclick = () => answer(i, btn);
+    if (i === q.ans) correctBtn = btn;
+    optsEl.appendChild(btn);
+  });
+
+  const fb = document.getElementById('qfb');
+  fb.style.display = 'none';
+  fb.className = 'feedback-box';
+  fb.innerHTML = '';
+  document.getElementById('qnext').style.display = 'none';
+  answered = false;
+  attempts = 0;
+
+  const card = document.getElementById('qcard');
+  card.classList.remove('question-animate');
+  void card.offsetWidth;
+  card.classList.add('question-animate');
+}
+
+function answer(idx, btn) {
+  if (answered) return;
+  const q = questions[cur];
+  const fb = document.getElementById('qfb');
+  const btns = document.querySelectorAll('.opt-btn');
+
+  if (idx === q.ans) {
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('score-disp').textContent = '✓ ' + score;
+    fb.className = 'feedback-box correct-fb';
+    fb.innerHTML = '🥳 Верно! ' + q.fb;
+    fb.style.display = 'block';
+    document.getElementById('qnext').style.display = 'inline-block';
+    btns.forEach(b => b.disabled = true);
+    answered = true;
+  } else {
+    attempts++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    if (attempts === 1) {
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '🤔 Не совсем. ' + q.hint;
+      fb.style.display = 'block';
+    } else {
+      // 2-я ошибка — показываем правильный ответ
+      btns.forEach(b => {
+        if (parseInt(b.dataset.orig) === q.ans) b.classList.add('correct');
+        b.disabled = true;
+      });
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '❌ ' + q.trap + '<br><br><strong>Правильный ответ:</strong> ' + q.opts[q.ans] + '<br>' + q.fb;
+      fb.style.display = 'block';
+      document.getElementById('qnext').style.display = 'inline-block';
+      answered = true;
+    }
+  }
+}
+
+function nextQ() {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+}
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  const total = questions.length;
+  const pct = score / total;
+  document.getElementById('res-score').textContent = score + ' / ' + total;
+  document.getElementById('res-total').textContent = 'Правильных ответов: ' + Math.round(pct * 100) + '%';
+
+  let emoji, title, rankClass, rankText, story;
+  if (pct >= 0.93) {
+    emoji = '🔍'; title = 'Досье раскрыто!';
+    rankClass = 'rank-s'; rankText = 'Ранг S — Мастер-следователь';
+    story = 'Архив Дурмстранга расшифрован полностью. Каркаров схвачен на выходе из потайного хода. Витька Крам пожал Гарри руку. Дамблдор довольно кивнул. Медведь тоже доволен — его покормили.';
+  } else if (pct >= 0.77) {
+    emoji = '🦅'; title = 'Большинство документов расшифровано';
+    rankClass = 'rank-a'; rankText = 'Ранг A — Старший следователь';
+    story = 'Большинство тайн Дурмстранга раскрыто. Каркаров вызван на допрос к Дамблдору. Витька передал ещё пару листков — в них ключи к остальному.';
+  } else if (pct >= 0.57) {
+    emoji = '🌿'; title = 'Следствие продолжается';
+    rankClass = 'rank-b'; rankText = 'Ранг B — Следователь';
+    story = 'Медведь пойман. Борщевик скошен. Балалайка замолчала. Половина архива прочитана. Но Каркаров ещё на свободе — и явно что-то знает про подсобку Снейпа.';
+  } else if (pct >= 0.37) {
+    emoji = '🧡'; title = 'Подозреваемый ушёл';
+    rankClass = 'rank-c'; rankText = 'Ранг C — Стажёр';
+    story = 'Каркаров успел выскользнуть через потайной ход за гобеленом. Рон чешет затылок. «Мы что-то упустили», — говорит он. «Много чего», — отвечает Гермиона.';
+  } else {
+    emoji = '📚'; title = 'Документы засекречены снова';
+    rankClass = 'rank-d'; rankText = 'Ранг D — Юный волшебник';
+    story = '«Нам надо в библиотеку», — говорит Гермиона. Рон вздыхает. Гарри смотрит на стопку нерасшифрованных листков. Медведь снова ходит по третьему этажу. Балалайка играет.';
+  }
+
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-title').textContent = title;
+  document.getElementById('res-rank').className = 'results-rank ' + rankClass;
+  document.getElementById('res-rank').textContent = rankText;
+  document.getElementById('res-story').textContent = story;
+}
+
+function toggleShpora() {
+  const block = document.getElementById('shpora-block');
+  const btn = document.getElementById('shpora-btn');
+  const hidden = block.style.display === 'none';
+  block.style.display = hidden ? 'block' : 'none';
+  btn.textContent = hidden ? '▲ Скрыть шпаргалку' : '▼ Показать шпаргалку';
+  btn.classList.toggle('open', hidden);
+}
+
+initQuiz();
+</script>
+</body>
+</html>
