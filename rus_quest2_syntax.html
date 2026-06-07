@@ -118,7 +118,7 @@
   .rule-card.c-abb::after { background:var(--c-abb); }
   .rule-icon { font-size:20px; margin-bottom:10px; margin-top:6px; }
   .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
-  .rule-body { font-size:13px; color:var(--muted); line-height:1.65; }
+  .rule-body { font-size:14px; color:#a8bccc; line-height:1.65; }
   .rule-body strong { color:var(--text); }
   .rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
   .c-eli .rule-formula { background:rgba(52,211,153,0.12); color:#34d399; }
@@ -247,11 +247,21 @@
   <div class="lore-intro">
     <p>На частоте, которой нет ни в одной базе данных, <span class="hero-name hero-eli">Элли</span> поймала сигнал. Русские. Они переправились через Берингов пролив ещё в самом начале заражения и нашли нечто, меняющее всё — способ противостоять кордицепсу. Способ, который работает.</p>
     <p><span class="hero-name hero-tom">Томми</span> проверил оружие. <span class="hero-name hero-din">Дина</span> взяла переводчик. <span class="hero-name hero-abb">Эбби</span> уже у двери. Единственная проблема: в записях выживших — замысловатый синтаксис. Расшифруй его — и формула иммунитета ваша.</p>
-    <div class="lore-cast">
-      <span class="cast-pill cp-eli">🟢 Элли — разведчик</span>
-      <span class="cast-pill cp-tom">🔵 Томми — переговорщик</span>
-      <span class="cast-pill cp-din">🟣 Дина — переводчик</span>
-      <span class="cast-pill cp-abb">🟠 Эбби — силовая поддержка</span>
+  </div>
+
+  <!-- ОПИСАНИЕ КВЕСТА -->
+  <div class="quiz-banner">
+    <div class="quiz-banner-body">
+      <div class="quiz-title">⚡ Сигнал с Аляски</div>
+      <div class="quiz-sub">Задания 2 (11 вопросов) · 3 (12 вопросов) · 4 (12 вопросов)</div>
+      <div class="quiz-lore">Каждый правильный ответ — шаг к расшифровке формулы. Два шанса на вопрос. Перемешивание активно. Удачи, выживший.</div>
+      <div class="quiz-stakes">
+        <span class="stake stake-s">S: ≥33 — Формула расшифрована</span>
+        <span class="stake stake-a">A: ≥27 — Союз заключён</span>
+        <span class="stake stake-b">B: ≥20 — Торговый пост открыт</span>
+        <span class="stake stake-c">C: ≥13 — Связь потеряна</span>
+        <span class="stake stake-d">D: &lt;13 — Миссия провалена</span>
+      </div>
     </div>
   </div>
 
@@ -261,7 +271,7 @@
   <div id="shpora-block">
 
     <!-- ЗАДАНИЕ 2 -->
-    <div class="sec-head" style="margin-top:24px">
+    <div class="sec-head" style="margin-top:28px">
       <span class="sec-badge task2">Задание 2 — Грамматическая основа</span><div class="sec-line"></div>
     </div>
     <div class="rules-grid">
@@ -335,7 +345,7 @@
     </div>
 
     <!-- ЗАДАНИЕ 3 -->
-    <div class="sec-head" style="margin-top:28px">
+    <div class="sec-head" style="margin-top:52px; border-top:1px solid rgba(255,255,255,0.09); padding-top:36px;">
       <span class="sec-badge task3">Задание 3 — Пунктуация</span><div class="sec-line"></div>
     </div>
     <div class="rules-grid">
@@ -421,7 +431,7 @@
     </div>
 
     <!-- ЗАДАНИЕ 4 -->
-    <div class="sec-head" style="margin-top:28px">
+    <div class="sec-head" style="margin-top:52px; border-top:1px solid rgba(255,255,255,0.09); padding-top:36px;">
       <span class="sec-badge task4">Задание 4 — Виды связи в словосочетании</span><div class="sec-line"></div>
     </div>
     <div class="rules-grid">
@@ -479,23 +489,7 @@
     </div>
   </div><!-- /#shpora-block -->
 
-  <!-- QUIZ BANNER -->
   <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Квест: 35 вопросов</span><div class="sec-line"></div></div>
-
-  <div class="quiz-banner">
-    <div class="quiz-banner-body">
-      <div class="quiz-title">⚡ Сигнал с Аляски</div>
-      <div class="quiz-sub">Задания 2 (11 вопросов) · 3 (12 вопросов) · 4 (12 вопросов)</div>
-      <div class="quiz-lore">Каждый правильный ответ — шаг к расшифровке формулы. Два шанса на вопрос. Перемешивание активно. Удачи, выживший.</div>
-      <div class="quiz-stakes">
-        <span class="stake stake-s">S: ≥33 — Формула расшифрована</span>
-        <span class="stake stake-a">A: ≥27 — Союз заключён</span>
-        <span class="stake stake-b">B: ≥20 — Торговый пост открыт</span>
-        <span class="stake stake-c">C: ≥13 — Связь потеряна</span>
-        <span class="stake stake-d">D: &lt;13 — Миссия провалена</span>
-      </div>
-    </div>
-  </div>
 
   <div id="quiz-progress-wrap" class="quiz-progress-wrap">
     <span class="quiz-score-badge" id="score-disp">⚔ 0 верно</span>
