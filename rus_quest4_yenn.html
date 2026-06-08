@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рус-4 · Академия Аретузы: Язык как Оружие</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #0d1117;
+  --bg2:   #111820;
+  --bg3:   #161e28;
+  --text:  #e2eaf3;
+  --muted: #7a90a4;
+  --border: rgba(255,255,255,0.07);
+  --c-yen: #8b5cf6;
+  --c-kei: #10b981;
+  --c-tri: #FF6F00;
+  --c-ava: #00B8D4;
+  --c-emh: #D81B60;
+  --c-lut: #CDDC39;
+  --c-cir: #f472b6;
+  --c-main: #8b5cf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; line-height:1.6; }
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(139,92,246,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 5%  20%,  rgba(0,184,212,0.05)  0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 95% 80%,  rgba(16,185,129,0.04) 0%, transparent 55%);
+}
+.wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+/* HERO */
+.hero { text-align:center; padding:72px 0 48px; position:relative; }
+.hero::before {
+  content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  width:320px; height:1px; background:linear-gradient(90deg,transparent,#8b5cf6,#00B8D4,#10b981,transparent);
+}
+.hero-eyebrow {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.24em;
+  color:#0d1117; background:var(--c-yen); text-transform:uppercase;
+  margin-bottom:24px; padding:5px 18px; border-radius:20px;
+}
+.hero-title { font-size:clamp(38px,8vw,82px); font-weight:700; line-height:1.05; letter-spacing:-0.02em; }
+.ht1 {
+  display:block;
+  background:linear-gradient(120deg,#8b5cf6 0%,#c4b5fd 45%,#00B8D4 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; filter:drop-shadow(0 4px 20px rgba(139,92,246,0.4));
+  animation:fadein-slow 0.8s ease;
+}
+.ht2 {
+  display:block; font-size:0.27em; font-weight:500; letter-spacing:0.55em;
+  color:var(--muted); text-transform:uppercase; margin:10px 0 8px;
+  -webkit-text-fill-color:var(--muted);
+}
+.ht3 {
+  display:block;
+  background:linear-gradient(120deg,#10b981 0%,#FF6F00 50%,#8b5cf6 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; filter:drop-shadow(0 4px 20px rgba(16,185,129,0.35));
+}
+@keyframes fadein-slow { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+.hero-sub { margin-top:18px; font-size:15px; color:var(--muted); max-width:520px; margin-left:auto; margin-right:auto; }
+
+/* ЛОРА */
+.lore-cast { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.cast-pill { font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; }
+.cp-yen { background:rgba(139,92,246,0.15); color:#a78bfa; }
+.cp-kei { background:rgba(16,185,129,0.15);  color:#10b981; }
+.cp-tri { background:rgba(255,111,0,0.15);   color:#FF6F00; }
+.cp-ava { background:rgba(0,184,212,0.15);   color:#00B8D4; }
+.cp-cir { background:rgba(244,114,182,0.15); color:#f472b6; }
+
+/* ШПАРГАЛКИ */
+.sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+.sec-line { flex:1; height:1px; background:var(--border); }
+.sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+.sec-badge.task7  { background:rgba(139,92,246,0.2); color:#a78bfa; }
+.sec-badge.task8  { background:rgba(16,185,129,0.2);  color:#10b981; }
+.sec-badge.task11 { background:rgba(0,184,212,0.2);   color:#00B8D4; }
+.sec-badge.task12 { background:rgba(255,111,0,0.2);   color:#FF6F00; }
+
+.shpora-wrap { margin-bottom:6px; }
+.shpora-toggle { display:flex; align-items:center; gap:8px; padding:8px 16px; background:var(--bg2); border:1.5px solid var(--c-yen); border-radius:8px; color:var(--c-yen); font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; }
+.shpora-toggle:hover { background:rgba(139,92,246,0.08); }
+.shpora-toggle.open { background:var(--c-yen); color:#0d1117; }
+
+.rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; margin:12px 0 8px; }
+.rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; }
+.rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+.c-yen::after { background:var(--c-yen); }
+.c-kei::after { background:var(--c-kei); }
+.c-tri::after { background:var(--c-tri); }
+.c-ava::after { background:var(--c-ava); }
+.c-emh::after { background:var(--c-emh); }
+.c-cir::after { background:var(--c-cir); }
+.rule-icon { font-size:22px; margin-bottom:7px; }
+.rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+.rule-body { font-size:14px; color:#a8bccc; line-height:1.65; }
+.rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
+.c-yen .rule-formula { background:rgba(139,92,246,0.12); color:#a78bfa; }
+.c-kei .rule-formula { background:rgba(16,185,129,0.12);  color:#10b981; }
+.c-tri .rule-formula { background:rgba(255,111,0,0.12);   color:#FF6F00; }
+.c-ava .rule-formula { background:rgba(0,184,212,0.12);   color:#00B8D4; }
+.c-emh .rule-formula { background:rgba(216,27,96,0.12);   color:#D81B60; }
+.c-cir .rule-formula { background:rgba(244,114,182,0.12); color:#f472b6; }
+.rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+.warn { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:#fbbf24; }
+.t-yen { color:#a78bfa; font-weight:700; }
+.t-kei { color:#10b981; font-weight:700; }
+.t-tri { color:#FF6F00; font-weight:700; }
+.t-ava { color:#00B8D4; font-weight:700; }
+.t-emh { color:#D81B60; font-weight:700; }
+.t-cir { color:#f472b6; font-weight:700; }
+.t-red  { color:#f87171; font-weight:700; }
+.t-gold { color:#fbbf24; font-weight:700; }
+
+/* SEC-HEAD */
+.sec-head { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.sec-badge { font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:4px 12px; border-radius:20px; white-space:nowrap; }
+.sec-badge.rule { background:rgba(139,92,246,0.15); color:#a78bfa; }
+.sec-line { flex:1; height:1px; background:var(--border); }
+
+/* QUIZ BANNER */
+.quiz-banner { border-radius:16px; overflow:hidden; margin-bottom:22px; background:var(--bg2); border:1px solid var(--border2); }
+.quiz-banner-body { padding:20px 24px; display:flex; flex-direction:column; gap:6px; }
+.quiz-sub { font-size:12px; color:var(--muted); letter-spacing:0.04em; }
+.quiz-lore { font-size:13px; color:#a8bccc; line-height:1.7; margin-top:6px; padding-top:10px; border-top:1px solid var(--border); }
+
+/* QUIZ PROGRESS */
+.quiz-progress-wrap { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.quiz-progress-wrap .progress-bar { flex:1; margin-bottom:0; }
+
+/* КВИЗ */
+.quiz-title { font-size:clamp(17px,3vw,24px); font-weight:700; color:var(--text); margin-bottom:4px; }
+.quiz-stakes { display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; }
+.stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+.stake-s { background:rgba(139,92,246,0.15); color:#a78bfa; }
+.stake-a { background:rgba(16,185,129,0.15);  color:#10b981; }
+.stake-b { background:rgba(0,184,212,0.15);   color:#00B8D4; }
+.stake-c { background:rgba(255,111,0,0.15);   color:#FF6F00; }
+.stake-d { background:rgba(107,114,128,0.15); color:#9ca3af; }
+.quiz-score-badge { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--c-yen); white-space:nowrap; margin-left:auto; }
+.quiz-counter { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); white-space:nowrap; }
+.progress-bar { height:4px; background:var(--bg3); border-radius:4px; margin-bottom:20px; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--c-yen),var(--c-ava)); border-radius:4px; transition:width 0.4s ease; }
+
+.qcard { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.question-header { padding:10px 16px 8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--bg3); display:flex; align-items:center; gap:8px; }
+.qh-src  { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+.qh-task { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+.src-yen { background:rgba(139,92,246,0.2); color:#a78bfa; }
+.src-kei { background:rgba(16,185,129,0.2);  color:#10b981; }
+.src-tri { background:rgba(255,111,0,0.2);   color:#FF6F00; }
+.src-ava { background:rgba(0,184,212,0.2);   color:#00B8D4; }
+.src-cir { background:rgba(244,114,182,0.2); color:#f472b6; }
+.task-7  { background:rgba(139,92,246,0.1);  color:#a78bfa; }
+.task-8  { background:rgba(16,185,129,0.1);  color:#10b981; }
+.task-11 { background:rgba(0,184,212,0.1);   color:#00B8D4; }
+.task-12 { background:rgba(255,111,0,0.1);   color:#FF6F00; }
+
+.question-body { padding:20px 20px 16px; }
+.qtext { font-size:15px; line-height:1.7; margin-bottom:18px; }
+.qtext em { color:#c4b5fd; font-style:italic; }
+.opts-grid { display:flex; flex-direction:column; gap:8px; }
+.opt-btn { background:var(--bg3); border:1.5px solid var(--border); border-radius:10px; padding:11px 16px; text-align:left; color:var(--text); font-family:'Outfit',sans-serif; font-size:14px; cursor:pointer; transition:all 0.15s; line-height:1.5; }
+.opt-btn:hover:not(:disabled) { border-color:var(--c-yen); background:rgba(139,92,246,0.06); }
+.opt-btn.correct { border-color:#10b981; background:rgba(16,185,129,0.1); color:#10b981; }
+.opt-btn.wrong   { border-color:#ef4444; background:rgba(239,68,68,0.08); color:#ef4444; opacity:0.7; }
+.opt-btn:disabled { cursor:default; }
+
+.feedback-box { margin:14px 0 10px; padding:14px 16px; border-radius:10px; font-size:14px; line-height:1.65; }
+.correct-fb { background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); }
+.wrong-fb   { background:rgba(239,68,68,0.07);  border:1px solid rgba(239,68,68,0.2); }
+.btn-next { display:inline-block; margin-top:10px; padding:10px 28px; background:var(--c-yen); color:#fff; border:none; border-radius:10px; font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:opacity 0.15s; }
+.btn-next:hover { opacity:0.88; }
+
+/* ИМЕНА ГЕРОЕВ */
+.hero-name { font-weight:700; }
+.hero-yen { color:#a78bfa; }
+.hero-kei { color:#10b981; }
+.hero-tri { color:#FF6F00; }
+.hero-ava { color:#00B8D4; }
+.hero-cir { color:#f472b6; }
+
+/* РЕЗУЛЬТАТЫ */
+#results { display:none; background:var(--bg2); border:1px solid var(--border); border-radius:20px; padding:40px 32px; text-align:center; margin-top:20px; }
+.res-emoji { font-size:56px; margin-bottom:16px; }
+.res-score { font-family:'Space Mono',monospace; font-size:36px; font-weight:700; color:var(--c-yen); margin-bottom:8px; }
+.res-total { font-size:14px; color:var(--muted); margin-bottom:18px; }
+.results-rank { display:inline-block; padding:6px 20px; border-radius:20px; font-size:13px; font-weight:700; letter-spacing:0.08em; margin-bottom:20px; }
+.rank-s { background:rgba(139,92,246,0.2); color:#a78bfa; }
+.rank-a { background:rgba(16,185,129,0.2);  color:#10b981; }
+.rank-b { background:rgba(0,184,212,0.2);   color:#00B8D4; }
+.rank-c { background:rgba(255,111,0,0.2);   color:#FF6F00; }
+.rank-d { background:rgba(107,114,128,0.2); color:#9ca3af; }
+.res-story { font-size:15px; color:#a8bccc; line-height:1.7; max-width:480px; margin:0 auto 28px; }
+.btn-restart { padding:12px 32px; background:var(--c-yen); color:#fff; border:none; border-radius:12px; font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; cursor:pointer; }
+
+/* НАВ */
+.quests-nav { margin-top:48px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.nav-label { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-right:4px; }
+.nav-pill { display:inline-block; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; text-decoration:none; border:2px solid; transition:all 0.15s; }
+.nav-pill:hover { opacity:0.8; }
+.nav-soon { opacity:0.35; cursor:default; pointer-events:none; }
+@keyframes question-animate { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.question-animate { animation:question-animate 0.25s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Русский язык · Квест 4</div>
+  <h1 class="hero-title">
+    <span class="ht1">Академия Аретузы</span>
+    <span class="ht2">✦ курс ✦</span>
+    <span class="ht3">Язык как Оружие</span>
+  </h1>
+  <p class="hero-sub">Задания 7, 8, 11, 12 · Тропы · Лексика · Средства выразительности</p>
+</div>
+
+<!-- ШПОРА 1: ТРОПЫ -->
+<div class="sec-head">
+  <span class="sec-badge task7">Задание 7 — Тропы</span>
+  <div class="sec-line"></div>
+</div>
+<div class="shpora-wrap">
+  <button class="shpora-toggle open" id="shpora-btn-1" onclick="toggleShpora(1)">▲ Шпаргалка: тропы</button>
+  <div id="shpora-block-1" style="display:block">
+    <div class="rules-grid" style="margin-top:12px">
+      <div class="rule-card c-yen">
+        <div class="rule-icon">🔮</div>
+        <div class="rule-title">Метафора</div>
+        <div class="rule-body">
+          <span class="rule-formula">= скрытое сравнение БЕЗ союза «как»</span><br>
+          Перенос значения по сходству. «Годы <span class="t-yen">пожирают</span> память», «лёд в её голосе», «железная воля».<br>
+          <span class="warn">⚠️ Ловушка:</span> если есть «как / будто / словно» — это сравнение, не метафора.
+        </div>
+        <div class="rule-assoc">🔮 Йен: «Тиссай говорил мне: метафора — это магия. Ты называешь одно, имея в виду другое. Без маски, но и без прямого слова.»</div>
+      </div>
+      <div class="rule-card c-tri">
+        <div class="rule-icon">✨</div>
+        <div class="rule-title">Эпитет</div>
+        <div class="rule-body">
+          <span class="rule-formula">= образное определение (обычно прилагательное)</span><br>
+          Создаёт художественный образ. «<span class="t-tri">Свинцовые</span> тучи», «<span class="t-tri">мятежный</span> огонь», «<span class="t-tri">мёртвая</span> тишина».<br>
+          <span class="warn">⚠️ Ловушка:</span> «деревянный стол» — НЕ эпитет (прямой признак). «Деревянное лицо» — эпитет (образ).
+        </div>
+        <div class="rule-assoc">✨ Трисс: «В моих письмах беглецам каждое прилагательное было зашифрованным сигналом. "Холодный" значило "опасно". Слово — это не украшение.»</div>
+      </div>
+      <div class="rule-card c-kei">
+        <div class="rule-icon">🌿</div>
+        <div class="rule-title">Сравнение</div>
+        <div class="rule-body">
+          <span class="rule-formula">= сопоставление С союзом «как / будто / словно»</span><br>
+          «Горит, <span class="t-kei">как</span> угли в печи», «упал, <span class="t-kei">словно</span> подкошенный», «бледная, <span class="t-kei">точно</span> мел».<br>
+          Союз обязателен. Без него — метафора.
+        </div>
+        <div class="rule-assoc">🌿 Кейра: «Крестьяне — мастера сравнений. "Горит как уголь", "орёт как недорезанный". Грубо, но точно.»</div>
+      </div>
+      <div class="rule-card c-cir">
+        <div class="rule-icon">⚡</div>
+        <div class="rule-title">Олицетворение</div>
+        <div class="rule-body">
+          <span class="rule-formula">= неодушевлённое действует как живое</span><br>
+          «Ветер <span class="t-cir">шептал</span>», «лес <span class="t-cir">прислушивался</span>», «зима <span class="t-cir">пришла</span> и <span class="t-cir">заперла</span> дороги».<br>
+          <span class="warn">⚠️ Ловушка:</span> не путай с метафорой. При олицетворении неодушевлённое именно <em>действует</em> как живое: «река вздохнула». Метафора — перенос по сходству: «река жизни».
+        </div>
+        <div class="rule-assoc">⚡ Цири: «Геральт однажды сказал мне, что лес "дышит". Я сначала испугалась. Потом поняла — это просто красиво.»</div>
+      </div>
+      <div class="rule-card c-kei">
+        <div class="rule-icon">💥</div>
+        <div class="rule-title">Гипербола и Литота</div>
+        <div class="rule-body">
+          <span class="rule-formula">Гипербола = преувеличение</span><br>
+          «Ждала <span class="t-kei">целую вечность</span>», «<span class="t-kei">сто раз</span> говорила», «<span class="t-kei">море</span> слёз».<br>
+          <span class="rule-formula">Литота = преуменьшение</span><br>
+          «<span class="t-kei">Ростом с воробья</span>», «<span class="t-kei">кот наплакал</span>», «в <span class="t-kei">двух шагах</span>».<br>
+          <span class="warn">⚠️ Ловушка:</span> «ростом с воробья» — литота, не сравнение: союза «как» нет. Гипербола ≠ преувеличение в переносном смысле вообще — только когда размер/количество явно нереальны.
+        </div>
+        <div class="rule-assoc">💥 Кейра: «Ламберт говорил мне одно и то же "тысячу раз". Это гипербола. На самом деле — раз двадцать. Но всё равно много.»</div>
+      </div>
+      <div class="rule-card c-yen">
+        <div class="rule-icon">🗡️</div>
+        <div class="rule-title">Ирония и Перифраз</div>
+        <div class="rule-body">
+          <span class="rule-formula">Ирония = сказано одно, имеется в виду противоположное</span><br>
+          «<span class="t-yen">Ну и умелец!</span>» (о неумехе).<br>
+          <span class="rule-formula">Перифраз = замена прямого названия описательным оборотом</span><br>
+          «<span class="t-yen">Царь зверей</span>» (лев), «<span class="t-yen">Белый Волк</span>» (Геральт), «<span class="t-yen">чёрное золото</span>» (нефть).
+        </div>
+        <div class="rule-assoc">🗡️ Йен: «Когда я называю Геральта "моим ведьмаком" — это перифраз. Когда говорю "какой умный" после очередной его выходки — ирония.»</div>
+      </div>
+      <div class="rule-card c-yen">
+        <div class="rule-icon">⚔️</div>
+        <div class="rule-title">Антитеза</div>
+        <div class="rule-body">
+          <span class="rule-formula">= резкое противопоставление образов или явлений</span><br>
+          Две части — противоположны по смыслу. «<span class="t-yen">Богатые пировали</span> — <span class="t-yen">бедные умирали</span>», «я царь — я раб».<br>
+          <span class="warn">⚠️ Ловушка:</span> антитеза ≠ оксюморон. Антитеза противопоставляет разные явления в разных частях. Оксюморон — соединяет противоречие в одном сочетании («горькая радость»).
+        </div>
+        <div class="rule-assoc">🔮 Йен: «Антитеза — это контраст. Тёмная магия и светлая. Аретуза и Нильфгаард. Жизнь и смерть — рядом, в одной фразе.»</div>
+      </div>
+      <div class="rule-card c-emh">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 7</div>
+        <div class="rule-body">
+          <span class="rule-formula">Алгоритм определения тропа</span><br>
+          1. Есть «как/будто/словно»? → <strong>сравнение</strong><br>
+          2. Неодушевлённое действует как живое? → <strong>олицетворение</strong><br>
+          3. Образное определение? → <strong>эпитет</strong><br>
+          4. Перенос значения по сходству, без союза? → <strong>метафора</strong><br>
+          5. Заменяет прямое название оборотом? → <strong>перифраз</strong><br>
+          6. Две части прямо противопоставлены? → <strong>антитеза</strong>
+        </div>
+        <div class="rule-assoc">🔘 Эмгыр: «Применяй алгоритм. Чувства — потом. Сначала признак.»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ШПОРА 2: ЛЕКСИКА -->
+<div class="sec-head">
+  <span class="sec-badge task8">Задание 8 — Лексика</span>
+  <div class="sec-line"></div>
+</div>
+<div class="shpora-wrap">
+  <button class="shpora-toggle open" id="shpora-btn-2" onclick="toggleShpora(2)">▲ Шпаргалка: лексика</button>
+  <div id="shpora-block-2" style="display:block">
+    <div class="rules-grid" style="margin-top:12px">
+      <div class="rule-card c-tri">
+        <div class="rule-icon">🔄</div>
+        <div class="rule-title">Синонимы и антонимы</div>
+        <div class="rule-body">
+          <span class="rule-formula">Синонимы = слова с близким значением</span><br>
+          «<span class="t-tri">Храбрый</span> — <span class="t-tri">отважный</span> — <span class="t-tri">бесстрашный</span>».<br>
+          Нейтральный синоним: без окраски (разговорная → нейтральная).<br>
+          <span class="rule-formula">Антонимы = слова с противоположным значением</span><br>
+          «<span class="t-tri">Жестокость</span> ↔ <span class="t-tri">милосердие</span>», «<span class="t-tri">богатые</span> ↔ <span class="t-tri">нищие</span>».
+        </div>
+        <div class="rule-assoc">🌸 Трисс: «В письмах беглецам слово "безопасно" и "спокойно" были синонимами. А "дорога открыта" и "дорога закрыта" — антонимами, от которых зависела жизнь.»</div>
+      </div>
+      <div class="rule-card c-kei">
+        <div class="rule-icon">🌾</div>
+        <div class="rule-title">Фразеологизмы</div>
+        <div class="rule-body">
+          <span class="rule-formula">= устойчивый оборот с переносным значением</span><br>
+          Нельзя понять буквально. «<span class="t-kei">Обвести вокруг пальца</span>» = обмануть. «<span class="t-kei">Водить за нос</span>» = вводить в заблуждение. «<span class="t-kei">Бить баклуши</span>» = бездельничать. «<span class="t-kei">Держать язык за зубами</span>» = молчать.<br>
+          Значение — всего оборота целиком, не отдельных слов.
+        </div>
+        <div class="rule-assoc">🌿 Кейра: «Одна крестьянка мне сказала: "Этот лекарь водит нас за нос". Я поняла — это не комплимент ни мне, ни коллеге.»</div>
+      </div>
+      <div class="rule-card c-yen">
+        <div class="rule-icon">📚</div>
+        <div class="rule-title">Стилистическая окраска</div>
+        <div class="rule-body">
+          <span class="rule-formula">Книжная:</span> «<span class="t-yen">уповать</span>», «<span class="t-yen">ибо</span>», «<span class="t-yen">сей</span>», «<span class="t-yen">дерзать</span>» — в разговоре не звучит.<br>
+          <span class="rule-formula">Нейтральная:</span> «<span class="t-kei">говорить</span>», «<span class="t-kei">работать</span>», «<span class="t-kei">смотреть</span>» — везде уместно.<br>
+          <span class="rule-formula">Разговорная:</span> «<span class="t-cir">болтать</span>», «<span class="t-cir">торчать</span>», «<span class="t-cir">напихать</span>», «<span class="t-cir">свалить</span>» — в официальном тексте недопустимо.
+        </div>
+        <div class="rule-assoc">🔮 Йен: «В уставе Аретузы написано "уповает". В деревне скажут "надеется". Разные слои языка — разные миры.»</div>
+      </div>
+      <div class="rule-card c-ava">
+        <div class="rule-icon">📜</div>
+        <div class="rule-title">Архаизмы и многозначность</div>
+        <div class="rule-body">
+          <span class="rule-formula">Архаизмы = устаревшие слова</span><br>
+          «<span class="t-ava">Уста</span>» (рот/губы), «<span class="t-ava">чело</span>» (лоб), «<span class="t-ava">перст</span>» (палец), «<span class="t-ava">очи</span>» (глаза), «<span class="t-ava">длань</span>» (ладонь).<br>
+          <span class="rule-formula">Многозначность:</span> одно слово — несколько значений.<br>
+          «Острый» нож (прямое) → «острый» ум (переносное).
+        </div>
+        <div class="rule-assoc">📜 Авалах: «Эльфы хранят слова тысячелетиями. "Уста" — не устаревшее слово. Это слово, которое люди забыли.»</div>
+      </div>
+      <div class="rule-card c-emh">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 8</div>
+        <div class="rule-body">
+          <span class="rule-formula">Нейтральный синоним — алгоритм</span><br>
+          1. Слово разговорное/просторечное? → ищи нейтральный аналог<br>
+          2. Слово книжное? → нейтральный аналог тоже нужен<br>
+          3. Среди вариантов выбирай то, что уместно в официальном тексте<br>
+          4. Фразеологизм заменяй одним нейтральным словом с тем же смыслом
+        </div>
+        <div class="rule-assoc">🔘 Эмгыр: «Нейтральный = без окраски. Не красивее и не грубее — просто точнее.»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ШПОРА 3: СРЕДСТВА ВЫР. -->
+<div class="sec-head">
+  <span class="sec-badge task11">Задание 11 — Лексические средства</span>
+  <div class="sec-line"></div>
+</div>
+<div class="shpora-wrap">
+  <button class="shpora-toggle open" id="shpora-btn-3" onclick="toggleShpora(3)">▲ Шпаргалка: средства выразительности</button>
+  <div id="shpora-block-3" style="display:block">
+    <div class="rules-grid" style="margin-top:12px">
+      <div class="rule-card c-yen">
+        <div class="rule-icon">🔁</div>
+        <div class="rule-title">Лексический повтор и Анафора/Эпифора</div>
+        <div class="rule-body">
+          <span class="rule-formula">Лексический повтор:</span> слово повторяется — в любом месте.<br>
+          «<span class="t-yen">Проходит</span> боль, <span class="t-yen">проходит</span> страх...»<br>
+          <span class="rule-formula">Анафора:</span> повторение в <strong>начале</strong> каждой части.<br>
+          «<span class="t-yen">Мы выбираем</span> магию. <span class="t-yen">Мы выбираем</span> знание.»<br>
+          <span class="rule-formula">Эпифора:</span> повторение в <strong>конце</strong>.<br>
+          «Я верю. Ты доберёшься — <span class="t-yen">я верю</span>. Ты выживешь — <span class="t-yen">я верю</span>.»
+        </div>
+        <div class="rule-assoc">🔮 Йен: «Когда я повторяю слово трижды — это не ошибка. Это удар.»</div>
+      </div>
+      <div class="rule-card c-tri">
+        <div class="rule-icon">📈</div>
+        <div class="rule-title">Градация</div>
+        <div class="rule-body">
+          <span class="rule-formula">= нарастание (или убывание) интенсивности</span><br>
+          Восходящая: «<span class="t-tri">волновалась</span> → <span class="t-tri">боялась</span> → <span class="t-tri">была в ужасе</span>».<br>
+          Нисходящая: «<span class="t-tri">был потрясён</span> → <span class="t-tri">огорчён</span> → <span class="t-tri">раздражён</span>».<br>
+          Каждый следующий элемент сильнее (или слабее) предыдущего.
+        </div>
+        <div class="rule-assoc">🌸 Трисс: «Я волновалась, потом боялась, потом была в ужасе — пока не увидела, что мы перешли границу. Это была восходящая градация. И настоящий страх.»</div>
+      </div>
+      <div class="rule-card c-ava">
+        <div class="rule-icon">⚡</div>
+        <div class="rule-title">Контекстные синонимы и антонимы</div>
+        <div class="rule-body">
+          <span class="rule-formula">Контекстные синонимы:</span> слова, близкие по смыслу только в данном тексте.<br>
+          «<span class="t-ava">Ворвался, влетел, рухнул</span>» — три слова об одном действии.<br>
+          <span class="rule-formula">Контекстные антонимы:</span> противопоставлены только здесь.<br>
+          «<span class="t-ava">Счастливые</span> и <span class="t-ava">потерявшие надежду</span>» — в словаре не антонимы, но здесь — да.
+        </div>
+        <div class="rule-assoc">📜 Авалах: «В языке эльфов нет слова "нейтральный". Каждое слово — это позиция.»</div>
+      </div>
+      <div class="rule-card c-kei">
+        <div class="rule-icon">❓</div>
+        <div class="rule-title">Риторический вопрос и Инверсия</div>
+        <div class="rule-body">
+          <span class="rule-formula">Риторический вопрос:</span> ответ не требуется — он очевиден.<br>
+          «Неужели мы допустим, чтобы это исчезло?» = нет, не допустим.<br>
+          <span class="rule-formula">Инверсия:</span> нарушение обычного порядка слов.<br>
+          «Белеет парус <span class="t-kei">одинокий</span>» — определение после существительного.
+        </div>
+        <div class="rule-assoc">🌿 Кейра: «Риторический вопрос — это когда я спрашиваю студента: "А разве это не очевидно?" Ответа не жду. Это и есть риторический вопрос.»</div>
+      </div>
+      <div class="rule-card c-yen">
+        <div class="rule-icon">💎</div>
+        <div class="rule-title">Оксюморон и Парцелляция</div>
+        <div class="rule-body">
+          <span class="rule-formula">Оксюморон:</span> соединение противоречащих слов.<br>
+          «Горькая радость», «живой труп», «громкое молчание».<br>
+          <span class="rule-formula">Парцелляция:</span> одно высказывание разбито на несколько коротких предложений.<br>
+          «Он ушёл. Не попрощавшись. Не оглянувшись.»
+        </div>
+        <div class="rule-assoc">🔮 Йен: «Геральт ушёл после Содденхилл. Не сразу. Не навсегда. — Это парцелляция. И — отдельно — больно.»</div>
+      </div>
+      <div class="rule-card c-tri">
+        <div class="rule-icon">🔃</div>
+        <div class="rule-title">Синтаксический параллелизм</div>
+        <div class="rule-body">
+          <span class="rule-formula">= одинаковая грамматическая структура нескольких предложений</span><br>
+          «<span class="t-tri">Вы идёте в темноте.</span> <span class="t-tri">Вы идёте без карты.</span> <span class="t-tri">Вы идёте — и это главное.</span>» — три предложения по схеме «Вы идёте + …»<br>
+          <span class="warn">⚠️ Ловушка:</span> не путать с анафорой. Анафора — одно и то же <em>слово</em> в начале. Параллелизм — одна и та же <em>структура</em> (конструкция).
+        </div>
+        <div class="rule-assoc">🌸 Трисс: «Я писала беглецам короткими одинаковыми фразами — чтобы они чувствовали ритм и не теряли надежду.»</div>
+      </div>
+      <div class="rule-card c-emh">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 11</div>
+        <div class="rule-body">
+          <span class="rule-formula">Определяем средство — шаги</span><br>
+          1. Повторяется одно слово → <strong>лексический повтор</strong><br>
+          2. Повтор слова в начале каждой части → <strong>анафора</strong>; в конце → <strong>эпифора</strong><br>
+          3. Повторяется структура (не слово!) → <strong>синтаксический параллелизм</strong><br>
+          4. Нарастание/убывание → <strong>градация</strong><br>
+          5. Вопрос без ответа → <strong>риторический вопрос</strong><br>
+          6. Слова противоречат в одном сочетании → <strong>оксюморон</strong><br>
+          7. Предложение дробится ради паузы → <strong>парцелляция</strong>
+        </div>
+        <div class="rule-assoc">🔘 Эмгыр: «Читай. Находи признак. Называй термин. Всё.»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ШПОРА 4: АНАЛИЗ ТЕКСТА -->
+<div class="sec-head">
+  <span class="sec-badge task12">Задание 12 — Лексический анализ</span>
+  <div class="sec-line"></div>
+</div>
+<div class="shpora-wrap">
+  <button class="shpora-toggle open" id="shpora-btn-4" onclick="toggleShpora(4)">▲ Шпаргалка: анализ текста</button>
+  <div id="shpora-block-4" style="display:block">
+    <div class="rules-grid" style="margin-top:12px">
+      <div class="rule-card c-yen">
+        <div class="rule-icon">🎭</div>
+        <div class="rule-title">Прямое и переносное значение</div>
+        <div class="rule-body">
+          <span class="rule-formula">Прямое = буквальное, первоначальное</span><br>
+          «<span class="t-yen">Острый</span> нож» — физически острый.<br>
+          <span class="rule-formula">Переносное = метафорическое</span><br>
+          «<span class="t-yen">Острый</span> ум» — переносное (ум не может быть острым буквально).<br>
+          «<span class="t-yen">Золотое</span> кольцо» — прямое. «<span class="t-yen">Золотые</span> руки» — переносное.
+        </div>
+        <div class="rule-assoc">🔮 Йен: «"У тебя золотые руки", — сказал мне Геральт. Долго думала: это комплимент или он опять про ювелирное дело.»</div>
+      </div>
+      <div class="rule-card c-kei">
+        <div class="rule-icon">📋</div>
+        <div class="rule-title">Стили речи по лексике</div>
+        <div class="rule-body">
+          <span class="rule-formula">Официально-деловой:</span> «настоящим», «означенный», «в соответствии с», «ходатайствует».<br>
+          <span class="rule-formula">Научный:</span> термины + определения («анамнез», «этиология»).<br>
+          <span class="rule-formula">Публицистический:</span> оценочность + призыв («граждане!», «недопустимо!»).<br>
+          <span class="rule-formula">Разговорный:</span> просторечия, неполные предложения.
+        </div>
+        <div class="rule-assoc">🌿 Кейра: «Городской лекарь пишет "анамнез". Крестьянин говорит "расскажи, что болит". Оба правы. Но это разные стили.»</div>
+      </div>
+      <div class="rule-card c-tri">
+        <div class="rule-icon">🔍</div>
+        <div class="rule-title">Синоним в контексте и многозначность</div>
+        <div class="rule-body">
+          <span class="rule-formula">Значение слова — по контексту, не по словарю.</span><br>
+          «Читала <span class="t-tri">роман</span>» → роман = книга (не отношения).<br>
+          «<span class="t-tri">Чёрствый</span> человек» → чёрствый = бездушный (не сухой хлеб).<br>
+          При замене синонимом: смысл должен сохраниться в том же контексте.
+        </div>
+        <div class="rule-assoc">🌸 Трисс: «Когда я написала Йен "тёплый" — она поняла: всё хорошо, опасность миновала. Одно слово. Правильный контекст.»</div>
+      </div>
+      <div class="rule-card c-ava">
+        <div class="rule-icon">📜</div>
+        <div class="rule-title">Профессиональная и устаревшая лексика</div>
+        <div class="rule-body">
+          <span class="rule-formula">Профессиональная:</span> понятна только специалисту.<br>
+          «Анамнез» (медицина), «истец» (право), «дебет» (бухгалтерия).<br>
+          <span class="rule-formula">Архаизмы в тексте:</span> «уста», «чело», «перст», «очи», «аршин».
+        </div>
+        <div class="rule-assoc">📜 Авалах: «Слово "уста" не умерло. Оно просто стало редким. Как сам я.»</div>
+      </div>
+      <div class="rule-card c-emh">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-title">Лайфхак ОГЭ: Задание 12</div>
+        <div class="rule-body">
+          <span class="rule-formula">Алгоритм анализа</span><br>
+          1. Значение слова: читай соседние слова — контекст укажет<br>
+          2. Прямое или переносное: буквально ли это возможно?<br>
+          3. Синоним: нейтральный, без потери смысла в данном предложении<br>
+          4. Стиль: ищи маркерные слова (клише, термины, просторечия)
+        </div>
+        <div class="rule-assoc">🔘 Эмгыр: «Контекст — твой главный союзник. Не читай слово. Читай предложение.»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ BANNER -->
+<div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Начать квест</span><div class="sec-line"></div></div>
+<div class="quiz-banner">
+  <div class="quiz-banner-body">
+    <div class="quiz-title">⚔️ Испытание Аретузы</div>
+    <div class="quiz-sub">50 вопросов · Задания 7, 8, 11, 12 · Тропы, лексика, выразительность</div>
+    <div class="quiz-lore">
+      Йеннифэр закрывает двери аудитории. Снаружи — война, снаружи — Нильфгаард. Здесь — последний закрытый курс Аретузы для тех, кто ещё не сдался.
+      «Язык — это единственное оружие, которое не отбирают при обыске, — говорит она. — Тот, кто умеет читать точно и писать точно, выживает. Остальные — нет. Приступим».
+      <div class="lore-cast" style="margin-top:12px">
+        <span class="cast-pill cp-yen">Йеннифэр — куратор курса</span>
+        <span class="cast-pill cp-kei">Кейра Мец — лексика и стиль</span>
+        <span class="cast-pill cp-tri">Трисс Меригольд — образность и тропы</span>
+        <span class="cast-pill cp-cir">Цири — ученица, точка опоры</span>
+        <span class="cast-pill cp-ava">Авалах — особо сложные вопросы</span>
+      </div>
+    </div>
+    <div class="quiz-stakes">
+      <span class="stake stake-s">S ≥93% — Круг Чародеев</span>
+      <span class="stake stake-a">A ≥77% — Аретуза ждёт</span>
+      <span class="stake stake-b">B ≥57% — Есть потенциал</span>
+      <span class="stake stake-c">C ≥37% — Учись у Трисс</span>
+      <span class="stake stake-d">D — Нильфгаард рад</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ AREA -->
+<div id="quiz-area">
+  <div class="quiz-progress-wrap">
+    <span class="quiz-score-badge" id="score-disp">✓ 0</span>
+    <div class="progress-bar"><div class="progress-fill" id="qbar" style="width:0%"></div></div>
+    <span class="quiz-counter" id="qcnt">1 / 40</span>
+  </div>
+  <div id="quiz-area-inner">
+    <div class="qcard" id="qcard">
+      <div class="question-header" id="qhead"></div>
+      <div class="question-body">
+        <div class="qtext" id="qtext"></div>
+        <div class="opts-grid" id="qopts"></div>
+        <div class="feedback-box" id="qfb" style="display:none"></div>
+        <button class="btn-next" id="qnext" style="display:none" onclick="nextQ()">Следующий →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results">
+    <div class="res-emoji" id="res-emoji"></div>
+    <div class="res-score" id="res-score"></div>
+    <div class="res-total" id="res-total"></div>
+    <div class="results-rank" id="res-rank"></div>
+    <p class="res-story" id="res-story"></p>
+    <button class="btn-restart" onclick="initQuiz()">Пройти снова</button>
+  </div>
+</div>
+
+<!-- НАВ -->
+<nav class="quests-nav">
+  <span class="nav-label">Русский:</span>
+  <a class="nav-pill" href="rus_quest1_ortho.html" style="color:#c0392b;border-color:#c0392b">Р1</a>
+  <a class="nav-pill" href="rus_quest2_syntax.html" style="color:#8b5cf6;border-color:#8b5cf6">Р2</a>
+  <a class="nav-pill" href="rus_quest3_text.html" style="color:#60a5fa;border-color:#60a5fa">Р3</a>
+  <a class="nav-pill" href="rus_quest4_yenn.html" style="color:#10b981;border-color:#10b981">Р4</a>
+  <a class="nav-pill nav-soon" href="#" style="color:#6b7280;border-color:#6b7280">Р5 скоро</a>
+  <a class="nav-pill nav-soon" href="#" style="color:#6b7280;border-color:#6b7280">∞ скоро</a>
+</nav>
+
+</div><!-- /wrap -->
+
+<script>
+const srcLabels = {
+  yen: { cls:'src-yen', text:'Йеннифэр' },
+  kei: { cls:'src-kei', text:'Кейра Мец' },
+  tri: { cls:'src-tri', text:'Трисс' },
+  ava: { cls:'src-ava', text:'Авалах' },
+  cir: { cls:'src-cir', text:'Цири' },
+};
+const taskLabels = {
+  7:  { cls:'task-7',  text:'Зад. 7' },
+  8:  { cls:'task-8',  text:'Зад. 8' },
+  11: { cls:'task-11', text:'Зад. 11' },
+  12: { cls:'task-12', text:'Зад. 12' },
+};
+
+const allQuestions = [
+
+// ===== ЗАДАНИЕ 7: ТРОПЫ =====
+
+{
+  task:7, src:'yen',
+  topic:'Метафора',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> открывает урок. «Тиссай де Врий, мой первый наставник, говорила нам: пока вы не видите образы в тексте — вы не маги, а грамотные люди. Разберём фрагмент».<br><br><em>«Годы пожирают память. Уходят лица, слова, запахи — остаются только тени прошлого.»</em><br><br>Укажите средство выразительности в первом предложении.',
+  opts:['Метафора','Сравнение','Олицетворение','Эпитет'],
+  ans:0,
+  fb:'«Годы пожирают» — скрытое сравнение без союза «как»: годам приписывается действие хищника. Это <b>метафора</b>. Если бы было «как хищник» — сравнение.',
+  trap:'Сравнение требует союза: как, будто, словно, точно. Метафора — скрытое сравнение, союза нет.',
+  hint:'Есть ли в этой фразе слово «как», «будто» или «словно»? Если нет — это не сравнение.',
+},
+
+{
+  task:7, src:'tri',
+  topic:'Эпитет',
+  text:'<span class="hero-name hero-tri">Трисс</span> рассказывает: «Когда мы помогали волшебникам бежать из Новиграда, каждое моё письмо должно было выглядеть невинно. Однажды я написала: <em>"Иди через мёртвый лес к живому берегу"</em> — "мёртвый" значило опасно, "живой" — безопасно. Слово работало как шифр». Найдите эпитет:<br><br><em>«Через свинцовые тучи пробивался робкий луч солнца.»</em>',
+  opts:['свинцовые тучи','пробивался луч','луч солнца','сквозь тучи'],
+  ans:0,
+  fb:'<b>Свинцовые тучи</b> — эпитет: образное определение, передающее цвет и тяжесть через образ металла. «Пробивался» — метафора. «Луч солнца» — нейтральное сочетание без образа.',
+  trap:'Не все прилагательные — эпитеты. «Деревянный стол» — просто признак. «Свинцовые тучи» — художественный образ, переносное значение.',
+  hint:'Какое прилагательное здесь создаёт художественный образ, а не просто называет признак? Загляни в шпору.',
+},
+
+{
+  task:7, src:'kei',
+  topic:'Сравнение',
+  text:'<span class="hero-name hero-kei">Кейра Мец</span> опирается о подоконник. «Три года в деревне под Оксенфуртом. Крестьяне описывают жар так: <em>"Горит, как угли в печи"</em>. Точно и образно — и заметьте: это не метафора». Найдите сравнение:<br><br><em>«Её слова падали, как камни в тихую воду, — медленно, с расходящимися кругами.»</em>',
+  opts:['как камни в тихую воду','слова падали','медленно с кругами','тихую воду'],
+  ans:0,
+  fb:'<b>Как камни в тихую воду</b> — сравнение: есть союз «как», два явления сопоставляются. Союз (как, будто, словно, точно, похожий на) — обязательный признак сравнения.',
+  trap:'Сравнение vs метафора: в сравнении есть союз «как / будто / словно». В метафоре — нет.',
+  hint:'Есть ли слово, соединяющее два образа — «как», «будто», «словно»?',
+},
+
+{
+  task:7, src:'cir',
+  topic:'Олицетворение',
+  text:'<span class="hero-name hero-cir">Цири</span> поднимает руку: «Геральт говорил мне в Каэр Морхен: <em>"Зима пришла и заперла дороги на замок"</em>. Я сначала не поняла — разве зима может что-то запирать? Теперь понимаю». Найдите олицетворение:<br><br><em>«Ветер шептал в ветвях, и лес прислушивался, затаив дыхание.»</em>',
+  opts:['ветер шептал и лес прислушивался','в ветвях шептал','затаив дыхание','ветер и лес'],
+  ans:0,
+  fb:'<b>Ветер шептал</b> и <b>лес прислушивался</b> — неодушевлённые предметы действуют как живые существа. Это олицетворение.',
+  trap:'Олицетворение: неодушевлённый предмет совершает действие живого существа. «Ветер шепчет», «лес смотрит» — классические примеры.',
+  hint:'Кто в предложении «шепчет» и «прислушивается»? Могут ли они делать это в реальности?',
+},
+
+{
+  task:7, src:'kei',
+  topic:'Гипербола',
+  text:'<span class="hero-name hero-kei">Кейра</span> закатывает глаза. «Ламберт — мой бойфренд — говорил мне одно и то же <em>"тысячу раз"</em>: что я слишком много болтаю с крестьянами о магии. Ламберт был большим любителем преувеличений». Определите средство в предложении:<br><br><em>«Я ждала тебя целую вечность — уже все звёзды успели погаснуть и зажечься снова.»</em>',
+  opts:['Гипербола','Метафора','Олицетворение','Литота'],
+  ans:0,
+  fb:'<b>Гипербола</b> — художественное преувеличение. «Целую вечность», «все звёзды погасли» — преувеличение ради выразительности. Реальное ожидание не может длиться вечность.',
+  trap:'Гипербола: намеренное преувеличение масштаба. Метафора: перенос значения по сходству.',
+  hint:'Преувеличивает ли автор реальный масштаб ситуации ради выразительности?',
+},
+
+{
+  task:7, src:'tri',
+  topic:'Литота',
+  text:'<span class="hero-name hero-tri">Трисс</span> говорит тихо: «Когда беглецов удавалось переправить в Ковир, они писали нам. Один написал: <em>"У нас самую малость еды — на день, не больше"</em>. Он преуменьшал, чтобы мы не волновались. Это тоже приём». Найдите литоту:<br><br><em>«Мальчик был ростом с воробья, но держался так, будто за ним стоит армия.»</em>',
+  opts:['ростом с воробья','держался как армия','мальчик держался','будто за ним'],
+  ans:0,
+  fb:'<b>Ростом с воробья</b> — литота: художественное преуменьшение. «Мальчик с пальчик», «кот наплакал», «в двух шагах» — классические литоты. Противоположность гиперболы.',
+  trap:'Литота vs гипербола: литота уменьшает, гипербола увеличивает.',
+  hint:'Гипербола преувеличивает, литота — преуменьшает. Что делает выражение «ростом с воробья»?',
+},
+
+{
+  task:7, src:'kei',
+  topic:'Ирония',
+  text:'<span class="hero-name hero-kei">Кейра</span> улыбается — не очень приятно. «У меня был один знакомый маг. Когда он снова не явился на встречу, я написала ему: <em>"Ну конечно, великий чародей опять забыл о времени"</em>. Он обиделся. Странно». Укажите средство:<br><br><em>«Ну и умелец же ты — опять сжёг ужин!»</em>',
+  opts:['Ирония','Гипербола','Эпитет','Сравнение'],
+  ans:0,
+  fb:'<b>Ирония</b> — слово употреблено в смысле, противоположном буквальному. «Умелец» сказано с насмешкой: говорят «умелец», подразумевают «неумеха».',
+  trap:'Ирония строится на противоположности смысла. Сказано одно — имеется в виду другое.',
+  hint:'Хвалит ли слово «умелец» на самом деле? Или имеется в виду противоположное?',
+},
+
+{
+  task:7, src:'yen',
+  topic:'Перифраз',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span>: «Геральт терпеть не может прозвища. Говорит, "Белый Волк" — упрощение. А я ему говорю: в этом обороте стоит целый образ, и он точнее прямого имени». Найдите в предложении оборот, заменяющий прямое название предмета описательным:<br><br><em>«Царь зверей вышел на вечернюю охоту. Трава замерла, и птицы смолкли.»</em>',
+  opts:['Царь зверей','вышел на охоту','трава замерла','птицы смолкли'],
+  ans:0,
+  fb:'<b>Царь зверей</b> — перифраз: замена прямого названия «лев» описательным оборотом. Другие примеры: «туманный Альбион» (Англия), «чёрное золото» (нефть).',
+  trap:'Перифраз vs метафора: перифраз заменяет название целиком описательным оборотом. Метафора — переносит значение одного слова на другое.',
+  hint:'Что заменяет выражение «царь зверей»? Ищите прямое название животного, которое опущено.',
+},
+
+{
+  task:7, src:'ava',
+  topic:'Эпитет vs определение',
+  text:'<span class="hero-name hero-ava">Авалах</span> поднимается. В зале тишина. «Эльфы хранили свой язык четыре тысячи лет. Мы знаем разницу между словом, которое описывает, и словом, которое создаёт образ». Он пишет на доске:<br><br><em>А) «В деревянном доме горел огонь.»<br>Б) «В доме горел мятежный огонь.»</em><br><br>В каком предложении есть эпитет?',
+  opts:['Только в Б','Только в А','В обоих','Ни в одном'],
+  ans:0,
+  fb:'<b>Мятежный огонь</b> (Б) — эпитет: огонь не может быть «мятежным» буквально — это образное определение. «Деревянный дом» (А) — прямой признак материала, не образ.',
+  trap:'Не каждое прилагательное — эпитет. Эпитет создаёт образ через переносное значение.',
+  hint:'Может ли огонь буквально «мятежничать»? Если нет — это образное определение. Загляни в шпору: как называется художественное определение, создающее образ?',
+},
+
+{
+  task:7, src:'yen',
+  topic:'Антитеза',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> завершает блок о тропах. «В Аретузе нас учили: самый мощный приём — не украшение, а противопоставление. Когда два образа сталкиваются лоб в лоб — читатель запоминает навсегда». Найдите антитезу:<br><br><em>«Богатые пировали, бедные умирали с голоду — и никто не замечал разницы.»</em>',
+  opts:['богатые пировали — бедные умирали','никто не замечал','умирали с голоду','богатые пировали'],
+  ans:0,
+  fb:'<b>Антитеза</b> — резкое противопоставление образов или понятий: «богатые пировали» — «бедные умирали». Создаёт контраст, усиливает выразительность.',
+  trap:'Антитеза vs оксюморон: антитеза противопоставляет разные явления в разных частях, оксюморон соединяет противоречие в одном сочетании («горькая радость»).',
+  hint:'Какие два явления прямо противопоставлены в этом предложении?',
+},
+
+// ===== ЗАДАНИЕ 8: ЛЕКСИКА =====
+
+{
+  task:8, src:'cir',
+  topic:'Нейтральный синоним',
+  text:'<span class="hero-name hero-cir">Цири</span> пишет донесение. «Геральт сказал: в официальном тексте — никаких разговорных слов. В черновике у меня стоит слово <b>«болтать»</b>. Чем заменить?»',
+  opts:['разговаривать','трещать','тараторить','лопотать'],
+  ans:0,
+  fb:'<b>Разговаривать</b> — стилистически нейтральное слово. «Болтать», «трещать», «тараторить», «лопотать» — все имеют разговорную или оценочную окраску.',
+  trap:'Синоним должен быть нейтральным — не просторечным, не книжным.',
+  hint:'Из четырёх вариантов какое слово уместно в официальном письме без потери тона?',
+},
+
+{
+  task:8, src:'tri',
+  topic:'Антоним',
+  text:'<span class="hero-name hero-tri">Трисс</span> составляет листовку: «Слова должны противостоять друг другу — только тогда призыв звучит». Фраза: <em>«Вы выбираете между жестокостью и ___.»</em> Подберите антоним к слову <b>«жестокость»</b>.',
+  opts:['милосердие','доброта','щедрость','справедливость'],
+  ans:0,
+  fb:'<b>Милосердие</b> — прямой антоним слова «жестокость»: оба описывают отношение к страданию другого. «Доброта» и «щедрость» — близкие, но не точные антонимы.',
+  trap:'Антоним — слово с противоположным значением в той же сфере смысла.',
+  hint:'Антоним к «жестокости» — качество, прямо противоположное безразличию к чужой боли.',
+},
+
+{
+  task:8, src:'kei',
+  topic:'Фразеологизм',
+  text:'<span class="hero-name hero-kei">Кейра</span>: «В деревне под Оксенфуртом меня однажды <em>обвели вокруг пальца</em> — продали болотную воду вместо настойки тысячелистника. С тех пор проверяю всё». Что означает фразеологизм <b>«обвести вокруг пальца»</b>?',
+  opts:['обмануть','договориться','запутать','убедить'],
+  ans:0,
+  fb:'«Обвести вокруг пальца» = <b>обмануть</b>, ловко провести кого-то. «Запутать» — близко, но не точно: здесь акцент на намеренном обмане ради выгоды.',
+  trap:'Фразеологизм нельзя понять буквально. Ищите устойчивое переносное значение оборота целиком.',
+  hint:'Что произошло с Кейрой — её просто запутали или намеренно ввели в заблуждение ради выгоды?',
+},
+
+{
+  task:8, src:'yen',
+  topic:'Книжная лексика',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> достаёт свиток. «Это устав Аретузы. Первая фраза, которую я выучила наизусть: <em>"Академия уповает на то, что каждая воспитанница проявит присущую ей стойкость духа"</em>. Одно слово здесь — книжное. Найдите его».',
+  opts:['уповает','проявит','присущую','стойкость'],
+  ans:0,
+  fb:'<b>Уповает</b> — книжное слово со значением «надеяться, рассчитывать». В разговорной речи не звучит. Это маркер книжного стиля.',
+  trap:'Книжная лексика: слова из официальной, художественной или высокой речи — в обычном разговоре не встречаются.',
+  hint:'Какое из слов вы никогда не услышите в бытовом разговоре?',
+},
+
+{
+  task:8, src:'kei',
+  topic:'Разговорная лексика',
+  text:'<span class="hero-name hero-kei">Кейра</span> смеётся. «Одна бабуля из деревни описала мой приезд так: <em>"Она пришла с утра пораньше, напихала в котёл всякой всячины и ушла до обеда"</em>. Найдите слово с <b>разговорной</b> стилистической окраской».',
+  opts:['напихала','пришла','ушла','всякой всячины'],
+  ans:0,
+  fb:'<b>Напихала</b> — разговорное, грубоватое слово со сниженной окраской. «Пришла», «ушла» — нейтральные глаголы. «Всякой всячины» — разговорный оборот, но как фразеологизированное сочетание, а не отдельное слово.',
+  trap:'Разговорная лексика: слово с экспрессивной сниженной окраской, неуместное в официальном тексте.',
+  hint:'Какое слово нельзя употребить в официальном письме из-за грубоватой окраски?',
+},
+
+{
+  task:8, src:'tri',
+  topic:'Синоним',
+  text:'<span class="hero-name hero-tri">Трисс</span> перебирает письма. «Геральт написал мне однажды: <em>"Ты отважная — это редкость"</em>. Я долго думала, что именно он имел в виду». Она улыбается. «Подберите синоним к слову <b>«отважный»</b>».',
+  opts:['храбрый','упрямый','стойкий','решительный'],
+  ans:0,
+  fb:'<b>Храбрый</b> — ближайший синоним слова «отважный»: оба обозначают бесстрашие перед опасностью. «Стойкий» — о выносливости, «решительный» — о готовности действовать.',
+  trap:'Синоним должен иметь близкое значение, а не просто похожую тему.',
+  hint:'Отважный — это тот, кто не боится. Какое слово значит то же самое?',
+},
+
+{
+  task:8, src:'cir',
+  topic:'Замена фразеологизма',
+  text:'<span class="hero-name hero-cir">Цири</span> прочитала вслух: «Он <em>водил всех за нос</em> целый год». Йеннифэр кивнула: «Хорошо. Теперь замените фразеологизм одним словом с тем же смыслом».',
+  opts:['обманывал','скрывал','прятался','уклонялся'],
+  ans:0,
+  fb:'«Водить за нос» = <b>обманывать</b>. Фразеологизм обозначает намеренный обман. «Скрывать» — о сокрытии информации, но без акцента на активном обмане.',
+  trap:'«Водить за нос» акцентирует именно ложь и намеренный обман, а не просто скрытность.',
+  hint:'Кто «водит за нос» — тот, кто прячется, или тот, кто активно заставляет других ошибаться?',
+},
+
+{
+  task:8, src:'ava',
+  topic:'Архаизм',
+  text:'<span class="hero-name hero-ava">Авалах</span> берёт старый документ. «Люди сохранили слова из языков, которые принято считать устаревшими. Эти слова — архаизмы. Они устарели, но встречаются в текстах». Какое слово является архаизмом?',
+  opts:['уста','губы','рот','щека'],
+  ans:0,
+  fb:'<b>Уста</b> — архаизм, устаревшее слово для «рот/губы». Встречается в поэзии: «из уст в уста». Современный вариант — «губы» или «рот».',
+  trap:'Архаизм: устаревшее слово, у которого есть современный синоним.',
+  hint:'Какое из слов вы не используете в обычной речи, хотя понимаете его из старых текстов?',
+},
+
+{
+  task:8, src:'yen',
+  topic:'Стилистически окрашенная лексика',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> проверяет письменные работы. Одну откладывает с поднятой бровью. «Написали "торчал". В официальном донесении». Обращается к аудитории: «Найдите в предложении слово с <b>разговорной</b> стилистической окраской и замените его нейтральным синонимом».<br><br><em>«Он торчал у окна до ночи, разглядывая улицу.»</em>',
+  opts:['торчал → стоял','разглядывая → смотря','ночи → темноты','улицу → дорогу'],
+  ans:0,
+  fb:'<b>Торчал</b> — разговорное, с оттенком праздности и осуждения. Нейтральный синоним: <b>стоял</b>. Остальные слова нейтральны и замены не требуют.',
+  trap:'Замена должна быть нейтральной — не более красивой и не более грубой. Только убираем окраску.',
+  hint:'Какое слово в предложении нельзя написать в официальном тексте? Его и нужно заменить.',
+},
+
+// ===== ЗАДАНИЕ 11: ЛЕКСИЧЕСКИЕ СРЕДСТВА =====
+
+{
+  task:11, src:'yen',
+  topic:'Лексический повтор',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> достаёт из ящика стола старый свиток. «Это написала Тиссай де Врий — первый ректор Аретузы. Я читала её слова много раз». Читает вслух: <em>«Всё проходит. Проходят годы, проходит боль, проходит страх — и остаётся только то, что ты выбрала сама».</em> «Назовите лексическое средство».',
+  opts:['Лексический повтор','Анафора','Градация','Синтаксический параллелизм'],
+  ans:0,
+  fb:'<b>Лексический повтор</b> — слово «проходит» намеренно повторяется. Анафора — повторение в начале предложений; здесь «проходит» стоит в разных позициях.',
+  trap:'Лексический повтор: слово повторяется. Анафора: оно стоит именно в начале каждого предложения/части.',
+  hint:'Какое слово встречается несколько раз в разных частях предложения? Загляни в шпору: как называется средство, где одно слово намеренно повторяется?',
+},
+
+{
+  task:11, src:'ava',
+  topic:'Контекстные антонимы',
+  text:'<span class="hero-name hero-ava">Авалах</span> тихо кладёт перед Йеннифэр список слов из эльфийского словаря. «Посмотри. Здесь нет слова "нейтральный". Два тысячелетия языка, и ни разу». Поворачивается к аудитории: «Прочитайте фрагмент. Каждое слово здесь занимает сторону».<br><br><em>«В этом городе жили богатые и нищие, сытые и голодные, счастливые и потерявшие надежду.»</em><br><br>Укажите приём, создающий картину контраста.',
+  opts:['Контекстные антонимы','Градация','Лексический повтор','Анафора'],
+  ans:0,
+  fb:'<b>Контекстные антонимы</b> — слова противопоставлены только в данном тексте. «Счастливые» и «потерявшие надежду» — в словаре не антонимы, но здесь выступают как таковые.',
+  trap:'Словарные антонимы: зафиксированы в словаре. Контекстные: противопоставлены только в данном тексте.',
+  hint:'Все пары слов противопоставлены. Какой приём называет именно контекстное противопоставление?',
+},
+
+{
+  task:11, src:'tri',
+  topic:'Градация',
+  text:'<span class="hero-name hero-tri">Трисс</span> вспоминает: «Ту ночь, когда выводила первую группу из Новиграда, я помню точно. Я <em>волновалась, потом боялась, потом была в ужасе</em> — пока не увидела, что мы перешли границу». Определите средство.',
+  opts:['Градация','Лексический повтор','Эпифора','Анафора'],
+  ans:0,
+  fb:'<b>Градация</b> — нарастание интенсивности: волновалась → боялась → была в ужасе. Каждое следующее состояние сильнее предыдущего.',
+  trap:'Градация — нарастание или убывание. Лексический повтор — повторение одного слова.',
+  hint:'Нарастает ли интенсивность от слова к слову? Первое чувство слабее или сильнее последнего?',
+},
+
+{
+  task:11, src:'yen',
+  topic:'Анафора',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> пишет на доске фрагмент из архива Аретузы:<br><br><em>«Мы выбираем магию. Мы выбираем знание. Мы выбираем одиночество — чтобы другие могли не выбирать между жизнью и смертью.»</em><br><br>Назовите лексическое средство.',
+  opts:['Анафора','Эпифора','Лексический повтор','Синтаксический параллелизм'],
+  ans:0,
+  fb:'<b>Анафора</b> — «Мы выбираем» повторяется в начале каждого предложения. Создаёт ритм и торжественность.',
+  trap:'Анафора vs лексический повтор: анафора — повторение именно в начале.',
+  hint:'«Мы выбираем» — в каком месте каждого предложения стоит это сочетание? Сравни с карточкой шпоры про повторения: что называется, когда повтор стоит в начале?',
+},
+
+{
+  task:11, src:'kei',
+  topic:'Риторический вопрос',
+  text:'<span class="hero-name hero-kei">Кейра</span> с улыбкой: «А разве не очевидно, что вопрос без ожидаемого ответа — это риторический вопрос? — пауза — Это был риторический вопрос, на случай если кто не понял». В каком предложении он использован?',
+  opts:[
+    'Неужели мы допустим, чтобы эти знания исчезли навсегда?',
+    'Ты знаешь, где находится библиотека?',
+    'Когда закончится этот урок?',
+    'Кто из вас был в Аретузе раньше?'
+  ],
+  ans:0,
+  fb:'«Неужели мы допустим...» — <b>риторический вопрос</b>: форма вопроса, но ответ не требуется и очевиден. Функция — усилить утверждение.',
+  trap:'Риторический вопрос не ждёт ответа — это утверждение в форме вопроса.',
+  hint:'На какой вопрос не ожидается конкретного ответа — он и так ясен?',
+},
+
+{
+  task:11, src:'cir',
+  topic:'Инверсия',
+  text:'<span class="hero-name hero-cir">Цири</span> читает стихи: «Здесь слова стоят не так, как обычно. Йен, это специально?» — «А ты как думаешь?» — Йеннифэр поставила галочку в журнале. Найдите предложение, в котором нарушен обычный порядок слов:<br><br><em>А) «Белеет парус одинокий в тумане моря голубом.»<br>Б) «В тумане виднеется белый одинокий парус.»</em>',
+  opts:['Только в А','Только в Б','В обоих','Ни в одном'],
+  ans:0,
+  fb:'<b>Инверсия в А</b>: «одинокий» стоит после «парус», «голубом» — после «моря» (обычный порядок: одинокий парус, голубого моря). В Б — обычный порядок.',
+  trap:'Инверсия: слово перенесено не на своё обычное место. Определение обычно стоит перед существительным.',
+  hint:'В каком предложении прилагательное стоит не перед существительным, а после него?',
+},
+
+{
+  task:11, src:'tri',
+  topic:'Эпифора',
+  text:'<span class="hero-name hero-tri">Трисс</span> показывает письмо: «Писала это беглецу, которого не знала по имени — просто чтобы поддержать»:<br><br><em>«Ты доберёшься — я верю. Ты выживешь — я верю. Ты вернёшься — я верю.»</em><br><br>«Что повторяется и где?»',
+  opts:['Эпифора','Анафора','Лексический повтор','Синтаксический параллелизм'],
+  ans:0,
+  fb:'<b>Эпифора</b> — «я верю» повторяется в конце каждого предложения. Анафора — начало. Эпифора — конец.',
+  trap:'Анафора: повторение в начале. Эпифора: повторение в конце.',
+  hint:'Где стоит повторяющееся «я верю» — в начале или в конце каждой части?',
+},
+
+{
+  task:11, src:'ava',
+  topic:'Оксюморон',
+  text:'<span class="hero-name hero-ava">Авалах</span> смотрит в окно. Снаружи догорает закат. «Один из магов Аретузы назвал этот закат "холодным огнём". Я не поправил его. Некоторые противоречия точнее правды». Оборачивается к аудитории и просит определить приём в выражениях: <em>«горькая радость»</em>, <em>«живой труп»</em>, <em>«громкое молчание»</em>.',
+  opts:['Оксюморон','Контекстные антонимы','Ирония','Метафора'],
+  ans:0,
+  fb:'<b>Оксюморон</b> — намеренное соединение противоречащих по смыслу слов в одном образе. «Горькая радость» — горечь и радость одновременно. От греч. «острый + тупой».',
+  trap:'Оксюморон vs контекстные антонимы: антонимы противопоставлены, оксюморон — соединён в одном образе.',
+  hint:'Противоречат ли слова в каждом сочетании? Они противопоставлены или соединены в одном образе?',
+},
+
+{
+  task:11, src:'kei',
+  topic:'Контекстные синонимы',
+  text:'<span class="hero-name hero-kei">Кейра</span>: «В деревне не скажут "он вошёл". Скажут: <em>ввалился, влетел, рухнул</em> — и каждый раз одно действие, но с другим оттенком». В тексте: <em>«Он ворвался в зал — влетел, буквально рухнул на первый стул.»</em> Что использовано?',
+  opts:['Контекстные синонимы','Градация','Лексический повтор','Гипербола'],
+  ans:0,
+  fb:'<b>Контекстные синонимы</b> — «ворвался», «влетел», «рухнул» в этом тексте обозначают одно действие с разными оттенками. В словаре они не синонимы, но здесь — да.',
+  trap:'Контекстные синонимы: близкие по смыслу только в данном тексте. Градация: нарастание интенсивности.',
+  hint:'Все три слова описывают одно действие. Как называются слова, которые в данном тексте обозначают одно и то же?',
+},
+
+{
+  task:11, src:'yen',
+  topic:'Парцелляция',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> долго молчит. Потом говорит: «Геральт ушёл после Содденхилл. Не сразу. Не навсегда». Пауза. «Это — парцелляция. Когда предложение разбивается на части. Намеренно». Укажите главный признак.',
+  opts:['Высказывание разбито на несколько коротких отдельных предложений','Повторение слова в начале предложений','Нарастание интенсивности','Обрыв мысли с многоточием'],
+  ans:0,
+  fb:'<b>Парцелляция</b>: «Не сразу. Не навсегда.» — части одного высказывания, оформленные как отдельные предложения. Создаёт паузы, акцентирует каждую деталь.',
+  trap:'Парцелляция vs умолчание: умолчание — незавершённая мысль (многоточие). Парцелляция — завершённая мысль, разбитая на части.',
+  hint:'Можно ли «Не сразу. Не навсегда.» соединить в одно предложение? Если да — это парцелляция.',
+},
+
+{
+  task:11, src:'tri',
+  topic:'Синтаксический параллелизм',
+  text:'<span class="hero-name hero-tri">Трисс</span> показывает обращение к беглецам, написанное в дороге:<br><br><em>«Вы идёте в темноте. Вы идёте без карты. Вы идёте — и это главное.»</em><br><br>«Обратите внимание на строение предложений». Определите средство.',
+  opts:['Синтаксический параллелизм','Анафора','Лексический повтор','Градация'],
+  ans:0,
+  fb:'<b>Синтаксический параллелизм</b> — все три предложения построены по одной схеме: «Вы идёте + обстоятельство». Одинаковая грамматическая конструкция создаёт ритм.<br>Отличие от анафоры: анафора — повторение слова. Параллелизм — повторение синтаксической структуры, конструкции.',
+  trap:'Анафора: повторяется слово («Мы выбираем... Мы выбираем...»). Параллелизм: повторяется структура предложения, даже если слова разные.',
+  hint:'Одинаково ли построены все три предложения грамматически — по одной схеме? Загляни в шпору: как называется средство, где повторяется не слово, а структура предложения?',
+},
+
+// ===== ЗАДАНИЕ 12: ЛЕКСИЧЕСКИЙ АНАЛИЗ =====
+
+{
+  task:12, src:'cir',
+  topic:'Значение слова в контексте',
+  text:'<span class="hero-name hero-cir">Цири</span> читает текст: <em>«Она читала роман всё утро, не замечая, как за окном поднимался ветер».</em> Йеннифэр: «Какое значение имеет слово "роман" в этом предложении?»',
+  opts:['Крупное прозаическое произведение','Любовные отношения','Мужское имя','Романтическое приключение'],
+  ans:0,
+  fb:'В контексте «читала роман» слово означает <b>литературный жанр</b>. «Читать» указывает на книгу. Контекст определяет значение.',
+  trap:'«Роман» — многозначное слово. «Читать роман» = книга; «у неё роман» = отношения.',
+  hint:'Что можно «читать» — книгу или отношения? Контекст сам подскажет.',
+},
+
+{
+  task:12, src:'tri',
+  topic:'Синоним в контексте',
+  text:'<span class="hero-name hero-tri">Трисс</span> перелистывает письма, которые беглецы присылали из Ковира. «Они часто писали об одном и том же. О людях, которые не замечали, что происходит». Читает вслух: <em>«Чёрствый человек не замечает чужой боли — он живёт за стеклом собственного равнодушия».</em> «Замените слово <b>"чёрствый"</b> синонимом, не меняя смысла».',
+  opts:['бездушный','злобный','жестокий','грубый'],
+  ans:0,
+  fb:'<b>Бездушный</b> точнее всего передаёт смысл «чёрствый» в контексте равнодушия. «Жестокий» — об активном причинении боли, «грубый» — о поведении.',
+  trap:'Синонимы бывают частичными. «Чёрствый» — о холодности и безразличии, а не об агрессии.',
+  hint:'«Чёрствый» — это о жестокости или о холодности и безразличии?',
+},
+
+{
+  task:12, src:'kei',
+  topic:'Переносное значение',
+  text:'<span class="hero-name hero-kei">Кейра</span>: «В травничестве есть острые вещества — это прямое значение. Когда я говорю об остром уме — совсем другое». В каком предложении слово <b>«острый»</b> употреблено в <b>переносном</b> значении?',
+  opts:[
+    'У неё острый ум — она видит то, что другие пропускают.',
+    'Нож должен быть острым, иначе он бесполезен.',
+    'Угол оказался острым — меньше девяноста градусов.',
+    'Осколок был острым и опасным.'
+  ],
+  ans:0,
+  fb:'<b>Острый ум</b> — переносное значение: ум не может буквально иметь лезвие. Слово перенесено на абстрактное качество. Во всех остальных — прямое значение.',
+  trap:'Прямое: буквальное (острый нож). Переносное: метафорическое, на основе сходства (острый ум).',
+  hint:'Может ли ум буквально иметь остроту? Если нет — это переносное значение.',
+},
+
+{
+  task:12, src:'kei',
+  topic:'Стиль по лексике',
+  text:'<span class="hero-name hero-kei">Кейра</span> достаёт свиток: «Документ от городского лекаря Оксенфурта: <em>"Настоящим подтверждается, что означенная особа прошла освидетельствование и признана дееспособной в соответствии с действующими нормами"</em>. Какой стиль?»',
+  opts:['Официально-деловой','Научный','Публицистический','Разговорный'],
+  ans:0,
+  fb:'<b>Официально-деловой</b>: «настоящим», «означенная», «освидетельствование», «в соответствии с» — клише делового стиля.',
+  trap:'Научный: термины + определения. Деловой: клише и шаблонные обороты без эмоций.',
+  hint:'Какой стиль использует слова «настоящим», «означенная особа», «в соответствии с»?',
+},
+
+{
+  task:12, src:'yen',
+  topic:'Прямое и переносное значение',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span>: «Геральт однажды сказал мне: "У тебя золотые руки". Я долго думала, обидеться или нет». В каком предложении слово <b>"золотой"</b> употреблено в <b>прямом</b> значении?',
+  opts:[
+    'Кольцо оказалось золотым — настоящим, без примесей.',
+    'У этого мастера золотые руки.',
+    'Наступили золотые деньки бабьего лета.',
+    'Это был золотой совет — я запомнила навсегда.'
+  ],
+  ans:0,
+  fb:'<b>Кольцо оказалось золотым</b> — прямое значение: «сделанный из золота». В остальных — переносное: «золотые руки» = умелые, «золотые деньки» = прекрасные.',
+  trap:'Прямое: буквальное (материал). Переносное: метафорическое (качество).',
+  hint:'В каком предложении «золотой» означает именно металл, а не качество?',
+},
+
+{
+  task:12, src:'cir',
+  topic:'Синоним к заимствованному',
+  text:'<span class="hero-name hero-cir">Цири</span>: «Йен дала мне слово — "лаконичный". Я не знаю такого». Йеннифэр: «Зато ты знаешь его значение». Замените <b>«лаконичный»</b> нейтральным синонимом.',
+  opts:['краткий','чёткий','умный','точный'],
+  ans:0,
+  fb:'<b>Краткий</b> — точный синоним «лаконичного»: оба означают «немногословный, без лишнего». «Чёткий» и «точный» — о ясности, а не о краткости.',
+  trap:'«Лаконичный» — о количестве слов, не об их качестве.',
+  hint:'«Лаконичный» — о том, сколько слов использовано или насколько они точны?',
+},
+
+{
+  task:12, src:'ava',
+  topic:'Значение архаизма',
+  text:'<span class="hero-name hero-ava">Авалах</span> медленно листает рукопись, принесённую из архива Аретузы. «Вот. Это написано четыреста лет назад». Указывает на строку: <em>«Он склонил чело в знак приветствия»</em>. Смотрит на аудиторию: «Что означает слово <b>"чело"</b> в этом предложении?»',
+  opts:['лоб','голову','взгляд','подбородок'],
+  ans:0,
+  fb:'<b>Чело</b> — архаизм, означает «лоб». «Склонить чело» = наклонить голову, обнажив лоб — жест почтения.',
+  trap:'«Чело» ≠ «голова» целиком. Именно лоб — передняя верхняя часть лица.',
+  hint:'В выражении «склонить чело» речь о части лица. Какой именно?',
+},
+
+{
+  task:12, src:'tri',
+  topic:'Переносное значение',
+  text:'<span class="hero-name hero-tri">Трисс</span>: «Когда переправили последнего беглеца на север, я написала Йен одно слово: "тёплый". Она поняла». В каком предложении слово <b>«тёплый»</b> в <b>переносном</b> значении?',
+  opts:[
+    'Нас встретили с тёплым приёмом и накормили.',
+    'Тёплый чай согрел озябшие руки.',
+    'Летний вечер выдался тёплым и безветренным.',
+    'Батарея была тёплой на ощупь.'
+  ],
+  ans:0,
+  fb:'«Тёплый приём» — <b>переносное значение</b>: «радушный, душевный». Приём не может быть тёплым физически — это образ. В остальных — реальная температура.',
+  trap:'«Тёплый приём» — устойчивое сочетание с переносным смыслом.',
+  hint:'В каком предложении «тёплый» описывает не температуру, а человеческое отношение?',
+},
+
+{
+  task:12, src:'kei',
+  topic:'Профессиональная лексика',
+  text:'<span class="hero-name hero-kei">Кейра</span>: «Когда крестьянин жалуется на боль в груди, я не говорю просто "болит". Я говорю: <em>анамнез, симптоматика, этиология</em>. Это точнее». Какое слово относится к <b>профессиональной медицинской лексике</b>?',
+  opts:['анамнез','болезнь','лечение','врач'],
+  ans:0,
+  fb:'<b>Анамнез</b> — медицинский термин: совокупность сведений о больном и истории его болезни. «Болезнь», «лечение», «врач» — общеупотребительные слова.',
+  trap:'Профессиональная лексика: термины, непонятные без специальных знаний.',
+  hint:'Какое слово потребует объяснения человеку без медицинского образования?',
+},
+
+{
+  task:12, src:'yen',
+  topic:'Значение слова в контексте',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span> закрывает книгу. «Это задание непростое». <em>«Она приняла холодный душ новостей молча: ни единой эмоции на лице».</em> В каком значении слово <b>«холодный»</b> использовано в этом контексте?',
+  opts:['неприятный, ошеломляющий','прохладный по температуре','резкий по тону','неожиданный'],
+  ans:0,
+  fb:'«Холодный душ» — переносное выражение: резкая, неприятная, ошеломляющая информация. «Обдать холодным душем» = неприятно удивить.',
+  trap:'«Холодный душ» — устойчивое выражение с переносным смыслом. Не физическая температура.',
+  hint:'«Холодный душ новостей» — это метафора. Что несут эти новости — приятное или нет?',
+},
+
+{
+  task:12, src:'ava',
+  topic:'Прямое значение многозначного слова',
+  text:'<span class="hero-name hero-ava">Авалах</span> поднимается. «Язык — единственное, что у вас останется, когда вы потеряете всё остальное». В каком предложении слово <b>«дорогой»</b> в <b>прямом</b> значении?',
+  opts:[
+    'Этот браслет слишком дорогой — я не могу себе позволить.',
+    'Дорогой друг, как давно мы не виделись!',
+    'Дорогой ценой далась нам эта победа.',
+    'Мой дорогой, я так скучала!'
+  ],
+  ans:0,
+  fb:'«Слишком дорогой» = <b>прямое значение</b>: «имеющий высокую цену в деньгах». В остальных — переносное: «дорогой друг» = близкий, «дорогой ценой» = с большими потерями.',
+  trap:'Прямое «дорогой»: высокая цена в деньгах. Переносное: ценный по другим причинам.',
+  hint:'В каком предложении «дорогой» связан именно с деньгами, а не с чувствами?',
+},
+
+// ===== ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ =====
+
+{
+  task:7, src:'cir',
+  topic:'Метафора',
+  text:'<span class="hero-name hero-cir">Цири</span> читает вслух черновик письма Трисс: «<em>Лёд в её взгляде остановил меня на пороге</em>». Йеннифэр: «Хорошо. Найди то же средство в следующем предложении».<br><br><em>«Его слова — яд: они медленно растворяются в памяти и разрушают изнутри.»</em>',
+  opts:['слова — яд','медленно растворяются','разрушают изнутри','его слова'],
+  ans:0,
+  fb:'«Слова — яд» — <b>метафора</b>: скрытое сравнение без союза «как». Словам приписывается свойство яда. Если бы было «слова, <em>как</em> яд» — это сравнение.',
+  trap:'Метафора vs сравнение: метафора — без союза «как/будто/словно». Нет союза — метафора.',
+  hint:'Есть ли в этом предложении союз «как», «будто», «словно»? Если нет, но значение переносное — это не сравнение.',
+},
+
+{
+  task:7, src:'tri',
+  topic:'Сравнение',
+  text:'<span class="hero-name hero-tri">Трисс</span>: «Я часто описывала дорогу в письмах образно — крестьяне понимали лучше, чем любой план». Укажите предложение, в котором есть сравнение:<br><br>А) «Он шёл, будто нёс весь мир на плечах.»<br>Б) «Лес глотал их тени один за другим.»<br>В) «Ветер подталкивал в спину, не давал остановиться.»',
+  opts:['Только в А','Только в Б','Только в В','Во всех трёх'],
+  ans:0,
+  fb:'«<b>Будто</b> нёс весь мир» — сравнение: союз «будто» соединяет два образа. «Лес глотал» — метафора (союза нет). «Ветер подталкивал» — олицетворение.',
+  trap:'Сравнение: обязателен союз как/будто/словно/точно/похожий на. Без союза — метафора.',
+  hint:'Ищи слово «как», «будто», «словно» или «точно» — оно обязательно в сравнении.',
+},
+
+{
+  task:7, src:'cir',
+  topic:'Олицетворение',
+  text:'<span class="hero-name hero-cir">Цири</span> смотрит в окно. «Геральт говорил: природа разговаривает с теми, кто умеет слушать». Найдите предложение, в котором использовано олицетворение:<br><br>А) «Вода была холодной и прозрачной.»<br>Б) «Камни блестели на солнце.»<br>В) «Река устала и легла спать меж берегами.»',
+  opts:['Только в В','Только в А','Только в Б','В А и Б'],
+  ans:0,
+  fb:'«Река <b>устала</b> и <b>легла спать</b>» — олицетворение: реке приписаны действия живого существа. «Блестели» — обычный физический процесс, не олицетворение.',
+  trap:'Олицетворение: неодушевлённый предмет совершает действие, характерное именно для живого существа.',
+  hint:'В каком предложении неодушевлённый предмет совершает действие, на которое способен только живой человек или животное?',
+},
+
+{
+  task:7, src:'kei',
+  topic:'Антитеза',
+  text:'<span class="hero-name hero-kei">Кейра</span>: «Противопоставление делает мысль острой — читатель видит контраст сразу». Укажите предложение, в котором есть антитеза:<br><br>А) «Он смеялся при всех — и плакал в одиночестве.»<br>Б) «Он шёл долго и очень устал.»<br>В) «Она молчала весь вечер у окна.»',
+  opts:['Только в А','Только в Б','Только в В','В А и В'],
+  ans:0,
+  fb:'«Смеялся при всех — плакал в одиночестве» — <b>антитеза</b>: два противоположных состояния в двух частях. Б и В — нет противопоставления.',
+  trap:'Антитеза ≠ просто два разных действия. Нужно именно смысловое противопоставление — контраст.',
+  hint:'Противопоставлены ли две части предложения по смыслу? Ищи контраст, а не просто перечисление.',
+},
+
+{
+  task:8, src:'ava',
+  topic:'Многозначность',
+  text:'<span class="hero-name hero-ava">Авалах</span> кладёт на стол учебник и открывает его на случайной странице. «Художник берёт кисть. Кейра срывает кисть смородины. Это одно слово?» — Цири кивает. «Одно. С разными значениями. Контекст решает, которое из них». Какое значение имеет слово <b>«кисть»</b> в предложении:<br><br><em>«Художник взял кисть и сделал первый мазок на холсте.»</em>',
+  opts:['Инструмент для рисования','Часть руки от запястья до пальцев','Гроздь плодов','Декоративная бахрома'],
+  ans:0,
+  fb:'В контексте «взял кисть + сделал мазок» слово означает <b>инструмент художника</b>. «Мазок» — ключевой контекстный сигнал. «Кисть» многозначное слово: рука, плоды, бахрома — это другие значения.',
+  trap:'«Кисть» — многозначное слово. Контекст (мазок, холст) указывает на правильное значение.',
+  hint:'«Мазок» делают кисточкой художника или частью руки? Контекст сам подскажет.',
+},
+
+{
+  task:11, src:'yen',
+  topic:'Градация',
+  text:'<span class="hero-name hero-yen">Йеннифэр</span>: «Нарастание — это не просто перечисление. Каждый элемент должен превосходить предыдущий». Укажите предложение, в котором использована градация:<br><br>А) «Он просил, умолял, требовал — но дверь так и не открылась.»<br>Б) «Он пришёл, сел и начал говорить.»<br>В) «Она улыбнулась и протянула руку.»',
+  opts:['Только в А','Только в Б','Только в В','В А и Б'],
+  ans:0,
+  fb:'«Просил → умолял → требовал» — <b>восходящая градация</b>: интенсивность нарастает. Просить < умолять < требовать. В Б и В — просто перечисление без нарастания.',
+  trap:'Градация: каждое следующее слово сильнее предыдущего. Обычное перечисление — не градация.',
+  hint:'В каком предложении каждое следующее слово обозначает более сильное действие или чувство?',
+},
+
+{
+  task:11, src:'ava',
+  topic:'Синтаксический параллелизм',
+  text:'<span class="hero-name hero-ava">Авалах</span>: «Параллелизм — это не повтор слова, а повтор архитектуры фразы». Укажите вариант, в котором использован синтаксический параллелизм:<br><br>А) «Сначала пришёл холод. Потом пришёл страх. Наконец пришло отчаяние.»<br>Б) «Холод, холод, холод — три недели без огня.»<br>В) «Она замёрзла. До нитки. До дрожи.»',
+  opts:['Только в А','Только в Б','Только в В','В А и В'],
+  ans:0,
+  fb:'«Сначала пришёл холод. Потом пришёл страх. Наконец пришло отчаяние.» — три предложения по одной схеме: наречие + глагол + существительное. Одинаковая конструкция = <b>синтаксический параллелизм</b>. Б — лексический повтор. В — парцелляция.',
+  trap:'Параллелизм: повторяется структура. Лексический повтор: повторяется слово. Парцелляция: предложение разбито на части.',
+  hint:'В каком варианте все предложения построены по одной грамматической схеме (нар. + гл. + сущ.)?',
+},
+
+{
+  task:12, src:'tri',
+  topic:'Стиль по лексике',
+  text:'<span class="hero-name hero-tri">Трисс</span> достаёт листок: «Это памфлет, который разбрасывали в Новиграде перед восстанием». Читает: <em>«Граждане! Недопустимо молчать, когда преступления власти требуют немедленного ответа!»</em> Определите стиль текста.',
+  opts:['Публицистический','Официально-деловой','Научный','Разговорный'],
+  ans:0,
+  fb:'«<b>Граждане!</b>», «<b>недопустимо</b>», «<b>требуют немедленного ответа</b>» — маркеры <b>публицистического стиля</b>: оценочность, призыв, обращение к широкой аудитории.',
+  trap:'Деловой: безэмоциональные клише («настоящим», «означенный»). Публицистический: оценочность + призыв к действию.',
+  hint:'В каком стиле текст обращается к гражданам и призывает к действию с эмоциональными оценками?',
+},
+
+]; // конец allQuestions
+
+let questions = [];
+let cur = 0, score = 0, attempts = 0, answered = false;
+
+function shuffle(a) {
+  const arr = [...a];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[cur];
+  const total = questions.length;
+  document.getElementById('qbar').style.width = (cur / total * 100) + '%';
+  document.getElementById('qcnt').textContent = (cur + 1) + ' / ' + total;
+  document.getElementById('score-disp').textContent = '✓ ' + score;
+
+  const src = srcLabels[q.src];
+  const tsk = taskLabels[q.task];
+  document.getElementById('qhead').innerHTML =
+    `<span class="qh-src ${src.cls}">${src.text}</span>` +
+    (tsk ? `<span class="qh-task ${tsk.cls}">${tsk.text}</span>` : '') +
+    `<span style="color:var(--muted);font-size:10px;margin-left:auto">${q.topic}</span>`;
+
+  document.getElementById('qtext').innerHTML = q.text;
+
+  const shuffledOpts = shuffle(q.opts.map((o, i) => ({ o, i })));
+  const optsEl = document.getElementById('qopts');
+  optsEl.innerHTML = '';
+  shuffledOpts.forEach(({ o, i }) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = o;
+    btn.dataset.orig = i;
+    btn.onclick = () => answer(i, btn);
+    optsEl.appendChild(btn);
+  });
+
+  const fb = document.getElementById('qfb');
+  fb.style.display = 'none';
+  fb.className = 'feedback-box';
+  fb.innerHTML = '';
+  document.getElementById('qnext').style.display = 'none';
+  answered = false;
+  attempts = 0;
+
+  const card = document.getElementById('qcard');
+  card.classList.remove('question-animate');
+  void card.offsetWidth;
+  card.classList.add('question-animate');
+}
+
+function answer(idx, btn) {
+  if (answered) return;
+  const q = questions[cur];
+  const fb = document.getElementById('qfb');
+  const btns = document.querySelectorAll('.opt-btn');
+
+  if (idx === q.ans) {
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('score-disp').textContent = '✓ ' + score;
+    fb.className = 'feedback-box correct-fb';
+    fb.innerHTML = '🥳 Верно! ' + q.fb;
+    fb.style.display = 'block';
+    document.getElementById('qnext').style.display = 'inline-block';
+    btns.forEach(b => b.disabled = true);
+    answered = true;
+  } else {
+    attempts++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    if (attempts === 1) {
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '🤔 Не совсем. ' + q.hint;
+      fb.style.display = 'block';
+    } else {
+      btns.forEach(b => {
+        if (parseInt(b.dataset.orig) === q.ans) b.classList.add('correct');
+        b.disabled = true;
+      });
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '❌ ' + q.trap + '<br><br><strong>Правильный ответ:</strong> ' + q.opts[q.ans] + '<br>' + q.fb;
+      fb.style.display = 'block';
+      document.getElementById('qnext').style.display = 'inline-block';
+      answered = true;
+    }
+  }
+}
+
+function nextQ() {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+}
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  const total = questions.length;
+  const pct = score / total;
+  document.getElementById('res-score').textContent = score + ' / ' + total;
+  document.getElementById('res-total').textContent = 'Правильных ответов: ' + Math.round(pct * 100) + '%';
+
+  let emoji, rankClass, rankText, story;
+  if (pct >= 0.93) {
+    emoji = '🔮';
+    rankClass = 'rank-s'; rankText = 'Ранг S — Круг Чародеев';
+    story = 'Йеннифэр смотрит долго. Потом говорит: «Ты готова. Язык — твой. Академия признаёт тебя». Кейра кивает, не без зависти. Трисс улыбается. Авалах молча встаёт и уходит — и это, говорят, высший знак уважения.';
+  } else if (pct >= 0.77) {
+    emoji = '✨';
+    rankClass = 'rank-a'; rankText = 'Ранг A — Старший курс Аретузы';
+    story = 'Йеннифэр: «Ты почти там. Работай над остальным — и место в Аретузе твоё». Кейра добавляет: «Почти — это уже немало». Трисс тихо жмёт руку.';
+  } else if (pct >= 0.57) {
+    emoji = '🌿';
+    rankClass = 'rank-b'; rankText = 'Ранг B — Ученица Аретузы';
+    story = 'Цири: «Я тоже не сразу. Пошли — Трисс объяснит ещё раз». Трисс улыбается: «У тебя хорошая основа. Время и шпора — и ты справишься».';
+  } else if (pct >= 0.37) {
+    emoji = '🍂';
+    rankClass = 'rank-c'; rankText = 'Ранг C — Вольный слушатель';
+    story = 'Трисс мягко: «Потенциал есть. Но язык требует терпения». Кейра: «Вернись к шпаргалкам. Или попроси Цири — она объяснит без снобизма».';
+  } else {
+    emoji = '📜';
+    rankClass = 'rank-d'; rankText = 'Ранг D — Курс не пройден';
+    story = 'Йеннифэр смотрит холодно: «Нильфгаард любит тех, кто плохо читает. Возвращайся к шпарам — с самого начала». Авалах: «Язык не прощает торопливости».';
+  }
+
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-rank').className = 'results-rank ' + rankClass;
+  document.getElementById('res-rank').textContent = rankText;
+  document.getElementById('res-story').textContent = story;
+}
+
+function toggleShpora(n) {
+  const block = document.getElementById('shpora-block-' + n);
+  const btn = document.getElementById('shpora-btn-' + n);
+  const hidden = block.style.display === 'none';
+  block.style.display = hidden ? 'block' : 'none';
+  btn.textContent = hidden ? '▲ Скрыть шпаргалку' : '▲ Шпаргалка: ' + ['тропы','лексика','средства выразительности','анализ текста'][n-1];
+  btn.classList.toggle('open', hidden);
+}
+
+initQuiz();
+</script>
+</body>
+</html>
