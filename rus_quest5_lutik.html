@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рус-5 · Вестник свободного Новиграда · Изложение и сочинение</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0d1117;
+    --bg2:   #111820;
+    --bg3:   #162030;
+    --c-main:#c0392b;
+    --c-lut: #CDDC39;
+    --c-par: #d94f8a;
+    --c-ger: #2d8a3e;
+    --c-cir: #c9912a;
+    --c-reg: #7c3aed;
+    --c-kei: #10b981;
+    --c-ann: #be185d;
+    --c-emh: #6b7280;
+    --c-gold:#fbbf24;
+    --text:  #dde6ee;
+    --muted: #7a90a4;
+    --soft:  #c5d4e0;
+    --border:  rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; min-height:100vh; }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(192,57,43,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 5%  20%,  rgba(251,191,36,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 40% at 95% 15%,  rgba(205,220,57,0.04) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 100%, rgba(217,79,138,0.04) 0%, transparent 55%);
+  }
+  .wrap { position:relative; z-index:1; max-width:920px; margin:0 auto; padding:0 24px 80px; }
+
+  /* HERO */
+  .hero { text-align:center; padding:72px 0 48px; position:relative; }
+  .hero::after {
+    content:''; display:block; margin:34px auto 0;
+    width:340px; max-width:90%; height:2px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,#c0392b,#fbbf24,#CDDC39,transparent);
+  }
+  .hero-eyebrow {
+    display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.24em;
+    color:#fff; background:var(--c-main); text-transform:uppercase;
+    margin-bottom:24px; padding:5px 18px; border-radius:20px;
+  }
+  .hero-title {
+    font-size:clamp(38px,8vw,82px); font-weight:700;
+    line-height:1.05; letter-spacing:-0.02em;
+  }
+  .ht1 {
+    display:block;
+    background:linear-gradient(120deg,#c0392b 0%,#e74c3c 45%,#fbbf24 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(192,57,43,0.4));
+    animation:fadein-slow 0.8s ease;
+  }
+  .ht2 {
+    display:block; font-size:0.27em; font-weight:500; letter-spacing:0.55em;
+    color:var(--muted); text-transform:uppercase; margin:10px 0 8px;
+    -webkit-text-fill-color:var(--muted);
+  }
+  .ht3 {
+    display:block;
+    background:linear-gradient(120deg,#fbbf24 0%,#CDDC39 50%,#c0392b 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; filter:drop-shadow(0 4px 20px rgba(251,191,36,0.35));
+  }
+  .hero-sub { margin-top:18px; font-size:14px; color:var(--soft); max-width:560px; margin-left:auto; margin-right:auto; }
+  @keyframes fadein-slow { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+  /* SECTION HEADS */
+  .sec-head { display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .sec-badge { font-size:10px; font-weight:700; letter-spacing:0.2em; padding:4px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+  .sec-badge.rule  { background:var(--c-main); color:#fff; }
+  .sec-badge.task1 { background:rgba(192,57,43,0.2);  color:#f87171; }
+  .sec-badge.task13{ background:rgba(205,220,57,0.18); color:#e6ee9a; }
+  .sec-badge.crit  { background:rgba(217,79,138,0.2); color:var(--c-par); }
+  .sec-line { flex:1; height:1px; background:var(--border2); }
+
+  /* RULE CARDS */
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:10px; margin-bottom:8px; }
+  .rule-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden; }
+  .rule-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:12px 12px 0 0; }
+  .rule-card.c-lut::after { background:var(--c-lut); }
+  .rule-card.c-par::after { background:var(--c-par); }
+  .rule-card.c-ger::after { background:var(--c-ger); }
+  .rule-card.c-cir::after { background:var(--c-cir); }
+  .rule-card.c-reg::after { background:var(--c-reg); }
+  .rule-card.c-kei::after { background:var(--c-kei); }
+  .rule-card.c-ann::after { background:var(--c-ann); }
+  .rule-card.c-emh::after { background:var(--c-emh); }
+  .rule-card.c-main::after{ background:var(--c-main); }
+  .rule-icon { font-size:20px; margin-bottom:8px; }
+  .rule-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+  .rule-body { font-size:14px; color:var(--soft); line-height:1.65; }
+  .rule-body strong { color:var(--text); }
+  .rule-formula { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; display:inline-block; margin:5px 0 9px; line-height:1.5; }
+  .c-lut  .rule-formula { background:rgba(205,220,57,0.12);  color:var(--c-lut); }
+  .c-par  .rule-formula { background:rgba(217,79,138,0.12);  color:var(--c-par); }
+  .c-ger  .rule-formula { background:rgba(45,138,62,0.12);   color:#4ade80; }
+  .c-cir  .rule-formula { background:rgba(201,145,42,0.12);  color:#e8b84a; }
+  .c-reg  .rule-formula { background:rgba(124,58,237,0.12);  color:#a78bfa; }
+  .c-kei  .rule-formula { background:rgba(16,185,129,0.12);  color:#10b981; }
+  .c-ann  .rule-formula { background:rgba(190,24,93,0.12);   color:#f472b6; }
+  .c-emh  .rule-formula { background:rgba(107,114,128,0.12); color:#9ca3af; }
+  .c-main .rule-formula { background:rgba(192,57,43,0.12);   color:#f87171; }
+  .rule-assoc { margin-top:9px; font-size:12px; color:var(--text); background:var(--bg3); border-radius:6px; padding:7px 10px; line-height:1.5; }
+  .warn { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:var(--c-gold); }
+  .t-lut  { color:var(--c-lut);  font-weight:700; }
+  .t-par  { color:var(--c-par);  font-weight:700; }
+  .t-ger  { color:#4ade80;       font-weight:700; }
+  .t-red  { color:#f87171;       font-weight:700; }
+  .t-gold { color:var(--c-gold);  font-weight:700; }
+  .t-kei  { color:#10b981;       font-weight:700; }
+
+  /* QUIZ BANNER */
+  .quiz-banner { border-radius:16px; overflow:hidden; margin-bottom:22px; background:var(--bg2); border:1px solid var(--border2); }
+  .quiz-banner-body { padding:20px 24px; }
+  .quiz-title { font-size:clamp(17px,3vw,24px); font-weight:700; color:var(--text); margin-bottom:4px; }
+  .quiz-sub { font-size:13px; color:var(--soft); }
+  .quiz-lore { font-size:14px; color:var(--soft); line-height:1.7; margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+  .quiz-lore p { margin-bottom:10px; }
+  .quiz-lore p:last-child { margin-bottom:0; }
+  .quiz-lore strong { color:var(--text); font-weight:600; }
+  .quiz-stakes { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .stake { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .stake-s { background:rgba(251,191,36,0.15);  color:var(--c-gold); }
+  .stake-a { background:rgba(192,57,43,0.15);  color:#f87171; }
+  .stake-b { background:rgba(45,138,62,0.15);   color:#4ade80; }
+  .stake-c { background:rgba(124,58,237,0.15);  color:#a78bfa; }
+  .stake-d { background:rgba(107,114,128,0.15); color:#9ca3af; }
+
+  /* QUIZ */
+  .quiz-progress-wrap { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .quiz-score-badge { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--c-gold); white-space:nowrap; }
+  .quiz-bar-bg { flex:1; height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+  .quiz-bar-fill { height:100%; background:var(--c-main); border-radius:3px; width:0%; transition:width 0.4s; }
+  .quiz-counter { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); white-space:nowrap; }
+  .question-card { background:var(--bg2); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+  .question-header { padding:10px 16px 8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--bg3); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .qh-src, .qh-task { padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; letter-spacing:0.06em; }
+  .src-lut { background:rgba(205,220,57,0.2);  color:var(--c-lut); }
+  .src-par { background:rgba(217,79,138,0.2);  color:var(--c-par); }
+  .src-ger { background:rgba(45,138,62,0.2);   color:#4ade80; }
+  .src-cir { background:rgba(201,145,42,0.2);  color:#e8b84a; }
+  .src-reg { background:rgba(124,58,237,0.2);  color:#a78bfa; }
+  .src-kei { background:rgba(16,185,129,0.2);  color:#10b981; }
+  .src-ann { background:rgba(190,24,93,0.2);   color:#f472b6; }
+  .src-emh { background:rgba(107,114,128,0.2); color:#9ca3af; }
+  .src-rad { background:rgba(192,57,43,0.2);   color:#f87171; }
+  .task-1   { background:rgba(192,57,43,0.12);  color:#f87171; }
+  .task-13  { background:rgba(205,220,57,0.12);  color:#e6ee9a; }
+  .task-131 { background:rgba(205,220,57,0.1);   color:#cddc39; }
+  .task-132 { background:rgba(16,185,129,0.1);   color:#10b981; }
+  .task-133 { background:rgba(124,58,237,0.1);   color:#a78bfa; }
+  .question-body { padding:20px 20px 0; }
+  .question-text { font-size:15px; line-height:1.65; margin-bottom:16px; }
+  .hero-name { font-weight:700; }
+  .hero-lut { color:var(--c-lut); }
+  .hero-par { color:var(--c-par); }
+  .hero-ger { color:#4ade80; }
+  .hero-cir { color:#e8b84a; }
+  .hero-reg { color:#a78bfa; }
+  .hero-kei { color:#10b981; }
+  .hero-ann { color:#f472b6; }
+  .hero-emh { color:#9ca3af; }
+  .hero-rad { color:#f87171; }
+  .term { font-style:italic; color:var(--c-gold); font-weight:600; }
+  .opts { display:grid; gap:8px; margin-bottom:0; }
+  .opt-btn { width:100%; text-align:left; padding:12px 16px; font-size:14px; font-family:'Outfit',sans-serif; background:var(--bg); border:1.5px solid var(--border2); border-radius:10px; cursor:pointer; transition:border-color 0.15s,background 0.15s; line-height:1.45; color:var(--text); }
+  .opt-btn:hover:not(:disabled) { border-color:var(--c-main); background:rgba(192,57,43,0.06); }
+  .opt-btn.correct { background:rgba(21,128,61,0.15); border-color:#15803d; color:#86efac; font-weight:600; }
+  .opt-btn.wrong   { background:rgba(185,28,28,0.12); border-color:#b91c1c; color:#fca5a5; }
+  .feedback-box { padding:12px 16px; font-size:13px; line-height:1.55; display:none; border-top:1px solid var(--border); }
+  .feedback-box.correct-fb { background:rgba(21,128,61,0.10); color:#86efac; }
+  .feedback-box.wrong-fb   { background:rgba(185,28,28,0.08); color:#fca5a5; }
+  .question-footer { padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; }
+  .next-btn { padding:10px 26px; font-size:14px; font-family:'Outfit',sans-serif; font-weight:600; background:var(--c-main); color:#fff; border:none; border-radius:10px; cursor:pointer; display:none; }
+  .next-btn:hover { opacity:0.88; }
+  .question-animate { animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+  .results { display:none; text-align:center; padding:48px 24px; }
+  .results-emoji { font-size:56px; margin-bottom:16px; }
+  .results-title { font-size:clamp(22px,4vw,32px); font-weight:700; margin-bottom:10px; }
+  .results-score { font-family:'Space Mono',monospace; font-size:28px; font-weight:700; color:var(--c-gold); margin-bottom:6px; }
+  .results-total { font-size:14px; color:var(--muted); margin-bottom:16px; }
+  .results-story { font-size:15px; max-width:560px; margin:0 auto 20px; line-height:1.65; color:var(--soft); }
+  .results-rank { font-size:15px; font-weight:700; display:inline-block; margin-bottom:28px; padding:10px 22px; border-radius:8px; }
+  .rank-s { background:rgba(251,191,36,0.15); color:var(--c-gold); }
+  .rank-a { background:rgba(192,57,43,0.15);  color:#f87171; }
+  .rank-b { background:rgba(45,138,62,0.15);   color:#4ade80; }
+  .rank-c { background:rgba(124,58,237,0.15);  color:#a78bfa; }
+  .rank-d { background:rgba(107,114,128,0.15); color:#9ca3af; }
+  .restart-btn { padding:12px 32px; font-size:15px; font-family:'Outfit',sans-serif; font-weight:700; background:var(--c-main); color:#fff; border:none; border-radius:12px; cursor:pointer; }
+  .restart-btn:hover { opacity:0.88; }
+
+  /* NAV */
+  .quests-nav { margin-top:48px; border-top:1px solid var(--border2); padding-top:28px; }
+  .quests-nav-title { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .quests-pills { display:grid; gap:8px; }
+  .quest-pill { display:flex; align-items:center; gap:14px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-decoration:none; color:var(--text); }
+  .quest-pill.quest-active { border-color:var(--c-main); background:rgba(192,57,43,0.06); }
+  .quest-pill.quest-locked { opacity:0.45; cursor:default; }
+  .qp-num { width:32px; height:32px; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; }
+  .qp-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .qp-name { font-size:15px; font-weight:600; }
+  .qp-sub  { font-size:12px; color:var(--muted); }
+  .qp-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; background:rgba(192,57,43,0.2); color:#f87171; white-space:nowrap; }
+  .qp-soon { background:rgba(107,114,128,0.15); color:#9ca3af; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ОГЭ · Русский язык · 9 класс · Квест 5 · Задания 1 и 13</div>
+    <h1 class="hero-title">
+      <span class="ht1">Вестник</span>
+      <span class="ht2">✦ свободного ✦</span>
+      <span class="ht3">Новиграда</span>
+    </h1>
+    <p class="hero-sub">Изложение и сочинение · 50 испытаний · Лютик × редакция × весь Континент</p>
+  </div>
+
+  <!-- ШПОРА: ЗАДАНИЕ 1 -->
+  <div class="sec-head"><span class="sec-badge task1">Задание 1 · Сжатое изложение</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-ann">
+      <div class="rule-icon">🎧</div>
+      <div class="rule-title">Как работать с аудиозаписью</div>
+      <div class="rule-body">
+        <span class="rule-formula">2 прослушивания · заметки на черновике</span><br>
+        <strong>1-е прослушивание:</strong> слушай целиком, отмечай смену темы (обычно их <span class="t-gold">2–3</span>). Запиши на полях только ключевые слова: имена, числа, глаголы.<br>
+        <strong>2-е прослушивание:</strong> допиши пропуски, уточни микротемы.<br>
+        <strong>После:</strong> составь план из абзацев → сожми каждый приёмами сжатия → проверь связность.<br><br>
+        <span class="warn">⚠️ Ловушка:</span> не переписывай услышанное дословно: это не сжатие.
+      </div>
+      <div class="rule-assoc">👑 Анна-Генриетта диктует репортаж по кристаллу. Лютик записывает: «сыр, вино, тарталетки», и теряет политику. На экзамене записывай суть каждой части, не только яркие детали.</div>
+    </div>
+
+    <div class="rule-card c-ger">
+      <div class="rule-icon">✂️</div>
+      <div class="rule-title">Приём сжатия: исключение</div>
+      <div class="rule-body">
+        <span class="rule-formula">Убираем лишнее, сохраняем смысл</span><br>
+        Можно исключить: <span class="t-gold">повторы</span>, <span class="t-gold">примеры-пояснения</span>, <span class="t-gold">вводные слова</span>, <span class="t-gold">эмоциональные оценки</span>, подробности, не относящиеся к микротеме.<br><br>
+        Нельзя убирать: <span class="t-red">главную мысль</span>, <span class="t-red">факты, без которых теряется смысл</span>, связь между микротемами.<br><br>
+        <em>Было:</em> «Геральт, усталый и злой, долго шёл по лесу и наконец увидел гулей.»<br>
+        <em>Стало:</em> «Геральт увидел гулей.»
+      </div>
+      <div class="rule-assoc">🎭 Геральт прислал репортаж о гулях на 4 страницы. Лютик вычеркнул «усталый и злой»: это не новость, это настроение.</div>
+    </div>
+
+    <div class="rule-card c-cir">
+      <div class="rule-icon">📦</div>
+      <div class="rule-title">Приём сжатия: обобщение</div>
+      <div class="rule-body">
+        <span class="rule-formula">Несколько частных случаев → одно общее</span><br>
+        Перечисление заменяем обобщающим словом или фразой:<br>
+        «дуб, бук, ясень» → <span class="t-gold">деревья</span><br>
+        «Иванов, Петров и Сидоров выполнили план. Станочники выточили 347 деталей. Слесари собрали 12 агрегатов.» → <span class="t-gold">«Рабочие завода досрочно выполнили план.»</span><br><br>
+        <span class="warn">⚠️ Ловушка:</span> не обобщай так, что исчезнет конкретика, нужная для микротемы.
+      </div>
+      <div class="rule-assoc">🌟 Цири сжимала этюды Кейры о морских битвах: «корабль за кораблём, меч за мечом» превратила в «волны врагов атаковали флотилию».</div>
+    </div>
+
+    <div class="rule-card c-reg">
+      <div class="rule-icon">🔧</div>
+      <div class="rule-title">Приём сжатия: упрощение</div>
+      <div class="rule-body">
+        <span class="rule-formula">Сложная конструкция → проще</span><br>
+        Причастный оборот → глагол: «ученик, <em>прочитавший</em> текст» → «ученик <em>прочитал</em> текст»<br>
+        Сложное предложение → простое: «Когда наступила ночь, гули вышли из леса» → «Ночью гули вышли из леса»<br>
+        Длинное словосочетание → короче: «жители, проживающие в деревне» → «деревенские жители»<br><br>
+        <span class="warn">⚠️ Ловушка:</span> упрощая, не меняй смысл и не теряй логическую связь.
+      </div>
+      <div class="rule-assoc">🦇 Регис правил пропаганду Эмгыра: из «император, даровавший миру порядок» сделали «император установил порядок». Смысл тот же, строк вдвое меньше.</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: Задание 1 · Приёмы сжатия</div>
+      <div class="rule-body">
+        <span class="rule-formula">Алгоритм «5 → 2»</span><br>
+        1. Прочитай текст, выдели <span class="t-gold">2–3 микротемы</span><br>
+        2. В каждом абзаце ищи, что можно <span class="t-red">убрать</span> (исключение)<br>
+        3. Перечисления замени <span class="t-gold">обобщением</span><br>
+        4. Длинные конструкции <span class="t-gold">упрости</span><br>
+        5. Проверь: все микротемы на месте?
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «Если абзац из пяти предложений, убери три. Геральт так не пишет, но ты должен.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">📰</div>
+      <div class="rule-title">Структура изложения: микротемы и абзацы</div>
+      <div class="rule-body">
+        <span class="rule-formula">2–3 микротемы = 2–3 абзаца</span><br>
+        В исходном тексте обычно <span class="t-gold">две или три микротемы</span> (смысловые части). Каждая → отдельный абзац в изложении.<br><br>
+        Абзац начинается с предложения, раскрывающего микротему. Между абзацами помогают связки: <span class="t-gold">таким образом</span>, <span class="t-gold">кроме того</span>, <span class="t-gold">именно поэтому</span>.<br><br>
+        <span class="warn">⚠️ Ошибка:</span> смешать две микротемы в одном абзаце или потерять одну из частей.
+      </div>
+      <div class="rule-assoc">🎭 Лютик разметил номер газеты: «Рубрика 1: огнепоклонники. Рубрика 2: права старшей крови. Рубрика 3: репортаж из леса. Три рубрики, три абзаца. Без исключений.»</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">📏</div>
+      <div class="rule-title">Объём, связность, типичные ошибки</div>
+      <div class="rule-body">
+        <span class="rule-formula">Изложение ~70–100 слов · сочинение ~150 слов</span><br>
+        <strong>Изложение:</strong> сожми до <span class="t-gold">70–100 слов</span>, не переписывай исходник.<br>
+        <strong>Связность:</strong> местоимения, союзы, вводные слова связывают предложения внутри абзаца.<br>
+        <strong>140 слов на весь блок:</strong> изложение + сочинение вместе должны быть не короче <span class="t-red">140 слов</span>, иначе можно потерять баллы за грамотность.<br><br>
+        <strong>Типичные ошибки изложения:</strong><br>
+        · потеряна микротема<br>
+        · сжали одну часть, две другие переписали почти дословно<br>
+        · добавлены <span class="t-red">собственные мысли</span>, которых не было в тексте<br>
+        · нарушена логическая связь между абзацами
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан отклонила репортаж Анны-Генриетты: «Вы потеряли микротему про винный урожай и оставили только тарталетки. Это не изложение, это меню.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: Задание 1 · Структура</div>
+      <div class="rule-body">
+        <span class="rule-formula">Абзац = микротема</span><br>
+        1. После первого прочтения выпиши ключевые мысли (по одной на абзац)<br>
+        2. Напиши черновик: по абзацу на каждую микротему<br>
+        3. Сожми каждый абзац приёмами сжатия<br>
+        4. Прочитай вслух: если «скачет» мысль, добавь связку
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «Абзац: это рубрика в газете. Смешал политику с рецептом: читатель ушёл.»</div>
+    </div>
+
+  </div>
+
+  <!-- ШПОРА: СОЧИНЕНИЕ ОБЩЕЕ -->
+  <div class="sec-head"><span class="sec-badge task13">Задание 13 · Сочинение-рассуждение</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">🏗️</div>
+      <div class="rule-title">Структура сочинения: тезис → примеры → вывод</div>
+      <div class="rule-body">
+        <span class="rule-formula">Композиция рассуждения</span><br>
+        <span class="t-gold">1. Тезис</span> (вступление): ответ на вопрос задания, твоя позиция<br>
+        <span class="t-gold">2. Аргументация:</span> минимум <strong>два примера</strong>, подтверждающих тезис<br>
+        <span class="t-gold">3. Вывод:</span> обобщение, итог (не дословный повтор тезиса)<br><br>
+        Объём: ориентир <span class="t-gold">~150 слов</span> и более.<br>
+        <span class="warn">⚠️ Без примеров: это не рассуждение.</span>
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан: «Тезис без доказательств: это колонка Лютика. А их и так слишком много.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: Задание 13 · Композиция</div>
+      <div class="rule-body">
+        <span class="rule-formula">План из 5 строк</span><br>
+        1. Тезис (1–2 предложения)<br>
+        2. Пример 1 + пояснение<br>
+        3. Пример 2 + пояснение<br>
+        4. Вывод (1–2 предложения)<br>
+        5. Перечитай: есть ли слова «во-первых», «таким образом»? Если нет, добавь связки
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «Без примеров: не рассуждение. Это просто громкое мнение. Как моя колонка про интервью с Дикой Охотой.»</div>
+    </div>
+
+    <div class="rule-card c-main">
+      <div class="rule-icon">🔀</div>
+      <div class="rule-title">13.1 · 13.2 · 13.3: чем отличаются</div>
+      <div class="rule-body">
+        <span class="rule-formula">Три варианта одного задания</span><br>
+        <span class="t-red">13.1</span>: рассуждение на <span class="t-gold">лингвистическую тему</span> (о языке, речи, словах). Примеры: из текста + грамматические.<br><br>
+        <span class="t-red">13.2</span>: объяснить <span class="t-gold">смысл фрагмента</span> (цитаты). Примеры: из текста, иллюстрируют мысль автора.<br><br>
+        <span class="t-red">13.3</span>: раскрыть <span class="t-gold">значение понятия</span> (честность, мужество, свобода). Определение + <strong>два примера из текста</strong>.<br><br>
+        Композиция у всех трёх <span class="t-gold">одинаковая</span>: тезис → 2 примера → вывод.
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «13.1: про слова. 13.2: про смысл цитаты. 13.3: про понятие. Структура одна, содержание разное. Как три рубрики в одном номере.»</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">🚫</div>
+      <div class="rule-title">Типичные ошибки сочинения</div>
+      <div class="rule-body">
+        <span class="rule-formula">Что снижает балл за содержание</span><br>
+        · <span class="t-red">Нет тезиса</span>: непонятно, о чём рассуждение<br>
+        · <span class="t-red">Меньше двух примеров</span>: аргументации нет<br>
+        · <span class="t-red">Примеры без пояснения</span>: процитировал, но не объяснил «это значит, что…»<br>
+        · <span class="t-red">Нет вывода</span>: текст обрывается на примерах<br>
+        · <span class="t-red">Примеры не из текста</span> (для 13.1, 13.2 и 13.3 на ОГЭ 2026)<br><br>
+        <em>Пример пояснения:</em> «Герой <span class="t-gold">сказал правду</span>: это показывает, что честность для него важнее выгоды.»
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан: «Ты привёл цитату и умолк. Это не аргумент, это декорация. Объясни, зачем она здесь.»</div>
+    </div>
+
+  </div>
+
+  <!-- ШПОРА: 13.1 -->
+  <div class="sec-head"><span class="sec-badge task13">13.1 · Лингвистическая тема</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-cir">
+      <div class="rule-icon">💬</div>
+      <div class="rule-title">13.1: как писать</div>
+      <div class="rule-body">
+        В тексте дана <span class="t-gold">цитата о языке</span> (о словах, речи, общении).<br><br>
+        <strong>Тезис:</strong> согласен или не согласен с автором, почему.<br>
+        <strong>Примеры:</strong> минимум два из текста: слова, конструкции, факты о языке. К каждому объясни, <em>как это связано с темой</em>.<br>
+        <strong>Вывод:</strong> обобщи свою позицию.<br><br>
+        <em>Мини-шаблон:</em> «Я согласен: слова могут менять отношение людей. Например, автор называет речь <span class="t-gold">"оружием"</span>: это метафора, показывающая силу слова. Кроме того, герой <span class="t-gold">говорит тихо</span>, и собеседник успокаивается: значит, интонация тоже важна. Таким образом, язык действует не только через смысл, но и через форму.»<br><br>
+        <span class="warn">⚠️ Примеры бери из текста, не выдумывай.</span>
+      </div>
+      <div class="rule-assoc">🌟 Цири разбирала пропаганду Радовида: «"Слово короля: закон" не про язык, а про власть. Для 13.1 ищи именно речь о словах.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: 13.1</div>
+      <div class="rule-body">
+        <span class="rule-formula">Ищи в тексте, не придумывай</span><br>
+        1. Подчеркни в тексте все места, где автор говорит <em>о языке</em><br>
+        2. Выбери два фрагмента как примеры<br>
+        3. Тезис = твоё отношение к цитате<br>
+        4. К каждому примеру: «Это показывает, что…»
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «Кейра придумывает красивые фразы. Мадам Пармезан их не печатает. На экзамене то же самое: только то, что есть в тексте.»</div>
+    </div>
+
+  </div>
+
+  <!-- ШПОРА: 13.2 -->
+  <div class="sec-head"><span class="sec-badge task13">13.2 · Смысл фрагмента</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-kei">
+      <div class="rule-icon">💕</div>
+      <div class="rule-title">13.2: как писать</div>
+      <div class="rule-body">
+        Нужно объяснить <span class="t-gold">смысл фрагмента</span> (цитаты) своими словами.<br><br>
+        <strong>Тезис:</strong> главная мысль фрагмента (перефразируй).<br>
+        <strong>Примеры:</strong> два фрагмента из текста, которые <span class="t-gold">подтверждают</span> эту мысль.<br>
+        <strong>Вывод:</strong> что автор хотел сказать читателю.<br><br>
+        <em>Мини-шаблон:</em> «Автор считает, что свобода слова важнее страха. Например, герой <span class="t-gold">публикует правду</span>, хотя ему грозит арест: это показывает смелость. Кроме того, люди <span class="t-gold">читают газету тайно</span>: значит, правда им нужна. Так автор доказывает ценность свободной прессы.»<br><br>
+        <span class="warn">⚠️ Не пересказывай цитату дословно: объясни своими словами.</span>
+      </div>
+      <div class="rule-assoc">💚 Кейра в рубрике «Сердца Континента»: «Любовь: это когда…», и дальше три страницы. Для 13.2 достаточно: «Автор считает, что любовь требует поступков, а не слов.»</div>
+    </div>
+
+    <div class="rule-card c-lut">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: 13.2</div>
+      <div class="rule-body">
+        <span class="rule-formula">Сначала перефразируй</span><br>
+        1. Прочитай цитату, закрой глаза, скажи «автор думает, что…»: это тезис<br>
+        2. Найди в тексте два места, где эта мысль проявляется<br>
+        3. К каждому: «Например, …: это значит, что…»<br>
+        4. Вывод: «Так автор показывает…»
+      </div>
+      <div class="rule-assoc">🎭 Лютик: «Перескажи Кейре её колонку одним предложением. Получилось? Это и есть тезис для 13.2.»</div>
+    </div>
+
+  </div>
+
+  <!-- ШПОРА: 13.3 -->
+  <div class="sec-head"><span class="sec-badge task13">13.3 · Значение понятия</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-ger">
+      <div class="rule-icon">📖</div>
+      <div class="rule-title">13.3: как писать</div>
+      <div class="rule-body">
+        Нужно раскрыть <span class="t-gold">значение понятия</span> (например: честность, мужество, свобода).<br><br>
+        <strong>1-е предложение:</strong> <span class="t-gold">определение</span> понятия своими словами.<br>
+        <strong>Пример 1 и пример 2:</strong> оба <span class="t-gold">из текста</span>: как понятие проявляется у героев или в ситуациях автора.<br>
+        <strong>Вывод:</strong> итог рассуждения.<br><br>
+        <em>Мини-шаблон:</em> «<span class="t-gold">Честность</span>: это говорить правду, даже когда это невыгодно. В тексте герой <span class="t-gold">признаёт ошибку</span> перед другом: это честность. Кроме того, он <span class="t-gold">отказывается лгать</span> властям: снова честность. Значит, для автора это основа человеческого достоинства.»<br><br>
+        <span class="warn">⚠️ Оба примера должны иллюстрировать одно и то же понятие.</span>
+      </div>
+      <div class="rule-assoc">🗡️ Геральт: «Честность: говорить правду, даже когда больно. В тексте барон признал вину, потом отказался подкупить судью. Оба поступка про одно понятие. Определение: в первой строке.»</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: 13.3</div>
+      <div class="rule-body">
+        <span class="rule-formula">Определение: в первом предложении</span><br>
+        1. Напиши: «<em>Понятие</em>: это…» (1–2 предложения)<br>
+        2. «В тексте автор показывает это, когда…» (пример 1 + пояснение)<br>
+        3. «Кроме того, …» (пример 2 из текста + пояснение)<br>
+        4. Вывод: «Значит, … важно, потому что…»
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан: «На ОГЭ 2026 оба примера: только из текста. Свой пример из жизни не засчитают. Как рецепт тарталеток в политической колонке.»</div>
+    </div>
+
+  </div>
+
+  <!-- ШПОРА: КРИТЕРИИ -->
+  <div class="sec-head"><span class="sec-badge crit">Критерии оценивания · оба задания</span><div class="sec-line"></div></div>
+
+  <div class="rules-grid">
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">📊</div>
+      <div class="rule-title">Содержание (макс. 3 балла)</div>
+      <div class="rule-body">
+        <span class="rule-formula">Изложение и сочинение</span><br>
+        <span class="t-gold">3 балла</span>: тема раскрыта полностью, логика не нарушена, все микротемы / части композиции на месте<br>
+        <span class="t-gold">2 балла</span>: тема раскрыта, но есть пробелы или слабая аргументация<br>
+        <span class="t-gold">1 балл</span>: тема раскрыта частично, серьёзные пробелы<br>
+        <span class="t-red">0 баллов</span>: тема не раскрыта или текст не по теме
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан: «Три балла: материал на первую полосу. Ноль: в корзину, рядом с моим терпением.»</div>
+    </div>
+
+    <div class="rule-card c-par">
+      <div class="rule-icon">✍️</div>
+      <div class="rule-title">Грамотность (макс. 3 балла)</div>
+      <div class="rule-body">
+        <span class="rule-formula">Орфография · пунктуация · грамматика</span><br>
+        <span class="t-gold">3 балла</span>: нет ошибок или 1–2 несущественные<br>
+        <span class="t-gold">2 балла</span>: 3–4 ошибки<br>
+        <span class="t-gold">1 балл</span>: 5–8 ошибок<br>
+        <span class="t-red">0 баллов</span>: 9 и более ошибок<br><br>
+        <span class="warn">⚠️ Задание 1: макс. 6 баллов (3+3). Задание 13: макс. 6 баллов (3+3). Весь блок: до 13 баллов. Изложение + сочинение вместе ≥ 140 слов.</span>
+      </div>
+      <div class="rule-assoc">💋 Мадам Пармезан: «Содержание без запятых: ноль. Грамотность без мысли: тоже ноль. Я щедра, но не настолько.»</div>
+    </div>
+
+    <div class="rule-card c-emh">
+      <div class="rule-icon">🎯</div>
+      <div class="rule-title">Лайфхак ОГЭ: перед сдачей</div>
+      <div class="rule-body">
+        <span class="rule-formula">Чеклист за 2 минуты</span><br>
+        <strong>Изложение:</strong> 2–3 абзаца? все микротемы? сжал, а не переписал? 70–100 слов?<br>
+        <strong>Сочинение:</strong> есть тезис? 2 примера с пояснением? вывод? ~150 слов?<br>
+        <strong>Оба вместе:</strong> ≥ 140 слов? перечитай на ошибки
+      </div>
+      <div class="rule-assoc">🦅 Эмгыр прислал в редакцию «образцовое изложение» на 12 страниц. Лютик использовал его как пример того, как делать <em>не</em> надо.</div>
+    </div>
+
+  </div>
+
+  <!-- БАННЕР КВЕСТА -->
+  <div class="sec-head" style="margin-top:44px"><span class="sec-badge rule">Редакционное испытание</span><div class="sec-line"></div></div>
+
+  <div class="quiz-banner">
+    <div class="quiz-banner-body">
+      <div class="quiz-title">📰 Стажировка в «Вестнике свободного Новиграда»</div>
+      <div class="quiz-sub">50 вопросов · 2 попытки · Изложение (№1) · Сочинение (№13.1 / 13.2 / 13.3)</div>
+      <div class="quiz-lore">
+        <p>Лютик основал подпольную газету в подвале таверны. «Вестник» критикует огнепоклонников и ужесточение режима, пишет о правах старшей крови и пересказывает приключения Геральта (в сжатом виде). Рубрику «Сердца Континента» ведёт Кейра. Анна-Генриетта шлёт новости из Туссента, но почему-то только про еду.</p>
+        <p>Эмгыр и Радовид требуют печатать пропаганду. Геральту заказали интервью с высшим вампиром и репортаж о гулях. Кейра присылает этюды о море и битвах, но слишком грозные. Лютик хочет взять интервью у Дикой Охоты. Редакция единогласно послала его.</p>
+        <p>Тебя берут стажёром. Первое дело: научиться <strong>сжимать репортажи</strong> и <strong>писать рецензии</strong> с железной аргументацией. Мадам Пармезан предупреждает: слабый текст не выйдет в печать. Лучший номер достучится до сердец жителей Континента.</p>
+      </div>
+      <div class="quiz-stakes">
+        <span class="stake stake-s">≥47 · Сердца Континента</span>
+        <span class="stake stake-a">≥39 · Цензоры в ярости</span>
+        <span class="stake stake-b">≥29 · Геральт: «Нормально»</span>
+        <span class="stake stake-c">≥19 · Регис: «Ещё 200 лет»</span>
+        <span class="stake stake-d">&lt;19 · Топка для огнепоклонников</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-area">
+    <div class="quiz-progress-wrap">
+      <span class="quiz-score-badge" id="score-disp">✓ 0</span>
+      <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="qbar"></div></div>
+      <span class="quiz-counter" id="qcnt">1 / 50</span>
+    </div>
+
+    <div class="question-card question-animate" id="qcard">
+      <div class="question-header" id="qhead"></div>
+      <div class="question-body">
+        <div class="question-text" id="qtext"></div>
+        <div class="opts" id="qopts"></div>
+      </div>
+      <div class="feedback-box" id="qfb"></div>
+      <div class="question-footer">
+        <button class="next-btn" id="qnext" onclick="nextQ()">Следующий материал →</button>
+      </div>
+    </div>
+
+    <div class="results" id="results">
+      <div class="results-emoji" id="res-emoji">📰</div>
+      <div class="results-title" id="res-title"></div>
+      <div class="results-score" id="res-score"></div>
+      <div class="results-total" id="res-total"></div>
+      <div class="results-story" id="res-story"></div>
+      <div class="results-rank" id="res-rank"></div>
+      <button class="restart-btn" id="restart" onclick="initQuiz()">Выпустить номер снова 📰</button>
+    </div>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="quests-nav">
+    <div class="quests-nav-title">Русский язык: все квесты</div>
+    <div class="quests-pills">
+      <a class="quest-pill" href="rus_quest1_ortho.html">
+        <span class="qp-num" style="background:#c0392b">Р1</span>
+        <span class="qp-info"><span class="qp-name">Институт нильфо-советских исследований</span><span class="qp-sub">Орфография · 45 вопросов</span></span>
+      </a>
+      <a class="quest-pill" href="rus_quest2_syntax.html">
+        <span class="qp-num" style="background:#c0392b">Р2</span>
+        <span class="qp-info"><span class="qp-name">Сигнал с Аляски</span><span class="qp-sub">Синтаксис и пунктуация · 41 вопрос</span></span>
+      </a>
+      <a class="quest-pill" href="rus_quest3_text.html">
+        <span class="qp-num" style="background:#c0392b">Р3</span>
+        <span class="qp-info"><span class="qp-name">Тайный архив Дурмстранга</span><span class="qp-sub">Смысловой анализ · 40 вопросов</span></span>
+      </a>
+      <a class="quest-pill" href="rus_quest4_yenn.html">
+        <span class="qp-num" style="background:#c0392b">Р4</span>
+        <span class="qp-info"><span class="qp-name">Академия Аретузы</span><span class="qp-sub">Тропы и лексика · 50 вопросов</span></span>
+      </a>
+      <a class="quest-pill quest-active" href="rus_quest5_lutik.html">
+        <span class="qp-num" style="background:#c0392b">Р5</span>
+        <span class="qp-info"><span class="qp-name">Вестник свободного Новиграда</span><span class="qp-sub">Изложение и сочинение · 50 вопросов</span></span>
+        <span class="qp-badge">здесь</span>
+      </a>
+      <span class="quest-pill quest-locked">
+        <span class="qp-num" style="background:#374151">∞</span>
+        <span class="qp-info"><span class="qp-name">Марафон по русскому</span><span class="qp-sub">Все квесты · скоро</span></span>
+        <span class="qp-badge qp-soon">скоро</span>
+      </span>
+      <a class="quest-pill" href="index.html">
+        <span class="qp-num" style="background:#374151">⌂</span>
+        <span class="qp-info"><span class="qp-name">На главную</span><span class="qp-sub">Все предметы и квесты</span></span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const srcLabels = {
+  lut: { cls:'src-lut', text:'Лютик' },
+  par: { cls:'src-par', text:'Мадам Пармезан' },
+  ger: { cls:'src-ger', text:'Геральт' },
+  cir: { cls:'src-cir', text:'Цири' },
+  reg: { cls:'src-reg', text:'Регис' },
+  kei: { cls:'src-kei', text:'Кейра Мец' },
+  ann: { cls:'src-ann', text:'Анна-Генриетта' },
+  emh: { cls:'src-emh', text:'Эмгыр' },
+  rad: { cls:'src-rad', text:'Радовид' },
+};
+
+const taskLabels = {
+  1:   { cls:'task-1',   text:'Зад.1' },
+  13:  { cls:'task-13',  text:'Зад.13' },
+  131: { cls:'task-131', text:'13.1' },
+  132: { cls:'task-132', text:'13.2' },
+  133: { cls:'task-133', text:'13.3' },
+};
+
+const allQuestions = [
+
+  // ═══ ЗАДАНИЕ 1 · АУДИОЗАПИСЬ ═══
+
+  {
+    task:1, src:'ann', topic:'Аудиозапись',
+    text:'<span class="hero-name hero-ann">Анна-Генриетта</span> диктует репортаж по кристаллу. Стажёр слушает аудиотекст <em>в первый раз</em>. Что разумнее всего делать на полях черновика?',
+    opts:['Переписывать каждое предложение дословно','Отмечать смену темы и ключевые слова (имена, числа, глаголы)','Сразу писать изложение целиком','Ждать второго прослушивания и ничего не записывать'],
+    ans:1,
+    fb:'На 1-м прослушивании слушают целиком и отмечают смену тем (обычно 2–3 микротемы), записывая только ключевые слова. Дословная запись, ловушка: это ещё не сжатие.',
+    trap:'«Ничего не записывать»: потеряешь структуру. «Сразу изложение»: рано, картина ещё неполная.',
+    hint:'На первом прослушивании важнее уловить структуру текста или скопировать каждую фразу?',
+    ref:'Как работать с аудиозаписью'
+  },
+
+  {
+    task:1, src:'lut', topic:'Аудиозапись',
+    text:'<span class="hero-name hero-lut">Лютик</span> проверяет черновик после <em>второго</em> прослушивания: в середине второй части пропущены числа. Зачем нужно 2-е прослушивание?',
+    opts:['Чтобы переписать весь текст заново','Чтобы дописать пропуски и уточнить микротемы','Чтобы добавить собственные рассуждения','Чтобы поменять порядок абзацев'],
+    ans:1,
+    fb:'2-е прослушивание нужно, чтобы дописать пропуски и уточнить микротемы. После этого составляют план абзацев и сжимают каждую часть.',
+    trap:'Порядок абзацев задаёт исходник, его не меняют. Собственные мысли в изложении запрещены.',
+    hint:'Что обычно не успевают зафиксировать на первом прослушивании, но уточняют на втором?',
+    ref:'Как работать с аудиозаписью'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · ПРИЁМЫ СЖАТИЯ (распознавание) ═══
+
+  {
+    task:1, src:'lut', topic:'Распознавание приёма сжатия',
+    text:'<span class="hero-name hero-lut">Лютик</span> сжимает репортаж <span class="hero-name hero-ger">Геральта</span> о гулях. Было: «Геральт, усталый и злой, долго шёл по лесу и наконец увидел гулей». Стало: «Геральт увидел гулей». Какой приём сжатия применён?',
+    opts:['Исключение второстепенных деталей','Обобщение перечисления','Упрощение синтаксической конструкции','Добавление связующих слов'],
+    ans:0,
+    fb:'Убраны второстепенные детали («усталый и злой», «долго шёл по лесу»), сохранена главная мысль. Это приём <em>исключения</em>: убираем лишнее, не меняя суть.',
+    trap:'Упрощение меняет конструкцию (причастие → глагол, сложное → простое). Здесь предложение просто укоротили, убрав лишние слова.',
+    hint:'Сравни «было» и «стало»: конструкция предложения та же, но исчезли слова. Какой приём убирает лишнее без перестройки грамматики?',
+    ref:'Приём сжатия: исключение'
+  },
+
+  {
+    task:1, src:'ger', topic:'Распознавание приёма сжатия',
+    text:'<span class="hero-name hero-ger">Геральт</span> прислал список: «дуб, бук, ясень, клён, ольха». <span class="hero-name hero-lut">Лютик</span> в изложении написал: «в лесу росли <span class="term">деревья</span>». Какой приём сжатия использован?',
+    opts:['Исключение','Обобщение','Упрощение','Синонимическая замена'],
+    ans:1,
+    fb:'Перечисление конкретных пород заменено обобщающим словом «деревья». Это <em>обобщение</em>: несколько частных случаев → одно общее понятие.',
+    trap:'Исключение просто убирает слова. Здесь перечисление заменено одним словом более широкого значения.',
+    hint:'Несколько однородных слов заменены одним словом, которое их все охватывает. Как называется такой приём?',
+    ref:'Приём сжатия: обобщение'
+  },
+
+  {
+    task:1, src:'cir', topic:'Распознавание приёма сжатия',
+    text:'<span class="hero-name hero-cir">Цири</span> сжимает этюд Кейры. Было: «Когда наступила ночь, гули вышли из леса». Стало: «Ночью гули вышли из леса». Какой приём применён?',
+    opts:['Обобщение перечисления','Исключение вводных слов','Упрощение синтаксической конструкции','Добавление примеров'],
+    ans:2,
+    fb:'Сложноподчинённое предложение («Когда наступила ночь, …») заменено простым («Ночью …»). Это <em>упрощение</em>: сложная конструкция → более простая при том же смысле.',
+    trap:'Исключение убирает слова. Здесь изменилась грамматическая структура: придаточное исчезло, появилось обстоятельство времени.',
+    hint:'Обрати внимание: изменилась не только длина, но и тип предложения. Сложное стало простым. Какой приём так делает?',
+    ref:'Приём сжатия: упрощение'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · ИСКЛЮЧЕНИЕ ═══
+
+  {
+    task:1, src:'par', topic:'Приём исключения',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> вычёркивает фразу из репортажа Анны-Генриетты: «великолепные тарталетки с трюфелем». Что из перечисленного <em>можно</em> исключить при сжатии изложения?',
+    opts:['Главную мысль микротемы','Числовые данные, без которых теряется смысл','Эмоциональные оценки и уточнения, не влияющие на суть','Связь между микротемами'],
+    ans:2,
+    fb:'Эмоциональные оценки («великолепные») и второстепенные детали (рецепт) можно исключить, если они не относятся к микротеме. Главную мысль, ключевые факты и связь между частями убирать нельзя.',
+    trap:'На экзамене часто оставляют «красивые» детали и теряют суть. Оценочные слова и пояснения-примеры, первые кандидаты на исключение.',
+    hint:'Подумай, что является «украшением» текста, а что несёт фактическую нагрузку. Что можно убрать, не потеряв главную мысль?',
+    ref:'Приём сжатия: исключение'
+  },
+
+  {
+    task:1, src:'reg', topic:'Приём исключения',
+    text:'<span class="hero-name hero-reg">Регис</span> правит пропаганду для «Вестника». Исходник: «Император, <em>мудрый и справедливый правитель</em>, даровал миру порядок». Какое сжатие допустимо?',
+    opts:['Император мудрый и справедливый даровал миру порядок','Император установил порядок','Император, мудрый правитель, установил порядок','Император даровал миру порядок и справедливость'],
+    ans:1,
+    fb:'Убраны оценочные эпитеты («мудрый и справедливый»), смысл сохранён: император установил порядок. Это правильное исключение второстепенного.',
+    trap:'Вариант с эпитетами, почти дословная копия. Вариант с «справедливостью» добавляет то, чего не было в исходнике.',
+    hint:'При исключении убирают оценки и уточнения, но не меняют факт. Какой вариант короче исходника, но не добавляет новых фактов?',
+    ref:'Приём сжатия: исключение'
+  },
+
+  {
+    task:1, src:'ann', topic:'Приём исключения',
+    text:'<span class="hero-name hero-ann">Анна-Генриетта</span> диктует репортаж: «В Туссенте собрали рекордный урожай винограда, и это важно для экономики региона». <span class="hero-name hero-lut">Лютик</span> спрашивает: что из перечисленного <em>допустимо</em> исключить при сжатии?',
+    opts:['Слово «рекордный» как оценку','Факт об урожае винограда','Связь урожая с экономикой','Упоминание Туссента как места'],
+    ans:0,
+    fb:'Оценку «рекордный» можно исключить: это эмоциональное уточнение. Факт об урожае, место (Туссент) и связь с экономикой: это смысловые элементы микротемы, их убирать нельзя.',
+    trap:'Ученики часто вычёркивают факты, а оставляют красивые эпитеты. Оценочные слова, как раз то, что исключают первым.',
+    hint:'Что из перечисленного, лишь «украшение» слова, а не факт о событии?',
+    ref:'Приём сжатия: исключение'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · ОБОБЩЕНИЕ ═══
+
+  {
+    task:1, src:'lut', topic:'Приём обобщения',
+    text:'<span class="hero-name hero-lut">Лютик</span> сжимает список подписчиков: «крестьянин Ян, торговец Бернард, кузнец Реми, портной Феликс». Какая запись соответствует приёму <span class="term">обобщения</span>?',
+    opts:['В Новиграде четверо жителей подписались на газету','Жители Новиграда подписались на газету','Ян, Бернард, Реми и Феликс читают «Вестник»','Каждый из перечисленных купил экземпляр'],
+    ans:1,
+    fb:'Конкретные имена заменены обобщающим словом «жители». Это обобщение: частные случаи → общее понятие.',
+    trap:'«Четверо жителей»: это исключение имён с сохранением числа, а не обобщение. Обобщение заменяет перечисление одним словом широкого значения.',
+    hint:'Ищи вариант, где перечисление конкретных людей заменено одним словом, охватывающим их всех.',
+    ref:'Приём сжатия: обобщение'
+  },
+
+  {
+    task:1, src:'cir', topic:'Приём обобщения',
+    text:'<span class="hero-name hero-cir">Цири</span> сжимает репортаж о битве: «Казимир ранен, Войцех убит, Ярослав пропал без вести». Какой вариант: <em>обобщение</em>, а не просто сокращение?',
+    opts:['В битве пострадали воины','Казимир, Войцех и Ярослав не вернулись','Трое бойцов понесли потери','Битва была жестокой'],
+    ans:0,
+    fb:'«Воины» обобщает трёх конкретных людей. «Трое бойцов» сохраняет число: это скорее исключение имён. «Битва была жестокой» добавляет оценку, которой не было.',
+    trap:'«Трое бойцов понесли потери», не обобщение, а замена имён числом. Обобщение, одно слово широкого значения вместо перечисления.',
+    hint:'Обобщение заменяет конкретные имена одним словом, которое их всех охватывает. Не путай с подсчётом («трое»).',
+    ref:'Приём сжатия: обобщение'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · УПРОЩЕНИЕ ═══
+
+  {
+    task:1, src:'reg', topic:'Приём упрощения',
+    text:'<span class="hero-name hero-reg">Регис</span> упрощает фразу для газеты. Было: «жители, <em>проживающие</em> в деревне у опушки». Какой вариант: упрощение?',
+    opts:['Жители деревни у опушки','Люди, живущие в деревне у опушки','Жители, проживающие у опушки леса','В деревне у опушки живут жители'],
+    ans:0,
+    fb:'«Жители, проживающие в деревне» → «жители деревни»: причастный оборот заменён простым словосочетанием. Это упрощение синтаксической конструкции.',
+    trap:'Вариант с «люди, живущие», то же причастие, только другое слово. Упрощение делает конструкцию проще, а не длиннее.',
+    hint:'Упрощение заменяет сложную грамматическую конструкцию более простой. Где причастный оборот исчез?',
+    ref:'Приём сжатия: упрощение'
+  },
+
+  {
+    task:1, src:'ger', topic:'Приём упрощения',
+    text:'<span class="hero-name hero-ger">Геральт</span> написал: «Охотник, <em>выследивший</em> чудовище, вернулся в деревню». <span class="hero-name hero-lut">Лютик</span> упрощает. Какой вариант верен?',
+    opts:['Охотник выследил чудовище и вернулся в деревню','Охотник, выследивший чудовище, вернулся','Выследив чудовище, охотник вернулся в деревню','Охотник вернулся в деревню после выслеживания'],
+    ans:0,
+    fb:'Причастный оборот «выследивший чудовище» заменён глаголом «выследил» в простом предложении. Это классическое упрощение.',
+    trap:'Вариант с деепричастным оборотом, другая конструкция, не обязательно проще. Упрощение часто: причастие → глагол.',
+    hint:'Найди вариант, где причастие стало обычным глаголом, а предложение проще по структуре.',
+    ref:'Приём сжатия: упрощение'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · МИКРОТЕМЫ ═══
+
+  {
+    task:1, src:'lut', topic:'Микротемы и абзацы',
+    text:'<span class="hero-name hero-lut">Лютик</span> размечает аудиотекст для изложения. В нём три смысловые части: огнепоклонники ужесточают цензуру; старшая кровь требует прав; репортаж из леса о гулях. Сколько абзацев должно быть в изложении?',
+    opts:['Один абзац на весь текст','Два абзаца','Три абзаца','Четыре абзаца'],
+    ans:2,
+    fb:'Каждая микротема → отдельный абзац. Три смысловые части = три абзаца. Это базовое правило структуры изложения на ОГЭ.',
+    trap:'Один абзац смешает все темы. Четвёртый абзац лишний, если в исходнике только три части.',
+    hint:'Сколько смысловых частей в исходном тексте? Столько же абзацев и в изложении.',
+    ref:'Структура изложения: микротемы'
+  },
+
+  {
+    task:1, src:'par', topic:'Микротемы и абзацы',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> читает черновик стажёра. Первый абзац, про цензуру, второй, снова про цензуру, третий, про гулей. Что нарушено?',
+    opts:['Объём изложения','Количество микротем','Распределение микротем по абзацам','Приёмы сжатия'],
+    ans:2,
+    fb:'Две микротемы смешаны в одном абзаце (цензура повторяется), а тема про гулей вынесена отдельно. Нарушено правило: один абзац = одна микротема.',
+    trap:'Объём и приёмы сжатия могут быть в порядке, но структура абзацев неверна.',
+    hint:'Сравни содержание абзацев: сколько разных тем затронуто и как они распределены?',
+    ref:'Структура изложения: микротемы'
+  },
+
+  {
+    task:1, src:'kei', topic:'Микротемы и абзацы',
+    text:'<span class="hero-name hero-kei">Кейра</span> пишет колонку «Сердца Континента» на три страницы. <span class="hero-name hero-lut">Лютик</span> объясняет стажёру: чем микротема отличается от абзаца в <em>изложении</em>?',
+    opts:['Микротема длиннее абзаца','Абзац: это заголовок газеты','Микротема в исходном тексте, абзац в вашем сжатом пересказе','Это одно и то же'],
+    ans:2,
+    fb:'Микротема: смысловая часть исходного текста (то, что вы слушаете). Абзац изложения: ваша сжатая передача этой части. Одна микротема → один абзац в изложении.',
+    trap:'Микротема и абзац изложения связаны, но это разные вещи: одна в источнике, другая в вашей работе.',
+    hint:'Где находится микротема: в аудиотексте или в вашем пересказе? А абзац изложения?',
+    ref:'Структура изложения: микротемы'
+  },
+
+  // ═══ ЗАДАНИЕ 1 · ОШИБКИ ИЗЛОЖЕНИЯ ═══
+
+  {
+    task:1, src:'par', topic:'Ошибки изложения',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> отклоняет изложение: в аудиотексте три части, а стажёр написал только про тарталетки и вино. Какая ошибка допущена?',
+    opts:['Слишком много приёмов сжатия','Изложение длиннее исходника','Нарушена орфография','Потеряна одна или несколько микротем'],
+    ans:3,
+    fb:'Стажёр оставил одну деталь (еда) и потерял остальные микротемы. Потеря микротемы: одна из самых серьёзных ошибок изложения.',
+    trap:'Сжатие не означает выбор одной темы. Все микротемы должны присутствовать, пусть и в сжатом виде.',
+    hint:'Сравни число частей в исходнике и в изложении. Что исчезло?',
+    ref:'Типичные ошибки изложения'
+  },
+
+  {
+    task:1, src:'emh', topic:'Ошибки изложения',
+    text:'<span class="hero-name hero-emh">Эмгыр</span> прислал «образцовое изложение» на 12 страниц с собственными рассуждениями о величии империи. <span class="hero-name hero-lut">Лютик</span> использует его как антипример. Какая ошибка?',
+    opts:['Недостаточно связок между абзацами','Добавлены собственные мысли, которых не было в тексте','Слишком короткое изложение','Нет заголовка'],
+    ans:1,
+    fb:'В изложении нельзя добавлять свои рассуждения и оценки, которых не было в исходном тексте. Это грубая ошибка содержания.',
+    trap:'Связки и заголовок, второстепенно. Главное: изложение передаёт чужой текст, а не ваши размышления.',
+    hint:'Изложение: пересказ услышанного. Что нельзя вставлять от себя?',
+    ref:'Типичные ошибки изложения'
+  },
+
+  {
+    task:1, src:'rad', topic:'Ошибки изложения',
+    text:'<span class="hero-name hero-rad">Радовид</span> требует: «Перепишите мой указ дословно, это и будет изложение». Почему <span class="hero-name hero-lut">Лютик</span> отказывается?',
+    opts:['Указ слишком короткий','Изложение: это сжатый пересказ, а не дословная копия','Нужно добавить больше эпитетов','Изложение пишется от первого лица'],
+    ans:1,
+    fb:'Изложение: сжатый пересказ с применением приёмов сжатия (исключение, обобщение, упрощение). Дословное переписывание: это ошибка, текст не сжат.',
+    trap:'Изложение не требует «красивой речи» и эпитетов. Оно требует сжатия при сохранении всех микротем.',
+    hint:'В чём главная задача задания 1: точная копия или передача сути короче?',
+    ref:'Типичные ошибки изложения'
+  },
+
+  {
+    task:1, src:'par', topic:'Объём изложения',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> считает слова в изложении стажёра: <span class="term">115 слов</span>. Все микротемы на месте, но текст почти не сжат. В чём ошибка?',
+    opts:['Изложение короче 70 слов','Изложение длиннее ориентира 70–100: сжатие недостаточное','Не хватает заголовка','Нарушена орфография'],
+    ans:1,
+    fb:'Ориентир для изложения: 70–100 слов. 115 слов обычно значит, что текст переписан слишком подробно, а не сжат приёмами исключения, обобщения и упрощения.',
+    trap:'Микротемы могут быть все на месте, но объём выдаёт слабое сжатие. Это не про орфографию и не про заголовок.',
+    hint:'Сколько слов рекомендует шпора для сжатого изложения?',
+    ref:'Объём, связность, типичные ошибки'
+  },
+
+  {
+    task:1, src:'cir', topic:'Связность изложения',
+    text:'<span class="hero-name hero-cir">Цири</span> читает изложение: во втором абзаце стоит «<em>Он</em> запретил печатать», но из первого абзаца неясно, кто «он». Чего не хватает для <span class="term">связности</span>?',
+    opts:['Больше эпитетов и оценок','Ясной отсылки к подлежащему или замены местоимения','Нового абзаца вместо второго','Списка источников'],
+    ans:1,
+    fb:'Связность обеспечивают местоимения, союзы и вводные слова, но местоимение должно отсылать к понятному подлежащему. Иначе абзацы «разорваны».',
+    trap:'Эпитеты не чинят логическую связь. Проблема в том, что читатель не понимает, о ком речь.',
+    hint:'Что должно быть ясно читателю, когда встречается местоимение «он»?',
+    ref:'Объём, связность, типичные ошибки'
+  },
+
+  {
+    task:1, src:'lut', topic:'Неравномерное сжатие',
+    text:'<span class="hero-name hero-lut">Лютик</span> сравнивает изложение с исходником: первый абзац сжат до двух строк, второй и третий почти дословно переписаны. Какая ошибка?',
+    opts:['Потеряна микротема','Неравномерное сжатие: одна часть сжата, другие переписаны','Добавлены собственные мысли автора','Слишком мало связок между абзацами'],
+    ans:1,
+    fb:'Типичная ошибка: сжали одну микротему, а две другие переписали почти дословно. На ОГЭ нужно сжать каждую часть равномерно.',
+    trap:'Микротемы формально все три на месте, но две части не сжаты. Это не потеря темы и не собственные мысли.',
+    hint:'Все ли части изложения прошли через приёмы сжатия одинаково?',
+    ref:'Объём, связность, типичные ошибки'
+  },
+
+  // ═══ ЗАДАНИЕ 13 · СТРУКТУРА СОЧИНЕНИЯ ═══
+
+  {
+    task:13, src:'par', topic:'Структура сочинения',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> проверяет сочинение стажёра. В каком варианте названы все обязательные части <span class="term">сочинения-рассуждения</span>?',
+    opts:['Вступление, основная часть, заключение','Тезис, аргументация (примеры), вывод','Заголовок, подзаголовок, подпись','Цитата, пересказ, список источников'],
+    ans:1,
+    fb:'Сочинение-рассуждение: тезис (позиция) → аргументация (минимум 2 примера с пояснением) → вывод. Это композиция для задания 13.',
+    trap:'«Вступление, основная часть, заключение», слишком общие термины. Для ОГЭ нужны конкретные: тезис, примеры, вывод.',
+    hint:'Какие три элемента проверяют на экзамене в задании 13? Позиция, доказательства, итог.',
+    ref:'Структура сочинения'
+  },
+
+  {
+    task:13, src:'lut', topic:'Структура сочинения',
+    text:'<span class="hero-name hero-lut">Лютик</span> читает черновик: есть тезис и вывод, но только один пример. <span class="hero-name hero-par">Мадам Пармезан</span> ставит «не печатать». Чего не хватает?',
+    opts:['Заголовка рубрики','Списка литературы','Прямой речи героя','Второго примера с пояснением'],
+    ans:3,
+    fb:'Для аргументации нужно минимум два примера, каждый с пояснением («это значит, что…»). Один пример: недостаточная аргументация.',
+    trap:'Заголовок и прямая речь не обязательны. Примеры, обязательны.',
+    hint:'Сколько примеров требует задание 13 для полноценной аргументации?',
+    ref:'Структура сочинения'
+  },
+
+  {
+    task:13, src:'ger', topic:'Структура сочинения',
+    text:'<span class="hero-name hero-ger">Геральт</span> спрашивает: чем <span class="term">вывод</span> отличается от тезиса в сочинении?',
+    opts:['Вывод: дословная копия тезиса','Вывод обобщает рассуждение, не повторяя тезис слово в слово','Вывод пишется до тезиса','Вывод не нужен, если есть два примера'],
+    ans:1,
+    fb:'Вывод: итог рассуждения, обобщение. Он не должен дословно повторять тезис, но логически завершает текст.',
+    trap:'Дословный повтор тезиса в конце, слабый вывод. Нужно обобщить, подвести итог.',
+    hint:'Вывод: финал. Должен ли он быть точной копией первого предложения?',
+    ref:'Структура сочинения'
+  },
+
+  // ═══ ЗАДАНИЕ 13.1 · ЛИНГВИСТИЧЕСКАЯ ТЕМА ═══
+
+  {
+    task:131, src:'cir', topic:'13.1 · Лингвистическая тема',
+    text:'<span class="hero-name hero-cir">Цири</span> разбирает пропаганду <span class="hero-name hero-rad">Радовида</span>: «Слово короля: закон». Для задания <span class="term">13.1</span> эта цитата подходит как пример?',
+    opts:['Да, это цитата о языке','Нет, это о власти, а не о языке','Да, если переписать от руки','Нет, слишком короткая'],
+    ans:1,
+    fb:'13.1: рассуждение на лингвистическую тему (о словах, речи, общении). «Слово короля: закон» о власти, а не о природе языка. Нужны примеры именно о речи.',
+    trap:'Слово «слово» в цитате сбивает с толку. Но смысл цитаты: власть, а не лингвистика.',
+    hint:'13.1 требует примеров о языке как явлении. О чём эта цитата на самом деле: о словах или о власти?',
+    ref:'13.1 · Лингвистическая тема'
+  },
+
+  {
+    task:131, src:'kei', topic:'13.1 · Примеры из текста',
+    text:'<span class="hero-name hero-kei">Кейра</span> пишет сочинение 13.1. В тексте есть: «Речь может <em>успокоить</em> собеседника» и «Автор называет слова <em>оружием</em>». Как использовать эти фрагменты?',
+    opts:['Как два примера о силе языка с пояснением','Как заголовок и подзаголовок','Как вступление без пояснения','Заменить своими примерами из жизни'],
+    ans:0,
+    fb:'Оба фрагмента: примеры о языке из текста. К каждому нужно пояснение: «Это показывает, что слова действуют на людей» / «Метафора „оружие" показывает силу речи».',
+    trap:'Примеры без пояснения не засчитываются. Свои примеры из жизни для 13.1 не подходят, нужен текст.',
+    hint:'13.1: два фрагмента из текста + объяснение, как каждый связан с лингвистической темой.',
+    ref:'13.1 · Лингвистическая тема'
+  },
+
+  {
+    task:131, src:'reg', topic:'13.1 · Тезис',
+    text:'<span class="hero-name hero-reg">Регис</span> помогает с сочинением 13.1. Дана цитата: «Слова иногда опаснее меча». Какой тезис уместен?',
+    opts:['Я согласен: язык может влиять на людей сильнее действий','Автор рассказывает о битве','Меч опаснее слов','Герой любит мечи'],
+    ans:0,
+    fb:'Тезис 13.1: твоё отношение к лингвистической цитате: согласен/не согласен и почему. «Язык влияет сильнее действий», позиция по теме цитаты.',
+    trap:'Пересказ сюжета: это не тезис. Тезис: твоя позиция по цитате о языке.',
+    hint:'Тезис отвечает на вопрос: что ты думаешь о цитате? Это согласие или несогласие с мыслью автора.',
+    ref:'13.1 · Лингвистическая тема'
+  },
+
+  {
+    task:131, src:'ann', topic:'13.1 · Лингвистическая тема',
+    text:'<span class="hero-name hero-ann">Анна-Генриетта</span> прислала текст, где герой «говорит <em>тихо</em>, и собеседник успокаивается». Для 13.1 это пример чего?',
+    opts:['Влияния интонации и формы речи на собеседника','Описания интерьера','Ошибки в орфографии','Сюжетного поворота'],
+    ans:0,
+    fb:'Тихая речь успокаивает. Это пример о том, как форма речи (интонация) влияет на человека. Лингвистический пример для 13.1.',
+    trap:'Это не сюжетный поворот и не интерьер. Обрати внимание на действие речи.',
+    hint:'Что здесь связано с языком и общением, а не с обстановкой или сюжетом?',
+    ref:'13.1 · Лингвистическая тема'
+  },
+
+  {
+    task:131, src:'par', topic:'13.1 · Ошибки',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> читает сочинение 13.1: «Как и в жизни, моя бабушка всегда говорила правду». Какая ошибка?',
+    opts:['Пример взят не из текста для чтения','Слишком короткий тезис','Нет вывода','Слишком много цитат'],
+    ans:0,
+    fb:'Для 13.1 примеры берут из предложенного текста, а не из личного опыта. Пример про бабушку не засчитают.',
+    trap:'Личный пример может быть убедительным, но на ОГЭ нужны фрагменты из текста.',
+    hint:'В каком задании примеры обязаны быть из предложенного текста, а не от себя?',
+    ref:'Типичные ошибки сочинения'
+  },
+
+  {
+    task:131, src:'emh', topic:'13.1 · Ошибки',
+    text:'<span class="hero-name hero-emh">Эмгыр</span> написал: «Автор пишет: "Слова: оружие".», и перешёл к выводу. Чего не хватает?',
+    opts:['Пояснения, как пример связан с тезисом','Заголовка','Второго тезиса','Списка литературы'],
+    ans:0,
+    fb:'Процитировал, но не объяснил «это значит, что…». Пример без пояснения: типичная ошибка, снижающая балл за содержание.',
+    trap:'Цитата сама по себе не аргумент. Нужно объяснить связь с тезисом.',
+    hint:'После цитаты экзаменатор ждёт не точку, а объяснение. Что должно идти после «Автор пишет…»?',
+    ref:'Типичные ошибки сочинения'
+  },
+
+  // ═══ ЗАДАНИЕ 13.2 · СМЫСЛ ФРАГМЕНТА ═══
+
+  {
+    task:132, src:'kei', topic:'13.2 · Смысл фрагмента',
+    text:'<span class="hero-name hero-kei">Кейра</span> дала цитату: «Люди читают правду, даже когда им грозит опасность». Что нужно сделать в задании <span class="term">13.2</span>?',
+    opts:['Дать определение понятия «правда»','Переписать цитату дословно','Найти грамматическую основу','Объяснить смысл фрагмента своими словами'],
+    ans:3,
+    fb:'13.2: объяснить смысл фрагмента (цитаты) своими словами: тезис = главная мысль, примеры из текста подтверждают, вывод обобщает.',
+    trap:'13.3: определение понятия. 13.2: объяснение мысли автора в цитате.',
+    hint:'13.2 не просит определения слова. Что нужно сделать с мыслью автора, пересказать или объяснить?',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  {
+    task:132, src:'lut', topic:'13.2 · Тезис',
+    text:'<span class="hero-name hero-lut">Лютик</span> просит перефразировать цитату: «Свободная пресса важнее страха». Какой тезис для 13.2 подходит?',
+    opts:['Газета называется «Вестник»','Лютик: редактор','Автор считает, что люди нуждаются в правдивой информации, даже рискуя','Страх: плохое чувство'],
+    ans:2,
+    fb:'Тезис 13.2: перефразированная главная мысль цитаты: «Автор считает, что…». Не пересказ сюжета, а смысл высказывания.',
+    trap:'«Газета называется…», факт, не тезис. Тезис передаёт позицию автора цитаты.',
+    hint:'Тезис начинается с «Автор считает, что…» и передаёт главную мысль, а не детали.',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  {
+    task:132, src:'ger', topic:'13.2 · Перефразирование',
+    text:'<span class="hero-name hero-ger">Геральт</span> спрашивает: можно ли в 13.2 переписать цитату дословно вместо объяснения? <span class="hero-name hero-par">Мадам Пармезан</span> отвечает:',
+    opts:['Да, дословная цитата: лучший тезис','Нет, нужно объяснить своими словами','Да, но только в выводе','Можно, если цитата короткая'],
+    ans:1,
+    fb:'13.2 требует объяснения смысла своими словами. Дословный пересказ цитаты: это ошибка, нужен перефраз, а не копия.',
+    trap:'Цитату можно вставить в пример, но тезис и объяснение, своими словами.',
+    hint:'Задание просит объяснить смысл. Значит ли это повторить те же слова?',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  {
+    task:132, src:'rad', topic:'13.2 · Смысл фрагмента',
+    text:'<span class="hero-name hero-rad">Радовид</span> цитирует: «Народ должен слушать короля». Стажёр пишет тезис: «Автор требует покорности». Это верно для 13.2?',
+    opts:['Нет, нужно добавить примеры из жизни','Нет, это задание 13.3','Да, это перефраз смысла цитаты','Да, но без вывода'],
+    ans:2,
+    fb:'«Автор требует покорности», перефраз смысла цитаты, подходит как тезис для 13.2. Далее нужны два примера из текста и вывод.',
+    trap:'Тезис может быть верным, но без примеров и вывода сочинение неполное.',
+    hint:'Оцени только тезис: передаёт ли он смысл цитаты своими словами?',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  {
+    task:132, src:'par', topic:'13.2 · Примеры',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> проверяет 13.2. Тезис: «Автор ценит смелость журналистов». Какие примеры из текста подойдут?',
+    opts:['Описание погоды и меню','Определение слова «журналист»','Примеры из личной жизни стажёра','Два фрагмента, где герои рискуют ради правды'],
+    ans:3,
+    fb:'Примеры 13.2 должны подтверждать тезис и быть из текста. Два фрагмента о смелости журналистов + пояснение к каждому.',
+    trap:'Определение слова: это для 13.3. Погода и меню не подтверждают тезис.',
+    hint:'Примеры должны иллюстрировать тезис и быть взяты из текста для чтения.',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  {
+    task:132, src:'cir', topic:'13.2 · Примеры',
+    text:'<span class="hero-name hero-cir">Цири</span> заглянула в черновик стажёра и сникла: «Тезис ясен с первой строки. Зачем городить <em>два</em> примера?» Что ответить по правилам <span class="term">13.2</span>?',
+    opts:['Два примера обязательны для аргументации: каждый с пояснением','Один пример достаточно','Примеры не нужны, только тезис','Два примера: только для 13.3'],
+    ans:0,
+    fb:'Минимум два примера с пояснением, требование ко всем вариантам задания 13. Один пример = слабая аргументация.',
+    trap:'Тезис без доказательств, не рассуждение. Примеры обязательны во всех подтипах 13.',
+    hint:'Сколько примеров требует композиция сочинения-рассуждения на ОГЭ?',
+    ref:'13.2 · Смысл фрагмента'
+  },
+
+  // ═══ ЗАДАНИЕ 13.3 · ЗНАЧЕНИЕ ПОНЯТИЯ ═══
+
+  {
+    task:133, src:'ger', topic:'13.3 · Определение понятия',
+    text:'<span class="hero-name hero-ger">Геральт</span> объясняет 13.3: «<span class="term">Честность</span>: говорить правду, даже когда больно». Где должно стоять определение?',
+    opts:['Только в выводе','После второго примера','В первом предложении сочинения','Определение не нужно'],
+    ans:2,
+    fb:'В 13.3 первое предложение: определение понятия своими словами. Затем два примера из текста и вывод.',
+    trap:'Определение в выводе, поздно. Экзаменатор ждёт его в начале.',
+    hint:'С чего начинается сочинение 13.3: с определения или с примера?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  {
+    task:133, src:'par', topic:'13.3 · Понятие',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> даёт задание: раскрыть значение понятия «<span class="term">мужество</span>». Что нужно сделать в 13.3?',
+    opts:['Написать стихотворение','Найти синонимы в словаре','Только пересказать сюжет','Дать определение + два примера из текста + вывод'],
+    ans:3,
+    fb:'13.3: определение понятия → два примера из текста (как понятие проявляется у героев) → вывод. Композиция та же, содержание другое.',
+    trap:'Пересказ сюжета, не 13.3. Нужно именно раскрыть понятие через определение и примеры.',
+    hint:'13.3 просит раскрыть значение слова-понятия. Из чего состоит такое рассуждение?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  {
+    task:133, src:'lut', topic:'13.3 · Определение',
+    text:'<span class="hero-name hero-lut">Лютик</span> пишет: «<span class="term">Свобода</span>: это возможность говорить правду без страха». Это:',
+    opts:['Тезис для 13.2','Пример из текста','Определение понятия для 13.3','Ошибка: слишком длинно'],
+    ans:2,
+    fb:'«Свобода: это…», формула определения для 13.3. Своими словами, 1–2 предложения, в начале сочинения.',
+    trap:'Похоже на тезис 13.2, но здесь раскрывается понятие, а не объясняется цитата.',
+    hint:'Формула «Понятие: это…» характерна для какого подтипа задания 13?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  {
+    task:133, src:'reg', topic:'13.3 · Понятие',
+    text:'<span class="hero-name hero-reg">Регис</span> спрашивает: в тексте герой «признаёт ошибку» и «отказывается лгать властям». Для 13.3 о каком понятии это примеры?',
+    opts:['О разных понятиях: ошибка и ложь','О свободе слова','О честности: оба поступка иллюстрируют одно понятие','О мужестве только второй пример'],
+    ans:2,
+    fb:'Оба поступка про честность: признать ошибку и отказаться лгать. Примеры 13.3 должны иллюстрировать одно и то же понятие.',
+    trap:'Примеры должны быть про одно понятие. Разные понятия, ошибка композиции 13.3.',
+    hint:'Оба поступка связаны с правдивостью. Какое одно понятие их объединяет?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  {
+    task:133, src:'ger', topic:'13.3 · Примеры из текста',
+    text:'<span class="hero-name hero-ger">Геральт</span> нашёл на столе чужой бланк: один пример из текста, второй — «как я однажды…». Стажёру он шепчет: на ОГЭ 2026 в <span class="term">13.3</span> оба примера должны быть:',
+    opts:['Только из предложенного текста для чтения','Из личного опыта автора сочинения','Из истории или кино','Одного из текста, второго из жизни'],
+    ans:0,
+    fb:'На ОГЭ 2026 оба примера в 13.3 только из текста. Пример из жизни не засчитают.',
+    trap:'Раньше иногда допускали жизненный пример. В 2026, оба из текста.',
+    hint:'Вспомни карточку шпоры про 13.3: сколько источников для примеров допускает кодификатор 2026?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  {
+    task:133, src:'par', topic:'13.3 · Примеры из текста',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> отклоняет сочинение: «Мой друг однажды проявил мужество на экзамене». Почему?',
+    opts:['Слишком короткое определение','Нет вывода','Два примера вместо одного','Пример не из текста для чтения'],
+    ans:3,
+    fb:'Пример из личной жизни не подходит для 13.3 на ОГЭ 2026. Нужны два поступка или ситуации из предложенного текста.',
+    trap:'Убедительный жизненный пример всё равно не засчитают, нужен текст.',
+    hint:'Какая ошибка связана с источником примера, а не с объёмом или выводом?',
+    ref:'13.3 · Значение понятия'
+  },
+
+  // ═══ ЗАДАНИЕ 13 · РАЗЛИЧЕНИЕ ВАРИАНТОВ ═══
+
+  {
+    task:13, src:'lut', topic:'Различие 13.1 / 13.2 / 13.3',
+    text:'<span class="hero-name hero-lut">Лютик</span> объясняет стажёру три рубрики. Какое соответствие верно?',
+    opts:['13.1: пересказ; 13.2: орфография; 13.3: пунктуация','Все три: одно и то же','13.1: понятие; 13.2: язык; 13.3, цитата','13.1: о языке; 13.2: смысл цитаты; 13.3: значение понятия'],
+    ans:3,
+    fb:'13.1: лингвистическая тема (о словах, речи). 13.2: объяснить смысл фрагмента. 13.3: раскрыть значение понятия. Композиция у всех одинаковая.',
+    trap:'Путают 13.1 и 13.3: первое, о языке, третье, о понятии (честность, мужество).',
+    hint:'Три подтипа, одна структура. Чем отличается содержание каждого?',
+    ref:'13.1 · 13.2 · 13.3'
+  },
+
+  {
+    task:13, src:'emh', topic:'Различие вариантов',
+    text:'<span class="hero-name hero-emh">Эмгыр</span> прислал сочинение: дал определение «порядок» и два примера из текста. Какой это вариант задания 13?',
+    opts:['13.1','13.2','Задание 1','13.3'],
+    ans:3,
+    fb:'Определение понятия + примеры из текста = 13.3. 13.1: лингвистическая цитата. 13.2: объяснение смысла фрагмента.',
+    trap:'Если есть «Понятие: это…» в начале: это 13.3, не 13.1.',
+    hint:'Что в начале сочинения: определение слова или цитата о языке?',
+    ref:'13.1 · 13.2 · 13.3'
+  },
+
+  {
+    task:13, src:'cir', topic:'Различие вариантов',
+    text:'<span class="hero-name hero-cir">Цири</span> спрашивает: цитата «Слова могут ранить сильнее клинка»: для какого подтипа?',
+    opts:['13.2: смысл фрагмента о битве','13.3: понятие «рана»','Задание 1: изложение','13.1: лингвистическая тема'],
+    ans:3,
+    fb:'Цитата о силе слов: лингвистическая тема для 13.1. Не 13.2 (там объясняют смысл данного фрагмента целиком) и не 13.3 (там определяют понятие).',
+    trap:'13.2 тоже работает с цитатой, но задача: объяснить смысл фрагмента, а не рассуждать о языке.',
+    hint:'Цитата говорит о словах и их силе. Это тема языка или раскрытие понятия?',
+    ref:'13.1 · 13.2 · 13.3'
+  },
+
+  // ═══ ЗАДАНИЕ 13 · КРИТЕРИИ ═══
+
+  {
+    task:13, src:'par', topic:'Критерии · Содержание',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> оценивает сочинение. При каком условии ставят <span class="term">3 балла за содержание</span>?',
+    opts:['Нет ни одной ошибки в орфографии','Текст написан от руки','Сочинение длиннее 300 слов','Тема раскрыта полностью, логика не нарушена, все части композиции на месте'],
+    ans:3,
+    fb:'3 балла за содержание: тема раскрыта полностью, логика сохранена, тезис + 2 примера + вывод (или все микротемы в изложении).',
+    trap:'Грамотность оценивается отдельно. Длина: лишь ориентир, не главный критерий содержания.',
+    hint:'Критерий «содержание»: о полноте раскрытия темы и логике, не об орфографии.',
+    ref:'Критерии оценивания'
+  },
+
+  {
+    task:13, src:'par', topic:'Критерии · Грамотность',
+    text:'Пять орфографических пятен подряд — <span class="hero-name hero-par">Мадам Пармезан</span> отсчитывает их пером, не поднимая глаз: «Пять. Ещё одна — и в топку». Сколько баллов за <span class="term">грамотность</span>?',
+    opts:['3 балла','2 балла','1 балл','0 баллов'],
+    ans:2,
+    fb:'5–8 ошибок = 1 балл за грамотность. 3–4 ошибки = 2 балла. 1–2 несущественные = 3 балла. 9+ = 0.',
+    trap:'5 ошибок, ещё не ноль. Смотри шкалу: 5–8 = один балл.',
+    hint:'Вспомни шкалу: сколько ошибок соответствует 1 баллу?',
+    ref:'Критерии оценивания'
+  },
+
+  {
+    task:13, src:'emh', topic:'Критерии · Объём',
+    text:'<span class="hero-name hero-emh">Эмгыр</span> спрашивает: изложение 60 слов, сочинение 70 слов. Вместе 130. Какой риск?',
+    opts:['Ничего, 130 достаточно','Нужно ровно 200 слов','Объём не проверяют','Можно потерять баллы: весь блок должен быть не короче 140 слов'],
+    ans:3,
+    fb:'Изложение + сочинение вместе ≥ 140 слов. При 130 словах можно потерять баллы за грамотность. Изложение ориентир 70–100, сочинение ~150.',
+    trap:'Каждое задание отдельно имеет ориентир, но есть и общий минимум 140 слов на весь блок.',
+    hint:'При недоборе слов на весь блок: какой критерий рискует пострадать в первую очередь?',
+    ref:'Критерии оценивания'
+  },
+
+  {
+    task:13, src:'lut', topic:'Типичные ошибки сочинения',
+    text:'<span class="hero-name hero-lut">Лютик</span> сдал колонку: <span class="term">тезис</span> есть, два примера с пояснением есть, текст обрывается на последнем примере. Чего не хватает?',
+    opts:['Тезиса','Второго примера','Вывода','Определения понятия'],
+    ans:2,
+    fb:'Текст обрывается на примерах без вывода, типичная ошибка сочинения. Вывод обобщает рассуждение и завершает композицию.',
+    trap:'Тезис и оба примера уже есть. Определение понятия нужно для 13.3, а не для любого рассуждения.',
+    hint:'Какая часть композиции идёт после аргументации и подводит итог?',
+    ref:'Типичные ошибки сочинения'
+  },
+
+  {
+    task:13, src:'par', topic:'Критерии · Грамотность',
+    text:'<span class="hero-name hero-par">Мадам Пармезан</span> нашла в сочинении <span class="term">3 ошибки</span>. Сколько баллов за грамотность?',
+    opts:['3 балла','2 балла','1 балл','0 баллов'],
+    ans:1,
+    fb:'3–4 ошибки = 2 балла за грамотность. 1–2 несущественные = 3 балла. 5–8 = 1 балл. 9 и более = 0.',
+    trap:'Три ошибки, это ещё не «почти идеально» (3 балла) и не провал (0 баллов). Смотри середину шкалы.',
+    hint:'Между какими границами шкалы лежит число 3?',
+    ref:'Критерии оценивания'
+  }
+
+];
+
+let questions = [];
+let cur = 0, score = 0, attempts = 0, answered = false;
+
+function shuffle(a) {
+  const arr = [...a];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function initQuiz() {
+  questions = shuffle(allQuestions);
+  cur = 0; score = 0; attempts = 0; answered = false;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('qcard').style.display = 'block';
+  document.querySelector('.quiz-progress-wrap').style.display = 'flex';
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[cur];
+  const total = questions.length;
+  document.getElementById('qbar').style.width = (cur / total * 100) + '%';
+  document.getElementById('qcnt').textContent = (cur + 1) + ' / ' + total;
+  document.getElementById('score-disp').textContent = '✓ ' + score;
+
+  const src = srcLabels[q.src];
+  const tsk = taskLabels[q.task];
+  document.getElementById('qhead').innerHTML =
+    `<span class="qh-src ${src.cls}">${src.text}</span>` +
+    (tsk ? `<span class="qh-task ${tsk.cls}">${tsk.text}</span>` : '') +
+    `<span style="color:var(--muted);font-size:10px;margin-left:auto">${q.topic}</span>`;
+
+  document.getElementById('qtext').innerHTML = q.text;
+
+  const shuffledOpts = shuffle(q.opts.map((o, i) => ({ o, i })));
+  const optsEl = document.getElementById('qopts');
+  optsEl.innerHTML = '';
+  shuffledOpts.forEach(({ o, i }) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = o;
+    btn.dataset.orig = i;
+    btn.onclick = () => answer(i, btn);
+    optsEl.appendChild(btn);
+  });
+
+  const fb = document.getElementById('qfb');
+  fb.style.display = 'none';
+  fb.className = 'feedback-box';
+  fb.innerHTML = '';
+  document.getElementById('qnext').style.display = 'none';
+  answered = false;
+  attempts = 0;
+
+  const card = document.getElementById('qcard');
+  card.classList.remove('question-animate');
+  void card.offsetWidth;
+  card.classList.add('question-animate');
+}
+
+function answer(idx, btn) {
+  if (answered) return;
+  const q = questions[cur];
+  const fb = document.getElementById('qfb');
+  const btns = document.querySelectorAll('.opt-btn');
+
+  if (idx === q.ans) {
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('score-disp').textContent = '✓ ' + score;
+    fb.className = 'feedback-box correct-fb';
+    fb.innerHTML = '🥳 Верно! ' + q.fb;
+    fb.style.display = 'block';
+    document.getElementById('qnext').style.display = 'inline-block';
+    btns.forEach(b => b.disabled = true);
+    answered = true;
+  } else {
+    attempts++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    if (attempts === 1) {
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '🤔 Не совсем. ' + q.hint;
+      fb.style.display = 'block';
+    } else {
+      btns.forEach(b => {
+        if (parseInt(b.dataset.orig) === q.ans) b.classList.add('correct');
+        b.disabled = true;
+      });
+      fb.className = 'feedback-box wrong-fb';
+      fb.innerHTML = '❌ ' + q.trap + '<br><br><strong>Правильный ответ:</strong> ' + q.opts[q.ans] + '<br>' + q.fb;
+      fb.style.display = 'block';
+      document.getElementById('qnext').style.display = 'inline-block';
+      answered = true;
+    }
+  }
+}
+
+function nextQ() {
+  cur++;
+  if (cur >= questions.length) { showResults(); return; }
+  renderQ();
+}
+
+function showResults() {
+  document.getElementById('qcard').style.display = 'none';
+  document.querySelector('.quiz-progress-wrap').style.display = 'none';
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  const total = questions.length;
+  document.getElementById('res-score').textContent = score + ' / ' + total;
+  document.getElementById('res-total').textContent = 'Правильных ответов: ' + Math.round(score / total * 100) + '%';
+
+  let emoji, title, rankClass, rankText, story;
+  if (score >= 47) {
+    emoji = '📰'; title = 'Номер достучался до сердец Континента';
+    rankClass = 'rank-s'; rankText = 'Ранг S · Главный редактор';
+    story = 'Мадам Пармезан впервые за десять лет сказала: «Печатаем на первой полосе». Эмгыр запретил «Вестник», тираж вырос втрое. Лютик упал в обморок от счастья. Цири принесла воду. Регис улыбнулся (чуть-чуть).';
+  } else if (score >= 39) {
+    emoji = '🔥'; title = 'Тираж разошёлся, цензоры в ярости';
+    rankClass = 'rank-a'; rankText = 'Ранг A · Штатный корреспондент';
+    story = 'Номер разошёлся по всему Новиграду. Радовид вызвал цензора. Эмгыр прислал грозное письмо. Лютик повесил его на стену рядом с первым номером. Геральт кивнул одобрительно.';
+  } else if (score >= 29) {
+    emoji = '⚔️'; title = 'Геральт: «Нормально»';
+    rankClass = 'rank-b'; rankText = 'Ранг B · Репортёр';
+    story = 'Геральт прочитал сжатый репортаж о гулях и сказал: «Нормально». Для ведьмака это высшая похвала. Кейра добавила колонку в рубрику. Мадам Пармезан не отвергла текст, уже прогресс.';
+  } else if (score >= 19) {
+    emoji = '🦇'; title = 'Регис: «Ещё 200 лет»';
+    rankClass = 'rank-c'; rankText = 'Ранг C · Стажёр';
+    story = 'Регис прочитал черновик и заметил: «За двести лет я видел хуже… но не намного». Лютик дал ещё одну попытку. Анна-Генриетта прислала рецепт тарталеток вместо репортажа, как всегда.';
+  } else {
+    emoji = '🔥'; title = 'Топка для огнепоклонников';
+    rankClass = 'rank-d'; rankText = 'Ранг D · Черновик сожжён';
+    story = 'Мадам Пармезан отправила текст в топку. Цири, не выдержав, открыла портал в другое измерение, «там хотя бы нет цензуры». Лютик бежал за ней с блокнотом.';
+  }
+
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-title').textContent = title;
+  document.getElementById('res-rank').className = 'results-rank ' + rankClass;
+  document.getElementById('res-rank').textContent = rankText;
+  document.getElementById('res-story').textContent = story;
+}
+
+initQuiz();
+</script>
+</body>
+</html>
