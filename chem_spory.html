@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шпоры по химии ОГЭ 2026 — Небесные принципы Тейвата</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+
+  /* Блок 1 — Сумеру / Теория */
+  --b1: #00897B;
+  --b1-light: #e0f2f1;
+  --b1-mid: #b2dfdb;
+
+  /* Блок 2 — Реакции */
+  --b2: #3949AB;
+  --b2-light: #e8eaf6;
+  --b2-mid: #c5cae9;
+
+  /* Блок 3 — Неорганика */
+  --b3: #E64A19;
+  --b3-light: #fbe9e7;
+  --b3-mid: #ffccbc;
+
+  /* Блок 4 — Практика */
+  --b4: #2E7D32;
+  --b4-light: #e8f5e9;
+  --b4-mid: #c8e6c9;
+
+  /* Карточки-типы */
+  --artifact: #F59E0B;
+  --artifact-bg: #fffbeb;
+  --mnemo: #7C3AED;
+  --mnemo-bg: #f5f3ff;
+  --boss: #DC2626;
+  --boss-bg: #fef2f2;
+  --task: #0284C7;
+  --task-bg: #f0f9ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  background: linear-gradient(135deg, #0d1b2a 0%, #1a1a3e 50%, #0d2b1a 100%);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,137,123,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(57,73,171,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 90%, rgba(230,74,25,0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: .3rem 1rem;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.hero-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  line-height: 1.15;
+  position: relative;
+  margin-bottom: .8rem;
+}
+.ht1 {
+  display: block;
+  background: linear-gradient(90deg, #80CBC4, #4DD0E1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ht2 {
+  display: block;
+  font-size: .6em;
+  font-weight: 400;
+  opacity: .7;
+  margin: .3rem 0;
+  -webkit-text-fill-color: rgba(255,255,255,0.7);
+}
+.ht3 {
+  display: block;
+  background: linear-gradient(90deg, #FFD54F, #FF8A65);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 1rem;
+  opacity: .75;
+  max-width: 520px;
+  margin: .8rem auto 0;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* ═══ БЛОКИ ═══ */
+.block-wrap { max-width: 960px; margin: 0 auto; padding: 0 1rem 2rem; }
+
+.block-header {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 2rem 0 1rem;
+  margin-top: 1rem;
+}
+.block-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.block-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.block-sub {
+  font-size: .85rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: .1rem;
+}
+
+/* ═══ ШПОРА-КАРТОЧКА ═══ */
+.shpora-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+.shpora-head {
+  padding: 1rem 1.25rem .75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.shpora-num {
+  font-size: .75rem;
+  font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  color: #fff;
+  background: var(--block-color, #888);
+  border-radius: 6px;
+  padding: .15rem .55rem;
+  flex-shrink: 0;
+  margin-top: .15rem;
+}
+.shpora-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.3;
+  flex: 1;
+}
+.shpora-subtitle {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: .15rem;
+}
+.shpora-lore {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: .9rem;
+  color: var(--muted);
+  font-style: italic;
+  padding: .6rem 1.25rem .85rem;
+  border-bottom: 1px solid #f3f4f6;
+  line-height: 1.55;
+}
+.shpora-body { padding: 1rem 1.25rem 1.25rem; }
+
+/* ═══ ВЛОЖЕННЫЕ КАРТОЧКИ ═══ */
+.inset {
+  border-radius: 10px;
+  padding: .85rem 1rem;
+  margin: .75rem 0;
+  border-left: 4px solid transparent;
+}
+.inset-artifact {
+  background: var(--artifact-bg);
+  border-color: var(--artifact);
+}
+.inset-mnemo {
+  background: var(--mnemo-bg);
+  border-color: var(--mnemo);
+}
+.inset-boss {
+  background: var(--boss-bg);
+  border-color: var(--boss);
+}
+.inset-task {
+  background: var(--task-bg);
+  border-color: var(--task);
+}
+.inset-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: .4rem;
+}
+.inset-artifact .inset-label { color: var(--artifact); }
+.inset-mnemo .inset-label { color: var(--mnemo); }
+.inset-boss .inset-label { color: var(--boss); }
+.inset-task .inset-label { color: var(--task); }
+.inset-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.inset-text strong { font-weight: 700; }
+
+/* ═══ ТАБЛИЦЫ ═══ */
+.chem-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  margin: .75rem 0;
+}
+.chem-table th {
+  background: #f3f4f6;
+  font-weight: 700;
+  padding: .55rem .75rem;
+  text-align: left;
+  font-size: .88rem;
+}
+.chem-table td {
+  padding: .55rem .75rem;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: top;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+.chem-table tr:last-child td { border-bottom: none; }
+.chem-table tr:nth-child(even) td { background: #fafafa; }
+
+/* ═══ ТЕКСТ ═══ */
+h3.sec { font-size: 1rem; font-weight: 700; margin: .9rem 0 .35rem; color: #374151; }
+p.rule { font-size: 1rem; line-height: 1.6; margin: .35rem 0; }
+.formula {
+  font-family: 'Space Mono', monospace;
+  font-size: .88rem;
+  background: #f3f4f6;
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+.hi { font-weight: 700; }
+.t-teal { color: #00897B; font-weight: 600; }
+.t-indigo { color: #3949AB; font-weight: 600; }
+.t-orange { color: #E64A19; font-weight: 600; }
+.t-green { color: #2E7D32; font-weight: 600; }
+.t-amber { color: #D97706; font-weight: 600; }
+.t-red { color: #DC2626; font-weight: 600; }
+.t-purple { color: #7C3AED; font-weight: 600; }
+.t-blue { color: #0284C7; font-weight: 600; }
+/* Доп. палитра синестетических цветов */
+.t-cyan    { color: #00ACC1; font-weight: 600; }  /* голубой — ков. полярная, вода */
+.t-pink    { color: #F50057; font-weight: 600; }  /* малиновый — СО, щёлочь */
+.t-magenta { color: #EA80FC; font-weight: 600; }  /* магента — газы, NH₄⁺ */
+.t-rust    { color: #BF360C; font-weight: 600; }  /* ржавый — Fe³⁺ */
+.t-slate   { color: #546E7A; font-weight: 600; }  /* серо-сизый — Fe²⁺ */
+.t-sky     { color: #039BE5; font-weight: 600; }  /* небесный — Cu²⁺, вода */
+.t-lime    { color: #558B2F; font-weight: 600; }  /* травяной — восстановители */
+
+/* pill доп. */
+.pill-cyan    { background: #e0f7fa; color: #006064; }
+.pill-rust    { background: #fbe9e7; color: #BF360C; }
+.pill-slate   { background: #eceff1; color: #37474F; }
+.pill-sky     { background: #e1f5fe; color: #01579B; }
+.pill-white   { background: #f5f5f5; color: #424242; border: 1px solid #e0e0e0; }
+.pill-magenta { background: #fce4ec; color: #880E4F; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0; }
+.pill {
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .2rem .65rem;
+  border-radius: 20px;
+  background: #f3f4f6;
+  color: #374151;
+}
+.pill-teal  { background: #e0f2f1; color: #00695C; }
+.pill-indigo{ background: #e8eaf6; color: #283593; }
+.pill-orange{ background: #fbe9e7; color: #bf360c; }
+.pill-green { background: #e8f5e9; color: #1B5E20; }
+.pill-amber { background: #fffde7; color: #F57F17; }
+.pill-red   { background: #fef2f2; color: #991B1B; }
+.pill-purple{ background: #f5f3ff; color: #4C1D95; }
+
+/* Цветные полосы карточек по блокам */
+.block-1 .shpora-card { border-top: 3px solid var(--b1); }
+.block-2 .shpora-card { border-top: 3px solid var(--b2); }
+.block-3 .shpora-card { border-top: 3px solid var(--b3); }
+.block-4 .shpora-card { border-top: 3px solid var(--b4); }
+
+.block-1 .shpora-num { background: var(--b1); }
+.block-2 .shpora-num { background: var(--b2); }
+.block-3 .shpora-num { background: var(--b3); }
+.block-4 .shpora-num { background: var(--b4); }
+
+.block-1 .block-dot { background: var(--b1); }
+.block-2 .block-dot { background: var(--b2); }
+.block-3 .block-dot { background: var(--b3); }
+.block-4 .block-dot { background: var(--b4); }
+.block-1 .block-title { color: var(--b1); }
+.block-2 .block-title { color: var(--b2); }
+.block-3 .block-title { color: var(--b3); }
+.block-4 .block-title { color: var(--b4); }
+
+/* ═══ НАВИГАЦИЯ (мобиль) ═══ */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  padding: .75rem 1rem .9rem;
+  z-index: 100;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.nav-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.nav-btn:hover { background: #f3f4f6; }
+.nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+.nav-counter {
+  font-family: 'Space Mono', monospace;
+  font-size: .85rem;
+  color: var(--muted);
+  text-align: center;
+  flex: 1;
+}
+.nav-card-title {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ═══ МОБИЛЬ РЕЖИМ ═══ */
+@media (max-width: 767px) {
+  .block-wrap { padding: 0 .75rem 5.5rem; }
+  .block-header { padding: 1.25rem 0 .75rem; }
+  .block-title { font-size: 1.1rem; }
+  .block-sub { display: none; }
+  .mobile-nav { display: flex; }
+
+  /* В мобиле показываем только активную карточку */
+  .shpora-card { display: none; }
+  .shpora-card.mobile-active { display: block; }
+
+  /* Блоки без отступов */
+  .block-section:not(.mobile-block-active) .block-header { display: none; }
+}
+
+@media (min-width: 768px) {
+  .shpora-card { display: block !important; }
+  .block-header { display: flex !important; }
+}
+
+/* ═══ СХЕМЫ / ДЕРЕВЬЯ ═══ */
+.tree {
+  font-family: 'Space Mono', monospace;
+  font-size: .8rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  margin: .6rem 0;
+  white-space: pre;
+}
+
+/* ═══ СПИСОК ═══ */
+ul.chem-list { padding-left: 1.1rem; margin: .4rem 0; }
+ul.chem-list li { font-size: 1rem; margin: .25rem 0; line-height: 1.6; }
+ol.chem-steps { padding-left: 1.3rem; margin: .4rem 0; }
+ol.chem-steps li { font-size: 1rem; margin: .4rem 0; line-height: 1.6; }
+ol.chem-steps li strong { color: var(--task); }
+
+/* ═══ ЭХР ═══ */
+.echr {
+  font-family: 'Space Mono', monospace;
+  font-size: .78rem;
+  background: linear-gradient(90deg, #e8f5e9, #fbe9e7);
+  border-radius: 8px;
+  padding: .6rem .9rem;
+  line-height: 1.8;
+  overflow-x: auto;
+  margin: .6rem 0;
+}
+.echr-active { color: #2E7D32; font-weight: 700; }
+.echr-h { color: #E64A19; font-weight: 700; }
+.echr-noble { color: #7C3AED; font-weight: 700; }
+
+/* ═══ РЕПЛИКИ ПЕРСОНАЖЕЙ ═══ */
+.hero-quote {
+  margin-top: 1rem;
+  padding: .7rem 1rem .75rem .9rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  font-size: .875rem;
+  line-height: 1.6;
+  color: #374151;
+  font-style: italic;
+  display: flex;
+  gap: .85rem;
+  align-items: flex-start;
+}
+.hero-quote-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #e2e8f0;
+  margin-top: .1rem;
+}
+.hero-quote-body {
+  flex: 1;
+  min-width: 0;
+}
+.hero-quote-name {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  font-size: .72rem;
+  color: #64748b;
+  margin-bottom: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+/* ═══ АНИМАЦИЯ ═══ */
+@keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.shpora-card.mobile-active { animation: fadein .2s ease; }
+
+/* ═══ ПРОГРЕСС БЛОКА ═══ */
+.block-progress {
+  font-size: .75rem;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  margin-left: auto;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="hero-eyebrow">⚗️ ОГЭ 2026 · Химия · 20 шпор</div>
+  <h1 class="hero-title">
+    <span class="ht1">Небесные принципы</span>
+    <span class="ht2">✦ Путешественник разгадывает ✦</span>
+    <span class="ht3">Химию Тейвата</span>
+  </h1>
+  <p class="hero-sub">
+    Архонт Мудрости Нахида и Архонт Справедливости Нёвиллет помогают тебе
+    победить боссов ОГЭ. Разгадай Небесные принципы — и найди близнеца.
+  </p>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     БЛОК 1: ТЕОРЕТИЧЕСКИЙ ФУНДАМЕНТ
+══════════════════════════════════════════════════════ -->
+<div class="block-wrap block-1 block-section" id="block-1">
+  <div class="block-header">
+    <div class="block-dot"></div>
+    <div>
+      <div class="block-title">Блок 1 — Теоретический фундамент</div>
+      <div class="block-sub">Сумеру · Архонт Мудрости Нахида: «Сначала пойми строение — потом всё остальное»</div>
+    </div>
+    <div class="block-progress">Шпоры 1–5</div>
+  </div>
+
+  <!-- ── ШПОРА 1: Строение атома ── -->
+  <div class="shpora-card" data-idx="0" data-title="Строение атома">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Строение атома и чистые вещества</div>
+        <div class="shpora-subtitle">Задания 1, 4 · Блок «Вещество»</div>
+      </div>
+      <div class="shpora-num">Ш1</div>
+    </div>
+    <div class="shpora-lore">🌿 Нахида открывает Дендро Архив: «Каждый атом — это маленькая Селестия с ядром-солнцем и электронами-путешественниками»</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Состав атома</h3>
+      <table class="chem-table">
+        <tr><th>Частица</th><th>Заряд</th><th>Где искать</th></tr>
+        <tr><td><span class="t-orange hi">Протон (p)</span> 😄</td><td><span class="t-orange">+1</span></td><td>Номер Z в таблице = число p = число e</td></tr>
+        <tr><td><span class="t-slate hi">Нейтрон (n)</span> 😎</td><td><span class="t-slate">0</span></td><td>N = A − Z (A = массовое число)</td></tr>
+        <tr><td><span class="t-cyan hi">Электрон (e)</span> 😠</td><td><span class="t-cyan">−1</span></td><td>Число e = Z (нейтральный атом)</td></tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника</div>
+        <div class="inset-text">
+          «Подрались весёлые <span class="t-orange">Протоны</span> на <span class="t-orange">плюс</span>-вайбах и мрачные <span class="t-cyan">электроны</span> на <span class="t-cyan">минус</span>-вайбах.<br>
+          И только чилловый <span class="t-slate">НЕЙтрон</span> остался <span class="t-slate">нейтрален</span>.»
+        </div>
+      </div>
+
+      <h3 class="sec">Периодическая таблица как ключ</h3>
+      <p class="rule">📍 <span class="hi">Период</span> = число электронных слоёв</p>
+      <p class="rule">📍 <span class="hi">Главная подгруппа</span> = число валентных электронов</p>
+      <p class="rule">📍 Максимум электронов на слое: 1-й — <strong>2</strong>, 2-й — <strong>8</strong>, 3-й — <strong>18</strong> (на ОГЭ 3-й слой заполняется до 8, если это не переходный металл)</p>
+      <p class="rule">📍 <span class="hi">Изотопы</span> — одинаковый Z, разное A: <span class="formula">¹²C и ¹⁴C</span></p>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Артефакт «Взор Нахиды»</div>
+        <div class="inset-text">
+          Рисуй электронную схему прямо по таблице — не заучивай!<br>
+          №11 Na: 3-й период, I группа → <span class="formula">2 + 8 + 1</span>, валентный 1 электрон ✓
+        </div>
+      </div>
+
+      <h3 class="sec">Чистые вещества и смеси</h3>
+      <table class="chem-table">
+        <tr><th>Понятие</th><th>Примеры</th></tr>
+        <tr><td><span class="t-teal hi">Простое вещество</span> — из атомов 1 элемента</td><td>O₂, Fe, Cu, Cl₂</td></tr>
+        <tr><td><span class="t-indigo hi">Сложное вещество</span> — из атомов ≥2 элементов</td><td>H₂O, NaCl, H₂SO₄</td></tr>
+        <tr><td><span class="t-orange hi">Смесь однородная</span> — не видны компоненты</td><td>Раствор соли, воздух</td></tr>
+        <tr><td><span class="t-amber hi">Смесь неоднородная</span> — видны компоненты</td><td>Речной песок + вода</td></tr>
+      </table>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Атом содержит 17 протонов и 18 нейтронов. Чему равно массовое число?<br>
+          <strong>A = 17 + 18 = 35.</strong> Это хлор-35 (<span class="t-teal">³⁵Cl</span>).
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://wotpack.ru/wp-content/uploads/2022/10/word-image-170897-1-800x450.jpeg" alt="Нахида"><div class="hero-quote-body"><span class="hero-quote-name">🌿 Нахида · Архонт Мудрости</span>«Знаешь, что меня поразило в людях? Они заучивают наизусть число протонов вместо того, чтобы просто открыть таблицу. Клетка таблицы = заряд ядра = число электронов. Трижды одно и то же число. Просто посмотри на него.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 2: Периодический закон ── -->
+  <div class="shpora-card" data-idx="1" data-title="Периодический закон">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Периодический закон и тренды ПС</div>
+        <div class="shpora-subtitle">Задание 2 · Закономерности свойств</div>
+      </div>
+      <div class="shpora-num">Ш2</div>
+    </div>
+    <div class="shpora-lore">🗺️ Карта Тейвата: чем правее регион, тем «агрессивнее» стихия — как неметаллы в периоде</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr>
+          <th>Направление</th>
+          <th>Заряд ядра</th>
+          <th>Радиус</th>
+          <th>ЭО</th>
+          <th>Неметалл. св-ва</th>
+          <th>Оксиды</th>
+        </tr>
+        <tr>
+          <td><span class="t-teal hi">По периоду →</span></td>
+          <td>↑</td><td>↓</td><td>↑</td><td>↑</td>
+          <td>Осн → Амф → Кислотн.<br><small style="color:#64748b">Na₂O→Al₂O₃→SiO₂→SO₃</small></td>
+        </tr>
+        <tr>
+          <td><span class="t-orange hi">По группе ↓</span></td>
+          <td>↑</td><td>↑</td><td>↓</td><td>↓ (металл ↑)</td>
+          <td>Усиление осн. хар-ра<br><small style="color:#64748b">MgO→CaO→BaO: осн.↑</small></td>
+        </tr>
+      </table>
+
+      <h3 class="sec">Амфотерные элементы — запомни!</h3>
+      <div class="pill-row">
+        <span class="pill pill-teal">Zn</span>
+        <span class="pill pill-teal">Al</span>
+        <span class="pill pill-teal">Be</span>
+        <span class="pill pill-teal">Fe(III)</span>
+        <span class="pill pill-teal">Cr(III)</span>
+        <span class="pill pill-teal">Pb</span>
+        <span class="pill pill-teal">Sn</span>
+      </div>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника</div>
+        <div class="inset-text">
+          «<span class="t-sky">Зина</span> <span class="t-teal">Алле</span> <span class="t-cyan">Берёт</span> <span class="t-rust">Фен</span> <span class="t-green">Хромовый</span> <em>по скидке 30%</em>»<br>
+          <span class="t-sky">Zn</span> · <span class="t-teal">Al</span> · <span class="t-cyan">Be</span> · <span class="t-rust">Fe(III)</span> · <span class="t-green">Cr(III)</span><br>
+          <span style="font-size:.82rem;color:var(--muted)">Остальные (Pb, Sn) — редко встречаются на ОГЭ</span>
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак ОГЭ: Задание 2</div>
+        <div class="inset-text">
+          Высшая степень окисления (СО) в кислородных соединениях = <strong>номер группы</strong> (главной подгруппы).<br>
+          Исключения: F (всегда −1), O (почти всегда −2).<br>
+          Формула водородного соединения неметалла: <span class="formula">H<sub>(8−n)</sub>E</span>, где n = номер группы <strong>(только для 4–7 групп!)</strong><br>
+          Сера (VI): 8−6=2 → <span class="t-teal">H₂S</span> | Хлор (VII): 8−7=1 → <span class="t-teal">HCl</span> | Углерод (IV): 8−4=4 → <span class="t-teal">CH₄</span><br>
+          <span class="warn">⚠️ Для 1–3 групп не применять</span> (у металлов нет летучих водородных соединений)
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          В ряду Na → Mg → Al → Si кислотные свойства высших оксидов…<br>
+          <strong>Усиливаются</strong> (движение по периоду вправо).
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://wotpack.ru/wp-content/uploads/2022/10/word-image-170897-1-800x450.jpeg" alt="Нахида"><div class="hero-quote-body"><span class="hero-quote-name">🌿 Нахида · Архонт Мудрости</span>«Я прочитала 500 000 рукописей Сумеру об устройстве мира. Знаешь, что в них есть? Ни намёка на периодическую таблицу. Это сделал человек. И это честно — свойства элементов действительно меняются строго по периодам, без исключений.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 3: Химическая связь ── -->
+  <div class="shpora-card" data-idx="2" data-title="Химическая связь">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Химическая связь и кристаллические решётки</div>
+        <div class="shpora-subtitle">Задание 3 · Строение вещества</div>
+      </div>
+      <div class="shpora-num">Ш3</div>
+    </div>
+    <div class="shpora-lore">💎 Фатуй изучают кристаллы Небесного острова: у каждого своя прочность — как у типов решёток</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr><th>Тип связи</th><th>Кто образует</th><th>Решётка</th><th>Свойства</th></tr>
+        <tr>
+          <td><span class="t-teal hi">Ков. неполярная</span></td>
+          <td>Не+Не одинак.</td>
+          <td>Молекулярная</td>
+          <td>Низкая T°пл, летучие</td>
+        </tr>
+        <tr>
+          <td><span class="t-cyan hi">Ков. полярная</span></td>
+          <td>Не+Не разные</td>
+          <td>Молекул./Атомная</td>
+          <td>Варьируется</td>
+        </tr>
+        <tr>
+          <td><span class="t-indigo hi">Ионная</span></td>
+          <td>Ме+Не</td>
+          <td>Ионная</td>
+          <td>Твёрдые, хрупкие, высокая T°пл</td>
+        </tr>
+        <tr>
+          <td><span class="t-orange hi">Металлическая</span></td>
+          <td>Ме+Ме</td>
+          <td>Металлическая</td>
+          <td>Пластичные, электропроводные</td>
+        </tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — «Четыре стихии решёток»</div>
+        <div class="inset-text">
+          🌨️ <span class="t-sky hi">МОЛЕКУЛ</span>ярная — как <strong>снег</strong>: тает легко (лёд, CO₂, сахар)<br>
+          🧂 <span class="t-pink hi">ИОН</span>ная — как <strong>соль</strong>: крепкая, но хрупкая (NaCl, CaO)<br>
+          💎 <span class="t-purple hi">АТОМ</span>ная — как <strong>алмаз</strong>: нерушимая (SiO₂, C-алмаз)<br>
+          🥄 <span class="t-amber hi">МЕТАЛЛ</span>ическая — как <strong>ложка</strong>: блестит и гнётся
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак: Ме или Не?</div>
+        <div class="inset-text">
+          <strong>МеНе → Ионная</strong> | <strong>НеНе → Ковалентная</strong> | <strong>МеМе → Металлическая</strong><br>
+          Запомни: <span class="formula">NaCl</span> = Ме+Не → ионная; <span class="formula">HCl</span> = Не+Не → ков. полярная
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Какое вещество имеет атомную кристаллическую решётку?<br>
+          А) NaCl  Б) CO₂  <strong>В) SiO₂ ✓</strong>  Г) H₂O<br>
+          <span style="color:var(--muted);font-size:.82rem">SiO₂ — ковалентная связь Si–O, гигантская атомная структура</span>
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://cdn.payga.me/editor/%D1%85%D1%83%D1%82%D0%B0%D0%B2%D0%B0_20230204190649815978.png" alt="Ху Тао"><div class="hero-quote-body"><span class="hero-quote-name">🦋 Ху Тао · Директор похоронного бюро</span>«Молекулярная решётка — как временная жизнь: мягкая, тает. Атомная — как истинная память: вечна и нерушима. Металлическая — блестит и гнётся, но не ломается. Выбери свою стихию, Путешественник.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 4: Степень окисления ── -->
+  <div class="shpora-card" data-idx="3" data-title="Степень окисления">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Степень окисления и валентность</div>
+        <div class="shpora-subtitle">Задание 5 · СО и валентность</div>
+      </div>
+      <div class="shpora-num">Ш4</div>
+    </div>
+    <div class="shpora-lore">⚖️ Нёвиллет взвешивает каждый ион: «У каждого своя мера заряда — справедливость требует баланса»</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Правила определения СО</h3>
+      <ul class="chem-list">
+        <li><span class="t-red hi">F</span> всегда <span class="formula">−1</span></li>
+        <li><span class="t-blue hi">O</span> почти всегда <span class="formula">−2</span></li>
+        <li><span class="t-amber hi">H</span> — с неметаллами <span class="formula">+1</span> (HCl), с металлами <span class="formula">−1</span> (NaH — гидриды)</li>
+        <li>В нейтральной молекуле: <span class="formula">Σ СО = 0</span></li>
+        <li>В ионе: <span class="formula">Σ СО = заряд иона</span></li>
+        <li>Простое вещество: СО = 0 (Fe⁰, Cl₂⁰)</li>
+      </ul>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — исключения O</div>
+        <div class="inset-text">
+          «В <strong>пероксидах</strong> (H₂O₂, Na₂O₂) кислород — <span class="t-orange">минус один</span>.<br>
+          Во <strong>фториде</strong> (OF₂) — кислород <span class="t-orange">плюс два</span>.<br>
+          Везде остальном — привычный <span class="t-teal">минус два</span>.»
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак ОГЭ: Алгоритм расчёта СО</div>
+        <div class="inset-text">
+          Пример: найти СО Cr в <span class="formula">Cr₂O₇²⁻</span><br>
+          1. Заряд иона = −2<br>
+          2. O даёт 7×(−2) = −14<br>
+          3. <span class="formula">2x + (−14) = −2</span><br>
+          4. <span class="formula">2x = 12 → x = +6</span> ✓<br>
+          Хром: <span class="t-teal">+6</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Валентность ≠ Степень окисления!</h3>
+      <table class="chem-table">
+        <tr><th></th><th><span class="t-cyan">Валентность</span></th><th><span class="t-pink">Степень окисления</span></th></tr>
+        <tr><td>Что это</td><td><span class="t-cyan">Число связей</span></td><td><span class="t-pink">Условный заряд</span></td></tr>
+        <tr><td>Знак</td><td><span class="t-cyan">Без знака (II, III)</span></td><td><span class="t-pink">Со знаком (−2, +3)</span></td></tr>
+        <tr><td>NH₃</td><td><span class="t-cyan">N — валентность III</span></td><td><span class="t-pink">N — СО = −3</span></td></tr>
+        <tr><td>H₂O₂</td><td><span class="t-cyan">O — валентность II</span></td><td><span class="t-pink">O — СО = −1</span></td></tr>
+      </table>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Босс Бездны</div>
+        <div class="inset-text">
+          В ионном уравнении пишут <span class="formula">Fe²⁺</span> (заряд иона), а не <span class="formula">Fe⁺²</span> (это СО)!<br>
+          Это разные обозначения с разным физическим смыслом. Путаница снимает баллы в задании 21.
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3DZNDoyixE2VataRF4kDwX60SuJkTHib3_g&s" alt="Нёвиллет"><div class="hero-quote-body"><span class="hero-quote-name">⚖️ Нёвиллет · Главный судья Фонтейна</span>«В суде Фонтейна каждый несёт ответственность точно в меру своего заряда. Никаких округлений, никаких "примерно". Σ СО = 0 — это закон, а не рекомендация.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 5: Классификация реакций ── -->
+  <div class="shpora-card" data-idx="4" data-title="Классификация реакций">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Классификация реакций</div>
+        <div class="shpora-subtitle">Задания 6–7 · Типы и признаки реакций</div>
+      </div>
+      <div class="shpora-num">Ш5</div>
+    </div>
+    <div class="shpora-lore">⚡ Синергии стихий в Тейвате = типы реакций: Вода + Огонь = Испарение (экзо), Дерево + Огонь = Горение</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr><th>Признак</th><th>Типы</th><th>Пример</th></tr>
+        <tr>
+          <td>По числу веществ</td>
+          <td>
+            <span class="t-teal hi">➕ Соединение</span> (A+B→AB)<br>
+            <span class="t-rust hi">✂️ Разложение</span> (AB→A+B)<br>
+            <span class="t-indigo hi">🔄 Замещение</span> (A+BC→AC+B)<br>
+            <span class="t-amber hi">↔️ Обмен</span> (AB+CD→AD+CB)
+          </td>
+          <td>
+            <span class="t-teal">2H₂+O₂→2H₂O</span><br>
+            <span class="t-rust">2H₂O→2H₂+O₂</span><br>
+            <span class="t-indigo">Zn+2HCl→ZnCl₂+H₂↑</span><br>
+            <span class="t-amber">NaCl+AgNO₃→AgCl↓+NaNO₃</span>
+          </td>
+        </tr>
+        <tr>
+          <td>По изменению СО</td>
+          <td><span class="t-pink hi">ОВР</span> (меняется СО)<br><span class="t-slate hi">не ОВР</span></td>
+          <td><span class="t-pink">горение, замещение</span><br><span class="t-slate">нейтрализация</span></td>
+        </tr>
+        <tr>
+          <td>По теплоте</td>
+          <td><span class="t-orange hi">Экзотермическая</span> (−ΔH)<br><span class="t-sky hi">Эндотермическая</span> (+ΔH)</td>
+          <td><span class="t-orange">горение, растворение H₂SO₄</span><br><span class="t-sky">обжиг известняка, фотосинтез</span></td>
+        </tr>
+        <tr>
+          <td>По обратимости</td>
+          <td><span class="t-teal hi">Обратимые ⇌</span><br><span class="t-indigo hi">Необратимые →</span></td>
+          <td><span class="t-teal">N₂+3H₂⇌2NH₃</span><br><span class="t-indigo">NaOH+HCl→NaCl+H₂O</span></td>
+        </tr>
+        <tr>
+          <td>По катализатору</td>
+          <td><span class="t-lime hi">Каталитические</span><br>Некаталитические</td>
+          <td><span class="t-lime">2H₂O₂ →(MnO₂) 2H₂O+O₂</span></td>
+        </tr>
+      </table>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          К реакциям соединения И одновременно ОВР относится:<br>
+          А) CaO + H₂O → Ca(OH)₂ ❌ (соединение, не ОВР)<br>
+          <strong>Б) 2H₂ + O₂ → 2H₂O ✓</strong> (соединение + ОВР: H⁰→+1, O⁰→−2)<br>
+          В) 2HCl → H₂ + Cl₂ ❌ (разложение + ОВР, но не соединение)
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://genshinpedia.ru/wp-content/uploads/2020/12/1615647544_d2ddea18f00665ce8623e36bd4e3c7c5-1024x1024.png" alt="Кли"><div class="hero-quote-body"><span class="hero-quote-name">💥 Кли · Боец Рыцарей Фавония</span>«Папа Капитан говорит: "Кли, не путай типы реакций". Но ведь это же просто! Если соединяется — соединение. Если распадается — разложение. Моя любимая, конечно, — горение. ОВР плюс соединение сразу!»</div></div>
+    </div>
+  </div>
+
+</div><!-- /block-1 -->
+
+<!-- ══════════════════════════════════════════════════════
+     БЛОК 2: ХИМИЧЕСКИЕ РЕАКЦИИ
+══════════════════════════════════════════════════════ -->
+<div class="block-wrap block-2 block-section" id="block-2">
+  <div class="block-header">
+    <div class="block-dot"></div>
+    <div>
+      <div class="block-title">Блок 2 — Химические реакции</div>
+      <div class="block-sub">Фонтейн · Архонт Справедливости Нёвиллет: «Каждая реакция подчиняется закону»</div>
+    </div>
+    <div class="block-progress">Шпоры 6–8</div>
+  </div>
+
+  <!-- ── ШПОРА 6: Скорость реакций ── -->
+  <div class="shpora-card" data-idx="5" data-title="Скорость реакций">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Скорость химических реакций</div>
+        <div class="shpora-subtitle">Задание 7 · Факторы скорости</div>
+      </div>
+      <div class="shpora-num">Ш6</div>
+    </div>
+    <div class="shpora-lore">⚡ Электро-Архонт Сигнора управляет скоростью реакций молний: одни — мгновенные, другие — медленные как ржавление</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">4 фактора скорости реакции</h3>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника «КТПК»</div>
+        <div class="inset-text">
+          <span class="t-pink"><strong>К</strong></span>аждый <span class="t-orange"><strong>Т</strong></span>ейватец <span class="t-cyan"><strong>П</strong></span>омнит <span class="t-lime"><strong>К</strong></span>омбо:<br>
+          <span class="t-pink">К</span>онцентрация · <span class="t-orange">Т</span>емпература · <span class="t-cyan">П</span>лощадь соприкосновения · <span class="t-lime">К</span>атализатор
+        </div>
+      </div>
+
+      <table class="chem-table">
+        <tr><th>Фактор</th><th>Эффект</th><th>Пример</th></tr>
+        <tr>
+          <td><span class="t-pink hi">Концентрация ↑</span></td>
+          <td>Скорость ↑ (больше столкновений)</td>
+          <td>Чистый O₂ vs воздух для горения</td>
+        </tr>
+        <tr>
+          <td><span class="t-orange hi">Температура +10°C</span></td>
+          <td>Скорость в <strong>2–4 раза ↑</strong></td>
+          <td>Молоко киснет быстрее в тепле</td>
+        </tr>
+        <tr>
+          <td><span class="t-cyan hi">Площадь контакта ↑</span></td>
+          <td>Скорость ↑ (только для гетерогенных)</td>
+          <td>Порошок Zn > кусочек Zn с HCl</td>
+        </tr>
+        <tr>
+          <td><span class="t-lime hi">Катализатор</span></td>
+          <td>Скорость ↑↑ (сам не расходуется)</td>
+          <td>MnO₂ при разложении H₂O₂</td>
+        </tr>
+      </table>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак ОГЭ: Задание 7</div>
+        <div class="inset-text">
+          Ингибитор — это <strong>замедлитель</strong> (снижает скорость). Катализатор — ускоряет.<br>
+          Для гомогенных реакций (оба вещества жидкие или оба газы) — площадь поверхности не важна.<br>
+          Температура ↑ всегда ускоряет, даже если реакция экзотермическая.
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Скорость реакции растворения мрамора в HCl увеличится при:<br>
+          А) Замена HCl на H₂SO₄ (разб.) ❌ — образуется нерастворимый CaSO₄↓, он покрывает мрамор и блокирует реакцию<br>
+          <strong>Б) Измельчение мрамора в порошок ✓</strong> (площадь ↑)<br>
+          В) Охлаждение раствора (T↓ → скорость↓)<br>
+          Г) Разбавление кислоты (концентрация↓)
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://i.pinimg.com/736x/c1/a3/9e/c1a39e1d091919361e2a78d15c6aab5c.jpg" alt="Сигнора"><div class="hero-quote-body"><span class="hero-quote-name">❄️ Сигнора · Вестник Фатуи</span>«Скорость — это власть. Хочешь, чтобы реакция шла быстрее? Три пути: грей, измельчай, добавь катализатор. Не жди. Действуй.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 7: ОВР ── -->
+  <div class="shpora-card" data-idx="6" data-title="ОВР">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Окислительно-восстановительные реакции</div>
+        <div class="shpora-subtitle">Задание 20 · ОВР и электронный баланс</div>
+      </div>
+      <div class="shpora-num">Ш7</div>
+    </div>
+    <div class="shpora-lore">⚡ Сигнора — повелительница электронов. Кто отдаёт — тот горит. Кто забирает — тот побеждает</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr>
+          <th></th>
+          <th><span class="t-red">Окислитель</span></th>
+          <th><span class="t-green">Восстановитель</span></th>
+        </tr>
+        <tr><td>Действие</td><td>Забирает e⁻</td><td>Отдаёт e⁻</td></tr>
+        <tr><td>СО</td><td>Понижается (от +5 к +4)</td><td>Повышается (от 0 к +2)</td></tr>
+        <tr><td>Сам при этом</td><td><strong>Восстанавливается</strong></td><td><strong>Окисляется</strong></td></tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — «Жадина и Щедрый»</div>
+        <div class="inset-text">
+          🏴‍☠️ <span class="t-red hi">Окислитель — Жадина</span>: тащит чужие электроны к себе, но сам от этого мельчает (<span class="t-red">СО↓</span>, <span class="t-red">восстанавливается</span>).<br>
+          🫴 <span class="t-lime hi">Восстановитель — Щедрый</span>: отдаёт электроны, и сам от этого «растёт» (<span class="t-lime">СО↑</span>, <span class="t-lime">окисляется</span>).
+        </div>
+      </div>
+
+      <h3 class="sec">Типичные окислители и восстановители</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 0;">
+        <div>
+          <p style="font-size:.8rem;font-weight:700;color:var(--boss);margin-bottom:.3rem">Окислители</p>
+          <div class="pill-row">
+            <span class="pill pill-red">KMnO₄</span>
+            <span class="pill pill-red">K₂Cr₂O₇</span>
+            <span class="pill pill-red">HNO₃</span>
+            <span class="pill pill-red">H₂SO₄(конц)</span>
+            <span class="pill pill-red">O₂</span>
+            <span class="pill pill-red">Cl₂</span>
+            <span class="pill pill-red">F₂</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:.8rem;font-weight:700;color:var(--b4);margin-bottom:.3rem">Восстановители</p>
+          <div class="pill-row">
+            <span class="pill pill-green">H₂</span>
+            <span class="pill pill-green">C (уголь)</span>
+            <span class="pill pill-green">CO</span>
+            <span class="pill pill-green">Металлы</span>
+            <span class="pill pill-green">HI, HBr</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Алгоритм электронного баланса (5 шагов)</div>
+        <div class="inset-text">
+          <ol class="chem-steps">
+            <li><strong>Расставь СО</strong> у всех элементов</li>
+            <li><strong>Найди изменения</strong>: кто и на сколько</li>
+            <li><strong>НОК → коэффициенты</strong> для балансировки</li>
+            <li><strong>Расставь коэф.</strong> в уравнении</li>
+            <li><strong>Проверь</strong> баланс атомов O и H</li>
+          </ol>
+          <div style="margin-top:.8rem;padding:.65rem .9rem;background:#f8fafc;border-radius:8px;border-left:3px solid #7C3AED;font-size:.82rem;line-height:1.7">
+            <strong>Пример: 2Fe + 3Cl₂ → 2FeCl₃</strong><br>
+            Fe⁰ → Fe<sup>+3</sup> — отдаёт <span class="t-orange">3e⁻</span> | берём ×<strong>2</strong><br>
+            Cl₂⁰ → 2Cl<sup>−1</sup> — принимает <span class="t-teal">2e⁻</span> (на молекулу) | берём ×<strong>3</strong><br>
+            НОК(3,2) = <strong>6</strong> → Fe коэф. 2, Cl₂ коэф. 3 ✓
+          </div>
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          <span class="formula">Cu + 4HNO₃(конц) → Cu(NO₃)₂ + 2NO₂↑ + 2H₂O</span><br>
+          Укажи окислитель и восстановитель:<br>
+          <strong>Окислитель</strong> — N⁺⁵ в HNO₃ (N: +5 → +4, восстановился)<br>
+          <strong>Восстановитель</strong> — Cu⁰ (Cu: 0 → +2, окислился)
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://cdn.payga.me/editor/%D1%85%D1%83%D1%82%D0%B0%D0%B2%D0%B0_20230204190649815978.png" alt="Ху Тао"><div class="hero-quote-body"><span class="hero-quote-name">🦋 Ху Тао · Директор похоронного бюро</span>«Окислитель берёт чужие электроны и от этого уменьшается — восстанавливается. Смешно, правда? Берёт больше, а становится меньше. Это я называю химической иронией судьбы.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 8: Электролиты и РИО ── -->
+  <div class="shpora-card" data-idx="7" data-title="Электролиты и РИО">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Электролиты, ТЭД и реакции ионного обмена</div>
+        <div class="shpora-subtitle">Задания 8–9, 21 · Ионные уравнения</div>
+      </div>
+      <div class="shpora-num">Ш8</div>
+    </div>
+    <div class="shpora-lore">🌊 Гидро-реакции Фонтейна: ионы свободно плывут в воде. Некоторые — вместе навсегда (осадки)</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Сильные электролиты (диссоциируют полностью →)</h3>
+      <div class="pill-row">
+        <span class="pill pill-red">HCl</span><span class="pill pill-red">HBr</span><span class="pill pill-red">HI</span>
+        <span class="pill pill-red">H₂SO₄</span><span class="pill pill-red">HNO₃</span><span class="pill pill-red">HClO₄</span>
+        <span class="pill pill-indigo">NaOH</span><span class="pill pill-indigo">KOH</span>
+        <span class="pill pill-indigo">Ca(OH)₂</span><span class="pill pill-indigo">Ba(OH)₂</span>
+        <span class="pill pill-teal">Растворимые соли</span>
+      </div>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — сильные кислоты</div>
+        <div class="inset-text">
+          Запомни формулами — пять сильных кислот:<br>
+          <span class="t-red hi">HCl</span> <span style="color:var(--muted);font-size:.8rem">(соляная)</span> ·
+          <span class="t-red hi">HBr</span> <span style="color:var(--muted);font-size:.8rem">(бромоводородная)</span> ·
+          <span class="t-red hi">HI</span> <span style="color:var(--muted);font-size:.8rem">(иодоводородная)</span> ·
+          <span class="t-pink hi">H₂SO₄</span> <span style="color:var(--muted);font-size:.8rem">(серная)</span> ·
+          <span class="t-pink hi">HNO₃</span> <span style="color:var(--muted);font-size:.8rem">(азотная)</span><br>
+          <span style="font-size:.82rem;color:var(--muted)">+ HClO₄ (хлорная) — тоже сильная, но на ОГЭ редко</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Слабые электролиты (⇌ частично)</h3>
+      <div class="pill-row">
+        <span class="pill">H₂O</span><span class="pill">H₂S</span><span class="pill">HF</span>
+        <span class="pill">CH₃COOH</span><span class="pill">H₂CO₃</span><span class="pill">H₂SiO₃</span>
+        <span class="pill">NH₃·H₂O</span>
+      </div>
+
+      <h3 class="sec">Правило Бертолле (РИО идёт, если образуется):</h3>
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника «ГОВ»</div>
+        <div class="inset-text">
+          <span class="t-magenta hi">Г</span>аз ↑ <span style="color:var(--muted);font-size:.8rem">(выделяется пузырями)</span> ·
+          <span class="t-purple hi">О</span>садок ↓ <span style="color:var(--muted);font-size:.8rem">(выпадает нерастворимое)</span> ·
+          <span class="t-sky hi">В</span>ода <span style="color:var(--muted);font-size:.8rem">(или слабый электролит)</span><br>
+          Есть хоть что-то из <span class="t-magenta">Г</span><span class="t-purple">О</span><span class="t-sky">В</span> → реакция <strong>пошла до конца</strong>!
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Главный босс: НЕ разбивай нерастворимые!</div>
+        <div class="inset-text">
+          BaSO₄↓ в ионном уравнении пишем как <span class="formula">BaSO₄↓</span> — <strong>не</strong> как Ba²⁺ + SO₄²⁻!<br>
+          Нерастворимые вещества, газы и слабые электролиты — <strong>всегда молекулярно</strong>.
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Алгоритм ионного уравнения</div>
+        <div class="inset-text">
+          <ol class="chem-steps">
+            <li><strong>Полное молекулярное</strong> уравнение</li>
+            <li><strong>Разбей на ионы</strong> только сильные электролиты + растворимые соли</li>
+            <li><strong>Вычеркни</strong> одинаковые ионы с обеих сторон (ионы-наблюдатели)</li>
+            <li><strong>Краткое ионное</strong> уравнение</li>
+          </ol>
+          <div style="margin-top:.8rem;padding:.65rem .9rem;background:#f8fafc;border-radius:8px;border-left:3px solid #0891b2;font-size:.82rem;line-height:1.8">
+            <strong>Пример: NaCl + AgNO₃ → AgCl↓ + NaNO₃</strong><br>
+            Полное ионное: Na⁺ + <u>Cl⁻</u> + <u>Ag⁺</u> + NO₃⁻ → AgCl↓ + Na⁺ + NO₃⁻<br>
+            Вычеркиваем: <span style="text-decoration:line-through;color:#94a3b8">Na⁺</span>, <span style="text-decoration:line-through;color:#94a3b8">NO₃⁻</span><br>
+            Краткое: <strong>Ag⁺ + Cl⁻ → AgCl↓</strong> ✓
+          </div>
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Какая реакция обмена протекает до конца?<br>
+          А) NaCl + KNO₃ ❌ (нет осадка/газа/воды)<br>
+          <strong>Б) Na₂SO₄ + BaCl₂ ✓</strong> → BaSO₄↓ + 2NaCl<br>
+          Краткое ионное: <span class="formula">Ba²⁺ + SO₄²⁻ → BaSO₄↓</span>
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://newcdn.igromania.ru/editor/images/58/ac7acbe8-cdbf-4159-91bb-154fa49e01c1.jpg" alt="Фурина"><div class="hero-quote-body"><span class="hero-quote-name">🎭 Фурина · Архонт Гидро</span>«Настоящий электролит диссоциирует полностью, без колебаний! Как я на главной роли — без слабых мест, без оговорок! В отличие от... некоторых слабых кислот, которые вечно колеблются.»</div></div>
+    </div>
+  </div>
+
+</div><!-- /block-2 -->
+
+<!-- ══════════════════════════════════════════════════════
+     БЛОК 3: НЕОРГАНИЧЕСКАЯ ХИМИЯ
+══════════════════════════════════════════════════════ -->
+<div class="block-wrap block-3 block-section" id="block-3">
+  <div class="block-header">
+    <div class="block-dot"></div>
+    <div>
+      <div class="block-title">Блок 3 — Неорганическая химия</div>
+      <div class="block-sub">Мондштадт · Ли Юэ · Инадзума — каждый регион = один класс веществ</div>
+    </div>
+    <div class="block-progress">Шпоры 9–14</div>
+  </div>
+
+  <!-- ── ШПОРА 9: Оксиды ── -->
+  <div class="shpora-card" data-idx="8" data-title="Оксиды">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Оксиды — классификация и реакции</div>
+        <div class="shpora-subtitle">Задания 10, 12 · Оксиды</div>
+      </div>
+      <div class="shpora-num">Ш9</div>
+    </div>
+    <div class="shpora-lore">🌬️ Мондштадт — город ветра. Анемо-Архонт Барбатос: «Оксиды летят в разные стороны — каждый к своему реагенту»</div>
+    <div class="shpora-body">
+
+      <div class="tree">Оксиды
+├── <span class="t-slate">Несолеобразующие: CO, NO, N₂O</span> <span style="color:var(--muted)">(только 3!)</span>
+└── Солеобразующие
+    ├── <span class="t-orange">Основные</span> <span style="color:var(--muted)">(Ме с низк. СО): Na₂O, CaO, FeO, CuO</span>
+    │   → + кислоты, кислотные оксиды, вода*
+    ├── <span class="t-red">Кислотные</span> <span style="color:var(--muted)">(Не, Ме с выс. СО): SO₃, CO₂, P₂O₅, CrO₃</span>
+    │   → + основания, основные оксиды, вода*
+    └── <span class="t-cyan">Амфотерные</span>: ZnO, Al₂O₃, Cr₂O₃, BeO
+        → + и кислоты, и щёлочи!</div>
+
+      <p style="font-size:.8rem;color:var(--muted);margin:.3rem 0">* Вода — только если образуется растворимый гидроксид или кислота</p>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак ОГЭ: Задание 10</div>
+        <div class="inset-text">
+          Если вещество <strong>амфотерное</strong> — оно реагирует и с кислотой, и со щёлочью.<br>
+          Al₂O₃ + 6HCl → 2AlCl₃ + 3H₂O (с кислотой)<br>
+          Al₂O₃ + 2NaOH → 2NaAlO₂ + H₂O (со щёлочью)
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          С каким веществом реагирует Al₂O₃?<br>
+          А) MgO  Б) CuO  <strong>В) NaOH ✓</strong>  Г) CO₂<br>
+          <span style="color:var(--muted);font-size:.82rem">Al₂O₃ — амфотерный, реагирует и с кислотами, и со щёлочами</span>
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://static.wikia.nocookie.net/gensin-impact/images/a/a6/Character_Venti_Full_Wish.png" alt="Венти" onerror="this.style.display='none'"><div class="hero-quote-body"><span class="hero-quote-name">🍃 Венти · Архонт Анемо</span>«Амфотерный оксид — это как я: могу с кем угодно. С кислотой? Пожалуйста. Со щёлочью? Тоже. Быть свободным значит не выбирать одну сторону. Al₂O₃ это понял. Ты понял?»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 10: Основания ── -->
+  <div class="shpora-card" data-idx="9" data-title="Основания">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Основания и гидроксиды</div>
+        <div class="shpora-subtitle">Задание 11 · Основания и их реакции</div>
+      </div>
+      <div class="shpora-num">Ш10</div>
+    </div>
+    <div class="shpora-lore">🪨 Гео-Архонт Жун Юань — щёлочи стойкие как камень. Но нерастворимые — разрушаются при нагреве</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Щёлочи (растворимые основания)</h3>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника</div>
+        <div class="inset-text">
+          «<span class="t-pink">Ли</span><span class="t-indigo">К</span><span class="t-teal">Ба</span><span class="t-orange">Ка</span><span class="t-sky">На</span> — <em>Тусили два кабана!</em>»<br>
+          <span class="t-pink">Li</span>OH · <span class="t-indigo">K</span>OH · <span class="t-teal">Ba</span>(OH)₂ · <span class="t-orange">Ca</span>(OH)₂ · <span class="t-sky">Na</span>OH<br>
+          <span style="font-size:.82rem;color:var(--muted)">+ Sr(OH)₂ — тоже щёлочь, но реже нужен</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Реакции оснований</h3>
+      <table class="chem-table">
+        <tr><th>Щёлочь + что</th><th>Продукт</th><th>Условие</th></tr>
+        <tr><td>+ Кислота</td><td>Соль + H₂O</td><td>Всегда (нейтрализация)</td></tr>
+        <tr><td>+ Кислотный оксид</td><td>Соль + H₂O</td><td>Всегда</td></tr>
+        <tr><td>+ Соль</td><td>Новая соль + новое основание↓</td><td>Если образуется ↓</td></tr>
+        <tr><td>+ Амфотерный оксид/гидроксид</td><td>Соль</td><td>Всегда!</td></tr>
+      </table>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Амфотерные гидроксиды реагируют со щёлочью!</div>
+        <div class="inset-text">
+          <span class="formula">Al(OH)₃ + NaOH → Na[Al(OH)₄]</span> или <span class="formula">NaAlO₂ + 2H₂O</span><br>
+          <span class="formula">Zn(OH)₂ + 2NaOH → Na₂[Zn(OH)₄]</span>
+        </div>
+      </div>
+
+      <p class="rule"><span class="hi">Нерастворимые основания</span> при нагревании разлагаются:</p>
+      <p class="rule"><span class="formula">Cu(OH)₂ →(t°) CuO + H₂O</span> (голубой → чёрный)</p>
+      <p class="rule"><span class="formula">Fe(OH)₃ →(t°) Fe₂O₃ + H₂O</span> (красно-бурый → красный)</p>
+      <div class="hero-quote"><span class="hero-quote-name">⚔️ Жун Юань · Советник Ли Юэ</span>«В торговле Ли Юэ есть правило: знай своих надёжных партнёров наизусть. ЛиКаБаКаНа — это не просто мнемоника. Это список тех, на кого можно положиться в щелочной среде.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 11: Кислоты ── -->
+  <div class="shpora-card" data-idx="10" data-title="Кислоты + Ловушки">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Кислоты — и главные ловушки ОГЭ</div>
+        <div class="shpora-subtitle">Задание 12 · Кислоты-окислители, пассивация</div>
+      </div>
+      <div class="shpora-num">Ш11</div>
+    </div>
+    <div class="shpora-lore">🔥 Пиро-Архонт Муратха: «Кислоты-окислители — самые опасные боссы ОГЭ. Не жди от них водород!»</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Обычные кислоты + металл (левее H в ЭХР)</h3>
+      <p class="rule"><span class="formula">Zn + 2HCl → ZnCl₂ + H₂↑</span> — водород выделяется ✓</p>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ ГЛАВНЫЙ БОСС ОГЭ: кислоты-окислители</div>
+        <div class="inset-text">
+          С <span class="t-red hi">HNO₃</span> (любой концентрации) и <span class="t-red hi">H₂SO₄ (конц.)</span> — <strong>водород H₂ НИКОГДА не выделяется!</strong><br><br>
+          <span class="t-red">HNO₃ разб.</span> → NO↑ (бесцветный, буреет на воздухе)<br>
+          <span class="t-red">HNO₃ конц.</span> → NO₂↑ (бурый газ)<br>
+          <span class="t-red">H₂SO₄ конц.</span> → SO₂↑ (сернистый газ с запахом)
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Босс Пассивации: Al, Fe, Cr</div>
+        <div class="inset-text">
+          Алюминий, железо и хром <strong>пассивируются</strong> в концентрированных HNO₃ и H₂SO₄ на холоду — покрываются оксидной плёнкой и не реагируют!<br>
+          При нагревании — реагируют.
+        </div>
+      </div>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — пассивация</div>
+        <div class="inset-text">
+          «<strong>Железо и Алюминий — маски надевают</strong> в концентрированных кислотах»<br>
+          (маска = оксидная плёнка = пассивация)
+        </div>
+      </div>
+
+      <h3 class="sec">Реакции обычных кислот</h3>
+      <table class="chem-table">
+        <tr><th>Кислота + что</th><th>Продукт</th><th>Условие</th></tr>
+        <tr><td>+ Металл (левее H)</td><td>Соль + H₂↑</td><td>Кроме HNO₃ и H₂SO₄(конц)!</td></tr>
+        <tr><td>+ Основный оксид</td><td>Соль + H₂O</td><td>Всегда</td></tr>
+        <tr><td>+ Основание</td><td>Соль + H₂O</td><td>Нейтрализация</td></tr>
+        <tr><td>+ Соль</td><td>Новая кислота + новая соль</td><td>Если образующаяся кислота слабее исходной, или выделяется газ↑, или выпадает осадок↓</td></tr>
+      </table>
+      <div class="hero-quote"><span class="hero-quote-name">❄️ Сигнора · Вестник Фатуи</span>«HNO₃ и H₂SO₄ концентрированные — не те кислоты, с которыми шутят. Пассивация — не слабость. Это умная защита. Знать, когда не реагировать — тоже стратегия.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 12: Соли ── -->
+  <div class="shpora-card" data-idx="11" data-title="Соли">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Соли — реакции и ловушки</div>
+        <div class="shpora-subtitle">Задание 13 · Реакции солей</div>
+      </div>
+      <div class="shpora-num">Ш12</div>
+    </div>
+    <div class="shpora-lore">🏪 Торговый порт Ли Юэ: ионы обменивают партнёров — но только если взамен есть выгода (осадок, газ, вода)</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Типы солей</h3>
+      <div class="pill-row">
+        <span class="pill pill-teal">Средние: Na₂SO₄</span>
+        <span class="pill pill-amber">Кислые: NaHSO₄, NaHCO₃</span>
+        <span class="pill pill-indigo">Основные: Cu₂(OH)₂CO₃</span>
+      </div>
+
+      <h3 class="sec">Реакции солей</h3>
+      <table class="chem-table">
+        <tr><th>Соль + что</th><th>Результат</th><th>Условие</th></tr>
+        <tr><td>+ Кислота</td><td>Новая соль + новая кислота</td><td>Если образующаяся кислота слабее исходной, выделяется газ↑ или выпадает осадок↓</td></tr>
+        <tr><td>+ Щёлочь</td><td>Новая соль + новое основание</td><td>Если ↓</td></tr>
+        <tr><td>+ Другая соль</td><td>2 новые соли</td><td>Если ↓ (оба растворимы исходно!)</td></tr>
+        <tr><td>+ Металл</td><td>Новый металл + новая соль</td><td>По ЭХР (НО! Na, K, Li — нет!)</td></tr>
+      </table>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Ловушка: Na (K, Li) + раствор соли</div>
+        <div class="inset-text">
+          <strong>НЕ пишем</strong> замещение Na + CuSO₄ → Cu + Na₂SO₄!<br>
+          <strong>ПРАВИЛЬНО:</strong><br>
+          1. <span class="formula">2Na + 2H₂O → 2NaOH + H₂↑</span><br>
+          2. <span class="formula">2NaOH + CuSO₄ → Cu(OH)₂↓ + Na₂SO₄</span><br>
+          Активные металлы сначала реагируют с <strong>водой-растворителем</strong>!
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">⚔️ Жун Юань · Советник Ли Юэ</span>«Ионный обмен — чистая коммерция. Ионы меняют партнёров только если есть выгода: появляется осадок, газ или вода. Нет выгоды — нет сделки. Бизнес есть бизнес.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 13: Металлы ── -->
+  <div class="shpora-card" data-idx="12" data-title="Металлы и ЭХР">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Металлы и электрохимический ряд</div>
+        <div class="shpora-subtitle">Задания 14–15 · ЭХР и реакции металлов</div>
+      </div>
+      <div class="shpora-num">Ш13</div>
+    </div>
+    <div class="shpora-lore">⚡ Электро-Архонт Сигнора выстроила иерархию: левее = активнее, правее = благороднее</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Электрохимический ряд напряжений металлов</h3>
+      <div class="echr">
+<span class="echr-active">Li · K · Ba · Ca · Na</span> · <span class="t-teal">Mg · Al · Mn</span> · <span class="t-orange">Zn · Cr · Fe · Co · Ni · Sn · Pb</span> · <span class="echr-h">[H]</span> · <span class="t-sky">Cu · Hg</span> · <span class="echr-noble">Ag · Pt · Au</span>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted);margin:.3rem 0">← <span class="t-lime">активнее (восстановители)</span> ················ <span class="t-purple">благороднее (окислители)</span> →</p>
+      <p style="font-size:.8rem;color:var(--muted);margin:.2rem 0"><span class="echr-active">■</span> реагируют с водой · <span class="t-teal">■</span> реагируют с кислотами · <span class="t-orange">■</span> только с окислителями · <span class="echr-h">■</span> водород · <span class="t-sky">■</span> Cu, Hg · <span class="echr-noble">■</span> благородные</p>
+
+      <h3 class="sec">Правила ЭХР</h3>
+      <table class="chem-table">
+        <tr><th>Правило</th><th>Пример</th></tr>
+        <tr>
+          <td>Металл левее H → вытесняет H₂ из неокисляющих кислот</td>
+          <td>Zn + 2HCl → ZnCl₂ + H₂↑</td>
+        </tr>
+        <tr>
+          <td>Металл левее другого → вытесняет его из раствора соли</td>
+          <td>Fe + CuSO₄ → FeSO₄ + Cu</td>
+        </tr>
+        <tr>
+          <td><span class="t-red hi">ИСКЛЮЧЕНИЕ!</span> Li, Na, K, Ca, Ba → сначала с водой!</td>
+          <td>Na + H₂O → NaOH + ½H₂↑</td>
+        </tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — активные металлы</div>
+        <div class="inset-text">
+          «<span class="t-pink">Ли</span><span class="t-indigo">К</span><span class="t-teal">Ба</span><span class="t-orange">Ка</span><span class="t-sky">На</span> — <em>сидели два кабана!</em>»<br>
+          <span class="t-pink">Li</span> · <span class="t-indigo">K</span> · <span class="t-teal">Ba</span> · <span class="t-orange">Ca</span> · <span class="t-sky">Na</span> — реагируют с водой без нагревания!
+        </div>
+      </div>
+
+      <h3 class="sec">Особенности металлов</h3>
+      <ul class="chem-list">
+        <li><span class="t-orange hi">Al, Fe, Cr</span> — пассивируются в конц. HNO₃ и H₂SO₄ (холодных)</li>
+        <li><span class="t-indigo hi">Cu, Ag</span> — не реагируют с HCl и H₂SO₄(разб), но реагируют с HNO₃</li>
+        <li><span class="t-green hi">Fe</span> — даёт <strong>+2</strong> с разб. кислотами, <strong>+3</strong> с окислителями (Cl₂, HNO₃)</li>
+        <li><span class="t-teal hi">Al</span> — амфотерный: реагирует и с кислотами, и со щёлочами</li>
+      </ul>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Железо взаимодействует с каждым из веществ:<br>
+          А) CuSO₄, S, NaOH ❌ (с NaOH Fe не реагирует)<br>
+          <strong>Б) HCl, CuSO₄, Cl₂ ✓</strong><br>
+          В) HCl, KOH, CuSO₄ ❌ (с KOH — нет)<br>
+          Г) CuSO₄, H₂O, HCl ❌ (с водой Fe при обычных условиях не реагирует)
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">✨ Путешественник · Чужестранец</span>«Я прошёл весь Тейват — от Мондштадта до Натлана. Металлы тоже выстроились в ряд. Чем левее — тем активнее. Натрий в воде я видел своими глазами. Не рекомендую повторять.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 14: Неметаллы ── -->
+  <div class="shpora-card" data-idx="13" data-title="Неметаллы">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Неметаллы — свойства и особенности</div>
+        <div class="shpora-subtitle">Задание 11 · Галогены, C, S, Si, N, P</div>
+      </div>
+      <div class="shpora-num">Ш14</div>
+    </div>
+    <div class="shpora-lore">🌬️ Анемо-Архонт Барбатос — летучие неметаллы как ветер: одни сильные окислители, другие — восстановители</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Галогены (F₂ > Cl₂ > Br₂ > I₂ — активность↓)</h3>
+      <p class="rule">Каждый вытесняет следующий: <span class="formula">Cl₂ + 2KBr → 2KCl + Br₂</span></p>
+      <p class="rule">Cl₂ + H₂O → HCl + HClO (хлорная вода — дезинфекция)</p>
+
+      <h3 class="sec">Кремний Si — особый!</h3>
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Ловушка с кремнием</div>
+        <div class="inset-text">
+          Si <strong>НЕ реагирует</strong> с большинством кислот (кроме HF!)<br>
+          НО реагирует с щёлочами: <span class="formula">Si + 2NaOH + H₂O → Na₂SiO₃ + 2H₂↑</span><br>
+          SiO₂ тоже реагирует со щёлочью: <span class="formula">SiO₂ + 2NaOH → Na₂SiO₃ + H₂O</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Углерод C — аллотропия</h3>
+      <div class="pill-row">
+        <span class="pill pill-indigo">Алмаз — атомная решётка, самый твёрдый</span>
+        <span class="pill pill-teal">Графит — слоистый, электропроводный!</span>
+        <span class="pill pill-amber">Сажа/уголь — аморфный</span>
+      </div>
+      <p class="rule"><span class="t-orange hi">CO</span> — угарный газ, несолеобразующий оксид, <span class="t-orange">сильный восстановитель</span></p>
+
+      <h3 class="sec">Азот N и фосфор P</h3>
+      <p class="rule">Цепочка N: <span class="formula">N₂ → NO → NO₂ → HNO₃</span></p>
+      <p class="rule"><span class="t-teal hi">NH₃</span> — аммиак: N₂ + 3H₂ ⇌ 2NH₃ (катализатор Fe, кат. давление, ~500 °C)</p>
+      <p class="rule">NH₃ — слабое основание, с кислотами даёт соли: NH₃ + HCl → NH₄Cl</p>
+      <p class="rule">Цепочка P: <span class="formula">P → P₂O₅ → H₃PO₄</span> | Фосфорная кислота — средняя, трёхосновная</p>
+
+      <h3 class="sec">Сера S</h3>
+      <p class="rule">Цепочка: <span class="formula">S → SO₂ → SO₃ → H₂SO₄</span> (промышленный синтез)</p>
+      <p class="rule">S — и окислитель (+с металлами), и восстановитель (+с O₂, F₂)</p>
+      <div class="hero-quote"><span class="hero-quote-name">💥 Кли · Боец Рыцарей Фавония</span>«Фтор — самый сильный окислитель! Сильнее хлора, сильнее всех в таблице! Папа Капитан не разрешает мне с ним работать. Говорит, мне и без того хватает взрывного потенциала. Это справедливо.»</div>
+    </div>
+  </div>
+
+</div><!-- /block-3 -->
+
+<!-- ══════════════════════════════════════════════════════
+     БЛОК 4: ПРАКТИКА И РАСЧЁТЫ
+══════════════════════════════════════════════════════ -->
+<div class="block-wrap block-4 block-section" id="block-4">
+  <div class="block-header">
+    <div class="block-dot"></div>
+    <div>
+      <div class="block-title">Блок 4 — Практика и расчёты</div>
+      <div class="block-sub">Фонтейн-лаборатория · «Здесь всё строго по протоколу»</div>
+    </div>
+    <div class="block-progress">Шпоры 15–20</div>
+  </div>
+
+  <!-- ── ШПОРА 15: Качественные реакции ── -->
+  <div class="shpora-card" data-idx="14" data-title="Качественные реакции">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Качественные реакции — цвета осадков</div>
+        <div class="shpora-subtitle">Задание 17 · Распознавание ионов</div>
+      </div>
+      <div class="shpora-num">Ш15</div>
+    </div>
+    <div class="shpora-lore">🔍 Детектив Рысь расследует в Фонтейне: цвет осадка — главная улика. Запомни палитру!</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr><th>Ион</th><th>Реагент</th><th>Признак</th><th>Осадок</th></tr>
+        <tr>
+          <td><span class="t-indigo hi">Ba²⁺</span></td>
+          <td>SO₄²⁻</td>
+          <td>BaSO₄↓</td>
+          <td><span class="pill pill-white">⬜ Белый, в кислотах НЕ растворяется!</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-amber hi">Ag⁺</span></td>
+          <td>Cl⁻</td>
+          <td>AgCl↓</td>
+          <td><span class="pill pill-white">🥛 Белый творожистый, темнеет на свету</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-sky hi">Cu²⁺</span></td>
+          <td>OH⁻</td>
+          <td>Cu(OH)₂↓</td>
+          <td><span class="pill pill-sky">🔵 Голубой студенистый — как небо</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-slate hi">Fe²⁺</span></td>
+          <td>OH⁻</td>
+          <td>Fe(OH)₂↓</td>
+          <td><span class="pill pill-slate">🥒 Серо-зелёный → буреет на воздухе!</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-rust hi">Fe³⁺</span></td>
+          <td>OH⁻</td>
+          <td>Fe(OH)₃↓</td>
+          <td><span class="pill pill-rust">🦀 Красно-бурый — как ржавчина</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-magenta hi">NH₄⁺</span></td>
+          <td>OH⁻ + нагрев</td>
+          <td>NH₃↑</td>
+          <td><span class="pill pill-magenta">👃 Резкий запах, синит влажный лакмус</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-cyan hi">CO₃²⁻</span></td>
+          <td>H⁺ (кислота)</td>
+          <td>CO₂↑</td>
+          <td><span class="pill pill-cyan">🫧 «Вскипание», газ без запаха</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-teal hi">SO₄²⁻</span></td>
+          <td>Ba²⁺</td>
+          <td>BaSO₄↓</td>
+          <td><span class="pill pill-white">⬜ Белый, в кислотах НЕ растворяется!</span></td>
+        </tr>
+        <tr>
+          <td><span class="t-blue hi">SiO₃²⁻</span></td>
+          <td>H⁺</td>
+          <td>H₂SiO₃↓</td>
+          <td><span class="pill pill-white">🪼 Бесцветный студенистый (как медуза)</span></td>
+        </tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — цвета железа</div>
+        <div class="inset-text">
+          🥒 <span class="t-slate hi">Fe²⁺</span> — как <strong>огурец</strong> (серо-зелёный)<br>
+          🦀 <span class="t-rust hi">Fe³⁺</span> — как <strong>ржавчина</strong> (красно-бурый)<br>
+          🔵 <span class="t-sky hi">Cu²⁺</span> — как <strong>небо</strong> (голубой)
+        </div>
+      </div>
+
+      <h3 class="sec">Индикаторы</h3>
+      <table class="chem-table">
+        <tr><th>Индикатор</th><th>Кислота</th><th>Нейтр.</th><th>Щёлочь</th></tr>
+        <tr><td>Лакмус</td><td><span class="t-red">Красный</span></td><td>Фиолетовый</td><td><span class="t-indigo">Синий</span></td></tr>
+        <tr><td>Фенолфталеин</td><td>Бесцветный</td><td>Бесцветный</td><td><span class="t-red">Малиновый</span></td></tr>
+        <tr><td>Метилоранж</td><td><span class="t-red">Красный</span></td><td>Оранжевый</td><td><span class="t-green">Жёлтый</span></td></tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника фенолфталеина</div>
+        <div class="inset-text">
+          «<strong>Фенолфталеиновый — в щёлочах <span class="t-pink">малиновый</span></strong>»<br>
+          <span style="font-size:.82rem;color:var(--muted)">В кислоте и нейтральной среде — бесцветный (невидимый). Только щёлочь его «будит»!</span>
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ</div>
+        <div class="inset-text">
+          Для обнаружения ионов Cl⁻ в растворе нужно добавить:<br>
+          А) KNO₃  <strong>Б) AgNO₃ ✓</strong>  В) BaCl₂  Г) NaOH<br>
+          <span class="formula">Ag⁺ + Cl⁻ → AgCl↓</span> (белый творожистый)
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">🐱 Линетт · Ассистент иллюзиониста</span>«Улика — это факт, который не лжёт. Белый творожистый осадок — AgCl. Красно-бурый — Fe(OH)₃. Голубой — Cu(OH)₂. Химик читает цвет как сыщик читает следы. Запомни палитру — и не ошибёшься.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 16: Техника безопасности ── -->
+  <div class="shpora-card" data-idx="15" data-title="ТБ и разделение смесей">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Техника безопасности и разделение смесей</div>
+        <div class="shpora-subtitle">Задания 23–24 · Эксперимент</div>
+      </div>
+      <div class="shpora-num">Ш16</div>
+    </div>
+    <div class="shpora-lore">🧪 Лаборатория Фонтейна: здесь каждое действие строго по протоколу. Нарушил — минус баллы</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Правила техники безопасности (ТБ)</h3>
+      <table class="chem-table">
+        <tr><th>Действие</th><th>КАК ПРАВИЛЬНО</th></tr>
+        <tr><td>Брать сыпучие</td><td><strong>Шпателем</strong>, не касаясь стенок пробирки</td></tr>
+        <tr><td>Наливать жидкость</td><td><strong>Этикеткой в ладонь</strong>, объём ≤ 1–2 мл</td></tr>
+        <tr><td>Нюхать вещество</td><td>Ладонью <strong>направлять пары к себе</strong> — не нюхать над пробиркой!</td></tr>
+        <tr><td>Разбавлять H₂SO₄</td><td><strong>Кислоту в воду!</strong> (не воду в кислоту)</td></tr>
+        <tr><td>Нагревать пробирку</td><td>Отверстие направлять <strong>от людей</strong></td></tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — разбавление кислоты</div>
+        <div class="inset-text">
+          <span class="t-sky">🟢 Кислоту в воду</span> — налил — <strong>ты ум!</strong> ✅<br>
+          <span class="t-rust">🔴 Воды в кислоту</span> — <strong>выхвати бадабум!</strong> ❌💥<br>
+          <span style="font-size:.82rem;color:var(--muted)">Правило: зелёное (кислота) вливается в голубое (вода). Голубое в зелёное — перечёркнуто навсегда.</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Методы разделения смесей</h3>
+      <table class="chem-table">
+        <tr><th>Метод</th><th>Для чего</th><th>Пример</th></tr>
+        <tr><td>Фильтрование</td><td>Осадок от жидкости</td><td>Отделить BaSO₄ от раствора</td></tr>
+        <tr><td>Выпаривание</td><td>Выделить соль из раствора</td><td>NaCl из воды</td></tr>
+        <tr><td>Дистилляция</td><td>Жидкости с разной T°кип</td><td>Спирт от воды</td></tr>
+        <tr><td>Делительная воронка</td><td>Несмешивающиеся жидкости</td><td>Бензин + вода</td></tr>
+        <tr><td>Магнит</td><td>Магнитные вещества</td><td>Железо из смеси с серой</td></tr>
+      </table>
+      <div class="hero-quote"><span class="hero-quote-name">⚖️ Нёвиллет · Главный судья Фонтейна</span>«Протокол нарушен — порядок нарушен. В Фонтейне это называется правонарушением. В лаборатории — несчастным случаем. Кислота в воду, не вода в кислоту. Это не рекомендация. Это закон.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 17: Расчётные задачи ── -->
+  <div class="shpora-card" data-idx="16" data-title="Расчётные задачи">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Расчётные задачи — алгоритм «Молярный мост»</div>
+        <div class="shpora-subtitle">Задание 22 · Расчёты по уравнениям реакций</div>
+      </div>
+      <div class="shpora-num">Ш17</div>
+    </div>
+    <div class="shpora-lore">⚖️ Нёвиллет взвешивает каждый моль: «Справедливость требует точного расчёта. Единицы — обязательно!»</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Ключевые формулы</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 0">
+        <div class="inset" style="background:#f0f9ff;border-left:3px solid #0284C7;margin:0">
+          <div style="font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:#0284C7;text-align:center">n = m / M</div>
+          <div style="font-size:.78rem;text-align:center;color:var(--muted);margin-top:.2rem">моль = г / г/моль</div>
+        </div>
+        <div class="inset" style="background:#f0fdf4;border-left:3px solid #2E7D32;margin:0">
+          <div style="font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:#2E7D32;text-align:center">n = V / 22,4</div>
+          <div style="font-size:.78rem;text-align:center;color:var(--muted);margin-top:.2rem">моль = л / л/моль (н.у.)</div>
+        </div>
+        <div class="inset" style="background:#fffbeb;border-left:3px solid #F59E0B;margin:0">
+          <div style="font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:#F59E0B;text-align:center">w% = m(в-ва)/m(р-ра)×100</div>
+          <div style="font-size:.78rem;text-align:center;color:var(--muted);margin-top:.2rem">Массовая доля в растворе</div>
+        </div>
+        <div class="inset" style="background:#f5f3ff;border-left:3px solid #7C3AED;margin:0">
+          <div style="font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:#7C3AED;text-align:center">N = n × 6,02×10²³</div>
+          <div style="font-size:.78rem;text-align:center;color:var(--muted);margin-top:.2rem">Число частиц (Авогадро)</div>
+        </div>
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Алгоритм «Молярный мост» — 5 шагов</div>
+        <div class="inset-text">
+          <ol class="chem-steps">
+            <li><strong>Дано</strong> — запиши условие, переведи единицы</li>
+            <li><strong>Уравнение</strong> — напиши и расставь коэффициенты</li>
+            <li><strong>В моли</strong> — <span class="formula">n = m/M</span> или <span class="formula">n = V/22,4</span></li>
+            <li><strong>Пропорция</strong> — по коэффициентам найди n искомого</li>
+            <li><strong>Из молей</strong> — переведи в г или л</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Частая потеря баллов</div>
+        <div class="inset-text">
+          Не указал единицы (г, л, моль) в промежуточных вычислениях → снижают балл!<br>
+          Не подписал «Ответ:» с единицами → снижают балл!
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ 2026</div>
+        <div class="inset-text">
+          Сожгли 12 г магния. Найди объём O₂ (н.у.):<br>
+          <span class="formula">2Mg + O₂ → 2MgO</span><br>
+          n(Mg) = 12/24 = <strong>0,5 моль</strong><br>
+          n(O₂) = 0,5/2 = <strong>0,25 моль</strong><br>
+          V(O₂) = 0,25 × 22,4 = <strong>5,6 л</strong><br>
+          <span style="color:var(--muted);font-size:.82rem">Ответ: 5,6 л</span>
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">⚖️ Нёвиллет · Главный судья Фонтейна</span>«Ответ без единиц — это как судебное решение без аргументации. Я не приму. Напиши "г", "л", "моль" — каждый раз. Точность — это форма уважения к работе.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 18: Цепочки превращений ── -->
+  <div class="shpora-card" data-idx="17" data-title="Цепочки превращений">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Цепочки превращений</div>
+        <div class="shpora-subtitle">Задание 21 · Генетические ряды + ионные уравнения</div>
+      </div>
+      <div class="shpora-num">Ш18</div>
+    </div>
+    <div class="shpora-lore">🗺️ Маршрут Путешественника по Тейвату = генетический ряд: каждый шаг — новое вещество, новый регион</div>
+    <div class="shpora-body">
+
+      <h3 class="sec">Генетический ряд металла (Fe)</h3>
+      <div class="tree">Fe → FeCl₂ → Fe(OH)₂ → FeO → Fe
+Fe → FeCl₃ → Fe(OH)₃ → Fe₂O₃ → Fe
+      </div>
+
+      <h3 class="sec">Генетический ряд неметалла (S)</h3>
+      <div class="tree">S → SO₂ → SO₃ → H₂SO₄ → CaSO₄↓
+S → H₂S → Na₂S → ...
+      </div>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Алгоритм цепочки</div>
+        <div class="inset-text">
+          <ol class="chem-steps">
+            <li><strong>Определи класс</strong> каждого вещества в цепочке</li>
+            <li><strong>Подбери реагент</strong>, который даёт нужный продукт</li>
+            <li><strong>Для ионного уравнения</strong>: разбей только сильные электролиты</li>
+            <li>Заряды ионов пиши <span class="formula">Fe²⁺</span>, а не <span class="formula">Fe⁺²</span>!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Условия меняют продукт: Cl₂ + KOH</div>
+        <div class="inset-text">
+          <strong>Холодный</strong> раствор: <span class="formula">Cl₂ + 2KOH → KCl + KClO + H₂O</span> (гипохлорит)<br>
+          <strong>Горячий</strong> раствор: <span class="formula">3Cl₂ + 6KOH →(t°) 5KCl + KClO₃ + 3H₂O</span> (хлорат)
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Задача ОГЭ: цепочка превращений</div>
+        <div class="inset-text">
+          <span class="formula">Ca → CaO → Ca(OH)₂ → CaCO₃ → CaO</span><br>
+          1. 2Ca + O₂ → 2CaO<br>
+          2. CaO + H₂O → Ca(OH)₂<br>
+          3. Ca(OH)₂ + CO₂ → CaCO₃↓ + H₂O<br>
+          4. CaCO₃ →(t°) CaO + CO₂↑
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">✨ Путешественник · Чужестранец</span>«Каждый регион Тейвата — это новое вещество в цепочке. Ca → CaO → Ca(OH)₂ → CaCO₃. Я прошёл этот маршрут лично. Каждый шаг — своя реакция. Теперь твоя очередь пройти его на бумаге.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 19: Тривиальные названия ── -->
+  <div class="shpora-card" data-idx="18" data-title="Тривиальные названия">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Тривиальные названия веществ</div>
+        <div class="shpora-subtitle">Все задания · «Словарь» химика</div>
+      </div>
+      <div class="shpora-num">Ш19</div>
+    </div>
+    <div class="shpora-lore">📖 Путешественник учит язык каждого народа Тейвата — без «словаря» химика ни одно задание не решить</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr><th>Тривиальное название</th><th>Формула</th></tr>
+        <!-- Кальциевая группа -->
+        <tr style="background:#f9ffe0"><td><span class="t-lime hi">🪨 Известняк / мел / мрамор</span></td><td class="formula t-lime">CaCO₃</td></tr>
+        <tr style="background:#f9ffe0"><td><span class="t-lime hi">🔥 Негашёная известь</span></td><td class="formula t-lime">CaO</td></tr>
+        <tr style="background:#f9ffe0"><td><span class="t-lime hi">💧 Гашёная известь</span></td><td class="formula t-lime">Ca(OH)₂</td></tr>
+        <tr style="background:#f9ffe0"><td><span class="t-lime hi">🦴 Гипс</span></td><td class="formula t-lime">CaSO₄·2H₂O</td></tr>
+        <!-- Щёлочи -->
+        <tr style="background:#fce4ec"><td><span class="t-pink hi">⚗️ Едкий натр</span></td><td class="formula t-pink">NaOH</td></tr>
+        <tr style="background:#fce4ec"><td><span class="t-pink hi">⚗️ Едкое кали</span></td><td class="formula t-pink">KOH</td></tr>
+        <!-- Газы -->
+        <tr style="background:#fce4ec"><td><span class="t-magenta hi">☠️ Угарный газ</span></td><td class="formula t-magenta">CO</td></tr>
+        <tr style="background:#fce4ec"><td><span class="t-magenta hi">🫧 Углекислый газ</span></td><td class="formula t-magenta">CO₂</td></tr>
+        <tr style="background:#fce4ec"><td><span class="t-magenta hi">🤧 Сернистый газ</span></td><td class="formula t-magenta">SO₂</td></tr>
+        <tr style="background:#fce4ec"><td><span class="t-magenta hi">👃 Аммиак (газ, молекула)</span></td><td class="formula t-magenta">NH₃</td></tr>
+        <tr style="background:#fce4ec"><td><span class="t-purple hi">🧪 Ион аммония (в солях!)</span></td><td class="formula t-purple">NH₄⁺</td></tr>
+        <!-- Железо -->
+        <tr style="background:#fbe9e7"><td><span class="t-rust hi">🔥 Пирит (железный колчедан)</span></td><td class="formula t-rust">FeS₂</td></tr>
+        <tr style="background:#fbe9e7"><td><span class="t-rust hi">🦀 Железная окалина</span></td><td class="formula t-rust">Fe₃O₄</td></tr>
+        <!-- Натриевые соли -->
+        <tr style="background:#e1f5fe"><td><span class="t-sky hi">🧂 Поваренная соль</span></td><td class="formula t-sky">NaCl</td></tr>
+        <tr style="background:#e1f5fe"><td><span class="t-sky hi">🥖 Сода питьевая (пищевая)</span></td><td class="formula t-sky">NaHCO₃</td></tr>
+        <tr style="background:#e1f5fe"><td><span class="t-sky hi">🧼 Сода кальцинированная</span></td><td class="formula t-sky">Na₂CO₃</td></tr>
+        <tr style="background:#e1f5fe"><td><span class="t-sky hi">🪟 Силикатный клей / жидкое стекло</span></td><td class="formula t-sky">Na₂SiO₃</td></tr>
+        <!-- Прочие -->
+        <tr style="background:#e0f7fa"><td><span class="t-cyan hi">🔵 Медный купорос</span></td><td class="formula t-cyan">CuSO₄·5H₂O</td></tr>
+        <tr style="background:#e0f7fa"><td><span class="t-indigo hi">⚡ Бертолетова соль</span></td><td class="formula t-indigo">KClO₃</td></tr>
+        <tr style="background:#e0f7fa"><td><span class="t-amber hi">🔬 Ляпис</span></td><td class="formula t-amber">AgNO₃</td></tr>
+      </table>
+
+      <div class="inset inset-mnemo">
+        <div class="inset-label">🔮 Мнемоника — Са-цепочка</div>
+        <div class="inset-text">
+          «<strong>Камень</strong> (CaCO₃) обжигают → <strong>негашёная</strong> (CaO).<br>
+          Залей водой — <strong>зашипит и нагреется</strong> → <strong>гашёная</strong> Ca(OH)₂ (белит стены!)»
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ NH₃ и NH₄⁺ — не путай!</div>
+        <div class="inset-text">
+          <span class="t-orange hi">NH₃</span> — аммиак: газ, молекула, резкий запах<br>
+          <span class="t-indigo hi">NH₄⁺</span> — ион аммония: в растворах и солях (NH₄Cl, (NH₄)₂SO₄)<br>
+          Они <strong>взаимопревращаются</strong>: NH₃ + H⁺ ⇌ NH₄⁺
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">🍃 Венти · Архонт Анемо</span>«Я знаю тысячу песен и тысячу имён. Гашёная известь, мрамор, мел — это разные имена Ca(OH)₂ и CaCO₃. Имён много, сути две. Запомни суть — и имена придут сами.»</div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 20: Химия и жизнь ── -->
+  <div class="shpora-card" data-idx="19" data-title="Химия и жизнь">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Химия и жизнь — применение веществ</div>
+        <div class="shpora-subtitle">Задание 18 · Экология, медицина, быт</div>
+      </div>
+      <div class="shpora-num">Ш20</div>
+    </div>
+    <div class="shpora-lore">🌿 Путешественник возвращается домой — и видит химию везде: в лекарствах, удобрениях, в самом воздухе Тейвата</div>
+    <div class="shpora-body">
+
+      <table class="chem-table">
+        <tr><th>Вещество</th><th>Применение</th></tr>
+        <tr><td><span class="t-teal hi">NaCl</span></td><td>Консервация, приправа, получение Cl₂ и NaOH</td></tr>
+        <tr><td><span class="t-teal hi">Ca(OH)₂</span> (гашёная известь)</td><td>Побелка, нейтрализация кислых почв, строительство</td></tr>
+        <tr><td><span class="t-teal hi">CaCO₃</span> (мел/мрамор)</td><td>Строительство, зубные пасты, мел для доски</td></tr>
+        <tr><td><span class="t-indigo hi">H₂SO₄</span></td><td>Аккумуляторы, удобрения, производство красок</td></tr>
+        <tr><td><span class="t-indigo hi">NH₃</span></td><td>Удобрения (NH₄NO₃, (NH₄)₂SO₄), холодильники</td></tr>
+        <tr><td><span class="t-orange hi">NaHCO₃</span> (сода)</td><td>Выпечка (разрыхлитель), медицина (изжога)</td></tr>
+        <tr><td><span class="t-orange hi">Na₂CO₃</span></td><td>Мыло, стекло, стиральный порошок</td></tr>
+        <tr><td><span class="t-green hi">O₃</span> (озон)</td><td>Дезинфекция воды, озоновый слой защищает от UV</td></tr>
+        <tr><td><span class="t-green hi">CO₂</span></td><td>Газировка, огнетушители, тепличный эффект ⚠️</td></tr>
+        <tr><td><span class="t-amber hi">Cl₂</span></td><td>Обеззараживание воды, производство хлорки</td></tr>
+      </table>
+
+      <h3 class="sec">Экологические проблемы</h3>
+      <table class="chem-table">
+        <tr><th>Проблема</th><th>Причина</th><th>Химия</th></tr>
+        <tr><td><span class="t-rust hi">🌧️ Кислотные дожди</span></td><td><span class="t-orange">SO₂, NO₂</span> в атмосфере</td><td>SO₂+H₂O → H₂SO₃; растворяют мрамор</td></tr>
+        <tr><td><span class="t-orange hi">🌡️ Парниковый эффект</span></td><td>Избыток <span class="t-magenta">CO₂</span></td><td>Удерживает тепловое излучение Земли</td></tr>
+        <tr><td><span class="t-magenta hi">🔆 Разрушение озонового слоя</span></td><td>Фреоны (CFC)</td><td><span class="t-red">Cl•</span> разрушает <span class="t-cyan">O₃</span> → O₂</td></tr>
+      </table>
+
+      <div class="inset inset-artifact">
+        <div class="inset-label">💎 Лайфхак ОГЭ: Задание 18</div>
+        <div class="inset-text">
+          Задание на применение — обычно 1 вариант, проверяй знание <strong>бытовых и промышленных функций</strong>.<br>
+          Запомни пары: <span class="t-teal">известняк → строительство</span>, <span class="t-indigo">H₂SO₄ → аккумуляторы</span>, <span class="t-orange">сода → выпечка</span>.
+        </div>
+      </div>
+      <div class="hero-quote"><span class="hero-quote-name">✨ Путешественник · Чужестранец</span>«Когда я наконец нашёл близнеца, понял: химия была везде всё это время — в воздухе Мондштадта, в камнях Ли Юэ, в воде Фонтейна. Небесные принципы — это и есть периодический закон. Повсюду.»</div>
+    </div>
+  </div>
+
+</div><!-- /block-4 -->
+
+<!-- ══════════════════════════════════════════════════════
+     МОБИЛЬНАЯ НАВИГАЦИЯ
+══════════════════════════════════════════════════════ -->
+<nav class="mobile-nav" id="mobile-nav">
+  <button class="nav-btn" id="nav-prev" onclick="navCard(-1)">←</button>
+  <div>
+    <div class="nav-card-title" id="nav-title">Строение атома</div>
+    <div class="nav-counter" id="nav-counter">1 / 20</div>
+  </div>
+  <button class="nav-btn" id="nav-next" onclick="navCard(1)">→</button>
+</nav>
+
+<script>
+(function() {
+  const cards = Array.from(document.querySelectorAll('.shpora-card'));
+  const blocks = Array.from(document.querySelectorAll('.block-section'));
+  let current = 0;
+  const total = cards.length;
+
+  function isMobile() { return window.innerWidth < 768; }
+
+  function showCard(idx) {
+    if (!isMobile()) return;
+    current = Math.max(0, Math.min(idx, total - 1));
+
+    cards.forEach(c => c.classList.remove('mobile-active'));
+    cards[current].classList.add('mobile-active');
+
+    // Показываем заголовок блока нужного блока
+    blocks.forEach(b => b.classList.remove('mobile-block-active'));
+    const activeBlock = cards[current].closest('.block-section');
+    if (activeBlock) activeBlock.classList.add('mobile-block-active');
+
+    // Навигация
+    document.getElementById('nav-counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('nav-title').textContent = cards[current].dataset.title || '';
+    document.getElementById('nav-prev').disabled = current === 0;
+    document.getElementById('nav-next').disabled = current === total - 1;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.navCard = function(dir) { showCard(current + dir); };
+
+  // Свайп
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (!isMobile()) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) navCard(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  // Клавиатура
+  document.addEventListener('keydown', e => {
+    if (!isMobile()) return;
+    if (e.key === 'ArrowRight') navCard(1);
+    if (e.key === 'ArrowLeft') navCard(-1);
+  });
+
+  // Инициализация
+  function init() {
+    if (isMobile()) {
+      showCard(0);
+    } else {
+      cards.forEach(c => c.classList.remove('mobile-active'));
+    }
+  }
+  init();
+  window.addEventListener('resize', init);
+})();
+</script>
+</body>
+</html>
