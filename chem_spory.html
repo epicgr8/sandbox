@@ -33,6 +33,11 @@
   --b4-light: #e8f5e9;
   --b4-mid: #c8e6c9;
 
+  /* Блок 5 — Небесные принципы / Логика */
+  --b5: #7C3AED;
+  --b5-light: #f5f3ff;
+  --b5-mid: #ddd6fe;
+
   /* Карточки-типы */
   --artifact: #F59E0B;
   --artifact-bg: #fffbeb;
@@ -238,6 +243,27 @@ body {
   line-height: 1.6;
 }
 .inset-text strong { font-weight: 700; }
+.rule-formula {
+  display: inline-block;
+  font-weight: 700;
+  color: #1a1a2e;
+  background: rgba(124,58,237,.08);
+  padding: .1rem .45rem;
+  border-radius: 5px;
+  margin-bottom: .25rem;
+}
+.warn { color: var(--boss); font-weight: 700; }
+
+/* Цветные плашки законов и приёмов (блок 5) */
+.slab { border-radius: 10px; padding: .85rem 1rem; margin: .75rem 0; border-left: 4px solid rgba(0,0,0,.18); }
+.slab .inset-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .4rem; color: #3a3a3a; }
+.slab .inset-text { font-size: 1rem; line-height: 1.6; }
+.slab-green  { background: #DCEDC8; }
+.slab-purple { background: #D1C4E9; }
+.slab-yellow { background: #FFF59D; }
+.slab-cyan   { background: #B2EBF2; }
+.slab-brown  { background: #D7CCC8; }
+.slab .rule-formula { background: rgba(255,255,255,.55); color: #1a1a2e; }
 
 /* ═══ ТАБЛИЦЫ ═══ */
 .chem-table {
@@ -322,20 +348,24 @@ p.rule { font-size: 1rem; line-height: 1.6; margin: .35rem 0; }
 .block-2 .shpora-card { border-top: 3px solid var(--b2); }
 .block-3 .shpora-card { border-top: 3px solid var(--b3); }
 .block-4 .shpora-card { border-top: 3px solid var(--b4); }
+.block-5 .shpora-card { border-top: 3px solid var(--b5); }
 
 .block-1 .shpora-num { background: var(--b1); }
 .block-2 .shpora-num { background: var(--b2); }
 .block-3 .shpora-num { background: var(--b3); }
 .block-4 .shpora-num { background: var(--b4); }
+.block-5 .shpora-num { background: var(--b5); }
 
 .block-1 .block-dot { background: var(--b1); }
 .block-2 .block-dot { background: var(--b2); }
 .block-3 .block-dot { background: var(--b3); }
 .block-4 .block-dot { background: var(--b4); }
+.block-5 .block-dot { background: var(--b5); }
 .block-1 .block-title { color: var(--b1); }
 .block-2 .block-title { color: var(--b2); }
 .block-3 .block-title { color: var(--b3); }
 .block-4 .block-title { color: var(--b4); }
+.block-5 .block-title { color: var(--b5); }
 
 /* ═══ НАВИГАЦИЯ (мобиль) ═══ */
 .mobile-nav {
@@ -490,7 +520,7 @@ ol.chem-steps li strong { color: var(--task); }
 
 <!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
-  <div class="hero-eyebrow">⚗️ ОГЭ 2026 · Химия · 20 шпор</div>
+  <div class="hero-eyebrow">⚗️ ОГЭ 2026 · Химия · 23 шпоры</div>
   <h1 class="hero-title">
     <span class="ht1">Небесные принципы</span>
     <span class="ht2">✦ Путешественник разгадывает ✦</span>
@@ -1355,7 +1385,7 @@ ol.chem-steps li strong { color: var(--task); }
       <div class="inset inset-mnemo">
         <div class="inset-label">🔮 Мнемоника — активные металлы</div>
         <div class="inset-text">
-          «<span class="t-pink">Ли</span><span class="t-indigo">К</span><span class="t-teal">Ба</span><span class="t-orange">Ка</span><span class="t-sky">На</span> — <em>сидели два кабана!</em>»<br>
+          «<span class="t-pink">Ли</span><span class="t-indigo">К</span><span class="t-teal">Ба</span><span class="t-orange">Ка</span><span class="t-sky">На</span> — <em>Тусили два кабана!</em>»<br>
           <span class="t-pink">Li</span> · <span class="t-indigo">K</span> · <span class="t-teal">Ba</span> · <span class="t-orange">Ca</span> · <span class="t-sky">Na</span> — реагируют с водой без нагревания!
         </div>
       </div>
@@ -1827,6 +1857,211 @@ S → H₂S → Na₂S → ...
   </div>
 
 </div><!-- /block-4 -->
+
+<!-- ══════════════════════════════════════════════════════
+     БЛОК 5: НЕБЕСНЫЕ ПРИНЦИПЫ — ЛОГИКА ВМЕСТО ЗУБРЁЖКИ
+══════════════════════════════════════════════════════ -->
+<div class="block-wrap block-5 block-section" id="block-5">
+  <div class="block-header">
+    <div class="block-dot"></div>
+    <div>
+      <div class="block-title">Блок 5 — Небесные принципы</div>
+      <div class="block-sub">Селестия · «Когда забыл частность — вспомни закон. Логика держит то, что не удержала память»</div>
+    </div>
+    <div class="block-progress">Шпоры 21–23</div>
+  </div>
+
+  <!-- ── ШПОРА 21: 4 закона-заповеди ── -->
+  <div class="shpora-card" data-idx="20" data-title="4 закона химии">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Четыре закона, которые не врут никогда</div>
+        <div class="shpora-subtitle">Опора всего ОГЭ · Фундамент, на который можно встать</div>
+      </div>
+      <div class="shpora-num">Ш21</div>
+    </div>
+    <div class="shpora-lore">⚖️ Нёвиллет: «В Фонтейне есть законы, которые не отменить ничьим указом. В химии их четыре. Запомни не формулировку — запомни, что на них всегда можно опереться»</div>
+    <div class="shpora-body">
+
+      <p class="rule" style="margin-bottom:.6rem">Частных правил — сотни, и все забываются. Но под ними лежат <span class="hi">четыре закона</span>. Если потерял правило — спроси себя: «какой из этих четырёх здесь работает?» Один обязательно подойдёт.</p>
+
+      <div class="slab slab-green">
+        <div class="inset-label">⚖️ Закон 1 — Сохранение массы (Ломоносов)</div>
+        <div class="inset-text">
+          <span class="rule-formula">⚛️ Атомы не исчезают и не появляются — только перегруппировываются.</span><br>
+          Сколько атомов каждого элемента слева — столько и справа. <strong>Отсюда коэффициенты в уравнениях.</strong><br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Если уравнение «не сходится» — ты не нарушил химию, ты ошибся в счёте атомов. Пересчитай.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-purple">
+        <div class="inset-label">🧩 Закон 2 — Постоянство состава (Пруст)</div>
+        <div class="inset-text">
+          <span class="rule-formula">💧 У чистого вещества состав всегда один и тот же.</span><br>
+          Вода — всегда H₂O, где бы её ни взяли: в Мондштадте, в кране, в облаке. <strong>Отсюда — формулы веществ постоянны.</strong><br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Не бывает «иногда H₂O, иногда H₃O». Формула — это паспорт вещества.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-yellow">
+        <div class="inset-label">🔆 Закон 3 — Периодический закон (Менделеев)</div>
+        <div class="inset-text">
+          <span class="rule-formula">🗺️ Свойства элементов закономерно зависят от заряда ядра.</span><br>
+          Знаешь, где элемент в таблице — знаешь почти всё: металл или нет, какая высшая СО, активный или нет.<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Таблица — не список для зубрёжки, а карта. Положение элемента <strong>само рассказывает</strong> о его свойствах.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-cyan">
+        <div class="inset-label">⚡ Закон 4 — Сохранение заряда</div>
+        <div class="inset-text">
+          <span class="rule-formula">➕➖ Суммарный заряд слева = суммарный заряд справа.</span><br>
+          В молекуле Σ СО = 0. В ионе Σ СО = заряд иона. В ОВР сколько электронов отдано — столько и принято.<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Электроны не теряются в пустоту. В ОВР это твоя главная проверка баланса.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-brown">
+        <div class="inset-label">🧭 Зачем тебе эти четыре закона на экзамене</div>
+        <div class="inset-text">
+          ⚖️ <strong>Масса</strong> → проверяю коэффициенты в уравнении<br>
+          🧩 <strong>Состав</strong> → формула вещества всегда одна и та же<br>
+          🔆 <strong>Менделеев</strong> → свойства читаю прямо по таблице<br>
+          ⚡ <strong>Заряд</strong> → проверяю баланс в ОВР и ионных уравнениях<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Застрял на любом задании? Пройдись по этим четырём — какой из них здесь поможет.</span>
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3DZNDoyixE2VataRF4kDwX60SuJkTHib3_g&s" alt="Нёвиллет"><div class="hero-quote-body"><span class="hero-quote-name">⚖️ Нёвиллет · Главный судья Фонтейна</span>«Я видел тысячи дел. Частности меняются, свидетели путаются, формулировки забываются. Но закон под ними остаётся. Забыл правило про оксиды? Спроси: сохраняется ли масса? заряд? Закон ответит за тебя.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 22: Логика реакций ── -->
+  <div class="shpora-card" data-idx="21" data-title="Логика реакций">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Кто с кем реагирует — логика, а не зубрёжка</div>
+        <div class="shpora-subtitle">Задания 10–13 · «Притяжение противоположностей»</div>
+      </div>
+      <div class="shpora-num">Ш22</div>
+    </div>
+    <div class="shpora-lore">🪨 Чжун Ли: «Контракты Ли Юэ просты: встречаются те, кому есть чем обменяться. В химии — то же самое. Противоположности тянутся друг к другу»</div>
+    <div class="shpora-body">
+
+      <p class="rule" style="margin-bottom:.6rem">Не надо помнить каждую строку таблиц. Достаточно одной идеи: <span class="hi">в химии реагируют противоположности</span>. Кислое тянется к основному, металл — к неметаллу, отдающий электроны — к забирающему.</p>
+
+      <div class="slab slab-purple">
+        <div class="inset-label">🧲 Главный принцип — «+ ищет −»</div>
+        <div class="inset-text">
+          <span class="t-red hi">Кислотное</span> ←→ <span class="t-indigo hi">Основное</span> · <span class="t-orange hi">Металл</span> ←→ <span class="t-teal hi">Неметалл</span> · <span class="t-lime hi">Отдаёт e⁻</span> ←→ <span class="t-red hi">Забирает e⁻</span><br>
+          <span style="color:#5a5a5a;font-size:.85rem">Похожее с похожим обычно не реагирует: кислота + кислота = ничего, металл + металл = просто сплав.</span>
+        </div>
+      </div>
+
+      <h3 class="sec">Таблица «дружбы» по классам</h3>
+      <table class="chem-table">
+        <tr><th>Кто</th><th>Тянется к…</th><th>Характер (ассоциация)</th></tr>
+        <tr>
+          <td><span class="t-red hi">😈 Кислота</span></td>
+          <td>Основания, осн. оксиды, металлы</td>
+          <td>Злюка-задира: цепляется к мягким (основания, металлы), но против равного по силе — пас</td>
+        </tr>
+        <tr>
+          <td><span class="t-indigo hi">🧼 Щёлочь</span></td>
+          <td>Кислоты, кислотные оксиды, амфотерные</td>
+          <td>Едкая «мыльная» дама: гасит задир-кислот, своих (другие щёлочи) не трогает</td>
+        </tr>
+        <tr>
+          <td><span class="t-cyan hi">🎭 Амфотерное</span></td>
+          <td>И кислоты, И щёлочи</td>
+          <td>Двуличный дипломат: и нашим, и вашим — подстроится под любую среду</td>
+        </tr>
+        <tr>
+          <td><span class="t-orange hi">💸 Активный металл</span></td>
+          <td>Кислоты, вода, соли менее активных</td>
+          <td>Транжира: раздаёт электроны кому угодно, лишь бы избавиться</td>
+        </tr>
+      </table>
+
+      <div class="slab slab-green">
+        <div class="inset-label">💎 Лайфхак: 3 вопроса перед любой реакцией</div>
+        <div class="inset-text">
+          <ol class="chem-steps">
+            <li>🔍 <strong>Кто здесь кто?</strong> Определи класс каждого вещества (кислота / основание / оксид / соль / металл).</li>
+            <li>↔️ <strong>Они противоположны?</strong> Если да — реакция возможна. Если одинаковы — скорее всего нет.</li>
+            <li>🎁 <strong>Есть «выгода»?</strong> Для обмена нужен <span class="t-magenta">газ↑</span>, <span class="t-purple">осадок↓</span> или <span class="t-sky">вода</span> (правило ГОВ из Ш8).</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ Как это работает на задаче</div>
+        <div class="inset-text">
+          «Реагирует ли NaOH с CO₂?» Думай: NaOH — <span class="t-indigo">основное</span>, CO₂ — <span class="t-red">кислотный оксид</span>. Противоположности → <strong>да, реагируют</strong>.<br>
+          «Реагирует ли NaOH с CaO?» Оба <span class="t-indigo">основные</span> → одинаковы → <strong>нет</strong>. Логика дала ответ без таблицы.
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://landofgames.ru/uploads/posts/2024-01/1706528740_1.webp" alt="Чжун Ли"><div class="hero-quote-body"><span class="hero-quote-name">🪨 Чжун Ли · Гео-Архонт Ли Юэ</span>«За шесть тысяч лет я заключил немало контрактов. Правило одно: сделка состоится, если каждой стороне есть что отдать и что получить. Кислота отдаёт H⁺, основание принимает. Это честный обмен — потому реакция и идёт.»</div></div>
+    </div>
+  </div>
+
+  <!-- ── ШПОРА 23: Логика запоминания ── -->
+  <div class="shpora-card" data-idx="22" data-title="Логика запоминания">
+    <div class="shpora-head">
+      <div>
+        <div class="shpora-title">Как зацепиться за память, когда всё плывёт</div>
+        <div class="shpora-subtitle">Перед экзаменом и на нём · Приёмы для головы</div>
+      </div>
+      <div class="shpora-num">Ш23</div>
+    </div>
+    <div class="shpora-lore">🍃 Венти: «Я помню тысячу песен не потому, что зубрил. Я связал каждую с историей. Память любит смысл, а не голые факты»</div>
+    <div class="shpora-body">
+
+      <p class="rule" style="margin-bottom:.6rem">Память держит не списки, а <span class="hi">связи и образы</span>. Эти приёмы — не магия, а то, как устроена голова. Пользуйся ими и до экзамена, и прямо за партой.</p>
+
+      <div class="slab slab-yellow">
+        <div class="inset-label">🎨 Приём 1 — Превращай в картинку или историю</div>
+        <div class="inset-text">
+          Сухой факт забывается, абсурдная картинка — нет. «ЛиКБаКаНа — Тусили два кабана!» прилипает, потому что это глупо и смешно.<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Fe³⁺ — ржавчина 🦀, Cu²⁺ — небо 🔵. Цвет + образ запоминается, формула в столбик — нет.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-cyan">
+        <div class="inset-label">🧠 Приём 2 — Выводи, а не зубри</div>
+        <div class="inset-text">
+          Что можно вывести — не учи. Число электронов? = номер элемента. Высшая СО? = номер группы. Формула водородного соединения? = 8 − номер группы <span style="color:#5a5a5a">(только для неметаллов 4–7 групп, как в Ш2)</span>.<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Заучивать стоит только то, что вывести нельзя: сильные кислоты, цвета осадков, тривиальные названия.</span>
+        </div>
+      </div>
+
+      <div class="slab slab-brown">
+        <div class="inset-label">🔗 Приём 3 — Зацепись за то, что уже знаешь</div>
+        <div class="inset-text">
+          Новое держится за знакомое. Сода — для пирогов, держим на кухне (NaHCO₃). Уксус — кислота (CH₃COOH), едкий запах. Ржавчина — Fe₂O₃, некрасивый налёт в ванной и туалете. Связал с бытом — вспомнишь на экзамене.<br>
+          <span style="color:#5a5a5a;font-size:.85rem">💡 Спрашивай себя: «где я это видел в жизни?» Химия не в учебнике, она вокруг.</span>
+        </div>
+      </div>
+
+      <div class="inset inset-boss">
+        <div class="inset-label">⚠️ Если совсем забыл — не сдавайся</div>
+        <div class="inset-text">
+          1. Вспомни не правило, а <strong>один пример</strong> на него (NaCl, Zn + HCl). Пример вытащит правило.<br>
+          2. Проверь ответ <strong>здравым смыслом</strong>: получилось 5 кг газа из щепотки порошка? Что-то не так.<br>
+          3. Опирайся на <strong>4 закона</strong> (Ш21): масса, состав, таблица, заряд. Они не подведут.
+        </div>
+      </div>
+
+      <div class="inset inset-task">
+        <div class="inset-label">⚔️ За минуту до сдачи</div>
+        <div class="inset-text">
+          Пробегись глазами: <strong>коэффициенты расставлены? единицы (г, л, моль) подписаны? заряды ионов — Fe²⁺, а не Fe⁺²?</strong> Эти три проверки спасают больше баллов, чем любое доучивание в последний вечер.
+        </div>
+      </div>
+      <div class="hero-quote"><img class="hero-quote-avatar" src="https://files.vgtimes.ru/si/post_75878_1x1_ru.webp" alt="Венти"><div class="hero-quote-body"><span class="hero-quote-name">🍃 Венти · Архонт Анемо</span>«Хочешь, открою секрет барда? Я ничего не заучиваю. Я связываю. Каждая нота — с чувством, каждое имя — с лицом. Сделай химию своей историей — и она останется с тобой даже тогда, когда нервничаешь у доски.»</div></div>
+    </div>
+  </div>
+
+</div><!-- /block-5 -->
 
 <!-- ══════════════════════════════════════════════════════
      МОБИЛЬНАЯ НАВИГАЦИЯ
