@@ -683,9 +683,21 @@ ol.chem-steps li strong { color: var(--task); }
 
       <h3 class="sec">🔑 Главный ключ — Периодическая таблица</h3>
       <figure class="pt-full">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Periodic_table_ru.svg" alt="Периодическая таблица Д. И. Менделеева" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Periodic_table_ru.svg" alt="Периодическая таблица Д. И. Менделеева" loading="lazy" onclick="openLightbox(this.src)" style="cursor:zoom-in">
         <figcaption>📋 Таблица Менделеева — её можно открыть на самом ОГЭ. Не заучивай числа, читай их по клетке.</figcaption>
       </figure>
+
+      <div class="meme-gallery">
+        <figure class="meme-item">
+          <img src="https://images.meme-arsenal.com/90254d90b90edd119e8e279be8c749ed.jpg" alt="Мем про таблицу Менделеева" loading="lazy" onclick="openLightbox(this.src)">
+        </figure>
+        <figure class="meme-item">
+          <img src="https://img-webcalypt.ru/img/thumb/lg/32419/20259/vU05lNNOMb4FsdYtNU2pPvwGABlpCcW9dquSbETMgcOO4weBTyxWjJEMxXlJgUGE9F8EbJPwdrCQaGL4FExhuc9CBpi8m6upJA6Uzm1jO1rJ7Ar7TzeoEzMv3kiuvF7t.jpeg.jpg" alt="Мем про таблицу Менделеева" loading="lazy" onclick="openLightbox(this.src)">
+        </figure>
+        <figure class="meme-item">
+          <img src="https://img-webcalypt.ru/img/thumb/lg/32419/20257/dBUwC07h7zIrVCTplPJnxs9IKi3SXYbGIuPiFHKz5rZ3yMCAw4TePvSCppg30vwcsH0bmp826sIuQAV8tkAVHgZVTttu6vPmOZFFBMVpct6Wrgo0JUohnrLzrZ3A02BI.jpeg.jpg" alt="Мем про таблицу Менделеева" loading="lazy" onclick="openLightbox(this.src)">
+        </figure>
+      </div>
 
       <div class="hero-quote"><img class="hero-quote-avatar" src="https://wotpack.ru/wp-content/uploads/2022/10/word-image-170897-1-800x450.jpeg" alt="Нахида"><div class="hero-quote-body"><span class="hero-quote-name">🌿 Нахида · Архонт Мудрости</span>«Знаешь, что меня поразило в людях? Они заучивают наизусть число протонов вместо того, чтобы просто открыть таблицу. Клетка таблицы = заряд ядра = число электронов. Трижды одно и то же число. Просто посмотри на него.»</div></div>
     </div>
@@ -1416,10 +1428,10 @@ ol.chem-steps li strong { color: var(--task); }
       <h3 class="sec">Реакции солей</h3>
       <table class="chem-table">
         <tr><th>Соль + что</th><th>Результат</th><th>Условие</th></tr>
-        <tr><td>+ Кислота</td><td>Новая соль + новая кислота</td><td>Если образующаяся кислота слабее исходной, выделяется газ↑ или выпадает осадок↓</td></tr>
-        <tr><td>+ Щёлочь</td><td>Новая соль + новое основание</td><td>Если ↓</td></tr>
-        <tr><td>+ Другая соль</td><td>2 новые соли</td><td>Если ↓ (оба растворимы исходно!)</td></tr>
-        <tr><td>+ Металл</td><td>Новый металл + новая соль</td><td>По ЭХР (НО! Na, K, Li — нет!)</td></tr>
+        <tr><td>➕ <span class="t-red hi">🧪 Кислота</span></td><td>Новая соль + новая кислота</td><td><span class="cond-if">⚠️ Если новая кислота слабее, газ↑ или осадок↓</span></td></tr>
+        <tr><td>➕ <span class="t-indigo hi">🧼 Щёлочь</span></td><td>Новая соль + новое основание</td><td><span class="cond-if">⚠️ Если выпадает ↓</span></td></tr>
+        <tr><td>➕ <span class="t-sky hi">🧂 Другая соль</span></td><td>2 новые соли</td><td><span class="cond-if">⚠️ Если ↓ (обе исходно растворимы!)</span></td></tr>
+        <tr><td>➕ <span class="t-orange hi">⚙️ Металл</span></td><td>Новый металл + новая соль</td><td><span class="cond-except">⛔ По ЭХР, но Na, K, Li — нет!</span></td></tr>
       </table>
 
       <div class="inset inset-boss">
