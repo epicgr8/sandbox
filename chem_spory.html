@@ -265,6 +265,11 @@ body {
 .slab-brown  { background: #D7CCC8; }
 .slab .rule-formula { background: rgba(255,255,255,.55); color: #1a1a2e; }
 
+/* Маркер условий в таблицах реакций */
+.cond-always { background: #DCEDC8; color: #2E5D1B; font-weight: 700; padding: .1rem .45rem; border-radius: 5px; display: inline-block; }
+.cond-if { background: #FFF59D; color: #7a5c00; font-weight: 700; padding: .1rem .45rem; border-radius: 5px; display: inline-block; }
+.cond-except { background: #FFCDD2; color: #9b2226; font-weight: 700; padding: .1rem .45rem; border-radius: 5px; display: inline-block; }
+
 /* ═══ ТАБЛИЦЫ ═══ */
 .chem-table {
   width: 100%;
@@ -1231,10 +1236,10 @@ ol.chem-steps li strong { color: var(--task); }
       <h3 class="sec">Реакции оснований</h3>
       <table class="chem-table">
         <tr><th>Щёлочь + что</th><th>Продукт</th><th>Условие</th></tr>
-        <tr><td>+ Кислота</td><td>Соль + H₂O</td><td>Всегда (нейтрализация)</td></tr>
-        <tr><td>+ Кислотный оксид</td><td>Соль + H₂O</td><td>Всегда</td></tr>
-        <tr><td>+ Соль</td><td>Новая соль + новое основание↓</td><td>Если образуется ↓</td></tr>
-        <tr><td>+ Амфотерный оксид/гидроксид</td><td>Соль</td><td>Всегда!</td></tr>
+        <tr><td>➕ <span class="t-red hi">🧪 Кислота</span></td><td>Соль + H₂O</td><td><span class="cond-always">✅ Всегда</span> (нейтрализация)</td></tr>
+        <tr><td>➕ <span class="t-orange hi">💨 Кислотный оксид</span></td><td>Соль + H₂O</td><td><span class="cond-always">✅ Всегда</span></td></tr>
+        <tr><td>➕ <span class="t-sky hi">🧂 Соль</span></td><td>Новая соль + новое основание↓</td><td><span class="cond-if">⚠️ Если выпадает ↓</span></td></tr>
+        <tr><td>➕ <span class="t-cyan hi">🎭 Амфотерный оксид/гидроксид</span></td><td>Соль</td><td><span class="cond-always">✅ Всегда</span></td></tr>
       </table>
 
       <div class="inset inset-boss">
@@ -1245,9 +1250,9 @@ ol.chem-steps li strong { color: var(--task); }
         </div>
       </div>
 
-      <p class="rule"><span class="hi">Нерастворимые основания</span> при нагревании разлагаются:</p>
-      <p class="rule"><span class="formula">Cu(OH)₂ →(t°) CuO + H₂O</span> (голубой → чёрный)</p>
-      <p class="rule"><span class="formula">Fe(OH)₃ →(t°) Fe₂O₃ + H₂O</span> (красно-бурый → красный)</p>
+      <p class="rule">🔥 <span class="hi">Нерастворимые основания</span> при нагревании разлагаются:</p>
+      <p class="rule"><span class="formula"><span class="t-sky">Cu(OH)₂</span> →(t°) <span class="t-slate">CuO</span> + H₂O</span> <span class="t-sky hi">🔵 голубой</span> → <span style="color:#1a1a1a;font-weight:700">⚫ чёрный</span></p>
+      <p class="rule"><span class="formula"><span class="t-rust">Fe(OH)₃</span> →(t°) <span class="t-rust">Fe₂O₃</span> + H₂O</span> <span class="t-rust hi">🦀 красно-бурый</span> → <span class="t-red hi">🔴 красный</span></p>
       <div class="hero-quote"><img class="hero-quote-avatar" src="https://landofgames.ru/uploads/posts/2024-01/1706528740_1.webp" alt="Чжун Ли"><div class="hero-quote-body"><span class="hero-quote-name">🪨 Чжун Ли · Гео-Архонт Ли Юэ</span>«В торговле Ли Юэ есть правило: знай своих надёжных партнёров наизусть. ЛиКаБаКаНа — это не просто мнемоника. Это список тех, на кого можно положиться в щелочной среде.»</div></div>
     </div>
   </div>
@@ -1296,10 +1301,10 @@ ol.chem-steps li strong { color: var(--task); }
       <h3 class="sec">Реакции обычных кислот</h3>
       <table class="chem-table">
         <tr><th>Кислота + что</th><th>Продукт</th><th>Условие</th></tr>
-        <tr><td>+ Металл (левее H)</td><td>Соль + H₂↑</td><td>Кроме HNO₃ и H₂SO₄(конц)!</td></tr>
-        <tr><td>+ Основный оксид</td><td>Соль + H₂O</td><td>Всегда</td></tr>
-        <tr><td>+ Основание</td><td>Соль + H₂O</td><td>Нейтрализация</td></tr>
-        <tr><td>+ Соль</td><td>Новая кислота + новая соль</td><td>Если образующаяся кислота слабее исходной, или выделяется газ↑, или выпадает осадок↓</td></tr>
+        <tr><td>➕ <span class="t-orange hi">⚙️ Металл (левее H)</span></td><td>Соль + H₂↑</td><td><span class="cond-except">⛔ Кроме HNO₃ и H₂SO₄(конц)!</span></td></tr>
+        <tr><td>➕ <span class="t-teal hi">🪨 Основный оксид</span></td><td>Соль + H₂O</td><td><span class="cond-always">✅ Всегда</span></td></tr>
+        <tr><td>➕ <span class="t-indigo hi">🧼 Основание</span></td><td>Соль + H₂O</td><td><span class="cond-always">✅ Всегда</span> (нейтрализация)</td></tr>
+        <tr><td>➕ <span class="t-sky hi">🧂 Соль</span></td><td>Новая кислота + новая соль</td><td><span class="cond-if">⚠️ Если кислота слабее исходной, газ↑ или осадок↓</span></td></tr>
       </table>
       <div class="hero-quote"><img class="hero-quote-avatar" src="https://i.pinimg.com/736x/c1/a3/9e/c1a39e1d091919361e2a78d15c6aab5c.jpg" alt="Сигнора"><div class="hero-quote-body"><span class="hero-quote-name">❄️ Сигнора · Крио-Вестник Фатуи</span>«HNO₃ и H₂SO₄ концентрированные — не те кислоты, с которыми шутят. Пассивация — не слабость. Это умная защита. Знать, когда не реагировать — тоже стратегия.»</div></div>
     </div>
@@ -1556,10 +1561,10 @@ ol.chem-steps li strong { color: var(--task); }
 
       <h3 class="sec">Индикаторы</h3>
       <table class="chem-table">
-        <tr><th>Индикатор</th><th>Кислота</th><th>Нейтр.</th><th>Щёлочь</th></tr>
-        <tr><td>Лакмус</td><td><span class="t-red">Красный</span></td><td>Фиолетовый</td><td><span class="t-indigo">Синий</span></td></tr>
-        <tr><td>Фенолфталеин</td><td>Бесцветный</td><td>Бесцветный</td><td><span class="t-red">Малиновый</span></td></tr>
-        <tr><td>Метилоранж</td><td><span class="t-red">Красный</span></td><td>Оранжевый</td><td><span class="t-green">Жёлтый</span></td></tr>
+        <tr><th>Индикатор</th><th><span class="t-red">🔴 Кислота</span></th><th><span class="t-purple">🟣 Нейтр.</span></th><th><span class="t-indigo">🔵 Щёлочь</span></th></tr>
+        <tr><td><span class="hi">Лакмус</span></td><td><span class="t-red hi">🔴 Красный</span></td><td><span class="t-purple hi">🟣 Фиолетовый</span></td><td><span class="t-indigo hi">🔵 Синий</span></td></tr>
+        <tr><td><span class="hi">Фенолфталеин</span></td><td>⚪ Бесцветный</td><td>⚪ Бесцветный</td><td><span class="t-pink hi">🩷 Малиновый</span></td></tr>
+        <tr><td><span class="hi">Метилоранж</span></td><td><span class="t-red hi">🔴 Красный</span></td><td><span class="t-amber hi">🟠 Оранжевый</span></td><td><span class="t-amber hi">🟡 Жёлтый</span></td></tr>
       </table>
 
       <div class="inset inset-mnemo">
@@ -1597,11 +1602,11 @@ ol.chem-steps li strong { color: var(--task); }
       <h3 class="sec">Правила техники безопасности (ТБ)</h3>
       <table class="chem-table">
         <tr><th>Действие</th><th>КАК ПРАВИЛЬНО</th></tr>
-        <tr><td>Брать сыпучие</td><td><strong>Шпателем</strong>, не касаясь стенок пробирки</td></tr>
-        <tr><td>Наливать жидкость</td><td><strong>Этикеткой в ладонь</strong>, объём ≤ 1–2 мл</td></tr>
-        <tr><td>Нюхать вещество</td><td>Ладонью <strong>направлять пары к себе</strong> — не нюхать над пробиркой!</td></tr>
-        <tr><td>Разбавлять H₂SO₄</td><td><strong>Кислоту в воду!</strong> (не воду в кислоту)</td></tr>
-        <tr><td>Нагревать пробирку</td><td>Отверстие направлять <strong>от людей</strong></td></tr>
+        <tr><td>🥄 Брать сыпучие</td><td><strong>Шпателем (лопаткой)</strong>, не касаясь стенок пробирки</td></tr>
+        <tr><td>🏷️🤲 Наливать жидкость</td><td><strong>Этикеткой в ладонь</strong>, объём ≤ 1–2 мл</td></tr>
+        <tr><td>👃❌🧪 Нюхать вещество</td><td>Ладонью <strong>направлять пары к себе</strong> — не нюхать над пробиркой!</td></tr>
+        <tr><td>☣️💧 Разбавлять H₂SO₄</td><td><strong>Кислоту в воду!</strong> (не воду в кислоту)</td></tr>
+        <tr><td>🔥🧪➡️ Нагревать пробирку</td><td>Отверстие направлять <strong>от людей</strong></td></tr>
       </table>
 
       <div class="inset inset-mnemo">
