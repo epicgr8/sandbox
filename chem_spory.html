@@ -270,6 +270,42 @@ body {
 .cond-if { background: #FFF59D; color: #7a5c00; font-weight: 700; padding: .1rem .45rem; border-radius: 5px; display: inline-block; }
 .cond-except { background: #FFCDD2; color: #9b2226; font-weight: 700; padding: .1rem .45rem; border-radius: 5px; display: inline-block; }
 
+/* ═══ КАРТА КЛЕТКИ ТАБЛИЦЫ МЕНДЕЛЕЕВА ═══ */
+.cell-map {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 1rem 1.4rem; margin: 1rem 0; padding: 1.2rem 1rem;
+  background: linear-gradient(135deg,#f8fafc,#eef2ff);
+  border: 1px solid var(--border); border-radius: 14px;
+}
+.pt-cell {
+  position: relative; width: 132px; flex-shrink: 0;
+  background: #fff; border: 3px solid #3949AB; border-radius: 12px;
+  padding: .55rem .5rem .5rem; text-align: center;
+  box-shadow: 0 4px 16px rgba(57,73,171,.18);
+}
+.pt-z { position:absolute; top:.35rem; left:.5rem; font-family:'Space Mono',monospace; font-weight:700; font-size:.95rem; color:#E64A19; }
+.pt-sym { font-family:'Space Mono',monospace; font-weight:700; font-size:2.6rem; line-height:1; color:#1a1a2e; margin:.6rem 0 .15rem; }
+.pt-name { font-size:.72rem; color:var(--muted); }
+.pt-mass { position:absolute; bottom:.3rem; right:.5rem; font-family:'Space Mono',monospace; font-weight:700; font-size:.8rem; color:#2E7D32; }
+.cell-legend { flex:1; min-width:220px; font-size:.92rem; line-height:1.7; }
+.cell-legend .lg { display:block; margin:.15rem 0; }
+.lg-z   { color:#E64A19; font-weight:700; }
+.lg-sym { color:#3949AB; font-weight:700; }
+.lg-mass{ color:#2E7D32; font-weight:700; }
+.lg-coord { color:#7C3AED; font-weight:700; }
+
+/* Галерея мемов про частицы */
+.meme-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin:1rem 0; }
+.meme-item { margin:0; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,.07); }
+.meme-item img { display:block; width:100%; height:170px; object-fit:cover; background:#f3f4f6; }
+.meme-item figcaption { font-size:.82rem; font-weight:600; color:#374151; text-align:center; padding:.45rem .3rem; }
+@media (max-width:520px){ .meme-gallery{ grid-template-columns:1fr; } .meme-item img{ height:auto; } }
+
+/* Таблица Менделеева в конце шпоры */
+.pt-full { margin:1rem 0; text-align:center; }
+.pt-full img { width:100%; max-width:900px; border-radius:12px; border:1px solid var(--border); box-shadow:0 4px 18px rgba(0,0,0,.1); background:#fff; }
+.pt-full figcaption { font-size:.82rem; color:var(--muted); margin-top:.4rem; }
+
 /* ═══ ТАБЛИЦЫ ═══ */
 .chem-table {
   width: 100%;
@@ -571,6 +607,21 @@ ol.chem-steps li strong { color: var(--task); }
         <tr><td><span class="t-cyan hi">Электрон (e)</span> 😠</td><td><span class="t-cyan">−1</span></td><td>Число e = Z (нейтральный атом)</td></tr>
       </table>
 
+      <div class="meme-gallery">
+        <figure class="meme-item">
+          <img src="https://cs19.pikabu.ru/s/2026/03/25/07/7ivewkwn_lg.png" alt="Мем про протон" loading="lazy">
+          <figcaption>😄 Протон</figcaption>
+        </figure>
+        <figure class="meme-item">
+          <img src="https://cs7.pikabu.ru/post_img/big/2014/05/31/12/1401564327_627775890.jpeg" alt="Мем про электрон" loading="lazy">
+          <figcaption>😠 Электрон</figcaption>
+        </figure>
+        <figure class="meme-item">
+          <img src="https://cs12.pikabu.ru/post_img/2021/01/21/8/161123242318270104.jpg" alt="Мем про атом" loading="lazy">
+          <figcaption>⚛️ Атом</figcaption>
+        </figure>
+      </div>
+
       <div class="inset inset-mnemo">
         <div class="inset-label">🔮 Мнемоника</div>
         <div class="inset-text">
@@ -584,6 +635,23 @@ ol.chem-steps li strong { color: var(--task); }
       <p class="rule">📍 <span class="hi">Главная подгруппа</span> = число валентных электронов</p>
       <p class="rule">📍 Максимум электронов на слое: 1-й — <strong>2</strong>, 2-й — <strong>8</strong>, 3-й — <strong>18</strong> (на ОГЭ 3-й слой заполняется до 8, если это не переходный металл)</p>
       <p class="rule">📍 <span class="hi">Изотопы</span> — одинаковый Z, разное A: <span class="formula">¹²C и ¹⁴C</span></p>
+
+      <h3 class="sec">🗺️ Как читать клетку элемента</h3>
+      <div class="cell-map">
+        <div class="pt-cell">
+          <span class="pt-z">11</span>
+          <span class="pt-mass">23</span>
+          <div class="pt-sym">Na</div>
+          <div class="pt-name">Натрий</div>
+        </div>
+        <div class="cell-legend">
+          <span class="lg">🔴 <span class="lg-z">11 (слева вверху)</span> — заряд ядра Z. <strong>= числу протонов = числу электронов</strong></span>
+          <span class="lg">🔵 <span class="lg-sym">Na</span> — символ элемента</span>
+          <span class="lg">🟢 <span class="lg-mass">23 (справа внизу)</span> — массовое число A. <strong>Нейтроны: N = A − Z = 23 − 11 = 12</strong></span>
+          <span class="lg">🟣 <span class="lg-coord">Координаты в таблице</span> → строение: <strong>3-й период = 3 слоя</strong>, <strong>I группа = 1 валентный e⁻</strong></span>
+          <span class="lg" style="color:var(--muted);font-size:.85rem;margin-top:.3rem">📐 Схема слоёв: <span class="formula">2 + 8 + 1</span> = 11 электронов ✓</span>
+        </div>
+      </div>
 
       <div class="inset inset-artifact">
         <div class="inset-label">💎 Артефакт «Взор Нахиды»</div>
@@ -609,6 +677,13 @@ ol.chem-steps li strong { color: var(--task); }
           <strong>A = 17 + 18 = 35.</strong> Это хлор-35 (<span class="t-teal">³⁵Cl</span>).
         </div>
       </div>
+
+      <h3 class="sec">🔑 Главный ключ — Периодическая таблица</h3>
+      <figure class="pt-full">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Periodic_table_ru.svg" alt="Периодическая таблица Д. И. Менделеева" loading="lazy">
+        <figcaption>📋 Таблица Менделеева — её можно открыть на самом ОГЭ. Не заучивай числа, читай их по клетке.</figcaption>
+      </figure>
+
       <div class="hero-quote"><img class="hero-quote-avatar" src="https://wotpack.ru/wp-content/uploads/2022/10/word-image-170897-1-800x450.jpeg" alt="Нахида"><div class="hero-quote-body"><span class="hero-quote-name">🌿 Нахида · Архонт Мудрости</span>«Знаешь, что меня поразило в людях? Они заучивают наизусть число протонов вместо того, чтобы просто открыть таблицу. Клетка таблицы = заряд ядра = число электронов. Трижды одно и то же число. Просто посмотри на него.»</div></div>
     </div>
   </div>
